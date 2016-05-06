@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>simmer | Discrete-Event Simulation for R</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <img src="images/simmer-logo.png" alt="simmer">
+        <p>Discrete-Event Simulation for R</p>
+
+        <p class="view"><a href="https://github.com/Enchufa2/simmer">View the Project on GitHub <small>Enchufa2/simmer</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/Enchufa2/simmer/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Enchufa2/simmer/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Enchufa2/simmer">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p><a href="https://travis-ci.org/Enchufa2/simmer"><img src="https://travis-ci.org/Enchufa2/simmer.svg?branch=master" alt="Build Status"></a>
+<a href="https://coveralls.io/github/Enchufa2/simmer?branch=master"><img src="https://coveralls.io/repos/github/Enchufa2/simmer/badge.svg?branch=master" alt="Coverage Status"></a>
+<a href="http://cran.r-project.org/package=simmer"><img src="http://www.r-pkg.org/badges/version/simmer" alt="CRAN\_Status\_Badge"></a>
+<a href="http://cran.rstudio.com/package=simmer"><img src="http://cranlogs.r-pkg.org/badges/simmer" alt="Downloads"></a></p>
+
+<p><em>by Bart Smeets, Iñaki Ucar</em></p>
+
+<p><strong>simmer</strong> is a process-oriented and trajectory-based Discrete-Event Simulation (DES) package for R. Designed to be a generic framework like <a href="https://simpy.readthedocs.org">SimPy</a> or <a href="http://simjuliajl.readthedocs.org">SimJulia</a>, it leverages the use of <a href="http://www.rcpp.org/">Rcpp</a> to boost the performance and turning DES in R feasible. As a noteworthy characteristic, simmer exploits the concept of <em>trajectory</em>: a common path in the simulation model for entities of the same type. It is pretty flexible and simple to use, and leverages the chaining/piping workflow introduced by the <a href="https://github.com/smbache/magrittr">magrittr</a> package.</p>
+
+<h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p>Documentation is available at <a href="http://r-simmer.org/docs">r-simmer.org/docs</a>.</p>
+
+<h2>
+<a id="mailing-list" class="anchor" href="#mailing-list" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mailing list</h2>
+
+<p>For bugs and/or issues, create a new issue on GitHub. For other questions or comments, please subscribe to the <a href="https://groups.google.com/forum/#!forum/simmer-devel">simmer-devel mailing list</a>:</p>
+
+<p><form action="http://groups.google.com/group/simmer-devel/boxsubscribe">
+  Your email address: <input type="text" name="email" /> <input type="submit" value="Subscribe" />
+</form></p>
+
+<p>You must be a member to post messages, but anyone can read the archived discussions.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Install the release version from CRAN:</p>
+
+<div class="highlight highlight-source-r"><pre>install.packages(<span class="pl-s"><span class="pl-pds">"</span>simmer<span class="pl-pds">"</span></span>)</pre></div>
+
+<p>The installation from GitHub requires the <a href="https://github.com/hadley/devtools">devtools</a> package.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-e">devtools</span><span class="pl-k">::</span>install_github(<span class="pl-s"><span class="pl-pds">"</span>Enchufa2/simmer<span class="pl-pds">"</span></span>)</pre></div>
+
+<p>Please note that the package contains some C++ code and thus you need a development environment to build the package (e.g. <a href="http://cran.r-project.org/bin/windows/Rtools/">Rtools</a> for Windows).</p>
+
+<h2>
+<a id="learning-simmer" class="anchor" href="#learning-simmer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Learning simmer</h2>
+
+<p>To get started, please explore the vignettes: </p>
+
+<div class="highlight highlight-source-r"><pre>vignette(<span class="pl-v">package</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>simmer<span class="pl-pds">"</span></span>)</pre></div>
+
+<p>These are currently available:</p>
+
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/simmer/vignettes/A-introduction.html">Introduction to simmer</a></li>
+<li><a href="https://cran.r-project.org/web/packages/simmer/vignettes/B-terminology.html">Terminology</a></li>
+<li><a href="https://cran.r-project.org/web/packages/simmer/vignettes/C-trajectories.html">Advanced trajectory usage</a></li>
+<li><a href="https://cran.r-project.org/web/packages/simmer/vignettes/D-queueing-systems.html">Queueing systems</a></li>
+<li><a href="https://cran.r-project.org/web/packages/simmer/vignettes/E-ctmc.html">Continuous-Time Markov Chains</a></li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Enchufa2">Iñaki Ucar</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+
+  </body>
+</html>
