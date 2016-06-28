@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>get_mon_arrivals. simmer 3.3.0</title>
+<title>leave. simmer 3.3.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -47,26 +47,26 @@
         
       </header>
       
-      <h1>Get arrival statistics</h1>
+      <h1>Add a leave activity</h1>
 
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><div>get_mon_arrivals(envs, per_resource&nbsp;=&nbsp;FALSE)</div></pre>
+    <pre><div>leave(traj, prob)</div></pre>
     
     <h2>Arguments</h2>
     <dl>
-      <dt>envs</dt>
-      <dd>the simulation environment (or a list of environments).</dd>
-      <dt>per_resource</dt>
-      <dd>whether the activity should be reported on a per-resource basis (by default: FALSE).</dd>
+      <dt>traj</dt>
+      <dd>the trajectory object.</dd>
+      <dt>prob</dt>
+      <dd>a probability or a function returning a probability.</dd>
     </dl>
     
     <div class="Value">
       <h2>Value</h2>
 
       <p><dl>
-Returns a data frame.
+The trajectory object.
 </dl></p>
   
     </div>
@@ -74,13 +74,13 @@ Returns a data frame.
     <div class="Description">
       <h2>Description</h2>
 
-      <p>Gets the arrivals' monitored data (if any).</p>
+      <p>Adds a new activity that terminates the trajectory with some probability.</p>
   
     </div>
       </div>
   <div class="span4">
     <!-- <ul>
-      <li>get_mon_arrivals</li>
+      <li>leave</li>
     </ul>
     <ul>
       
@@ -88,11 +88,11 @@ Returns a data frame.
       
     <h2>See also</h2>
     
-Other methods for dealing with a simulation environment:
-<a href='simmer.html'>simmer</a>, <a href='reset.html'>reset</a>, <a href='now.html'>now</a>, <a href='peek.html'>peek</a>, <a href='onestep.html'>onestep</a>, <a href='run.html'>run</a>, 
-<a href='add_resource.html'>add_resource</a>, <a href='add_generator.html'>add_generator</a>, <a href='get_mon_attributes.html'>get_mon_attributes</a>,
-<a href='get_mon_resources.html'>get_mon_resources</a>, <a href='get_n_generated.html'>get_n_generated</a>, <a href='get_capacity.html'>get_capacity</a>, <a href='get_queue_size.html'>get_queue_size</a>,
-<a href='set_capacity.html'>set_capacity</a>, <a href='set_queue_size.html'>set_queue_size</a>, <a href='get_server_count.html'>get_server_count</a>, <a href='get_queue_count.html'>get_queue_count</a>.
+Other methods for dealing with trajectories:
+<a href='create_trajectory.html'>create_trajectory</a>, <a href='get_head.html'>get_head</a>, <a href='get_tail.html'>get_tail</a>, 
+<a href='get_n_activities.html'>get_n_activities</a>, <a href='join.html'>join</a>, <a href='seize.html'>seize</a>, <a href='release.html'>release</a>, 
+<a href='set_attribute.html'>set_attribute</a>, <a href='timeout.html'>timeout</a>, <a href='branch.html'>branch</a>, <a href='rollback.html'>rollback</a>,
+<a href='seize_selected.html'>seize_selected</a>, <a href='release_selected.html'>release_selected</a>, <a href='select.html'>select</a>.
 
         
   </div>

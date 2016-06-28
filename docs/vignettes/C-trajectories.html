@@ -7,11 +7,12 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="author" content="Bart Smeets, Iñaki Ucar" />
 
-<meta name="date" content="2016-05-01" />
+<meta name="date" content="2016-06-28" />
 
 <title>Advanced Trajectory Usage</title>
 
@@ -57,6 +58,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </style>
 
 
+
 <link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
 
 </head>
@@ -65,14 +67,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<div class="fluid-row" id="header">
 
-
-<h1 class="title">Advanced Trajectory Usage</h1>
+<h1 class="title toc-ignore">Advanced Trajectory Usage</h1>
 <h4 class="author"><em>Bart Smeets, Iñaki Ucar</em></h4>
-<h4 class="date"><em>2016-05-01</em></h4>
+<h4 class="date"><em>2016-06-28</em></h4>
 
-</div>
 
 <div id="TOC">
 <ul>
@@ -83,6 +82,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#branch">branch</a></li>
 <li><a href="#rollback">rollback</a></li>
 </ul></li>
+<li><a href="#concatenating-trajectories">Concatenating trajectories</a></li>
 <li><a href="#interacting-with-the-environment-from-within-a-trajectory">Interacting with the environment from within a trajectory</a></li>
 </ul>
 </div>
@@ -140,7 +140,7 @@ env&lt;-
 <span class="co">#&gt; 1    0 patient0          my_key 123.0000000           1</span>
 <span class="co">#&gt; 2    5 patient0          my_key 124.0000000           1</span>
 <span class="co">#&gt; 3   10 patient0   dependent_key   0.0000000           1</span>
-<span class="co">#&gt; 4   15 patient0 independent_key   0.7568021           1</span></code></pre></div>
+<span class="co">#&gt; 4   15 patient0 independent_key   0.2453603           1</span></code></pre></div>
 </div>
 <div id="seize-release" class="section level3">
 <h3>seize &amp; release</h3>
@@ -159,9 +159,9 @@ env&lt;-
 <span class="st">  </span><span class="kw">run</span>()
 
 <span class="kw">get_mon_resources</span>(env)
-<span class="co">#&gt;   time server queue system resource replication</span>
-<span class="co">#&gt; 1    0      1     0      1   doctor           1</span>
-<span class="co">#&gt; 2    3      0     0      0   doctor           1</span></code></pre></div>
+<span class="co">#&gt;   time server queue capacity queue_size system limit resource replication</span>
+<span class="co">#&gt; 1    0      1     0        1        Inf      1   Inf   doctor           1</span>
+<span class="co">#&gt; 2    3      0     0        1        Inf      0   Inf   doctor           1</span></code></pre></div>
 <p>Here the <code>mon=1</code> argument (=default) of <code>add_resource</code> makes the simulation environment monitor the resource usage. Using the <code>get_mon_resources(env)</code> function you can get access to the log of the usage evolution of resources.</p>
 <p>There are situations where you want to let the amount of resources seized/released be dependent on a specific function or on a previously set attribute. To achieve this, you can pass a function in the form of either <code>function(){}</code> or <code>function(attrs){}</code> to the <code>amount</code> parameter instead of a numeric value. If going for the latter, the current state of the arrival’s attributes will be passed to <code>attrs</code> as a list which you can inspect. This allows for the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj&lt;-
@@ -179,12 +179,12 @@ env&lt;-
 <span class="st">  </span><span class="kw">run</span>()
 
 <span class="kw">get_mon_resources</span>(env)
-<span class="co">#&gt;   time server queue system resource replication</span>
-<span class="co">#&gt; 1    0      2     0      2   doctor           1</span>
-<span class="co">#&gt; 2    3      0     0      0   doctor           1</span>
+<span class="co">#&gt;   time server queue capacity queue_size system limit resource replication</span>
+<span class="co">#&gt; 1    0      2     0        2        Inf      2   Inf   doctor           1</span>
+<span class="co">#&gt; 2    3      0     0        2        Inf      0   Inf   doctor           1</span>
 <span class="kw">get_mon_attributes</span>(env)
 <span class="co">#&gt;   time     name           key value replication</span>
-<span class="co">#&gt; 1    0 patient0        health    57           1</span>
+<span class="co">#&gt; 1    0 patient0        health    51           1</span>
 <span class="co">#&gt; 2    0 patient0 docs_to_seize     2           1</span></code></pre></div>
 </div>
 <div id="timeout" class="section level3">
@@ -219,19 +219,19 @@ env&lt;-
 
 <span class="kw">get_mon_arrivals</span>(env)
 <span class="co">#&gt;       name start_time end_time activity_time finished replication</span>
-<span class="co">#&gt; 1 patient0          0      118           118     TRUE           1</span>
+<span class="co">#&gt; 1 patient0          0       72            72     TRUE           1</span>
 <span class="kw">get_mon_attributes</span>(env)
 <span class="co">#&gt;   time     name    key value replication</span>
-<span class="co">#&gt; 1    0 patient0 health    47           1</span></code></pre></div>
+<span class="co">#&gt; 1    0 patient0 health    67           1</span></code></pre></div>
 <p>Be aware that if you want the <code>timeout</code>’s <code>task</code> parameter to be evaluated dynamically, you should supply a callable function. For example in <code>timeout(function() rpois(1, 10))</code>, <code>rpois(1, 10)</code> will be evaluated every time the timeout activity is executed. However, if you supply it in the form of <code>timeout(rpois(1, 10))</code>, it will only be evaluated at initalization and will remain static after that.</p>
 <p>Of course, this <code>task</code>, supplied as a function, may be as complex as you need and, for instance, check a resource’s status, interact with other entities in your simulation model… The same applies to all previous activities when they accept a function as a parameter.</p>
 </div>
 <div id="branch" class="section level3">
 <h3>branch</h3>
-<p>The <code>branch(trajectory, option, merge, ...)</code> method offers the possibility of adding alternative paths in the trajectory. The following example shows how a trajectory can be built with a 50-50 chance for an arrival to pass through each path of a two-path branch.</p>
+<p>The <code>branch(trajectory, option, continue, ...)</code> method offers the possibility of adding alternative paths in the trajectory. The following example shows how a trajectory can be built with a 50-50 chance for an arrival to pass through each path of a two-path branch.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t1 &lt;-<span class="st"> </span><span class="kw">create_trajectory</span>(<span class="st">&quot;trajectory with a branch&quot;</span>) %&gt;%
 <span class="st">  </span><span class="kw">seize</span>(<span class="st">&quot;server&quot;</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw">branch</span>(function() <span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">2</span>, <span class="dv">1</span>), <span class="dt">merge=</span><span class="kw">c</span>(T, F), 
+<span class="st">  </span><span class="kw">branch</span>(function() <span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">2</span>, <span class="dv">1</span>), <span class="dt">continue=</span><span class="kw">c</span>(T, F), 
          <span class="kw">create_trajectory</span>(<span class="st">&quot;branch1&quot;</span>) %&gt;%
 <span class="st">           </span><span class="kw">timeout</span>(function() <span class="dv">1</span>),
          <span class="kw">create_trajectory</span>(<span class="st">&quot;branch2&quot;</span>) %&gt;%
@@ -239,7 +239,7 @@ env&lt;-
 <span class="st">           </span><span class="kw">release</span>(<span class="st">&quot;server&quot;</span>, <span class="dv">1</span>)
   ) %&gt;%
 <span class="st">  </span><span class="kw">release</span>(<span class="st">&quot;server&quot;</span>, <span class="dv">1</span>)</code></pre></div>
-<p>When an arrival gets to the branch, the first argument is evaluated to select a specific path to follow, so it must be callable and must return a numeric value between 1 and <code>n</code>, where <code>n</code> is the number of paths defined. The second argument, <code>merge</code>, indicates whether the arrival must continue executing the activities after the selected path or not. In the example above, only the first path continues to the last <em>release</em>.</p>
+<p>When an arrival gets to the branch, the first argument is evaluated to select a specific path to follow, so it must be callable and must return a numeric value between 1 and <code>n</code>, where <code>n</code> is the number of paths defined. The second argument, <code>continue</code>, indicates whether the arrival must continue executing the activities after the selected path or not. In the example above, only the first path continues to the last <em>release</em>.</p>
 <p>Sometimes you may need to count how many times a certain trajectory in a certain branch is entered, or how much time arrivals spend inside that trajectory. For these situations, it is handy to use resources with infinite capacity just for <em>accounting</em> purposes, like in the example below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t0 &lt;-<span class="st"> </span><span class="kw">create_trajectory</span>() %&gt;%
 <span class="st">  </span><span class="kw">branch</span>(function() <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">1</span>), <span class="kw">c</span>(T, T),
@@ -268,14 +268,14 @@ arrivals %&gt;%<span class="st"> </span><span class="kw">count</span>(resource)
 <span class="co">#&gt; Source: local data frame [2 x 2]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;   resource     n</span>
-<span class="co">#&gt;     (fctr) (int)</span>
-<span class="co">#&gt; 1  branch1   479</span>
-<span class="co">#&gt; 2  branch2   521</span>
+<span class="co">#&gt;     &lt;fctr&gt; &lt;int&gt;</span>
+<span class="co">#&gt; 1  branch1   506</span>
+<span class="co">#&gt; 2  branch2   494</span>
 
 <span class="co"># The `activity_time` is the total time inside each branch for each arrival</span>
 <span class="co"># Let's see the distributions</span>
 <span class="kw">ggplot</span>(arrivals) +<span class="st"> </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x=</span>activity_time)) +<span class="st"> </span><span class="kw">facet_wrap</span>(~resource)</code></pre></div>
-<p><img src="data:image/png;base64,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" title alt style="display: block; margin: auto;" /></p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkAAAAGACAMAAAByRC0tAAAC2VBMVEUAAAABAQECAgIDAwMEBAQFBQUGBgYHBwcICAgJCQkKCgoLCwsMDAwNDQ0ODg4PDw8QEBARERESEhITExMUFBQVFRUWFhYXFxcYGBgZGRkaGhobGxscHBwdHR0fHx8gICAhISEjIyMkJCQmJiYnJycoKCgpKSkqKiorKyssLCwtLS0uLi4vLy8wMDAxMTEyMjIzMzM0NDQ1NTU2NjY3Nzc4ODg5OTk6Ojo7Ozs8PDw9PT0+Pj4/Pz9AQEBBQUFCQkJDQ0NERERFRUVGRkZHR0dISEhJSUlLS0tMTExNTU1OTk5PT09QUFBRUVFSUlJTU1NUVFRVVVVWVlZZWVlaWlpbW1tcXFxdXV1eXl5gYGBhYWFiYmJjY2NkZGRlZWVmZmZnZ2doaGhpaWlqampra2tsbGxtbW1ubm5vb29wcHBxcXFycnJzc3N0dHR1dXV2dnZ3d3d4eHh5eXl6enp7e3t9fX1+fn5/f3+AgICBgYGEhISFhYWGhoaHh4eIiIiJiYmKioqLi4uMjIyPj4+QkJCRkZGSkpKTk5OUlJSVlZWWlpaXl5eYmJiZmZmampqbm5ucnJydnZ2enp6fn5+goKChoaGioqKjo6OkpKSlpaWmpqanp6eoqKipqamqqqqrq6usrKytra2urq6vr6+wsLCxsbGysrKzs7O0tLS1tbW2tra3t7e4uLi5ubm6urq7u7u9vb2+vr6/v7/AwMDBwcHCwsLDw8PExMTFxcXGxsbHx8fIyMjJycnKysrLy8vMzMzNzc3Ozs7Pz8/Q0NDR0dHS0tLT09PU1NTV1dXW1tbX19fY2NjZ2dna2trb29vc3Nzd3d3e3t7f39/g4ODh4eHi4uLj4+Pk5OTl5eXm5ubn5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7///8TcIBIAAAACXBIWXMAAA7DAAAOwwHHb6hkAAASLElEQVR4nO3d+59U9X3H8QObagtIXDRNsiCEAIISsF6C0EhNNNVmQ2PQmEaqYou50BDjJZUkRUIEhGhIYxAxrEE2SnABJW24Lewy0loxiyvEpibiEvYye2VndvfzF3Tue+ZyvnPOfIYZduf1/mFu3/P5zmc+PB/MMLvDWEKIIlaxGyBDOwAiqgCIqAIgogqAiCoAIqrkDuj0sZLNm4HoCNqK3UgR06UGtHN3yWZTU3QEh18qdidFyy9+qwfkK9lUxwHtLXYnRctuACkCIACpAiAAqQIgAKkCIACpAiAAqQKgoQRoT4W75SNz95z7ZqIpNCB3Izjy0NWTb325EP34hiGgI6tvryhxQN+f+Yv9i+cXoh/fEAP0g9lTFx30Vfx05jMb/vpjVzzq81X8+Jqpy32H759x5dfrQstXTXnUV79o0XAG5GYEt33T5/tNRW1hWhpSgG599aW5X/NV/O2TeyfevXf9+AO+ii/Xrppw8MFPv1o984k9FffUPTnhYOjA4QzIzQj27Pf51s0pTEdDC1C1z7dhtq9io6++prbu6ZCTiud9dRV7rv6Zz/fclj0Vr/jqI3aGMyB3I6j7/vSnC9PR0AJ0yOd7eaIvNCXfhhvnhZ+pwsOq2DOxJrp8JGZnOANyNYIX5t78y8I0NMQAhabyk2vCE6qb/NSRQ4npzd4Uun1t5BXksAfkZgQvTF95pDD9+IYYoM/t2X79g+GRHZqw8fDSiprY9JbevKd69orSAORmBLctfiWU+sK0NKQAPT57+j8djozse1NmfXfhnNj0au+9fNqS+tIA5GYEV1aEU6AhDCFA52F4JxpAqgAIQKoACECqAAhAqgAIQKoACECqACgfgGqqSzb//l50BBurit1J0bLpl2pAR5+qsue5LVWmmFerfv5z83qWzXXVz3mtXvGr6AjWrFFulL/qqs2FrX58oxrQW3VJV7t7jUcH+4zLPWeNy31B43Jvj6Y60GVczlD9ox3R8yd2JW/UrWkj2Kmp7uswLvcHjMsDfq/Vzz8TuwAgAAEIQAACEICMRwMIQCkBEIAEQAIgARCAAAQgABmPBhCAUgIgAAmABEACIAANF0B3RJPhaAABKCUAApAASAAkAAIQgAAEIAGQpg0ACYA0bQBIAKRpA0ACIE0bABIAadoAkABI0waABECaNgAkANK0ASABkKYNAAmANG0ASACkaQNAAiBNGwASAGnaAJAASNNG6QE63G9PV0/oJAaoPz3BYIYbB9PdY1wOBozLPd3mavN9n+30Wp0AtDN5oy5NG70dmupAu3G5zzzAvjav1VV6QMdrA/Z0dIVOYoACntPZ6b1mMF2q6u52rxXr44Bqkjfq0LTR41dVt2mqe1u9VmzhKSwRnsJ4DQQgABmXAQQgAAEoOQACkABIACQAAhCAAAQgAZCmDQAJgDRtAEgApGkDQAIgTRsAEgBp2gCQAEjTBoAEQJo2ACQA0rQBIAGQpg0ACYA0bQBIAKRpA0ACIE0bABIAadoAkABI0waABECaNgAkANK0ASABkKYNAAmANG0ASACkaQNAAiBNGwASAGnaAJAASNMGgARAmjYAJADStAEgAZCmDQAJgDRtAEgApGkDQAIgTRsAEgBp2gCQAEjTBoAEQJo2ACQA0rQBIAGQpg0ACYA0bQBIAKRpA0ACIE0bABIAadoAkABI08ZwBTQw61TotGXB2MqWxFkkAAKQZAU08PztVhjQsoVNCx9InEUCIABJVkB9990XATR+p9RcljiLBEAAEjevgcKAgiMapXFkX+wsejuAACRuAZ2xuqXLao6dify6vLz8lr1+e5pbQicxQP70tLZluDGl2jltrcblFlV16xmv1evigLYnb9Rc2DbyV+0/7bV6szdAAeuENFqB2JnI71auXLnW05fu9pq/9TXLl+4Geo3LWb50N0t1li/dzVCd25fuZmkjy5fuZqnO8qW7wbPG5Sxfupuh2sOX7kZeA03YLbsuS5xFwlMYT2HiGtDSRT13LUucRQIgAIlrQO2V4xZ0JM4iARCAhHeiBUACIAABCEAAEgBp2gCQAEjTBoAEQJo2ACQA0rQBIAGQpg0ACYA0bQBIAKRpA0ACIE0bABIAadoAkCQA3ZEOCUAASgmAACQAEgAJgAAEIAABSACkaQNAAiBNGwASAGnaAJAASNMGgARAmjYAJADStAEgAZCmDQAJgDRtAEgAJKZfSABQcgAEIAGQAEgABCAAAQhAAiABkPsACEACIAGQAAhAAAIQgARAAiD3ARCABEACIAEQgIY6oDsyx3Y0gACUEgABSAAkABIAAej8ART5Zgx5rdy4YSQAApCkAOpoaLD2NYSyeoxxw0gABCBJAbTDiqXsW8YNIwEQgMTpKcxNjh/qS8QB0OABfYFgnyld3cblYMC43NOlqT7bYa5O73zwGwuTN+rsS4wihzbavbZhT6/fXG2+72Cb12oP31joDCiYiAOgwQOCgaAxnV3mdXN5d6emuqfDXJxevT4OqCZ9o/SHbtjInrPtXttIqvYbl7OMINDqtdoZUGdDJNkB8RTGU5ikA6q6IPoqyLhhJAACkKQDmrTgPeNegwEQgCQdUPmvjVvZAiAASTqghRuMW9kCIABJOqC669b4eBGdpRpAhveBLF5EZ60GED9MtQVAAAIQgIzLABoygHgN5KIaQM6Awv8Ce239rHeMG0YCIACJ01PYz24ybhgJgAAkToB2X2TcMBIAAUgyP4U17J033bhhJAACkDi9iJ7o4idiAAKQ8M94AZAACEDnEaBfzbukfN7Lxv2iARCAJB3Q1g88vP/Aw2XVxg0jARCAJB3QrEfCpw9eZdwwEgABSNIBjdoZPt052rhhJAACkKQDuvyH4dNVvA9kqgaQM6DVY55tbn52zGrjhpEACECSDqj/h5dY1iWr+o0bRgIgAEmm94EGmpoGjNvFAiAASQZAr28WWfGGcb9oAAQgSQe0r+xGkSkXvGrcMBIAAUjSAc2tDI2z5/PXGTeMBEAAknRAF20Ln27jfSBTNYCcAU1dFz5dN9W4YSQuANkgAahEAK25uKq5ddu4VcYNIwEQgCQd0MDaj1jWuBX5eR8IQB7aGCaAQpv96VS+3gcCkIc2hg0gtwEQgARAAiAB0HkIyPbQXbYBIAAByEs8AHL+az0eAAEIQADyFAABSAAkABIAAQhAAAIQgADkJQACkLgFdCb8f77cKdKyYGxlS+w2AAFI3AI6NPndd99tFlm2sGnhA7HbAAQgcQvo2b+Lno/fKTWXxW4DEIDELaBHZ0wa+/d/lOCIRmkc2SfSffLkyYMAcgHI9thLGtA/vHvq9ptCL4W6pcsKPZXtDr0kumGvPxF3gPzOaW4xLPr9ba3G5RZVdesZr9Xr4oC2J2/U7HccxbloI3/V/tNeqzd7/1fYeyO7A9YJabRCHE9t3bp1C38D8TeQW0Ab/1ek6cKgTNgtu3gNBCDPgO6Zf7zpzi+JLF3Uc9ey2G0AApC4BdR+z0cv/cfW0HnluAXxTgEEIOGdaAGQAAhAAAIQgAAEIC8BEIAEQAIgAdAQAJR9BAACEIC8BEAAEgAJgARAAAIQgAAEIAB5CYAAJAASAAmAAAQgAAEIQADyEgABSAAkABIAAQhAAAIQgADkJQACkABICgvIMAoAAQhAXgIgAAmABEACoPMBkLsRAGgwAAKQAEgAJAACEIAABCAAAchLAAQgAZAASAAEIAABCEAAApCXAAhAAiABkAAIQAACEIAA5B2Q7SqAAAQgLwGQAlCGyZQcoOOHgom4G1PQOZ1dhsVQAsbV7k5NdU+HuTi9en0cUM3gbSpA4Q3Otnttw56zfuNylhEEWr1WVwEoEQAVBxBPYTyFCYAEQAIgAJUGIAMkAAEIQADyFADlD5BhMi4fBICM9wUgAAEIQMkBEIAEQHJeATIMCkAAAlBSAAQgAZAASAAEIAABCEC5jifTuFICIAA5jyfTuFICIAA5jyfTuFICIAA5jyfTuFICIAA5jyfTuFICIAB5G1dKAAQgb+NKCYAA5G1cKSlRQPbJAMjVmBwCIAC5G5NDAAQgd2NyCIAA5G5MDgEQgNyNySEAApC7MTkEQAByNyaHAAhA7sbkEADZ28g0LwAByDwZALkak0MAZADkYn4AAhCAXI3JIQACkLsxOQRAAPI0rdQAKNyGw6BMg4sHQMZWAOQ0uHgAZGwFQE6DiwdAxlYA5DS4eABkbGW4AzIPKuV6xjkCyNgKgGzXM84RQMZWAGS7nnGO/YGMN8cDIOMygAAEIOdBpVzPOEcAGVsBkO16xjmeL4BaFoytbIldPteA7FcB5CLuGnE4yjiC/AFatrBp4QOxywACkHgFNH6n1FwWu3yuAJkfeMakA0oqAlCe70JyBRQc0SiNI/tETm3dunULgADkEdAZq1u6rGaR3ZZl3bDXb09zi9+U1jbjcpbqtlbjcouquvWM1+p1cUDbkzdqLmwb+av2n/ZavTknQAHrhDRaoSfE7pMnTx6sS1rr7jWWBvuMy0P/P9kMb9StaaMkvu5pwm7Zlek1kABIAOQiSxf13LUsdhlAABKvgNorxy2IdwogAEm+3okWAAmAPAZAABIACYAEQAACEIAAZDwaQABKCYAAJAASAEmxAG3z2XPosM+U+nrjsq768CFNdV2t1+rH44CeSd5I1Ub9wXNYfaTOvHzAa/WP8wBoeVKu/fRyReZ+SlM9f46m+uarPZfsi45gU/Ktn7lG08YtszTVlTM01bdN8VzykhpQSj75ZU31zZWa6i/O11TfPVtTbctXrtVUf3WapvqRCk31Y2NyLgUQgAAEoGEAqP4NTfXR/9ZUv+7TVL95WFNty7G67Mc453itpvrtfZrqd/4j59K8ASKlGQARVfIEyP6JQ+9ZN3HU/OO533nvveXXnsy5+g+fHbugPfc7H0wxZ1C8EeQJkP0Th55TW76v6e55ud/58i+8v+QLOVff8nX/4m/kfueDKeYMijeCPAGyf+LQc37wJZH/yf3fATLpqPj351rcW9Yox8bnfueDKeYMijeC/ABKfOIwx/T/8ZFbcr9z68HyOW/lWt1lnZS3LfOPity1UcQZFHEE+QGU+MRhjnnBuvBNxZ1/tfVb1+dcft2325ZYZ3Iut7VRvBkUcQT5AZT4xGGuaV41Oefa3tCdnxhh/pG6IQ3XXvzwCPOPul2lmDMo4gjy9BrI/olDz1n9oki7Zf5tBlM++qa89YGc/+T+r1de+1jO921LMWdQvBHkCZD9E4ee8+QV+997+Mrc7/wbi1vuvzXn6s9++/Rty3O/88EUcwbFG0GeANk/ceg5/d+ZPPrGBs2dj73pDzlXN8y++F7zL8O5bqN4MyjeCHgnmqgCIKIKgIgqACKqAIioAiCiCoCIKgDKHqsh82XjgaUSAJmzoyMd0I5MbxemHlgqAZA5YRMd/YPXw5czOkk9sFQCIHMyYXEEVIoBUFKOfb7iz2dUhS4MrL38onn7xQolbGPh1aHbWi5YG74cvu07kwZEfj/ipURh/ECx9laWf6J23ydHf3xXaJenpv3FrGcGivZwChAA2XP2Q5N+sv2+sjaRtR98Ytvnyl4/Ze07FXax3TopsuHC5vDl8G3HrMMiKz48+AsU8QPFmvncrnkfnFH98g0TRZ6dvmnXQ2VPFfERnfMAyJ7W5QdF2kIOBj6yRaTzxs1REw3Se8kKkU/dKfHrMvNfZGCa/Vfo4wvWVpH/tP5L5EhotFedCK18U/F5gfM/AErKwIEf3Tcl5OBP8d/wjLtY8gn5vfWbweuPje+vt35rq0wACt3YYA2ET0RGh5/ZrA8X5aEUKABKyp1T//XV05GnqdboDXEXh6zjj00ZGLz+jrXva3PslQlADVE7kZMPHW0IpwgPpGABkD2nrfdFmsJPYeXbRHqm/FvCxMDk712xSgaNyPWLL/2pvTQjoPk7QpVLHirKYylQAGRP96j7D1TNLtvUKyvGra9ecMEbUrbmtSiY7176Z00S9RG+TdaNHJX0Yc74gUmAtl+0+sWvWDuK8lgKFAAl5cXJY/7m6D+PeUf6V3581DWviCwbXR4F9Lb1xfAB4cvh2+T9kXclVcYPTAIkT08b9VfVhX8YBQyAcszvLNV/qDJsAqCcEmxfNHNYvz/oOgDKKQ3WX0b+SywrnmI3VLSU7iNXZeBU7h+CH14BEFEFQEQVABFVAERUARBRBUBEFQARVf4fCMVTX6/Q9MoAAAAASUVORK5CYII=" style="display: block; margin: auto;" /></p>
 </div>
 <div id="rollback" class="section level3">
 <h3>rollback</h3>
@@ -286,7 +286,6 @@ arrivals %&gt;%<span class="st"> </span><span class="kw">count</span>(resource)
     <span class="kw">print</span>(<span class="st">&quot;Hello!&quot;</span>)
     <span class="dv">0</span>}) %&gt;%
 <span class="st">  </span><span class="kw">rollback</span>(<span class="dt">amount=</span><span class="dv">1</span>, <span class="dt">times=</span><span class="dv">3</span>)
-
 
 <span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;hello_sayer&quot;</span>, t0, <span class="kw">at</span>(<span class="dv">0</span>)) %&gt;%<span class="st"> </span>
@@ -314,7 +313,6 @@ arrivals %&gt;%<span class="st"> </span><span class="kw">count</span>(resource)
 <span class="st">  </span><span class="kw">set_attribute</span>(<span class="st">&quot;happiness&quot;</span>, function(attrs) attrs[[<span class="st">&quot;happiness&quot;</span>]] +<span class="st"> </span><span class="dv">25</span>) %&gt;%
 <span class="st">  </span><span class="kw">rollback</span>(<span class="dt">amount=</span><span class="dv">2</span>, <span class="dt">check=</span>function(attrs) attrs[[<span class="st">&quot;happiness&quot;</span>]] &lt;<span class="st"> </span><span class="dv">100</span>)
 
-
 <span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;mood_swinger&quot;</span>, t0, <span class="kw">at</span>(<span class="dv">0</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">run</span>()
@@ -325,6 +323,30 @@ arrivals %&gt;%<span class="st"> </span><span class="kw">count</span>(resource)
 <span class="co">#&gt; simmer environment: anonymous | now: 0 | next: </span>
 <span class="co">#&gt; { Generator: mood_swinger | monitored: 1 | n_generated: 1 }</span></code></pre></div>
 </div>
+</div>
+<div id="concatenating-trajectories" class="section level2">
+<h2>Concatenating trajectories</h2>
+<p>It is possible to concatenate together any number of trajectories using the <code>join(...)</code> verb. It may be used as a standalone function as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t1 &lt;-<span class="st"> </span><span class="kw">create_trajectory</span>() %&gt;%<span class="st"> </span><span class="kw">seize</span>(<span class="st">&quot;dummy&quot;</span>, <span class="dv">1</span>)
+t2 &lt;-<span class="st"> </span><span class="kw">create_trajectory</span>() %&gt;%<span class="st"> </span><span class="kw">timeout</span>(<span class="dv">1</span>)
+t3 &lt;-<span class="st"> </span><span class="kw">create_trajectory</span>() %&gt;%<span class="st"> </span><span class="kw">release</span>(<span class="st">&quot;dummy&quot;</span>, <span class="dv">1</span>)
+
+t0 &lt;-<span class="st"> </span><span class="kw">join</span>(t1, t2, t3)
+t0
+<span class="co">#&gt; simmer trajectory: anonymous, 3 activities</span>
+<span class="co">#&gt; { Activity: Seize        | resource: dummy | amount: 1 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span>
+<span class="co">#&gt; { Activity: Release      | resource: dummy | amount: 1 }</span></code></pre></div>
+<p>Or it may operate inline, like another activity:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t0 &lt;-<span class="st"> </span><span class="kw">create_trajectory</span>() %&gt;%
+<span class="st">  </span><span class="kw">join</span>(t1) %&gt;%
+<span class="st">  </span><span class="kw">timeout</span>(<span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="kw">join</span>(t3)
+t0
+<span class="co">#&gt; simmer trajectory: anonymous, 3 activities</span>
+<span class="co">#&gt; { Activity: Seize        | resource: dummy | amount: 1 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span>
+<span class="co">#&gt; { Activity: Release      | resource: dummy | amount: 1 }</span></code></pre></div>
 </div>
 <div id="interacting-with-the-environment-from-within-a-trajectory" class="section level2">
 <h2>Interacting with the environment from within a trajectory</h2>

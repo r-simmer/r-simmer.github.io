@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>at. simmer 3.2.1</title>
+<title>at. simmer 3.3.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.2.1</a>
+      <a class="brand" href="#">simmer 3.3.0</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -84,16 +84,16 @@ env &lt;- simmer(verbose=TRUE) %&gt;%
 </div>
 <div class='output'>         0 | generator: dummy          |       new: dummy0         | 0
          0 | generator: dummy          |       new: dummy1         | 1
-         0 |   arrival: dummy0         |  activity: Timeout        | -
-         1 | generator: dummy          |       new: dummy2         | 10
-         1 |   arrival: dummy1         |  activity: Timeout        | -
-        10 | generator: dummy          |       new: dummy3         | 30
-        10 |   arrival: dummy2         |  activity: Timeout        | -
-        30 | generator: dummy          |       new: dummy4         | 40
-        30 |   arrival: dummy3         |  activity: Timeout        | -
-        40 | generator: dummy          |       new: dummy5         | 43
-        40 |   arrival: dummy4         |  activity: Timeout        | -
-        43 |   arrival: dummy5         |  activity: Timeout        | -
+         0 | generator: dummy          |       new: dummy2         | 10
+         0 | generator: dummy          |       new: dummy3         | 30
+         0 | generator: dummy          |       new: dummy4         | 40
+         0 | generator: dummy          |       new: dummy5         | 43
+         0 |   arrival: dummy0         |  activity: Timeout        | 0
+         1 |   arrival: dummy1         |  activity: Timeout        | 0
+        10 |   arrival: dummy2         |  activity: Timeout        | 0
+        30 |   arrival: dummy3         |  activity: Timeout        | 0
+        40 |   arrival: dummy4         |  activity: Timeout        | 0
+        43 |   arrival: dummy5         |  activity: Timeout        | 0
 </div></pre>
   </div>
   <div class="span4">
@@ -106,7 +106,7 @@ env &lt;- simmer(verbose=TRUE) %&gt;%
       
     <h2>See also</h2>
     
-<a href='add_generator.html'>add_generator</a>, <a href='every.html'>every</a>, <a href='from.html'>from</a>, 
+<a href='add_generator.html'>add_generator</a>, <a href='from.html'>from</a>, 
 <a href='to.html'>to</a>, <a href='from_to.html'>from_to</a>.
 
         

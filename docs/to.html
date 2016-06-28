@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>to. simmer 3.2.1</title>
+<title>to. simmer 3.3.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.2.1</a>
+      <a class="brand" href="#">simmer 3.3.0</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -84,12 +84,10 @@ env &lt;- simmer(verbose=TRUE) %&gt;%
   add_generator(&quot;dummy&quot;, t0, to(5, function() runif(1, 1, 2))) %&gt;%
   run(10)
 </div>
-<div class='output'>         0 | generator: dummy          |       new: dummy0         | 1.00631
-   1.00631 | generator: dummy          |       new: dummy1         | 2.78569
-   1.00631 |   arrival: dummy0         |  activity: Timeout        | -
-   2.78569 | generator: dummy          |       new: dummy2         | 4.25958
-   2.78569 |   arrival: dummy1         |  activity: Timeout        | -
-   4.25958 |   arrival: dummy2         |  activity: Timeout        | -
+<div class='output'>         0 | generator: dummy          |       new: dummy0         | 1.95039
+   1.95039 | generator: dummy          |       new: dummy1         | 3.66781
+   1.95039 |   arrival: dummy0         |  activity: Timeout        | 0
+   3.66781 |   arrival: dummy1         |  activity: Timeout        | 0
 </div></pre>
   </div>
   <div class="span4">
@@ -102,7 +100,7 @@ env &lt;- simmer(verbose=TRUE) %&gt;%
       
     <h2>See also</h2>
     
-<a href='add_generator.html'>add_generator</a>, <a href='at.html'>at</a>, <a href='every.html'>every</a>, <a href='from.html'>from</a>, 
+<a href='add_generator.html'>add_generator</a>, <a href='at.html'>at</a>, <a href='from.html'>from</a>, 
 <a href='from_to.html'>from_to</a>.
 
         

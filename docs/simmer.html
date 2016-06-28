@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>simmer. simmer 3.2.1</title>
+<title>simmer. simmer 3.3.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.2.1</a>
+      <a class="brand" href="#">simmer 3.3.0</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -101,11 +101,11 @@ env &lt;- simmer(&quot;SuperDuperSim&quot;) %&gt;%
   
 env %&gt;% run(until=80)
 </div>
-<div class='output'>simmer environment: SuperDuperSim | now: 83.5216413193452 | next: 83.5216413193452
-{ Resource: nurse | monitored: 1 | server status: 1(1) | queue status: 2(Inf) }
+<div class='output'>simmer environment: SuperDuperSim | now: 82.8688332051333 | next: 82.8688332051333
+{ Resource: nurse | monitored: 1 | server status: 1(1) | queue status: 3(Inf) }
 { Resource: doctor | monitored: 1 | server status: 1(2) | queue status: 0(Inf) }
 { Resource: administration | monitored: 1 | server status: 0(1) | queue status: 0(Inf) }
-{ Generator: patient | monitored: 1 | n_generated: 8 }
+{ Generator: patient | monitored: 1 | n_generated: 9 }
 </div>
 <div class='input'>
 plot_resource_usage(env, &quot;doctor&quot;)
@@ -126,7 +126,7 @@ Other methods for dealing with a simulation environment:
 <a href='reset.html'>reset</a>, <a href='now.html'>now</a>, <a href='peek.html'>peek</a>, <a href='onestep.html'>onestep</a>, <a href='run.html'>run</a>, 
 <a href='add_resource.html'>add_resource</a>, <a href='add_generator.html'>add_generator</a>, <a href='get_mon_arrivals.html'>get_mon_arrivals</a>, <a href='get_mon_attributes.html'>get_mon_attributes</a>,
 <a href='get_mon_resources.html'>get_mon_resources</a>, <a href='get_n_generated.html'>get_n_generated</a>, <a href='get_capacity.html'>get_capacity</a>, <a href='get_queue_size.html'>get_queue_size</a>,
-<a href='get_server_count.html'>get_server_count</a>, <a href='get_queue_count.html'>get_queue_count</a>.
+<a href='set_capacity.html'>set_capacity</a>, <a href='set_queue_size.html'>set_queue_size</a>, <a href='get_server_count.html'>get_server_count</a>, <a href='get_queue_count.html'>get_queue_count</a>.
 
         
   </div>
