@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>get_capacity. simmer 3.3.0</title>
+<title>resource. simmer 3.4.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.3.0</a>
+      <a class="brand" href="#">simmer 3.4.0</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -47,12 +47,17 @@
         
       </header>
       
-      <h1>Get the capacity</h1>
+      <h1>Set/Get a resource's parameters</h1>
 
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><div>get_capacity(env, name)</div></pre>
+    <pre><div>set_capacity(env, name, value)</div>
+<div>get_capacity(env, name)</div>
+<div>set_queue_size(env, name, value)</div>
+<div>get_queue_size(env, name)</div>
+<div>get_server_count(env, name)</div>
+<div>get_queue_count(env, name)</div></pre>
     
     <h2>Arguments</h2>
     <dl>
@@ -60,13 +65,15 @@
       <dd>the simulation environment.</dd>
       <dt>name</dt>
       <dd>the name of the resource.</dd>
+      <dt>value</dt>
+      <dd>new value to set.</dd>
     </dl>
     
     <div class="Value">
       <h2>Value</h2>
 
       <p><dl>
-Returns a numeric value.
+Return the simulation environment (setters) or a numeric value (getters).
 </dl></p>
   
     </div>
@@ -74,26 +81,18 @@ Returns a numeric value.
     <div class="Description">
       <h2>Description</h2>
 
-      <p>Gets a resource's capacity by name.</p>
+      <p>Simulator getters/setters for a resource's server capacity/count and queue size/count.</p>
   
     </div>
       </div>
   <div class="span4">
     <!-- <ul>
-      <li>get_capacity</li>
+      <li>get_capacity</li><li>get_queue_count</li><li>get_queue_size</li><li>get_server_count</li><li>resource</li><li>set_capacity</li><li>set_queue_size</li>
     </ul>
     <ul>
       
     </ul> -->
       
-    <h2>See also</h2>
-    
-Other methods for dealing with a simulation environment:
-<a href='simmer.html'>simmer</a>, <a href='reset.html'>reset</a>, <a href='now.html'>now</a>, <a href='peek.html'>peek</a>, <a href='onestep.html'>onestep</a>, <a href='run.html'>run</a>, 
-<a href='add_resource.html'>add_resource</a>, <a href='add_generator.html'>add_generator</a>, <a href='get_mon_arrivals.html'>get_mon_arrivals</a>, <a href='get_mon_attributes.html'>get_mon_attributes</a>,
-<a href='get_mon_resources.html'>get_mon_resources</a>, <a href='get_n_generated.html'>get_n_generated</a>, <a href='get_queue_size.html'>get_queue_size</a>,
-<a href='set_capacity.html'>set_capacity</a>, <a href='set_queue_size.html'>set_queue_size</a>, <a href='get_server_count.html'>get_server_count</a>, <a href='get_queue_count.html'>get_queue_count</a>.
-
         
   </div>
 </div>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Duncan Garmonsway" />
+
+<meta name="date" content="2016-08-09" />
+
+<title>The Bank Tutorial: Part I</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">The Bank Tutorial: Part I</h1>
+<h4 class="author"><em>Duncan Garmonsway</em></h4>
+<h4 class="date"><em>2016-08-09</em></h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#a-single-customer">A single customer</a><ul>
+<li><a href="#a-customer-arriving-at-a-fixed-time">A customer arriving at a fixed time</a></li>
+<li><a href="#a-customer-arriving-at-random">A customer arriving at random</a></li>
+<li><a href="#more-customers">More customers</a></li>
+<li><a href="#many-customers">Many customers</a></li>
+<li><a href="#many-random-customers">Many random customers</a></li>
+</ul></li>
+<li><a href="#a-service-counter">A Service counter</a><ul>
+<li><a href="#one-service-counter">One Service counter</a></li>
+<li><a href="#a-server-with-a-random-service-time">A server with a random service time</a></li>
+</ul></li>
+<li><a href="#several-service-counters">Several Service Counters</a><ul>
+<li><a href="#several-counters-but-a-single-queue">Several Counters but a Single Queue</a></li>
+<li><a href="#several-counters-with-individual-queues">Several Counters with individual queues</a></li>
+<li><a href="#the-bank-with-a-monitor-aka-summary-statistics">The bank with a monitor (aka summary statistics)</a></li>
+<li><a href="#multiple-runs">Multiple runs</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This tutorial is adapted from a tutorial for the Python 2 package ‘SimPy’, <a href="https://pythonhosted.org/SimPy/Tutorials/TheBank.html">here</a>. Users familiar with SimPy may find this tutorial helpful for transitioning to simmer. Some very basic material is not covered. Beginners should first read the vignettes ‘Introduction’, ‘Terminology’ and ‘Trajectories’.</p>
+</div>
+<div id="a-single-customer" class="section level2">
+<h2>A single customer</h2>
+<p>In this tutorial we model a simple bank with customers arriving at random. We develop the model step-by-step, starting out simply, and producing a running program at each stage.</p>
+<p>A simulation should always be developed to answer a specific question; in these models we investigate how changing the number of bank servers or tellers might affect the waiting time for customers.</p>
+<div id="a-customer-arriving-at-a-fixed-time" class="section level3">
+<h3>A customer arriving at a fixed time</h3>
+<p>We first model a single customer who arrives at the bank for a visit, looks around at the decor for a time and then leaves. There is no queueing. First we will assume his arrival time and the time he spends in the bank are fixed.</p>
+<p>The arrival time is fixed at 5, and the time spent in the bank is fixed at 10. We interpret ‘5’ and ‘10’ as ‘5 minutes’ and ‘10 minutes’. The simulation runs for a maximum of 100 minutes, or until all the customers that are generated complete their trajectories.</p>
+<p>Note where these constants appear in the code below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
+
+customer &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">create_trajectory</span>(<span class="st">&quot;Customer's path&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">timeout</span>(<span class="dv">10</span>) 
+
+bank &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">&quot;bank&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;Customer&quot;</span>, customer, <span class="kw">at</span>(<span class="dv">5</span>))
+
+bank %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dt">until =</span> <span class="dv">100</span>) 
+<span class="co">#&gt; simmer environment: bank | now: 15 | next: </span>
+<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 1 }</span>
+bank %&gt;%<span class="st"> </span>get_mon_arrivals
+<span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
+<span class="co">#&gt; 1 Customer0          5       15            10     TRUE           1</span></code></pre></div>
+<p>The short trace printed out by the <code>get_mon_arrivals</code> function shows the result. The program finishes at simulation time 15 because there are no further events to be executed. At the end of the visit, the customer has no more actions and no other objects or customers are active.</p>
+</div>
+<div id="a-customer-arriving-at-random" class="section level3">
+<h3>A customer arriving at random</h3>
+<p>Now we extend the model to allow our customer to arrive at a random simulated time though we will keep the time in the bank at 10, as before.</p>
+<p>The change occurs in the arguments to the <code>add_generator</code> function. The function <code>rexp</code> draws from an exponential distribution with the given parameter, which in this case is <code>1/5</code>. See <code>?rexp</code> for more details. We also seed the random number generator with 10211 so that the same sequence of random numbers will be drawn every time the script is run.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
+
+<span class="kw">set.seed</span>(<span class="dv">10212</span>)
+
+customer &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">create_trajectory</span>(<span class="st">&quot;Customer's path&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">timeout</span>(<span class="dv">10</span>) 
+
+bank &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">&quot;bank&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;Customer&quot;</span>, customer, <span class="kw">at</span>(<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/<span class="dv">5</span>)))
+
+bank %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dt">until =</span> <span class="dv">100</span>) 
+<span class="co">#&gt; simmer environment: bank | now: 17.8393046225526 | next: </span>
+<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 1 }</span>
+bank %&gt;%<span class="st"> </span>get_mon_arrivals
+<span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
+<span class="co">#&gt; 1 Customer0   7.839305  17.8393            10     TRUE           1</span></code></pre></div>
+<p>The trace shows that the customer now arrives at time 7.839305. Changing the seed value would change that time.</p>
+</div>
+<div id="more-customers" class="section level3">
+<h3>More customers</h3>
+<p>Our simulation does little so far. To consider a simulation with several customers we return to the simple deterministic model and add more customers.</p>
+<p>The program is almost as easy as the first example (A customer arriving at a fixed time). The main change is in the <code>add_generator</code> function, where we generate three customers by defining three start times. We also increase the maximum simulation time to 400 in the <code>run</code> function. Observe that we need only one definition of the customer trajectory, and generate several customers who follow that trajectory. These customers act quite independently in this model.</p>
+<p>Each customer also stays in the bank for a different, but non-random, amount of time. This is an unusual case, so it requires an unusual bit of R code. The <code>timeout</code> function accepts either a constant waiting time, or a function that is called once per customer and returns a single value (e.g. <code>rexp(1, 1/10)</code>). So we need to create a function that returns a different, but specific, value each time it is called. We define a function called <code>loop</code> to do this. The <code>loop</code> function returns another function. In the example, we store that function under the name <code>x</code>. When called, the function <code>x</code> returns one of (in the example) 10, 7, and 20, in sequence, wrapping around when it is called a fourth time.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Function to specify a series of waiting times, that loop around</span>
+loop &lt;-<span class="st"> </span>function(...) {
+    time_diffs &lt;-<span class="st"> </span><span class="kw">c</span>(...)
+    i &lt;-<span class="st"> </span><span class="dv">0</span>
+    function() {        
+      if (i &lt;<span class="st"> </span><span class="kw">length</span>(time_diffs)) {     
+        i &lt;&lt;-<span class="st"> </span>i<span class="dv">+1</span>       
+      } else {      
+        i &lt;&lt;-<span class="st"> </span><span class="dv">1</span>     
+      }     
+      <span class="kw">return</span>(time_diffs[i])     
+    }       
+  }
+
+x &lt;-<span class="st"> </span><span class="kw">loop</span>(<span class="dv">10</span>, <span class="dv">7</span>, <span class="dv">20</span>)
+<span class="kw">x</span>(); <span class="kw">x</span>(); <span class="kw">x</span>(); <span class="kw">x</span>(); <span class="kw">x</span>()
+<span class="co">#&gt; [1] 10</span>
+<span class="co">#&gt; [1] 7</span>
+<span class="co">#&gt; [1] 20</span>
+<span class="co">#&gt; [1] 10</span>
+<span class="co">#&gt; [1] 7</span></code></pre></div>
+<p>The technical term for the <code>loop</code> function is a ‘closure’. How closures work is beyond the scope of this vignette; if you wish to learn more, then <a href="http://adv-r.had.co.nz/Functional-programming.html#closures">Advanced R</a> by Hadley Wickam has a good explanation.</p>
+<p>When we use <code>loop</code> in the <code>timeout</code> function, we don’t need to assign its output to a name; it can be an ‘anonymous’ function. It will be called whenever a customer is about to wait and needs to know how long to wait for. Because only three customers are generated, and their first step is the timeout step, they are assigned 10, 7, and 20 in order.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
+
+<span class="co"># Function to specify a series of waiting times in a loop</span>
+loop &lt;-<span class="st"> </span>function(...) {
+    time_diffs &lt;-<span class="st"> </span><span class="kw">c</span>(...)
+    i &lt;-<span class="st"> </span><span class="dv">0</span>
+    function() {        
+      if (i &lt;<span class="st"> </span><span class="kw">length</span>(time_diffs)) {     
+        i &lt;&lt;-<span class="st"> </span>i<span class="dv">+1</span>       
+      } else {      
+        i &lt;&lt;-<span class="st"> </span><span class="dv">1</span>     
+      }     
+      <span class="kw">return</span>(time_diffs[i])     
+    }       
+  }
+
+customer &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">create_trajectory</span>(<span class="st">&quot;Customer's path&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">timeout</span>(<span class="kw">loop</span>(<span class="dv">10</span>, <span class="dv">7</span>, <span class="dv">20</span>))
+
+bank &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">&quot;bank&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;Customer&quot;</span>, customer, <span class="kw">at</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">12</span>))
+
+bank %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dt">until =</span> <span class="dv">400</span>) 
+<span class="co">#&gt; simmer environment: bank | now: 32 | next: </span>
+<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 3 }</span>
+bank %&gt;%<span class="st"> </span>get_mon_arrivals
+<span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
+<span class="co">#&gt; 1 Customer0          2       12            10     TRUE           1</span>
+<span class="co">#&gt; 2 Customer1          5       12             7     TRUE           1</span>
+<span class="co">#&gt; 3 Customer2         12       32            20     TRUE           1</span></code></pre></div>
+<p>Again the simulation finishes before the 400 specified in the <code>run</code> function.</p>
+</div>
+<div id="many-customers" class="section level3">
+<h3>Many customers</h3>
+<p>Another change will allow us to have more customers. And use a separate Source class to create and activate them. To make things clearer we do not use random numbers in this model.</p>
+<p>The change is in the <code>add_generator</code> function, where we create a sequence of start times for five customers, starting at time 0, with an interval of 10 between each customer. The -1 is a flag to stop the generator. An idiosyncracy of the syntax is that this argument must be a function, hence <code>function() {c(first time, interarrival times, -1)}</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
+
+customer &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">create_trajectory</span>(<span class="st">&quot;Customer's path&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">timeout</span>(<span class="dv">12</span>) 
+
+bank &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">&quot;bank&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;Customer&quot;</span>, customer, 
+                function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="dv">10</span>, <span class="dv">4</span>), -<span class="dv">1</span>)}) <span class="co"># every 10 starting at 0 for 5 customers</span>
+
+bank %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dt">until =</span> <span class="dv">400</span>) 
+<span class="co">#&gt; simmer environment: bank | now: 52 | next: </span>
+<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
+bank %&gt;%<span class="st"> </span>get_mon_arrivals
+<span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
+<span class="co">#&gt; 1 Customer0          0       12            12     TRUE           1</span>
+<span class="co">#&gt; 2 Customer1         10       22            12     TRUE           1</span>
+<span class="co">#&gt; 3 Customer2         20       32            12     TRUE           1</span>
+<span class="co">#&gt; 4 Customer3         30       42            12     TRUE           1</span>
+<span class="co">#&gt; 5 Customer4         40       52            12     TRUE           1</span></code></pre></div>
+</div>
+<div id="many-random-customers" class="section level3">
+<h3>Many random customers</h3>
+<p>We now extend this model to allow arrivals at random. In simulation this is usually interpreted as meaning that the times between customer arrivals are distributed as exponential random variates. There is little change in our program. The only difference between this and the previous example of a single customer generated at a random time is that this example generates several customers at different randome times.</p>
+<p>The change occurs in the arguments to the <code>add_generator</code> function. The function <code>rexp</code> draws from an exponential distribution with the given parameter, which in this case is <code>1/10</code>. See <code>?rexp</code> for more details. We also seed the random number generator with 1289 so that the same sequence of random numbers will be drawn every time the script is run. The 0 is the time of the first customer, then the random interarrival times are drawn, and then -1 stops the generator.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
+
+<span class="kw">set.seed</span>(<span class="dv">1289</span>)
+
+customer &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">create_trajectory</span>(<span class="st">&quot;Customer's path&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">timeout</span>(<span class="dv">12</span>) 
+
+bank &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">&quot;bank&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;Customer&quot;</span>, customer, function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span>/<span class="dv">10</span>), -<span class="dv">1</span>)})
+
+bank %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dt">until =</span> <span class="dv">400</span>) 
+<span class="co">#&gt; simmer environment: bank | now: 50.2705868901582 | next: </span>
+<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
+bank %&gt;%<span class="st"> </span>get_mon_arrivals
+<span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
+<span class="co">#&gt; 1 Customer0    0.00000 12.00000            12     TRUE           1</span>
+<span class="co">#&gt; 2 Customer1   14.31136 26.31136            12     TRUE           1</span>
+<span class="co">#&gt; 3 Customer2   26.55882 38.55882            12     TRUE           1</span>
+<span class="co">#&gt; 4 Customer3   35.85064 47.85064            12     TRUE           1</span>
+<span class="co">#&gt; 5 Customer4   38.27059 50.27059            12     TRUE           1</span></code></pre></div>
+</div>
+</div>
+<div id="a-service-counter" class="section level2">
+<h2>A Service counter</h2>
+<p>So far, the model has been more like an art gallery, the customers entering, looking around, and leaving. Now they are going to require service from the bank clerk. We extend the model to include a service counter that will be modelled as a ‘resource’. The actions of a Resource are simple: a customer requests a unit of the resource (a clerk). If one is free, then the customer gets service (and the unit is no longer available to other customers). If there is no free clerk, then the customer joins the queue (managed by the resource object) until it is the customer’s turn to be served. As each customer completes service and releases the unit, the clerk can start serving the next in line.</p>
+<div id="one-service-counter" class="section level3">
+<h3>One Service counter</h3>
+<p>The service counter is created with the <code>add_resource</code> function. Default arguments specify that it can serve one customer at a time, and has infinite queueing capacity.</p>
+<p>The <code>seize</code> function causes the customer to join the queue at the counter. If the queue is empty and the counter is available (not serving any customers), then the customer claims the counter for itself and moves onto the <code>timeout</code> step. Otherwise the customer must wait until the counter becomes available. Behaviour of the customer while in the queue is controlled by the arguments of the <code>seize</code> function, rather than by any other functions. Once the <code>timeout</code> step is complete, the <code>release</code> function causes the customer to make the counter available to other customers in the queue.</p>
+<p>Since the activity trace does not produce the waiting time by default, this is calculated and appended using the <code>mutate</code> function in the dplyr package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(simmer)
+
+<span class="kw">set.seed</span>(<span class="dv">99999</span>)
+
+customer &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">create_trajectory</span>(<span class="st">&quot;Customer's path&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">seize</span>(<span class="st">&quot;counter&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">timeout</span>(<span class="dv">12</span>) %&gt;%
+<span class="st">  </span><span class="kw">release</span>(<span class="st">&quot;counter&quot;</span>)
+
+bank &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">&quot;bank&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">add_resource</span>(<span class="st">&quot;counter&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;Customer&quot;</span>, customer, function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span>/<span class="dv">10</span>), -<span class="dv">1</span>)})
+
+bank %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dt">until =</span> <span class="dv">400</span>) 
+<span class="co">#&gt; simmer environment: bank | now: 60 | next: </span>
+<span class="co">#&gt; { Resource: counter | monitored: 1 | server status: 0(1) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
+bank %&gt;%<span class="st"> </span>
+<span class="st">  </span>get_mon_arrivals %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+<span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
+<span class="co">#&gt; 1 Customer0    0.00000       12            12     TRUE           1</span>
+<span class="co">#&gt; 2 Customer1   10.34073       24            12     TRUE           1</span>
+<span class="co">#&gt; 3 Customer2   13.03443       36            12     TRUE           1</span>
+<span class="co">#&gt; 4 Customer3   31.65036       48            12     TRUE           1</span>
+<span class="co">#&gt; 5 Customer4   46.04056       60            12     TRUE           1</span>
+<span class="co">#&gt;   waiting_time</span>
+<span class="co">#&gt; 1     0.000000</span>
+<span class="co">#&gt; 2     1.659269</span>
+<span class="co">#&gt; 3    10.965568</span>
+<span class="co">#&gt; 4     4.349641</span>
+<span class="co">#&gt; 5     1.959439</span></code></pre></div>
+<p>Examining the trace we see that the first customer gets instant service but the others have to wait. We still only have five customers, so we cannot draw general conclusions.</p>
+</div>
+<div id="a-server-with-a-random-service-time" class="section level3">
+<h3>A server with a random service time</h3>
+<p>This is a simple change to the model in that we retain the single service counter but make the customer service time a random variable. As is traditional in the study of simple queues we first assume an exponential service time.</p>
+<p>Note that the argument to <code>timeout</code> must be a function, otherwise it would apply a constant timeout to every customer.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(simmer)
+
+<span class="kw">set.seed</span>(<span class="dv">99999</span>)
+
+customer &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">create_trajectory</span>(<span class="st">&quot;Customer's path&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">seize</span>(<span class="st">&quot;counter&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">timeout</span>(function() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/<span class="dv">12</span>)}) %&gt;%
+<span class="st">  </span><span class="co"># timeout(rexp(1, 1/12)) %&gt;% # This line would use the same time for everyone</span>
+<span class="st">  </span><span class="kw">release</span>(<span class="st">&quot;counter&quot;</span>)
+
+bank &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">&quot;bank&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">add_resource</span>(<span class="st">&quot;counter&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;Customer&quot;</span>, customer, function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span>/<span class="dv">10</span>), -<span class="dv">1</span>)})
+
+bank %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dt">until =</span> <span class="dv">400</span>) 
+<span class="co">#&gt; simmer environment: bank | now: 57.0052703780482 | next: </span>
+<span class="co">#&gt; { Resource: counter | monitored: 1 | server status: 0(1) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
+bank %&gt;%<span class="st"> </span>
+<span class="st">  </span>get_mon_arrivals %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+<span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
+<span class="co">#&gt; 1 Customer0    0.00000  6.24161      6.241610     TRUE           1</span>
+<span class="co">#&gt; 2 Customer1   10.34073 19.05906      8.718329     TRUE           1</span>
+<span class="co">#&gt; 3 Customer2   13.03443 20.08416      1.025096     TRUE           1</span>
+<span class="co">#&gt; 4 Customer3   31.65036 47.58293     15.932568     TRUE           1</span>
+<span class="co">#&gt; 5 Customer4   46.04056 57.00527      9.422343     TRUE           1</span>
+<span class="co">#&gt;   waiting_time</span>
+<span class="co">#&gt; 1     0.000000</span>
+<span class="co">#&gt; 2     0.000000</span>
+<span class="co">#&gt; 3     6.024628</span>
+<span class="co">#&gt; 4     0.000000</span>
+<span class="co">#&gt; 5     1.542366</span></code></pre></div>
+<p>This model with random arrivals and exponential service times is an example of an M/M/1 queue and could rather easily be solved analytically to calculate the steady-state mean waiting time and other operating characteristics. (But not so easily solved for its transient behavior.)</p>
+</div>
+</div>
+<div id="several-service-counters" class="section level2">
+<h2>Several Service Counters</h2>
+<p>When we introduce several counters we must decide on a queue discipline. Are customers going to make one queue or are they going to form separate queues in front of each counter? Then there are complications - will they be allowed to switch lines (jockey)? We first consider a single queue with several counters and later consider separate isolated queues. We will not look at jockeying.</p>
+<div id="several-counters-but-a-single-queue" class="section level3">
+<h3>Several Counters but a Single Queue</h3>
+<p>Here we model a bank whose customers arrive randomly and are to be served at a group of counters, taking a random time for service, where we assume that waiting customers form a single first-in first-out queue.</p>
+<p>The only difference between this model and the single-server model is in the <code>add_resource</code> function, where we have increased the capacity to two so that it can serve two customers at once.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(simmer)
+
+<span class="kw">set.seed</span>(<span class="dv">99999</span>)
+
+customer &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">create_trajectory</span>(<span class="st">&quot;Customer's path&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">seize</span>(<span class="st">&quot;counter&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">timeout</span>(function() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/<span class="dv">12</span>)}) %&gt;%
+<span class="st">  </span><span class="co"># timeout(rexp(1, 1/12)) %&gt;% # This line would use the same time for everyone</span>
+<span class="st">  </span><span class="kw">release</span>(<span class="st">&quot;counter&quot;</span>)
+
+bank &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">&quot;bank&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">add_resource</span>(<span class="st">&quot;counter&quot;</span>, <span class="dv">2</span>) %&gt;%
+<span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;Customer&quot;</span>, customer, function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span>/<span class="dv">10</span>), -<span class="dv">1</span>)})
+
+bank %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dt">until =</span> <span class="dv">400</span>) 
+<span class="co">#&gt; simmer environment: bank | now: 55.4629048639701 | next: </span>
+<span class="co">#&gt; { Resource: counter | monitored: 1 | server status: 0(2) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
+bank %&gt;%<span class="st"> </span>
+<span class="st">  </span>get_mon_arrivals %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+<span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
+<span class="co">#&gt; 1 Customer0    0.00000  6.24161      6.241610     TRUE           1</span>
+<span class="co">#&gt; 2 Customer2   13.03443 14.05953      1.025096     TRUE           1</span>
+<span class="co">#&gt; 3 Customer1   10.34073 19.05906      8.718329     TRUE           1</span>
+<span class="co">#&gt; 4 Customer3   31.65036 47.58293     15.932568     TRUE           1</span>
+<span class="co">#&gt; 5 Customer4   46.04056 55.46290      9.422343     TRUE           1</span>
+<span class="co">#&gt;   waiting_time</span>
+<span class="co">#&gt; 1 0.000000e+00</span>
+<span class="co">#&gt; 2 2.220446e-16</span>
+<span class="co">#&gt; 3 0.000000e+00</span>
+<span class="co">#&gt; 4 0.000000e+00</span>
+<span class="co">#&gt; 5 1.776357e-15</span></code></pre></div>
+<p>The waiting times in this model are much shorter than those for the single service counter. For example, the waiting time for Customer2 has been reduced from 6 minutes to zero. Again we have too few customers processed to draw general conclusions.</p>
+</div>
+<div id="several-counters-with-individual-queues" class="section level3">
+<h3>Several Counters with individual queues</h3>
+<p>Each counter is now assumed to have its own queue. The programming is more complicated because the customer has to decide which queue to join. The obvious technique is to make each counter a separate resource.</p>
+<p>In practice, a customer might join the shortest queue. We implement this behaviour by first selecting the shortest queue, using the <code>select</code> function. (This is prefixed <code>simmer::select</code> to avoid clashes with the dplyr package). Then we use <code>seize_selected</code> to enter the chosen queue, and later <code>release_selected</code>.</p>
+<p>The rest of the program is the same as before.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(simmer)
+
+<span class="kw">set.seed</span>(<span class="dv">1014</span>)
+
+customer &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">create_trajectory</span>(<span class="st">&quot;Customer's path&quot;</span>) %&gt;%
+<span class="st">  </span>simmer::<span class="kw">select</span>(<span class="kw">c</span>(<span class="st">&quot;counter1&quot;</span>, <span class="st">&quot;counter2&quot;</span>), <span class="dt">policy =</span> <span class="st">&quot;shortest-queue&quot;</span>) %&gt;%
+<span class="st">  </span>seize_selected %&gt;%
+<span class="st">  </span><span class="kw">timeout</span>(function() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/<span class="dv">12</span>)}) %&gt;%
+<span class="st">  </span>release_selected
+
+bank &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">&quot;bank&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">add_resource</span>(<span class="st">&quot;counter1&quot;</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="kw">add_resource</span>(<span class="st">&quot;counter2&quot;</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;Customer&quot;</span>, customer, function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span>/<span class="dv">10</span>), -<span class="dv">1</span>)})
+
+bank %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dt">until =</span> <span class="dv">400</span>) 
+<span class="co">#&gt; simmer environment: bank | now: 62.3885266177193 | next: </span>
+<span class="co">#&gt; { Resource: counter1 | monitored: 1 | server status: 0(1) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Resource: counter2 | monitored: 1 | server status: 0(1) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
+bank %&gt;%<span class="st"> </span>
+<span class="st">  </span>get_mon_arrivals %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">service_start_time =</span> end_time -<span class="st"> </span>activity_time) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(start_time)
+<span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
+<span class="co">#&gt; 1 Customer0    0.00000 62.10372    62.1037152     TRUE           1</span>
+<span class="co">#&gt; 2 Customer1   23.71444 33.94103    10.2265939     TRUE           1</span>
+<span class="co">#&gt; 3 Customer2   30.40110 62.38853     0.2848114     TRUE           1</span>
+<span class="co">#&gt; 4 Customer3   32.41632 39.53020     5.5891677     TRUE           1</span>
+<span class="co">#&gt; 5 Customer4   48.85593 55.39645     6.5405163     TRUE           1</span>
+<span class="co">#&gt;   service_start_time</span>
+<span class="co">#&gt; 1            0.00000</span>
+<span class="co">#&gt; 2           23.71444</span>
+<span class="co">#&gt; 3           62.10372</span>
+<span class="co">#&gt; 4           33.94103</span>
+<span class="co">#&gt; 5           48.85593</span>
+bank %&gt;%<span class="st"> </span>
+<span class="st">  </span>get_mon_resources %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(time)
+<span class="co">#&gt;    resource     time server queue capacity queue_size system limit</span>
+<span class="co">#&gt; 1  counter1  0.00000      1     0        1        Inf      1   Inf</span>
+<span class="co">#&gt; 2  counter2 23.71444      1     0        1        Inf      1   Inf</span>
+<span class="co">#&gt; 3  counter1 30.40110      1     1        1        Inf      2   Inf</span>
+<span class="co">#&gt; 4  counter2 32.41632      1     1        1        Inf      2   Inf</span>
+<span class="co">#&gt; 5  counter2 33.94103      1     0        1        Inf      1   Inf</span>
+<span class="co">#&gt; 6  counter2 39.53020      0     0        1        Inf      0   Inf</span>
+<span class="co">#&gt; 7  counter2 48.85593      1     0        1        Inf      1   Inf</span>
+<span class="co">#&gt; 8  counter2 55.39645      0     0        1        Inf      0   Inf</span>
+<span class="co">#&gt; 9  counter1 62.10372      1     0        1        Inf      1   Inf</span>
+<span class="co">#&gt; 10 counter1 62.38853      0     0        1        Inf      0   Inf</span>
+<span class="co">#&gt;    replication</span>
+<span class="co">#&gt; 1            1</span>
+<span class="co">#&gt; 2            1</span>
+<span class="co">#&gt; 3            1</span>
+<span class="co">#&gt; 4            1</span>
+<span class="co">#&gt; 5            1</span>
+<span class="co">#&gt; 6            1</span>
+<span class="co">#&gt; 7            1</span>
+<span class="co">#&gt; 8            1</span>
+<span class="co">#&gt; 9            1</span>
+<span class="co">#&gt; 10           1</span></code></pre></div>
+<p>The results show that the customers chose the counter with the smallest number. Unlucky Customer2 who joins the wrong queue has to wait until Customer0 finishes at time 62.10372, and is the last to leave. There are, however, too few arrivals in these runs, limited as they are to five customers, to draw any general conclusions about the relative efficiencies of the two systems.</p>
+</div>
+<div id="the-bank-with-a-monitor-aka-summary-statistics" class="section level3">
+<h3>The bank with a monitor (aka summary statistics)</h3>
+<p>We now demonstrate how to calculate average waiting times for our customers. In the original SimPy version of this tutorial, this involved using ‘Monitors’. In simmer, data is returned by the <code>get_mon_*</code> family of functions, as has already been demonstrated. Here, we simply summarise the data frame returned by the <code>get_mon_arrivals</code> function, using functions from the <code>dplyr</code> package.</p>
+<p>We also increase the number of customers to 50 (find the number ‘49’ in the code.code).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(simmer)
+
+<span class="kw">set.seed</span>(<span class="dv">100005</span>)
+
+customer &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">create_trajectory</span>(<span class="st">&quot;Customer's path&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">seize</span>(<span class="st">&quot;counter&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">timeout</span>(function() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/<span class="dv">12</span>)}) %&gt;%
+<span class="st">  </span><span class="kw">release</span>(<span class="st">&quot;counter&quot;</span>)
+
+bank &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">&quot;bank&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">add_resource</span>(<span class="st">&quot;counter&quot;</span>, <span class="dv">2</span>) %&gt;%
+<span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;Customer&quot;</span>, customer, function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">49</span>, <span class="dv">1</span>/<span class="dv">10</span>), -<span class="dv">1</span>)})
+
+bank %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dt">until =</span> <span class="dv">400</span>) 
+<span class="co">#&gt; simmer environment: bank | now: 440.872565352812 | next: 440.872565352812</span>
+<span class="co">#&gt; { Resource: counter | monitored: 1 | server status: 1(2) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 50 }</span>
+result &lt;-<span class="st"> </span>
+<span class="st">  </span>bank %&gt;%<span class="st"> </span>
+<span class="st">  </span>get_mon_arrivals %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+<span class="kw">paste</span>(<span class="st">&quot;Average wait for &quot;</span>, <span class="kw">sum</span>(result$finished), <span class="st">&quot; completions was &quot;</span>,
+      <span class="kw">mean</span>(result$waiting_time), <span class="st">&quot;minutes.&quot;</span>)
+<span class="co">#&gt; [1] &quot;Average wait for  29  completions was  0.584941574937737 minutes.&quot;</span></code></pre></div>
+</div>
+<div id="multiple-runs" class="section level3">
+<h3>Multiple runs</h3>
+<p>To get a number of independent measurements we must replicate the runs using different random number seeds. Each replication must be independent of previous ones, so the environment (bank) must be redefined for each run, so that the random interarrival times in the <code>add_generator</code> function are generated from scratch.</p>
+<p>We take the chunks of code that build the environment (bank) and run the simulation, and wrap them in the <code>mclapply</code> function from the ‘parallel’ package. This function runs each simulation in parallel, using the available cores in the computer’s processor. Because we use seeds for reproducability, we pass these to the function that runs the simulation (<code>function(the_seed)</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(simmer)
+<span class="kw">library</span>(parallel)
+
+customer &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">create_trajectory</span>(<span class="st">&quot;Customer's path&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">seize</span>(<span class="st">&quot;counter&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">timeout</span>(function() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/<span class="dv">12</span>)}) %&gt;%
+<span class="st">  </span><span class="kw">release</span>(<span class="st">&quot;counter&quot;</span>)
+
+<span class="kw">mclapply</span>(<span class="kw">c</span>(<span class="dv">393943</span>, <span class="dv">100005</span>, <span class="dv">777999555</span>, <span class="dv">319999772</span>), function(the_seed) {
+  <span class="kw">set.seed</span>(the_seed)
+
+  bank &lt;-<span class="st"> </span>
+<span class="st">    </span><span class="kw">simmer</span>(<span class="st">&quot;bank&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">add_resource</span>(<span class="st">&quot;counter&quot;</span>, <span class="dv">2</span>) %&gt;%
+<span class="st">    </span><span class="kw">add_generator</span>(<span class="st">&quot;Customer&quot;</span>, customer, function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">49</span>, <span class="dv">1</span>/<span class="dv">10</span>), -<span class="dv">1</span>)})
+
+  bank %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dt">until =</span> <span class="dv">400</span>) 
+  result &lt;-<span class="st"> </span>
+<span class="st">    </span>bank %&gt;%<span class="st"> </span>
+<span class="st">    </span>get_mon_arrivals %&gt;%
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+  <span class="kw">paste</span>(<span class="st">&quot;Average wait for &quot;</span>, <span class="kw">sum</span>(result$finished), <span class="st">&quot; completions was &quot;</span>,
+        <span class="kw">mean</span>(result$waiting_time), <span class="st">&quot;minutes.&quot;</span>)
+})
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [1] &quot;Average wait for  49  completions was  3.4958501806687 minutes.&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; [1] &quot;Average wait for  29  completions was  0.584941574937737 minutes.&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt; [1] &quot;Average wait for  32  completions was  1.00343842138177 minutes.&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[4]]</span>
+<span class="co">#&gt; [1] &quot;Average wait for  42  completions was  7.41231393636088 minutes.&quot;</span></code></pre></div>
+<p>The results show some variation. Remember, though, that the system is still only operating for 50 customers, so the system may not be in steady-state.</p>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

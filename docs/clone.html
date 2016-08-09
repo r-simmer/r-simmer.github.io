@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>release_selected. simmer 3.3.0</title>
+<title>clone. simmer 3.4.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.3.0</a>
+      <a class="brand" href="#">simmer 3.4.0</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -47,21 +47,30 @@
         
       </header>
       
-      <h1>Add a release activity</h1>
+      <h1>Add a clone/synchronize activity</h1>
 
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><div>release_selected(traj, amount&nbsp;=&nbsp;1, id&nbsp;=&nbsp;0)</div></pre>
+    <pre><div>clone(traj, n, ...)</div>
+<div>synchronize(traj, wait&nbsp;=&nbsp;TRUE, mon_all&nbsp;=&nbsp;FALSE)</div></pre>
     
     <h2>Arguments</h2>
     <dl>
       <dt>traj</dt>
       <dd>the trajectory object.</dd>
-      <dt>amount</dt>
-      <dd>the amount to release, accepts either a callable object (a function) or a numeric value.</dd>
-      <dt>id</dt>
-      <dd>selection identifier for nested usage.</dd>
+      <dt>n</dt>
+      <dd>number of clones, accepts either a numeric or a callable object 
+(a function) which must return a numeric.</dd>
+      <dt>...</dt>
+      <dd>optional parallel sub-trajectories. Each clone will follow 
+a different sub-trajectory if available.</dd>
+      <dt>wait</dt>
+      <dd>if <code>FALSE</code>, all clones but the first to arrive are removed.
+if <code>TRUE</code> (default), all clones but the last to arrive are removed.</dd>
+      <dt>mon_all</dt>
+      <dd>if <code>TRUE</code>, <code>get_mon_arrivals</code> will show one
+line per clone.</dd>
     </dl>
     
     <div class="Value">
@@ -76,26 +85,19 @@ The trajectory object.
     <div class="Description">
       <h2>Description</h2>
 
-      <p>Adds a new activity capable of releasing a previously selected resource to the tail of a trajectory.</p>
+      <p>A <code>clone</code> activity replicates an arrival <code>n</code> times (the original
+one + <code>n-1</code> copies). A <code>synchronize</code> activity removes all but one clone.</p>
   
     </div>
       </div>
   <div class="span4">
     <!-- <ul>
-      <li>release_selected</li>
+      <li>clone</li><li>synchronize</li>
     </ul>
     <ul>
       
     </ul> -->
       
-    <h2>See also</h2>
-    
-<a href='seize_selected.html'>seize_selected</a>, <a href='select.html'>select</a>. 
-Other methods for dealing with trajectories:
-<a href='create_trajectory.html'>create_trajectory</a>, <a href='get_head.html'>get_head</a>, <a href='get_tail.html'>get_tail</a>, 
-<a href='get_n_activities.html'>get_n_activities</a>, <a href='join.html'>join</a>, <a href='seize.html'>seize</a>, <a href='release.html'>release</a>, 
-<a href='set_attribute.html'>set_attribute</a>, <a href='timeout.html'>timeout</a>, <a href='branch.html'>branch</a>, <a href='rollback.html'>rollback</a>, <a href='leave.html'>leave</a>.
-
         
   </div>
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>Index. simmer 3.3.0</title>
+<title>Index. simmer 3.4.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.3.0</a>
+      <a class="brand" href="#">simmer 3.4.0</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -63,7 +63,13 @@
         <code><a href="create_trajectory.html">create_trajectory</a></code><br />Create a trajectory</li>
             
       <li>
+        <code><a href="batch.html">batch</a></code>(separate)<br />Add a batch/separate activity</li>
+            
+      <li>
         <code><a href="branch.html">branch</a></code><br />Add a branch activity</li>
+            
+      <li>
+        <code><a href="clone.html">clone</a></code>(synchronize)<br />Add a clone/synchronize activity</li>
             
       <li>
         <code><a href="join.html">join</a></code><br />Join trajectories</li>
@@ -72,25 +78,22 @@
         <code><a href="leave.html">leave</a></code><br />Add a leave activity</li>
             
       <li>
-        <code><a href="release.html">release</a></code><br />Add a release activity</li>
-            
-      <li>
-        <code><a href="release_selected.html">release_selected</a></code><br />Add a release activity</li>
+        <code><a href="renege_in.html">renege_in</a></code>(renege_abort)<br />Add a renege activity</li>
             
       <li>
         <code><a href="rollback.html">rollback</a></code><br />Add a rollback activity</li>
             
       <li>
-        <code><a href="seize.html">seize</a></code><br />Add a seize activity</li>
-            
-      <li>
-        <code><a href="seize_selected.html">seize_selected</a></code><br />Add a seize activity</li>
+        <code><a href="seize.html">seize</a></code>(release, release_selected, seize_selected)<br />Add a seize/release activity</li>
             
       <li>
         <code><a href="select.html">select</a></code><br />Select a resource</li>
             
       <li>
         <code><a href="set_attribute.html">set_attribute</a></code><br />Add a set attribute activity</li>
+            
+      <li>
+        <code><a href="set_prioritization.html">set_prioritization</a></code><br />Add a set prioritization activity</li>
             
       <li>
         <code><a href="timeout.html">timeout</a></code><br />Add a timeout activity</li>
@@ -103,19 +106,13 @@
     <ul class="index">
         
       <li>
-        <code><a href="get_head.html">get_head</a></code><br />Get the first activity</li>
-            
-      <li>
-        <code><a href="get_tail.html">get_tail</a></code><br />Get the last activity</li>
+        <code><a href="get_head.html">get_head</a></code>(get_tail)<br />Get the first/last activity</li>
             
       <li>
         <code><a href="get_n_activities.html">get_n_activities</a></code><br />Get the number of activities</li>
             
       <li>
-        <code><a href="get_next_activity.html">get_next_activity</a></code><br />Get the next activity</li>
-            
-      <li>
-        <code><a href="get_prev_activity.html">get_prev_activity</a></code><br />Get the previous activity</li>
+        <code><a href="get_next_activity.html">get_next_activity</a></code>(get_prev_activity)<br />Get the next/prev activity</li>
             
       <li>
         <code><a href="print_activity.html">print_activity</a></code><br />Print an activity</li>
@@ -137,13 +134,10 @@
         <code><a href="add_resource.html">add_resource</a></code><br />Add a resource</li>
             
       <li>
-        <code><a href="onestep.html">onestep</a></code><br />Step the simulation</li>
-            
-      <li>
         <code><a href="reset.html">reset</a></code><br />Reset a simulator</li>
             
       <li>
-        <code><a href="run.html">run</a></code><br />Run the simulation</li>
+        <code><a href="run.html">run</a></code>(onestep)<br />Run the simulation</li>
             
       <li>
         <code><a href="wrap.html">wrap</a></code><br />Wrap a simulation environment</li>
@@ -156,28 +150,13 @@
     <ul class="index">
         
       <li>
-        <code><a href="get_capacity.html">get_capacity</a></code><br />Get the capacity</li>
-            
-      <li>
-        <code><a href="set_capacity.html">set_capacity</a></code><br />Set the capacity</li>
-            
-      <li>
         <code><a href="get_n_generated.html">get_n_generated</a></code><br />Get the number of arrivals generated</li>
             
       <li>
-        <code><a href="get_queue_size.html">get_queue_size</a></code><br />Get the queue size</li>
+        <code><a href="resource.html">resource</a></code>(get_capacity, get_queue_count, get_queue_size, get_server_count, set_capacity, set_queue_size)<br />Set/Get a resource's parameters</li>
             
       <li>
-        <code><a href="set_queue_size.html">set_queue_size</a></code><br />Set the queue size</li>
-            
-      <li>
-        <code><a href="get_queue_count.html">get_queue_count</a></code><br />Get the queue count</li>
-            
-      <li>
-        <code><a href="get_server_count.html">get_server_count</a></code><br />Get the server count</li>
-            
-      <li>
-        <code><a href="now.html">now</a></code><br />Get the current time</li>
+        <code><a href="now.html">now</a></code><br />Get current time</li>
             
       <li>
         <code><a href="peek.html">peek</a></code><br />Peek next events</li>
@@ -190,13 +169,7 @@
     <ul class="index">
         
       <li>
-        <code><a href="get_mon_arrivals.html">get_mon_arrivals</a></code><br />Get arrival statistics</li>
-            
-      <li>
-        <code><a href="get_mon_attributes.html">get_mon_attributes</a></code><br />Get attribute statistics</li>
-            
-      <li>
-        <code><a href="get_mon_resources.html">get_mon_resources</a></code><br />Get resource statistics</li>
+        <code><a href="get_mon.html">get_mon</a></code>(get_mon_arrivals, get_mon_attributes, get_mon_resources)<br />Get statistics</li>
     
     </ul>
     <h3>Convenience functions</h3>
@@ -207,9 +180,6 @@
         
       <li>
         <code><a href="at.html">at</a></code><br />Arrivals at specific times</li>
-            
-      <li>
-        <code><a href="every.html">every</a></code><br />[Deprecated] Arrivals every specific interval</li>
             
       <li>
         <code><a href="from.html">from</a></code><br />Generate arrivals starting at a specified time</li>
@@ -251,8 +221,9 @@
       <li><a href="vignettes/A-introduction.html">Introduction to simmer</a></li>
       <li><a href="vignettes/B-terminology.html">Terminology</a></li>
       <li><a href="vignettes/C-trajectories.html">Advanced Trajectory Usage</a></li>
-      <li><a href="vignettes/D-queueing-systems.html">Queueing Systems</a></li>
-      <li><a href="vignettes/E-ctmc.html">Continuous-Time Markov Chains</a></li>
+      <li><a href="vignettes/D-bank-1.html">The Bank Tutorial: Part I</a></li>
+      <li><a href="vignettes/E-queueing-systems.html">Queueing Systems</a></li>
+      <li><a href="vignettes/F-ctmc.html">Continuous-Time Markov Chains</a></li>
     </ul>
         
     <h2>Dependencies</h2>

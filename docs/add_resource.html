@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>add_resource. simmer 3.3.0</title>
+<title>add_resource. simmer 3.4.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.3.0</a>
+      <a class="brand" href="#">simmer 3.4.0</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -72,8 +72,8 @@ on seize priorities.</dd>
       <dt>preempt_order</dt>
       <dd>if the resource is preemptive and preemption occurs with 
 more than one arrival in the server, this parameter defines which arrival should 
-be preempted first. It must be `fifo` (First In First Out: older preemptible 
-tasks are preempted first) or `lifo` (Last In First Out: newer preemptible tasks 
+be preempted first. It must be <code>fifo</code> (First In First Out: older preemptible 
+tasks are preempted first) or <code>lifo</code> (Last In First Out: newer preemptible tasks 
 are preempted first).</dd>
       <dt>queue_size_strict</dt>
       <dd>if the resource is preemptive and preemption occurs,
@@ -95,7 +95,7 @@ Returns the simulation environment.
     <div class="Description">
       <h2>Description</h2>
 
-      <p>Adds a resource to a simulation environment.</p>
+      <p>Define a new resource in a simulation environment.</p>
   
     </div>
       </div>
@@ -109,12 +109,7 @@ Returns the simulation environment.
       
     <h2>See also</h2>
     
-Convenience functions: <a href='schedule.html'>schedule</a>.
-Other methods for dealing with a simulation environment:
-<a href='simmer.html'>simmer</a>, <a href='reset.html'>reset</a>, <a href='now.html'>now</a>, <a href='peek.html'>peek</a>, <a href='onestep.html'>onestep</a>, <a href='run.html'>run</a>, 
-<a href='add_generator.html'>add_generator</a>, <a href='get_mon_arrivals.html'>get_mon_arrivals</a>, <a href='get_mon_attributes.html'>get_mon_attributes</a>,
-<a href='get_mon_resources.html'>get_mon_resources</a>, <a href='get_n_generated.html'>get_n_generated</a>, <a href='get_capacity.html'>get_capacity</a>, <a href='get_queue_size.html'>get_queue_size</a>,
-<a href='set_capacity.html'>set_capacity</a>, <a href='set_queue_size.html'>set_queue_size</a>, <a href='get_server_count.html'>get_server_count</a>, <a href='get_queue_count.html'>get_queue_count</a>.
+Convenience functions: <code><a href='schedule.html'>schedule</a></code>.
 
         
   </div>

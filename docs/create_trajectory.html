@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>create_trajectory. simmer 3.3.0</title>
+<title>create_trajectory. simmer 3.4.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.3.0</a>
+      <a class="brand" href="#">simmer 3.4.0</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -74,8 +74,8 @@ Returns an environment that represents the trajectory.
     <div class="Description">
       <h2>Description</h2>
 
-      <p>This function initialises a trajectory, which is a chain of activities followed 
-by arrivals of the same type.</p>
+      <p>This method initialises a trajectory object, which comprises a chain of 
+activities that can be attached to a generator.</p>
   
     </div>
     
@@ -98,13 +98,13 @@ t0
 </div>
 <div class='output'>simmer trajectory: my trajectory, 9 activities
 { Activity: Seize        | resource: nurse | amount: 1 }
-{ Activity: Timeout      | task: function() }
+{ Activity: Timeout      | delay: 0x7b2c058 }
 { Activity: Release      | resource: nurse | amount: 1 }
 { Activity: Seize        | resource: doctor | amount: 1 }
-{ Activity: Timeout      | task: function() }
+{ Activity: Timeout      | delay: 0x8887928 }
 { Activity: Release      | resource: doctor | amount: 1 }
 { Activity: Seize        | resource: administration | amount: 1 }
-{ Activity: Timeout      | task: function() }
+{ Activity: Timeout      | delay: 0x8791ca0 }
 { Activity: Release      | resource: administration | amount: 1 }
 </div>
 <div class='input'>
@@ -126,15 +126,14 @@ t1
 </div>
 <div class='output'>simmer trajectory: trajectory with a branch, 7 activities
 { Activity: Seize        | resource: server | amount: 1 }
-{ Activity: Branch       | continue: 1 }
-  simmer trajectory: branch1, 1 activities
-  { Activity: Timeout      | task: function() }
-{ Activity: Branch       | continue: 0 }
-  simmer trajectory: branch2, 2 activities
-  { Activity: Timeout      | task: function() }
+{ Activity: Branch       | option: 0x82f3d18 }
+  Fork 1, continue,  simmer trajectory: branch1, 1 activities
+  { Activity: Timeout      | delay: 0x8390fe8 }
+  Fork 2, stop,  simmer trajectory: branch2, 2 activities
+  { Activity: Timeout      | delay: 0x8339fc0 }
   { Activity: Release      | resource: server | amount: 1 }
 { Activity: Release      | resource: server | amount: 1 }
-{ Activity: Timeout      | task: function() }
+{ Activity: Timeout      | delay: 0x8285390 }
 </div></pre>
   </div>
   <div class="span4">
@@ -147,11 +146,13 @@ t1
       
     <h2>See also</h2>
     
-Other methods for dealing with trajectories:
-<a href='get_head.html'>get_head</a>, <a href='get_tail.html'>get_tail</a>, <a href='get_n_activities.html'>get_n_activities</a>, 
-<a href='join.html'>join</a>, <a href='seize.html'>seize</a>, <a href='release.html'>release</a>, 
-<a href='set_attribute.html'>set_attribute</a>, <a href='timeout.html'>timeout</a>, <a href='branch.html'>branch</a>, <a href='rollback.html'>rollback</a>, <a href='leave.html'>leave</a>, 
-<a href='seize_selected.html'>seize_selected</a>, <a href='release_selected.html'>release_selected</a>, <a href='select.html'>select</a>.
+Methods for dealing with trajectories:
+<code><a href='get_head.html'>get_head</a></code>, <code><a href='get_head.html'>get_tail</a></code>, <code><a href='get_n_activities.html'>get_n_activities</a></code>, <code><a href='join.html'>join</a></code>,
+<code><a href='seize.html'>seize</a></code>, <code><a href='seize.html'>release</a></code>, <code><a href='seize.html'>seize_selected</a></code>, <code><a href='seize.html'>release_selected</a></code>, 
+<code><a href='select.html'>select</a></code>, <code><a href='set_prioritization.html'>set_prioritization</a></code>, <code><a href='set_attribute.html'>set_attribute</a></code>, 
+<code><a href='timeout.html'>timeout</a></code>, <code><a href='branch.html'>branch</a></code>, <code><a href='rollback.html'>rollback</a></code>, <code><a href='leave.html'>leave</a></code>, 
+<code><a href='renege_in.html'>renege_in</a></code>, <code><a href='renege_in.html'>renege_abort</a></code>,<code><a href='clone.html'>clone</a></code>, <code><a href='clone.html'>synchronize</a></code>, 
+<code><a href='batch.html'>batch</a></code>, <code><a href='batch.html'>separate</a></code>.
 
         
   </div>
