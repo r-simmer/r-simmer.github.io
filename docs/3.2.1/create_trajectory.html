@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>create_trajectory. simmer 3.2.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">simmer 3.2.1</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Create a trajectory</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>create_trajectory(name&nbsp;=&nbsp;"anonymous")</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>name</dt>
+      <dd>the name of the trajectory.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+Returns an environment that represents the trajectory.
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function initialises a trajectory, which is a chain of activities followed 
+by arrivals of the same type.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>t0 &lt;- create_trajectory(&quot;my trajectory&quot;) %&gt;%
+  ## add an intake activity
+  seize(&quot;nurse&quot;, 1) %&gt;%
+  timeout(function() rnorm(1, 15)) %&gt;%
+  release(&quot;nurse&quot;, 1) %&gt;%
+  ## add a consultation activity
+  seize(&quot;doctor&quot;, 1) %&gt;%
+  timeout(function() rnorm(1, 20)) %&gt;%
+  release(&quot;doctor&quot;, 1) %&gt;%
+  ## add a planning activity
+  seize(&quot;administration&quot;, 1) %&gt;%
+  timeout(function() rnorm(1, 5)) %&gt;%
+  release(&quot;administration&quot;, 1)
+
+t0
+</div>
+<div class='output'>simmer trajectory: my trajectory, 9 activities
+{ Activity: Seize(nurse) | amount: 1 }
+{ Activity: Timeout(-) | task: function() }
+{ Activity: Release(nurse) | amount: 1 }
+{ Activity: Seize(doctor) | amount: 1 }
+{ Activity: Timeout(-) | task: function() }
+{ Activity: Release(doctor) | amount: 1 }
+{ Activity: Seize(administration) | amount: 1 }
+{ Activity: Timeout(-) | task: function() }
+{ Activity: Release(administration) | amount: 1 }
+</div>
+<div class='input'>
+t1 &lt;- create_trajectory(&quot;trajectory with a branch&quot;) %&gt;%
+  seize(&quot;server&quot;, 1) %&gt;%
+  ## 50-50 chance for each branch
+  branch(function() sample(1:2, 1), merge=c(TRUE, FALSE), 
+    create_trajectory(&quot;branch1&quot;) %&gt;%
+      timeout(function() 1),
+    create_trajectory(&quot;branch2&quot;) %&gt;%
+      timeout(function() rexp(1, 3)) %&gt;%
+      release(&quot;server&quot;, 1)
+  ) %&gt;%
+  ## only the first branch continues here
+  release(&quot;server&quot;, 1) %&gt;%
+  timeout(function() 2)
+
+t1
+</div>
+<div class='output'>simmer trajectory: trajectory with a branch, 6 activities
+{ Activity: Seize(server) | amount: 1 }
+{ Activity: Branch(-) | merge: 1 }
+  simmer trajectory: branch1, 1 activities
+  { Activity: Timeout(-) | task: function() }
+{ Activity: Branch(-) | merge: 0 }
+  simmer trajectory: branch2, 2 activities
+  { Activity: Timeout(-) | task: function() }
+  { Activity: Release(server) | amount: 1 }
+{ Activity: Release(server) | amount: 1 }
+{ Activity: Timeout(-) | task: function() }
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>create_trajectory</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other methods for dealing with trajectories:
+<a href='get_head.html'>get_head</a>, <a href='get_tail.html'>get_tail</a>,
+<a href='get_n_activities.html'>get_n_activities</a>, <a href='seize.html'>seize</a>, <a href='release.html'>release</a>, <a href='timeout.html'>timeout</a>, 
+<a href='set_attribute.html'>set_attribute</a>, <a href='branch.html'>branch</a>, <a href='rollback.html'>rollback</a>.
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

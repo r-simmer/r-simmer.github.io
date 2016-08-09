@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>rollback. simmer 3.2.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">simmer 3.2.1</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Add a rollback activity</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>rollback(traj, amount, times&nbsp;=&nbsp;1, check)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>traj</dt>
+      <dd>the trajectory object.</dd>
+      <dt>amount</dt>
+      <dd>the amount of activities (of the same or parent trajectories) to roll back.</dd>
+      <dt>times</dt>
+      <dd>the number of repetitions until an arrival may continue.</dd>
+      <dt>check</dt>
+      <dd>a callable object (a function) that must return a boolean. If
+present, the <code>times</code> parameter is ignored, and the activity uses this
+function to check whether the rollback must be done or not.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+The trajectory object.
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Adds a new activity that goes backwards in the trajectory.</p>
+  
+    </div>
+      </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>rollback</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other methods for dealing with trajectories:
+<a href='create_trajectory.html'>create_trajectory</a>, <a href='get_head.html'>get_head</a>,
+<a href='get_tail.html'>get_tail</a>, <a href='get_n_activities.html'>get_n_activities</a>, <a href='seize.html'>seize</a>, <a href='release.html'>release</a>,
+<a href='set_attribute.html'>set_attribute</a>, <a href='timeout.html'>timeout</a>, <a href='branch.html'>branch</a>.
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

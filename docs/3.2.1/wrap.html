@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>wrap. simmer 3.2.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">simmer 3.2.1</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Wrap a simulation environment</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>wrap(env)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>env</dt>
+      <dd>the simulation environment.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+Returns a simulation wrapper.
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function extracts the monitored data from a simulation environment 
+making it accessible through the same methods. Only useful if you want 
+to parallelize heavy replicas (see the example below), because the C++ 
+simulation backend is destroyed when the threads exit.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>library(parallel)
+
+mm1 &lt;- create_trajectory() %&gt;%
+  seize(&quot;server&quot;, 1) %&gt;%
+  timeout(function() rexp(1, 2)) %&gt;%
+  release(&quot;server&quot;, 1)
+
+envs &lt;- mclapply(1:4, function(i) {
+  simmer(&quot;M/M/1 example&quot;) %&gt;%
+    add_resource(&quot;server&quot;, 1) %&gt;%
+    add_generator(&quot;customer&quot;, mm1, function() rexp(1, 1)) %&gt;%
+    run(100) %&gt;%
+    wrap()
+})
+
+plot_resource_usage(envs, &quot;server&quot;)
+</div>
+<p><img src='wrap-2.png' alt='' width='540' height='400' /></p></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>wrap</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other methods for dealing with a simulation wrapper:
+<a href='get_mon_arrivals.html'>get_mon_arrivals</a>, <a href='get_mon_attributes.html'>get_mon_attributes</a>, <a href='get_mon_resources.html'>get_mon_resources</a>, 
+<a href='get_n_generated.html'>get_n_generated</a>, <a href='get_capacity.html'>get_capacity</a>, <a href='get_queue_size.html'>get_queue_size</a>,
+<a href='get_server_count.html'>get_server_count</a>, <a href='get_queue_count.html'>get_queue_count</a>.
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
