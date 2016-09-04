@@ -12,7 +12,7 @@
 
 <meta name="author" content="Duncan Garmonsway" />
 
-<meta name="date" content="2016-08-09" />
+<meta name="date" content="2016-09-04" />
 
 <title>The Bank Tutorial: Part I</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">The Bank Tutorial: Part I</h1>
 <h4 class="author"><em>Duncan Garmonsway</em></h4>
-<h4 class="date"><em>2016-08-09</em></h4>
+<h4 class="date"><em>2016-09-04</em></h4>
 
 
 <div id="TOC">
@@ -492,8 +492,8 @@ bank &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">add_generator</span>(<span class="st">&quot;Customer&quot;</span>, customer, function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">49</span>, <span class="dv">1</span>/<span class="dv">10</span>), -<span class="dv">1</span>)})
 
 bank %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dt">until =</span> <span class="dv">400</span>) 
-<span class="co">#&gt; simmer environment: bank | now: 440.872565352812 | next: 440.872565352812</span>
-<span class="co">#&gt; { Resource: counter | monitored: 1 | server status: 1(2) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; simmer environment: bank | now: 400 | next: 440.872565352812</span>
+<span class="co">#&gt; { Resource: counter | monitored: 1 | server status: 0(2) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 50 }</span>
 result &lt;-<span class="st"> </span>
 <span class="st">  </span>bank %&gt;%<span class="st"> </span>

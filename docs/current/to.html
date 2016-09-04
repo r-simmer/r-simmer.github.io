@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>to. simmer 3.4.0</title>
+<title>to. simmer 3.4.2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.4.0</a>
+      <a class="brand" href="#">simmer 3.4.2</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -52,7 +52,7 @@
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><div>to(stop_time, dist)</div></pre>
+    <pre><span class="functioncall"><a href='to.html'>to</a></span><span class="keyword">(</span><span class="symbol">stop_time</span><span class="keyword">,</span> <span class="symbol">dist</span><span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
     <dl>
@@ -79,15 +79,16 @@ Returns a generator function.
     </div>
     
     <h2 id="examples">Examples</h2>
-    <pre class="examples"><div class='input'>t0 &lt;- create_trajectory() %&gt;% timeout(0)
-env &lt;- simmer(verbose=TRUE) %&gt;%
-  add_generator(&quot;dummy&quot;, t0, to(5, function() runif(1, 1, 2))) %&gt;%
-  run(10)
-</div>
-<div class='output'>         0 | generator: dummy          |       new: dummy0         | 1.95039
-   1.95039 | generator: dummy          |       new: dummy1         | 3.66781
-   1.95039 |   arrival: dummy0         |  activity: Timeout        | 0
-   3.66781 |   arrival: dummy1         |  activity: Timeout        | 0
+    <pre class="examples"><div class='input'><span class="symbol">t0</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span> <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="number">0</span><span class="keyword">)</span>
+<span class="symbol">env</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='simmer.html'>simmer</a></span><span class="keyword">(</span><span class="argument">verbose</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='add_generator.html'>add_generator</a></span><span class="keyword">(</span><span class="string">"dummy"</span><span class="keyword">,</span> <span class="symbol">t0</span><span class="keyword">,</span> <span class="functioncall"><a href='to.html'>to</a></span><span class="keyword">(</span><span class="number">5</span><span class="keyword">,</span> <span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Uniform'>runif</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">,</span> <span class="number">2</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='run.html'>run</a></span><span class="keyword">(</span><span class="number">10</span><span class="keyword">)</span></div>
+<div class='output'>         0 | generator: dummy          |       new: dummy0         | 1.85522
+   1.85522 | generator: dummy          |       new: dummy1         | 3.0842
+   1.85522 |   arrival: dummy0         |  activity: Timeout        | 0
+    3.0842 | generator: dummy          |       new: dummy2         | 4.10811
+    3.0842 |   arrival: dummy1         |  activity: Timeout        | 0
+   4.10811 |   arrival: dummy2         |  activity: Timeout        | 0
 </div></pre>
   </div>
   <div class="span4">

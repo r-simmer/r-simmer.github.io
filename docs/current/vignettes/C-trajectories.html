@@ -12,7 +12,7 @@
 
 <meta name="author" content="Bart Smeets, Iñaki Ucar" />
 
-<meta name="date" content="2016-08-09" />
+<meta name="date" content="2016-09-04" />
 
 <title>Advanced Trajectory Usage</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Advanced Trajectory Usage</h1>
 <h4 class="author"><em>Bart Smeets, Iñaki Ucar</em></h4>
-<h4 class="date"><em>2016-08-09</em></h4>
+<h4 class="date"><em>2016-09-04</em></h4>
 
 
 <div id="TOC">
@@ -140,7 +140,7 @@ env&lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="co">#&gt; 1    0 patient0          my_key 123.0000000           1</span>
 <span class="co">#&gt; 2    5 patient0          my_key 124.0000000           1</span>
 <span class="co">#&gt; 3   10 patient0   dependent_key   0.0000000           1</span>
-<span class="co">#&gt; 4   15 patient0 independent_key   0.2453603           1</span></code></pre></div>
+<span class="co">#&gt; 4   15 patient0 independent_key   0.8656147           1</span></code></pre></div>
 <p>In general, whenever an activity accepts a function as a parameter, the rule above applies, and you can obtain the current set of attributes as the first argument of that function.</p>
 </div>
 <div id="timeout" class="section level3">
@@ -170,10 +170,10 @@ env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 
 <span class="kw">get_mon_arrivals</span>(env)
 <span class="co">#&gt;       name start_time end_time activity_time finished replication</span>
-<span class="co">#&gt; 1 patient0          0 98.05436      98.05436     TRUE           1</span>
+<span class="co">#&gt; 1 patient0          0 80.00479      80.00479     TRUE           1</span>
 <span class="kw">get_mon_attributes</span>(env)
 <span class="co">#&gt;   time     name    key value replication</span>
-<span class="co">#&gt; 1    0 patient0 health    51           1</span></code></pre></div>
+<span class="co">#&gt; 1    0 patient0 health    60           1</span></code></pre></div>
 <p>Be aware that if you want the <code>timeout</code>’s <code>task</code> parameter to be evaluated dynamically, you should supply a callable function. For example in <code>timeout(function() rexp(1, 10))</code>, <code>rexp(1, 10)</code> will be evaluated every time the timeout activity is executed. However, if you supply it in the form of <code>timeout(rexp(1, 10))</code>, it will only be evaluated at the initalization and will remain static after that.</p>
 <p>Of course, this <code>task</code>, supplied as a function, may be as complex as you need and, for instance, it may check a resource’s status, interact with other entities in your simulation model… The same applies to all the activities when they accept a function as a parameter.</p>
 </div>
@@ -211,12 +211,12 @@ env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 
 <span class="kw">get_mon_resources</span>(env)
 <span class="co">#&gt;   resource time server queue capacity queue_size system limit replication</span>
-<span class="co">#&gt; 1   doctor    0      1     0        2        Inf      1   Inf           1</span>
+<span class="co">#&gt; 1   doctor    0      2     0        2        Inf      2   Inf           1</span>
 <span class="co">#&gt; 2   doctor    3      0     0        2        Inf      0   Inf           1</span>
 <span class="kw">get_mon_attributes</span>(env)
 <span class="co">#&gt;   time     name           key value replication</span>
-<span class="co">#&gt; 1    0 patient0        health    27           1</span>
-<span class="co">#&gt; 2    0 patient0 docs_to_seize     1           1</span></code></pre></div>
+<span class="co">#&gt; 1    0 patient0        health    80           1</span>
+<span class="co">#&gt; 2    0 patient0 docs_to_seize     2           1</span></code></pre></div>
 <p>By default, an unsuccessful <code>seize</code> results in the rejection of the arrival. In the following example, the second patient tries to seize the only doctor while the first patient is being attended. There is no waiting room available, therefore it is rejected:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw">create_trajectory</span>(<span class="dt">name =</span> <span class="st">&quot;patient_trajectory&quot;</span>) %&gt;%
 <span class="st">  </span><span class="kw">seize</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">1</span>) %&gt;%
@@ -367,22 +367,22 @@ env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 
 <span class="kw">get_mon_attributes</span>(env)
 <span class="co">#&gt;   time     name      key value replication</span>
-<span class="co">#&gt; 1    0 patient0 resource     3           1</span>
+<span class="co">#&gt; 1    0 patient0 resource     1           1</span>
 <span class="co">#&gt; 2    1 patient1 resource     3           1</span>
-<span class="co">#&gt; 3    2 patient2 resource     1           1</span>
+<span class="co">#&gt; 3    2 patient2 resource     2           1</span>
 <span class="kw">get_mon_arrivals</span>(env)
 <span class="co">#&gt;       name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 patient0          0        5             5     TRUE           1</span>
-<span class="co">#&gt; 2 patient2          2        7             5     TRUE           1</span>
-<span class="co">#&gt; 3 patient1          1       10             5     TRUE           1</span>
+<span class="co">#&gt; 2 patient1          1        6             5     TRUE           1</span>
+<span class="co">#&gt; 3 patient2          2        7             5     TRUE           1</span>
 <span class="kw">get_mon_resources</span>(env)
 <span class="co">#&gt;   resource time server queue capacity queue_size system limit replication</span>
-<span class="co">#&gt; 1  doctor3    0      1     0        1        Inf      1   Inf           1</span>
-<span class="co">#&gt; 2  doctor3    1      1     1        1        Inf      2   Inf           1</span>
-<span class="co">#&gt; 3  doctor1    2      1     0        1        Inf      1   Inf           1</span>
-<span class="co">#&gt; 4  doctor3    5      1     0        1        Inf      1   Inf           1</span>
-<span class="co">#&gt; 5  doctor1    7      0     0        1        Inf      0   Inf           1</span>
-<span class="co">#&gt; 6  doctor3   10      0     0        1        Inf      0   Inf           1</span></code></pre></div>
+<span class="co">#&gt; 1  doctor1    0      1     0        1        Inf      1   Inf           1</span>
+<span class="co">#&gt; 2  doctor3    1      1     0        1        Inf      1   Inf           1</span>
+<span class="co">#&gt; 3  doctor2    2      1     0        1        Inf      1   Inf           1</span>
+<span class="co">#&gt; 4  doctor1    5      0     0        1        Inf      0   Inf           1</span>
+<span class="co">#&gt; 5  doctor3    6      0     0        1        Inf      0   Inf           1</span>
+<span class="co">#&gt; 6  doctor2    7      0     0        1        Inf      0   Inf           1</span></code></pre></div>
 <p>And, of course, everything learned for <code>seize</code> and <code>release</code> applies to <code>seize_selected</code> and <code>release_selected</code>.</p>
 </div>
 <div id="set_prioritization" class="section level3">
@@ -437,12 +437,12 @@ arrivals &lt;-<span class="st"> </span><span class="kw">get_mon_arrivals</span>(
 <span class="kw">table</span>(arrivals$resource)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; branch1 branch2 </span>
-<span class="co">#&gt;     508     492</span>
+<span class="co">#&gt;     501     499</span>
 
 <span class="co"># The `activity_time` is the total time inside each branch for each arrival</span>
 <span class="co"># Let's see the distributions</span>
 <span class="kw">ggplot</span>(arrivals) +<span class="st"> </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x=</span>activity_time)) +<span class="st"> </span><span class="kw">facet_wrap</span>(~resource)</code></pre></div>
-<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkAAAAGACAMAAAByRC0tAAAC6FBMVEUAAAABAQECAgIDAwMEBAQFBQUGBgYHBwcICAgJCQkKCgoLCwsMDAwNDQ0ODg4PDw8QEBARERESEhITExMUFBQVFRUWFhYXFxcZGRkaGhobGxscHBwdHR0eHh4fHx8gICAhISEiIiIjIyMkJCQmJiYnJycoKCgpKSkqKiorKyssLCwtLS0uLi4vLy8wMDAxMTEyMjIzMzM0NDQ1NTU2NjY3Nzc4ODg5OTk6Ojo7Ozs8PDw9PT0+Pj4/Pz9AQEBBQUFCQkJDQ0NERERFRUVGRkZHR0dISEhJSUlKSkpLS0tMTExNTU1OTk5PT09QUFBRUVFSUlJTU1NUVFRVVVVWVlZXV1dYWFhZWVlaWlpbW1tcXFxdXV1eXl5fX19gYGBhYWFiYmJjY2NkZGRlZWVmZmZnZ2doaGhpaWlqampra2tsbGxtbW1ubm5vb29wcHBxcXFycnJzc3N1dXV2dnZ3d3d4eHh5eXl6enp7e3t8fHx9fX1+fn5/f3+AgICBgYGCgoKDg4OEhISFhYWGhoaHh4eIiIiJiYmKioqLi4uMjIyOjo6Pj4+QkJCRkZGSkpKTk5OUlJSVlZWWlpaXl5eYmJiZmZmampqbm5ucnJydnZ2enp6fn5+goKChoaGioqKjo6OkpKSlpaWmpqanp6eoqKipqamqqqqrq6usrKytra2urq6vr6+wsLCxsbGysrKzs7O0tLS1tbW2tra3t7e4uLi5ubm6urq7u7u8vLy9vb2+vr6/v7/AwMDBwcHCwsLDw8PExMTFxcXGxsbHx8fIyMjJycnKysrLy8vMzMzOzs7Q0NDR0dHT09PU1NTV1dXW1tbX19fY2NjZ2dna2trb29vc3Nzd3d3e3t7f39/g4ODh4eHi4uLj4+Pk5OTm5ubn5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7///+46kYFAAAACXBIWXMAAA7DAAAOwwHHb6hkAAATRUlEQVR4nO3de4BU5XnH8QOK3FYQQ6QrBHaBcIkGUS7h3iZgq5aLaFJCqlgVtdEmFWqisXihCRQC5RYootxXjSJ3WYgGFmGXZbBqgGKLVLEWcO+77MzsPv/2zJnZuc8758w77LA7398fcznvec488/BhZ3dg9hhCiEaMTDdAWnYARLQCIKIVABGtAIhoBUBEK6kD+r+PszafuP0jKM90IxlMjTagvfuyNhu+8o+gZHumO8lY3viTPiBX1ubtJkCHMt1JxrIPQBoBEIC0AiAAaQVAANIKgACkFQABSCsAakmAVkxSLhfmN1MfYWluQFfhCFojoDnPX/FeArlKAa0f12f44mZox5cWCajwWJzlpukV/CwvCwCpRnCo/8uH1+RtbZ6WWhKgHzzx7aH/4ioc+vPcwiV3fOu2Ra7CIUumD37yuGvtqLyJOwrzFwzt9w/HXS8+NKT1ArI1grVDjrtcU3/RPC21JEC5c4tW9t5c2GvWHw73+u2hhfmlhb2fdxX2fGdvv9V/+LuJhbkPFa/L3WnuOK31ArI1gsMHXK7Dt7zaPC21JECDS12uWY8X5h5yFe90la7LLS7MPexyjdz47A9droPz9+UedLmGbnG1akB2R/DmmL+N9xp3BdKSAE0wL579UWEfl6v0n/9izA/N6eW5fNN79CnfsnVnWCsHZG8Ehx8ZPP9483TUogD5/vo9+JTvO8VV39npOmROz/dN48iN//Rj80v2L/b47rR2QLZGUDrpvqLm6cfVsgDd/PTh1XnbfCP79YjDBx7P3R+Y3s6+rxQ9OaYwGwDZGsGqwXsKCwubyVALAvTaTx/sP2yZ9bPqB1P7Dl/w8N3WwMZuca0amTdxezYAsjeCn+f6wk9hLSD8UwaAtAIgAGkFQADSCoAApBUAAUgrAAKQVgCUDkB73s7arD3vH8FrBZnuJGPZsE0b0InfFYRn89YCVdSrBVu2qNeTHFyverPT6l/v9I9g6VLNA6WvumBT81Yvfk0b0OljEXdr65V7e7zK5brLymWvR7lcX6dT7a5RLsepXrnLf73s3cgD1eq04anWqfZWKZcb3Mrlxgqn1a+vD9wAEIAABCAAAQhAyr0BBKCoAAhAAiABkAAIQAACEICUewMIQFEBEIAEQAIgARCAWgugGf7E2RtAAIoKgAAkABIACYAABCAAAUgApNMGgARAOm0ASACk0waABEA6bQBIAKTTBoAEQDptAEgApNMGgARAOm0ASACk0waABEA6bWQdoFMlDeGpqTMvAoAaYuPxxNkYSm2dctnjVi7X1aqr1Y99udppdRDQ3sgD1ei0UV+lU+2uVC571QP0ljutLkgDoKPu8FTVmBcBQG7Hqa52XhNKjVZ1baXTihVNgPZEHqhKp426Cq3qcp3q+jKnFVt5CQuGlzC+BwIQgJTLAAIQgAAUGQABSAAkABIAAQhAAAKQAEinDQAJgHTaAJAASKcNAAmAdNoAkABIpw0ACYB02gCQAEinDQAJgHTaAJAASKcNAAmAdNoAkABIpw0ACYB02gCQAEinDQAJgHTaAJAASKcNAAmAdNoAkABIpw0ACYB02gCQAEinDQAJgHTaAJAASKcNAAmAdNoAkABIpw0ACYB02gCQAEinDQAJgHTaAJAASKcNAAmAdNoAkABIpw0ACYB02gCQAEinDQAJgHTaAJAASKcNAAmAdNoAkABIpw0ACYB02gCQAEinDQAJgHTaAJAASKeNVgto3hLz4tPxXUafCl5ZARCAJDmgY7/sZAJqHDjv0vz8hsCVfwVAAJLkgFY81tsEVNLNLd7uRYEr/wqAACR2XsKmmIA2jTVvjF8XuBL5ZPbs2c8Xe8NTXWdeBAB5Y1NfH2djKDW1yuUk1XU1OtWXq5xWB095uTfyQNVabVTqVNdXKJfdl5XLnnKn1Q7OmeoDtPQu88bkhYErkaL8/Pzph2vCU15hXgQA1cSmqirOxqjqxElSXVGuU11Z5rR6eROgXZEH0mqj6usrWF1dqV6+6LR6izNAG8eZNya8Erjyb+cljJcwsQuouLtXGnocDFz5twMIQGIXUOOAZd5VfRsCV/7tAAKQ2AUkZ8bcOOpU8MoKgAAkvBMtABIAAQhAAAKQAEinDQAJgHTaAJAASKcNAAmAdNoAkABIpw0ACYB02gCQAEinDQAJgHTaAJAASKcNAEkQ0IxYSAACUFQABCABkABIAAQgALUaQIl/jgBQZAAEIAGQAEgABCAAAQhAAiABkP0ACEACIAGQAAhAAAIQgARAAiD7ARCABEACIAEQgFo6oBnxE7Y3gAAUFQABSAAkABIAAQhAAAIQgADkJAACkABIACQAAhCAAAQgAAHISQAEIAGQAEgABKCrBlCZ/1Q8nnLlAa0ACEASA8j40roqvV55QCsAApBEAZoyxbhzii8D85QHtHKq2BNMAkChHTxujzLVNep1dXlttU51XZW6OLY6eM7UPbEHin3qigOF53Kl0zYiqiuUy0lG4C5zWh3/nKkzZxr3zvRl1h/tAAqdgjUBoPDztnqUp3VNctJdj1u5nOSku0mqk5x01xPbueqku7FP3W4b6pPuxmkjPElOupvksZOcdDdOdaKT7o64mFxOILyE8RIm/BQmAJJ0Arrw+PdG+PKE8oBWAAQgiQE0rcdjc3x5XnlAKwACkMQAuv608kjhARCAJAbQIPUfZHgABCCJAfTSMuWRwgMgAEkMoK23f3/eEl+UB7QCIABJDKCbm6I8oBUAAUh4H0gAJAAC0FUD6O5A5ioPaAVAAJIYQA+aeeAvu/ZfpzygFQABSBK8hJX/+RrlAa0ACECS6Hug929RHtAKgAAkiQDt7qw8oBUAAUhiAG2ysrTXeOUBrQAIQBIDqL2VjiP/pDygFQABSHgfSAAkaQZ0+TP1qT+bAiAASSygbbe2MYzBbyuP5w+AACQxgN4x7tmwf9NkY4fygFYABCCJAXTHw9bVI8OVB7QCIABJDKDOu62rd3OUB7QCIABJDKBvL7CuFg1UHtAKgAAkMYBeaL/8fxu+WtnhBeUBrQAIQBIDyPNYW6ON0Xa2ulsrAAKQxHkf6LMdv9v+mfJwgQAIQBIL6PzaSjm/wI4gG4DCIAEoOwAV39D5gpzrcX2J8oBWAAQgiQE0ZpKvkfr70/Ov8VkMKM6reFYACrwPtD89v6EMQDPst9E6APVbZV2t7qs8oBUAAUhiAD13w1se8e68cY7ygFYABCCJfR/ooTbX9GhnTFP/iVgBEIAkzvtAJ9e/vPaE8nCBAAhAcoX/RyKAZthvA0AAApCTAAhAAiABkAAIQAACEIAABCAnARCABEACILn6AcUOMzqtFlDYcwdQZAAEILEN6D7DzJfy6fguo08FNgEIQGIb0HcLzp49620cOO/S/Hz/aVUBBCBf7AFq7Py576qkm1u83Yv82wAEILEL6LwxseOA12XTWPP2+HUiRfn5+dOLqoKxB6gqccrKFItVVRUVyuVyveqvnVYvbwK0M/ZAiZ97kjYqLjltw0F1ZblyueqC0+rNzgB9eMe+yt9f51p6l3l78kLzq88zzzzzm+TnTI2K4qycSc6ZWl+vXE5yztQk1UnOmRqn2sY5U+M892RtqM+ZmqQ6yTlT3ZeVy0nOmRqnOtE5U1WZ/NLGcebVhFf8d3kJ4yVM7AIq3mZeTF9c3N0rDT0O+rcBCEBiF1Dpdbtqdnc90zhgmXdVX34KA5DjH+Nfy+tw+3siZ8bcOIr3gQDEO9HhARCAAAQg5WMBCEAAAlBkAAQgAZAASAAEIAABCEAAApCTAAhAAiABkACoBQBKPgIAAQhATgIgAAmABEACIAABCEAAAhCAnARAABIACYAEQAACEIAABCAAOQmAACQAkuYFpBgFgAAEICcBEIAEQAIgARCAAAQgAGU3IHsjAFAoAAKQAEgAJAACEIAABCAAAchJAAQgAZAASAAEIAABCEAAApCTAAhAAiABkAAIQAACEIAABCAnOXXUHYy9qbkTp7pasZg0NVrVtZVOK4KnvNwT2uYMUJyD1lVoPAd3XblOdX2Z04qtaQBU0hCMvak1JE5tnWKxocHjVi7X1aqrPcrly9VOq4NfgfaGtjkDFGcy9VU6T8JdqVz2qgfoLXdanco5U6PCS5jGS1icyWTdSxiA0gfIxoQABCAARcQ5IMWYAAQgAAHIUQAEIAGQAEgA1GoAKRwBCEAAigiArhigeIMCEIAAFBEAAUgAJAASAAEIQAACEIAA5CQAApBkBlDUeOKNKyoAAlDi8cQbV1QABKDE44k3rqgACECJxxNvXFEBEICcjSsqWQoofDIAsjWmBAEQgOyNKUEABCB7Y0oQAAHI3pgSBEAAsjemBAEQgOyNKUEABCB7Y0oQAIW3EW9eAAKQejIAsjWmBAEQgOyNKUEABCB7Y0oQACkA2ZgfgAAEIFtjShAAAcjemBIEQACyN6YEAZCvjQTzsjE/AAEIQLbGlCAAApC9MSUIgADkaFrRyXJA6kGpBtcUAClbAVCiwTUFQMpWABR2P+4cG9xxNzcFQMplAAEIQIkHFXU/7hwBpGwFQGH3484xGwGF3wWQjdhrJMFeyhGkD9Cn47uMPhW4DSAAiUNAjQPnXZqf3+C/c6UAqZ+4RN21AiBfmqGR0NNNDVBJN7d4uxeJVLhcrv0AApBDQJvGmhfj14nsMwxj/MGyYK5k04FEPVRZeC5dLFPl60vK5UsXnFYvbwK0vVlHkCTN0Ejo6W5KCdDSu8yLyQtjvwKZqa1Xlnq8yuWW/yvufAeq1WkjG055uXGceTHhFf+d0wACkENAxd290tDjoP8OgAAkTn8KG7DMu6pvnJ/CBEACIBs5M+bGUfHeBxIACYAcBkAAEgAJgARAAAIQgACk3BtAAIoKgAAkABIASaYAveUKT3GJS5XSUuWyXnVJsU71saNOqxc3AVofeSCtNkqPXMHq48fUyx84rV6dBkDzIjL8+/M0MnqcTvWE7+lUT7rDcUmRfwQbIrf+YJhOG381RKd68mCd6un9HZds1wYUlZE/0ameNFmn+r4JOtUP36ZTHZYHhutUPzlAp/rZXJ3q3+SkXAogAAEIQK0AUOlHOtUnPtSp/g+XTvUnJTrVYfn4WPJ9EufUUZ3qM0U61WffT7k0bYBIdgZARCsAIlpJE6DwTxw6z7aBHYek/iosl+7vlrc15eoDt+WM/jj1Bw8lkzPI3AjSAyjiE4eO83mnXRef66b+5whVJsy9uLv96RSLz+a8UbGkp/rfCWwlozPI3AjSAyj4icOU8uYwkeo2qT59+egmt8i5yhSrV9xp/tkPejf5jsmSyRlkcATpART8xGGKaTy7JjflLwIFIx/5Zv+NqVYvvse8GLoi1fJQMjmDDI4gPYCCnzhMMZ907bIj5eJ/M5ZWHOhYmmL1hx32Va0xXkr50YPJ5AwyOIL0AIr4xGFKqe2X8huRG/qbF/emTGBz3y4zR69JtTqUTM4ggyNID6CITxw6zoKnzIvxKX8FPpzXKDI11b/6NV+IeHt+kOqDh5LJGWRwBGn6KSz8E4eO88ENxZe3dz6T6oM39FtUs6fzyRSrz7XfUfnCbY2pPngomZxBBkeQpveBwj9x6Dwr+3Qcsjf1Bz89Nuc7u1OufjO/619/mfqDh5LJGWRuBLwTTbQCIKIVABGtAIhoBUBEKwAiWgEQ0QqAiFYApM7MKVJlPBi8a902tyXdMWsCIHVMF7XTlwfvWrcTAQrfMWsCoIiUP/pn1+W91Cji+VX/nHElMsIwjLKbl8jUIeZiQ+4TYt72bXusp7lPXZfQP1827Si9N/x9r7wVX9z1jW/5/ovpq0M7DX41Y8+mOQKgiDzwzYU7njYKRB7qumL3pBvOX7z3zi8bTBebjXMiR4wjPkC+bSXGcZF3fBsDadpRevfe433RGHDM85MOtbL02ud2/9RYlcEndMUDoIhM3WBe3DpXTrX5vfkNT6e11suV6aL8uhUiT/dp9N32bWvs9azI34wNqwzsKL1niXxhzBd5zzhd1e1Fc+XRnpl5Ls0TAEWl8X/Wt5sj66/x/UqcC5VBF3dPksY+v5ImQPKzQVLdaXVYXRDQAvP1z3hL5CPjZIlx5MKFCwVG6p8XuPoDoIicmNS966Sb5sjLPQIbmly82q7cZZwMATpknH7j2othlUFAi3yA3rEAvW74858ZeCbNFQCFp6zDj442yLA5srad73+GnTsfdHHp2jd+ebuEAHlvWjjtnvDSeIDeMz7PzPNoxgAoPPt9f+KVXebICWOXSH2PBUEXMvHH/X8rIUAy+9b2BeGl8QB91c73Irfk/jT8f8erNgAKz3+1feLIrpGdR52Uad/49wP3X39WZg067rEArbmu7XnxG/Ftk0Kjc8QvNWzaMRyQzM1ZVDjvmn/NzJNpngAoIhv7dhqx7f3bl0jdP+bljCsWeb9PTrkF6Ku2E307+G77tkl9TuQvRGraMQToli+kYdGgjgNWtuYvQABKNf9taPwv7lYUAKUUT+UjN6t/c262BEAp5YzRxverfnd/tynHM91RpgKglOL+Y1o+CdQKAiCiFQARrQCIaAVARCsAIloBENEKgIhW/h/l5zUiAzTQnwAAAABJRU5ErkJggg==" style="display: block; margin: auto;" /></p>
 </div>
 <div id="rollback" class="section level3">
 <h3><code>rollback</code></h3>
@@ -566,28 +566,28 @@ env &lt;-<span class="st"> </span><span class="kw">simmer</span>(<span class="dt
 <span class="st">  </span><span class="kw">run</span>()
 <span class="co">#&gt;          0 | generator: customer       |       new: customer0      | 0</span>
 <span class="co">#&gt;          0 | generator: customer       |       new: customer1      | 1</span>
-<span class="co">#&gt;          0 |   arrival: customer0      |  activity: Timeout        | 0x51d4338</span>
+<span class="co">#&gt;          0 |   arrival: customer0      |  activity: Timeout        | 0x3abc880</span>
 <span class="co">#&gt; [1] &quot;Here I am&quot;</span>
 <span class="co">#&gt;          0 |   arrival: customer0      |  activity: RenegeIn       | 5, 1 paths</span>
 <span class="co">#&gt;          0 |   arrival: customer0      |  activity: Seize          | clerk, 1, 0 paths</span>
 <span class="co">#&gt;          0 |  resource: clerk          |   arrival: customer0      | SERVE</span>
 <span class="co">#&gt;          0 |   arrival: customer0      |  activity: RenegeAbort    | </span>
-<span class="co">#&gt;          0 |   arrival: customer0      |  activity: Timeout        | 0x636b6f0</span>
+<span class="co">#&gt;          0 |   arrival: customer0      |  activity: Timeout        | 0x38b2098</span>
 <span class="co">#&gt; [1] &quot;I'm being attended&quot;</span>
 <span class="co">#&gt;          0 |   arrival: customer0      |  activity: Timeout        | 10</span>
-<span class="co">#&gt;          1 |   arrival: customer1      |  activity: Timeout        | 0x51d4338</span>
+<span class="co">#&gt;          1 |   arrival: customer1      |  activity: Timeout        | 0x3abc880</span>
 <span class="co">#&gt; [1] &quot;Here I am&quot;</span>
 <span class="co">#&gt;          1 |   arrival: customer1      |  activity: RenegeIn       | 5, 1 paths</span>
 <span class="co">#&gt;          1 |   arrival: customer1      |  activity: Seize          | clerk, 1, 0 paths</span>
 <span class="co">#&gt;          1 |  resource: clerk          |   arrival: customer1      | ENQUEUE</span>
 <span class="co">#&gt;          6 |      task: Renege-Timer   |                           | </span>
 <span class="co">#&gt;          6 |  resource: clerk          |   arrival: customer1      | DEPART</span>
-<span class="co">#&gt;          6 |   arrival: customer1      |  activity: Timeout        | 0x6384f88</span>
+<span class="co">#&gt;          6 |   arrival: customer1      |  activity: Timeout        | 0x38ea008</span>
 <span class="co">#&gt; [1] &quot;Lost my patience. Reneging...&quot;</span>
 <span class="co">#&gt;         10 |   arrival: customer0      |  activity: Release        | clerk, 1</span>
 <span class="co">#&gt;         10 |  resource: clerk          |   arrival: customer0      | DEPART</span>
 <span class="co">#&gt;         10 |      task: Post-Release   |                           | </span>
-<span class="co">#&gt;         10 |   arrival: customer0      |  activity: Timeout        | 0x50c1af0</span>
+<span class="co">#&gt;         10 |   arrival: customer0      |  activity: Timeout        | 0x3886e68</span>
 <span class="co">#&gt; [1] &quot;Finished&quot;</span></code></pre></div>
 </div>
 <div id="clone-synchronize" class="section level3">
@@ -918,7 +918,7 @@ env %&gt;%<span class="st"> </span><span class="kw">run</span>(<span class="dv">
 <span class="co">#&gt; [1] 2</span>
 <span class="co">#&gt; [1] 3</span>
 <span class="co">#&gt; simmer environment: anonymous | now: 4 | next: 4</span>
-<span class="co">#&gt; { Generator: dummy | monitored: 1 | n_generated: 5 }</span></code></pre></div>
+<span class="co">#&gt; { Generator: dummy | monitored: 1 | n_generated: 4 }</span></code></pre></div>
 <p>And we get the expected output. However, as a general rule of good practice, <strong>it is recommended to instantiate the environment always in the first place</strong>, to avoid possible mistakes and because the code becomes more readable:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, instantiate the environment</span>
 env &lt;-<span class="st"> </span><span class="kw">simmer</span>()
@@ -935,7 +935,7 @@ env %&gt;%
 <span class="co">#&gt; [1] 2</span>
 <span class="co">#&gt; [1] 3</span>
 <span class="co">#&gt; simmer environment: anonymous | now: 4 | next: 4</span>
-<span class="co">#&gt; { Generator: dummy | monitored: 1 | n_generated: 5 }</span></code></pre></div>
+<span class="co">#&gt; { Generator: dummy | monitored: 1 | n_generated: 4 }</span></code></pre></div>
 </div>
 
 

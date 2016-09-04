@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>join. simmer 3.4.0</title>
+<title>join. simmer 3.4.2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.4.0</a>
+      <a class="brand" href="#">simmer 3.4.2</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -52,7 +52,7 @@
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><div>join(...)</div></pre>
+    <pre><span class="functioncall"><a href='join.html'>join</a></span><span class="keyword">(</span><span class="symbol">...</span><span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
     <dl>
@@ -77,23 +77,21 @@ A new trajectory object.
     </div>
     
     <h2 id="examples">Examples</h2>
-    <pre class="examples"><div class='input'>t1 &lt;- create_trajectory() %&gt;% seize(&quot;dummy&quot;, 1)
-t2 &lt;- create_trajectory() %&gt;% timeout(1)
-t3 &lt;- create_trajectory() %&gt;% release(&quot;dummy&quot;, 1)
+    <pre class="examples"><div class='input'><span class="symbol">t1</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span> <span class="functioncall"><a href='seize.html'>seize</a></span><span class="keyword">(</span><span class="string">"dummy"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span>
+<span class="symbol">t2</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span> <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">)</span>
+<span class="symbol">t3</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span> <span class="functioncall"><a href='seize.html'>release</a></span><span class="keyword">(</span><span class="string">"dummy"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span>
 
-join(t1, t2, t3)
-</div>
+<span class="functioncall"><a href='join.html'>join</a></span><span class="keyword">(</span><span class="symbol">t1</span><span class="keyword">,</span> <span class="symbol">t2</span><span class="keyword">,</span> <span class="symbol">t3</span><span class="keyword">)</span></div>
 <div class='output'>simmer trajectory: anonymous, 3 activities
 { Activity: Seize        | resource: dummy | amount: 1 }
 { Activity: Timeout      | delay: 1 }
 { Activity: Release      | resource: dummy | amount: 1 }
 </div>
 <div class='input'>
-create_trajectory() %&gt;%
-  join(t1) %&gt;%
-  timeout(1) %&gt;%
-  join(t3)
-</div>
+<span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='join.html'>join</a></span><span class="keyword">(</span><span class="symbol">t1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='join.html'>join</a></span><span class="keyword">(</span><span class="symbol">t3</span><span class="keyword">)</span></div>
 <div class='output'>simmer trajectory: anonymous, 3 activities
 { Activity: Seize        | resource: dummy | amount: 1 }
 { Activity: Timeout      | delay: 1 }

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>from_to. simmer 3.4.0</title>
+<title>from_to. simmer 3.4.2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.4.0</a>
+      <a class="brand" href="#">simmer 3.4.2</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -52,7 +52,7 @@
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><div>from_to(start_time, stop_time, dist, arrive&nbsp;=&nbsp;TRUE)</div></pre>
+    <pre><span class="functioncall"><a href='from_to.html'>from_to</a></span><span class="keyword">(</span><span class="symbol">start_time</span><span class="keyword">,</span> <span class="symbol">stop_time</span><span class="keyword">,</span> <span class="symbol">dist</span><span class="keyword">,</span> <span class="argument">arrive</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
     <dl>
@@ -87,19 +87,18 @@ Returns a generator function.
     </div>
     
     <h2 id="examples">Examples</h2>
-    <pre class="examples"><div class='input'>t0 &lt;- create_trajectory() %&gt;% timeout(0)
-env &lt;- simmer(verbose=TRUE) %&gt;%
-  add_generator(&quot;dummy&quot;, t0, from_to(5, 10, function() runif(1, 1, 2))) %&gt;%
-  run(100)
-</div>
+    <pre class="examples"><div class='input'><span class="symbol">t0</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span> <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="number">0</span><span class="keyword">)</span>
+<span class="symbol">env</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='simmer.html'>simmer</a></span><span class="keyword">(</span><span class="argument">verbose</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='add_generator.html'>add_generator</a></span><span class="keyword">(</span><span class="string">"dummy"</span><span class="keyword">,</span> <span class="symbol">t0</span><span class="keyword">,</span> <span class="functioncall"><a href='from_to.html'>from_to</a></span><span class="keyword">(</span><span class="number">5</span><span class="keyword">,</span> <span class="number">10</span><span class="keyword">,</span> <span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Uniform'>runif</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">,</span> <span class="number">2</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='run.html'>run</a></span><span class="keyword">(</span><span class="number">100</span><span class="keyword">)</span></div>
 <div class='output'>         0 | generator: dummy          |       new: dummy0         | 5
-         5 | generator: dummy          |       new: dummy1         | 6.52157
+         5 | generator: dummy          |       new: dummy1         | 6.76629
          5 |   arrival: dummy0         |  activity: Timeout        | 0
-   6.52157 | generator: dummy          |       new: dummy2         | 7.77933
-   6.52157 |   arrival: dummy1         |  activity: Timeout        | 0
-   7.77933 | generator: dummy          |       new: dummy3         | 9.23365
-   7.77933 |   arrival: dummy2         |  activity: Timeout        | 0
-   9.23365 |   arrival: dummy3         |  activity: Timeout        | 0
+   6.76629 | generator: dummy          |       new: dummy2         | 8.2791
+   6.76629 |   arrival: dummy1         |  activity: Timeout        | 0
+    8.2791 | generator: dummy          |       new: dummy3         | 9.88124
+    8.2791 |   arrival: dummy2         |  activity: Timeout        | 0
+   9.88124 |   arrival: dummy3         |  activity: Timeout        | 0
 </div></pre>
   </div>
   <div class="span4">

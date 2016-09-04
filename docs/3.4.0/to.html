@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>to. simmer 3.4.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">simmer 3.4.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Generate arrivals stopping at a specified time</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>to(stop_time, dist)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>stop_time</dt>
+      <dd>the time at which to stop the generator.</dd>
+      <dt>dist</dt>
+      <dd>a function modelling the interarrival times.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+Returns a generator function.
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Generator convenience function to generate inter-arrivals with a specified stop time.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>t0 &lt;- create_trajectory() %&gt;% timeout(0)
+env &lt;- simmer(verbose=TRUE) %&gt;%
+  add_generator(&quot;dummy&quot;, t0, to(5, function() runif(1, 1, 2))) %&gt;%
+  run(10)
+</div>
+<div class='output'>         0 | generator: dummy          |       new: dummy0         | 1.95039
+   1.95039 | generator: dummy          |       new: dummy1         | 3.66781
+   1.95039 |   arrival: dummy0         |  activity: Timeout        | 0
+   3.66781 |   arrival: dummy1         |  activity: Timeout        | 0
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>to</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<code><a href='add_generator.html'>add_generator</a></code>.
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

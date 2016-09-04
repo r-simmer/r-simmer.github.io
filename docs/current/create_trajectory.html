@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>create_trajectory. simmer 3.4.0</title>
+<title>create_trajectory. simmer 3.4.2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.4.0</a>
+      <a class="brand" href="#">simmer 3.4.2</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -52,7 +52,7 @@
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><div>create_trajectory(name&nbsp;=&nbsp;"anonymous", verbose&nbsp;=&nbsp;FALSE)</div></pre>
+    <pre><span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="argument">name</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"anonymous"</span><span class="keyword">,</span> <span class="argument">verbose</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
     <dl>
@@ -80,60 +80,58 @@ activities that can be attached to a generator.</p>
     </div>
     
     <h2 id="examples">Examples</h2>
-    <pre class="examples"><div class='input'>t0 &lt;- create_trajectory(&quot;my trajectory&quot;) %&gt;%
-  ## add an intake activity
-  seize(&quot;nurse&quot;, 1) %&gt;%
-  timeout(function() rnorm(1, 15)) %&gt;%
-  release(&quot;nurse&quot;, 1) %&gt;%
-  ## add a consultation activity
-  seize(&quot;doctor&quot;, 1) %&gt;%
-  timeout(function() rnorm(1, 20)) %&gt;%
-  release(&quot;doctor&quot;, 1) %&gt;%
-  ## add a planning activity
-  seize(&quot;administration&quot;, 1) %&gt;%
-  timeout(function() rnorm(1, 5)) %&gt;%
-  release(&quot;administration&quot;, 1)
+    <pre class="examples"><div class='input'><span class="symbol">t0</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="string">"my trajectory"</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="comment">## add an intake activity</span>
+  <span class="functioncall"><a href='seize.html'>seize</a></span><span class="keyword">(</span><span class="string">"nurse"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">15</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='seize.html'>release</a></span><span class="keyword">(</span><span class="string">"nurse"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="comment">## add a consultation activity</span>
+  <span class="functioncall"><a href='seize.html'>seize</a></span><span class="keyword">(</span><span class="string">"doctor"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">20</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='seize.html'>release</a></span><span class="keyword">(</span><span class="string">"doctor"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="comment">## add a planning activity</span>
+  <span class="functioncall"><a href='seize.html'>seize</a></span><span class="keyword">(</span><span class="string">"administration"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">5</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='seize.html'>release</a></span><span class="keyword">(</span><span class="string">"administration"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span>
 
-t0
-</div>
+<span class="symbol">t0</span></div>
 <div class='output'>simmer trajectory: my trajectory, 9 activities
 { Activity: Seize        | resource: nurse | amount: 1 }
-{ Activity: Timeout      | delay: 0x7b2c058 }
+{ Activity: Timeout      | delay: 0x6839d70 }
 { Activity: Release      | resource: nurse | amount: 1 }
 { Activity: Seize        | resource: doctor | amount: 1 }
-{ Activity: Timeout      | delay: 0x8887928 }
+{ Activity: Timeout      | delay: 0x63736b8 }
 { Activity: Release      | resource: doctor | amount: 1 }
 { Activity: Seize        | resource: administration | amount: 1 }
-{ Activity: Timeout      | delay: 0x8791ca0 }
+{ Activity: Timeout      | delay: 0x752cd28 }
 { Activity: Release      | resource: administration | amount: 1 }
 </div>
 <div class='input'>
-t1 &lt;- create_trajectory(&quot;trajectory with a branch&quot;) %&gt;%
-  seize(&quot;server&quot;, 1) %&gt;%
-  ## 50-50 chance for each branch
-  branch(function() sample(1:2, 1), continue=c(TRUE, FALSE), 
-    create_trajectory(&quot;branch1&quot;) %&gt;%
-      timeout(function() 1),
-    create_trajectory(&quot;branch2&quot;) %&gt;%
-      timeout(function() rexp(1, 3)) %&gt;%
-      release(&quot;server&quot;, 1)
-  ) %&gt;%
-  ## only the first branch continues here
-  release(&quot;server&quot;, 1) %&gt;%
-  timeout(function() 2)
+<span class="symbol">t1</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="string">"trajectory with a branch"</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='seize.html'>seize</a></span><span class="keyword">(</span><span class="string">"server"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="comment">## 50-50 chance for each branch</span>
+  <span class="functioncall"><a href='branch.html'>branch</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/sample'>sample</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">:</span><span class="number">2</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">continue</span><span class="argument">=</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="number">TRUE</span><span class="keyword">,</span> <span class="number">FALSE</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="string">"branch1"</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+      <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="number">1</span><span class="keyword">)</span><span class="keyword">,</span>
+    <span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="string">"branch2"</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+      <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Exponential'>rexp</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">3</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+      <span class="functioncall"><a href='seize.html'>release</a></span><span class="keyword">(</span><span class="string">"server"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span>
+  <span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="comment">## only the first branch continues here</span>
+  <span class="functioncall"><a href='seize.html'>release</a></span><span class="keyword">(</span><span class="string">"server"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="number">2</span><span class="keyword">)</span>
 
-t1
-</div>
+<span class="symbol">t1</span></div>
 <div class='output'>simmer trajectory: trajectory with a branch, 7 activities
 { Activity: Seize        | resource: server | amount: 1 }
-{ Activity: Branch       | option: 0x82f3d18 }
+{ Activity: Branch       | option: 0x5ebcfc8 }
   Fork 1, continue,  simmer trajectory: branch1, 1 activities
-  { Activity: Timeout      | delay: 0x8390fe8 }
+  { Activity: Timeout      | delay: 0x5f58370 }
   Fork 2, stop,  simmer trajectory: branch2, 2 activities
-  { Activity: Timeout      | delay: 0x8339fc0 }
+  { Activity: Timeout      | delay: 0x5ef2680 }
   { Activity: Release      | resource: server | amount: 1 }
 { Activity: Release      | resource: server | amount: 1 }
-{ Activity: Timeout      | delay: 0x8285390 }
+{ Activity: Timeout      | delay: 0x5c25018 }
 </div></pre>
   </div>
   <div class="span4">

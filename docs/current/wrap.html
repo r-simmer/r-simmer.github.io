@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>wrap. simmer 3.4.0</title>
+<title>wrap. simmer 3.4.2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.4.0</a>
+      <a class="brand" href="#">simmer 3.4.2</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -52,7 +52,7 @@
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><div>wrap(env)</div></pre>
+    <pre><span class="functioncall"><a href='wrap.html'>wrap</a></span><span class="keyword">(</span><span class="symbol">env</span><span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
     <dl>
@@ -80,23 +80,22 @@ simulation backend is destroyed when the threads exit.</p>
     </div>
     
     <h2 id="examples">Examples</h2>
-    <pre class="examples"><div class='input'>library(parallel)
+    <pre class="examples"><div class='input'><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/library'>library</a></span><span class="keyword">(</span><span class="symbol">parallel</span><span class="keyword">)</span>
 
-mm1 &lt;- create_trajectory() %&gt;%
-  seize(&quot;server&quot;, 1) %&gt;%
-  timeout(function() rexp(1, 2)) %&gt;%
-  release(&quot;server&quot;, 1)
+<span class="symbol">mm1</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='seize.html'>seize</a></span><span class="keyword">(</span><span class="string">"server"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Exponential'>rexp</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">2</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='seize.html'>release</a></span><span class="keyword">(</span><span class="string">"server"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span>
 
-envs &lt;- mclapply(1:4, function(i) {
-  simmer(&quot;M/M/1 example&quot;) %&gt;%
-    add_resource(&quot;server&quot;, 1) %&gt;%
-    add_generator(&quot;customer&quot;, mm1, function() rexp(1, 1)) %&gt;%
-    run(100) %&gt;%
-    wrap()
-})
+<span class="symbol">envs</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/parallel/topics/mclapply'>mclapply</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">:</span><span class="number">4</span><span class="keyword">,</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">i</span><span class="keyword">)</span> <span class="keyword">{</span>
+  <span class="functioncall"><a href='simmer.html'>simmer</a></span><span class="keyword">(</span><span class="string">"M/M/1 example"</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+    <span class="functioncall"><a href='add_resource.html'>add_resource</a></span><span class="keyword">(</span><span class="string">"server"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+    <span class="functioncall"><a href='add_generator.html'>add_generator</a></span><span class="keyword">(</span><span class="string">"customer"</span><span class="keyword">,</span> <span class="symbol">mm1</span><span class="keyword">,</span> <span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Exponential'>rexp</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+    <span class="functioncall"><a href='run.html'>run</a></span><span class="keyword">(</span><span class="number">100</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+    <span class="functioncall"><a href='wrap.html'>wrap</a></span><span class="keyword">(</span><span class="keyword">)</span>
+<span class="keyword">}</span><span class="keyword">)</span>
 
-plot_resource_usage(envs, &quot;server&quot;)
-</div>
+<span class="functioncall"><a href='plot_resource_usage.html'>plot_resource_usage</a></span><span class="keyword">(</span><span class="symbol">envs</span><span class="keyword">,</span> <span class="string">"server"</span><span class="keyword">)</span></div>
 <p><img src='wrap-2.png' alt='' width='540' height='400' /></p></pre>
   </div>
   <div class="span4">

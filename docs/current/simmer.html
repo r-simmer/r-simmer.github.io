@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>simmer. simmer 3.4.0</title>
+<title>simmer. simmer 3.4.2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">simmer 3.4.0</a>
+      <a class="brand" href="#">simmer 3.4.2</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -52,7 +52,7 @@
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><div>simmer(name&nbsp;=&nbsp;"anonymous", verbose&nbsp;=&nbsp;FALSE)</div></pre>
+    <pre><span class="functioncall"><a href='simmer.html'>simmer</a></span><span class="keyword">(</span><span class="argument">name</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"anonymous"</span><span class="keyword">,</span> <span class="argument">verbose</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
     <dl>
@@ -79,38 +79,38 @@ Returns a simulation environment.
     </div>
     
     <h2 id="examples">Examples</h2>
-    <pre class="examples"><div class='input'>t0 &lt;- create_trajectory(&quot;my trajectory&quot;) %&gt;%
-  ## add an intake activity
-  seize(&quot;nurse&quot;, 1) %&gt;%
-  timeout(function() rnorm(1, 15)) %&gt;%
-  release(&quot;nurse&quot;, 1) %&gt;%
-  ## add a consultation activity
-  seize(&quot;doctor&quot;, 1) %&gt;%
-  timeout(function() rnorm(1, 20)) %&gt;%
-  release(&quot;doctor&quot;, 1) %&gt;%
-  ## add a planning activity
-  seize(&quot;administration&quot;, 1) %&gt;%
-  timeout(function() rnorm(1, 5)) %&gt;%
-  release(&quot;administration&quot;, 1)
+    <pre class="examples"><div class='input'><span class="symbol">t0</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='create_trajectory.html'>create_trajectory</a></span><span class="keyword">(</span><span class="string">"my trajectory"</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="comment">## add an intake activity</span>
+  <span class="functioncall"><a href='seize.html'>seize</a></span><span class="keyword">(</span><span class="string">"nurse"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">15</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='seize.html'>release</a></span><span class="keyword">(</span><span class="string">"nurse"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="comment">## add a consultation activity</span>
+  <span class="functioncall"><a href='seize.html'>seize</a></span><span class="keyword">(</span><span class="string">"doctor"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">20</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='seize.html'>release</a></span><span class="keyword">(</span><span class="string">"doctor"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="comment">## add a planning activity</span>
+  <span class="functioncall"><a href='seize.html'>seize</a></span><span class="keyword">(</span><span class="string">"administration"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='timeout.html'>timeout</a></span><span class="keyword">(</span><span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">5</span><span class="keyword">)</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='seize.html'>release</a></span><span class="keyword">(</span><span class="string">"administration"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span>
 
-env &lt;- simmer(&quot;SuperDuperSim&quot;) %&gt;%
-  add_resource(&quot;nurse&quot;, 1) %&gt;%
-  add_resource(&quot;doctor&quot;, 2) %&gt;%
-  add_resource(&quot;administration&quot;, 1) %&gt;%
-  add_generator(&quot;patient&quot;, t0, function() rnorm(1, 10, 2))
-  
-env %&gt;% run(until=80)
-</div>
-<div class='output'>simmer environment: SuperDuperSim | now: 82.8688332051333 | next: 82.8688332051333
-{ Resource: nurse | monitored: 1 | server status: 1(1) | queue status: 3(Inf) }
+<span class="symbol">env</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='simmer.html'>simmer</a></span><span class="keyword">(</span><span class="string">"SuperDuperSim"</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='add_resource.html'>add_resource</a></span><span class="keyword">(</span><span class="string">"nurse"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='add_resource.html'>add_resource</a></span><span class="keyword">(</span><span class="string">"doctor"</span><span class="keyword">,</span> <span class="number">2</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='add_resource.html'>add_resource</a></span><span class="keyword">(</span><span class="string">"administration"</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span> <span class="keyword">%&gt;%</span>
+  <span class="functioncall"><a href='add_generator.html'>add_generator</a></span><span class="keyword">(</span><span class="string">"patient"</span><span class="keyword">,</span> <span class="symbol">t0</span><span class="keyword">,</span> <span class="keyword">function</span><span class="keyword">(</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">10</span><span class="keyword">,</span> <span class="number">2</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="symbol">env</span> <span class="keyword">%&gt;%</span> <span class="functioncall"><a href='run.html'>run</a></span><span class="keyword">(</span><span class="argument">until</span><span class="argument">=</span><span class="number">80</span><span class="keyword">)</span></div>
+<div class='output'>simmer environment: SuperDuperSim | now: 80 | next: 83.081692634281
+{ Resource: nurse | monitored: 1 | server status: 1(1) | queue status: 2(Inf) }
 { Resource: doctor | monitored: 1 | server status: 1(2) | queue status: 0(Inf) }
-{ Resource: administration | monitored: 1 | server status: 0(1) | queue status: 0(Inf) }
-{ Generator: patient | monitored: 1 | n_generated: 9 }
+{ Resource: administration | monitored: 1 | server status: 1(1) | queue status: 0(Inf) }
+{ Generator: patient | monitored: 1 | n_generated: 8 }
 </div>
 <div class='input'>
-plot_resource_usage(env, &quot;doctor&quot;)
-</div>
-<p><img src='simmer-4.png' alt='' width='540' height='400' /></p></pre>
+<span class="functioncall"><a href='plot_resource_usage.html'>plot_resource_usage</a></span><span class="keyword">(</span><span class="symbol">env</span><span class="keyword">,</span> <span class="string">"doctor"</span><span class="keyword">)</span></div>
+<strong class='warning'>Warning message:
+failed to assign NativeSymbolInfo for env since env is already defined in the ‘lazyeval’ namespace</strong>
+<p><img src='simmer-5.png' alt='' width='540' height='400' /></p></pre>
   </div>
   <div class="span4">
     <!-- <ul>
