@@ -79,7 +79,7 @@
       <h1>Advanced Trajectory Usage</h1>
                         <h4 class="author">Bart Smeets, I&ntilde;aki Ucar</h4>
             
-            <h4 class="date">2016-10-04</h4>
+            <h4 class="date">2016-10-06</h4>
           </div>
 
     
@@ -557,28 +557,28 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
 <span class="co">#&gt;          0 | generator: customer       |       new: customer0      | 0</span>
 <span class="co">#&gt;          0 | generator: customer       |       new: customer1      | 1</span>
-<span class="co">#&gt;          0 |   arrival: customer0      |  activity: Timeout        | 0x724cae8</span>
+<span class="co">#&gt;          0 |   arrival: customer0      |  activity: Timeout        | 0x7dd57c8</span>
 <span class="co">#&gt; [1] "Here I am"</span>
 <span class="co">#&gt;          0 |   arrival: customer0      |  activity: RenegeIn       | 5, 1 paths</span>
 <span class="co">#&gt;          0 |   arrival: customer0      |  activity: Seize          | clerk, 1, 0 paths</span>
 <span class="co">#&gt;          0 |  resource: clerk          |   arrival: customer0      | SERVE</span>
 <span class="co">#&gt;          0 |   arrival: customer0      |  activity: RenegeAbort    | </span>
-<span class="co">#&gt;          0 |   arrival: customer0      |  activity: Timeout        | 0x76ad490</span>
+<span class="co">#&gt;          0 |   arrival: customer0      |  activity: Timeout        | 0x775e540</span>
 <span class="co">#&gt; [1] "I'm being attended"</span>
 <span class="co">#&gt;          0 |   arrival: customer0      |  activity: Timeout        | 10</span>
-<span class="co">#&gt;          1 |   arrival: customer1      |  activity: Timeout        | 0x724cae8</span>
+<span class="co">#&gt;          1 |   arrival: customer1      |  activity: Timeout        | 0x7dd57c8</span>
 <span class="co">#&gt; [1] "Here I am"</span>
 <span class="co">#&gt;          1 |   arrival: customer1      |  activity: RenegeIn       | 5, 1 paths</span>
 <span class="co">#&gt;          1 |   arrival: customer1      |  activity: Seize          | clerk, 1, 0 paths</span>
 <span class="co">#&gt;          1 |  resource: clerk          |   arrival: customer1      | ENQUEUE</span>
 <span class="co">#&gt;          6 |      task: Renege-Timer   |                           | </span>
 <span class="co">#&gt;          6 |  resource: clerk          |   arrival: customer1      | DEPART</span>
-<span class="co">#&gt;          6 |   arrival: customer1      |  activity: Timeout        | 0x76eff10</span>
+<span class="co">#&gt;          6 |   arrival: customer1      |  activity: Timeout        | 0x5bb6860</span>
 <span class="co">#&gt; [1] "Lost my patience. Reneging..."</span>
 <span class="co">#&gt;         10 |   arrival: customer0      |  activity: Release        | clerk, 1</span>
 <span class="co">#&gt;         10 |  resource: clerk          |   arrival: customer0      | DEPART</span>
 <span class="co">#&gt;         10 |      task: Post-Release   |                           | </span>
-<span class="co">#&gt;         10 |   arrival: customer0      |  activity: Timeout        | 0x78ccd88</span>
+<span class="co">#&gt;         10 |   arrival: customer0      |  activity: Timeout        | 0x7aeb988</span>
 <span class="co">#&gt; [1] "Finished"</span></code></pre></div>
 </div>
 <div id="clone-synchronize" class="section level3">
@@ -896,7 +896,9 @@ t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_tr
 env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, t, function() <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">4</span>)
-<span class="co">#&gt; Error in eval(substitute(expr), envir, enclos): objeto 'env' no encontrado</span></code></pre></div>
+<span class="co">#&gt; [1] 0</span>
+<span class="co">#&gt; [1] 0</span>
+<span class="co">#&gt; [1] 0</span></code></pre></div>
 <p>Because the global <code>env</code> is not available at runtime: the simulation runs <em>and then</em> the resulting object is assigned to <code>env</code>. We need to assign first, then run. So this will work:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">print</span>(env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/now.html">now</a></span>()))
