@@ -167,13 +167,13 @@ activities that can be attached to a generator.</p>
 
 <span class='no'>t0</span></div><div class='output co'>#&gt; simmer trajectory: my trajectory, 9 activities
 #&gt; { Activity: Seize        | resource: nurse | amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0xaab6c38 }
+#&gt; { Activity: Timeout      | delay: 0x5aa1fe8 }
 #&gt; { Activity: Release      | resource: nurse | amount: 1 }
 #&gt; { Activity: Seize        | resource: doctor | amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0xc3ecd40 }
+#&gt; { Activity: Timeout      | delay: 0x5a09750 }
 #&gt; { Activity: Release      | resource: doctor | amount: 1 }
 #&gt; { Activity: Seize        | resource: administration | amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0xa0bccd0 }
+#&gt; { Activity: Timeout      | delay: 0x57c6288 }
 #&gt; { Activity: Release      | resource: administration | amount: 1 }
 #&gt; </div><div class='input'>
 <span class='no'>t1</span> <span class='kw'>&lt;-</span> <span class='fu'>create_trajectory</span>(<span class='st'>"trajectory with a branch"</span>) <span class='kw'>%&gt;%</span>
@@ -192,14 +192,14 @@ activities that can be attached to a generator.</p>
 
 <span class='no'>t1</span></div><div class='output co'>#&gt; simmer trajectory: trajectory with a branch, 7 activities
 #&gt; { Activity: Seize        | resource: server | amount: 1 }
-#&gt; { Activity: Branch       | option: 0xc058580 }
+#&gt; { Activity: Branch       | option: 0x56a3a48 }
 #&gt;   Fork 1, continue,  simmer trajectory: branch1, 1 activities
-#&gt;   { Activity: Timeout      | delay: 0xbcbdac0 }
+#&gt;   { Activity: Timeout      | delay: 0x5942c68 }
 #&gt;   Fork 2, stop,  simmer trajectory: branch2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0xb5efdb8 }
+#&gt;   { Activity: Timeout      | delay: 0x56d6568 }
 #&gt;   { Activity: Release      | resource: server | amount: 1 }
 #&gt; { Activity: Release      | resource: server | amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x8e0c5e8 }
+#&gt; { Activity: Timeout      | delay: 0x5676db0 }
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
