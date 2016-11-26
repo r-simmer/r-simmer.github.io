@@ -71,16 +71,19 @@
       <a href="../articles/B-terminology.html">Terminology</a>
     </li>
     <li>
-      <a href="../articles/C-trajectories.html">Advanced trajectory usage</a>
+      <a href="../articles/C-trajectories.html">Advanced Trajectory Usage</a>
     </li>
     <li>
       <a href="../articles/D-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
-      <a href="../articles/E-queueing-systems.html">Queueing systems</a>
+      <a href="../articles/E-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/F-ctmc.html">Continuous-Time Markov Chains</a>
+      <a href="../articles/F-queueing-systems.html">Queueing Systems</a>
+    </li>
+    <li>
+      <a href="../articles/G-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
   </ul>
 </li>
@@ -112,81 +115,99 @@
   <div class="col-md-9">
     <div class="page-header">
       <h1>Function reference</h1>
-      <h4>version&nbsp;3.5.0</h4>
+      <h4>version&nbsp;3.5.1</h4>
     </div>
 
     <div class="contents">
       <h2 id="section-build-trajectories" class="hasAnchor"><a href="#section-build-trajectories" class="anchor"></a>Build trajectories</h2>
       <p class="section-desc"><p>Methods for building trajectory objects</p></p>
 
+      
       <p><a href="activate.html">Add a activate/deactivate activity</a></p>
       <ul>
         <li><code><a href="activate.html">activate</a></code></li><li><code><a href="activate.html">deactivate</a></code></li>
       </ul>
+      
       <p><a href="batch.html">Add a batch/separate activity</a></p>
       <ul>
         <li><code><a href="batch.html">batch</a></code></li><li><code><a href="batch.html">separate</a></code></li>
       </ul>
+      
       <p><a href="branch.html">Add a branch activity</a></p>
       <ul>
         <li><code><a href="branch.html">branch</a></code></li>
       </ul>
+      
       <p><a href="clone.html">Add a clone/synchronize activity</a></p>
       <ul>
         <li><code><a href="clone.html">clone</a></code></li><li><code><a href="clone.html">synchronize</a></code></li>
       </ul>
+      
       <p><a href="create_trajectory.html">Create a trajectory</a></p>
       <ul>
         <li><code><a href="create_trajectory.html">create_trajectory</a></code></li>
       </ul>
+      
       <p><a href="join.html">Join trajectories</a></p>
       <ul>
         <li><code><a href="join.html">join</a></code></li>
       </ul>
+      
       <p><a href="leave.html">Add a leave activity</a></p>
       <ul>
         <li><code><a href="leave.html">leave</a></code></li>
       </ul>
+      
       <p><a href="log_.html">Add a logging activity</a></p>
       <ul>
         <li><code><a href="log_.html">log_</a></code></li>
       </ul>
+      
       <p><a href="renege_in.html">Add a renege activity</a></p>
       <ul>
-        <li><code><a href="renege_in.html">renege_abort</a></code></li><li><code><a href="renege_in.html">renege_in</a></code></li>
+        <li><code><a href="renege_in.html">renege_abort</a></code></li><li><code><a href="renege_in.html">renege_if</a></code></li><li><code><a href="renege_in.html">renege_in</a></code></li>
       </ul>
+      
       <p><a href="rollback.html">Add a rollback activity</a></p>
       <ul>
         <li><code><a href="rollback.html">rollback</a></code></li>
       </ul>
+      
       <p><a href="seize.html">Add a seize/release activity</a></p>
       <ul>
         <li><code><a href="seize.html">release</a></code></li><li><code><a href="seize.html">release_selected</a></code></li><li><code><a href="seize.html">seize</a></code></li><li><code><a href="seize.html">seize_selected</a></code></li>
       </ul>
+      
       <p><a href="select.html">Select a resource</a></p>
       <ul>
         <li><code><a href="select.html">select</a></code></li>
       </ul>
+      
       <p><a href="send.html">Add an inter-arrival communication activity</a></p>
       <ul>
         <li><code><a href="send.html">send</a></code></li><li><code><a href="send.html">trap</a></code></li><li><code><a href="send.html">untrap</a></code></li><li><code><a href="send.html">wait</a></code></li>
       </ul>
+      
       <p><a href="set_attribute.html">Add a set attribute activity</a></p>
       <ul>
         <li><code><a href="set_attribute.html">set_attribute</a></code></li>
       </ul>
+      
       <p><a href="set_capacity.html">Add a set capacity/queue size activity</a></p>
       <ul>
         <li><code><a href="set_capacity.html">set_capacity</a></code></li><li><code><a href="set_capacity.html">set_capacity_selected</a></code></li><li><code><a href="set_capacity.html">set_queue_size</a></code></li><li><code><a href="set_capacity.html">set_queue_size_selected</a></code></li>
       </ul>
+      
       <p><a href="set_prioritization.html">Add a set prioritization activity</a></p>
       <ul>
         <li><code><a href="set_prioritization.html">set_prioritization</a></code></li>
       </ul>
+      
       <p><a href="set_trajectory.html">Add a set trajectory/distribution activity</a></p>
       <ul>
         <li><code><a href="set_trajectory.html">set_distribution</a></code></li><li><code><a href="set_trajectory.html">set_trajectory</a></code></li>
       </ul>
+      
       <p><a href="timeout.html">Add a timeout activity</a></p>
       <ul>
         <li><code><a href="timeout.html">timeout</a></code></li>
@@ -194,18 +215,22 @@
           <h2 id="section-manage-trajectories" class="hasAnchor"><a href="#section-manage-trajectories" class="anchor"></a>Manage trajectories</h2>
       <p class="section-desc"><p>Methods for getting information about trajectory objects</p></p>
 
+      
       <p><a href="get_head.html">Get the first/last activity</a></p>
       <ul>
         <li><code><a href="get_head.html">get_head</a></code></li><li><code><a href="get_head.html">get_tail</a></code></li>
       </ul>
+      
       <p><a href="get_n_activities.html">Get the number of activities</a></p>
       <ul>
         <li><code><a href="get_n_activities.html">get_n_activities</a></code></li>
       </ul>
+      
       <p><a href="get_next_activity.html">Get the next/prev activity</a></p>
       <ul>
         <li><code><a href="get_next_activity.html">get_next_activity</a></code></li><li><code><a href="get_next_activity.html">get_prev_activity</a></code></li>
       </ul>
+      
       <p><a href="print_activity.html">Print an activity</a></p>
       <ul>
         <li><code><a href="print_activity.html">print_activity</a></code></li>
@@ -213,26 +238,32 @@
           <h2 id="section-build-and-run-simulation-environments" class="hasAnchor"><a href="#section-build-and-run-simulation-environments" class="anchor"></a>Build and run simulation environments</h2>
       <p class="section-desc"><p>Methods for building and running simulation objects</p></p>
 
+      
       <p><a href="add_generator.html">Add a generator</a></p>
       <ul>
         <li><code><a href="add_generator.html">add_generator</a></code></li>
       </ul>
+      
       <p><a href="add_resource.html">Add a resource</a></p>
       <ul>
         <li><code><a href="add_resource.html">add_resource</a></code></li>
       </ul>
+      
       <p><a href="reset.html">Reset a simulator</a></p>
       <ul>
         <li><code><a href="reset.html">reset</a></code></li>
       </ul>
+      
       <p><a href="run.html">Run the simulation</a></p>
       <ul>
         <li><code><a href="run.html">onestep</a></code></li><li><code><a href="run.html">run</a></code></li>
       </ul>
+      
       <p><a href="simmer.html">Create a simulator</a></p>
       <ul>
         <li><code><a href="simmer.html">simmer</a></code></li>
       </ul>
+      
       <p><a href="wrap.html">Wrap a simulation environment</a></p>
       <ul>
         <li><code><a href="wrap.html">wrap</a></code></li>
@@ -240,18 +271,22 @@
           <h2 id="section-manage-simulation-environments" class="hasAnchor"><a href="#section-manage-simulation-environments" class="anchor"></a>Manage simulation environments</h2>
       <p class="section-desc"><p>Methods for getting information about simulation components</p></p>
 
+      
       <p><a href="get_capacity.html">Get a resource's parameter</a></p>
       <ul>
         <li><code><a href="get_capacity.html">get_capacity</a></code></li><li><code><a href="get_capacity.html">get_queue_count</a></code></li><li><code><a href="get_capacity.html">get_queue_size</a></code></li><li><code><a href="get_capacity.html">get_server_count</a></code></li>
       </ul>
+      
       <p><a href="get_n_generated.html">Get the number of arrivals generated</a></p>
       <ul>
         <li><code><a href="get_n_generated.html">get_n_generated</a></code></li>
       </ul>
+      
       <p><a href="now.html">Get current time</a></p>
       <ul>
         <li><code><a href="now.html">now</a></code></li>
       </ul>
+      
       <p><a href="peek.html">Peek next events</a></p>
       <ul>
         <li><code><a href="peek.html">peek</a></code></li>
@@ -259,6 +294,7 @@
           <h2 id="section-statistics" class="hasAnchor"><a href="#section-statistics" class="anchor"></a>Statistics</h2>
       <p class="section-desc"><p>Methods for getting monitored statistics</p></p>
 
+      
       <p><a href="get_mon.html">Get statistics</a></p>
       <ul>
         <li><code><a href="get_mon.html">get_mon</a></code></li><li><code><a href="get_mon.html">get_mon_arrivals</a></code></li><li><code><a href="get_mon.html">get_mon_attributes</a></code></li><li><code><a href="get_mon.html">get_mon_resources</a></code></li>
@@ -266,22 +302,27 @@
           <h2 id="section-convenience-functions" class="hasAnchor"><a href="#section-convenience-functions" class="anchor"></a>Convenience functions</h2>
       <p class="section-desc"><p>Helper methods for generators and resources</p></p>
 
+      
       <p><a href="at.html">Arrivals at specific times</a></p>
       <ul>
         <li><code><a href="at.html">at</a></code></li>
       </ul>
+      
       <p><a href="from_to.html">Generate arrivals starting and stopping at specified times</a></p>
       <ul>
         <li><code><a href="from_to.html">from_to</a></code></li>
       </ul>
+      
       <p><a href="from.html">Generate arrivals starting at a specified time</a></p>
       <ul>
         <li><code><a href="from.html">from</a></code></li>
       </ul>
+      
       <p><a href="schedule.html">Generate a scheduling object</a></p>
       <ul>
         <li><code><a href="schedule.html">schedule</a></code></li>
       </ul>
+      
       <p><a href="to.html">Generate arrivals stopping at a specified time</a></p>
       <ul>
         <li><code><a href="to.html">to</a></code></li>
@@ -289,18 +330,22 @@
           <h2 id="section-plotting" class="hasAnchor"><a href="#section-plotting" class="anchor"></a>Plotting</h2>
       <p class="section-desc"><p>Basic plotting functions</p></p>
 
+      
       <p><a href="plot_attributes.html">Plot evolution of attribute data</a></p>
       <ul>
         <li><code><a href="plot_attributes.html">plot_attributes</a></code></li>
       </ul>
+      
       <p><a href="plot_evolution_arrival_times.html">Plot evolution of arrival times</a></p>
       <ul>
         <li><code><a href="plot_evolution_arrival_times.html">plot_evolution_arrival_times</a></code></li>
       </ul>
+      
       <p><a href="plot_resource_usage.html">Plot usage of a resource over time</a></p>
       <ul>
         <li><code><a href="plot_resource_usage.html">plot_resource_usage</a></code></li>
       </ul>
+      
       <p><a href="plot_resource_utilization.html">Plot utilization of resources</a></p>
       <ul>
         <li><code><a href="plot_resource_utilization.html">plot_resource_utilization</a></code></li>

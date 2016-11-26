@@ -71,16 +71,19 @@
       <a href="../articles/B-terminology.html">Terminology</a>
     </li>
     <li>
-      <a href="../articles/C-trajectories.html">Advanced trajectory usage</a>
+      <a href="../articles/C-trajectories.html">Advanced Trajectory Usage</a>
     </li>
     <li>
       <a href="../articles/D-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
-      <a href="../articles/E-queueing-systems.html">Queueing systems</a>
+      <a href="../articles/E-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/F-ctmc.html">Continuous-Time Markov Chains</a>
+      <a href="../articles/F-queueing-systems.html">Queueing Systems</a>
+    </li>
+    <li>
+      <a href="../articles/G-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
   </ul>
 </li>
@@ -115,10 +118,12 @@
     </div>
 
     
-    <p>Set or unset a timer after which the arrival will abandon.</p>
+    <p>Set or unset a timer or a signal after which the arrival will abandon.</p>
     
 
     <pre><span class='fu'>renege_in</span>(<span class='no'>.trj</span>, <span class='no'>t</span>, <span class='kw'>out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>renege_if</span>(<span class='no'>.trj</span>, <span class='no'>signal</span>, <span class='kw'>out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='fu'>renege_abort</span>(<span class='no'>.trj</span>)</pre>
     
@@ -131,11 +136,18 @@
 (a function) which must return a numeric.</dd>
       <dt>out</dt>
       <dd>optional sub-trajectory in case of reneging.</dd>
+      <dt>signal</dt>
+      <dd>signal to trigger reneging, accepts either a string or a callable object
+(a function) which must return a string.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns the trajectory object.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><code><a href='send.html'>send</a></code></p>
     
 
   </div>
@@ -145,6 +157,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

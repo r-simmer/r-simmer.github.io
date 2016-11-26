@@ -71,16 +71,19 @@
       <a href="../articles/B-terminology.html">Terminology</a>
     </li>
     <li>
-      <a href="../articles/C-trajectories.html">Advanced trajectory usage</a>
+      <a href="../articles/C-trajectories.html">Advanced Trajectory Usage</a>
     </li>
     <li>
       <a href="../articles/D-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
-      <a href="../articles/E-queueing-systems.html">Queueing systems</a>
+      <a href="../articles/E-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/F-ctmc.html">Continuous-Time Markov Chains</a>
+      <a href="../articles/F-queueing-systems.html">Queueing Systems</a>
+    </li>
+    <li>
+      <a href="../articles/G-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
   </ul>
 </li>
@@ -142,10 +145,7 @@
 <code><a href='get_capacity.html'>get_server_count</a></code>, <code><a href='get_capacity.html'>get_queue_count</a></code>.</p>
     
 
-    <h2 class="hasAnchor" id="examples">
-      <a class="anchor" href="#examples"></a>
-      Examples
-    </h2>
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_trajectory.html'>create_trajectory</a></span>(<span class='st'>"my trajectory"</span>) <span class='kw'>%&gt;%</span>
   <span class='co'>## add an intake activity</span>
   <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"nurse"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
@@ -170,8 +170,7 @@
 #&gt; { Resource: nurse | monitored: 1 | server status: 1(1) | queue status: 3(Inf) }
 #&gt; { Resource: doctor | monitored: 1 | server status: 1(2) | queue status: 0(Inf) }
 #&gt; { Resource: administration | monitored: 1 | server status: 1(1) | queue status: 0(Inf) }
-#&gt; { Generator: patient | monitored: 1 | n_generated: 9 }
-#&gt; </div><div class='input'>
+#&gt; { Generator: patient | monitored: 1 | n_generated: 9 }</div><div class='input'>
 <span class='fu'><a href='plot_resource_usage.html'>plot_resource_usage</a></span>(<span class='no'>env</span>, <span class='st'>"doctor"</span>)</div><img src='simmer-4.png' alt='' width='540' height='400' /></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

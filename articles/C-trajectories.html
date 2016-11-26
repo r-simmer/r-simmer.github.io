@@ -37,16 +37,19 @@
       <a href="../articles/B-terminology.html">Terminology</a>
     </li>
     <li>
-      <a href="../articles/C-trajectories.html">Advanced trajectory usage</a>
+      <a href="../articles/C-trajectories.html">Advanced Trajectory Usage</a>
     </li>
     <li>
       <a href="../articles/D-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
-      <a href="../articles/E-queueing-systems.html">Queueing systems</a>
+      <a href="../articles/E-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/F-ctmc.html">Continuous-Time Markov Chains</a>
+      <a href="../articles/F-queueing-systems.html">Queueing Systems</a>
+    </li>
+    <li>
+      <a href="../articles/G-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
   </ul></li>
 <li>
@@ -73,7 +76,7 @@
       <h1>Advanced Trajectory Usage</h1>
                         <h4 class="author">I&ntilde;aki Ucar, Bart Smeets</h4>
             
-            <h4 class="date">2016-10-27</h4>
+            <h4 class="date">2016-11-26</h4>
           </div>
 
     
@@ -110,7 +113,7 @@ t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_tr
 </div>
 <div id="set_attribute" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#set_attribute" class="anchor"> </a></body></html><code><a href="../reference/set_attribute.html">set_attribute()</a></code></h3>
-<p>The <code><a href="../reference/set_attribute.html">set_attribute(., key, value)</a></code> method sets the <code>value</code> of an arrival&rsquo;s attribute <code>key</code>. Be aware that <code>value</code> can only be numeric.</p>
+<p>The <code><a href="../reference/set_attribute.html">set_attribute(., key, value, global)</a></code> method sets the <code>value</code> of an arrival&rsquo;s attribute <code>key</code>. Be aware that <code>value</code> can only be numeric.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="dt">key =</span> <span class="st">"my_key"</span>, <span class="dt">value =</span> <span class="dv">123</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">5</span>) %&gt;%
@@ -146,6 +149,39 @@ env&lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.h
 <span class="co">#&gt; 3   10 patient0   dependent_key   0.0000000           1</span>
 <span class="co">#&gt; 4   15 patient0 independent_key   0.9234335           1</span></code></pre></div>
 <p>In general, whenever an activity accepts a function as a parameter, the rule above applies, and you can obtain the current set of attributes as the first argument of that function.</p>
+<p>Attributes are <em>per arrival</em> by default (<code>global=FALSE</code>), meaning that each arrival has its own set of attributes, not visible by anyone else:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">writer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="dt">key =</span> <span class="st">"my_key"</span>, <span class="dt">value =</span> <span class="dv">123</span>)
+
+reader &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function(attr) <span class="kw">paste0</span>(attr[<span class="st">"my_key"</span>]))
+
+env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"writer"</span>, writer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"reader"</span>, reader, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">1</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
+<span class="co">#&gt; 1: reader0: NA</span>
+
+<span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)
+<span class="co">#&gt;   time    name    key value replication</span>
+<span class="co">#&gt; 1    0 writer0 my_key   123           1</span></code></pre></div>
+<p>Thus, the reader in the example above returns <code>NA</code>, missing. However, attributes can also be global with <code>global=TRUE</code>. To retrieve the global set of attributes in any activity that accepts a function as a parameter, you need to specify a second argument:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">writer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="dt">key =</span> <span class="st">"my_key"</span>, <span class="dt">value =</span> <span class="dv">123</span>, <span class="dt">global =</span> <span class="ot">TRUE</span>)
+
+reader &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function(attr, glb) <span class="kw">paste0</span>(attr[<span class="st">"my_key"</span>], <span class="st">", "</span>, glb[<span class="st">"my_key"</span>]))
+
+env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"writer"</span>, writer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"reader"</span>, reader, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">1</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
+<span class="co">#&gt; 1: reader0: NA, 123</span>
+
+<span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)
+<span class="co">#&gt;   time name    key value replication</span>
+<span class="co">#&gt; 1    0      my_key   123           1</span></code></pre></div>
+<p>As shown above, global attributes are reported in <code><a href="../reference/get_mon.html">get_mon_attributes()</a></code> as unnamed key/value pairs.</p>
 </div>
 <div id="timeout" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#timeout" class="anchor"> </a></body></html><code><a href="../reference/timeout.html">timeout()</a></code></h3>
@@ -404,9 +440,9 @@ env &lt;-<span class="st"> </span>env %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">100</span>)
 
 <span class="kw"><a href="../reference/plot_resource_usage.html">plot_resource_usage</a></span>(env, <span class="st">"res1"</span>, <span class="dt">steps =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="C-trajectories_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="C-trajectories_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_resource_usage.html">plot_resource_usage</a></span>(env, <span class="st">"res2"</span>, <span class="dt">steps =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="C-trajectories_files/figure-html/unnamed-chunk-15-2.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="C-trajectories_files/figure-html/unnamed-chunk-17-2.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="select" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#select" class="anchor"> </a></body></html><code><a href="../reference/select.html">select()</a></code></h3>
@@ -576,7 +612,7 @@ arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ge
 <span class="co"># The `activity_time` is the total time inside each branch for each arrival</span>
 <span class="co"># Let's see the distributions</span>
 <span class="kw">ggplot</span>(arrivals) +<span class="st"> </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x=</span>activity_time)) +<span class="st"> </span><span class="kw">facet_wrap</span>(~resource)</code></pre></div>
-<p><img src="C-trajectories_files/figure-html/unnamed-chunk-22-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="C-trajectories_files/figure-html/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="rollback" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#rollback" class="anchor"> </a></body></html><code><a href="../reference/rollback.html">rollback()</a></code></h3>
@@ -677,34 +713,6 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="co">#&gt; 4    nurse    6      0     0        1        Inf      0   Inf           1</span>
 <span class="co">#&gt; 5   doctor    6      1     0        1        Inf      1   Inf           1</span>
 <span class="co">#&gt; 6   doctor    9      0     0        1        Inf      0   Inf           1</span></code></pre></div>
-</div>
-<div id="renege_in-renege_abort" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#renege_in-renege_abort" class="anchor"> </a></body></html><code><a href="../reference/renege_in.html">renege_in()</a></code>, <code><a href="../reference/renege_in.html">renege_abort()</a></code></h3>
-<p>The <code><a href="../reference/renege_in.html">renege_in(., t, out)</a></code> method offers the possibility of setting a timeout after which the arrival will abandon the trajectory. After reneging, the arrival can follow an optional sub-trajectory <code>out</code>. The <code><a href="../reference/renege_in.html">renege_abort(.)</a></code> method cancels a previously established timeout. Together, they allows us, for instance, to model arrivals with limited patience. In the example below, <code>customer1</code> arrives at the bank, where there is only one busy clerk. He/she waits in the queue for 5 minutes and then leaves.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>(<span class="dt">name =</span> <span class="st">"bank"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am"</span>) %&gt;%
-<span class="st">  </span><span class="co"># renege in 5 minutes</span>
-<span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_in</a></span>(<span class="dv">5</span>, 
-            <span class="dt">out =</span> <span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
-<span class="st">              </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Lost my patience. Reneging..."</span>)
-            ) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="co"># stay if I'm being attended within 5 minutes</span>
-<span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_abort</a></span>() %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"I'm being attended"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">10</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished"</span>)
-
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"customer"</span>, t, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
-<span class="co">#&gt; 0: customer0: Here I am</span>
-<span class="co">#&gt; 0: customer0: I'm being attended</span>
-<span class="co">#&gt; 1: customer1: Here I am</span>
-<span class="co">#&gt; 6: customer1: Lost my patience. Reneging...</span>
-<span class="co">#&gt; 10: customer0: Finished</span></code></pre></div>
 </div>
 <div id="clone-synchronize" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#clone-synchronize" class="anchor"> </a></body></html><code><a href="../reference/clone.html">clone()</a></code>, <code><a href="../reference/clone.html">synchronize()</a></code></h3>
@@ -986,7 +994,6 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 </div>
 <div id="send-trap-untrap-wait" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#send-trap-untrap-wait" class="anchor"> </a></body></html><code><a href="../reference/send.html">send()</a></code>, <code><a href="../reference/send.html">trap()</a></code>, <code><a href="../reference/send.html">untrap()</a></code>, <code><a href="../reference/send.html">wait()</a></code></h3>
-<p>The <code><a href="../reference/send.html">send(., n, timeout, permanent, name, rule)</a></code> m</p>
 <p>These activities enable asynchronous programming. The <code><a href="../reference/send.html">send(., signals, delay)</a></code> method broadcasts a signal or a list of signals to all the arrivals subscribed to them. Signals can be triggered immediately:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="dt">signals =</span> <span class="kw">c</span>(<span class="st">"signal1"</span>, <span class="st">"signal2"</span>))
@@ -1008,7 +1015,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="co">#&gt;          0 |   arrival: signaler0      |  activity: Send           | [signal1, signal2, ], 3</span>
 <span class="co">#&gt;          3 |      task: Broadcast      |                           |</span></code></pre></div>
 <p>Note that both arguments, <code>signals</code> and <code>delay</code>, can be functions, and therefore they can retrieve the arrival&rsquo;s attributes.</p>
-<p>This is not very useful if nobody is listening. Arrivals can subscribe to signals and (optionally) assign a handler with the <code><a href="../reference/send.html">trap(., signals, handler)</a></code>. In the following example, an arrival subscribes to a signal and blocks until its reception using the <code><a href="../reference/send.html">wait(.)</a></code> method.</p>
+<p>This is not very useful if nobody is listening. Arrivals can subscribe to signals and (optionally) assign a handler with the <code><a href="../reference/send.html">trap(., signals, handler, interruptible)</a></code>. In the following example, an arrival subscribes to a signal and blocks until its reception using the <code><a href="../reference/send.html">wait(.)</a></code> method.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_blocked &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">trap</a></span>(<span class="st">"you shall pass"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"waiting..."</span>) %&gt;%
@@ -1026,7 +1033,7 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="co">#&gt; 0: blocked0: waiting...</span>
 <span class="co">#&gt; 5: signaler0: you shall pass</span>
 <span class="co">#&gt; 5: blocked0: continuing!</span></code></pre></div>
-<p>Note that, while inside a batch, all the signals subscribed before entering the batch are ignored. Thus, the following batch will block indifinitely:</p>
+<p>Note that signals are ignored when an arrival is waiting in a resource&rsquo;s queue. The same applies inside a batch: all the signals subscribed before entering the batch are ignored. Thus, the following batch will block indifinitely:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_blocked &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">trap</a></span>(<span class="st">"you shall pass"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"waiting inside a batch..."</span>) %&gt;%
@@ -1049,7 +1056,8 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">trap</a></span>(<span class="st">"you are free to go"</span>, 
        <span class="dt">handler =</span> <span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
 <span class="st">         </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"ok, I'm packing..."</span>) %&gt;%
-<span class="st">         </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">1</span>)) %&gt;%
+<span class="st">         </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">1</span>)
+  ) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"performing a looong task..."</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">100</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"and I'm leaving!"</span>)
@@ -1071,7 +1079,8 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">trap</a></span>(<span class="st">"you are free to go"</span>, 
        <span class="dt">handler =</span> <span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
 <span class="st">         </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"ok, I'm packing..."</span>) %&gt;%
-<span class="st">         </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">1</span>)) %&gt;%
+<span class="st">         </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">1</span>)
+  ) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"performing a looong task..."</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">untrap</a></span>(<span class="st">"you are free to go"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">100</span>) %&gt;%
@@ -1088,6 +1097,137 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="co">#&gt; 0: worker0: performing a looong task...</span>
 <span class="co">#&gt; 5: signaler0: you are free to go</span>
 <span class="co">#&gt; 100: worker0: and I'm leaving!</span></code></pre></div>
+<p>Signal handlers can be interrupted as well by default, meaning that a handler may keep restarting if there are frequent enough signals:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_worker &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/send.html">trap</a></span>(<span class="st">"you are free to go"</span>, 
+       <span class="dt">handler =</span> <span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
+<span class="st">         </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"ok, I'm packing..."</span>) %&gt;%
+<span class="st">         </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">1</span>)
+  ) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"performing a looong task..."</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">100</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"and I'm leaving!"</span>)
+
+t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"you are free to go"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="st">"you are free to go"</span>)
+
+<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"worker"</span>, t_worker, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"signaler"</span>, t_signaler, <span class="kw"><a href="../reference/from.html">from</a></span>(<span class="dv">5</span>, function() <span class="fl">0.5</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">10</span>) %&gt;%<span class="st"> </span>invisible
+<span class="co">#&gt; 0: worker0: performing a looong task...</span>
+<span class="co">#&gt; 5: signaler0: you are free to go</span>
+<span class="co">#&gt; 5: worker0: ok, I'm packing...</span>
+<span class="co">#&gt; 5.5: signaler1: you are free to go</span>
+<span class="co">#&gt; 5.5: worker0: ok, I'm packing...</span>
+<span class="co">#&gt; 6: signaler2: you are free to go</span>
+<span class="co">#&gt; 6: worker0: ok, I'm packing...</span>
+<span class="co">#&gt; 6.5: signaler3: you are free to go</span>
+<span class="co">#&gt; 6.5: worker0: ok, I'm packing...</span>
+<span class="co">#&gt; 7: signaler4: you are free to go</span>
+<span class="co">#&gt; 7: worker0: ok, I'm packing...</span>
+<span class="co">#&gt; 7.5: signaler5: you are free to go</span>
+<span class="co">#&gt; 7.5: worker0: ok, I'm packing...</span>
+<span class="co">#&gt; 8: signaler6: you are free to go</span>
+<span class="co">#&gt; 8: worker0: ok, I'm packing...</span>
+<span class="co">#&gt; 8.5: signaler7: you are free to go</span>
+<span class="co">#&gt; 8.5: worker0: ok, I'm packing...</span>
+<span class="co">#&gt; 9: signaler8: you are free to go</span>
+<span class="co">#&gt; 9: worker0: ok, I'm packing...</span>
+<span class="co">#&gt; 9.5: signaler9: you are free to go</span>
+<span class="co">#&gt; 9.5: worker0: ok, I'm packing...</span></code></pre></div>
+<p>If an uninterruptible handler is needed, this can be achieved by setting the proper flag:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_worker &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/send.html">trap</a></span>(<span class="st">"you are free to go"</span>, 
+       <span class="dt">handler =</span> <span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
+<span class="st">         </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"ok, I'm packing..."</span>) %&gt;%
+<span class="st">         </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">1</span>),
+       <span class="dt">interruptible =</span> <span class="ot">FALSE</span>            <span class="co"># make it uninterruptible</span>
+  ) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"performing a looong task..."</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">100</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"and I'm leaving!"</span>)
+
+t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"you are free to go"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="st">"you are free to go"</span>)
+
+<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"worker"</span>, t_worker, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"signaler"</span>, t_signaler, <span class="kw"><a href="../reference/from.html">from</a></span>(<span class="dv">5</span>, function() <span class="fl">0.5</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">10</span>) %&gt;%<span class="st"> </span>invisible
+<span class="co">#&gt; 0: worker0: performing a looong task...</span>
+<span class="co">#&gt; 5: signaler0: you are free to go</span>
+<span class="co">#&gt; 5: worker0: ok, I'm packing...</span>
+<span class="co">#&gt; 5.5: signaler1: you are free to go</span>
+<span class="co">#&gt; 6: worker0: and I'm leaving!</span>
+<span class="co">#&gt; 6: signaler2: you are free to go</span>
+<span class="co">#&gt; 6.5: signaler3: you are free to go</span>
+<span class="co">#&gt; 7: signaler4: you are free to go</span>
+<span class="co">#&gt; 7.5: signaler5: you are free to go</span>
+<span class="co">#&gt; 8: signaler6: you are free to go</span>
+<span class="co">#&gt; 8.5: signaler7: you are free to go</span>
+<span class="co">#&gt; 9: signaler8: you are free to go</span>
+<span class="co">#&gt; 9.5: signaler9: you are free to go</span></code></pre></div>
+</div>
+<div id="renege_in-renege_if-renege_abort" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#renege_in-renege_if-renege_abort" class="anchor"> </a></body></html><code><a href="../reference/renege_in.html">renege_in()</a></code>, <code><a href="../reference/renege_in.html">renege_if()</a></code>, <code><a href="../reference/renege_in.html">renege_abort()</a></code></h3>
+<p>The <code><a href="../reference/renege_in.html">renege_in(., t, out)</a></code> method offers the possibility of setting a timeout after which the arrival will abandon the trajectory. After reneging, the arrival can follow an optional sub-trajectory <code>out</code>. The <code><a href="../reference/renege_in.html">renege_abort(.)</a></code> method cancels the latter. Together, they allows us, for instance, to model arrivals with limited patience. In the example below, <code>customer1</code> arrives at the bank, where there is only one busy clerk. He/she waits in the queue for 5 minutes and then leaves.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>(<span class="dt">name =</span> <span class="st">"bank"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am"</span>) %&gt;%
+<span class="st">  </span><span class="co"># renege in 5 minutes</span>
+<span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_in</a></span>(<span class="dv">5</span>, 
+            <span class="dt">out =</span> <span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
+<span class="st">              </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Lost my patience. Reneging..."</span>)
+  ) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="co"># stay if I'm being attended within 5 minutes</span>
+<span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_abort</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"I'm being attended"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">10</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished"</span>)
+
+<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"customer"</span>, t, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
+<span class="co">#&gt; 0: customer0: Here I am</span>
+<span class="co">#&gt; 0: customer0: I'm being attended</span>
+<span class="co">#&gt; 1: customer1: Here I am</span>
+<span class="co">#&gt; 6: customer1: Lost my patience. Reneging...</span>
+<span class="co">#&gt; 10: customer0: Finished</span></code></pre></div>
+<p>The same can be achieved with <code><a href="../reference/renege_in.html">renege_if(., signal, out)</a></code> if <code>customer0</code> sends a signal to <code>customer1</code> at <code>t=5</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>(<span class="dt">name =</span> <span class="st">"bank"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am"</span>) %&gt;%
+<span class="st">  </span><span class="co"># renege when "renege now" is received</span>
+<span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_if</a></span>(<span class="st">"renege now"</span>, 
+            <span class="dt">out =</span> <span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
+<span class="st">              </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Ok. Reneging..."</span>)
+  ) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="co"># stay if I'm being attended within 5 minutes</span>
+<span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_abort</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"I'm being attended"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">5</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"I say: renege now"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="st">"renege now"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">5</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished"</span>)
+
+<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"customer"</span>, t, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
+<span class="co">#&gt; 0: customer0: Here I am</span>
+<span class="co">#&gt; 0: customer0: I'm being attended</span>
+<span class="co">#&gt; 1: customer1: Here I am</span>
+<span class="co">#&gt; 5: customer0: I say: renege now</span>
+<span class="co">#&gt; 5: customer1: Ok. Reneging...</span>
+<span class="co">#&gt; 10: customer0: Finished</span></code></pre></div>
+<p>Note that, in contrast to <code><a href="../reference/send.html">trap()</a></code>, reneging is triggered even if the arrival is in a queue or is part of a non-permanent batch.</p>
 </div>
 </div>
 <div id="concatenating-trajectories" class="section level2">
@@ -1126,7 +1266,7 @@ t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_tr
 env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, t, function() <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">4</span>)
-<span class="co">#&gt; Error in eval(substitute(expr), envir, enclos): objeto 'env' no encontrado</span></code></pre></div>
+<span class="co">#&gt; Error in run_(private$sim_obj, until): objeto 'env' no encontrado</span></code></pre></div>
 <p>Because the global <code>env</code> is not available at runtime: the simulation runs <em>and then</em> the resulting object is assigned to <code>env</code>. We need to assign first, then run. So this will work:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_trajectory.html">create_trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">print</span>(env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/now.html">now</a></span>()))
