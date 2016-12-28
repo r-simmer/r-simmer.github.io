@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a trajectory — create_trajectory • simmer</title>
+<title>Create a trajectory — trajectory • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -122,7 +122,9 @@
 activities that can be attached to a generator.</p>
     
 
-    <pre><span class='fu'>create_trajectory</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"anonymous"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre><span class='fu'>trajectory</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"anonymous"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>create_trajectory</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"anonymous"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -139,11 +141,12 @@ activities that can be attached to a generator.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Methods for dealing with trajectories:
-<code><a href='get_head.html'>get_head</a></code>, <code><a href='get_head.html'>get_tail</a></code>, <code><a href='get_n_activities.html'>get_n_activities</a></code>, <code><a href='join.html'>join</a></code>,
-<code><a href='seize.html'>seize</a></code>, <code><a href='seize.html'>release</a></code>, <code><a href='seize.html'>seize_selected</a></code>, <code><a href='seize.html'>release_selected</a></code>,
-<code><a href='select.html'>select</a></code>, <code><a href='set_capacity.html'>set_capacity</a></code>, <code><a href='set_capacity.html'>set_queue_size</a></code>,
-<code><a href='set_capacity.html'>set_capacity_selected</a></code>, <code><a href='set_capacity.html'>set_queue_size_selected</a></code>, <code><a href='set_prioritization.html'>set_prioritization</a></code>,
-<code><a href='activate.html'>activate</a></code>, <code><a href='activate.html'>deactivate</a></code>, <code><a href='set_trajectory.html'>set_trajectory</a></code>, <code><a href='set_trajectory.html'>set_distribution</a></code>,
+<code><a href='Extract.html'>[.trajectory</a></code>, <code><a href='Extract.html'>[[.trajectory</a></code>, <code><a href='length.html'>length.trajectory</a></code>,
+<code><a href='length.html'>get_n_activities</a></code>, <code><a href='join.html'>join</a></code>, <code><a href='seize.html'>seize</a></code>, <code><a href='seize.html'>release</a></code>,
+<code><a href='seize.html'>seize_selected</a></code>, <code><a href='seize.html'>release_selected</a></code>, <code><a href='select.html'>select</a></code>,
+<code><a href='set_capacity.html'>set_capacity</a></code>, <code><a href='set_capacity.html'>set_queue_size</a></code>, <code><a href='set_capacity.html'>set_capacity_selected</a></code>,
+<code><a href='set_capacity.html'>set_queue_size_selected</a></code>, <code><a href='set_prioritization.html'>set_prioritization</a></code>, <code><a href='activate.html'>activate</a></code>,
+<code><a href='activate.html'>deactivate</a></code>, <code><a href='set_trajectory.html'>set_trajectory</a></code>, <code><a href='set_trajectory.html'>set_distribution</a></code>,
 <code><a href='set_attribute.html'>set_attribute</a></code>, <code><a href='timeout.html'>timeout</a></code>, <code><a href='branch.html'>branch</a></code>, <code><a href='rollback.html'>rollback</a></code>,
 <code><a href='leave.html'>leave</a></code>, <code><a href='renege_in.html'>renege_in</a></code>, <code><a href='renege_in.html'>renege_if</a></code>, <code><a href='renege_in.html'>renege_abort</a></code>,
 <code><a href='clone.html'>clone</a></code>, <code><a href='clone.html'>synchronize</a></code>, <code><a href='batch.html'>batch</a></code>, <code><a href='batch.html'>separate</a></code>,
@@ -151,7 +154,7 @@ activities that can be attached to a generator.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'>create_trajectory</span>(<span class='st'>"my trajectory"</span>) <span class='kw'>%&gt;%</span>
+    <pre class="examples"><div class='input'><span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'>trajectory</span>(<span class='st'>"my trajectory"</span>) <span class='kw'>%&gt;%</span>
   <span class='co'>## add an intake activity</span>
   <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"nurse"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='kw'>function</span>() <span class='fu'>rnorm</span>(<span class='fl'>1</span>, <span class='fl'>15</span>)) <span class='kw'>%&gt;%</span>
@@ -165,23 +168,23 @@ activities that can be attached to a generator.</p>
   <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='kw'>function</span>() <span class='fu'>rnorm</span>(<span class='fl'>1</span>, <span class='fl'>5</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"administration"</span>, <span class='fl'>1</span>)
 
-<span class='no'>t0</span></div><div class='output co'>#&gt; simmer trajectory: my trajectory, 9 activities
+<span class='no'>t0</span></div><div class='output co'>#&gt; trajectory: my trajectory, 9 activities
 #&gt; { Activity: Seize        | resource: nurse | amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0xe9eddf0 }
+#&gt; { Activity: Timeout      | delay: 0x9d7a450 }
 #&gt; { Activity: Release      | resource: nurse | amount: 1 }
 #&gt; { Activity: Seize        | resource: doctor | amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0xc15a380 }
+#&gt; { Activity: Timeout      | delay: 0xaca52d8 }
 #&gt; { Activity: Release      | resource: doctor | amount: 1 }
 #&gt; { Activity: Seize        | resource: administration | amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0xe124ee0 }
+#&gt; { Activity: Timeout      | delay: 0x70a9e48 }
 #&gt; { Activity: Release      | resource: administration | amount: 1 }</div><div class='input'>
-<span class='no'>t1</span> <span class='kw'>&lt;-</span> <span class='fu'>create_trajectory</span>(<span class='st'>"trajectory with a branch"</span>) <span class='kw'>%&gt;%</span>
+<span class='no'>t1</span> <span class='kw'>&lt;-</span> <span class='fu'>trajectory</span>(<span class='st'>"trajectory with a branch"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='co'># 50-50 chance for each branch</span>
   <span class='fu'><a href='branch.html'>branch</a></span>(<span class='kw'>function</span>() <span class='fu'>sample</span>(<span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>), <span class='kw'>continue</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>),
-    <span class='fu'>create_trajectory</span>(<span class='st'>"branch1"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'>trajectory</span>(<span class='st'>"branch1"</span>) <span class='kw'>%&gt;%</span>
       <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='kw'>function</span>() <span class='fl'>1</span>),
-    <span class='fu'>create_trajectory</span>(<span class='st'>"branch2"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'>trajectory</span>(<span class='st'>"branch2"</span>) <span class='kw'>%&gt;%</span>
       <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='kw'>function</span>() <span class='fu'>rexp</span>(<span class='fl'>1</span>, <span class='fl'>3</span>)) <span class='kw'>%&gt;%</span>
       <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>)
   ) <span class='kw'>%&gt;%</span>
@@ -189,16 +192,16 @@ activities that can be attached to a generator.</p>
   <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='kw'>function</span>() <span class='fl'>2</span>)
 
-<span class='no'>t1</span></div><div class='output co'>#&gt; simmer trajectory: trajectory with a branch, 7 activities
+<span class='no'>t1</span></div><div class='output co'>#&gt; trajectory: trajectory with a branch, 7 activities
 #&gt; { Activity: Seize        | resource: server | amount: 1 }
-#&gt; { Activity: Branch       | option: 0xc52cc20 }
-#&gt;   Fork 1, continue,  simmer trajectory: branch1, 1 activities
-#&gt;   { Activity: Timeout      | delay: 0xcf6bf10 }
-#&gt;   Fork 2, stop,  simmer trajectory: branch2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0xc73b870 }
+#&gt; { Activity: Branch       | option: 0xe815e20 }
+#&gt;   Fork 1, continue,  trajectory: branch1, 1 activities
+#&gt;   { Activity: Timeout      | delay: 0x9a46048 }
+#&gt;   Fork 2, stop,  trajectory: branch2, 2 activities
+#&gt;   { Activity: Timeout      | delay: 0xbf835b0 }
 #&gt;   { Activity: Release      | resource: server | amount: 1 }
 #&gt; { Activity: Release      | resource: server | amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x9cd8440 }</div></pre>
+#&gt; { Activity: Timeout      | delay: 0xe8b3018 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

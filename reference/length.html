@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the number of activities — get_n_activities • simmer</title>
+<title>Number of activities in a trajectory — length • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -114,28 +114,33 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the number of activities</h1>
+    <h1>Number of activities in a trajectory</h1>
     </div>
 
     
-    <p>Trajectory getter for obtaining the total number of activities defined inside it.</p>
+    <p>Get the number of activities in a trajectory. <code>length</code> returns the number
+of first-level activities (sub-trajectories not included). <code>get_n_activities</code>
+returns the total number of activities (sub-trajectories included).</p>
     
 
-    <pre><span class='fu'>get_n_activities</span>(<span class='no'>.trj</span>)</pre>
+    <pre><span class='co'># S3 method for trajectory</span>
+<span class='fu'>length</span>(<span class='no'>x</span>)
+
+<span class='fu'>get_n_activities</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>.trj</dt>
+      <dt>x</dt>
       <dd>the trajectory object.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns the number of activities in the trajectory.</p>
+    <p>Returns a non-negative integer of length 1.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='get_head.html'>get_head</a></code>, <code><a href='get_head.html'>get_tail</a></code>, <code><a href='join.html'>join</a></code>.</p>
+    <p><code><a href='Extract.html'>[.trajectory</a></code>, <code><a href='Extract.html'>[[.trajectory</a></code>, <code><a href='join.html'>join</a></code>.</p>
     
 
   </div>

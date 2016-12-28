@@ -115,12 +115,35 @@
   <div class="col-md-9">
     <div class="page-header">
       <h1>Function reference</h1>
-      <h4>version&nbsp;3.5.1</h4>
+      <h4>version&nbsp;3.6.0</h4>
     </div>
 
     <div class="contents">
-      <h2 id="section-build-trajectories" class="hasAnchor"><a href="#section-build-trajectories" class="anchor"></a>Build trajectories</h2>
-      <p class="section-desc"><p>Methods for building trajectory objects</p></p>
+      <h2 id="section-build-and-manage-trajectories" class="hasAnchor"><a href="#section-build-and-manage-trajectories" class="anchor"></a>Build and manage trajectories</h2>
+      <p class="section-desc"><p>Methods for building and manipulating trajectory objects</p></p>
+
+      
+      <p><a href="Extract.html">Extract parts of a trajectory</a></p>
+      <ul>
+        <li><code><a href="Extract.html">Extract</a></code></li><li><code><a href="Extract.html">[.trajectory</a></code></li><li><code><a href="Extract.html">[[.trajectory</a></code></li>
+      </ul>
+      
+      <p><a href="join.html">Join trajectories</a></p>
+      <ul>
+        <li><code><a href="join.html">join</a></code></li>
+      </ul>
+      
+      <p><a href="length.html">Number of activities in a trajectory</a></p>
+      <ul>
+        <li><code><a href="length.html">get_n_activities</a></code></li><li><code><a href="length.html">length</a></code></li><li><code><a href="length.html">length.trajectory</a></code></li>
+      </ul>
+      
+      <p><a href="trajectory.html">Create a trajectory</a></p>
+      <ul>
+        <li><code><a href="trajectory.html">create_trajectory</a></code></li><li><code><a href="trajectory.html">trajectory</a></code></li>
+      </ul>
+          <h2 id="section-add-activities" class="hasAnchor"><a href="#section-add-activities" class="anchor"></a>Add activities</h2>
+      <p class="section-desc"><p>Verbs for appending activities to trajectory objects</p></p>
 
       
       <p><a href="activate.html">Add a activate/deactivate activity</a></p>
@@ -141,16 +164,6 @@
       <p><a href="clone.html">Add a clone/synchronize activity</a></p>
       <ul>
         <li><code><a href="clone.html">clone</a></code></li><li><code><a href="clone.html">synchronize</a></code></li>
-      </ul>
-      
-      <p><a href="create_trajectory.html">Create a trajectory</a></p>
-      <ul>
-        <li><code><a href="create_trajectory.html">create_trajectory</a></code></li>
-      </ul>
-      
-      <p><a href="join.html">Join trajectories</a></p>
-      <ul>
-        <li><code><a href="join.html">join</a></code></li>
       </ul>
       
       <p><a href="leave.html">Add a leave activity</a></p>
@@ -211,29 +224,6 @@
       <p><a href="timeout.html">Add a timeout activity</a></p>
       <ul>
         <li><code><a href="timeout.html">timeout</a></code></li>
-      </ul>
-          <h2 id="section-manage-trajectories" class="hasAnchor"><a href="#section-manage-trajectories" class="anchor"></a>Manage trajectories</h2>
-      <p class="section-desc"><p>Methods for getting information about trajectory objects</p></p>
-
-      
-      <p><a href="get_head.html">Get the first/last activity</a></p>
-      <ul>
-        <li><code><a href="get_head.html">get_head</a></code></li><li><code><a href="get_head.html">get_tail</a></code></li>
-      </ul>
-      
-      <p><a href="get_n_activities.html">Get the number of activities</a></p>
-      <ul>
-        <li><code><a href="get_n_activities.html">get_n_activities</a></code></li>
-      </ul>
-      
-      <p><a href="get_next_activity.html">Get the next/prev activity</a></p>
-      <ul>
-        <li><code><a href="get_next_activity.html">get_next_activity</a></code></li><li><code><a href="get_next_activity.html">get_prev_activity</a></code></li>
-      </ul>
-      
-      <p><a href="print_activity.html">Print an activity</a></p>
-      <ul>
-        <li><code><a href="print_activity.html">print_activity</a></code></li>
       </ul>
           <h2 id="section-build-and-run-simulation-environments" class="hasAnchor"><a href="#section-build-and-run-simulation-environments" class="anchor"></a>Build and run simulation environments</h2>
       <p class="section-desc"><p>Methods for building and running simulation objects</p></p>
@@ -357,8 +347,8 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-build-trajectories">Build trajectories</a></li>
-      <li><a href="#section-manage-trajectories">Manage trajectories</a></li>
+      <li><a href="#section-build-and-manage-trajectories">Build and manage trajectories</a></li>
+      <li><a href="#section-add-activities">Add activities</a></li>
       <li><a href="#section-build-and-run-simulation-environments">Build and run simulation environments</a></li>
       <li><a href="#section-manage-simulation-environments">Manage simulation environments</a></li>
       <li><a href="#section-statistics">Statistics</a></li>

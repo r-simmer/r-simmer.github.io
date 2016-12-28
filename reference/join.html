@@ -135,22 +135,23 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='get_head.html'>get_head</a></code>, <code><a href='get_head.html'>get_tail</a></code>, <code><a href='get_n_activities.html'>get_n_activities</a></code>.</p>
+    <p><code><a href='Extract.html'>[.trajectory</a></code>, <code><a href='Extract.html'>[[.trajectory</a></code>, <code><a href='length.html'>length.trajectory</a></code>,
+<code><a href='length.html'>get_n_activities</a></code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>t1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_trajectory.html'>create_trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"dummy"</span>, <span class='fl'>1</span>)
-<span class='no'>t2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_trajectory.html'>create_trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>1</span>)
-<span class='no'>t3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_trajectory.html'>create_trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"dummy"</span>, <span class='fl'>1</span>)
+    <pre class="examples"><div class='input'><span class='no'>t1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"dummy"</span>, <span class='fl'>1</span>)
+<span class='no'>t2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>1</span>)
+<span class='no'>t3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"dummy"</span>, <span class='fl'>1</span>)
 
-<span class='fu'>join</span>(<span class='no'>t1</span>, <span class='no'>t2</span>, <span class='no'>t3</span>)</div><div class='output co'>#&gt; simmer trajectory: anonymous, 3 activities
+<span class='fu'>join</span>(<span class='no'>t1</span>, <span class='no'>t2</span>, <span class='no'>t3</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 3 activities
 #&gt; { Activity: Seize        | resource: dummy | amount: 1 }
 #&gt; { Activity: Timeout      | delay: 1 }
 #&gt; { Activity: Release      | resource: dummy | amount: 1 }</div><div class='input'>
-<span class='fu'><a href='create_trajectory.html'>create_trajectory</a></span>() <span class='kw'>%&gt;%</span>
+<span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>join</span>(<span class='no'>t1</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>join</span>(<span class='no'>t3</span>)</div><div class='output co'>#&gt; simmer trajectory: anonymous, 3 activities
+  <span class='fu'>join</span>(<span class='no'>t3</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 3 activities
 #&gt; { Activity: Seize        | resource: dummy | amount: 1 }
 #&gt; { Activity: Timeout      | delay: 1 }
 #&gt; { Activity: Release      | resource: dummy | amount: 1 }</div></pre>

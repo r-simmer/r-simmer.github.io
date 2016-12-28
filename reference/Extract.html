@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print an activity — print_activity • simmer</title>
+<title>Extract parts of a trajectory — Extract • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -114,25 +114,48 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Print an activity</h1>
+    <h1>Extract parts of a trajectory</h1>
     </div>
 
     
-    <p>It can be used to visualise an activity&#39;s internal structure.</p>
+    <p>Operators acting on trajectories.</p>
     
 
-    <pre><span class='fu'>print_activity</span>(<span class='no'>activity</span>)</pre>
+    <pre># S3 method for trajectory
+[(x, i)
+
+# S3 method for trajectory
+[[(x, i)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>activity</dt>
-      <dd>an external pointer to the activity.</dd>
+      <dt>x</dt>
+      <dd>the trajectory object.</dd>
+      <dt>i</dt>
+      <dd>indices specifying elements to extract. Indices are <code>numeric</code> or <code>character</code>
+or <code>logical</code> vectors or empty (missing) or <code>NULL</code>.
+
+Numeric values are coerced to integer as by <code>as.integer</code> (and hence truncated towards
+zero). Negative integers indicate elemets/slices to leave out the selection.
+
+Character vectors will be matched to the names of the activities in the trajectory as by
+<code>%in%</code>.
+
+Logical vectors indicate elements/slices to select. Such vectors are NOT recycled to match the
+corresponding extent.
+
+An empty index will return the whole trajectory.
+
+An index value of <code>NULL</code> is treated as if it were <code>integer(0)</code>.</dd>
     </dl>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Returns a new trajectory object.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='get_head.html'>get_head</a></code>, <code><a href='get_head.html'>get_tail</a></code>,
-<code><a href='get_next_activity.html'>get_next_activity</a></code>, <code><a href='get_next_activity.html'>get_prev_activity</a></code>.</p>
+    <p><code><a href='length.html'>length.trajectory</a></code>, <code><a href='length.html'>get_n_activities</a></code>, <code><a href='join.html'>join</a></code>.</p>
     
 
   </div>
@@ -141,6 +164,8 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 
