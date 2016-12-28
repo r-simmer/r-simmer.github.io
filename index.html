@@ -74,6 +74,20 @@
     News
   </a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-puzzle-piece"></span>
+     
+    Extensions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="extensions/plot">simmer.plot</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -99,15 +113,48 @@
 </h1></div>
 
 <p><strong>simmer</strong> is a process-oriented and trajectory-based Discrete-Event Simulation (DES) package for R. Designed to be a generic framework like <a href="https://simpy.readthedocs.org">SimPy</a> or <a href="http://simjuliajl.readthedocs.org">SimJulia</a>, it leverages the power of <a href="http://www.rcpp.org/">Rcpp</a> to boost the performance and turning DES in R feasible. As a noteworthy characteristic, simmer exploits the concept of <em>trajectory</em>: a common path in the simulation model for entities of the same type. It is pretty flexible and simple to use, and leverages the chaining/piping workflow introduced by the <a href="https://github.com/smbache/magrittr">magrittr</a> package.</p>
-<div id="documentation" class="section level2">
+<div id="extensions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#documentation" class="anchor"> </a>Documentation</h2>
-<p>Documentation is available at <a href="http://r-simmer.org/reference">r-simmer.org/reference</a>.</p>
+<a href="#extensions" class="anchor"> </a>Extensions</h2>
+<table style="width:100%;">
+<colgroup>
+<col width="20%">
+<col width="57%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th>Package</th>
+<th>Description</th>
+<th>Status</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><a href="http://r-simmer.org/extensions/plot"><strong>simmer.plot</strong></a></td>
+<td>Plotting Methods for ‘simmer’</td>
+<td><a href="http://cran.r-project.org/package=simmer.plot"><embed src="http://www.r-pkg.org/badges/version/simmer.plot"></embed></a></td>
+</tr>
+<tr class="even">
+<td><strong>simmer.optim</strong></td>
+<td>Parameter Optimization Functions for ‘simmer’</td>
+<td><a href="http://cran.r-project.org/package=simmer.optim"><embed src="http://www.r-pkg.org/badges/version/simmer.optim"></embed></a></td>
+</tr>
+<tr class="odd">
+<td><strong>simmer.json</strong></td>
+<td>Read / Load ‘simmer’ Definitions in JSON Format</td>
+<td><a href="http://cran.r-project.org/package=simmer.json"><embed src="http://www.r-pkg.org/badges/version/simmer.json"></embed></a></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="mailing-list" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mailing-list" class="anchor"> </a>Mailing list</h2>
 <p>For bugs and/or issues, create a new issue on GitHub. For other questions or comments, please subscribe to the <a href="https://groups.google.com/forum/#!forum/simmer-devel">simmer-devel mailing list</a>. You must be a member to post messages, but anyone can read the archived discussions.</p>
+</div>
+<div id="documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation" class="anchor"> </a>Documentation</h2>
+<p>Documentation is available at <a href="http://r-simmer.org/reference">r-simmer.org/reference</a>.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">

@@ -94,6 +94,20 @@
     News
   </a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-puzzle-piece"></span>
+     
+    Extensions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../extensions/plot">simmer.plot</a>
+    </li>
+  </ul>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -119,6 +133,15 @@
     </div>
 
     <div class="contents">
+    <div id="simmer-3-6-0-9000" class="section level1">
+<h1 class="hasAnchor">
+<a href="#simmer-3-6-0-9000" class="anchor"> </a>simmer 3.6.0.9000</h1>
+<div id="minor-changes-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-and-fixes" class="anchor"> </a>Minor changes and fixes:</h2>
+<ul><li>Remove plotting functions (bb9656b), deprecated since v3.6.0. The new <code>simmer.plot</code> package (on CRAN) already covers these features among others.</li>
+</ul></div>
+</div>
     <div id="simmer-3-6-0" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simmer-3-6-0" class="anchor"> </a>simmer 3.6.0</h1>
@@ -128,13 +151,13 @@
 <ul><li>New subsetting operators, <code>[</code> and <code>[[</code>, for trajectories (1847898). Think about trajectories as lists of activities and these operators will do (almost) everything you expect. As a side effect, the generics <code>head()</code> and <code>tail()</code> automatically work with trajectories also as expected.</li>
 <li>New <code><a href="../reference/length.html">length()</a></code> method to obtain the number of first-level activities in a trajectory (f86375a). Useful in combination with the subsetting operators.</li>
 </ul></div>
-<div id="minor-changes-and-fixes" class="section level2">
+<div id="minor-changes-and-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-1" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>
 <code><a href="../reference/trajectory.html">create_trajectory()</a></code> has been deprecated in favor of <code><a href="../reference/trajectory.html">trajectory()</a></code> (76c1317).</li>
 <li>
-<code><a href="../reference/plot_resource_usage.html">plot_resource_usage()</a></code>, <code><a href="../reference/plot_resource_utilization.html">plot_resource_utilization()</a></code>, <code><a href="../reference/plot_evolution_arrival_times.html">plot_evolution_arrival_times()</a></code> and <code><a href="../reference/plot_attributes.html">plot_attributes()</a></code> have been deprecated and will be removed in the next release in order to minimise dependencies (5b43f2b). We plan to release a new package on CRAN covering these features and new ones.</li>
+<code>plot_resource_usage()</code>, <code>plot_resource_utilization()</code>, <code>plot_evolution_arrival_times()</code> and <code>plot_attributes()</code> have been deprecated and will be removed in the next release in order to minimise dependencies (5b43f2b). We plan to release a new package on CRAN covering these features and new ones.</li>
 <li>All methods are now S3 methods, so that a nice intelligible error is displayed if you apply a method to the wrong object (e891045).</li>
 <li>All the activity management -related stuff has been removed, i.e, <code>get_head()</code>, <code>get_tail()</code>, <code>print_activity()</code>, <code>get_next_activity()</code>, <code>get_prev_activity()</code> (f86375a). These methods were only useful for development purposes and nobody should be using them. And it was never a good idea to directly expose external pointers.</li>
 <li>Clone all trajectories before passing them to the C++ core (f655cae).</li>
@@ -152,9 +175,9 @@
 <li>Add support for uninterruptible handlers in <code><a href="../reference/send.html">trap()</a></code> (bb2aa46).</li>
 <li>Add support for global attributes in <code><a href="../reference/set_attribute.html">set_attribute()</a></code> (#82).</li>
 </ul></div>
-<div id="minor-changes-and-fixes-1" class="section level2">
+<div id="minor-changes-and-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-1" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-2" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>Fix bug in <code><a href="../reference/set_capacity.html">set_queue_size()</a></code> with <code>queue_size_strict=TRUE</code>: arrivals were not being dropped (#83).</li>
 <li>Fix bug in <code><a href="../reference/set_capacity.html">set_capacity()</a></code> with a preemptive resource when the old value was <code>Inf</code>: arrivals were not being preempted (63beb2c).</li>
 <li>Fix bug in per-resource activity monitoring: activity was not being reset (55097c9).</li>
@@ -177,9 +200,9 @@
 <li>New interarrival communication activities allowing asynchronous programming: <code><a href="../reference/send.html">send()</a></code>, <code><a href="../reference/send.html">trap()</a></code>, <code><a href="../reference/send.html">untrap()</a></code> and <code><a href="../reference/send.html">wait()</a></code> can be used to send signals, wait for signals, trap them and launch asynchronous handlers.</li>
 <li>New <code><a href="../reference/log_.html">log_()</a></code> activity simply prints messages for debugging purposes (eaa4554).</li>
 </ul></div>
-<div id="minor-changes-and-fixes-2" class="section level2">
+<div id="minor-changes-and-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-2" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-3" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>Store inline trajectory objects inside the simulation environment to prevent them to be garbage-collected.</li>
 <li>Update “Advanced Trajectory Usage” vignette.</li>
 </ul></div>
@@ -187,18 +210,18 @@
     <div id="simmer-3-4-4" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simmer-3-4-4" class="anchor"> </a>simmer 3.4.4</h1>
-<div id="minor-changes-and-fixes-3" class="section level2">
+<div id="minor-changes-and-fixes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-3" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-4" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>Fix non-defined behaviour caused by a race condition in object destruction under some platforms.</li>
 </ul></div>
 </div>
     <div id="simmer-3-4-3" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simmer-3-4-3" class="anchor"> </a>simmer 3.4.3</h1>
-<div id="minor-changes-and-fixes-4" class="section level2">
+<div id="minor-changes-and-fixes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-4" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-5" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>Remove warnings for unused arguments in <code><a href="../reference/seize.html">seize()</a></code> and <code><a href="../reference/seize.html">seize_selected()</a></code> (1c8c3bb).</li>
 <li>Fix crash on arrival reneging in non-triggered batches (8713d95).</li>
 <li>Fix crash on batches triggered before the timer expires (8713d95).</li>
@@ -214,9 +237,9 @@
 <a href="#new-features-3" class="anchor"> </a>New features:</h2>
 <ul><li>Ongoing (unfinished) arrivals are reported with <code><a href="../reference/get_mon.html">get_mon_arrivals(ongoing = TRUE)</a></code> (#73).</li>
 </ul></div>
-<div id="minor-changes-and-fixes-5" class="section level2">
+<div id="minor-changes-and-fixes-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-5" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-6" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>Simplify Rcpp glue: remove unnecessary <code>as&lt;&gt;()</code> calls (ec4e51a).</li>
 <li>Simplify trajectory’s head/tail management (06432a8).</li>
 <li>Now, <code><a href="../reference/run.html">run(until)</a></code> runs the simulation exactly until <code>until</code>, instead of until the first event scheduled at a time &gt;= <code>until</code> (e7264f6).</li>
@@ -227,9 +250,9 @@
     <div id="simmer-3-4-1" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simmer-3-4-1" class="anchor"> </a>simmer 3.4.1</h1>
-<div id="minor-changes-and-fixes-6" class="section level2">
+<div id="minor-changes-and-fixes-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-6" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-7" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>Fix memtest notes on CRAN (heap-use-after-free).</li>
 <li>Fix memory leaks.</li>
 </ul></div>
@@ -246,9 +269,9 @@
 <li>New <code><a href="../reference/batch.html">batch()</a></code> and <code><a href="../reference/batch.html">separate()</a></code> activities (#45). They can be used to implement a rollercoaster process: <code><a href="../reference/batch.html">batch()</a></code> collects a number of arrivals before they can continue processing as a block, and <code><a href="../reference/batch.html">separate()</a></code> splits a previously established batch.</li>
 <li>New <code><a href="../reference/renege_in.html">renege_in()</a></code> and <code><a href="../reference/renege_in.html">renege_abort()</a></code> activities (#58). They can be used to set or unset a timer after which the arrival will abandon.</li>
 </ul></div>
-<div id="minor-changes-and-fixes-7" class="section level2">
+<div id="minor-changes-and-fixes-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-7" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-8" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>If a <code><a href="../reference/branch.html">branch()</a></code>’s <code>option</code> returns <code>0</code>, the arrival skips the <code><a href="../reference/branch.html">branch()</a></code> and continues to the next activity instead of throwing an <code>index out of range</code> error (#70).</li>
 <li>Throw errors on incorrect releases (#72).</li>
 <li>Remove deprecated convenience function <code>every()</code> (#65) and <code><a href="../reference/branch.html">branch()</a></code>’s deprecated argument <code>merge</code> (#57).</li>
@@ -274,9 +297,9 @@
 <a href="#major-fixes" class="anchor"> </a>Major fixes:</h2>
 <ul><li>Fix per-resource activity time monitoring (#67). The problem emerged when an arrival revisited a resource and it was enqueued. An uninitialised variable could lead to an activity time greater than <code>end_time - start_time</code>. All versions 3.2.x are affected by this bug.</li>
 </ul></div>
-<div id="minor-changes-and-fixes-8" class="section level2">
+<div id="minor-changes-and-fixes-9" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-8" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-9" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>Fix the description of <code>preemptible</code> in the documentation of <code><a href="../reference/seize.html">seize()</a></code> and force <code>preemptible</code> to be equal or greater than <code>priority</code> (#53).</li>
 <li>Reset finite generators (#51).</li>
 <li>Fix the handling of a capacity change when the new value is infinite (#60).</li>
@@ -298,10 +321,10 @@
 <ul><li>Add time-specific resource availability support (#21). Both resources’ <code>capacity</code> and <code>queue_size</code> can change over time following a user-defined scheduling, which can be generated with the new function <code><a href="../reference/schedule.html">schedule()</a></code>.</li>
 <li>Advanced peek: inspect any number of future events in the event queue (8147820). For more details, see <code><a href="../reference/peek.html">?peek</a></code>.</li>
 </ul></div>
-<div id="minor-changes-and-fixes-9" class="section level2">
+<div id="minor-changes-and-fixes-10" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-9" class="anchor"> </a>Minor changes and fixes:</h2>
-<ul><li>Fix steps grouping in <code><a href="../reference/plot_resource_usage.html">plot_resource_usage()</a></code> (8da9b97).</li>
+<a href="#minor-changes-and-fixes-10" class="anchor"> </a>Minor changes and fixes:</h2>
+<ul><li>Fix steps grouping in <code>plot_resource_usage()</code> (8da9b97).</li>
 <li>Fix incorrect trajectory behaviour when a rejection occurs inside a branch with <code>merge=TRUE</code> (#46).</li>
 <li>Fix a couple of segmentation faults in preemptive resources (f64f6b2).</li>
 <li>Improve verbose output (9013db0).</li>
@@ -332,12 +355,12 @@
 <code>restart</code>: whether the current task (a <code><a href="../reference/timeout.html">timeout()</a></code> activity, for instance) should be restarted if the arrival is preempted.</li>
 </ul></li>
 </ul></div>
-<div id="minor-changes-and-fixes-10" class="section level2">
+<div id="minor-changes-and-fixes-11" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-10" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-11" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>Remove deprecated functions <code>show_activity()</code> and <code>show_trajectory()</code>.</li>
 <li>Add <code>every()</code>, <code><a href="../reference/to.html">to()</a></code> and <code><a href="../reference/from_to.html">from_to()</a></code> convenience functions (8e524cd).</li>
-<li>Fix colour scale in <code><a href="../reference/plot_resource_usage.html">plot_resource_usage()</a></code> (6b034a7).</li>
+<li>Fix colour scale in <code>plot_resource_usage()</code> (6b034a7).</li>
 <li>Fix compatibility with the upcoming version of <code>testthat</code> (#41).</li>
 <li>The <code><a href="../reference/branch.html">branch()</a></code> activity now provides attributes to its <code>option</code> function, as the other activities (#42).</li>
 <li>Implement error handling in <code>plot_*()</code> functions (#44).</li>
@@ -351,9 +374,9 @@
 <a href="#new-features-8" class="anchor"> </a>New features:</h2>
 <ul><li>Monitor arrivals’ start/activity/end times on a per-resource basis (#38). So far, the function <code><a href="../reference/get_mon.html">get_mon_arrivals()</a></code> returned the start/activity/end times per arrival for the whole trajectory. This behaviour remains, but additionally, <code><a href="../reference/get_mon.html">get_mon_arrivals(per_resource = TRUE)</a></code> returns these times per resource, so that it is possible to retrieve queueing/system times per resource.</li>
 </ul></div>
-<div id="minor-changes-and-fixes-11" class="section level2">
+<div id="minor-changes-and-fixes-12" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-11" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-12" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>Fix testing ERRORs reported on platforms using clang and Sparc Solaris.</li>
 <li>
 <code>get_mon_*()</code> functions accept a single simulation environment as well as a list of environments representing several replications (5ee2725). A new column (<code>replication</code>) in the resulting data frame indicates the corresponding replication number.</li>
@@ -370,9 +393,9 @@
 <li>New <code><a href="../reference/rollback.html">rollback()</a></code> activity (#17 and #22).</li>
 <li>Add priorities to resources’ queue (#20).</li>
 </ul></div>
-<div id="minor-changes-and-fixes-12" class="section level2">
+<div id="minor-changes-and-fixes-13" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-12" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-13" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>Performance improvements with Boost (1b654fd).</li>
 <li>Fix arrivals’ timing issues (#24).</li>
 <li>Nicer object printing (#26).</li>
@@ -385,9 +408,9 @@
     <div id="simmer-3-0-1" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simmer-3-0-1" class="anchor"> </a>simmer 3.0.1</h1>
-<div id="minor-changes-and-fixes-13" class="section level2">
+<div id="minor-changes-and-fixes-14" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-13" class="anchor"> </a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-14" class="anchor"> </a>Minor changes and fixes:</h2>
 <ul><li>Complete test coverage (#12).</li>
 <li>Minor fix in the documentation (42363d2).</li>
 <li>Set finalizer in the simulator object (#14).</li>
@@ -418,6 +441,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#simmer-3-6-0-9000">3.6.0.9000</a></li>
         <li><a href="#simmer-3-6-0">3.6.0</a></li>
         <li><a href="#simmer-3-5-1">3.5.1</a></li>
         <li><a href="#simmer-3-5-0">3.5.0</a></li>
