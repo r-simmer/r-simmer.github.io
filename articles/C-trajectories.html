@@ -74,6 +74,20 @@
     News
   </a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-puzzle-piece"></span>
+     
+    Extensions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../extensions/plot">simmer.plot</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -104,7 +118,7 @@
     
 <div class="contents">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
-<span class="kw">library</span>(ggplot2)</code></pre></div>
+<span class="kw">library</span>(simmer.plot)</code></pre></div>
 <div id="available-set-of-activities" class="section level2">
 <h2 class="hasAnchor">
 <html><body><a href="#available-set-of-activities" class="anchor"> </a></body></html>Available set of activities</h2>
@@ -476,16 +490,8 @@ env &lt;-<span class="st"> </span>env %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"t2_"</span>, t2, function() <span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">100</span>)
 
-<span class="kw"><a href="../reference/plot_resource_usage.html">plot_resource_usage</a></span>(env, <span class="st">"res1"</span>, <span class="dt">steps =</span> <span class="ot">TRUE</span>)
-<span class="co">#&gt; Warning: 'plot_resource_usage' is deprecated.</span>
-<span class="co">#&gt; Use 'simmer.plot::plot' instead.</span>
-<span class="co">#&gt; See help("Deprecated")</span></code></pre></div>
+<span class="kw">plot</span>(env, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="kw">c</span>(<span class="st">"res1"</span>, <span class="st">"res2"</span>), <span class="dt">steps =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="C-trajectories_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_resource_usage.html">plot_resource_usage</a></span>(env, <span class="st">"res2"</span>, <span class="dt">steps =</span> <span class="ot">TRUE</span>)
-<span class="co">#&gt; Warning: 'plot_resource_usage' is deprecated.</span>
-<span class="co">#&gt; Use 'simmer.plot::plot' instead.</span>
-<span class="co">#&gt; See help("Deprecated")</span></code></pre></div>
-<p><img src="C-trajectories_files/figure-html/unnamed-chunk-17-2.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="select" class="section level3">
 <h3 class="hasAnchor">

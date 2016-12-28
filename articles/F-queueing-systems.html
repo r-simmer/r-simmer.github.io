@@ -74,6 +74,20 @@
     News
   </a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-puzzle-piece"></span>
+     
+    Extensions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../extensions/plot">simmer.plot</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -104,7 +118,7 @@
     
 <div class="contents">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
-<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(simmer.plot)
 <span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(parallel)
 <span class="kw">set.seed</span>(<span class="dv">1234</span>)</code></pre></div>
@@ -133,23 +147,17 @@ mm1.env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"resource"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="ot">Inf</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival"</span>, mm1.trajectory, function() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span><span class="dv">2000</span>)</code></pre></div>
-<p>Our package provides convenience plotting functions to quickly visualise the usage of a resource over time, for instance. Down below, we can see how the simulation converges to the theoretical average number of customers in the system.</p>
+<p>Our <code>simmer.plot</code> package provides convenience plotting functions to quickly visualise the usage of a resource over time, for instance. Down below, we can see how the simulation converges to the theoretical average number of customers in the system.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evolution of the average number of customers in the system</span>
-graph &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_resource_usage.html">plot_resource_usage</a></span>(mm1.env, <span class="st">"resource"</span>, <span class="dt">items=</span><span class="st">"system"</span>)
-<span class="co">#&gt; Warning: 'plot_resource_usage' is deprecated.</span>
-<span class="co">#&gt; Use 'simmer.plot::plot' instead.</span>
-<span class="co">#&gt; See help("Deprecated")</span>
+graph &lt;-<span class="st"> </span><span class="kw">plot</span>(mm1.env, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"resource"</span>, <span class="dt">items=</span><span class="st">"system"</span>)
 
 <span class="co"># Theoretical value</span>
 mm1.N &lt;-<span class="st"> </span>rho/(<span class="dv">1</span>-rho)
 graph +<span class="st"> </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>mm1.N)</code></pre></div>
 <p><img src="F-queueing-systems_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>It is possible also to visualise, for instance, the instantaneous usage of individual elements by playing with the parameters <code>items</code> and <code>steps</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_resource_usage.html">plot_resource_usage</a></span>(mm1.env, <span class="st">"resource"</span>, <span class="dt">items=</span><span class="kw">c</span>(<span class="st">"queue"</span>, <span class="st">"server"</span>), <span class="dt">steps=</span><span class="ot">TRUE</span>) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(mm1.env, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"resource"</span>, <span class="dt">items=</span><span class="kw">c</span>(<span class="st">"queue"</span>, <span class="st">"server"</span>), <span class="dt">steps=</span><span class="ot">TRUE</span>) +
 <span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">20</span>) +<span class="st"> </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">4</span>)
-<span class="co">#&gt; Warning: 'plot_resource_usage' is deprecated.</span>
-<span class="co">#&gt; Use 'simmer.plot::plot' instead.</span>
-<span class="co">#&gt; See help("Deprecated")</span>
 <span class="co">#&gt; Warning: Removed 16112 rows containing missing values (geom_path).</span>
 
 <span class="co">#&gt; Warning: Removed 16112 rows containing missing values (geom_path).</span>

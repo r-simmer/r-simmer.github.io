@@ -74,6 +74,20 @@
     News
   </a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-puzzle-piece"></span>
+     
+    Extensions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../extensions/plot">simmer.plot</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -110,7 +124,7 @@
     tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
   });
 </script><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
-<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(simmer.plot)
 <span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(tidyr)
 <span class="kw">set.seed</span>(<span class="dv">1234</span>)</code></pre></div>
@@ -209,10 +223,7 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P *<sp
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gas.station &lt;-<span class="st"> </span><span class="kw">option.3</span>(<span class="dv">5000</span>)
 
 <span class="co"># Evolution + theoretical value</span>
-graph &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_resource_usage.html">plot_resource_usage</a></span>(gas.station, <span class="st">"pump"</span>, <span class="dt">items=</span><span class="st">"system"</span>)
-<span class="co">#&gt; Warning: 'plot_resource_usage' is deprecated.</span>
-<span class="co">#&gt; Use 'simmer.plot::plot' instead.</span>
-<span class="co">#&gt; See help("Deprecated")</span>
+graph &lt;-<span class="st"> </span><span class="kw">plot</span>(gas.station, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"pump"</span>, <span class="dt">items=</span><span class="st">"system"</span>)
 graph +<span class="st"> </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>N_average_theor)</code></pre></div>
 <p><img src="G-ctmc_files/figure-html/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>And these are some performance results:</p>
@@ -373,10 +384,7 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P *<sp
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gas.station &lt;-<span class="st"> </span><span class="kw">option.1</span>(<span class="dv">5000</span>)
 
 <span class="co"># Evolution + theoretical value</span>
-graph &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_resource_usage.html">plot_resource_usage</a></span>(gas.station, <span class="st">"pump"</span>, <span class="dt">items=</span><span class="st">"system"</span>)
-<span class="co">#&gt; Warning: 'plot_resource_usage' is deprecated.</span>
-<span class="co">#&gt; Use 'simmer.plot::plot' instead.</span>
-<span class="co">#&gt; See help("Deprecated")</span>
+graph &lt;-<span class="st"> </span><span class="kw">plot</span>(gas.station, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"pump"</span>, <span class="dt">items=</span><span class="st">"system"</span>)
 graph +<span class="st"> </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>N_average_theor)</code></pre></div>
 <p><img src="G-ctmc_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>However, it is not the case in options 4 and 5. The parameters of these models are <em>adulterated</em> to fit our performance purposes. Therefore, we need to extract the RAW data, rescale the numbers and plot them. And, of course, we get the same figure:</p>
