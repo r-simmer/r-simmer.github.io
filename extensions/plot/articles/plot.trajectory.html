@@ -89,13 +89,13 @@
       <h1>Plotting simmer trajectories</h1>
                         <h4 class="author">Iñaki Ucar, Bart Smeets</h4>
             
-            <h4 class="date">2016-12-30</h4>
+            <h4 class="date">2017-01-04</h4>
           </div>
 
     
     
 <div class="contents">
-<p>This package provides an S3 method for the <code>plot</code> generic to visualise diagrams of trajectory objects (see <code><a href="../reference/plot.trajectory.html">?plot.trajectory</a></code> for more details) using the <code>DiagrammeR</code> package as backend.</p>
+<p>This package provides an S3 method for the <code>plot</code> generic to visualise diagrams of trajectory objects (see <code><a href="../reference/plot.trajectory.html">?plot.trajectory</a></code> for more details) using the <code>DiagrammeR</code> package as the backend.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer.plot)
 
 t0 &lt;-<span class="st"> </span><span class="kw">trajectory</span>() %&gt;%
@@ -127,52 +127,6 @@ t0 &lt;-<span class="st"> </span><span class="kw">trajectory</span>() %&gt;%
 <div class="figure">
 <img src="includes/trajectory.svg">
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="kw">plot</span>(t0, <span class="dt">output=</span><span class="st">"DOT"</span>))
-<span class="co">#&gt; digraph {</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   '1' [label = 'Seize', shape = 'box', tooltip = 'amount: 1'] </span>
-<span class="co">#&gt;   '2' [label = 'Timeout', shape = 'box', tooltip = 'delay: 0xbde7680'] </span>
-<span class="co">#&gt;   '3' [label = 'Release', shape = 'box', tooltip = 'amount: 1'] </span>
-<span class="co">#&gt;   '4' [label = 'Branch', shape = 'diamond', tooltip = 'option: 0x85bab18'] </span>
-<span class="co">#&gt;   '5' [label = 'Clone', shape = 'diamond', tooltip = 'n: 2'] </span>
-<span class="co">#&gt;   '6' [label = 'Seize', shape = 'box', tooltip = 'amount: 1'] </span>
-<span class="co">#&gt;   '7' [label = 'Timeout', shape = 'box', tooltip = 'delay: 1'] </span>
-<span class="co">#&gt;   '8' [label = 'Release', shape = 'box', tooltip = 'amount: 1'] </span>
-<span class="co">#&gt;   '9' [label = 'Trap', shape = 'diamond', tooltip = 'signals: [signal, ]'] </span>
-<span class="co">#&gt;   '10' [label = 'Timeout', shape = 'box', tooltip = 'delay: 1'] </span>
-<span class="co">#&gt;   '11' [label = 'Timeout', shape = 'box', tooltip = 'delay: 1'] </span>
-<span class="co">#&gt;   '12' [label = 'SetAttribute', shape = 'box', tooltip = 'key: dummy, value: 1, global: 0'] </span>
-<span class="co">#&gt;   '13' [label = 'SetAttribute', shape = 'box', tooltip = 'key: dummy, value: 0x84d66e0, global: 0'] </span>
-<span class="co">#&gt;   '14' [label = 'Seize', shape = 'box', tooltip = 'amount: 0x85338d8'] </span>
-<span class="co">#&gt;   '15' [label = 'Timeout', shape = 'box', tooltip = 'delay: 0x8514f48'] </span>
-<span class="co">#&gt;   '16' [label = 'Release', shape = 'box', tooltip = 'amount: 0x7b506c0'] </span>
-<span class="co">#&gt;   '17' [label = 'Rollback', shape = 'diamond', tooltip = 'times: 1'] </span>
-<span class="co">#&gt;   '18' [label = 'Timeout', shape = 'box', tooltip = 'delay: 1'] </span>
-<span class="co">#&gt;   '19' [label = 'Rollback', shape = 'diamond', tooltip = 'times: 1'] </span>
-<span class="co">#&gt; '1'-&gt;'2' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '2'-&gt;'3' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '3'-&gt;'4' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '4'-&gt;'18' [color = 'gray', style = 'dashed'] </span>
-<span class="co">#&gt; '5'-&gt;'18' [color = 'gray', style = 'dashed'] </span>
-<span class="co">#&gt; '6'-&gt;'7' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '7'-&gt;'8' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '8'-&gt;'18' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '9'-&gt;'11' [color = 'gray', style = 'dashed'] </span>
-<span class="co">#&gt; '11'-&gt;'18' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '12'-&gt;'13' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '13'-&gt;'14' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '14'-&gt;'15' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '15'-&gt;'16' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '16'-&gt;'17' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '18'-&gt;'19' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '4'-&gt;'5' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '5'-&gt;'6' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '5'-&gt;'9' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '9'-&gt;'10' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '4'-&gt;'12' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '17'-&gt;'1' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; '19'-&gt;'4' [color = 'black', style = 'solid'] </span>
-<span class="co">#&gt; }</span></code></pre></div>
 </div>
   </div>
 
