@@ -1,0 +1,59 @@
+---
+title: "simmer v3.5.0 released on CRAN"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(simmer)
+create_trajectory <- trajectory
+```
+
+We are proud to present [__simmer 3.5.0__](http://r-simmer.org/), a new release on CRAN of the Discrete-Event Simulator for R with a bunch of exciting features:
+
+* __Simpler logging__. So far, if we wanted arrivals to print something into the console, we had, for instance, to make a custom function returning zero, with a `print()` inside, and to put it into a `timeout()` activity. Now, with `log_()` it's easier and, in addition, you get the simulation time and the arrival name:
+
+```{r}
+library(simmer)
+
+sayer <- create_trajectory() %>%
+  log_("hello world!")
+
+simmer() %>%
+  add_generator("dummy", sayer, at(3, 6)) %>%
+  run() %>% invisible
+```
+
+* __New resource modifiers__. `set_capacity()` and `set_queue_size()` existed before, but they were not very useful. Now, these methods become activities and you can use them in your trajectories. They have their associated `set_capacity_selected()` and `set_queue_size_selected()`, just like `seize()` and `release()`, for a joint use with the resource selector `select()`.
+* __New generator modifiers__. Activities `activate()`, `deactivate()` allow us to start/stop generators from within trajectories. Activities `set_trajectory()`, `set_distribution()` allow us to change a generator's assigned trajectory or distribution respectively.
+* __New interarrival communication activities, allowing asynchronous programming__. `send()`, `trap()`, `untrap()` and `wait()` can be used to send signals, wait for signals, trap them and launch asynchronous handlers. Nothing better than an example to understand the possibilities of this mechanism:
+
+```{r}
+library(simmer)
+
+t_blocked <- create_trajectory() %>%
+  trap("you shall pass", 
+       handler = create_trajectory() %>%
+         log_("ok, I'm packing...") %>%
+         timeout(1)) %>%
+  log_("waiting...") %>%
+  wait() %>%
+  log_("and I'm leaving!")
+
+t_signaler <- create_trajectory() %>%
+  log_("you shall pass") %>%
+  send("you shall pass")
+
+simmer() %>%
+  add_generator("blocked", t_blocked, at(0)) %>%
+  add_generator("signaler", t_signaler, at(5)) %>%
+  run() %>% invisible
+```
+
+Other interesting new features from [past releases](http://r-simmer.org/news/index.html) since our last post include [_post-seize_ and _reject_](http://r-simmer.org/articles/C-trajectories.html#seize-release) optional trajectories when seizing resources, arrival [cloning and synchronizing](http://r-simmer.org/articles/C-trajectories.html#clone-synchronize), arrival [batching and separating](http://r-simmer.org/articles/C-trajectories.html#batch-separate) or [reneging](http://r-simmer.org/articles/C-trajectories.html#renege_in-renege_abort).
+
+Please, refer to the updated [_Advanced Trajectory Usage_](http://r-simmer.org/articles/C-trajectories.html) vignette for more information and examples. Also remember that you can participate in our [simmer-devel mailing list](https://groups.google.com/forum/#!forum/simmer-devel) to get help, discuss methodologies... any feedback is always welcome.

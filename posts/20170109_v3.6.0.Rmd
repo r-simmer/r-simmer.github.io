@@ -1,0 +1,93 @@
+---
+title: "Extensions for 'simmer'"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A new version of the [Discrete-Event Simulator for R](http://r-simmer.org/) was released a few days ago on CRAN. The most interesting new feature is the implementation of the subsetting operators `[` and `[[` for trajectory objects. Basically, think about trajectories as lists of activities and these operators will do (almost) everything you expect.
+
+```{r}
+library(simmer)
+
+t0 <- trajectory() %>%
+  seize("resource", 1) %>%
+  timeout(function() rexp(1, 2)) %>%
+  release("resource", 2)
+
+t0
+
+t0[c(3, 1)]
+```
+
+After the last maintenance update (v3.5.1), which fixed several bugs and included [a new interesting vignette with SimPy examples](http://r-simmer.org/articles/E-simpy.html) translated to 'simmer', this v3.6.0 comes hand in hand with the first 'simmer' extension released on CRAN: [**simmer.plot**](http://r-simmer.org/extensions/plot/). 
+
+The primary purpose of 'simmer.plot' is to detach plotting capabilities from the core package, to systematise and enhance them. If you were using any of the old `plot_*()` functions, you will get a deprecation warning pointing to the S3 method `simmer.plot::plot.simmer`. [This vignette](http://r-simmer.org/extensions/plot/articles/plot.simmer.html) will help you make the transition.
+
+'simmer.plot' also implements a new `plot` S3 method for trajectories. It produces a diagram of a given trajectory object, which is very helpful for debugging and checking that everything conforms your simulation model. Let us consider, for instance, the following pretty complex trajectory:
+
+```{r}
+t0 <- trajectory() %>%
+  seize("res0", 1) %>%
+  branch(function() 1, c(TRUE, FALSE),
+         trajectory() %>%
+           clone(2,
+                 trajectory() %>%
+                   seize("res1", 1) %>%
+                   timeout(1) %>%
+                   release("res1", 1),
+                 trajectory() %>%
+                   trap("signal",
+                        handler=trajectory() %>%
+                          timeout(1)) %>%
+                   timeout(1)),
+         trajectory() %>%
+           set_attribute("dummy", 1) %>%
+           seize("res2", function() 1) %>%
+           timeout(function() rnorm(1, 20)) %>%
+           release("res2", function() 1) %>%
+           release("res0", 1) %>%
+           rollback(11)) %>%
+  synchronize() %>%
+  rollback(2) %>%
+  release("res0", 1)
+```
+
+We must ensure that:
+
+- Resources are seized and released as we expect.
+- Branches end (or continue) where we expect.
+- Rollbacks point back to the activity we expect.
+- ...
+
+Things are indeed much easier if you can just inspect it visually:
+
+```{r, message=FALSE}
+library(simmer.plot)
+
+plot(t0)
+```
+
+Note that different resources are mapped to a qualitative color scale, so that you can quickly glance whether you placed the appropriate seizes/releases for each resource.
+
+Other interesting 'simmer' extensions are already on our roadmap. Particularly, Bart has been _simmering_ a new package (still under development) called [**simmer.optim**](https://github.com/r-simmer/simmer.optim), which brings parameter optimisation to 'simmer'. While 'simmer', as is, can help you answer a question like the following:
+
+> If we have x amount of resources of type A, what will the average waiting time in the process be?
+
+'simmer.optim' is targeted to a reformulation like this:
+
+> What amount x of resources of type A minimises the waiting time, while still maintaining a utilisation level of $\rho_A$?
+
+We would be very grateful if someone with experience on DES optimisation could try it out and give us some feedback. Simply install it from GitHub using 'devtools'
+
+```{r, eval=FALSE}
+devtools::install_github("r-simmer/simmer.optim")
+```
+
+and start from the [README](https://github.com/r-simmer/simmer.optim), which demonstrates the current functionalities.
