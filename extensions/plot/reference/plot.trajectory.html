@@ -114,7 +114,8 @@
     
 
     <pre><span class='co'># S3 method for trajectory</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>engine</span> <span class='kw'>=</span> <span class='st'>"dot"</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>engine</span> <span class='kw'>=</span> <span class='st'>"dot"</span>,
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='kw'>scales</span><span class='kw'>::</span><span class='fu'>brewer_pal</span>(<span class='st'>"qual"</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -122,6 +123,8 @@
       <dd>a simmer trajectory.</dd>
       <dt>engine</dt>
       <dd>a string specifying a layout engine (see <code>grViz</code>).</dd>
+      <dt>fill</dt>
+      <dd>discrete color palette for resource identification.</dd>
       <dt>...</dt>
       <dd>additional parameters for <code>render_graph</code>.</dd>
     </dl>
@@ -133,30 +136,10 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-<span class='fu'>seize</span>(<span class='st'>"resource"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>timeout</span>(<span class='kw'>function</span>() <span class='fu'>rnorm</span>(<span class='fl'>1</span>, <span class='fl'>15</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>release</span>(<span class='st'>"resource"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>branch</span>(<span class='kw'>function</span>() <span class='fl'>1</span>, <span class='fu'>c</span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>),
-         <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-           <span class='fu'>clone</span>(<span class='fl'>2</span>,
-                 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-                   <span class='fu'>seize</span>(<span class='st'>"resource"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-                   <span class='fu'>timeout</span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-                   <span class='fu'>release</span>(<span class='st'>"resource"</span>, <span class='fl'>1</span>),
-                 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-                   <span class='fu'>trap</span>(<span class='st'>"signal"</span>,
-                        <span class='kw'>handler</span><span class='kw'>=</span><span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-                          <span class='fu'>timeout</span>(<span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
-                   <span class='fu'>timeout</span>(<span class='fl'>1</span>)),
-         <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-           <span class='fu'>set_attribute</span>(<span class='st'>"dummy"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-           <span class='fu'>set_attribute</span>(<span class='st'>"dummy"</span>, <span class='kw'>function</span>() <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-           <span class='fu'>seize</span>(<span class='st'>"resource"</span>, <span class='kw'>function</span>() <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-           <span class='fu'>timeout</span>(<span class='kw'>function</span>() <span class='fu'>rnorm</span>(<span class='fl'>1</span>, <span class='fl'>20</span>)) <span class='kw'>%&gt;%</span>
-           <span class='fu'>release</span>(<span class='st'>"resource"</span>, <span class='kw'>function</span>() <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-           <span class='fu'>rollback</span>(<span class='fl'>9</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>seize</span>(<span class='st'>"res"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>timeout</span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>rollback</span>(<span class='fl'>2</span>)
+  <span class='fu'>release</span>(<span class='st'>"res"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>rollback</span>(<span class='fl'>3</span>)
 
 <span class='fu'>plot</span>(<span class='no'>x</span>)</div></pre>
   </div>

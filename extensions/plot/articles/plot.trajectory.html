@@ -89,26 +89,24 @@
       <h1>Plotting simmer trajectories</h1>
                         <h4 class="author">Iñaki Ucar, Bart Smeets</h4>
             
-            <h4 class="date">2017-01-04</h4>
+            <h4 class="date">2017-02-08</h4>
           </div>
 
     
     
 <div class="contents">
-<p>This package provides an S3 method for the <code>plot</code> generic to visualise diagrams of trajectory objects (see <code><a href="../reference/plot.trajectory.html">?plot.trajectory</a></code> for more details) using the <code>DiagrammeR</code> package as the backend.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer.plot)
+<p>Simulation trajectories may grow considerably, and they are not always easy to inspect to ensure their compliance with the model that we are trying to build. For instance, let us consider this pretty complex one:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 
 t0 &lt;-<span class="st"> </span><span class="kw">trajectory</span>() %&gt;%
-<span class="st">  </span><span class="kw">seize</span>(<span class="st">"resource"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw">timeout</span>(function() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">15</span>)) %&gt;%
-<span class="st">  </span><span class="kw">release</span>(<span class="st">"resource"</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="kw">seize</span>(<span class="st">"res0"</span>, <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw">branch</span>(function() <span class="dv">1</span>, <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>),
          <span class="kw">trajectory</span>() %&gt;%
 <span class="st">           </span><span class="kw">clone</span>(<span class="dv">2</span>,
                  <span class="kw">trajectory</span>() %&gt;%
-<span class="st">                   </span><span class="kw">seize</span>(<span class="st">"resource"</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">                   </span><span class="kw">seize</span>(<span class="st">"res1"</span>, <span class="dv">1</span>) %&gt;%
 <span class="st">                   </span><span class="kw">timeout</span>(<span class="dv">1</span>) %&gt;%
-<span class="st">                   </span><span class="kw">release</span>(<span class="st">"resource"</span>, <span class="dv">1</span>),
+<span class="st">                   </span><span class="kw">release</span>(<span class="st">"res1"</span>, <span class="dv">1</span>),
                  <span class="kw">trajectory</span>() %&gt;%
 <span class="st">                   </span><span class="kw">trap</span>(<span class="st">"signal"</span>,
                         <span class="dt">handler=</span><span class="kw">trajectory</span>() %&gt;%
@@ -116,14 +114,27 @@ t0 &lt;-<span class="st"> </span><span class="kw">trajectory</span>() %&gt;%
 <span class="st">                   </span><span class="kw">timeout</span>(<span class="dv">1</span>)),
          <span class="kw">trajectory</span>() %&gt;%
 <span class="st">           </span><span class="kw">set_attribute</span>(<span class="st">"dummy"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">           </span><span class="kw">set_attribute</span>(<span class="st">"dummy"</span>, function() <span class="dv">1</span>) %&gt;%
-<span class="st">           </span><span class="kw">seize</span>(<span class="st">"resource"</span>, function() <span class="dv">1</span>) %&gt;%
+<span class="st">           </span><span class="kw">seize</span>(<span class="st">"res2"</span>, function() <span class="dv">1</span>) %&gt;%
 <span class="st">           </span><span class="kw">timeout</span>(function() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">20</span>)) %&gt;%
-<span class="st">           </span><span class="kw">release</span>(<span class="st">"resource"</span>, function() <span class="dv">1</span>) %&gt;%
-<span class="st">           </span><span class="kw">rollback</span>(<span class="dv">9</span>)) %&gt;%
-<span class="st">  </span><span class="kw">timeout</span>(<span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw">rollback</span>(<span class="dv">2</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(t0)</code></pre></div>
+<span class="st">           </span><span class="kw">release</span>(<span class="st">"res2"</span>, function() <span class="dv">1</span>) %&gt;%
+<span class="st">           </span><span class="kw">release</span>(<span class="st">"res0"</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">           </span><span class="kw">rollback</span>(<span class="dv">11</span>)) %&gt;%
+<span class="st">  </span><span class="kw">synchronize</span>() %&gt;%
+<span class="st">  </span><span class="kw">rollback</span>(<span class="dv">2</span>) %&gt;%
+<span class="st">  </span><span class="kw">release</span>(<span class="st">"res0"</span>, <span class="dv">1</span>)</code></pre></div>
+<p>We must ensure that:</p>
+<ul>
+<li>Resources are seized and released as we expect.</li>
+<li>Branches end (or continue) where we expect.</li>
+<li>Rollbacks point back to the activity we expect.</li>
+<li>…</li>
+</ul>
+<p>For this task, the <strong>simmer.plot</strong> package provides an S3 method for the <code>plot</code> generic to visualise diagrams of trajectory objects (see <code><a href="../reference/plot.trajectory.html">?plot.trajectory</a></code> for more details) using the <code>DiagrammeR</code> package as the backend, which facilitates trajectory checking and debugging.</p>
+<p>Note that colors are assigned to seizes and releases as a function of the resource that these are applied to. By default, resources are mapped to a qualitative Color Brewer palette, but you can override this using the optional parameter <code>fill</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer.plot)
+
+get_palette &lt;-<span class="st"> </span>scales::<span class="kw">brewer_pal</span>(<span class="dt">type =</span> <span class="st">"qual"</span>, <span class="dt">palette =</span> <span class="dv">1</span>)
+<span class="kw">plot</span>(t0, <span class="dt">fill =</span> get_palette)</code></pre></div>
 <div class="figure">
 <img src="includes/trajectory.svg">
 </div>

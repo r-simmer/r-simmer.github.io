@@ -89,7 +89,7 @@
       <h1>Plotting simmer statistics</h1>
                         <h4 class="author">Bart Smeets, Iñaki Ucar</h4>
             
-            <h4 class="date">2017-01-04</h4>
+            <h4 class="date">2017-02-08</h4>
           </div>
 
     
@@ -152,16 +152,16 @@ envs &lt;-<span class="st"> </span><span class="kw">mclapply</span>(<span class=
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer.plot)
 
 <span class="kw">plot</span>(envs, <span class="dt">what =</span> <span class="st">"resources"</span>, <span class="dt">metric =</span> <span class="st">"utilization"</span>, <span class="kw">c</span>(<span class="st">"nurse"</span>, <span class="st">"doctor"</span>,<span class="st">"administration"</span>))</code></pre></div>
-<p><img src="plot.simmer_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="plot.simmer_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>It is also possible to have a look at resources’ activity during the simulation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(envs, <span class="dt">what =</span> <span class="st">"resources"</span>, <span class="dt">metric =</span> <span class="st">"usage"</span>, <span class="kw">c</span>(<span class="st">"nurse"</span>, <span class="st">"doctor"</span>), <span class="dt">items =</span> <span class="st">"server"</span>, <span class="dt">steps =</span> T)</code></pre></div>
-<p><img src="plot.simmer_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;"></p>
-<p>In the above graph, the individual lines are all separate replications. The step lines are instantaneous utilization and the smooth line is a running average. Let’s take a look now at a specific replication for one resource. In the example below the 6th replication is shown.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(envs[[<span class="dv">6</span>]], <span class="dt">what =</span> <span class="st">"resources"</span>, <span class="dt">metric =</span> <span class="st">"usage"</span>, <span class="st">"doctor"</span>, <span class="dt">items =</span> <span class="st">"server"</span>, <span class="dt">steps =</span> T)</code></pre></div>
-<p><img src="plot.simmer_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(envs, <span class="dt">what =</span> <span class="st">"resources"</span>, <span class="dt">metric =</span> <span class="st">"usage"</span>, <span class="kw">c</span>(<span class="st">"nurse"</span>, <span class="st">"doctor"</span>), <span class="dt">items =</span> <span class="st">"server"</span>)</code></pre></div>
+<p><img src="plot.simmer_files/figure-html/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;"></p>
+<p>In the above graph, the individual lines are all separate replications. The smoothing performed is a cumulative average. Let’s take a look now at the instantaneous behaviour for a specific replication and resource. In the example below, the 6th replication is shown.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(envs[[<span class="dv">6</span>]], <span class="dt">what =</span> <span class="st">"resources"</span>, <span class="dt">metric =</span> <span class="st">"usage"</span>, <span class="st">"doctor"</span>, <span class="dt">items =</span> <span class="st">"server"</span>, <span class="dt">steps =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="plot.simmer_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>Next we can have a look at the evolution of the arrivals’ flow time during the simulation. In the plot below, each individual line represents a replication. A smooth line is drawn over them. All arrivals that didn’t finish their entire trajectory are excluded from the plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(envs, <span class="dt">what =</span> <span class="st">"arrivals"</span>, <span class="dt">metric =</span> <span class="st">"flow_time"</span>)</code></pre></div>
-<p><img src="plot.simmer_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="plot.simmer_files/figure-html/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>Similarly one can have a look at the evolution of the activity times with <code>metric = "activity_time"</code> and waiting times with <code>metric = "waiting_time"</code>.</p>
 </div>
 </div>
