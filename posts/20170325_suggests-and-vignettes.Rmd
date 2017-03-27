@@ -1,0 +1,25 @@
+---
+title: "Suggests and Vignettes"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Dirk Eddelbuettel quite rightly reminded us the other day that [`Suggests` is not `Depends`](http://dirk.eddelbuettel.com/blog/2017/03/22/#suggests_is_not_depends). I am sorry to say that I am one of those who are using `Suggests`... "casually". *Mea culpa*. I must say that this is restricted to vignettes: there are no tests nor examples using suggested packages. But I am not checking if suggested packages are available at all, which is definitely wrong. And I understand that it must be frustrating to run reverse dependencies on a package as popular as `Rcpp` when the rest of us are using `Suggests` so... "casually". So I was definitely determined to solve this, and I finally managed to find a very simple solution that may be helpful to other maintainers.
+
+Our [`simmer`](https://cran.r-project.org/package=simmer) package has seven vignettes. Two of them are very introductory and do not use any external package. But as you try to demonstrate more advanced features and use cases, you start needing some other tools; and their use could be intensive, so that checking suggested packages for every call or every code chunk might not scale. However, I realised that the important thing for those advanced vignettes is just to make the story they tell available to your users, and anyway they are always built and available online on CRAN. Therefore, I decided to add the following at the beginning of each vignette:
+
+```{r}
+required <- c("pkg1", "pkg2", "pkgn")
+
+if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
+  knitr::opts_chunk$set(eval = FALSE)
+```
+
+Problem solved. Yes, I know, I am still taking `knitr` for granted. But given that it has its own entry (`VignetteBuilder`) in the `DESCRIPTION`, I think this is fair enough. I only hope that Dirk will unblacklist `simmer` after our next release. ;-)
