@@ -111,7 +111,7 @@
       <h1>Queueing Systems</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2016-12-28</h4>
+            <h4 class="date">2017-03-31</h4>
           </div>
 
     
@@ -119,12 +119,11 @@
 <div class="contents">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 <span class="kw">library</span>(simmer.plot)
-<span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(parallel)
 <span class="kw">set.seed</span>(<span class="dv">1234</span>)</code></pre></div>
 <div id="the-mm1-system" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#the-mm1-system" class="anchor"> </a></body></html>The M/M/1 system</h2>
+<a href="#the-mm1-system" class="anchor"></a>The M/M/1 system</h2>
 <p>In Kendall’s notation, an M/M/1 system has exponential arrivals (<strong>M</strong>/M/1), a single server (M/M/<strong>1</strong>) with exponential service time (M/<strong>M</strong>/1) and an inifinite queue (implicit M/M/1/<strong><span class="math inline">\(\infty\)</span></strong>). For instance, people arriving at an ATM at rate <span class="math inline">\(\lambda\)</span>, waiting their turn in the street and withdrawing money at rate <span class="math inline">\(\mu\)</span>.</p>
 <p>Let us remember the basic parameters of this system:</p>
 <p><span class="math display">\[\begin{aligned}
@@ -148,18 +147,16 @@ mm1.env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sim
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival"</span>, mm1.trajectory, function() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span><span class="dv">2000</span>)</code></pre></div>
 <p>Our <code>simmer.plot</code> package provides convenience plotting functions to quickly visualise the usage of a resource over time, for instance. Down below, we can see how the simulation converges to the theoretical average number of customers in the system.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evolution of the average number of customers in the system</span>
-graph &lt;-<span class="st"> </span><span class="kw">plot</span>(mm1.env, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"resource"</span>, <span class="dt">items=</span><span class="st">"system"</span>)
-
-<span class="co"># Theoretical value</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Theoretical value</span>
 mm1.N &lt;-<span class="st"> </span>rho/(<span class="dv">1</span>-rho)
-graph +<span class="st"> </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>mm1.N)</code></pre></div>
+
+<span class="co"># Evolution of the average number of customers in the system</span>
+<span class="kw">plot</span>(mm1.env, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"resource"</span>, <span class="dt">items=</span><span class="st">"system"</span>) +
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>mm1.N)</code></pre></div>
 <p><img src="F-queueing-systems_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>It is possible also to visualise, for instance, the instantaneous usage of individual elements by playing with the parameters <code>items</code> and <code>steps</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(mm1.env, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"resource"</span>, <span class="dt">items=</span><span class="kw">c</span>(<span class="st">"queue"</span>, <span class="st">"server"</span>), <span class="dt">steps=</span><span class="ot">TRUE</span>) +
 <span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">20</span>) +<span class="st"> </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">4</span>)
-<span class="co">#&gt; Warning: Removed 16112 rows containing missing values (geom_path).</span>
-
 <span class="co">#&gt; Warning: Removed 16112 rows containing missing values (geom_path).</span>
 
 <span class="co">#&gt; Warning: Removed 16112 rows containing missing values (geom_path).</span></code></pre></div>
@@ -182,9 +179,9 @@ mm1.T ; <span class="kw">mean</span>(mm1.t_system)
 }, <span class="dt">mc.set.seed=</span><span class="ot">FALSE</span>)</code></pre></div>
 <p>Parallelizing has the shortcoming that we lose the underlying C++ objects when each thread finishes, but the <code>wrap</code> function does all the magic for us retrieving the monitored data. Let’s perform a simple test:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_system &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(envs) %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t_system =</span> end_time -<span class="st"> </span>start_time) %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(replication) %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(t_system))
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">t_system =</span> end_time -<span class="st"> </span>start_time) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">group_by</span>(replication) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(t_system))
 
 <span class="kw">t.test</span>(t_system$mean)
 <span class="co">#&gt; </span>
@@ -209,7 +206,7 @@ mm1.T ; <span class="kw">mean</span>(mm1.t_system)
 </div>
 <div id="mmck-systems" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#mmck-systems" class="anchor"> </a></body></html>M/M/c/k systems</h2>
+<a href="#mmck-systems" class="anchor"></a>M/M/c/k systems</h2>
 <p>An M/M/c/k system keeps exponential arrivals and service times, but has more than one server in general and a finite queue, which often is more realistic. For instance, a router may have several processor to handle packets, and the in/out queues are necessarily finite.</p>
 <p>This is the simulation of an M/M/2/3 system (2 server, 1 position in queue). Note that the trajectory is identical to the M/M/1 case.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lambda &lt;-<span class="st"> </span><span class="dv">2</span>
@@ -227,7 +224,7 @@ mm23.env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/si
 <p>In this case, there are rejections when the queue is full.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mm23.arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(mm23.env)
 mm23.arrivals %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">rejection_rate =</span> <span class="kw">sum</span>(!finished)/<span class="kw"><a href="../reference/length.html">length</a></span>(finished))
+<span class="st">  </span>dplyr::<span class="kw">summarise</span>(<span class="dt">rejection_rate =</span> <span class="kw">sum</span>(!finished)/<span class="kw">length</span>(finished))
 <span class="co">#&gt;   rejection_rate</span>
 <span class="co">#&gt; 1     0.02291365</span></code></pre></div>
 <p>Despite this, the time spent in the system still follows an exponential random variable, as in the M/M/1 case, but the average has dropped.</p>
@@ -239,7 +236,7 @@ mm23.arrivals %&gt;%
 </div>
 <div id="queueing-networks" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#queueing-networks" class="anchor"> </a></body></html>Queueing Networks</h2>
+<a href="#queueing-networks" class="anchor"></a>Queueing Networks</h2>
 <p>Let us consider the following network of queues (example taken from <a href="http://www.grotto-networking.com/DiscreteEventPython.html#NetQueues">Grotto Networking</a>):</p>
 <div class="figure">
 <img src="includes/queue-network.svg" alt="A network of queues."><p class="caption">A network of queues.</p>
@@ -282,7 +279,8 @@ to_queue_4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw">md1</span>(<span class="dv">4</span>)</code></pre></div>
 <p>Finally, we prepare and run the simulation environment with the resources and generators required:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()
-<span class="kw">lapply</span>(<span class="dv">1</span>:<span class="dv">4</span>, function(i) env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="kw">paste0</span>(<span class="st">"md1_"</span>, i))) %&gt;%<span class="st"> </span>invisible
+for (i in <span class="dv">1</span>:<span class="dv">4</span>) env %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="kw">paste0</span>(<span class="st">"md1_"</span>, i))
 env %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival1_"</span>, to_queue_1, function() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda1), <span class="dt">mon=</span><span class="dv">2</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival3_"</span>, to_queue_3, function() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda3), <span class="dt">mon=</span><span class="dv">2</span>) %&gt;%
@@ -299,15 +297,15 @@ env %&gt;%
 <p>In the analysis, we filter arrivals from generator 1 that reach queues 3 and 4, and we examine the average waiting time and the total number of messages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env, <span class="dt">per_resource =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span>dplyr::<span class="kw"><a href="../reference/select.html">select</a></span>(name, resource) %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(resource %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">"md1_3"</span>, <span class="st">"md1_4"</span>))
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(resource %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">"md1_3"</span>, <span class="st">"md1_4"</span>))
 arr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env) %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>(start_time +<span class="st"> </span>activity_time),
-         <span class="dt">generator =</span> <span class="kw">regmatches</span>(name, <span class="kw">regexpr</span>(<span class="st">"arrival[[:digit:]]"</span>, name))) %&gt;%
-<span class="st">  </span><span class="kw">left_join</span>(res) %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(generator, resource)
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>(start_time +<span class="st"> </span>activity_time),
+                <span class="dt">generator =</span> <span class="kw">regmatches</span>(name, <span class="kw">regexpr</span>(<span class="st">"arrival[[:digit:]]"</span>, name))) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">left_join</span>(res) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">group_by</span>(generator, resource)
 <span class="co">#&gt; Joining, by = "name"</span>
 
-<span class="kw">summarise</span>(arr, <span class="dt">average =</span> <span class="kw">sum</span>(waiting_time) /<span class="st"> </span><span class="kw">n</span>())
+dplyr::<span class="kw">summarise</span>(arr, <span class="dt">average =</span> <span class="kw">sum</span>(waiting_time) /<span class="st"> </span><span class="kw">n</span>())
 <span class="co">#&gt; Source: local data frame [5 x 3]</span>
 <span class="co">#&gt; Groups: generator [?]</span>
 <span class="co">#&gt; </span>
@@ -320,7 +318,7 @@ arr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon
 <span class="co">#&gt; 5  arrival4    md1_4  0.5094670</span>
 <span class="kw"><a href="../reference/get_n_generated.html">get_n_generated</a></span>(env, <span class="st">"arrival1_"</span>) +<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_n_generated</a></span>(env, <span class="st">"arrival4_"</span>)
 <span class="co">#&gt; [1] 10539</span>
-<span class="kw">count</span>(arr)
+dplyr::<span class="kw">count</span>(arr)
 <span class="co">#&gt; Source: local data frame [5 x 3]</span>
 <span class="co">#&gt; Groups: generator [?]</span>
 <span class="co">#&gt; </span>

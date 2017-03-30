@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Authors • simmer</title>
+<title>Extract or replace parts of a trajectory — Extract.trajectory • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -20,9 +20,9 @@
 
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script>
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script>
+<script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
 <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -36,7 +36,7 @@
   </head>
 
   <body>
-    <div class="container template-authors">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,12 +46,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">simmer | DES for R</a>
+      <a class="navbar-brand" href="../index.html">simmer | DES for R</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="reference/index.html">
+  <a href="../reference/index.html">
     <span class="fa fa-gears"></span>
      
     Reference
@@ -67,30 +67,30 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/A-introduction.html">Introduction to simmer</a>
+      <a href="../articles/A-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="articles/B-terminology.html">Terminology</a>
+      <a href="../articles/B-terminology.html">Terminology</a>
     </li>
     <li>
-      <a href="articles/C-trajectories.html">Advanced Trajectory Usage</a>
+      <a href="../articles/C-trajectories.html">Advanced Trajectory Usage</a>
     </li>
     <li>
-      <a href="articles/D-bank-1.html">The Bank Tutorial: Part I</a>
+      <a href="../articles/D-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
-      <a href="articles/E-simpy.html">Other SimPy Examples</a>
+      <a href="../articles/E-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="articles/F-queueing-systems.html">Queueing Systems</a>
+      <a href="../articles/F-queueing-systems.html">Queueing Systems</a>
     </li>
     <li>
-      <a href="articles/G-ctmc.html">Continuous-Time Markov Chains</a>
+      <a href="../articles/G-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="news/index.html">
+  <a href="../news/index.html">
     <span class="fa fa-newspaper-o"></span>
      
     News
@@ -106,7 +106,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="extensions/plot">simmer.plot</a>
+      <a href="../extensions/plot">simmer.plot</a>
     </li>
   </ul>
 </li>
@@ -128,26 +128,75 @@
       </header>
 
       <div class="row">
-  <div class="contents col-md-12">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Authors</h1>
+    <h1>Extract or replace parts of a trajectory</h1>
     </div>
 
-    <ul class="list-unstyled">
-      <li>
-        <p><strong>Iñaki Ucar</strong>. Author, copyright&nbsp;holder, maintainer.
-        </p>
-      </li>
-      <li>
-        <p><strong>Bart Smeets</strong>. Author, copyright&nbsp;holder.
-        </p>
-      </li>
-    </ul>
+    
+    <p>Operators acting on trajectories to extract or replace parts.</p>
+    
+
+    <pre># S3 method for trajectory
+[(x, i)
+
+# S3 method for trajectory
+[[(x, i)
+
+# S3 method for trajectory
+[(x, i) <- value
+
+# S3 method for trajectory
+[[(x, i) <- value</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>the trajectory object.</p></td>
+    </tr>
+    <tr>
+      <th>i</th>
+      <td><p>indices specifying elements to extract. Indices are <code>numeric</code> or <code>character</code>
+or <code>logical</code> vectors or empty (missing) or <code>NULL</code>.</p>
+<p>Numeric values are coerced to integer as by <code>as.integer</code> (and hence truncated towards
+zero). Negative integers indicate elemets/slices to leave out the selection.</p>
+<p>Character vectors will be matched to the names of the activities in the trajectory as by
+<code>%in%</code>.</p>
+<p>Logical vectors indicate elements/slices to select. Such vectors are recycled if necessary to
+match the corresponding extent.</p>
+<p>An empty index will return the whole trajectory.</p>
+<p>An index value of <code>NULL</code> is treated as if it were <code>integer(0)</code>.</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>another trajectory object.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Returns a new trajectory object.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><code><a href='length.trajectory.html'>length.trajectory</a></code>, <code><a href='length.trajectory.html'>get_n_activities</a></code>, <code><a href='join.html'>join</a></code>.</p>
+    
 
   </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
 
+      <li><a href="#see-also">See also</a></li>
+          </ul>
+
+  </div>
 </div>
-
 
       <footer>
       <div class="copyright">

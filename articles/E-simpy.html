@@ -111,7 +111,7 @@
       <h1>Other SimPy Examples</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2016-12-28</h4>
+            <h4 class="date">2017-03-31</h4>
           </div>
 
     
@@ -119,12 +119,12 @@
 <div class="contents">
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#introduction" class="anchor"> </a></body></html>Introduction</h2>
+<a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>These examples are adapted from the Python package ‘SimPy’, <a href="https://simpy.readthedocs.io/en/latest/examples">here</a>. Users familiar with SimPy may find these examples helpful for transitioning to <code>simmer</code>. Some very basic material is not covered. Beginners should first read the vignettes <a href="A-introduction.html"><em>Introduction to simmer</em></a>, <a href="B-terminology.html"><em>Terminology</em></a>, <a href="C-trajectories.html"><em>Advanced Trajectory Usage</em></a> and <a href="D-bank-1.html"><em>The Bank Tutorial</em></a>.</p>
 </div>
 <div id="carwash" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#carwash" class="anchor"> </a></body></html>Carwash</h2>
+<a href="#carwash" class="anchor"></a>Carwash</h2>
 <p>Covers:</p>
 <ul>
 <li>Standard resources.</li>
@@ -195,7 +195,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 </div>
 <div id="machine-shop" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#machine-shop" class="anchor"> </a></body></html>Machine Shop</h2>
+<a href="#machine-shop" class="anchor"></a>Machine Shop</h2>
 <p>Covers:</p>
 <ul>
 <li>Preemptive resources.</li>
@@ -207,10 +207,8 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <blockquote>
 <p>This example comprises a workshop with <code>n</code> identical machines. A stream of jobs (enough to keep the machines busy) arrives. Each machine breaks down periodically. Repairs are carried out by one repairman. The repairman has other, less important tasks to perform, too. Broken machines preempt theses tasks. The repairman continues them when he is done with the machine repair. The workshop works continuously.</p>
 </blockquote>
-<p>First of all, we load the libraries and prepare the environment. We will use <code>dplyr</code> later for the data analysis. There is a reason for loading it before <code>simmer</code>, and it is to mask <code>dplyr::select</code> with <code>simmer::select</code> and not the other way round.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">detach</span>(<span class="st">"package:simmer"</span>)
-<span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(simmer)
+<p>First of all, we load the libraries and prepare the environment.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 
 PT_MEAN &lt;-<span class="st"> </span><span class="fl">10.0</span>         <span class="co"># Avg. processing time in minutes</span>
 PT_SIGMA &lt;-<span class="st"> </span><span class="fl">2.0</span>         <span class="co"># Sigma of processing time</span>
@@ -249,11 +247,9 @@ failure &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tra
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"repairman"</span>, <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release_selected</a></span>(<span class="dv">1</span>)</code></pre></div>
 <p>The machines and their workers are appended to the simulation environment. Note that each machine, which is defined as preemptive, has space for one worker (or a failure) and no space in queue.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(machines, function(i) {
-  env %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(i, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dt">preemptive =</span> <span class="ot">TRUE</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="kw">paste0</span>(i, <span class="st">"_worker"</span>), <span class="kw">make_parts</span>(i), <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>)
-}) %&gt;%<span class="st"> </span>invisible</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for (i in machines) env %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(i, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dt">preemptive =</span> <span class="ot">TRUE</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="kw">paste0</span>(i, <span class="st">"_worker"</span>), <span class="kw">make_parts</span>(i), <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>)</code></pre></div>
 <p>The same for the repairman, but this time the queue is infinite, since there could be any number of machines at any time waiting for repairments.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">env %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"repairman"</span>, <span class="dv">1</span>, <span class="ot">Inf</span>, <span class="dt">preemptive =</span> <span class="ot">TRUE</span>) %&gt;%
@@ -267,28 +263,28 @@ failure &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tra
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(SIM_TIME) %&gt;%<span class="st"> </span>invisible</code></pre></div>
 <p>The last value per worker from the attributes table reports the number of parts made:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env) %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(name) %&gt;%
-<span class="st">  </span><span class="kw">slice</span>(<span class="kw">n</span>()) %&gt;%
-<span class="st">  </span><span class="kw">arrange</span>(name)
+<span class="st">  </span>dplyr::<span class="kw">group_by</span>(name) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">slice</span>(<span class="kw">n</span>()) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">arrange</span>(name)
 <span class="co">#&gt; Source: local data frame [10 x 5]</span>
 <span class="co">#&gt; Groups: name [10]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;        time             name   key value replication</span>
 <span class="co">#&gt;       &lt;dbl&gt;            &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;       &lt;int&gt;</span>
-<span class="co">#&gt; 1  40275.55 machine0_worker0 parts  3329           1</span>
-<span class="co">#&gt; 2  40312.71 machine1_worker0 parts  3266           1</span>
-<span class="co">#&gt; 3  40244.22 machine2_worker0 parts  3231           1</span>
-<span class="co">#&gt; 4  40319.42 machine3_worker0 parts  3334           1</span>
-<span class="co">#&gt; 5  40312.07 machine4_worker0 parts  3238           1</span>
-<span class="co">#&gt; 6  40316.85 machine5_worker0 parts  3306           1</span>
-<span class="co">#&gt; 7  40223.46 machine6_worker0 parts  3247           1</span>
-<span class="co">#&gt; 8  40313.86 machine7_worker0 parts  3269           1</span>
-<span class="co">#&gt; 9  40310.88 machine8_worker0 parts  3327           1</span>
-<span class="co">#&gt; 10 40309.67 machine9_worker0 parts  3291           1</span></code></pre></div>
+<span class="co">#&gt; 1  40312.79 machine0_worker0 parts  3234           1</span>
+<span class="co">#&gt; 2  40313.02 machine1_worker0 parts  3369           1</span>
+<span class="co">#&gt; 3  40317.91 machine2_worker0 parts  3345           1</span>
+<span class="co">#&gt; 4  40315.71 machine3_worker0 parts  3269           1</span>
+<span class="co">#&gt; 5  40311.65 machine4_worker0 parts  3310           1</span>
+<span class="co">#&gt; 6  40314.01 machine5_worker0 parts  3266           1</span>
+<span class="co">#&gt; 7  40316.61 machine6_worker0 parts  3371           1</span>
+<span class="co">#&gt; 8  40314.26 machine7_worker0 parts  3386           1</span>
+<span class="co">#&gt; 9  40315.19 machine8_worker0 parts  3216           1</span>
+<span class="co">#&gt; 10 40318.83 machine9_worker0 parts  3401           1</span></code></pre></div>
 </div>
 <div id="movie-renege" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#movie-renege" class="anchor"> </a></body></html>Movie Renege</h2>
+<a href="#movie-renege" class="anchor"></a>Movie Renege</h2>
 <p>Covers:</p>
 <ul>
 <li>Standard resources.</li>
@@ -300,10 +296,8 @@ failure &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tra
 <blockquote>
 <p>This example models a movie theater with one ticket counter selling tickets for three movies (next show only). People arrive at random times and try to buy a random number (1-6) of tickets for a random movie. When a movie is sold out, all people waiting to buy a ticket for that movie renege (leave the queue).</p>
 </blockquote>
-<p>First of all, we load the libraries and prepare the environment. We will use <code>dplyr</code> later for the data analysis. There is a reason for loading it before <code>simmer</code>, and it is to mask <code>dplyr::select</code> with <code>simmer::select</code> and not the other way round.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">detach</span>(<span class="st">"package:simmer"</span>)
-<span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(simmer)
+<p>First of all, we load the libraries and prepare the environment.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 
 TICKETS &lt;-<span class="st"> </span><span class="dv">50</span>     <span class="co"># Number of tickets per movie</span>
 SIM_TIME &lt;-<span class="st"> </span><span class="dv">120</span>   <span class="co"># Simulate until</span>
@@ -374,7 +368,8 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">wait</a></span>()</code></pre></div>
 <p>which actually constitutes a quite interesting subset of <code>simmer</code>’s capabilities. The next step is to add the required resources to the environment <code>env</code>: the three movies and the ticket counter.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add movies as resources with capacity TICKETS and no queue</span>
-<span class="kw">lapply</span>(movies, function(i) <span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(env, i, TICKETS, <span class="dv">0</span>)) %&gt;%<span class="st"> </span>invisible
+for (i in movies) env %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(i, TICKETS, <span class="dv">0</span>)
 
 <span class="co"># add ticket counter with capacity 1 and infinite queue</span>
 env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>, <span class="dv">1</span>, <span class="ot">Inf</span>)
@@ -398,24 +393,24 @@ env %&gt;%
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env)
 resources &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(env)
 attributes &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)</code></pre></div>
-<p>As we promised, the analysis is performed with the help of <code>dplyr</code>:</p>
+<p>The analysis is performed with the help of <code>dplyr</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get the three rows with the sold out instants</span>
 sold_time &lt;-<span class="st"> </span>resources %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(resource !=<span class="st"> "counter"</span> &amp;<span class="st"> </span>capacity ==<span class="st"> </span><span class="dv">0</span>)
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(resource !=<span class="st"> "counter"</span> &amp;<span class="st"> </span>capacity ==<span class="st"> </span><span class="dv">0</span>)
 
 <span class="co"># get the arrivals that left at the sold out instants</span>
 <span class="co"># count the number of arrivals per movie</span>
-n_reneges &lt;-<span class="st"> </span><span class="kw">left_join</span>(
+n_reneges &lt;-<span class="st"> </span>dplyr::<span class="kw">left_join</span>(
     arrivals %&gt;%<span class="st"> </span>
-<span class="st">      </span><span class="kw">filter</span>(finished ==<span class="st"> </span><span class="ot">FALSE</span> &amp;<span class="st"> </span>end_time %in%<span class="st"> </span>sold_time$time),
+<span class="st">      </span>dplyr::<span class="kw">filter</span>(finished ==<span class="st"> </span><span class="ot">FALSE</span> &amp;<span class="st"> </span>end_time %in%<span class="st"> </span>sold_time$time),
     attributes
   ) %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">resource =</span> movies[value]) %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(resource) %&gt;%
-<span class="st">  </span><span class="kw">count</span>()
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">resource =</span> movies[value]) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">group_by</span>(resource) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">count</span>()
 
 <span class="co"># merge the info</span>
-result &lt;-<span class="st"> </span><span class="kw">left_join</span>(sold_time, n_reneges)
+result &lt;-<span class="st"> </span>dplyr::<span class="kw">left_join</span>(sold_time, n_reneges)
 <span class="co"># and print</span>
 <span class="kw">apply</span>(result, <span class="dv">1</span>, function(i) {
   <span class="kw">cat</span>(<span class="st">"Movie '"</span>, i[<span class="st">"resource"</span>], <span class="st">"' sold out "</span>, i[<span class="st">"time"</span>], 
@@ -431,7 +426,7 @@ result &lt;-<span class="st"> </span><span class="kw">left_join</span>(sold_time
 </div>
 <div id="gas-station-refuelling" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#gas-station-refuelling" class="anchor"> </a></body></html>Gas Station Refuelling</h2>
+<a href="#gas-station-refuelling" class="anchor"></a>Gas Station Refuelling</h2>
 <p>Covers:</p>
 <ul>
 <li>Standard resources.</li>

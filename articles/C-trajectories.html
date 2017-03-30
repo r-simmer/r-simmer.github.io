@@ -111,7 +111,7 @@
       <h1>Advanced Trajectory Usage</h1>
                         <h4 class="author">Iñaki Ucar, Bart Smeets</h4>
             
-            <h4 class="date">2016-12-28</h4>
+            <h4 class="date">2017-03-31</h4>
           </div>
 
     
@@ -121,7 +121,7 @@
 <span class="kw">library</span>(simmer.plot)</code></pre></div>
 <div id="available-set-of-activities" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#available-set-of-activities" class="anchor"> </a></body></html>Available set of activities</h2>
+<a href="#available-set-of-activities" class="anchor"></a>Available set of activities</h2>
 <p>When a generator creates an arrival, it couples the arrival to a given trajectory. A trajectory is defined as an interlinkage of activities which together form the arrivals’ lifetime in the system. Once an arrival is coupled to the trajectory, it will (in general) start processing the activities in the trajectory in the specified order and, eventually, leave the system. Consider the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="dt">resource =</span> <span class="st">"doctor"</span>, <span class="dt">amount =</span> <span class="dv">1</span>) %&gt;%
@@ -131,8 +131,7 @@
 <p>This is a very straightforward example, however, most of the trajectory-related functions allow for more advanced usage. The different functions are introduced below.</p>
 <div id="log_" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#log_" class="anchor"> </a></body></html>
-<code><a href="../reference/log_.html">log_()</a></code>
+<a href="#log_" class="anchor"></a><code><a href="../reference/log_.html">log_()</a></code>
 </h3>
 <p>The <code>log_(., message</code>) method just prints a given message preceded by the simulation time and the name of the arrival, for debugging purposes:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
@@ -152,8 +151,7 @@ t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajector
 </div>
 <div id="set_attribute" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#set_attribute" class="anchor"> </a></body></html>
-<code><a href="../reference/set_attribute.html">set_attribute()</a></code>
+<a href="#set_attribute" class="anchor"></a><code><a href="../reference/set_attribute.html">set_attribute()</a></code>
 </h3>
 <p>The <code><a href="../reference/set_attribute.html">set_attribute(., key, value, global)</a></code> method sets the <code>value</code> of an arrival’s attribute <code>key</code>. Be aware that <code>value</code> can only be numeric.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
@@ -227,8 +225,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 </div>
 <div id="timeout" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#timeout" class="anchor"> </a></body></html>
-<code><a href="../reference/timeout.html">timeout()</a></code>
+<a href="#timeout" class="anchor"></a><code><a href="../reference/timeout.html">timeout()</a></code>
 </h3>
 <p>At its simplest, the <code><a href="../reference/timeout.html">timeout(., task)</a></code> method delays the arrival’s advance through the trajectory for a specified amount of time. Consider the following minimal example where we simply supply a static value to the timeout’s <code>task</code> parameter.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
@@ -264,8 +261,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 </div>
 <div id="seize-release" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#seize-release" class="anchor"> </a></body></html>
-<code><a href="../reference/seize.html">seize()</a></code>, <code><a href="../reference/seize.html">release()</a></code>
+<a href="#seize-release" class="anchor"></a><code><a href="../reference/seize.html">seize()</a></code>, <code><a href="../reference/seize.html">release()</a></code>
 </h3>
 <p>The <code><a href="../reference/seize.html">seize(., resource, amount)</a></code> method seizes a specified <code>amount</code> of the resource named <code>resource</code>. Conversely, the <code><a href="../reference/seize.html">release(., resource, amount)</a></code> method releases a specified <code>amount</code> of the resource named <code>resource</code>. Be aware that, in order to use these functions in relation to a specific resource, you have to create it in your definition of the simulation environment (check <code><a href="../reference/add_resource.html">?add_resource</a></code>).</p>
 <p>Consider the following example:</p>
@@ -450,8 +446,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 </div>
 <div id="set_capacity-set_queue_size" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#set_capacity-set_queue_size" class="anchor"> </a></body></html>
-<code><a href="../reference/set_capacity.html">set_capacity()</a></code>, <code><a href="../reference/set_capacity.html">set_queue_size()</a></code>
+<a href="#set_capacity-set_queue_size" class="anchor"></a><code><a href="../reference/set_capacity.html">set_capacity()</a></code>, <code><a href="../reference/set_capacity.html">set_queue_size()</a></code>
 </h3>
 <p>The <code><a href="../reference/set_capacity.html">set_capacity(., resource, value)</a></code> method modifies the capacity of the specified resource by name, and the <code><a href="../reference/set_capacity.html">set_queue_size(., resource, value)</a></code> method modifies its queue size. Be aware that, in order to use these functions in relation to a specific resource, you have to create it in your definition of the simulation environment (check <code><a href="../reference/add_resource.html">?add_resource</a></code>). You can supply the <code>value</code> parameter either as a numeric value or as a function, in the form of either <code>function(){}</code> or <code>function(attrs){}</code>, which must return a numeric value.</p>
 <p>These activities are interesting to introduce dynamical changes in the resources. For instance, consider the following example in which two trajectories fight for the capacity of their resource:</p>
@@ -495,8 +490,7 @@ env &lt;-<span class="st"> </span>env %&gt;%
 </div>
 <div id="select" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#select" class="anchor"> </a></body></html>
-<code><a href="../reference/select.html">select()</a></code>
+<a href="#select" class="anchor"></a><code><a href="../reference/select.html">select()</a></code>
 </h3>
 <p><code><a href="../reference/seize.html">seize()</a></code>, <code><a href="../reference/seize.html">release()</a></code>, <code><a href="../reference/set_capacity.html">set_capacity()</a></code> and <code><a href="../reference/set_capacity.html">set_queue_size()</a></code> work well when you know the resources implied beforehand. But sometimes the resource to choose may depend on a certain policy. For these situations, the <code><a href="../reference/select.html">select(., resources, policy, id)</a></code> method offers the possibility of selecting a resource at any point, and this choice will be observed by <code><a href="../reference/seize.html">seize_selected()</a></code>, <code><a href="../reference/seize.html">release_selected()</a></code>, <code><a href="../reference/set_capacity.html">set_capacity_selected()</a></code> and <code><a href="../reference/set_capacity.html">set_queue_size_selected()</a></code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
@@ -566,8 +560,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 </div>
 <div id="activate-deactivate" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#activate-deactivate" class="anchor"> </a></body></html>
-<code><a href="../reference/activate.html">activate()</a></code>, <code><a href="../reference/activate.html">deactivate()</a></code>
+<a href="#activate-deactivate" class="anchor"></a><code><a href="../reference/activate.html">activate()</a></code>, <code><a href="../reference/activate.html">deactivate()</a></code>
 </h3>
 <p>The <code><a href="../reference/activate.html">activate(., generator)</a></code> and <code><a href="../reference/activate.html">deactivate(., generator)</a></code> methods are able to start or stop, respectively, a generator by name. This name can be supplied as either a string or a function returning a string. In the following simple example, the use of these methods spreads the interarrival times which otherwise would be of 1 unit of time, as defined in the generator:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
@@ -587,8 +580,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 </div>
 <div id="set_trajectory-set_distribution" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#set_trajectory-set_distribution" class="anchor"> </a></body></html>
-<code><a href="../reference/set_trajectory.html">set_trajectory()</a></code>, <code><a href="../reference/set_trajectory.html">set_distribution()</a></code>
+<a href="#set_trajectory-set_distribution" class="anchor"></a><code><a href="../reference/set_trajectory.html">set_trajectory()</a></code>, <code><a href="../reference/set_trajectory.html">set_distribution()</a></code>
 </h3>
 <p>The <code><a href="../reference/set_trajectory.html">set_trajectory(., generator, trajectory)</a></code> and <code><a href="../reference/set_trajectory.html">set_distribution(., generator, distribution)</a></code> methods are able to install a new trajectory or distribution, respectively, in a generator by name. This name can be supplied as either a string or a function returning a string.</p>
 <p>In the following distribution, <code>t2</code> changes the distribution and then switches to <code>t1</code>, so that only the first arrival takes <code>t2</code>:</p>
@@ -615,8 +607,7 @@ t2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajecto
 </div>
 <div id="set_prioritization" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#set_prioritization" class="anchor"> </a></body></html>
-<code><a href="../reference/set_prioritization.html">set_prioritization()</a></code>
+<a href="#set_prioritization" class="anchor"></a><code><a href="../reference/set_prioritization.html">set_prioritization()</a></code>
 </h3>
 <p>The <code><a href="../reference/add_generator.html">add_generator()</a></code> method assigns a set of prioritization values to each generated arrival: by default, <code>priority=0</code>, <code>preemptible=priority</code>, <code>restart=FALSE</code> (see <code><a href="../reference/add_generator.html">?add_generator</a></code> for more details). The <code><a href="../reference/set_prioritization.html">set_prioritization(., values)</a></code> method can change those values with more granularity at any point in the trajectory:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
@@ -629,8 +620,7 @@ t2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajecto
 </div>
 <div id="branch" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#branch" class="anchor"> </a></body></html>
-<code><a href="../reference/branch.html">branch()</a></code>
+<a href="#branch" class="anchor"></a><code><a href="../reference/branch.html">branch()</a></code>
 </h3>
 <p>The <code><a href="../reference/branch.html">branch(., option, continue, ...)</a></code> method offers the possibility of adding alternative paths in the trajectory. The following example shows how a trajectory can be built with a 50-50 chance for an arrival to pass through each path of a two-path branch.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"trajectory with a branch"</span>) %&gt;%
@@ -680,8 +670,7 @@ arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ge
 </div>
 <div id="rollback" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#rollback" class="anchor"> </a></body></html>
-<code><a href="../reference/rollback.html">rollback()</a></code>
+<a href="#rollback" class="anchor"></a><code><a href="../reference/rollback.html">rollback()</a></code>
 </h3>
 <p>The <code><a href="../reference/rollback.html">rollback(., amount, times, check)</a></code> method allows an arrival to rollback the trajectory an <code>amount</code> number of steps.</p>
 <p>Consider the following where a string is printed in the timeout function. After the first run, the trajectory is rolled back 3 times (so that it prints “Hello!” <em>four</em> times).</p>
@@ -720,8 +709,7 @@ arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ge
 </div>
 <div id="leave" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#leave" class="anchor"> </a></body></html>
-<code><a href="../reference/leave.html">leave()</a></code>
+<a href="#leave" class="anchor"></a><code><a href="../reference/leave.html">leave()</a></code>
 </h3>
 <p>The <code><a href="../reference/leave.html">leave(., prob)</a></code> method allows an arrival to leave the trajectory with some probability:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
@@ -786,8 +774,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 </div>
 <div id="clone-synchronize" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#clone-synchronize" class="anchor"> </a></body></html>
-<code><a href="../reference/clone.html">clone()</a></code>, <code><a href="../reference/clone.html">synchronize()</a></code>
+<a href="#clone-synchronize" class="anchor"></a><code><a href="../reference/clone.html">clone()</a></code>, <code><a href="../reference/clone.html">synchronize()</a></code>
 </h3>
 <p>The <code><a href="../reference/clone.html">clone(., n, ...)</a></code> method offers the possibility of replicating an arrival <code>n-1</code> times to be processed through up to <code>n</code> sub-trajectories in parallel. Then, the <code><a href="../reference/clone.html">synchronize(., wait, mon_all)</a></code> method synchronizes and removes replicas. By default, <code><a href="../reference/clone.html">synchronize()</a></code> waits for all of the replicas to arrive and allows the last one to continue:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
@@ -903,8 +890,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 </div>
 <div id="batch-separate" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#batch-separate" class="anchor"> </a></body></html>
-<code><a href="../reference/batch.html">batch()</a></code>, <code><a href="../reference/batch.html">separate()</a></code>
+<a href="#batch-separate" class="anchor"></a><code><a href="../reference/batch.html">batch()</a></code>, <code><a href="../reference/batch.html">separate()</a></code>
 </h3>
 <p>The <code><a href="../reference/batch.html">batch(., n, timeout, permanent, name, rule)</a></code> method offers the possibility of collecting a number of arrivals before they can continue processing as a block. Then, the <code><a href="../reference/batch.html">separate(.)</a></code> method splits a previously established non-permanent batch. This allows us to implement a rollercoaster process, for instance.</p>
 <p>Let us consider a rollercoaster, with up to 10 places and a queue of 20 people, that lasts 5 minutes. We can model this problem as follows:</p>
@@ -1070,8 +1056,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 </div>
 <div id="send-trap-untrap-wait" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#send-trap-untrap-wait" class="anchor"> </a></body></html>
-<code><a href="../reference/send.html">send()</a></code>, <code><a href="../reference/send.html">trap()</a></code>, <code><a href="../reference/send.html">untrap()</a></code>, <code><a href="../reference/send.html">wait()</a></code>
+<a href="#send-trap-untrap-wait" class="anchor"></a><code><a href="../reference/send.html">send()</a></code>, <code><a href="../reference/send.html">trap()</a></code>, <code><a href="../reference/send.html">untrap()</a></code>, <code><a href="../reference/send.html">wait()</a></code>
 </h3>
 <p>These activities enable asynchronous programming. The <code><a href="../reference/send.html">send(., signals, delay)</a></code> method broadcasts a signal or a list of signals to all the arrivals subscribed to them. Signals can be triggered immediately:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
@@ -1252,8 +1237,7 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 </div>
 <div id="renege_in-renege_if-renege_abort" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#renege_in-renege_if-renege_abort" class="anchor"> </a></body></html>
-<code><a href="../reference/renege_in.html">renege_in()</a></code>, <code><a href="../reference/renege_in.html">renege_if()</a></code>, <code><a href="../reference/renege_in.html">renege_abort()</a></code>
+<a href="#renege_in-renege_if-renege_abort" class="anchor"></a><code><a href="../reference/renege_in.html">renege_in()</a></code>, <code><a href="../reference/renege_in.html">renege_if()</a></code>, <code><a href="../reference/renege_in.html">renege_abort()</a></code>
 </h3>
 <p>The <code><a href="../reference/renege_in.html">renege_in(., t, out)</a></code> method offers the possibility of setting a timeout after which the arrival will abandon the trajectory. After reneging, the arrival can follow an optional sub-trajectory <code>out</code>. The <code><a href="../reference/renege_in.html">renege_abort(.)</a></code> method cancels the latter. Together, they allows us, for instance, to model arrivals with limited patience. In the example below, <code>customer1</code> arrives at the bank, where there is only one busy clerk. He/she waits in the queue for 5 minutes and then leaves.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"bank"</span>) %&gt;%
@@ -1314,11 +1298,10 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 </div>
 <div id="manipulating-trajectories-joining-and-subsetting" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#manipulating-trajectories-joining-and-subsetting" class="anchor"> </a></body></html>Manipulating trajectories: joining and subsetting</h2>
+<a href="#manipulating-trajectories-joining-and-subsetting" class="anchor"></a>Manipulating trajectories: joining and subsetting</h2>
 <div id="join" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#join" class="anchor"> </a></body></html>
-<code><a href="../reference/join.html">join()</a></code>
+<a href="#join" class="anchor"></a><code><a href="../reference/join.html">join()</a></code>
 </h3>
 <p>The <code><a href="../reference/join.html">join(...)</a></code> method is very useful to concatenate together any number of trajectories. It may be used as a standalone function as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"dummy"</span>, <span class="dv">1</span>)
@@ -1328,9 +1311,9 @@ t3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajecto
 t0 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/join.html">join</a></span>(t1, t2, t3)
 t0
 <span class="co">#&gt; trajectory: anonymous, 3 activities</span>
-<span class="co">#&gt; { Activity: Seize        | resource: dummy | amount: 1 }</span>
+<span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span>
-<span class="co">#&gt; { Activity: Release      | resource: dummy | amount: 1 }</span></code></pre></div>
+<span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
 <p>Or it may operate inline, like another activity:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t0 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/join.html">join</a></span>(t1) %&gt;%
@@ -1338,62 +1321,61 @@ t0
 <span class="st">  </span><span class="kw"><a href="../reference/join.html">join</a></span>(t3)
 t0
 <span class="co">#&gt; trajectory: anonymous, 3 activities</span>
-<span class="co">#&gt; { Activity: Seize        | resource: dummy | amount: 1 }</span>
+<span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span>
-<span class="co">#&gt; { Activity: Release      | resource: dummy | amount: 1 }</span></code></pre></div>
+<span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
 </div>
 <div id="section" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#section" class="anchor"> </a></body></html>
-<code>[</code>, <code>[[</code>
+<a href="#section" class="anchor"></a><code>[</code>, <code>[[</code>
 </h3>
 <p>You can think about a trajectory object as a list of activities that has a length</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/length.html">length</a></span>(t0)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(t0)
 <span class="co">#&gt; [1] 3</span></code></pre></div>
 <p>and can be subset using the standard operator <code>[</code>. For instance, you can select the activities you want with a logical vector:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t0[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
-<span class="co">#&gt; { Activity: Seize        | resource: dummy | amount: 1 }</span>
-<span class="co">#&gt; { Activity: Release      | resource: dummy | amount: 1 }</span></code></pre></div>
+<span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
+<span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
 <p>Or a set of indices that respect the order given:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t0[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
-<span class="co">#&gt; { Activity: Seize        | resource: dummy | amount: 1 }</span>
-<span class="co">#&gt; { Activity: Release      | resource: dummy | amount: 1 }</span>
+<span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
+<span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span>
 t0[<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>)]
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
-<span class="co">#&gt; { Activity: Release      | resource: dummy | amount: 1 }</span>
-<span class="co">#&gt; { Activity: Seize        | resource: dummy | amount: 1 }</span></code></pre></div>
+<span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span>
+<span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span></code></pre></div>
 <p>Or a set of indices to remove from the selection:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t0[-<span class="dv">2</span>]
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
-<span class="co">#&gt; { Activity: Seize        | resource: dummy | amount: 1 }</span>
-<span class="co">#&gt; { Activity: Release      | resource: dummy | amount: 1 }</span></code></pre></div>
+<span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
+<span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
 <p>Or by name, but note that this does <strong>not</strong> respect the order given though, because it performs a match:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t0[<span class="kw">c</span>(<span class="st">"seize"</span>, <span class="st">"release"</span>)]
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
-<span class="co">#&gt; { Activity: Seize        | resource: dummy | amount: 1 }</span>
-<span class="co">#&gt; { Activity: Release      | resource: dummy | amount: 1 }</span>
+<span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
+<span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span>
 t0[<span class="kw">c</span>(<span class="st">"release"</span>, <span class="st">"seize"</span>)]
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
-<span class="co">#&gt; { Activity: Seize        | resource: dummy | amount: 1 }</span>
-<span class="co">#&gt; { Activity: Release      | resource: dummy | amount: 1 }</span></code></pre></div>
+<span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
+<span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
 <p>If you provide no indices, the whole trajectory is returned:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t0[]
 <span class="co">#&gt; trajectory: anonymous, 3 activities</span>
-<span class="co">#&gt; { Activity: Seize        | resource: dummy | amount: 1 }</span>
+<span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span>
-<span class="co">#&gt; { Activity: Release      | resource: dummy | amount: 1 }</span></code></pre></div>
+<span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
 <p>In fact, you are <strong>cloning</strong> the trajectory with the latter command. It is equivalent to <code>t0[1:length(t0)]</code> or <code><a href="../reference/join.html">join(t0)</a></code>.</p>
 <p>The generics <code>head()</code> and <code>tail()</code> use the <code>[</code> operator under the hood, thus you can use them as well:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(t0, <span class="dv">2</span>)
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
-<span class="co">#&gt; { Activity: Seize        | resource: dummy | amount: 1 }</span>
+<span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span>
 <span class="kw">tail</span>(t0, -<span class="dv">1</span>)
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
 <span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span>
-<span class="co">#&gt; { Activity: Release      | resource: dummy | amount: 1 }</span></code></pre></div>
+<span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
 <p>The <code>[[</code> operator can also be used to extract <strong>only one</strong> element:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t0[[<span class="dv">2</span>]]
 <span class="co">#&gt; trajectory: anonymous, 1 activities</span>
@@ -1410,7 +1392,7 @@ t0[<span class="kw">c</span>(<span class="st">"release"</span>, <span class="st"
 </div>
 <div id="interacting-with-the-environment-from-within-a-trajectory" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#interacting-with-the-environment-from-within-a-trajectory" class="anchor"> </a></body></html>Interacting with the environment from within a trajectory</h2>
+<a href="#interacting-with-the-environment-from-within-a-trajectory" class="anchor"></a>Interacting with the environment from within a trajectory</h2>
 <p>It is possible to interact with the simulation environment in order to extract parameters of interest such as the current simulation time (<code><a href="../reference/now.html">now()</a></code>), status of resources (<code><a href="../reference/get_capacity.html">get_capacity()</a></code>, <code><a href="../reference/get_capacity.html">get_queue_size()</a></code>, <code><a href="../reference/get_capacity.html">get_server_count()</a></code>, <code>get_queue_count</code>()), status of generators (<code><a href="../reference/get_n_generated.html">get_n_generated()</a></code>) or directly to gather the history of monitored values (<code>get_mon_*()</code>). You may also want (or in other words, your model may need) to check and use all this information to take decisions inside a given trajectory.</p>
 <p>For instance, let’s suppose we just want to print the simulation time at a given point in a trajectory. The only requirement is that you must define the simulation environment <strong>before</strong> running the simulation. This won’t work:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">remove</span>(env)

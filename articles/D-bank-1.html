@@ -111,7 +111,7 @@
       <h1>The Bank Tutorial: Part I</h1>
                         <h4 class="author">Duncan Garmonsway</h4>
             
-            <h4 class="date">2016-12-28</h4>
+            <h4 class="date">2017-03-31</h4>
           </div>
 
     
@@ -119,17 +119,17 @@
 <div class="contents">
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#introduction" class="anchor"> </a></body></html>Introduction</h2>
+<a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>This tutorial is adapted from a tutorial for the Python 2 package ‘SimPy’, <a href="https://pythonhosted.org/SimPy/Tutorials/TheBank.html">here</a>. Users familiar with SimPy may find this tutorial helpful for transitioning to simmer. Some very basic material is not covered. Beginners should first read the vignettes <a href="A-introduction.html"><em>Introduction to simmer</em></a>, <a href="B-terminology.html"><em>Terminology</em></a> and <a href="C-trajectories.html"><em>Advanced Trajectory Usage</em></a>.</p>
 </div>
 <div id="a-single-customer" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#a-single-customer" class="anchor"> </a></body></html>A single customer</h2>
+<a href="#a-single-customer" class="anchor"></a>A single customer</h2>
 <p>In this tutorial we model a simple bank with customers arriving at random. We develop the model step-by-step, starting out simply, and producing a running program at each stage.</p>
 <p>A simulation should always be developed to answer a specific question; in these models we investigate how changing the number of bank servers or tellers might affect the waiting time for customers.</p>
 <div id="a-customer-arriving-at-a-fixed-time" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#a-customer-arriving-at-a-fixed-time" class="anchor"> </a></body></html>A customer arriving at a fixed time</h3>
+<a href="#a-customer-arriving-at-a-fixed-time" class="anchor"></a>A customer arriving at a fixed time</h3>
 <p>We first model a single customer who arrives at the bank for a visit, looks around at the decor for a time and then leaves. There is no queueing. First we will assume his arrival time and the time he spends in the bank are fixed.</p>
 <p>The arrival time is fixed at 5, and the time spent in the bank is fixed at 10. We interpret ‘5’ and ‘10’ as ‘5 minutes’ and ‘10 minutes’. The simulation runs for a maximum of 100 minutes, or until all the customers that are generated complete their trajectories.</p>
 <p>Note where these constants appear in the code below.</p>
@@ -153,7 +153,7 @@ bank %&gt;%<span class="st"> </span>get_mon_arrivals
 </div>
 <div id="a-customer-arriving-at-random" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#a-customer-arriving-at-random" class="anchor"> </a></body></html>A customer arriving at random</h3>
+<a href="#a-customer-arriving-at-random" class="anchor"></a>A customer arriving at random</h3>
 <p>Now we extend the model to allow our customer to arrive at a random simulated time though we will keep the time in the bank at 10, as before.</p>
 <p>The change occurs in the arguments to the <code>add_generator</code> function. The function <code>rexp</code> draws from an exponential distribution with the given parameter, which in this case is <code>1/5</code>. See <code>?rexp</code> for more details. We also seed the random number generator with 10211 so that the same sequence of random numbers will be drawn every time the script is run.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
@@ -178,7 +178,7 @@ bank %&gt;%<span class="st"> </span>get_mon_arrivals
 </div>
 <div id="more-customers" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#more-customers" class="anchor"> </a></body></html>More customers</h3>
+<a href="#more-customers" class="anchor"></a>More customers</h3>
 <p>Our simulation does little so far. To consider a simulation with several customers we return to the simple deterministic model and add more customers.</p>
 <p>The program is almost as easy as the first example (A customer arriving at a fixed time). The main change is in the <code>add_generator</code> function, where we generate three customers by defining three start times. We also increase the maximum simulation time to 400 in the <code>run</code> function. Observe that we need only one definition of the customer trajectory, and generate several customers who follow that trajectory. These customers act quite independently in this model.</p>
 <p>Each customer also stays in the bank for a different, but non-random, amount of time. This is an unusual case, so it requires an unusual bit of R code. The <code>timeout</code> function accepts either a constant waiting time, or a function that is called once per customer and returns a single value (e.g. <code>rexp(1, 1/10)</code>). So we need to create a function that returns a different, but specific, value each time it is called. We define a function called <code>loop</code> to do this. The <code>loop</code> function returns another function. In the example, we store that function under the name <code>x</code>. When called, the function <code>x</code> returns one of (in the example) 10, 7, and 20, in sequence, wrapping around when it is called a fourth time.</p>
@@ -187,7 +187,7 @@ loop &lt;-<span class="st"> </span>function(...) {
     time_diffs &lt;-<span class="st"> </span><span class="kw">c</span>(...)
     i &lt;-<span class="st"> </span><span class="dv">0</span>
     function() {        
-      if (i &lt;<span class="st"> </span><span class="kw"><a href="../reference/length.html">length</a></span>(time_diffs)) {     
+      if (i &lt;<span class="st"> </span><span class="kw">length</span>(time_diffs)) {     
         i &lt;&lt;-<span class="st"> </span>i<span class="dv">+1</span>       
       } else {      
         i &lt;&lt;-<span class="st"> </span><span class="dv">1</span>     
@@ -212,7 +212,7 @@ loop &lt;-<span class="st"> </span>function(...) {
     time_diffs &lt;-<span class="st"> </span><span class="kw">c</span>(...)
     i &lt;-<span class="st"> </span><span class="dv">0</span>
     function() {        
-      if (i &lt;<span class="st"> </span><span class="kw"><a href="../reference/length.html">length</a></span>(time_diffs)) {     
+      if (i &lt;<span class="st"> </span><span class="kw">length</span>(time_diffs)) {     
         i &lt;&lt;-<span class="st"> </span>i<span class="dv">+1</span>       
       } else {      
         i &lt;&lt;-<span class="st"> </span><span class="dv">1</span>     
@@ -241,7 +241,7 @@ bank %&gt;%<span class="st"> </span>get_mon_arrivals
 </div>
 <div id="many-customers" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#many-customers" class="anchor"> </a></body></html>Many customers</h3>
+<a href="#many-customers" class="anchor"></a>Many customers</h3>
 <p>Another change will allow us to have more customers. And use a separate Source class to create and activate them. To make things clearer we do not use random numbers in this model.</p>
 <p>The change is in the <code>add_generator</code> function, where we create a sequence of start times for five customers, starting at time 0, with an interval of 10 between each customer. The -1 is a flag to stop the generator. An idiosyncracy of the syntax is that this argument must be a function, hence <code>function() {c(first time, interarrival times, -1)}</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
@@ -268,7 +268,7 @@ bank %&gt;%<span class="st"> </span>get_mon_arrivals
 </div>
 <div id="many-random-customers" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#many-random-customers" class="anchor"> </a></body></html>Many random customers</h3>
+<a href="#many-random-customers" class="anchor"></a>Many random customers</h3>
 <p>We now extend this model to allow arrivals at random. In simulation this is usually interpreted as meaning that the times between customer arrivals are distributed as exponential random variates. There is little change in our program. The only difference between this and the previous example of a single customer generated at a random time is that this example generates several customers at different randome times.</p>
 <p>The change occurs in the arguments to the <code>add_generator</code> function. The function <code>rexp</code> draws from an exponential distribution with the given parameter, which in this case is <code>1/10</code>. See <code>?rexp</code> for more details. We also seed the random number generator with 1289 so that the same sequence of random numbers will be drawn every time the script is run. The 0 is the time of the first customer, then the random interarrival times are drawn, and then -1 stops the generator.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
@@ -297,16 +297,15 @@ bank %&gt;%<span class="st"> </span>get_mon_arrivals
 </div>
 <div id="a-service-counter" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#a-service-counter" class="anchor"> </a></body></html>A Service counter</h2>
+<a href="#a-service-counter" class="anchor"></a>A Service counter</h2>
 <p>So far, the model has been more like an art gallery, the customers entering, looking around, and leaving. Now they are going to require service from the bank clerk. We extend the model to include a service counter that will be modelled as a ‘resource’. The actions of a Resource are simple: a customer requests a unit of the resource (a clerk). If one is free, then the customer gets service (and the unit is no longer available to other customers). If there is no free clerk, then the customer joins the queue (managed by the resource object) until it is the customer’s turn to be served. As each customer completes service and releases the unit, the clerk can start serving the next in line.</p>
 <div id="one-service-counter" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#one-service-counter" class="anchor"> </a></body></html>One Service counter</h3>
+<a href="#one-service-counter" class="anchor"></a>One Service counter</h3>
 <p>The service counter is created with the <code>add_resource</code> function. Default arguments specify that it can serve one customer at a time, and has infinite queueing capacity.</p>
 <p>The <code>seize</code> function causes the customer to join the queue at the counter. If the queue is empty and the counter is available (not serving any customers), then the customer claims the counter for itself and moves onto the <code>timeout</code> step. Otherwise the customer must wait until the counter becomes available. Behaviour of the customer while in the queue is controlled by the arguments of the <code>seize</code> function, rather than by any other functions. Once the <code>timeout</code> step is complete, the <code>release</code> function causes the customer to make the counter available to other customers in the queue.</p>
 <p>Since the activity trace does not produce the waiting time by default, this is calculated and appended using the <code>mutate</code> function in the dplyr package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(simmer)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 
 <span class="kw">set.seed</span>(<span class="dv">99999</span>)
 
@@ -327,7 +326,7 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 bank %&gt;%<span class="st"> </span>
 <span class="st">  </span>get_mon_arrivals %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0    0.00000       12            12     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1   10.34073       24            12     TRUE           1</span>
@@ -344,11 +343,10 @@ bank %&gt;%<span class="st"> </span>
 </div>
 <div id="a-server-with-a-random-service-time" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#a-server-with-a-random-service-time" class="anchor"> </a></body></html>A server with a random service time</h3>
+<a href="#a-server-with-a-random-service-time" class="anchor"></a>A server with a random service time</h3>
 <p>This is a simple change to the model in that we retain the single service counter but make the customer service time a random variable. As is traditional in the study of simple queues we first assume an exponential service time.</p>
 <p>Note that the argument to <code>timeout</code> must be a function, otherwise it would apply a constant timeout to every customer.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(simmer)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 
 <span class="kw">set.seed</span>(<span class="dv">99999</span>)
 
@@ -370,7 +368,7 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 bank %&gt;%<span class="st"> </span>
 <span class="st">  </span>get_mon_arrivals %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0    0.00000  6.24161      6.241610     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1   10.34073 19.05906      8.718329     TRUE           1</span>
@@ -388,15 +386,14 @@ bank %&gt;%<span class="st"> </span>
 </div>
 <div id="several-service-counters" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#several-service-counters" class="anchor"> </a></body></html>Several Service Counters</h2>
+<a href="#several-service-counters" class="anchor"></a>Several Service Counters</h2>
 <p>When we introduce several counters we must decide on a queue discipline. Are customers going to make one queue or are they going to form separate queues in front of each counter? Then there are complications - will they be allowed to switch lines (jockey)? We first consider a single queue with several counters and later consider separate isolated queues. We will not look at jockeying.</p>
 <div id="several-counters-but-a-single-queue" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#several-counters-but-a-single-queue" class="anchor"> </a></body></html>Several Counters but a Single Queue</h3>
+<a href="#several-counters-but-a-single-queue" class="anchor"></a>Several Counters but a Single Queue</h3>
 <p>Here we model a bank whose customers arrive randomly and are to be served at a group of counters, taking a random time for service, where we assume that waiting customers form a single first-in first-out queue.</p>
 <p>The only difference between this model and the single-server model is in the <code>add_resource</code> function, where we have increased the capacity to two so that it can serve two customers at once.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(simmer)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 
 <span class="kw">set.seed</span>(<span class="dv">99999</span>)
 
@@ -418,7 +415,7 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 bank %&gt;%<span class="st"> </span>
 <span class="st">  </span>get_mon_arrivals %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0    0.00000  6.24161      6.241610     TRUE           1</span>
 <span class="co">#&gt; 2 Customer2   13.03443 14.05953      1.025096     TRUE           1</span>
@@ -435,18 +432,17 @@ bank %&gt;%<span class="st"> </span>
 </div>
 <div id="several-counters-with-individual-queues" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#several-counters-with-individual-queues" class="anchor"> </a></body></html>Several Counters with individual queues</h3>
+<a href="#several-counters-with-individual-queues" class="anchor"></a>Several Counters with individual queues</h3>
 <p>Each counter is now assumed to have its own queue. The programming is more complicated because the customer has to decide which queue to join. The obvious technique is to make each counter a separate resource.</p>
-<p>In practice, a customer might join the shortest queue. We implement this behaviour by first selecting the shortest queue, using the <code>select</code> function. (This is prefixed <code>simmer::select</code> to avoid clashes with the dplyr package). Then we use <code>seize_selected</code> to enter the chosen queue, and later <code>release_selected</code>.</p>
+<p>In practice, a customer might join the shortest queue. We implement this behaviour by first selecting the shortest queue, using the <code>select</code> function. Then we use <code>seize_selected</code> to enter the chosen queue, and later <code>release_selected</code>.</p>
 <p>The rest of the program is the same as before.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(simmer)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 
 <span class="kw">set.seed</span>(<span class="dv">1014</span>)
 
 customer &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) %&gt;%
-<span class="st">  </span>simmer::<span class="kw"><a href="../reference/select.html">select</a></span>(<span class="kw">c</span>(<span class="st">"counter1"</span>, <span class="st">"counter2"</span>), <span class="dt">policy =</span> <span class="st">"shortest-queue"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/select.html">select</a></span>(<span class="kw">c</span>(<span class="st">"counter1"</span>, <span class="st">"counter2"</span>), <span class="dt">policy =</span> <span class="st">"shortest-queue"</span>) %&gt;%
 <span class="st">  </span>seize_selected %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/<span class="dv">12</span>)}) %&gt;%
 <span class="st">  </span>release_selected
@@ -464,8 +460,8 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 bank %&gt;%<span class="st"> </span>
 <span class="st">  </span>get_mon_arrivals %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">service_start_time =</span> end_time -<span class="st"> </span>activity_time) %&gt;%
-<span class="st">  </span><span class="kw">arrange</span>(start_time)
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">service_start_time =</span> end_time -<span class="st"> </span>activity_time) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">arrange</span>(start_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0    0.00000 62.10372    62.1037152     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1   23.71444 33.94103    10.2265939     TRUE           1</span>
@@ -480,7 +476,7 @@ bank %&gt;%<span class="st"> </span>
 <span class="co">#&gt; 5           48.85593</span>
 bank %&gt;%<span class="st"> </span>
 <span class="st">  </span>get_mon_resources %&gt;%
-<span class="st">  </span><span class="kw">arrange</span>(time)
+<span class="st">  </span>dplyr::<span class="kw">arrange</span>(time)
 <span class="co">#&gt;    resource     time server queue capacity queue_size system limit</span>
 <span class="co">#&gt; 1  counter1  0.00000      1     0        1        Inf      1   Inf</span>
 <span class="co">#&gt; 2  counter2 23.71444      1     0        1        Inf      1   Inf</span>
@@ -507,11 +503,10 @@ bank %&gt;%<span class="st"> </span>
 </div>
 <div id="the-bank-with-a-monitor-aka-summary-statistics" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#the-bank-with-a-monitor-aka-summary-statistics" class="anchor"> </a></body></html>The bank with a monitor (aka summary statistics)</h3>
+<a href="#the-bank-with-a-monitor-aka-summary-statistics" class="anchor"></a>The bank with a monitor (aka summary statistics)</h3>
 <p>We now demonstrate how to calculate average waiting times for our customers. In the original SimPy version of this tutorial, this involved using ‘Monitors’. In simmer, data is returned by the <code>get_mon_*</code> family of functions, as has already been demonstrated. Here, we simply summarise the data frame returned by the <code>get_mon_arrivals</code> function, using functions from the <code>dplyr</code> package.</p>
 <p>We also increase the number of customers to 50 (find the number ‘49’ in the code.code).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(simmer)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 
 <span class="kw">set.seed</span>(<span class="dv">100005</span>)
 
@@ -533,18 +528,17 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
 result &lt;-<span class="st"> </span>
 <span class="st">  </span>bank %&gt;%<span class="st"> </span>
 <span class="st">  </span>get_mon_arrivals %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
 <span class="kw">paste</span>(<span class="st">"Average wait for "</span>, <span class="kw">sum</span>(result$finished), <span class="st">" completions was "</span>,
       <span class="kw">mean</span>(result$waiting_time), <span class="st">"minutes."</span>)
 <span class="co">#&gt; [1] "Average wait for  29  completions was  0.584941574937737 minutes."</span></code></pre></div>
 </div>
 <div id="multiple-runs" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#multiple-runs" class="anchor"> </a></body></html>Multiple runs</h3>
+<a href="#multiple-runs" class="anchor"></a>Multiple runs</h3>
 <p>To get a number of independent measurements we must replicate the runs using different random number seeds. Each replication must be independent of previous ones, so the environment (bank) must be redefined for each run, so that the random interarrival times in the <code>add_generator</code> function are generated from scratch.</p>
 <p>We take the chunks of code that build the environment (bank) and run the simulation, and wrap them in the <code>mclapply</code> function from the ‘parallel’ package. This function runs each simulation in parallel, using the available cores in the computer’s processor. Because we use seeds for reproducability, we pass these to the function that runs the simulation (<code>function(the_seed)</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(simmer)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 <span class="kw">library</span>(parallel)
 
 customer &lt;-<span class="st"> </span>
@@ -565,21 +559,14 @@ customer &lt;-<span class="st"> </span>
   result &lt;-<span class="st"> </span>
 <span class="st">    </span>bank %&gt;%<span class="st"> </span>
 <span class="st">    </span>get_mon_arrivals %&gt;%
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+<span class="st">    </span>dplyr::<span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
   <span class="kw">paste</span>(<span class="st">"Average wait for "</span>, <span class="kw">sum</span>(result$finished), <span class="st">" completions was "</span>,
         <span class="kw">mean</span>(result$waiting_time), <span class="st">"minutes."</span>)
-})
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [1] "Average wait for  49  completions was  3.4958501806687 minutes."</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; [1] "Average wait for  29  completions was  0.584941574937737 minutes."</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[3]]</span>
-<span class="co">#&gt; [1] "Average wait for  32  completions was  1.00343842138177 minutes."</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[4]]</span>
-<span class="co">#&gt; [1] "Average wait for  42  completions was  7.41231393636088 minutes."</span></code></pre></div>
+}) %&gt;%<span class="st"> </span><span class="kw">unlist</span>()
+<span class="co">#&gt; [1] "Average wait for  49  completions was  3.4958501806687 minutes."  </span>
+<span class="co">#&gt; [2] "Average wait for  29  completions was  0.584941574937737 minutes."</span>
+<span class="co">#&gt; [3] "Average wait for  32  completions was  1.00343842138177 minutes." </span>
+<span class="co">#&gt; [4] "Average wait for  42  completions was  7.41231393636088 minutes."</span></code></pre></div>
 <p>The results show some variation. Remember, though, that the system is still only operating for 50 customers, so the system may not be in steady-state.</p>
 </div>
 </div>

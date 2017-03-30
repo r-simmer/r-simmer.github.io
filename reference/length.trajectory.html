@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • simmer</title>
+<title>Number of activities in a trajectory — length.trajectory • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -31,10 +31,12 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
-    <div class="container template-vignette-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -125,26 +127,52 @@
       
       </header>
 
-      <div class="page-header">
-  <h1>Vignette reference <small>version&nbsp;3.6.0.9000</small></h1>
-</div>
-
-<div class="row">
-  <div class="col-md-9">
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <ul>
-        <li><a href="A-introduction.html">Introduction to simmer</a></li>
-        <li><a href="B-terminology.html">Terminology</a></li>
-        <li><a href="C-trajectories.html">Advanced Trajectory Usage</a></li>
-        <li><a href="D-bank-1.html">The Bank Tutorial: Part I</a></li>
-        <li><a href="E-simpy.html">Other SimPy Examples</a></li>
-        <li><a href="F-queueing-systems.html">Queueing Systems</a></li>
-        <li><a href="G-ctmc.html">Continuous-Time Markov Chains</a></li>
-      </ul>
+      <div class="row">
+  <div class="col-md-9 contents">
+    <div class="page-header">
+    <h1>Number of activities in a trajectory</h1>
     </div>
+
+    
+    <p>Get the number of activities in a trajectory. <code>length</code> returns the number
+of first-level activities (sub-trajectories not included). <code>get_n_activities</code>
+returns the total number of activities (sub-trajectories included).</p>
+    
+
+    <pre><span class='co'># S3 method for trajectory</span>
+<span class='fu'>length</span>(<span class='no'>x</span>)
+
+<span class='fu'>get_n_activities</span>(<span class='no'>x</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>the trajectory object.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Returns a non-negative integer of length 1.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><code><a href='Extract.trajectory.html'>[.trajectory</a></code>, <code><a href='Extract.trajectory.html'>[[.trajectory</a></code>, <code><a href='join.html'>join</a></code>.</p>
+    
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
+
   </div>
 </div>
 

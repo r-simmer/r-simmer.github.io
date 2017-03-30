@@ -31,6 +31,8 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -129,209 +131,283 @@
   <div class="col-md-9">
     <div class="page-header">
       <h1>Function reference</h1>
-      <h4>version&nbsp;3.6.0.9000</h4>
+      <h4>version&nbsp;3.6.1</h4>
     </div>
 
     <div class="contents">
-      <h2 id="section-build-and-manage-trajectories" class="hasAnchor"><a href="#section-build-and-manage-trajectories" class="anchor"></a>Build and manage trajectories</h2>
-      <p class="section-desc"><p>Methods for building and manipulating trajectory objects</p></p>
+      <table class="ref-index">
 
-      
-      <p><a href="Extract.html">Extract parts of a trajectory</a></p>
-      <ul>
-        <li><code><a href="Extract.html">Extract</a></code></li><li><code><a href="Extract.html">[.trajectory</a></code></li><li><code><a href="Extract.html">[[.trajectory</a></code></li>
-      </ul>
-      
-      <p><a href="join.html">Join trajectories</a></p>
-      <ul>
-        <li><code><a href="join.html">join</a></code></li>
-      </ul>
-      
-      <p><a href="length.html">Number of activities in a trajectory</a></p>
-      <ul>
-        <li><code><a href="length.html">get_n_activities</a></code></li><li><code><a href="length.html">length</a></code></li><li><code><a href="length.html">length.trajectory</a></code></li>
-      </ul>
-      
-      <p><a href="trajectory.html">Create a trajectory</a></p>
-      <ul>
-        <li><code><a href="trajectory.html">create_trajectory</a></code></li><li><code><a href="trajectory.html">trajectory</a></code></li>
-      </ul>
-          <h2 id="section-add-activities" class="hasAnchor"><a href="#section-add-activities" class="anchor"></a>Add activities</h2>
-      <p class="section-desc"><p>Verbs for appending activities to trajectory objects</p></p>
+      <colgroup>
+        <col class="alias" />
+        <col class="title" />
+      </colgroup>
 
-      
-      <p><a href="activate.html">Add a activate/deactivate activity</a></p>
-      <ul>
-        <li><code><a href="activate.html">activate</a></code></li><li><code><a href="activate.html">deactivate</a></code></li>
-      </ul>
-      
-      <p><a href="batch.html">Add a batch/separate activity</a></p>
-      <ul>
-        <li><code><a href="batch.html">batch</a></code></li><li><code><a href="batch.html">separate</a></code></li>
-      </ul>
-      
-      <p><a href="branch.html">Add a branch activity</a></p>
-      <ul>
-        <li><code><a href="branch.html">branch</a></code></li>
-      </ul>
-      
-      <p><a href="clone.html">Add a clone/synchronize activity</a></p>
-      <ul>
-        <li><code><a href="clone.html">clone</a></code></li><li><code><a href="clone.html">synchronize</a></code></li>
-      </ul>
-      
-      <p><a href="leave.html">Add a leave activity</a></p>
-      <ul>
-        <li><code><a href="leave.html">leave</a></code></li>
-      </ul>
-      
-      <p><a href="log_.html">Add a logging activity</a></p>
-      <ul>
-        <li><code><a href="log_.html">log_</a></code></li>
-      </ul>
-      
-      <p><a href="renege_in.html">Add a renege activity</a></p>
-      <ul>
-        <li><code><a href="renege_in.html">renege_abort</a></code></li><li><code><a href="renege_in.html">renege_if</a></code></li><li><code><a href="renege_in.html">renege_in</a></code></li>
-      </ul>
-      
-      <p><a href="rollback.html">Add a rollback activity</a></p>
-      <ul>
-        <li><code><a href="rollback.html">rollback</a></code></li>
-      </ul>
-      
-      <p><a href="seize.html">Add a seize/release activity</a></p>
-      <ul>
-        <li><code><a href="seize.html">release</a></code></li><li><code><a href="seize.html">release_selected</a></code></li><li><code><a href="seize.html">seize</a></code></li><li><code><a href="seize.html">seize_selected</a></code></li>
-      </ul>
-      
-      <p><a href="select.html">Select a resource</a></p>
-      <ul>
-        <li><code><a href="select.html">select</a></code></li>
-      </ul>
-      
-      <p><a href="send.html">Add an inter-arrival communication activity</a></p>
-      <ul>
-        <li><code><a href="send.html">send</a></code></li><li><code><a href="send.html">trap</a></code></li><li><code><a href="send.html">untrap</a></code></li><li><code><a href="send.html">wait</a></code></li>
-      </ul>
-      
-      <p><a href="set_attribute.html">Add a set attribute activity</a></p>
-      <ul>
-        <li><code><a href="set_attribute.html">set_attribute</a></code></li>
-      </ul>
-      
-      <p><a href="set_capacity.html">Add a set capacity/queue size activity</a></p>
-      <ul>
-        <li><code><a href="set_capacity.html">set_capacity</a></code></li><li><code><a href="set_capacity.html">set_capacity_selected</a></code></li><li><code><a href="set_capacity.html">set_queue_size</a></code></li><li><code><a href="set_capacity.html">set_queue_size_selected</a></code></li>
-      </ul>
-      
-      <p><a href="set_prioritization.html">Add a set prioritization activity</a></p>
-      <ul>
-        <li><code><a href="set_prioritization.html">set_prioritization</a></code></li>
-      </ul>
-      
-      <p><a href="set_trajectory.html">Add a set trajectory/distribution activity</a></p>
-      <ul>
-        <li><code><a href="set_trajectory.html">set_distribution</a></code></li><li><code><a href="set_trajectory.html">set_trajectory</a></code></li>
-      </ul>
-      
-      <p><a href="timeout.html">Add a timeout activity</a></p>
-      <ul>
-        <li><code><a href="timeout.html">timeout</a></code></li>
-      </ul>
-          <h2 id="section-build-and-run-simulation-environments" class="hasAnchor"><a href="#section-build-and-run-simulation-environments" class="anchor"></a>Build and run simulation environments</h2>
-      <p class="section-desc"><p>Methods for building and running simulation objects</p></p>
-
-      
-      <p><a href="add_generator.html">Add a generator</a></p>
-      <ul>
-        <li><code><a href="add_generator.html">add_generator</a></code></li>
-      </ul>
-      
-      <p><a href="add_resource.html">Add a resource</a></p>
-      <ul>
-        <li><code><a href="add_resource.html">add_resource</a></code></li>
-      </ul>
-      
-      <p><a href="reset.html">Reset a simulator</a></p>
-      <ul>
-        <li><code><a href="reset.html">reset</a></code></li>
-      </ul>
-      
-      <p><a href="run.html">Run the simulation</a></p>
-      <ul>
-        <li><code><a href="run.html">onestep</a></code></li><li><code><a href="run.html">run</a></code></li>
-      </ul>
-      
-      <p><a href="simmer.html">Create a simulator</a></p>
-      <ul>
-        <li><code><a href="simmer.html">simmer</a></code></li>
-      </ul>
-      
-      <p><a href="wrap.html">Wrap a simulation environment</a></p>
-      <ul>
-        <li><code><a href="wrap.html">wrap</a></code></li>
-      </ul>
-          <h2 id="section-manage-simulation-environments" class="hasAnchor"><a href="#section-manage-simulation-environments" class="anchor"></a>Manage simulation environments</h2>
-      <p class="section-desc"><p>Methods for getting information about simulation components</p></p>
-
-      
-      <p><a href="get_capacity.html">Get a resource's parameter</a></p>
-      <ul>
-        <li><code><a href="get_capacity.html">get_capacity</a></code></li><li><code><a href="get_capacity.html">get_queue_count</a></code></li><li><code><a href="get_capacity.html">get_queue_size</a></code></li><li><code><a href="get_capacity.html">get_server_count</a></code></li>
-      </ul>
-      
-      <p><a href="get_n_generated.html">Get the number of arrivals generated</a></p>
-      <ul>
-        <li><code><a href="get_n_generated.html">get_n_generated</a></code></li>
-      </ul>
-      
-      <p><a href="now.html">Get current time</a></p>
-      <ul>
-        <li><code><a href="now.html">now</a></code></li>
-      </ul>
-      
-      <p><a href="peek.html">Peek next events</a></p>
-      <ul>
-        <li><code><a href="peek.html">peek</a></code></li>
-      </ul>
-          <h2 id="section-statistics" class="hasAnchor"><a href="#section-statistics" class="anchor"></a>Statistics</h2>
-      <p class="section-desc"><p>Methods for getting monitored statistics</p></p>
-
-      
-      <p><a href="get_mon.html">Get statistics</a></p>
-      <ul>
-        <li><code><a href="get_mon.html">get_mon</a></code></li><li><code><a href="get_mon.html">get_mon_arrivals</a></code></li><li><code><a href="get_mon.html">get_mon_attributes</a></code></li><li><code><a href="get_mon.html">get_mon_resources</a></code></li>
-      </ul>
-          <h2 id="section-convenience-functions" class="hasAnchor"><a href="#section-convenience-functions" class="anchor"></a>Convenience functions</h2>
-      <p class="section-desc"><p>Helper methods for generators and resources</p></p>
-
-      
-      <p><a href="at.html">Arrivals at specific times</a></p>
-      <ul>
-        <li><code><a href="at.html">at</a></code></li>
-      </ul>
-      
-      <p><a href="from_to.html">Generate arrivals starting and stopping at specified times</a></p>
-      <ul>
-        <li><code><a href="from_to.html">from_to</a></code></li>
-      </ul>
-      
-      <p><a href="from.html">Generate arrivals starting at a specified time</a></p>
-      <ul>
-        <li><code><a href="from.html">from</a></code></li>
-      </ul>
-      
-      <p><a href="schedule.html">Generate a scheduling object</a></p>
-      <ul>
-        <li><code><a href="schedule.html">schedule</a></code></li>
-      </ul>
-      
-      <p><a href="to.html">Generate arrivals stopping at a specified time</a></p>
-      <ul>
-        <li><code><a href="to.html">to</a></code></li>
-      </ul>
-    
+      <tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-build-and-manage-trajectories" class="hasAnchor"><a href="#section-build-and-manage-trajectories" class="anchor"></a>Build and manage trajectories</h2>
+            <p class="section-desc"><p>Methods for building and manipulating trajectory objects</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="trajectory.html">trajectory</a></code> <code><a href="trajectory.html">create_trajectory</a></code> </p>
+          </td>
+          <td><p>Create a trajectory</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Extract.trajectory.html">Extract.trajectory</a></code> <code><a href="Extract.trajectory.html">[.trajectory</a></code> <code><a href="Extract.trajectory.html">[[.trajectory</a></code> <code><a href="Extract.trajectory.html">[&lt;-.trajectory</a></code> <code><a href="Extract.trajectory.html">[[&lt;-.trajectory</a></code> </p>
+          </td>
+          <td><p>Extract or replace parts of a trajectory</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="join.html">join</a></code> </p>
+          </td>
+          <td><p>Join trajectories</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="length.trajectory.html">length.trajectory</a></code> <code><a href="length.trajectory.html">get_n_activities</a></code> </p>
+          </td>
+          <td><p>Number of activities in a trajectory</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-add-activities" class="hasAnchor"><a href="#section-add-activities" class="anchor"></a>Add activities</h2>
+            <p class="section-desc"><p>Verbs for appending activities to trajectory objects</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="batch.html">batch</a></code> <code><a href="batch.html">separate</a></code> </p>
+          </td>
+          <td><p>Add a batch/separate activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="branch.html">branch</a></code> </p>
+          </td>
+          <td><p>Add a branch activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="clone.html">clone</a></code> <code><a href="clone.html">synchronize</a></code> </p>
+          </td>
+          <td><p>Add a clone/synchronize activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="leave.html">leave</a></code> </p>
+          </td>
+          <td><p>Add a leave activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="renege_in.html">renege_in</a></code> <code><a href="renege_in.html">renege_if</a></code> <code><a href="renege_in.html">renege_abort</a></code> </p>
+          </td>
+          <td><p>Add a renege activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="rollback.html">rollback</a></code> </p>
+          </td>
+          <td><p>Add a rollback activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="seize.html">seize</a></code> <code><a href="seize.html">seize_selected</a></code> <code><a href="seize.html">release</a></code> <code><a href="seize.html">release_selected</a></code> </p>
+          </td>
+          <td><p>Add a seize/release activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="select.html">select</a></code> </p>
+          </td>
+          <td><p>Select a resource</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="set_attribute.html">set_attribute</a></code> </p>
+          </td>
+          <td><p>Add a set attribute activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="set_prioritization.html">set_prioritization</a></code> </p>
+          </td>
+          <td><p>Add a set prioritization activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="set_capacity.html">set_capacity</a></code> <code><a href="set_capacity.html">set_capacity_selected</a></code> <code><a href="set_capacity.html">set_queue_size</a></code> <code><a href="set_capacity.html">set_queue_size_selected</a></code> </p>
+          </td>
+          <td><p>Add a set capacity/queue size activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="timeout.html">timeout</a></code> </p>
+          </td>
+          <td><p>Add a timeout activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="activate.html">activate</a></code> <code><a href="activate.html">deactivate</a></code> </p>
+          </td>
+          <td><p>Add a activate/deactivate activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="set_trajectory.html">set_trajectory</a></code> <code><a href="set_trajectory.html">set_distribution</a></code> </p>
+          </td>
+          <td><p>Add a set trajectory/distribution activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="send.html">send</a></code> <code><a href="send.html">trap</a></code> <code><a href="send.html">untrap</a></code> <code><a href="send.html">wait</a></code> </p>
+          </td>
+          <td><p>Add an inter-arrival communication activity</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="log_.html">log_</a></code> </p>
+          </td>
+          <td><p>Add a logging activity</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-build-and-run-simulation-environments" class="hasAnchor"><a href="#section-build-and-run-simulation-environments" class="anchor"></a>Build and run simulation environments</h2>
+            <p class="section-desc"><p>Methods for building and running simulation objects</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="simmer.html">simmer</a></code> <code><a href="simmer.html">simmer-package</a></code> <code><a href="simmer.html">simmer</a></code> </p>
+          </td>
+          <td><p><span class="pkg">simmer</span>: Discrete-Event Simulation for <span style="R">R</span></p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="add_generator.html">add_generator</a></code> </p>
+          </td>
+          <td><p>Add a generator</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="add_resource.html">add_resource</a></code> </p>
+          </td>
+          <td><p>Add a resource</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="reset.html">reset</a></code> </p>
+          </td>
+          <td><p>Reset a simulator</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="run.html">run</a></code> <code><a href="run.html">onestep</a></code> </p>
+          </td>
+          <td><p>Run the simulation</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="wrap.html">wrap</a></code> </p>
+          </td>
+          <td><p>Wrap a simulation environment</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-manage-simulation-environments" class="hasAnchor"><a href="#section-manage-simulation-environments" class="anchor"></a>Manage simulation environments</h2>
+            <p class="section-desc"><p>Methods for getting information about simulation components</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_n_generated.html">get_n_generated</a></code> </p>
+          </td>
+          <td><p>Get the number of arrivals generated</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_capacity.html">get_capacity</a></code> <code><a href="get_capacity.html">get_queue_size</a></code> <code><a href="get_capacity.html">get_server_count</a></code> <code><a href="get_capacity.html">get_queue_count</a></code> </p>
+          </td>
+          <td><p>Get a resource's parameter</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="now.html">now</a></code> </p>
+          </td>
+          <td><p>Get current time</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="peek.html">peek</a></code> </p>
+          </td>
+          <td><p>Peek next events</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-statistics" class="hasAnchor"><a href="#section-statistics" class="anchor"></a>Statistics</h2>
+            <p class="section-desc"><p>Methods for getting monitored statistics</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_mon.html">get_mon</a></code> <code><a href="get_mon.html">get_mon_arrivals</a></code> <code><a href="get_mon.html">get_mon_attributes</a></code> <code><a href="get_mon.html">get_mon_resources</a></code> </p>
+          </td>
+          <td><p>Get statistics</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-convenience-functions" class="hasAnchor"><a href="#section-convenience-functions" class="anchor"></a>Convenience functions</h2>
+            <p class="section-desc"><p>Helper methods for generators and resources</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="at.html">at</a></code> </p>
+          </td>
+          <td><p>Arrivals at specific times</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="from.html">from</a></code> </p>
+          </td>
+          <td><p>Generate arrivals starting at a specified time</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="from_to.html">from_to</a></code> </p>
+          </td>
+          <td><p>Generate arrivals starting and stopping at specified times</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="schedule.html">schedule</a></code> </p>
+          </td>
+          <td><p>Generate a scheduling object</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="to.html">to</a></code> </p>
+          </td>
+          <td><p>Generate arrivals stopping at a specified time</p></td>
+        </tr>
+      </tbody>
+      </table>
     </div>
   </div>
 
