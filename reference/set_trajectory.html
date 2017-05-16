@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -132,25 +134,34 @@
     </div>
 
     
-    <p>Modify a generator&#39;s trajectory or distribution by name.</p>
+    <p>Modify a generator's trajectory or distribution by name.</p>
     
 
-    <pre><span class='fu'>set_trajectory</span>(<span class='no'>.trj</span>, <span class='no'>generator</span>, <span class='no'>trajectory</span>)
+    <pre class="usage"><span class='fu'>set_trajectory</span>(<span class='no'>.trj</span>, <span class='no'>generator</span>, <span class='no'>trajectory</span>)
 
 <span class='fu'>set_distribution</span>(<span class='no'>.trj</span>, <span class='no'>generator</span>, <span class='no'>distribution</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.trj</dt>
-      <dd>the trajectory object.</dd>
-      <dt>generator</dt>
-      <dd>the name of the generator or a function returning a name.</dd>
-      <dt>trajectory</dt>
-      <dd>the trajectory that the generated arrivals will follow.</dd>
-      <dt>distribution</dt>
-      <dd>a function modelling the interarrival times (returning a
-negative value stops the generator).</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.trj</th>
+      <td><p>the trajectory object.</p></td>
+    </tr>
+    <tr>
+      <th>generator</th>
+      <td><p>the name of the generator or a function returning a name.</p></td>
+    </tr>
+    <tr>
+      <th>trajectory</th>
+      <td><p>the trajectory that the generated arrivals will follow.</p></td>
+    </tr>
+    <tr>
+      <th>distribution</th>
+      <td><p>a function modelling the interarrival times (returning a
+negative value stops the generator).</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

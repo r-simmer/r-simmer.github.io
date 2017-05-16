@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -135,23 +137,32 @@
     <p>Define a fork with <code>N</code> alternative sub-trajectories.</p>
     
 
-    <pre><span class='fu'>branch</span>(<span class='no'>.trj</span>, <span class='no'>option</span>, <span class='no'>continue</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>branch</span>(<span class='no'>.trj</span>, <span class='no'>option</span>, <span class='no'>continue</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.trj</dt>
-      <dd>the trajectory object.</dd>
-      <dt>option</dt>
-      <dd>a callable object (a function) which must return an integer between
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.trj</th>
+      <td><p>the trajectory object.</p></td>
+    </tr>
+    <tr>
+      <th>option</th>
+      <td><p>a callable object (a function) which must return an integer between
 <code>0</code> and <code>N</code>. A return value equal to <code>0</code> skips the branch and
 continues to the next activity. A returning value between <code>1</code> to <code>N</code>
-makes the arrival to follow the corresponding sub-trajectory.</dd>
-      <dt>continue</dt>
-      <dd>a vector of <code>N</code> booleans that indicate whether the arrival must
-continue to the main trajectory after each sub-trajectory or not.</dd>
-      <dt>...</dt>
-      <dd><code>N</code> trajectory objects describing each sub-trajectory.</dd>
-    </dl>
+makes the arrival to follow the corresponding sub-trajectory.</p></td>
+    </tr>
+    <tr>
+      <th>continue</th>
+      <td><p>a vector of <code>N</code> booleans that indicate whether the arrival must
+continue to the main trajectory after each sub-trajectory or not.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p><code>N</code> trajectory objects describing each sub-trajectory.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

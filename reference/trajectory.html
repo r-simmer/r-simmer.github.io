@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -136,17 +138,22 @@
 activities that can be attached to a generator.</p>
     
 
-    <pre><span class='fu'>trajectory</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"anonymous"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>trajectory</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"anonymous"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='fu'>create_trajectory</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"anonymous"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>name</dt>
-      <dd>the name of the trajectory.</dd>
-      <dt>verbose</dt>
-      <dd>enable showing additional information.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>name</th>
+      <td><p>the name of the trajectory.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>enable showing additional information.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -155,8 +162,8 @@ activities that can be attached to a generator.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Methods for dealing with trajectories:
-<code><a href='Extract.html'>[.trajectory</a></code>, <code><a href='Extract.html'>[[.trajectory</a></code>, <code><a href='length.html'>length.trajectory</a></code>,
-<code><a href='length.html'>get_n_activities</a></code>, <code><a href='join.html'>join</a></code>, <code><a href='seize.html'>seize</a></code>, <code><a href='seize.html'>release</a></code>,
+<code><a href='Extract.trajectory.html'>[.trajectory</a></code>, <code><a href='Extract.trajectory.html'>[[.trajectory</a></code>, <code><a href='length.trajectory.html'>length.trajectory</a></code>,
+<code><a href='length.trajectory.html'>get_n_activities</a></code>, <code><a href='join.html'>join</a></code>, <code><a href='seize.html'>seize</a></code>, <code><a href='seize.html'>release</a></code>,
 <code><a href='seize.html'>seize_selected</a></code>, <code><a href='seize.html'>release_selected</a></code>, <code><a href='select.html'>select</a></code>,
 <code><a href='set_capacity.html'>set_capacity</a></code>, <code><a href='set_capacity.html'>set_queue_size</a></code>, <code><a href='set_capacity.html'>set_capacity_selected</a></code>,
 <code><a href='set_capacity.html'>set_queue_size_selected</a></code>, <code><a href='set_prioritization.html'>set_prioritization</a></code>, <code><a href='activate.html'>activate</a></code>,
@@ -183,15 +190,15 @@ activities that can be attached to a generator.</p>
   <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"administration"</span>, <span class='fl'>1</span>)
 
 <span class='no'>t0</span></div><div class='output co'>#&gt; trajectory: my trajectory, 9 activities
-#&gt; { Activity: Seize        | resource: nurse | amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x3ac01e8 }
-#&gt; { Activity: Release      | resource: nurse | amount: 1 }
-#&gt; { Activity: Seize        | resource: doctor | amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x382d1f0 }
-#&gt; { Activity: Release      | resource: doctor | amount: 1 }
-#&gt; { Activity: Seize        | resource: administration | amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x394a928 }
-#&gt; { Activity: Release      | resource: administration | amount: 1 }</div><div class='input'>
+#&gt; { Activity: Seize        | resource: nurse, amount: 1 }
+#&gt; { Activity: Timeout      | delay: 0x676bef8 }
+#&gt; { Activity: Release      | resource: nurse, amount: 1 }
+#&gt; { Activity: Seize        | resource: doctor, amount: 1 }
+#&gt; { Activity: Timeout      | delay: 0x601ff00 }
+#&gt; { Activity: Release      | resource: doctor, amount: 1 }
+#&gt; { Activity: Seize        | resource: administration, amount: 1 }
+#&gt; { Activity: Timeout      | delay: 0x6481d58 }
+#&gt; { Activity: Release      | resource: administration, amount: 1 }</div><div class='input'>
 <span class='no'>t1</span> <span class='kw'>&lt;-</span> <span class='fu'>trajectory</span>(<span class='st'>"trajectory with a branch"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='co'># 50-50 chance for each branch</span>
@@ -207,15 +214,15 @@ activities that can be attached to a generator.</p>
   <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='kw'>function</span>() <span class='fl'>2</span>)
 
 <span class='no'>t1</span></div><div class='output co'>#&gt; trajectory: trajectory with a branch, 7 activities
-#&gt; { Activity: Seize        | resource: server | amount: 1 }
-#&gt; { Activity: Branch       | option: 0x2365bf0 }
+#&gt; { Activity: Seize        | resource: server, amount: 1 }
+#&gt; { Activity: Branch       | option: 0x5ee1768 }
 #&gt;   Fork 1, continue,  trajectory: branch1, 1 activities
-#&gt;   { Activity: Timeout      | delay: 0x2fd8118 }
+#&gt;   { Activity: Timeout      | delay: 0x63320d0 }
 #&gt;   Fork 2, stop,  trajectory: branch2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x2ce7610 }
-#&gt;   { Activity: Release      | resource: server | amount: 1 }
-#&gt; { Activity: Release      | resource: server | amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x4add5e0 }</div></pre>
+#&gt;   { Activity: Timeout      | delay: 0x65590c8 }
+#&gt;   { Activity: Release      | resource: server, amount: 1 }
+#&gt; { Activity: Release      | resource: server, amount: 1 }
+#&gt; { Activity: Timeout      | delay: 0x6066eb0 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

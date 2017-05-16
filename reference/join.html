@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -135,13 +137,16 @@
     <p>Concatenate any number of trajectories in the specified order.</p>
     
 
-    <pre><span class='fu'>join</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>join</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>...</dt>
-      <dd>trajectory objects.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>...</th>
+      <td><p>trajectory objects.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -149,8 +154,8 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='Extract.html'>[.trajectory</a></code>, <code><a href='Extract.html'>[[.trajectory</a></code>, <code><a href='length.html'>length.trajectory</a></code>,
-<code><a href='length.html'>get_n_activities</a></code>.</p>
+    <p><code><a href='Extract.trajectory.html'>[.trajectory</a></code>, <code><a href='Extract.trajectory.html'>[[.trajectory</a></code>, <code><a href='length.trajectory.html'>length.trajectory</a></code>,
+<code><a href='length.trajectory.html'>get_n_activities</a></code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -159,16 +164,16 @@
 <span class='no'>t3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"dummy"</span>, <span class='fl'>1</span>)
 
 <span class='fu'>join</span>(<span class='no'>t1</span>, <span class='no'>t2</span>, <span class='no'>t3</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 3 activities
-#&gt; { Activity: Seize        | resource: dummy | amount: 1 }
+#&gt; { Activity: Seize        | resource: dummy, amount: 1 }
 #&gt; { Activity: Timeout      | delay: 1 }
-#&gt; { Activity: Release      | resource: dummy | amount: 1 }</div><div class='input'>
+#&gt; { Activity: Release      | resource: dummy, amount: 1 }</div><div class='input'>
 <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>join</span>(<span class='no'>t1</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>join</span>(<span class='no'>t3</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 3 activities
-#&gt; { Activity: Seize        | resource: dummy | amount: 1 }
+#&gt; { Activity: Seize        | resource: dummy, amount: 1 }
 #&gt; { Activity: Timeout      | delay: 1 }
-#&gt; { Activity: Release      | resource: dummy | amount: 1 }</div></pre>
+#&gt; { Activity: Release      | resource: dummy, amount: 1 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

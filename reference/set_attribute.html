@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -135,20 +137,29 @@
     <p>Modify an attribute in the form of a key/value pair.</p>
     
 
-    <pre><span class='fu'>set_attribute</span>(<span class='no'>.trj</span>, <span class='no'>key</span>, <span class='no'>value</span>, <span class='kw'>global</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>set_attribute</span>(<span class='no'>.trj</span>, <span class='no'>key</span>, <span class='no'>value</span>, <span class='kw'>global</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.trj</dt>
-      <dd>the trajectory object.</dd>
-      <dt>key</dt>
-      <dd>the attribute key (coerced to a string).</dd>
-      <dt>value</dt>
-      <dd>the value to set, accepts either a numeric or a callable object
-(a function) which must return a numeric.</dd>
-      <dt>global</dt>
-      <dd>if <code>TRUE</code>, the attribute will be global instead of per-arrival.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.trj</th>
+      <td><p>the trajectory object.</p></td>
+    </tr>
+    <tr>
+      <th>key</th>
+      <td><p>the attribute key (coerced to a string).</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>the value to set, accepts either a numeric or a callable object
+(a function) which must return a numeric.</p></td>
+    </tr>
+    <tr>
+      <th>global</th>
+      <td><p>if <code>TRUE</code>, the attribute will be global instead of per-arrival.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

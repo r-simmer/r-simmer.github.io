@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -135,37 +137,54 @@
     <p>Define a new generator of arrivals in a simulation environment.</p>
     
 
-    <pre><span class='fu'>add_generator</span>(<span class='no'>.env</span>, <span class='no'>name_prefix</span>, <span class='no'>trajectory</span>, <span class='no'>distribution</span>, <span class='kw'>mon</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+    <pre class="usage"><span class='fu'>add_generator</span>(<span class='no'>.env</span>, <span class='no'>name_prefix</span>, <span class='no'>trajectory</span>, <span class='no'>distribution</span>, <span class='kw'>mon</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>priority</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>preemptible</span> <span class='kw'>=</span> <span class='no'>priority</span>, <span class='kw'>restart</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.env</dt>
-      <dd>the simulation environment.</dd>
-      <dt>name_prefix</dt>
-      <dd>the name prefix of the generated arrivals.</dd>
-      <dt>trajectory</dt>
-      <dd>the trajectory that the generated arrivals will follow (see
-<code><a href='trajectory.html'>trajectory</a></code>).</dd>
-      <dt>distribution</dt>
-      <dd>a function modelling the interarrival times (returning a
-negative value stops the generator).</dd>
-      <dt>mon</dt>
-      <dd>whether the simulator must monitor the generated arrivals or not
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.env</th>
+      <td><p>the simulation environment.</p></td>
+    </tr>
+    <tr>
+      <th>name_prefix</th>
+      <td><p>the name prefix of the generated arrivals.</p></td>
+    </tr>
+    <tr>
+      <th>trajectory</th>
+      <td><p>the trajectory that the generated arrivals will follow (see
+<code><a href='trajectory.html'>trajectory</a></code>).</p></td>
+    </tr>
+    <tr>
+      <th>distribution</th>
+      <td><p>a function modelling the interarrival times (returning a
+negative value stops the generator).</p></td>
+    </tr>
+    <tr>
+      <th>mon</th>
+      <td><p>whether the simulator must monitor the generated arrivals or not
 (0 = no monitoring, 1 = simple arrival monitoring, 2 = level 1 + arrival
-attribute montoring)</dd>
-      <dt>priority</dt>
-      <dd>the priority of each arrival (a higher integer equals higher
-priority; defaults to the minimum priority, which is 0).</dd>
-      <dt>preemptible</dt>
-      <dd>if a seize occurs in a preemptive resource, this parameter
+attribute montoring)</p></td>
+    </tr>
+    <tr>
+      <th>priority</th>
+      <td><p>the priority of each arrival (a higher integer equals higher
+priority; defaults to the minimum priority, which is 0).</p></td>
+    </tr>
+    <tr>
+      <th>preemptible</th>
+      <td><p>if a seize occurs in a preemptive resource, this parameter
 establishes the minimum incoming priority that can preempt these arrivals (an
 arrival with a priority greater than <code>preemptible</code> gains the resource). In
 any case, <code>preemptible</code> must be equal or greater than <code>priority</code>, and
-thus only higher priority arrivals can trigger preemption.</dd>
-      <dt>restart</dt>
-      <dd>whether the activity must be restarted after being preempted.</dd>
-    </dl>
+thus only higher priority arrivals can trigger preemption.</p></td>
+    </tr>
+    <tr>
+      <th>restart</th>
+      <td><p>whether the activity must be restarted after being preempted.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

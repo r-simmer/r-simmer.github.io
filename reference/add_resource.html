@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -135,38 +137,55 @@
     <p>Define a new resource in a simulation environment.</p>
     
 
-    <pre><span class='fu'>add_resource</span>(<span class='no'>.env</span>, <span class='no'>name</span>, <span class='kw'>capacity</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>queue_size</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>mon</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+    <pre class="usage"><span class='fu'>add_resource</span>(<span class='no'>.env</span>, <span class='no'>name</span>, <span class='kw'>capacity</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>queue_size</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>mon</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>preemptive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>preempt_order</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"fifo"</span>, <span class='st'>"lifo"</span>),
   <span class='kw'>queue_size_strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.env</dt>
-      <dd>the simulation environment.</dd>
-      <dt>name</dt>
-      <dd>the name of the resource.</dd>
-      <dt>capacity</dt>
-      <dd>the capacity of the server.</dd>
-      <dt>queue_size</dt>
-      <dd>the size of the queue.</dd>
-      <dt>mon</dt>
-      <dd>whether the simulator must monitor this resource or not.</dd>
-      <dt>preemptive</dt>
-      <dd>whether arrivals in the server can be preempted or not based
-on seize priorities.</dd>
-      <dt>preempt_order</dt>
-      <dd>if the resource is preemptive and preemption occurs with
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.env</th>
+      <td><p>the simulation environment.</p></td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td><p>the name of the resource.</p></td>
+    </tr>
+    <tr>
+      <th>capacity</th>
+      <td><p>the capacity of the server.</p></td>
+    </tr>
+    <tr>
+      <th>queue_size</th>
+      <td><p>the size of the queue.</p></td>
+    </tr>
+    <tr>
+      <th>mon</th>
+      <td><p>whether the simulator must monitor this resource or not.</p></td>
+    </tr>
+    <tr>
+      <th>preemptive</th>
+      <td><p>whether arrivals in the server can be preempted or not based
+on seize priorities.</p></td>
+    </tr>
+    <tr>
+      <th>preempt_order</th>
+      <td><p>if the resource is preemptive and preemption occurs with
 more than one arrival in the server, this parameter defines which arrival should
 be preempted first. It must be <code>fifo</code> (First In First Out: older preemptible
 tasks are preempted first) or <code>lifo</code> (Last In First Out: newer preemptible tasks
-are preempted first).</dd>
-      <dt>queue_size_strict</dt>
-      <dd>if the resource is preemptive and preemption occurs,
+are preempted first).</p></td>
+    </tr>
+    <tr>
+      <th>queue_size_strict</th>
+      <td><p>if the resource is preemptive and preemption occurs,
 this parameter controls whether the <code>queue_size</code> is a hard limit. By default,
 preempted arrivals go to a dedicated queue, so that <code>queue_size</code> may be
 exceeded. If this option is <code>TRUE</code>, preempted arrivals go to the standard
-queue, and the maximum <code>queue_size</code> is guaranteed (rejection may occur).</dd>
-    </dl>
+queue, and the maximum <code>queue_size</code> is guaranteed (rejection may occur).</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -135,24 +137,33 @@
     <p>Simulator getters for obtaining monitored data (if any) about arrivals, attributes and resources.</p>
     
 
-    <pre><span class='fu'>get_mon_arrivals</span>(<span class='no'>.envs</span>, <span class='kw'>per_resource</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ongoing</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>get_mon_arrivals</span>(<span class='no'>.envs</span>, <span class='kw'>per_resource</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ongoing</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='fu'>get_mon_attributes</span>(<span class='no'>.envs</span>)
 
 <span class='fu'>get_mon_resources</span>(<span class='no'>.envs</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"counts"</span>, <span class='st'>"limits"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.envs</dt>
-      <dd>the simulation environment (or a list of environments).</dd>
-      <dt>per_resource</dt>
-      <dd>if <code>TRUE</code>, statistics will be reported on a per-resource basis.</dd>
-      <dt>ongoing</dt>
-      <dd>if <code>TRUE</code>, ongoing arrivals will be reported. The columns
-<code>end_time</code> and <code>finished</code> of these arrivals are reported as <code>NA</code>s.</dd>
-      <dt>data</dt>
-      <dd>whether to retrieve the &quot;counts&quot;, the &quot;limits&quot; or both.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.envs</th>
+      <td><p>the simulation environment (or a list of environments).</p></td>
+    </tr>
+    <tr>
+      <th>per_resource</th>
+      <td><p>if <code>TRUE</code>, statistics will be reported on a per-resource basis.</p></td>
+    </tr>
+    <tr>
+      <th>ongoing</th>
+      <td><p>if <code>TRUE</code>, ongoing arrivals will be reported. The columns
+<code>end_time</code> and <code>finished</code> of these arrivals are reported as <code>NA</code>s.</p></td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td><p>whether to retrieve the "counts", the "limits" or both.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

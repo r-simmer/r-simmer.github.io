@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -135,25 +137,34 @@
     <p>Set or unset a timer or a signal after which the arrival will abandon.</p>
     
 
-    <pre><span class='fu'>renege_in</span>(<span class='no'>.trj</span>, <span class='no'>t</span>, <span class='kw'>out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>renege_in</span>(<span class='no'>.trj</span>, <span class='no'>t</span>, <span class='kw'>out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='fu'>renege_if</span>(<span class='no'>.trj</span>, <span class='no'>signal</span>, <span class='kw'>out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='fu'>renege_abort</span>(<span class='no'>.trj</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.trj</dt>
-      <dd>the trajectory object.</dd>
-      <dt>t</dt>
-      <dd>timeout to trigger reneging, accepts either a numeric or a callable object
-(a function) which must return a numeric.</dd>
-      <dt>out</dt>
-      <dd>optional sub-trajectory in case of reneging.</dd>
-      <dt>signal</dt>
-      <dd>signal to trigger reneging, accepts either a string or a callable object
-(a function) which must return a string.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.trj</th>
+      <td><p>the trajectory object.</p></td>
+    </tr>
+    <tr>
+      <th>t</th>
+      <td><p>timeout to trigger reneging, accepts either a numeric or a callable object
+(a function) which must return a numeric.</p></td>
+    </tr>
+    <tr>
+      <th>out</th>
+      <td><p>optional sub-trajectory in case of reneging.</p></td>
+    </tr>
+    <tr>
+      <th>signal</th>
+      <td><p>signal to trigger reneging, accepts either a string or a callable object
+(a function) which must return a string.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

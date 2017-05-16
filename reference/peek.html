@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -135,17 +137,24 @@
     <p>Look for future events in the event queue and (optionally) obtain info about them.</p>
     
 
-    <pre><span class='fu'>peek</span>(<span class='no'>.env</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>peek</span>(<span class='no'>.env</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.env</dt>
-      <dd>the simulation environment.</dd>
-      <dt>steps</dt>
-      <dd>number of steps to peek.</dd>
-      <dt>verbose</dt>
-      <dd>show additional information (i.e., the name of the process) about future events.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.env</th>
+      <td><p>the simulation environment.</p></td>
+    </tr>
+    <tr>
+      <th>steps</th>
+      <td><p>number of steps to peek.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>show additional information (i.e., the name of the process) about future events.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

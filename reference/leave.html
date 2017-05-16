@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -135,15 +137,20 @@
     <p>Leave the trajectory with some probability.</p>
     
 
-    <pre><span class='fu'>leave</span>(<span class='no'>.trj</span>, <span class='no'>prob</span>)</pre>
+    <pre class="usage"><span class='fu'>leave</span>(<span class='no'>.trj</span>, <span class='no'>prob</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.trj</dt>
-      <dd>the trajectory object.</dd>
-      <dt>prob</dt>
-      <dd>a probability or a function returning a probability.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.trj</th>
+      <td><p>the trajectory object.</p></td>
+    </tr>
+    <tr>
+      <th>prob</th>
+      <td><p>a probability or a function returning a probability.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

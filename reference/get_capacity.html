@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a resource&#39;s parameter — get_capacity • simmer</title>
+<title>Get a resource's parameter — get_capacity • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -128,14 +130,14 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a resource&#39;s parameter</h1>
+    <h1>Get a resource's parameter</h1>
     </div>
 
     
-    <p>Getters for a resource&#39;s server capacity/count and queue size/count.</p>
+    <p>Getters for a resource's server capacity/count and queue size/count.</p>
     
 
-    <pre><span class='fu'>get_capacity</span>(<span class='no'>.env</span>, <span class='no'>resource</span>)
+    <pre class="usage"><span class='fu'>get_capacity</span>(<span class='no'>.env</span>, <span class='no'>resource</span>)
 
 <span class='fu'>get_queue_size</span>(<span class='no'>.env</span>, <span class='no'>resource</span>)
 
@@ -144,12 +146,17 @@
 <span class='fu'>get_queue_count</span>(<span class='no'>.env</span>, <span class='no'>resource</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.env</dt>
-      <dd>the simulation environment.</dd>
-      <dt>resource</dt>
-      <dd>the name of the resource.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.env</th>
+      <td><p>the simulation environment.</p></td>
+    </tr>
+    <tr>
+      <th>resource</th>
+      <td><p>the name of the resource.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

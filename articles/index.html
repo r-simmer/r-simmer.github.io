@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add a seize/release activity — seize • simmer</title>
+<title>Articles • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,7 +36,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-vignette-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -127,83 +127,26 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header">
-    <h1>Add a seize/release activity</h1>
+      <div class="page-header">
+  <h1>Articles <small>version&nbsp;3.6.1.9000</small></h1>
+</div>
+
+<div class="row">
+  <div class="col-md-9">
+    <div class="section ">
+      <h3>All vignettes</h3>
+      <p class="section-desc"></p>
+
+      <ul>
+        <li><a href="A-introduction.html">Introduction to simmer</a></li>
+        <li><a href="B-terminology.html">Terminology</a></li>
+        <li><a href="C-trajectories.html">Advanced Trajectory Usage</a></li>
+        <li><a href="D-bank-1.html">The Bank Tutorial: Part I</a></li>
+        <li><a href="E-simpy.html">Other SimPy Examples</a></li>
+        <li><a href="F-queueing-systems.html">Queueing Systems</a></li>
+        <li><a href="G-ctmc.html">Continuous-Time Markov Chains</a></li>
+      </ul>
     </div>
-
-    
-    <p>Activities for seizing/releasing a resource, by name or a previously selected one.</p>
-    
-
-    <pre class="usage"><span class='fu'>seize</span>(<span class='no'>.trj</span>, <span class='no'>resource</span>, <span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>continue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>post.seize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>reject</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>seize_selected</span>(<span class='no'>.trj</span>, <span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>continue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>post.seize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reject</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>release</span>(<span class='no'>.trj</span>, <span class='no'>resource</span>, <span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-
-<span class='fu'>release_selected</span>(<span class='no'>.trj</span>, <span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>.trj</th>
-      <td><p>the trajectory object.</p></td>
-    </tr>
-    <tr>
-      <th>resource</th>
-      <td><p>the name of the resource.</p></td>
-    </tr>
-    <tr>
-      <th>amount</th>
-      <td><p>the amount to seize/release, accepts either a numeric or a callable object
-(a function) which must return a numeric.</p></td>
-    </tr>
-    <tr>
-      <th>continue</th>
-      <td><p>a boolean (if <code>post.seize</code> OR <code>reject</code> is defined) or a pair of booleans
-(if <code>post.seize</code> AND <code>reject</code> are defined) to indicate whether these subtrajectories
-should continue to the next activity in the main trajectory.</p></td>
-    </tr>
-    <tr>
-      <th>post.seize</th>
-      <td><p>an optional trajectory object which will be followed after a successful seize.</p></td>
-    </tr>
-    <tr>
-      <th>reject</th>
-      <td><p>an optional trajectory object which will be followed if the arrival is rejected.</p></td>
-    </tr>
-    <tr>
-      <th>id</th>
-      <td><p>selection identifier for nested usage.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Returns the trajectory object.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p><code><a href='select.html'>select</a></code>, <code><a href='set_capacity.html'>set_capacity</a></code>, <code><a href='set_capacity.html'>set_queue_size</a></code>,
-<code><a href='set_capacity.html'>set_capacity_selected</a></code>, <code><a href='set_capacity.html'>set_queue_size_selected</a></code>.</p>
-    
-
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
   </div>
 </div>
 

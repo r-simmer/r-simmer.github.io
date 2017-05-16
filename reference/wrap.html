@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -138,13 +140,16 @@ to parallelize heavy replicas (see the example below), because the C++
 simulation backend is destroyed when the threads exit.</p>
     
 
-    <pre><span class='fu'>wrap</span>(<span class='no'>.env</span>)</pre>
+    <pre class="usage"><span class='fu'>wrap</span>(<span class='no'>.env</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.env</dt>
-      <dd>the simulation environment.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.env</th>
+      <td><p>the simulation environment.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -159,19 +164,21 @@ simulation backend is destroyed when the threads exit.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>parallel</span>)
+    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
+  <span class='fu'>library</span>(<span class='no'>parallel</span>)
 
-<span class='no'>mm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='kw'>function</span>() <span class='fu'>rexp</span>(<span class='fl'>1</span>, <span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>)
+  <span class='no'>mm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='kw'>function</span>() <span class='fu'>rexp</span>(<span class='fl'>1</span>, <span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>)
 
-<span class='no'>envs</span> <span class='kw'>&lt;-</span> <span class='fu'>mclapply</span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>function</span>(<span class='no'>i</span>) {
-  <span class='fu'><a href='simmer.html'>simmer</a></span>(<span class='st'>"M/M/1 example"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"customer"</span>, <span class='no'>mm1</span>, <span class='kw'>function</span>() <span class='fu'>rexp</span>(<span class='fl'>1</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>100</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>wrap</span>()
+  <span class='no'>envs</span> <span class='kw'>&lt;-</span> <span class='fu'>mclapply</span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>function</span>(<span class='no'>i</span>) {
+    <span class='fu'><a href='simmer.html'>simmer</a></span>(<span class='st'>"M/M/1 example"</span>) <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"customer"</span>, <span class='no'>mm1</span>, <span class='kw'>function</span>() <span class='fu'>rexp</span>(<span class='fl'>1</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>100</span>) <span class='kw'>%&gt;%</span>
+      <span class='fu'>wrap</span>()
+  })
 })</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

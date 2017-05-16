@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -135,21 +137,30 @@
     <p>Go backwards to a previous point in the trajectory. Useful to implement loops.</p>
     
 
-    <pre><span class='fu'>rollback</span>(<span class='no'>.trj</span>, <span class='no'>amount</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>check</span>)</pre>
+    <pre class="usage"><span class='fu'>rollback</span>(<span class='no'>.trj</span>, <span class='no'>amount</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='no'>check</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.trj</dt>
-      <dd>the trajectory object.</dd>
-      <dt>amount</dt>
-      <dd>the amount of activities (of the same or parent trajectories) to roll back.</dd>
-      <dt>times</dt>
-      <dd>the number of repetitions until an arrival may continue.</dd>
-      <dt>check</dt>
-      <dd>a callable object (a function) which must return a boolean. If
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.trj</th>
+      <td><p>the trajectory object.</p></td>
+    </tr>
+    <tr>
+      <th>amount</th>
+      <td><p>the amount of activities (of the same or parent trajectories) to roll back.</p></td>
+    </tr>
+    <tr>
+      <th>times</th>
+      <td><p>the number of repetitions until an arrival may continue.</p></td>
+    </tr>
+    <tr>
+      <th>check</th>
+      <td><p>a callable object (a function) which must return a boolean. If
 present, the <code>times</code> parameter is ignored, and the activity uses this
-function to check whether the rollback must be done or not.</dd>
-    </dl>
+function to check whether the rollback must be done or not.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

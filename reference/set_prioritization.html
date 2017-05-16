@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -132,21 +134,26 @@
     </div>
 
     
-    <p>Modify the arrival&#39;s prioritization values.</p>
+    <p>Modify the arrival's prioritization values.</p>
     
 
-    <pre><span class='fu'>set_prioritization</span>(<span class='no'>.trj</span>, <span class='no'>values</span>)</pre>
+    <pre class="usage"><span class='fu'>set_prioritization</span>(<span class='no'>.trj</span>, <span class='no'>values</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.trj</dt>
-      <dd>the trajectory object.</dd>
-      <dt>values</dt>
-      <dd>expects either a vector/list or a callable object (a function)
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.trj</th>
+      <td><p>the trajectory object.</p></td>
+    </tr>
+    <tr>
+      <th>values</th>
+      <td><p>expects either a vector/list or a callable object (a function)
 returning a vector/list of three values <code>c(priority, preemptible, restart)</code>.
 A negative value leaves the corresponding parameter unchanged.
-See <code><a href='add_generator.html'>add_generator</a></code> for more information about these parameters.</dd>
-    </dl>
+See <code><a href='add_generator.html'>add_generator</a></code> for more information about these parameters.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

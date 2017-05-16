@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -136,27 +138,38 @@
 one + <code>n-1</code> copies). A <code>synchronize</code> activity removes all but one clone.</p>
     
 
-    <pre><span class='fu'>clone</span>(<span class='no'>.trj</span>, <span class='no'>n</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>clone</span>(<span class='no'>.trj</span>, <span class='no'>n</span>, <span class='no'>...</span>)
 
 <span class='fu'>synchronize</span>(<span class='no'>.trj</span>, <span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>mon_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.trj</dt>
-      <dd>the trajectory object.</dd>
-      <dt>n</dt>
-      <dd>number of clones, accepts either a numeric or a callable object
-(a function) which must return a numeric.</dd>
-      <dt>...</dt>
-      <dd>optional parallel sub-trajectories. Each clone will follow
-a different sub-trajectory if available.</dd>
-      <dt>wait</dt>
-      <dd>if <code>FALSE</code>, all clones but the first to arrive are removed.
-if <code>TRUE</code> (default), all clones but the last to arrive are removed.</dd>
-      <dt>mon_all</dt>
-      <dd>if <code>TRUE</code>, <code>get_mon_arrivals</code> will show one
-line per clone.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.trj</th>
+      <td><p>the trajectory object.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>number of clones, accepts either a numeric or a callable object
+(a function) which must return a numeric.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>optional parallel sub-trajectories. Each clone will follow
+a different sub-trajectory if available.</p></td>
+    </tr>
+    <tr>
+      <th>wait</th>
+      <td><p>if <code>FALSE</code>, all clones but the first to arrive are removed.
+if <code>TRUE</code> (default), all clones but the last to arrive are removed.</p></td>
+    </tr>
+    <tr>
+      <th>mon_all</th>
+      <td><p>if <code>TRUE</code>, <code>get_mon_arrivals</code> will show one
+line per clone.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

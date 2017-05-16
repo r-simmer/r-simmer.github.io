@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -136,29 +138,43 @@
 or split a previously established batch.</p>
     
 
-    <pre><span class='fu'>batch</span>(<span class='no'>.trj</span>, <span class='no'>n</span>, <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>permanent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>rule</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>batch</span>(<span class='no'>.trj</span>, <span class='no'>n</span>, <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>permanent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>rule</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='fu'>separate</span>(<span class='no'>.trj</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.trj</dt>
-      <dd>the trajectory object.</dd>
-      <dt>n</dt>
-      <dd>batch size, accepts a numeric.</dd>
-      <dt>timeout</dt>
-      <dd>set an optional timer which triggers batches every <code>timeout</code> time
-units even if the batch size has not been fulfilled, accepts a numeric (0 = disabled).</dd>
-      <dt>permanent</dt>
-      <dd>if <code>TRUE</code>, batches cannot be split.</dd>
-      <dt>name</dt>
-      <dd>optional string. Unnamed batches from different <code>batch</code> activities are
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.trj</th>
+      <td><p>the trajectory object.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>batch size, accepts a numeric.</p></td>
+    </tr>
+    <tr>
+      <th>timeout</th>
+      <td><p>set an optional timer which triggers batches every <code>timeout</code> time
+units even if the batch size has not been fulfilled, accepts a numeric or a callable
+object (a function) which must return a numeric (0 = disabled).</p></td>
+    </tr>
+    <tr>
+      <th>permanent</th>
+      <td><p>if <code>TRUE</code>, batches cannot be split.</p></td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td><p>optional string. Unnamed batches from different <code>batch</code> activities are
 independent. However, if you want to feed arrivals from different trajectories into a
-same batch, you need to specify a common name across all your <code>batch</code> activities.</dd>
-      <dt>rule</dt>
-      <dd>an optional callable object (a function) which will be applied to
-every arrival to determine whether it should be included into the batch, thus</dd>
-    </dl>
+same batch, you need to specify a common name across all your <code>batch</code> activities.</p></td>
+    </tr>
+    <tr>
+      <th>rule</th>
+      <td><p>an optional callable object (a function) which will be applied to
+every arrival to determine whether it should be included into the batch, thus</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

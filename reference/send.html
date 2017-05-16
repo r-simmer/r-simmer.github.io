@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -141,7 +143,7 @@ point of the interruption. <code>untrap()</code> can be used to unsubscribe from
 <code>wait()</code> blocks until a signal is received.</p>
     
 
-    <pre><span class='fu'>send</span>(<span class='no'>.trj</span>, <span class='no'>signals</span>, <span class='kw'>delay</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+    <pre class="usage"><span class='fu'>send</span>(<span class='no'>.trj</span>, <span class='no'>signals</span>, <span class='kw'>delay</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
 <span class='fu'>trap</span>(<span class='no'>.trj</span>, <span class='no'>signals</span>, <span class='kw'>handler</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>interruptible</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
@@ -150,20 +152,31 @@ point of the interruption. <code>untrap()</code> can be used to unsubscribe from
 <span class='fu'>wait</span>(<span class='no'>.trj</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.trj</dt>
-      <dd>the trajectory object.</dd>
-      <dt>signals</dt>
-      <dd>signal or list of signals, accepts either a string, a list of strings or a
-callable object (a function) which must return a string or a list of strings.</dd>
-      <dt>delay</dt>
-      <dd>optional timeout to trigger the signals, accepts either a numeric or a callable
-object (a function) which must return a numeric.</dd>
-      <dt>handler</dt>
-      <dd>optional trajectory object to handle a signal received.</dd>
-      <dt>interruptible</dt>
-      <dd>whether the handler can be interrupted by signals.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.trj</th>
+      <td><p>the trajectory object.</p></td>
+    </tr>
+    <tr>
+      <th>signals</th>
+      <td><p>signal or list of signals, accepts either a string, a list of strings or a
+callable object (a function) which must return a string or a list of strings.</p></td>
+    </tr>
+    <tr>
+      <th>delay</th>
+      <td><p>optional timeout to trigger the signals, accepts either a numeric or a callable
+object (a function) which must return a numeric.</p></td>
+    </tr>
+    <tr>
+      <th>handler</th>
+      <td><p>optional trajectory object to handle a signal received.</p></td>
+    </tr>
+    <tr>
+      <th>interruptible</th>
+      <td><p>whether the handler can be interrupted by signals.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
