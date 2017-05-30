@@ -67,25 +67,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/A-introduction.html">Introduction to simmer</a>
+      <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/B-terminology.html">Terminology</a>
+      <a href="../articles/simmer-02-terminology.html">Terminology</a>
     </li>
     <li>
-      <a href="../articles/C-trajectories.html">Advanced Trajectory Usage</a>
+      <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
     </li>
     <li>
-      <a href="../articles/D-bank-1.html">The Bank Tutorial: Part I</a>
+      <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
-      <a href="../articles/E-simpy.html">Other SimPy Examples</a>
+      <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/F-queueing-systems.html">Queueing Systems</a>
+      <a href="../articles/simmer-06-queueing-systems.html">Queueing Systems</a>
     </li>
     <li>
-      <a href="../articles/G-ctmc.html">Continuous-Time Markov Chains</a>
+      <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
   </ul>
 </li>
@@ -191,13 +191,13 @@ activities that can be attached to a generator.</p>
 
 <span class='no'>t0</span></div><div class='output co'>#&gt; trajectory: my trajectory, 9 activities
 #&gt; { Activity: Seize        | resource: nurse, amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x676bef8 }
+#&gt; { Activity: Timeout      | delay: 0x8977510 }
 #&gt; { Activity: Release      | resource: nurse, amount: 1 }
 #&gt; { Activity: Seize        | resource: doctor, amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x601ff00 }
+#&gt; { Activity: Timeout      | delay: 0x87d0a38 }
 #&gt; { Activity: Release      | resource: doctor, amount: 1 }
 #&gt; { Activity: Seize        | resource: administration, amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x6481d58 }
+#&gt; { Activity: Timeout      | delay: 0x65b6a70 }
 #&gt; { Activity: Release      | resource: administration, amount: 1 }</div><div class='input'>
 <span class='no'>t1</span> <span class='kw'>&lt;-</span> <span class='fu'>trajectory</span>(<span class='st'>"trajectory with a branch"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
@@ -215,14 +215,14 @@ activities that can be attached to a generator.</p>
 
 <span class='no'>t1</span></div><div class='output co'>#&gt; trajectory: trajectory with a branch, 7 activities
 #&gt; { Activity: Seize        | resource: server, amount: 1 }
-#&gt; { Activity: Branch       | option: 0x5ee1768 }
+#&gt; { Activity: Branch       | option: 0x706d490 }
 #&gt;   Fork 1, continue,  trajectory: branch1, 1 activities
-#&gt;   { Activity: Timeout      | delay: 0x63320d0 }
+#&gt;   { Activity: Timeout      | delay: 0x68e1a50 }
 #&gt;   Fork 2, stop,  trajectory: branch2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x65590c8 }
+#&gt;   { Activity: Timeout      | delay: 0x7472358 }
 #&gt;   { Activity: Release      | resource: server, amount: 1 }
 #&gt; { Activity: Release      | resource: server, amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x6066eb0 }</div></pre>
+#&gt; { Activity: Timeout      | delay: 0x705af60 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -67,25 +67,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/A-introduction.html">Introduction to simmer</a>
+      <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/B-terminology.html">Terminology</a>
+      <a href="../articles/simmer-02-terminology.html">Terminology</a>
     </li>
     <li>
-      <a href="../articles/C-trajectories.html">Advanced Trajectory Usage</a>
+      <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
     </li>
     <li>
-      <a href="../articles/D-bank-1.html">The Bank Tutorial: Part I</a>
+      <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
-      <a href="../articles/E-simpy.html">Other SimPy Examples</a>
+      <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/F-queueing-systems.html">Queueing Systems</a>
+      <a href="../articles/simmer-06-queueing-systems.html">Queueing Systems</a>
     </li>
     <li>
-      <a href="../articles/G-ctmc.html">Continuous-Time Markov Chains</a>
+      <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
   </ul>
 </li>
@@ -135,9 +135,9 @@
     </div>
 
     <div class="contents">
-    <div id="simmer-3-6-1-9000" class="section level1">
+    <div id="simmer-3-6-2" class="section level1">
 <h1 class="hasAnchor">
-<a href="#simmer-3-6-1-9000" class="anchor"></a>simmer 3.6.1.9000</h1>
+<a href="#simmer-3-6-2" class="anchor"></a>simmer 3.6.2</h1>
 <div id="minor-changes-and-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes:</h2>
@@ -148,7 +148,8 @@
 <li>Accept dynamic timeouts in batches (#93).</li>
 <li>Change <code><a href="../reference/rollback.html">rollback()</a></code>’s default behaviour to <code>times=Inf</code>, i.e., infinite loop (#95).</li>
 <li>Stop and throw an error when <code><a href="../reference/timeout.html">timeout()</a></code> returns a missing value (#96 and #97).</li>
-<li>Fix memory management: resetting the environment was clearing but not deallocating memory (#98).</li>
+<li>Fix memory management: resetting the environment was clearing but not deallocating memory (#98, fixed in #99).</li>
+<li>Fix object destruction: workaround for tidyverse/magrittr#146 (#98, fixed in effcb6b).</li>
 </ul>
 </div>
 </div>
@@ -524,7 +525,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#simmer-3-6-1-9000">3.6.1.9000</a></li>
+        <li><a href="#simmer-3-6-2">3.6.2</a></li>
         <li><a href="#simmer-3-6-1">3.6.1</a></li>
         <li><a href="#simmer-3-6-0">3.6.0</a></li>
         <li><a href="#simmer-3-5-1">3.5.1</a></li>

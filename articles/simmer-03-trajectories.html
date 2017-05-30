@@ -45,25 +45,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/A-introduction.html">Introduction to simmer</a>
+      <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/B-terminology.html">Terminology</a>
+      <a href="../articles/simmer-02-terminology.html">Terminology</a>
     </li>
     <li>
-      <a href="../articles/C-trajectories.html">Advanced Trajectory Usage</a>
+      <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
     </li>
     <li>
-      <a href="../articles/D-bank-1.html">The Bank Tutorial: Part I</a>
+      <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
-      <a href="../articles/E-simpy.html">Other SimPy Examples</a>
+      <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/F-queueing-systems.html">Queueing Systems</a>
+      <a href="../articles/simmer-06-queueing-systems.html">Queueing Systems</a>
     </li>
     <li>
-      <a href="../articles/G-ctmc.html">Continuous-Time Markov Chains</a>
+      <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
   </ul>
 </li>
@@ -111,7 +111,7 @@
       <h1>Advanced Trajectory Usage</h1>
                         <h4 class="author">Iñaki Ucar, Bart Smeets</h4>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-05-30</h4>
           </div>
 
     
@@ -486,7 +486,7 @@ env &lt;-<span class="st"> </span>env %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">100</span>)
 
 <span class="kw">plot</span>(env, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="kw">c</span>(<span class="st">"res1"</span>, <span class="st">"res2"</span>), <span class="dt">steps =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="C-trajectories_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="simmer-03-trajectories_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="select" class="section level3">
 <h3 class="hasAnchor">
@@ -666,7 +666,7 @@ arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ge
 <span class="co"># The `activity_time` is the total time inside each branch for each arrival</span>
 <span class="co"># Let's see the distributions</span>
 <span class="kw">ggplot</span>(arrivals) +<span class="st"> </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x=</span>activity_time)) +<span class="st"> </span><span class="kw">facet_wrap</span>(~resource)</code></pre></div>
-<p><img src="C-trajectories_files/figure-html/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="simmer-03-trajectories_files/figure-html/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="rollback" class="section level3">
 <h3 class="hasAnchor">
@@ -1403,7 +1403,7 @@ t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajector
 env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, t, function() <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">4</span>)
-<span class="co">#&gt; Error in run_(private$sim_obj, until): objeto 'env' no encontrado</span></code></pre></div>
+<span class="co">#&gt; Error in run_(private$sim_obj, until): Evaluation error: objeto 'env' no encontrado.</span></code></pre></div>
 <p>Because the global <code>env</code> is not available at runtime: the simulation runs <em>and then</em> the resulting object is assigned to <code>env</code>. We need to assign first, then run. So this will work:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">print</span>(env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/now.html">now</a></span>()))

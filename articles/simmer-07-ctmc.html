@@ -45,25 +45,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/A-introduction.html">Introduction to simmer</a>
+      <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/B-terminology.html">Terminology</a>
+      <a href="../articles/simmer-02-terminology.html">Terminology</a>
     </li>
     <li>
-      <a href="../articles/C-trajectories.html">Advanced Trajectory Usage</a>
+      <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
     </li>
     <li>
-      <a href="../articles/D-bank-1.html">The Bank Tutorial: Part I</a>
+      <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
-      <a href="../articles/E-simpy.html">Other SimPy Examples</a>
+      <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/F-queueing-systems.html">Queueing Systems</a>
+      <a href="../articles/simmer-06-queueing-systems.html">Queueing Systems</a>
     </li>
     <li>
-      <a href="../articles/G-ctmc.html">Continuous-Time Markov Chains</a>
+      <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
   </ul>
 </li>
@@ -111,7 +111,7 @@
       <h1>Continuous-Time Markov Chains</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-05-30</h4>
           </div>
 
     
@@ -223,7 +223,7 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P *<sp
 <span class="co"># Evolution + theoretical value</span>
 <span class="kw">plot</span>(gas.station, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"pump"</span>, <span class="dt">items=</span><span class="st">"system"</span>) +
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>N_average_theor)</code></pre></div>
-<p><img src="G-ctmc_files/figure-html/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="simmer-07-ctmc_files/figure-html/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>And these are some performance results:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(microbenchmark)
 
@@ -384,7 +384,7 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P *<sp
 <span class="co"># Evolution + theoretical value</span>
 <span class="kw">plot</span>(gas.station, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"pump"</span>, <span class="dt">items=</span><span class="st">"system"</span>) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>N_average_theor)</code></pre></div>
-<p><img src="G-ctmc_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="simmer-07-ctmc_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>However, it is not the case in options 4 and 5. The parameters of these models are <em>adulterated</em> to fit our performance purposes. Therefore, we need to extract the RAW data, rescale the numbers and plot them. And, of course, we get the same figure:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gas.station &lt;-<span class="st"> </span><span class="kw">option.5</span>(<span class="dv">5000</span>)
 
@@ -404,7 +404,7 @@ limits &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span cl
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">"in use"</span>) +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">"time"</span>) +<span class="st"> </span><span class="kw">expand_limits</span>(<span class="dt">y=</span><span class="dv">0</span>) +
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept=</span>value, <span class="dt">color=</span>item), limits, <span class="dt">lty=</span><span class="dv">2</span>) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>N_average_theor)</code></pre></div>
-<p><img src="G-ctmc_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="simmer-07-ctmc_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>Finally, these are some performance results:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(microbenchmark)
 

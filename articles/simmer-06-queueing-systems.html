@@ -45,25 +45,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/A-introduction.html">Introduction to simmer</a>
+      <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/B-terminology.html">Terminology</a>
+      <a href="../articles/simmer-02-terminology.html">Terminology</a>
     </li>
     <li>
-      <a href="../articles/C-trajectories.html">Advanced Trajectory Usage</a>
+      <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
     </li>
     <li>
-      <a href="../articles/D-bank-1.html">The Bank Tutorial: Part I</a>
+      <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
-      <a href="../articles/E-simpy.html">Other SimPy Examples</a>
+      <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/F-queueing-systems.html">Queueing Systems</a>
+      <a href="../articles/simmer-06-queueing-systems.html">Queueing Systems</a>
     </li>
     <li>
-      <a href="../articles/G-ctmc.html">Continuous-Time Markov Chains</a>
+      <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
   </ul>
 </li>
@@ -111,7 +111,7 @@
       <h1>Queueing Systems</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2017-05-16</h4>
+            <h4 class="date">2017-05-30</h4>
           </div>
 
     
@@ -153,14 +153,14 @@ mm1.N &lt;-<span class="st"> </span>rho/(<span class="dv">1</span>-rho)
 <span class="co"># Evolution of the average number of customers in the system</span>
 <span class="kw">plot</span>(mm1.env, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"resource"</span>, <span class="dt">items=</span><span class="st">"system"</span>) +
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>mm1.N)</code></pre></div>
-<p><img src="F-queueing-systems_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="simmer-06-queueing-systems_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>It is possible also to visualise, for instance, the instantaneous usage of individual elements by playing with the parameters <code>items</code> and <code>steps</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(mm1.env, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"resource"</span>, <span class="dt">items=</span><span class="kw">c</span>(<span class="st">"queue"</span>, <span class="st">"server"</span>), <span class="dt">steps=</span><span class="ot">TRUE</span>) +
 <span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">20</span>) +<span class="st"> </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">4</span>)
 <span class="co">#&gt; Warning: Removed 16112 rows containing missing values (geom_path).</span>
 
 <span class="co">#&gt; Warning: Removed 16112 rows containing missing values (geom_path).</span></code></pre></div>
-<p><img src="F-queueing-systems_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="simmer-06-queueing-systems_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>Experimentally, we obtain the time spent by each customer in the system and we compare the average with the theoretical expression.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mm1.arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(mm1.env)
 mm1.t_system &lt;-<span class="st"> </span>mm1.arrivals$end_time -<span class="st"> </span>mm1.arrivals$start_time
@@ -202,7 +202,7 @@ mm1.T ; <span class="kw">mean</span>(mm1.t_system)
 <p>Moreover, an M/M/1 satisfies that the distribution of the time spent in the system is, in turn, an exponential random variable with average <span class="math inline">\(T\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqplot</span>(mm1.t_system, <span class="kw">rexp</span>(<span class="dv">1000</span>, <span class="dv">1</span>/mm1.T))
 <span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">"red"</span>)</code></pre></div>
-<p><img src="F-queueing-systems_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="simmer-06-queueing-systems_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="mmck-systems" class="section level2">
 <h2 class="hasAnchor">
@@ -232,7 +232,7 @@ mm23.arrivals %&gt;%
 <span class="co"># Comparison with M/M/1 times</span>
 <span class="kw">qqplot</span>(mm1.t_system, mm23.t_system)
 <span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">"red"</span>)</code></pre></div>
-<p><img src="F-queueing-systems_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="simmer-06-queueing-systems_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="queueing-networks" class="section level2">
 <h2 class="hasAnchor">
@@ -309,6 +309,7 @@ dplyr::<span class="kw">summarise</span>(arr, <span class="dt">average =</span> 
 <span class="co">#&gt; Source: local data frame [5 x 3]</span>
 <span class="co">#&gt; Groups: generator [?]</span>
 <span class="co">#&gt; </span>
+<span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt;   generator resource    average</span>
 <span class="co">#&gt;       &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt;</span>
 <span class="co">#&gt; 1  arrival1    md1_3 11.2998883</span>
@@ -322,6 +323,7 @@ dplyr::<span class="kw">count</span>(arr)
 <span class="co">#&gt; Source: local data frame [5 x 3]</span>
 <span class="co">#&gt; Groups: generator [?]</span>
 <span class="co">#&gt; </span>
+<span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt;   generator resource     n</span>
 <span class="co">#&gt;       &lt;chr&gt;    &lt;chr&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1  arrival1    md1_3  3951</span>
