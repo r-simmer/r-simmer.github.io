@@ -1,0 +1,29 @@
+---
+title: "simmer 3.6.2"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The second update of the 3.6.x release of [simmer](http://r-simmer.org/), the Discrete-Event Simulator for R, is on CRAN, thus inaugurating a bi-monthly release cycle. I must thank Duncan Garmonsway (@[nacnudus](https://github.com/nacnudus)) for creating and now maintaining ["The Bank Tutorial: Part I"](http://r-simmer.org/articles/simmer-04-bank-1.html) vignette, Franz Fuchs for finding an important and weird memory bug ([here](https://groups.google.com/forum/#!topic/simmer-devel/A4M7uP0Lmgw)) that prevented `simmer` from freeing the allocated memory (all 3.x.x versions are affected up to this release), and the `Rcpp` people [for enduring me](https://github.com/RcppCore/Rcpp/issues/693) while I was helplessly searching for a solution to this. :)
+
+My special thanks to Kevin Ushey (@[kevinushey](https://github.com/kevinushey)), who finally [found the bug](https://github.com/tidyverse/magrittr/issues/146#issuecomment-301624507). As it happens, the bug was not in `simmer` or `Rcpp` but  in `magrittr`, and the problem is that the pipe operator, in its inscrutable magic, creates a new environment for unnamed functions (instead of the current one, as it should be), and there it stores a reference to the first object in the pipe. More or less. Further details [here](https://github.com/tidyverse/magrittr/issues/146#issuecomment-301805434).
+
+Anyway, if somebody faces the same problem, know that there is a workaround: you just need to delete that hidden reference, [as `simmer` does in this release](https://github.com/r-simmer/simmer/blob/master/R/utils.R#L53) to get rid of the memory issues. Happy simmering!
+
+> ### Minor changes and fixes:
+> 
+> * Update "The Bank Tutorial: Part I" vignette (@nacnudus in #90).
+> * Fix `trap()`'s handler cloning and associated test (#91).
+> * Apply `select()`'s `policy` also when `resources` is a function (#92).
+> * Accept dynamic timeouts in batches (#93).
+> * Change `rollback()`'s default behaviour to `times=Inf`, i.e., infinite loop (#95).
+> * Stop and throw an error when `timeout()` returns a missing value (#96 and #97).
+> * Fix memory management: resetting the environment was clearing but not deallocating memory (#98, fixed in #99).
+> * Fix object destruction: workaround for tidyverse/magrittr#146 (#98, fixed in effcb6b).
