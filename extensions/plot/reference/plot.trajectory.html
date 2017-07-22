@@ -23,9 +23,10 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -115,23 +116,34 @@
     <p>A method for the <code>plot</code> generic that plots a diagram of the given trajectory.</p>
     
 
-    <pre><span class='co'># S3 method for trajectory</span>
+    <pre class="usage"><span class='co'># S3 method for trajectory</span>
 <span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>engine</span> <span class='kw'>=</span> <span class='st'>"dot"</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='kw'>scales</span><span class='kw'>::</span><span class='fu'>brewer_pal</span>(<span class='st'>"qual"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/scales/topics/brewer_pal'>brewer_pal</a></span>(<span class='st'>"qual"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>x</dt>
-      <dd><p>a simmer trajectory.</p></dd>
-      <dt>engine</dt>
-      <dd><p>a string specifying a layout engine (see <code>grViz</code>).</p></dd>
-      <dt>fill</dt>
-      <dd><p>discrete color palette for resource identification.</p></dd>
-      <dt>verbose</dt>
-      <dd><p>show additional info directly in the labels.</p></dd>
-      <dt>...</dt>
-      <dd><p>additional parameters for <code>render_graph</code>.</p></dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>a simmer trajectory.</p></td>
+    </tr>
+    <tr>
+      <th>engine</th>
+      <td><p>a string specifying a layout engine (see <code>grViz</code>).</p></td>
+    </tr>
+    <tr>
+      <th>fill</th>
+      <td><p>discrete color palette for resource identification.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>show additional info directly in the labels.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional parameters for <code>render_graph</code>.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
