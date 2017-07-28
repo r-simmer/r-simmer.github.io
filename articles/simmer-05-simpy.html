@@ -57,6 +57,9 @@
       <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
+      <a href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
+    </li>
+    <li>
       <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
@@ -111,7 +114,7 @@
       <h1>Other SimPy Examples</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2017-05-30</h4>
+            <h4 class="date">2017-07-28</h4>
           </div>
 
     
@@ -145,7 +148,7 @@ SIM_TIME &lt;-<span class="st"> </span><span class="dv">20</span>     <span clas
 
 <span class="co"># setup</span>
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()</code></pre></div>
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>()</code></pre></div>
 <p>The implementation with <code>simmer</code> is as simple as defining the trajectory each arriving <code>car</code> will share and follow. This trajectory comprises seizing a wash machine, spending some time and releasing it. The process takes <code>WASHTIME</code> and removes some random percentage of dirt between 50 and 90%. The <code><a href="../reference/log_.html">log_()</a></code> messages are merely illustrative.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">car &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"arrives at the carwash"</span>) %&gt;%
@@ -153,8 +156,8 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"enters the carwash"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(WASHTIME) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"dirt_removed"</span>, function() <span class="kw">sample</span>(<span class="dv">50</span>:<span class="dv">99</span>, <span class="dv">1</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function(attr) 
-    <span class="kw">paste0</span>(attr[<span class="st">"dirt_removed"</span>], <span class="st">"% of dirt was removed"</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() 
+    <span class="kw">paste0</span>(<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"dirt_removed"</span>), <span class="st">"% of dirt was removed"</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"wash"</span>, <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"leaves the carwash"</span>)</code></pre></div>
 <p>Finally, we setup the resources and feed the trajectory with a couple of generators. The result is shown below:</p>
@@ -189,7 +192,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="co">#&gt; 18: car1: arrives at the carwash</span>
 <span class="co">#&gt; 18: car1: enters the carwash</span>
 <span class="co">#&gt; simmer environment: anonymous | now: 20 | next: 23</span>
-<span class="co">#&gt; { Resource: wash | monitored: 1 | server status: 1(2) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Resource: wash | monitored: TRUE | server status: 1(2) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: car_initial | monitored: 1 | n_generated: 4 }</span>
 <span class="co">#&gt; { Generator: car | monitored: 1 | n_generated: 3 }</span></code></pre></div>
 </div>
@@ -222,14 +225,14 @@ SIM_TIME &lt;-<span class="st"> </span>WEEKS *<span class="st"> </span><span cla
 
 <span class="co"># setup</span>
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()</code></pre></div>
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>()</code></pre></div>
 <p>The <code>make_parts</code> trajectory defines a machine’s operating loop. A worker seizes the machine and starts manufacturing and counting parts in an infinite loop. Provided we want more than one machine, we parametrise the trajectory as a function of the machine:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">make_parts &lt;-<span class="st"> </span>function(machine)
   <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"parts"</span>, <span class="dv">0</span>) %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(machine, <span class="dv">1</span>) %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rnorm</span>(<span class="dv">1</span>, PT_MEAN, PT_SIGMA)) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"parts"</span>, function(attr) attr[<span class="st">"parts"</span>] +<span class="st"> </span><span class="dv">1</span>) %&gt;%
+<span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"parts"</span>, function() <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"parts"</span>) +<span class="st"> </span><span class="dv">1</span>) %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dv">2</span>, <span class="ot">Inf</span>) <span class="co"># go to 'timeout' over and over</span></code></pre></div>
 <p>Repairman’s <em>unimportant</em> jobs may be modelled in the same way (without the accounting part):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">other_jobs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
@@ -266,10 +269,8 @@ failure &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tra
 <span class="st">  </span>dplyr::<span class="kw">group_by</span>(name) %&gt;%
 <span class="st">  </span>dplyr::<span class="kw">slice</span>(<span class="kw">n</span>()) %&gt;%
 <span class="st">  </span>dplyr::<span class="kw">arrange</span>(name)
-<span class="co">#&gt; Source: local data frame [10 x 5]</span>
-<span class="co">#&gt; Groups: name [10]</span>
-<span class="co">#&gt; </span>
 <span class="co">#&gt; # A tibble: 10 x 5</span>
+<span class="co">#&gt; # Groups:   name [10]</span>
 <span class="co">#&gt;        time             name   key value replication</span>
 <span class="co">#&gt;       &lt;dbl&gt;            &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;       &lt;int&gt;</span>
 <span class="co">#&gt;  1 40312.79 machine0_worker0 parts  3234           1</span>
@@ -306,7 +307,7 @@ movies &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">
 
 <span class="co"># setup</span>
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()</code></pre></div>
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>()</code></pre></div>
 <p>The main actor of this simulation is the <em>moviegoer</em>, a process that will try to buy a number of tickets for a certain movie. The logic is as follows:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -339,11 +340,11 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">moviegoer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="co"># select a movie</span>
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"movie"</span>, function() <span class="kw">sample</span>(<span class="dv">3</span>, <span class="dv">1</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/select.html">select</a></span>(function(attr) movies[attr[<span class="st">"movie"</span>]]) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/select.html">select</a></span>(function() movies[<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"movie"</span>)]) %&gt;%
 <span class="st">  </span><span class="co"># set reneging condition</span>
-<span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_if</a></span>(function(attr) <span class="kw">paste0</span>(movies[attr[<span class="st">"movie"</span>]], <span class="st">" sold out"</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_if</a></span>(function() <span class="kw">paste0</span>(movies[<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"movie"</span>)], <span class="st">" sold out"</span>)) %&gt;%
 <span class="st">  </span><span class="co"># leave immediately if the movie was already sold out</span>
-<span class="st">  </span><span class="kw"><a href="../reference/leave.html">leave</a></span>(function(attr) <span class="kw"><a href="../reference/get_capacity.html">get_capacity</a></span>(env, movies[attr[<span class="st">"movie"</span>]]) ==<span class="st"> </span><span class="dv">0</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/leave.html">leave</a></span>(function() <span class="kw"><a href="../reference/get_capacity.html">get_capacity</a></span>(env, movies[<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"movie"</span>)]) ==<span class="st"> </span><span class="dv">0</span>) %&gt;%
 <span class="st">  </span><span class="co"># wait for my turn</span>
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>, <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="co"># buy tickets</span>
@@ -356,12 +357,12 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="co"># abort reneging condition</span>
 <span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_abort</a></span>() %&gt;%
 <span class="st">  </span><span class="co"># check the tickets available</span>
-<span class="st">  </span><span class="kw"><a href="../reference/branch.html">branch</a></span>(function(attr) <span class="kw"><a href="../reference/get_capacity.html">get_server_count</a></span>(env, movies[attr[<span class="st">"movie"</span>]]) &gt;<span class="st"> </span>(TICKETS -<span class="st"> </span><span class="dv">2</span>),
+<span class="st">  </span><span class="kw"><a href="../reference/branch.html">branch</a></span>(function() <span class="kw"><a href="../reference/get_capacity.html">get_server_count</a></span>(env, movies[<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"movie"</span>)]) &gt;<span class="st"> </span>(TICKETS -<span class="st"> </span><span class="dv">2</span>),
          <span class="dt">continue =</span> <span class="ot">TRUE</span>,
          <span class="co"># trigger the "sold out" event for the movie</span>
          <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">           </span><span class="kw"><a href="../reference/set_capacity.html">set_capacity_selected</a></span>(<span class="dv">0</span>) %&gt;%
-<span class="st">           </span><span class="kw"><a href="../reference/send.html">send</a></span>(function(attr) <span class="kw">paste0</span>(movies[attr[<span class="st">"movie"</span>]], <span class="st">" sold out"</span>))
+<span class="st">           </span><span class="kw"><a href="../reference/send.html">send</a></span>(function() <span class="kw">paste0</span>(movies[<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"movie"</span>)], <span class="st">" sold out"</span>))
   ) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>, <span class="dv">1</span>) %&gt;%
@@ -375,20 +376,20 @@ for (i in movies) env %&gt;%
 <span class="co"># add ticket counter with capacity 1 and infinite queue</span>
 env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>, <span class="dv">1</span>, <span class="ot">Inf</span>)
 <span class="co">#&gt; simmer environment: anonymous | now: 0 | next: </span>
-<span class="co">#&gt; { Resource: R Unchained | monitored: 1 | server status: 0(50) | queue status: 0(0) }</span>
-<span class="co">#&gt; { Resource: Kill Process | monitored: 1 | server status: 0(50) | queue status: 0(0) }</span>
-<span class="co">#&gt; { Resource: Pulp Implementation | monitored: 1 | server status: 0(50) | queue status: 0(0) }</span>
-<span class="co">#&gt; { Resource: counter | monitored: 1 | server status: 0(1) | queue status: 0(Inf) }</span></code></pre></div>
+<span class="co">#&gt; { Resource: R Unchained | monitored: TRUE | server status: 0(50) | queue status: 0(0) }</span>
+<span class="co">#&gt; { Resource: Kill Process | monitored: TRUE | server status: 0(50) | queue status: 0(0) }</span>
+<span class="co">#&gt; { Resource: Pulp Implementation | monitored: TRUE | server status: 0(50) | queue status: 0(0) }</span>
+<span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span></code></pre></div>
 <p>And finally, we attach an exponential <em>moviegoer</em> generator to the <code>moviegoer</code> trajectory and the simulation starts:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add a moviegoer generator and start simulation</span>
 env %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"moviegoer"</span>, moviegoer, function() <span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span> /<span class="st"> </span><span class="fl">0.5</span>), <span class="dt">mon=</span><span class="dv">2</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(SIM_TIME)
 <span class="co">#&gt; simmer environment: anonymous | now: 120 | next: 120.289360000071</span>
-<span class="co">#&gt; { Resource: R Unchained | monitored: 1 | server status: 50(0) | queue status: 0(0) }</span>
-<span class="co">#&gt; { Resource: Kill Process | monitored: 1 | server status: 49(0) | queue status: 0(0) }</span>
-<span class="co">#&gt; { Resource: Pulp Implementation | monitored: 1 | server status: 49(0) | queue status: 0(0) }</span>
-<span class="co">#&gt; { Resource: counter | monitored: 1 | server status: 0(1) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Resource: R Unchained | monitored: TRUE | server status: 50(0) | queue status: 0(0) }</span>
+<span class="co">#&gt; { Resource: Kill Process | monitored: TRUE | server status: 49(0) | queue status: 0(0) }</span>
+<span class="co">#&gt; { Resource: Pulp Implementation | monitored: TRUE | server status: 49(0) | queue status: 0(0) }</span>
+<span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: moviegoer | monitored: 2 | n_generated: 227 }</span></code></pre></div>
 <p><code>simmer</code> <em>automagically</em> monitors the system status, and this information can be retrieved with three methods:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env)
@@ -458,7 +459,7 @@ SIM_TIME &lt;-<span class="st"> </span><span class="dv">1000</span>            <
 
 <span class="co"># setup</span>
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()</code></pre></div>
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>()</code></pre></div>
 <p>SimPy solves this problem using a special kind of resource called <em>container</em>, which is not present in <code>simmer</code> so far. However, a container is nothing more than an embellished counter. Therefore, we can implement this in <code>simmer</code> with a global counter (<code>GAS_STATION_LEVEL</code> here), some signaling and some care checking the counter bounds.</p>
 <p>Let us consider just the refuelling process in the first place. A car needs to check whether there is enough fuel available to fill its tank. If not, it needs to block until the gas station is refilled.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GAS_STATION_LEVEL &lt;-<span class="st"> </span>GAS_STATION_SIZE
@@ -466,7 +467,7 @@ signal &lt;-<span class="st"> "gas station refilled"</span>
 
 refuelling &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="co"># check if there is enough fuel available</span>
-<span class="st">  </span><span class="kw"><a href="../reference/branch.html">branch</a></span>(function(attr) FUEL_TANK_SIZE -<span class="st"> </span>attr[<span class="st">"level"</span>] &gt;<span class="st"> </span>GAS_STATION_LEVEL, 
+<span class="st">  </span><span class="kw"><a href="../reference/branch.html">branch</a></span>(function() FUEL_TANK_SIZE -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"level"</span>) &gt;<span class="st"> </span>GAS_STATION_LEVEL, 
          <span class="dt">continue =</span> <span class="ot">TRUE</span>,
          <span class="co"># if not, block until the signal "gas station refilled" is received</span>
          <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
@@ -475,8 +476,8 @@ refuelling &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">           </span><span class="kw"><a href="../reference/send.html">untrap</a></span>(signal)
   ) %&gt;%
 <span class="st">  </span><span class="co"># refuel</span>
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function(attr) {
-    liters_required &lt;-<span class="st"> </span>FUEL_TANK_SIZE -<span class="st"> </span>attr[<span class="st">"level"</span>]
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() {
+    liters_required &lt;-<span class="st"> </span>FUEL_TANK_SIZE -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"level"</span>)
     GAS_STATION_LEVEL &lt;&lt;-<span class="st"> </span>GAS_STATION_LEVEL -<span class="st"> </span>liters_required
     <span class="kw">return</span>(liters_required /<span class="st"> </span>REFUELING_SPEED)
   })</code></pre></div>
@@ -490,8 +491,8 @@ refuelling &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="co"># 'join()' concatenates the refuelling trajectory here</span>
 <span class="st">  </span><span class="kw"><a href="../reference/join.html">join</a></span>(refuelling) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function(attr) 
-    <span class="kw">paste0</span>(<span class="st">"finished refuelling in "</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(env) -<span class="st"> </span>attr[<span class="st">"start"</span>], <span class="st">" seconds"</span>))</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() 
+    <span class="kw">paste0</span>(<span class="st">"finished refuelling in "</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(env) -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"start"</span>), <span class="st">" seconds"</span>))</code></pre></div>
 <p>The tank truck takes some time to arrive. Then, the gas station is completely refilled and the signal “gas station refilled” is sent to the blocked cars.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tank_truck &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(TANK_TRUCK_TIME) %&gt;%
@@ -549,7 +550,7 @@ refuelling &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="co">#&gt; 931: car12: arriving at gas station</span>
 <span class="co">#&gt; 997: car13: arriving at gas station</span>
 <span class="co">#&gt; simmer environment: anonymous | now: 1000 | next: 1091</span>
-<span class="co">#&gt; { Resource: pump | monitored: 1 | server status: 2(2) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Resource: pump | monitored: TRUE | server status: 2(2) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: controller | monitored: 1 | n_generated: 1 }</span>
 <span class="co">#&gt; { Generator: car | monitored: 1 | n_generated: 15 }</span></code></pre></div>
 </div>
@@ -558,7 +559,8 @@ refuelling &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#introduction">Introduction</a></li>
       <li><a href="#carwash">Carwash</a></li>

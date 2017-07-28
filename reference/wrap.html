@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wrap a simulation environment — wrap • simmer</title>
+<title>Wrap a Simulation Environment — wrap • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,6 +80,9 @@
       <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
+      <a href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
+    </li>
+    <li>
       <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
@@ -130,7 +134,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Wrap a simulation environment</h1>
+    <h1>Wrap a Simulation Environment</h1>
     </div>
 
     
@@ -164,22 +168,22 @@ simulation backend is destroyed when the threads exit.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='fu'>library</span>(<span class='no'>parallel</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>library</span>(<span class='no'>parallel</span>)
 
-  <span class='no'>mm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='kw'>function</span>() <span class='fu'>rexp</span>(<span class='fl'>1</span>, <span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>)
+<span class='no'>mm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='kw'>function</span>() <span class='fu'>rexp</span>(<span class='fl'>1</span>, <span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>)
 
-  <span class='no'>envs</span> <span class='kw'>&lt;-</span> <span class='fu'>mclapply</span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>function</span>(<span class='no'>i</span>) {
-    <span class='fu'><a href='simmer.html'>simmer</a></span>(<span class='st'>"M/M/1 example"</span>) <span class='kw'>%&gt;%</span>
-      <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-      <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"customer"</span>, <span class='no'>mm1</span>, <span class='kw'>function</span>() <span class='fu'>rexp</span>(<span class='fl'>1</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
-      <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>100</span>) <span class='kw'>%&gt;%</span>
-      <span class='fu'>wrap</span>()
-  })
-})</div></pre>
+<span class='no'>envs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/parallel/topics/mclapply'>mclapply</a></span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>function</span>(<span class='no'>i</span>) {
+  <span class='fu'>simmer</span>(<span class='st'>"M/M/1 example"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"customer"</span>, <span class='no'>mm1</span>, <span class='kw'>function</span>() <span class='fu'>rexp</span>(<span class='fl'>1</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>100</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'>wrap</span>()
+})
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

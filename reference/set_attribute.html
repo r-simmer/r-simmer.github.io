@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add a set attribute activity — set_attribute • simmer</title>
+<title>Set Attributes — set_attribute • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,6 +80,9 @@
       <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
+      <a href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
+    </li>
+    <li>
       <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
@@ -130,14 +134,16 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add a set attribute activity</h1>
+    <h1>Set Attributes</h1>
     </div>
 
     
-    <p>Modify an attribute in the form of a key/value pair.</p>
+    <p>Activity for modifying an arrival's attribute in the form of a key/value pair.</p>
     
 
-    <pre class="usage"><span class='fu'>set_attribute</span>(<span class='no'>.trj</span>, <span class='no'>key</span>, <span class='no'>value</span>, <span class='kw'>global</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>set_attribute</span>(<span class='no'>.trj</span>, <span class='no'>key</span>, <span class='no'>value</span>, <span class='kw'>global</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>set_global</span>(<span class='no'>.trj</span>, <span class='no'>key</span>, <span class='no'>value</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -148,7 +154,7 @@
     </tr>
     <tr>
       <th>key</th>
-      <td><p>the attribute key (coerced to a string).</p></td>
+      <td><p>the attribute name.</p></td>
     </tr>
     <tr>
       <th>value</th>
@@ -165,6 +171,14 @@
 
     <p>Returns the trajectory object.</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>set_global</code> is a shortcut for <code>set_attribute(global=TRUE)</code>.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><code><a href='get_n_generated.html'>get_attribute</a></code>.</p>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -173,6 +187,10 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add a set capacity/queue size activity — set_capacity • simmer</title>
+<title>Set Resource Parameters — set_capacity • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,6 +80,9 @@
       <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
+      <a href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
+    </li>
+    <li>
       <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
@@ -130,11 +134,12 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add a set capacity/queue size activity</h1>
+    <h1>Set Resource Parameters</h1>
     </div>
 
     
-    <p>Modify a resource's server capacity or queue size, by name or a previously selected one.</p>
+    <p>Activities for modifying a resource's server capacity or queue size, by name
+or a previously selected one.</p>
     
 
     <pre class="usage"><span class='fu'>set_capacity</span>(<span class='no'>.trj</span>, <span class='no'>resource</span>, <span class='no'>value</span>)
@@ -173,7 +178,8 @@
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><code><a href='select.html'>select</a></code>, <code><a href='seize.html'>seize</a></code>, <code><a href='seize.html'>release</a></code>,
-<code><a href='seize.html'>seize_selected</a></code>, <code><a href='seize.html'>release_selected</a></code>.</p>
+<code><a href='seize.html'>seize_selected</a></code>, <code><a href='seize.html'>release_selected</a></code>,
+<code><a href='get_capacity.html'>get_capacity</a></code>, <code><a href='get_capacity.html'>get_queue_size</a></code>.</p>
     
 
   </div>

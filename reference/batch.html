@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add a batch/separate activity — batch • simmer</title>
+<title>Batch/Separate Arrivals — batch • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,6 +80,9 @@
       <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
+      <a href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
+    </li>
+    <li>
       <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
@@ -130,12 +134,12 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add a batch/separate activity</h1>
+    <h1>Batch/Separate Arrivals</h1>
     </div>
 
     
-    <p>Collect a number of arrivals before they can continue processing
-or split a previously established batch.</p>
+    <p>Activities for collecting a number of arrivals before they can continue processing
+and splitting a previously established batch.</p>
     
 
     <pre class="usage"><span class='fu'>batch</span>(<span class='no'>.trj</span>, <span class='no'>n</span>, <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>permanent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>rule</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)

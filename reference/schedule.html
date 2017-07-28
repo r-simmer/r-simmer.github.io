@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate a scheduling object — schedule • simmer</title>
+<title>Generate a Scheduling Object — schedule • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,6 +80,9 @@
       <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
+      <a href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
+    </li>
+    <li>
       <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
@@ -130,7 +134,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate a scheduling object</h1>
+    <h1>Generate a Scheduling Object</h1>
     </div>
 
     
@@ -158,7 +162,7 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a Schedule object.</p>
+    <p>Returns a <code>schedule</code> object.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -171,7 +175,7 @@
 <span class='co'>#          1 units from 24 to 8 h</span>
 <span class='no'>capacity_schedule</span> <span class='kw'>&lt;-</span> <span class='fu'>schedule</span>(<span class='fu'>c</span>(<span class='fl'>8</span>, <span class='fl'>16</span>, <span class='fl'>24</span>), <span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>1</span>), <span class='kw'>period</span><span class='kw'>=</span><span class='fl'>24</span>)
 
-<span class='no'>env</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+<span class='no'>env</span> <span class='kw'>&lt;-</span> <span class='fu'>simmer</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"dummy"</span>, <span class='no'>capacity_schedule</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Arrivals at specific times — at • simmer</title>
+<title>Convenience Functions for Generators — at • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,6 +80,9 @@
       <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
+      <a href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
+    </li>
+    <li>
       <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
@@ -130,14 +134,21 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Arrivals at specific times</h1>
+    <h1>Convenience Functions for Generators</h1>
     </div>
 
     
-    <p>Generator convenience function to generate arrivals at specific times.</p>
+    <p>These convenience functions facilitate the definition of generators of arrivals
+for some common cases.</p>
     
 
-    <pre class="usage"><span class='fu'>at</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>at</span>(<span class='no'>...</span>)
+
+<span class='fu'>from</span>(<span class='no'>start_time</span>, <span class='no'>dist</span>, <span class='kw'>arrive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>to</span>(<span class='no'>stop_time</span>, <span class='no'>dist</span>)
+
+<span class='fu'>from_to</span>(<span class='no'>start_time</span>, <span class='no'>stop_time</span>, <span class='no'>dist</span>, <span class='kw'>arrive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>every</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -146,11 +157,43 @@
       <th>...</th>
       <td><p>a vector or multiple parameters of times at which to initiate an arrival.</p></td>
     </tr>
+    <tr>
+      <th>start_time</th>
+      <td><p>the time at which to launch the initial arrival.</p></td>
+    </tr>
+    <tr>
+      <th>dist</th>
+      <td><p>a function modelling the interarrival times.</p></td>
+    </tr>
+    <tr>
+      <th>arrive</th>
+      <td><p>if set to <code>TRUE</code> (default) the first arrival will be
+generated at <code>start_time</code> and will follow <code>dist</code> from then on.
+If set to <code>FALSE</code>, will initiate <code>dist</code> at <code>start_time</code>
+(and the first arrival will most likely start at a time later than
+<code>start_time</code>).</p></td>
+    </tr>
+    <tr>
+      <th>stop_time</th>
+      <td><p>the time at which to stop the generator.</p></td>
+    </tr>
+    <tr>
+      <th>every</th>
+      <td><p>repeat with this time cycle.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns a generator function.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>at</code> generates arrivals at specific absolute times.
+<code>from</code> generates inter-arrivals following a given distribution
+with a specified start time. <code>to</code> generates inter-arrivals following
+a given distribution with a specified stop time. <code>from_to</code> is the
+union of the last two.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -161,7 +204,7 @@
     <pre class="examples"><div class='input'><span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>0</span>)
 
-<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+<span class='fu'>simmer</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>t0</span>, <span class='fu'>at</span>(<span class='fl'>0</span>, <span class='fu'>c</span>(<span class='fl'>1</span>,<span class='fl'>10</span>,<span class='fl'>30</span>), <span class='fl'>40</span>, <span class='fl'>43</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>100</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='get_mon.html'>get_mon_arrivals</a></span>()</div><div class='output co'>#&gt;     name start_time end_time activity_time finished replication
@@ -170,7 +213,45 @@
 #&gt; 3 dummy2         10       10             0     TRUE           1
 #&gt; 4 dummy3         30       30             0     TRUE           1
 #&gt; 5 dummy4         40       40             0     TRUE           1
-#&gt; 6 dummy5         43       43             0     TRUE           1</div></pre>
+#&gt; 6 dummy5         43       43             0     TRUE           1</div><div class='input'><span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>0</span>)
+
+<span class='fu'>simmer</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>t0</span>, <span class='fu'>from</span>(<span class='fl'>5</span>, <span class='kw'>function</span>() <span class='fu'>runif</span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>))) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>10</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='get_mon.html'>get_mon_arrivals</a></span>()</div><div class='output co'>#&gt;     name start_time end_time activity_time finished replication
+#&gt; 1 dummy0   5.000000 5.000000             0     TRUE           1
+#&gt; 2 dummy1   6.080750 6.080750             0     TRUE           1
+#&gt; 3 dummy2   7.915083 7.915083             0     TRUE           1
+#&gt; 4 dummy3   9.515844 9.515844             0     TRUE           1</div><div class='input'><span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>0</span>)
+
+<span class='fu'>simmer</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>t0</span>, <span class='fu'>to</span>(<span class='fl'>5</span>, <span class='kw'>function</span>() <span class='fu'>runif</span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>))) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>10</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='get_mon.html'>get_mon_arrivals</a></span>()</div><div class='output co'>#&gt;     name start_time end_time activity_time finished replication
+#&gt; 1 dummy0   1.007399 1.007399             0     TRUE           1
+#&gt; 2 dummy1   2.473793 2.473793             0     TRUE           1
+#&gt; 3 dummy2   3.971570 3.971570             0     TRUE           1</div><div class='input'><span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>0</span>)
+
+<span class='co'># from 8 to 16 h every 24 h:</span>
+<span class='fu'>simmer</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>t0</span>, <span class='fu'>from_to</span>(<span class='fl'>8</span>, <span class='fl'>16</span>, <span class='kw'>function</span>() <span class='fu'>runif</span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>every</span><span class='kw'>=</span><span class='fl'>24</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>48</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='get_mon.html'>get_mon_arrivals</a></span>()</div><div class='output co'>#&gt;       name start_time  end_time activity_time finished replication
+#&gt; 1   dummy0   8.000000  8.000000             0     TRUE           1
+#&gt; 2   dummy1   9.732882  9.732882             0     TRUE           1
+#&gt; 3   dummy2  11.505403 11.505403             0     TRUE           1
+#&gt; 4   dummy3  13.380004 13.380004             0     TRUE           1
+#&gt; 5   dummy4  14.554945 14.554945             0     TRUE           1
+#&gt; 6   dummy5  15.589186 15.589186             0     TRUE           1
+#&gt; 7   dummy6  32.000000 32.000000             0     TRUE           1
+#&gt; 8   dummy7  33.402328 33.402328             0     TRUE           1
+#&gt; 9   dummy8  34.597998 34.597998             0     TRUE           1
+#&gt; 10  dummy9  36.001536 36.001536             0     TRUE           1
+#&gt; 11 dummy10  37.065198 37.065198             0     TRUE           1
+#&gt; 12 dummy11  38.453899 38.453899             0     TRUE           1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -178,6 +259,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

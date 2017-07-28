@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -79,6 +80,9 @@
       <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
+      <a href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
+    </li>
+    <li>
       <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
@@ -132,7 +136,7 @@
     <div class="page-header">
       <h1>
         Reference
-        <small>version&nbsp;3.6.2</small>
+        <small>version&nbsp;3.6.3</small>
       </h1>
     </div>
 
@@ -156,30 +160,30 @@
           <td>
             <p><code><a href="trajectory.html">trajectory</a></code> <code><a href="trajectory.html">create_trajectory</a></code> </p>
           </td>
-          <td><p>Create a trajectory</p></td>
+          <td><p>Create a Trajectory</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="Extract.trajectory.html">Extract.trajectory</a></code> </p>
+            <p></p>
           </td>
-          <td><p>Extract or replace parts of a trajectory</p></td>
+          <td><p>Extract or Replace Parts of a Trajectory</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="join.html">join</a></code> </p>
           </td>
-          <td><p>Join trajectories</p></td>
+          <td><p>Join Trajectories</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="length.trajectory.html">length</a></code> <code><a href="length.trajectory.html">get_n_activities</a></code> </p>
           </td>
-          <td><p>Number of activities in a trajectory</p></td>
+          <td><p>Number of Activities in a Trajectory</p></td>
         </tr>
       </tbody><tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-add-activities" class="hasAnchor"><a href="#section-add-activities" class="anchor"></a>Add activities</h2>
+            <h2 id="section-add-activities-to-trajectories" class="hasAnchor"><a href="#section-add-activities-to-trajectories" class="anchor"></a>Add activities to trajectories</h2>
             <p class="section-desc"><p>Verbs for appending activities to trajectory objects</p></p>
           </th>
         </tr>
@@ -188,97 +192,97 @@
           <td>
             <p><code><a href="batch.html">batch</a></code> <code><a href="batch.html">separate</a></code> </p>
           </td>
-          <td><p>Add a batch/separate activity</p></td>
+          <td><p>Batch/Separate Arrivals</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="branch.html">branch</a></code> </p>
           </td>
-          <td><p>Add a branch activity</p></td>
+          <td><p>Fork the Trajectory Path</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="clone.html">clone</a></code> <code><a href="clone.html">synchronize</a></code> </p>
           </td>
-          <td><p>Add a clone/synchronize activity</p></td>
+          <td><p>Clone/Synchronize Arrivals</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="leave.html">leave</a></code> </p>
           </td>
-          <td><p>Add a leave activity</p></td>
+          <td><p>Leave the Trajectory</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="renege_in.html">renege_in</a></code> <code><a href="renege_in.html">renege_if</a></code> <code><a href="renege_in.html">renege_abort</a></code> </p>
           </td>
-          <td><p>Add a renege activity</p></td>
+          <td><p>Renege on some Condition</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="rollback.html">rollback</a></code> </p>
           </td>
-          <td><p>Add a rollback activity</p></td>
+          <td><p>Rollback a Number of Activities</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="seize.html">seize</a></code> <code><a href="seize.html">seize_selected</a></code> <code><a href="seize.html">release</a></code> <code><a href="seize.html">release_selected</a></code> </p>
           </td>
-          <td><p>Add a seize/release activity</p></td>
+          <td><p>Seize/Release Resources</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="select.html">select</a></code> </p>
           </td>
-          <td><p>Select a resource</p></td>
+          <td><p>Select Resources</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="set_attribute.html">set_attribute</a></code> </p>
+            <p><code><a href="set_attribute.html">set_attribute</a></code> <code><a href="set_attribute.html">set_global</a></code> </p>
           </td>
-          <td><p>Add a set attribute activity</p></td>
+          <td><p>Set Attributes</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="set_prioritization.html">set_prioritization</a></code> </p>
           </td>
-          <td><p>Add a set prioritization activity</p></td>
+          <td><p>Set Prioritization Values</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="set_capacity.html">set_capacity</a></code> <code><a href="set_capacity.html">set_capacity_selected</a></code> <code><a href="set_capacity.html">set_queue_size</a></code> <code><a href="set_capacity.html">set_queue_size_selected</a></code> </p>
           </td>
-          <td><p>Add a set capacity/queue size activity</p></td>
+          <td><p>Set Resource Parameters</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="timeout.html">timeout</a></code> </p>
           </td>
-          <td><p>Add a timeout activity</p></td>
+          <td><p>Delay</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="activate.html">activate</a></code> <code><a href="activate.html">deactivate</a></code> </p>
           </td>
-          <td><p>Add a activate/deactivate activity</p></td>
+          <td><p>Activate/Deactivate Generators</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="set_trajectory.html">set_trajectory</a></code> <code><a href="set_trajectory.html">set_distribution</a></code> </p>
           </td>
-          <td><p>Add a set trajectory/distribution activity</p></td>
+          <td><p>Set Generator Parameters</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="send.html">send</a></code> <code><a href="send.html">trap</a></code> <code><a href="send.html">untrap</a></code> <code><a href="send.html">wait</a></code> </p>
           </td>
-          <td><p>Add an inter-arrival communication activity</p></td>
+          <td><p>Inter-arrival Communication</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="log_.html">log_</a></code> </p>
           </td>
-          <td><p>Add a logging activity</p></td>
+          <td><p>Logging</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -298,31 +302,31 @@
           <td>
             <p><code><a href="add_generator.html">add_generator</a></code> </p>
           </td>
-          <td><p>Add a generator</p></td>
+          <td><p>Add a Generator</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="add_resource.html">add_resource</a></code> </p>
           </td>
-          <td><p>Add a resource</p></td>
+          <td><p>Add a Resource</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="reset.html">reset</a></code> </p>
           </td>
-          <td><p>Reset a simulator</p></td>
+          <td><p>Reset a Simulator</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="run.html">run</a></code> <code><a href="run.html">onestep</a></code> </p>
           </td>
-          <td><p>Run the simulation</p></td>
+          <td><p>Run a Simulation</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="wrap.html">wrap</a></code> </p>
           </td>
-          <td><p>Wrap a simulation environment</p></td>
+          <td><p>Wrap a Simulation Environment</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -334,33 +338,33 @@
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="get_n_generated.html">get_n_generated</a></code> </p>
+            <p><code><a href="get_n_generated.html">get_n_generated</a></code> <code><a href="get_n_generated.html">get_name</a></code> <code><a href="get_n_generated.html">get_attribute</a></code> <code><a href="get_n_generated.html">get_global</a></code> <code><a href="get_n_generated.html">get_prioritization</a></code> </p>
           </td>
-          <td><p>Get the number of arrivals generated</p></td>
+          <td><p>Get Process Parameters</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="get_capacity.html">get_capacity</a></code> <code><a href="get_capacity.html">get_queue_size</a></code> <code><a href="get_capacity.html">get_server_count</a></code> <code><a href="get_capacity.html">get_queue_count</a></code> </p>
           </td>
-          <td><p>Get a resource's parameter</p></td>
+          <td><p>Get Resource Parameters</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="now.html">now</a></code> </p>
           </td>
-          <td><p>Get current time</p></td>
+          <td><p>Simulation Time</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="peek.html">peek</a></code> </p>
           </td>
-          <td><p>Peek next events</p></td>
+          <td><p>Peek Next Events</p></td>
         </tr>
       </tbody><tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-statistics" class="hasAnchor"><a href="#section-statistics" class="anchor"></a>Statistics</h2>
-            <p class="section-desc"><p>Methods for getting monitored statistics</p></p>
+            <h2 id="section-monitoring" class="hasAnchor"><a href="#section-monitoring" class="anchor"></a>Monitoring</h2>
+            <p class="section-desc"><p>Methods for getting monitoring statistics</p></p>
           </th>
         </tr>
         <tr>
@@ -368,7 +372,7 @@
           <td>
             <p><code><a href="get_mon.html">get_mon_arrivals</a></code> <code><a href="get_mon.html">get_mon_attributes</a></code> <code><a href="get_mon.html">get_mon_resources</a></code> </p>
           </td>
-          <td><p>Get statistics</p></td>
+          <td><p>Monitoring Statistics</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -380,33 +384,15 @@
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="at.html">at</a></code> </p>
+            <p><code><a href="at.html">at</a></code> <code><a href="at.html">from</a></code> <code><a href="at.html">to</a></code> <code><a href="at.html">from_to</a></code> </p>
           </td>
-          <td><p>Arrivals at specific times</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="from.html">from</a></code> </p>
-          </td>
-          <td><p>Generate arrivals starting at a specified time</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="from_to.html">from_to</a></code> </p>
-          </td>
-          <td><p>Generate arrivals starting and stopping at specified times</p></td>
+          <td><p>Convenience Functions for Generators</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="schedule.html">schedule</a></code> </p>
           </td>
-          <td><p>Generate a scheduling object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="to.html">to</a></code> </p>
-          </td>
-          <td><p>Generate arrivals stopping at a specified time</p></td>
+          <td><p>Generate a Scheduling Object</p></td>
         </tr>
       </tbody>
       </table>
@@ -417,10 +403,10 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-build-and-manage-trajectories">Build and manage trajectories</a></li>
-      <li><a href="#section-add-activities">Add activities</a></li>
+      <li><a href="#section-add-activities-to-trajectories">Add activities to trajectories</a></li>
       <li><a href="#section-build-and-run-simulation-environments">Build and run simulation environments</a></li>
       <li><a href="#section-manage-simulation-environments">Manage simulation environments</a></li>
-      <li><a href="#section-statistics">Statistics</a></li>
+      <li><a href="#section-monitoring">Monitoring</a></li>
       <li><a href="#section-convenience-functions">Convenience functions</a></li>
     </ul>
   </div>

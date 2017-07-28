@@ -57,6 +57,9 @@
       <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
+      <a href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
+    </li>
+    <li>
       <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
@@ -111,7 +114,7 @@
       <h1>Advanced Trajectory Usage</h1>
                         <h4 class="author">Iñaki Ucar, Bart Smeets</h4>
             
-            <h4 class="date">2017-05-30</h4>
+            <h4 class="date">2017-07-28</h4>
           </div>
 
     
@@ -139,7 +142,7 @@
 t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"hello world!"</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, t, function() <span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">5</span>) %&gt;%<span class="st"> </span>invisible
 <span class="co">#&gt; 2.50176: dummy0: hello world!</span>
@@ -159,7 +162,7 @@ t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajector
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">5</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="dt">key =</span> <span class="st">"my_key"</span>, <span class="dt">value =</span> <span class="dv">456</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
 
@@ -168,19 +171,21 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="co">#&gt; 1    0 patient0 my_key   123           1</span>
 <span class="co">#&gt; 2    5 patient0 my_key   456           1</span></code></pre></div>
 <p>Above, a trajectory which <em>only</em> sets attribute <code>my_key</code> to value <code>123</code> is launched once by an arrival generated at time 0 (check <code><a href="../reference/at.html">?at</a></code>). The <code>mon=2</code> of <code><a href="../reference/add_generator.html">add_generator()</a></code> makes the simulation environment monitor the attributes’ evolution (disabled by default). Using <code><a href="../reference/get_mon.html">get_mon_attributes()</a></code>, we can look at the evolution of the value of <code>my_key</code>.</p>
-<p>If you want to set an attribute that depends on another attribute, or on the current value of the attribute to be set, this is also possible. In fact, if, instead of a numeric value, you supply a function with one parameter, the current set of attributes is passed as a list to that function. Whatever (numeric value) your function returns is set as the value of the specified attribute key. If the supplied function has no parameters, it is evaluated in the same way, but the attribute list is not accesible in the function body. This means that, if you supply a function to the <code>value</code> parameter, it has to be in the form of either <code>function(attrs){}</code> (first case) or <code>function(){}</code> (second case). Below, you can see an example of this in practice.</p>
+<p>If you want to set an attribute that depends on another attribute, or on the current value of the attribute to be set, this is also possible. Attributes can be retrieved inside user-supplied functions using <code><a href="../reference/get_n_generated.html">get_attribute(.)</a></code>. Below, you can see an example of this in practice.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"my_key"</span>, <span class="dv">123</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">5</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"my_key"</span>, function(attrs) attrs[[<span class="st">"my_key"</span>]] +<span class="st"> </span><span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"my_key"</span>, function() <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"my_key"</span>) +<span class="st"> </span><span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">5</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"dependent_key"</span>, function(attrs) <span class="kw">ifelse</span>(attrs[[<span class="st">"my_key"</span>]]&lt;=<span class="dv">123</span>, <span class="dv">1</span>, <span class="dv">0</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"dependent_key"</span>, function() <span class="kw">ifelse</span>(<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"my_key"</span>)&lt;=<span class="dv">123</span>, <span class="dv">1</span>, <span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">5</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"independent_key"</span>, function() <span class="kw">runif</span>(<span class="dv">1</span>))
 
-env&lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
+env&lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>)
+env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>()
+<span class="co">#&gt; simmer environment: anonymous | now: 15 | next: </span>
+<span class="co">#&gt; { Generator: patient | monitored: 2 | n_generated: 1 }</span>
 
 <span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)
 <span class="co">#&gt;   time     name             key       value replication</span>
@@ -188,35 +193,40 @@ env&lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.h
 <span class="co">#&gt; 2    5 patient0          my_key 124.0000000           1</span>
 <span class="co">#&gt; 3   10 patient0   dependent_key   0.0000000           1</span>
 <span class="co">#&gt; 4   15 patient0 independent_key   0.9234335           1</span></code></pre></div>
-<p>In general, whenever an activity accepts a function as a parameter, the rule above applies, and you can obtain the current set of attributes as the first argument of that function.</p>
 <p>Attributes are <em>per arrival</em> by default (<code>global=FALSE</code>), meaning that each arrival has its own set of attributes, not visible by anyone else:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">writer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="dt">key =</span> <span class="st">"my_key"</span>, <span class="dt">value =</span> <span class="dv">123</span>)
 
 reader &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function(attr) <span class="kw">paste0</span>(attr[<span class="st">"my_key"</span>]))
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() <span class="kw">paste0</span>(<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"my_key"</span>)))
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"writer"</span>, writer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"reader"</span>, reader, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">1</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"reader"</span>, reader, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">1</span>), <span class="dt">mon =</span> <span class="dv">2</span>)
+env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>()
 <span class="co">#&gt; 1: reader0: NA</span>
+<span class="co">#&gt; simmer environment: anonymous | now: 1 | next: </span>
+<span class="co">#&gt; { Generator: writer | monitored: 2 | n_generated: 1 }</span>
+<span class="co">#&gt; { Generator: reader | monitored: 2 | n_generated: 1 }</span>
 
 <span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)
 <span class="co">#&gt;   time    name    key value replication</span>
 <span class="co">#&gt; 1    0 writer0 my_key   123           1</span></code></pre></div>
-<p>Thus, the reader in the example above returns <code>NA</code>, missing. However, attributes can also be global with <code>global=TRUE</code>. To retrieve the global set of attributes in any activity that accepts a function as a parameter, you need to specify a second argument:</p>
+<p>Thus, the reader in the example above returns <code>NA</code>, missing. However, attributes can also be global with <code>global=TRUE</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">writer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="dt">key =</span> <span class="st">"my_key"</span>, <span class="dt">value =</span> <span class="dv">123</span>, <span class="dt">global =</span> <span class="ot">TRUE</span>)
 
 reader &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function(attr, glb) <span class="kw">paste0</span>(attr[<span class="st">"my_key"</span>], <span class="st">", "</span>, glb[<span class="st">"my_key"</span>]))
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() <span class="kw">paste0</span>(<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"my_key"</span>), <span class="st">", "</span>, <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"my_key"</span>, <span class="dt">global =</span> <span class="ot">TRUE</span>)))
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"writer"</span>, writer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"reader"</span>, reader, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">1</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"reader"</span>, reader, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">1</span>), <span class="dt">mon =</span> <span class="dv">2</span>)
+env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>()
 <span class="co">#&gt; 1: reader0: NA, 123</span>
+<span class="co">#&gt; simmer environment: anonymous | now: 1 | next: </span>
+<span class="co">#&gt; { Generator: writer | monitored: 2 | n_generated: 1 }</span>
+<span class="co">#&gt; { Generator: reader | monitored: 2 | n_generated: 1 }</span>
 
 <span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)
 <span class="co">#&gt;   time name    key value replication</span>
@@ -231,24 +241,26 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dt">task =</span> <span class="dv">3</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
 
 <span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env)
 <span class="co">#&gt;       name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 patient0          0        3             3     TRUE           1</span></code></pre></div>
-<p>Often, however, you want a timeout to be dependent on a distribution or, for example, an earlier set attribute. This is achieved by passing a function in to form of either <code>function(){}</code> or <code>function(attrs){}</code> to the <code>task</code> parameter, as we explained before. In the following example, this functionality is demonstrated:</p>
+<p>Often, however, you want a timeout to be dependent on a distribution or, for example, an earlier set attribute. This is achieved by passing a function to the <code>task</code> parameter, as we explained before, and using <code><a href="../reference/get_n_generated.html">get_attribute(.)</a></code>. In the following example, this functionality is demonstrated:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"health"</span>, function() <span class="kw">sample</span>(<span class="dv">20</span>:<span class="dv">80</span>, <span class="dv">1</span>)) %&gt;%
 <span class="st">  </span><span class="co"># distribution-based timeout</span>
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">10</span>)) %&gt;%
 <span class="st">  </span><span class="co"># attribute-dependent timeout</span>
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function(attrs) (<span class="dv">100</span> -<span class="st"> </span>attrs[[<span class="st">"health"</span>]]) *<span class="st"> </span><span class="dv">2</span>)
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() (<span class="dv">100</span> -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"health"</span>)) *<span class="st"> </span><span class="dv">2</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>)
+env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>()
+<span class="co">#&gt; simmer environment: anonymous | now: 126.067459125631 | next: </span>
+<span class="co">#&gt; { Generator: patient | monitored: 2 | n_generated: 1 }</span>
 
 <span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env)
 <span class="co">#&gt;       name start_time end_time activity_time finished replication</span>
@@ -270,7 +282,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">3</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="dt">resource =</span> <span class="st">"doctor"</span>, <span class="dt">amount =</span> <span class="dv">1</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">mon =</span> <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
@@ -280,18 +292,21 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="co">#&gt; 1   doctor    0      1     0        1        Inf      1   Inf           1</span>
 <span class="co">#&gt; 2   doctor    3      0     0        1        Inf      0   Inf           1</span></code></pre></div>
 <p>Here the <code>mon=1</code> argument (=default) of <code><a href="../reference/add_resource.html">add_resource()</a></code> makes the simulation environment monitor the resource usage. Using the <code><a href="../reference/get_mon.html">get_mon_resources(env)</a></code> method you can get access to the log of the usage evolution of resources.</p>
-<p>There are situations where you want to let the amount of resources seized/released be dependent on a specific function or on a previously set attribute. To achieve this, you can pass a function in the form of either <code>function(){}</code> or <code>function(attrs){}</code> to the <code>amount</code> parameter instead of a numeric value. If going for the latter, the current state of the arrival’s attributes will be passed to <code>attrs</code> as a list which you can inspect. This allows for the following:</p>
+<p>There are situations where you want to let the amount of resources seized/released be dependent on a specific function or on a previously set attribute. To achieve this, you can pass a function to the <code>amount</code> parameter instead of a numeric value and use <code><a href="../reference/get_n_generated.html">get_attribute(.)</a></code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"health"</span>, function() <span class="kw">sample</span>(<span class="dv">20</span>:<span class="dv">80</span>, <span class="dv">1</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"docs_to_seize"</span>, function(attrs) <span class="kw">ifelse</span>(attrs[[<span class="st">"health"</span>]]&lt;<span class="dv">50</span>, <span class="dv">1</span>, <span class="dv">2</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"doctor"</span>, function(attrs) attrs[[<span class="st">"docs_to_seize"</span>]]) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"docs_to_seize"</span>, function() <span class="kw">ifelse</span>(<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"health"</span>)&lt;<span class="dv">50</span>, <span class="dv">1</span>, <span class="dv">2</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"doctor"</span>, function() <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"docs_to_seize"</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">3</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"doctor"</span>, function(attrs) attrs[[<span class="st">"docs_to_seize"</span>]])
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"doctor"</span>, function() <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"docs_to_seize"</span>))
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="dt">capacity =</span> <span class="dv">2</span>, <span class="dt">mon =</span> <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>)
+env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>()
+<span class="co">#&gt; simmer environment: anonymous | now: 3 | next: </span>
+<span class="co">#&gt; { Resource: doctor | monitored: 1 | server status: 0(2) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Generator: patient | monitored: 2 | n_generated: 1 }</span>
 
 <span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(env)
 <span class="co">#&gt;   resource time server queue capacity queue_size system limit replication</span>
@@ -310,7 +325,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">5</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"doctor"</span>, <span class="dv">1</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="dt">capacity =</span> <span class="dv">1</span>, <span class="dt">queue_size =</span> <span class="dv">0</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
@@ -341,7 +356,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">5</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"doctor"</span>, <span class="dv">1</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="dt">capacity =</span> <span class="dv">1</span>, <span class="dt">queue_size =</span> <span class="dv">0</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"nurse"</span>, <span class="dt">capacity =</span> <span class="dv">10</span>, <span class="dt">queue_size =</span> <span class="dv">0</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)) %&gt;%
@@ -379,7 +394,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"doctor"</span>, <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"leaving"</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="dt">capacity =</span> <span class="dv">1</span>, <span class="dt">queue_size =</span> <span class="dv">0</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
@@ -421,7 +436,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">10</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"leaving..."</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="dt">capacity =</span> <span class="dv">1</span>, <span class="dt">queue_size =</span> <span class="dv">0</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"nurse"</span>, <span class="dt">capacity =</span> <span class="dv">10</span>, <span class="dt">queue_size =</span> <span class="dv">0</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)) %&gt;%
@@ -448,10 +463,10 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <h3 class="hasAnchor">
 <a href="#set_capacity-set_queue_size" class="anchor"></a><code><a href="../reference/set_capacity.html">set_capacity()</a></code>, <code><a href="../reference/set_capacity.html">set_queue_size()</a></code>
 </h3>
-<p>The <code><a href="../reference/set_capacity.html">set_capacity(., resource, value)</a></code> method modifies the capacity of the specified resource by name, and the <code><a href="../reference/set_capacity.html">set_queue_size(., resource, value)</a></code> method modifies its queue size. Be aware that, in order to use these functions in relation to a specific resource, you have to create it in your definition of the simulation environment (check <code><a href="../reference/add_resource.html">?add_resource</a></code>). You can supply the <code>value</code> parameter either as a numeric value or as a function, in the form of either <code>function(){}</code> or <code>function(attrs){}</code>, which must return a numeric value.</p>
+<p>The <code><a href="../reference/set_capacity.html">set_capacity(., resource, value)</a></code> method modifies the capacity of the specified resource by name, and the <code><a href="../reference/set_capacity.html">set_queue_size(., resource, value)</a></code> method modifies its queue size. Be aware that, in order to use these functions in relation to a specific resource, you have to create it in your definition of the simulation environment (check <code><a href="../reference/add_resource.html">?add_resource</a></code>). You can supply the <code>value</code> parameter either as a numeric value or as a function which must return a numeric value.</p>
 <p>These activities are interesting to introduce dynamical changes in the resources. For instance, consider the following example in which two trajectories fight for the capacity of their resource:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">12345</span>)
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>()
 
 increment &lt;-<span class="st"> </span>function(res) {
   function() <span class="kw"><a href="../reference/get_capacity.html">get_capacity</a></span>(env, res) +<span class="st"> </span><span class="dv">1</span>
@@ -500,7 +515,7 @@ env &lt;-<span class="st"> </span>env %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">5</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release_selected</a></span>(<span class="dt">amount =</span> <span class="dv">1</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor1"</span>, <span class="dt">capacity =</span> <span class="dv">0</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor2"</span>, <span class="dt">capacity =</span> <span class="dv">0</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor3"</span>, <span class="dt">capacity =</span> <span class="dv">0</span>) %&gt;%
@@ -526,17 +541,22 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <p>If you provide <code><a href="../reference/select.html">select()</a></code> with <code>resources</code> as a vector of names, you can use one of the predefined policies (see <code><a href="../reference/select.html">?select</a></code>). If you need some custom policy, you can define it and supply it as a function. For instance, let’s pick a resource based on a previously set attribute:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"resource"</span>, function() <span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">3</span>, <span class="dv">1</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/select.html">select</a></span>(<span class="dt">resources =</span> function(attrs) <span class="kw">paste0</span>(<span class="st">"doctor"</span>, attrs[<span class="st">"resource"</span>])) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/select.html">select</a></span>(<span class="dt">resources =</span> function() <span class="kw">paste0</span>(<span class="st">"doctor"</span>, <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"resource"</span>))) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize_selected</a></span>(<span class="dt">amount =</span> <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">5</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release_selected</a></span>(<span class="dt">amount =</span> <span class="dv">1</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor1"</span>, <span class="dt">capacity =</span> <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor2"</span>, <span class="dt">capacity =</span> <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor3"</span>, <span class="dt">capacity =</span> <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">mon =</span> <span class="dv">2</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">mon =</span> <span class="dv">2</span>)
+env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>()
+<span class="co">#&gt; simmer environment: anonymous | now: 11 | next: </span>
+<span class="co">#&gt; { Resource: doctor1 | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Resource: doctor2 | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Resource: doctor3 | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Generator: patient | monitored: 2 | n_generated: 3 }</span>
 
 <span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)
 <span class="co">#&gt;   time     name      key value replication</span>
@@ -568,7 +588,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/activate.html">activate</a></span>(<span class="dt">generator =</span> <span class="st">"dummy"</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, t, function() <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">10</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>()
@@ -592,7 +612,7 @@ t2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajecto
 <span class="st">  </span><span class="kw"><a href="../reference/set_trajectory.html">set_trajectory</a></span>(<span class="st">"dummy"</span>, t1) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">2</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, <span class="dt">trajectory =</span> t2, <span class="dt">distribution =</span> function() <span class="dv">2</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">10</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>()
@@ -609,13 +629,17 @@ t2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajecto
 <h3 class="hasAnchor">
 <a href="#set_prioritization" class="anchor"></a><code><a href="../reference/set_prioritization.html">set_prioritization()</a></code>
 </h3>
-<p>The <code><a href="../reference/add_generator.html">add_generator()</a></code> method assigns a set of prioritization values to each generated arrival: by default, <code>priority=0</code>, <code>preemptible=priority</code>, <code>restart=FALSE</code> (see <code><a href="../reference/add_generator.html">?add_generator</a></code> for more details). The <code><a href="../reference/set_prioritization.html">set_prioritization(., values)</a></code> method can change those values with more granularity at any point in the trajectory:</p>
+<p>The <code><a href="../reference/add_generator.html">add_generator()</a></code> method assigns a set of prioritization values to each generated arrival: by default, <code>priority=0</code>, <code>preemptible=priority</code>, <code>restart=FALSE</code> (see <code><a href="../reference/add_generator.html">?add_generator</a></code> for more details). The <code><a href="../reference/set_prioritization.html">set_prioritization(., values)</a></code> method can change those values with more granularity at any point in the trajectory, and they can also be retrieved inside the trajectory using <code><a href="../reference/get_n_generated.html">get_prioritization(.)</a></code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"priority"</span>, <span class="dv">3</span>) %&gt;%
 <span class="st">  </span><span class="co"># static values</span>
 <span class="st">  </span><span class="kw"><a href="../reference/set_prioritization.html">set_prioritization</a></span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="ot">TRUE</span>)) %&gt;%
 <span class="st">  </span><span class="co"># dynamically with a function</span>
-<span class="st">  </span><span class="kw"><a href="../reference/set_prioritization.html">set_prioritization</a></span>(<span class="dt">values =</span> function(attrs) <span class="kw">c</span>(attrs[<span class="st">"priority"</span>], <span class="dv">7</span>, <span class="ot">TRUE</span>))</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="../reference/set_prioritization.html">set_prioritization</a></span>(<span class="dt">values =</span> function() {
+    prio &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_prioritization</a></span>(env)
+    attr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"priority"</span>)
+    <span class="kw">c</span>(attr, prio[[<span class="dv">2</span>]]+<span class="dv">1</span>, <span class="ot">FALSE</span>)
+  })</code></pre></div>
 <p>More details on prioritization in the <em>Advanced Resource Usage</em> vignette (pending).</p>
 </div>
 <div id="branch" class="section level3">
@@ -648,7 +672,7 @@ t2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajecto
 <span class="st">           </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/<span class="dv">2</span>)) %&gt;%
 <span class="st">           </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"branch2"</span>, <span class="dv">1</span>))
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, t0, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">1000</span>))) %&gt;%
 <span class="st">  </span><span class="co"># Resources with infinite capacity, just for accounting purposes</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"branch1"</span>, <span class="ot">Inf</span>) %&gt;%
@@ -679,7 +703,7 @@ arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ge
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dt">amount =</span> <span class="dv">2</span>, <span class="dt">times =</span> <span class="dv">3</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"hello_sayer"</span>, t0, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
 <span class="co">#&gt; 0: hello_sayer0: Hello!</span>
@@ -689,19 +713,20 @@ arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ge
 <p>The <code><a href="../reference/rollback.html">rollback()</a></code> method also accepts an optional <code>check</code> parameter which overrides the default amount-based behaviour. This parameter must be a function that returns a logical value. Each time an arrival reaches the activity, this <code>check</code> is evaluated to determine whether the <code><a href="../reference/rollback.html">rollback()</a></code> with <code>amount</code> steps must be performed or not. Consider the following example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t0 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"happiness"</span>, <span class="dv">0</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function(attrs) {
-    <span class="kw">paste0</span>(<span class="st">"&gt;&gt; Happiness level is at: "</span>, attrs[[<span class="st">"happiness"</span>]], <span class="st">" -- "</span>, 
-           <span class="kw">ifelse</span>(attrs[[<span class="st">"happiness"</span>]]&lt;<span class="dv">25</span>,<span class="st">"PETE: I'm feeling crappy..."</span>,
-                  <span class="kw">ifelse</span>(attrs[[<span class="st">"happiness"</span>]]&lt;<span class="dv">50</span>,<span class="st">"PETE: Feelin' a bit moody"</span>,
-                         <span class="kw">ifelse</span>(attrs[[<span class="st">"happiness"</span>]]&lt;<span class="dv">75</span>,<span class="st">"PETE: Just had a good espresso"</span>,
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {
+    level &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"happiness"</span>)
+    <span class="kw">paste0</span>(<span class="st">"&gt;&gt; Happiness level is at: "</span>, level, <span class="st">" -- "</span>, 
+           <span class="kw">ifelse</span>(level&lt;<span class="dv">25</span>,<span class="st">"PETE: I'm feeling crappy..."</span>,
+                  <span class="kw">ifelse</span>(level&lt;<span class="dv">50</span>,<span class="st">"PETE: Feelin' a bit moody"</span>,
+                         <span class="kw">ifelse</span>(level&lt;<span class="dv">75</span>,<span class="st">"PETE: Just had a good espresso"</span>,
                                 <span class="st">"PETE: Let's do this! (and stop this loop...)"</span>))))
   }) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"happiness"</span>, function(attrs) attrs[[<span class="st">"happiness"</span>]] +<span class="st"> </span><span class="dv">25</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dt">amount =</span> <span class="dv">2</span>, <span class="dt">check =</span> function(attrs) attrs[[<span class="st">"happiness"</span>]] &lt;<span class="st"> </span><span class="dv">100</span>)
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"happiness"</span>, function() <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"happiness"</span>) +<span class="st"> </span><span class="dv">25</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dt">amount =</span> <span class="dv">2</span>, <span class="dt">check =</span> function() <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"happiness"</span>) &lt;<span class="st"> </span><span class="dv">100</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"mood_swinger"</span>, t0, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"mood_swinger"</span>, t0, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>))
+env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span><span class="kw">invisible</span>()
 <span class="co">#&gt; 0: mood_swinger0: &gt;&gt; Happiness level is at: 0 -- PETE: I'm feeling crappy...</span>
 <span class="co">#&gt; 0: mood_swinger0: &gt;&gt; Happiness level is at: 25 -- PETE: Feelin' a bit moody</span>
 <span class="co">#&gt; 0: mood_swinger0: &gt;&gt; Happiness level is at: 50 -- PETE: Just had a good espresso</span>
@@ -724,7 +749,7 @@ arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ge
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">3</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"doctor"</span>, <span class="dv">1</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"nurse"</span>, <span class="dt">capacity=</span><span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="dt">capacity=</span><span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
@@ -750,7 +775,7 @@ patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../referenc
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">3</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"doctor"</span>, <span class="dv">1</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"nurse"</span>, <span class="dt">capacity=</span><span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="dt">capacity=</span><span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)) %&gt;%
@@ -788,7 +813,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/clone.html">synchronize</a></span>(<span class="dt">wait =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">0.5</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival"</span>, t, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
 <span class="co">#&gt;          0 | generator: arrival        |       new: arrival0       | 0</span>
@@ -814,7 +839,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/clone.html">synchronize</a></span>(<span class="dt">wait =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">0.5</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival"</span>, t, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
 <span class="co">#&gt;          0 | generator: arrival        |       new: arrival0       | 0</span>
@@ -841,7 +866,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/clone.html">synchronize</a></span>(<span class="dt">wait =</span> <span class="ot">FALSE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">0.5</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival"</span>, t, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
 <span class="co">#&gt;          0 | generator: arrival        |       new: arrival0       | 0</span>
@@ -869,7 +894,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="st">  </span><span class="kw"><a href="../reference/clone.html">synchronize</a></span>(<span class="dt">wait =</span> <span class="ot">FALSE</span>, <span class="dt">mon_all =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">0.5</span>)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival"</span>, t, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
 <span class="co">#&gt;          0 | generator: arrival        |       new: arrival0       | 0</span>
@@ -903,7 +928,7 @@ t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajector
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"rollercoaster"</span>, <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/batch.html">separate</a></span>()
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="co"># capacity and queue_size are defined in batches of 10</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"rollercoaster"</span>, <span class="dt">capacity =</span> <span class="dv">1</span>, <span class="dt">queue_size =</span> <span class="dv">2</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"person"</span>, t, function() <span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">2</span>)) %&gt;%
@@ -943,7 +968,7 @@ t_nobatch &lt;-<span class="st"> </span><span class="kw"><a href="../reference/t
 
 <span class="kw">set.seed</span>(<span class="dv">1234</span>)
 
-env_batch &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env_batch &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="co"># capacity and queue_size are defined in batches of 10</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"rollercoaster"</span>, <span class="dt">capacity =</span> <span class="dv">1</span>, <span class="dt">queue_size =</span> <span class="dv">2</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"person"</span>, t_batch, function() <span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">2</span>)) %&gt;%
@@ -951,7 +976,7 @@ env_batch &lt;-<span class="st"> </span><span class="kw"><a href="../reference/s
 
 <span class="kw">set.seed</span>(<span class="dv">1234</span>)
 
-env_nobatch &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env_nobatch &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="co"># capacity and queue_size are defined in batches of 10</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"rollercoaster"</span>, <span class="dt">capacity =</span> <span class="dv">1</span>, <span class="dt">queue_size =</span> <span class="dv">2</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"person"</span>, t_nobatch, function() <span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">2</span>)) %&gt;%
@@ -975,7 +1000,7 @@ t1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajecto
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/join.html">join</a></span>(t0)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"t0_"</span>, t0, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"t1_"</span>, t1, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
@@ -1011,7 +1036,7 @@ t1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajecto
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">2</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/batch.html">separate</a></span>()
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"t0_"</span>, t0, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"t1_"</span>, t1, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
@@ -1037,7 +1062,7 @@ t1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajecto
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/join.html">join</a></span>(t0)
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"t0_"</span>, t0, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"t1_"</span>, t1, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>()
@@ -1062,7 +1087,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="dt">signals =</span> <span class="kw">c</span>(<span class="st">"signal1"</span>, <span class="st">"signal2"</span>))
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
+<span class="kw">simmer</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"signaler"</span>, t, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
 <span class="co">#&gt;          0 | generator: signaler       |       new: signaler0      | 0</span>
@@ -1072,7 +1097,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="dt">signals =</span> <span class="kw">c</span>(<span class="st">"signal1"</span>, <span class="st">"signal2"</span>), <span class="dt">delay =</span> <span class="dv">3</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
+<span class="kw">simmer</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"signaler"</span>, t, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
 <span class="co">#&gt;          0 | generator: signaler       |       new: signaler0      | 0</span>
@@ -1090,7 +1115,7 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"you shall pass"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="st">"you shall pass"</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"blocked"</span>, t_blocked, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"signaler"</span>, t_signaler, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">5</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
@@ -1109,7 +1134,7 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"you shall pass"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="st">"you shall pass"</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"blocked"</span>, t_blocked, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"signaler"</span>, t_signaler, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">5</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
@@ -1130,7 +1155,7 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"you are free to go"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="st">"you are free to go"</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"worker"</span>, t_worker, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"signaler"</span>, t_signaler, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">5</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
@@ -1154,7 +1179,7 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"you are free to go"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="st">"you are free to go"</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"worker"</span>, t_worker, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"signaler"</span>, t_signaler, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">5</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
@@ -1176,9 +1201,9 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"you are free to go"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="st">"you are free to go"</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"worker"</span>, t_worker, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"signaler"</span>, t_signaler, <span class="kw"><a href="../reference/from.html">from</a></span>(<span class="dv">5</span>, function() <span class="fl">0.5</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"signaler"</span>, t_signaler, <span class="kw"><a href="../reference/at.html">from</a></span>(<span class="dv">5</span>, function() <span class="fl">0.5</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">10</span>) %&gt;%<span class="st"> </span>invisible
 <span class="co">#&gt; 0: worker0: performing a looong task...</span>
 <span class="co">#&gt; 5: signaler0: you are free to go</span>
@@ -1217,9 +1242,9 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"you are free to go"</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="st">"you are free to go"</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"worker"</span>, t_worker, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"signaler"</span>, t_signaler, <span class="kw"><a href="../reference/from.html">from</a></span>(<span class="dv">5</span>, function() <span class="fl">0.5</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"signaler"</span>, t_signaler, <span class="kw"><a href="../reference/at.html">from</a></span>(<span class="dv">5</span>, function() <span class="fl">0.5</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">10</span>) %&gt;%<span class="st"> </span>invisible
 <span class="co">#&gt; 0: worker0: performing a looong task...</span>
 <span class="co">#&gt; 5: signaler0: you are free to go</span>
@@ -1255,7 +1280,7 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished"</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"customer"</span>, t, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
@@ -1283,7 +1308,7 @@ t_signaler &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished"</span>)
 
-<span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"clerk"</span>, <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"customer"</span>, t, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>() %&gt;%<span class="st"> </span>invisible
@@ -1400,7 +1425,7 @@ t0[<span class="kw">c</span>(<span class="st">"release"</span>, <span class="st"
 t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">print</span>(env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/now.html">now</a></span>()))
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, t, function() <span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">4</span>)
 <span class="co">#&gt; Error in run_(private$sim_obj, until): Evaluation error: objeto 'env' no encontrado.</span></code></pre></div>
@@ -1408,7 +1433,7 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">print</span>(env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/now.html">now</a></span>()))
 
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, t, function() <span class="dv">1</span>)
 
 env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">4</span>) %&gt;%<span class="st"> </span>invisible
@@ -1417,7 +1442,7 @@ env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.ht
 <span class="co">#&gt; [1] 3</span></code></pre></div>
 <p>And we get the expected output. However, as a general rule of good practice, <strong>it is recommended to instantiate the environment always in the first place</strong>, to avoid possible mistakes and because the code becomes more readable:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, instantiate the environment</span>
-env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()
+env &lt;-<span class="st"> </span><span class="kw">simmer</span>()
 
 <span class="co"># Here I'm using it</span>
 t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
@@ -1436,7 +1461,8 @@ env %&gt;%
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#available-set-of-activities">Available set of activities</a></li>
       <li><a href="#manipulating-trajectories-joining-and-subsetting">Manipulating trajectories: joining and subsetting</a></li>

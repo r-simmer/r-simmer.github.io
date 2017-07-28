@@ -57,6 +57,9 @@
       <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
+      <a href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
+    </li>
+    <li>
       <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
@@ -111,7 +114,7 @@
       <h1>Queueing Systems</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2017-05-30</h4>
+            <h4 class="date">2017-07-28</h4>
           </div>
 
     
@@ -142,7 +145,7 @@ mm1.trajectory &lt;-<span class="st"> </span><span class="kw"><a href="../refere
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"resource"</span>, <span class="dt">amount=</span><span class="dv">1</span>)
 
-mm1.env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+mm1.env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"resource"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="ot">Inf</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival"</span>, mm1.trajectory, function() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span><span class="dv">2000</span>)</code></pre></div>
@@ -170,8 +173,8 @@ mm1.T ; <span class="kw">mean</span>(mm1.t_system)
 <span class="co">#&gt; [1] 0.5</span>
 <span class="co">#&gt; [1] 0.5012594</span></code></pre></div>
 <p>It seems that it matches the theoretical value pretty well. But of course we are picky, so let’s take a closer look, just to be sure. Replication can be done with standard R tools:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">envs &lt;-<span class="st"> </span><span class="kw">mclapply</span>(<span class="dv">1</span>:<span class="dv">100</span>, function(i) {
-  <span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">envs &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span>:<span class="dv">100</span>, function(i) {
+  <span class="kw">simmer</span>() %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"resource"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="ot">Inf</span>) %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival"</span>, mm1.trajectory, function() <span class="kw">rexp</span>(<span class="dv">100</span>, lambda)) %&gt;%
 <span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">1000</span>/lambda) %&gt;%
@@ -217,7 +220,7 @@ mm23.trajectory &lt;-<span class="st"> </span><span class="kw"><a href="../refer
 <span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"server"</span>, <span class="dt">amount=</span><span class="dv">1</span>)
 
-mm23.env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() %&gt;%
+mm23.env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"server"</span>, <span class="dt">capacity=</span><span class="dv">2</span>, <span class="dt">queue_size=</span><span class="dv">1</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival"</span>, mm23.trajectory, function() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span><span class="dv">2000</span>)</code></pre></div>
@@ -256,7 +259,7 @@ set_msg_size &lt;-<span class="st"> </span>function(.)
 <span class="co"># seize an M/D/1 queue by id; the timeout is function of the message size</span>
 md1 &lt;-<span class="st"> </span>function(., id)
   <span class="kw"><a href="../reference/seize.html">seize</a></span>(., <span class="kw">paste0</span>(<span class="st">"md1_"</span>, id), <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function(attrs) attrs[[<span class="st">"size"</span>]] /<span class="st"> </span>rate) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"size"</span>) /<span class="st"> </span>rate) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="kw">paste0</span>(<span class="st">"md1_"</span>, id), <span class="dv">1</span>)</code></pre></div>
 <p>The next step is to set up the three points of attachment for our generators:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">to_queue_1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
@@ -278,7 +281,7 @@ to_queue_4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw">set_msg_size</span>() %&gt;%
 <span class="st">  </span><span class="kw">md1</span>(<span class="dv">4</span>)</code></pre></div>
 <p>Finally, we prepare and run the simulation environment with the resources and generators required:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">env &lt;-<span class="st"> </span><span class="kw">simmer</span>()
 for (i in <span class="dv">1</span>:<span class="dv">4</span>) env %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="kw">paste0</span>(<span class="st">"md1_"</span>, i))
 env %&gt;%
@@ -287,10 +290,10 @@ env %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival4_"</span>, to_queue_4, function() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda4), <span class="dt">mon=</span><span class="dv">2</span>) %&gt;%
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">4000</span>)
 <span class="co">#&gt; simmer environment: anonymous | now: 4000 | next: 4000.11349802496</span>
-<span class="co">#&gt; { Resource: md1_1 | monitored: 1 | server status: 1(1) | queue status: 9(Inf) }</span>
-<span class="co">#&gt; { Resource: md1_2 | monitored: 1 | server status: 1(1) | queue status: 3(Inf) }</span>
-<span class="co">#&gt; { Resource: md1_3 | monitored: 1 | server status: 1(1) | queue status: 1(Inf) }</span>
-<span class="co">#&gt; { Resource: md1_4 | monitored: 1 | server status: 0(1) | queue status: 0(Inf) }</span>
+<span class="co">#&gt; { Resource: md1_1 | monitored: TRUE | server status: 1(1) | queue status: 9(Inf) }</span>
+<span class="co">#&gt; { Resource: md1_2 | monitored: TRUE | server status: 1(1) | queue status: 3(Inf) }</span>
+<span class="co">#&gt; { Resource: md1_3 | monitored: TRUE | server status: 1(1) | queue status: 1(Inf) }</span>
+<span class="co">#&gt; { Resource: md1_4 | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: arrival1_ | monitored: 2 | n_generated: 8141 }</span>
 <span class="co">#&gt; { Generator: arrival3_ | monitored: 2 | n_generated: 2053 }</span>
 <span class="co">#&gt; { Generator: arrival4_ | monitored: 2 | n_generated: 2398 }</span></code></pre></div>
@@ -306,10 +309,8 @@ arr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon
 <span class="co">#&gt; Joining, by = "name"</span>
 
 dplyr::<span class="kw">summarise</span>(arr, <span class="dt">average =</span> <span class="kw">sum</span>(waiting_time) /<span class="st"> </span><span class="kw">n</span>())
-<span class="co">#&gt; Source: local data frame [5 x 3]</span>
-<span class="co">#&gt; Groups: generator [?]</span>
-<span class="co">#&gt; </span>
 <span class="co">#&gt; # A tibble: 5 x 3</span>
+<span class="co">#&gt; # Groups:   generator [?]</span>
 <span class="co">#&gt;   generator resource    average</span>
 <span class="co">#&gt;       &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt;</span>
 <span class="co">#&gt; 1  arrival1    md1_3 11.2998883</span>
@@ -320,10 +321,8 @@ dplyr::<span class="kw">summarise</span>(arr, <span class="dt">average =</span> 
 <span class="kw"><a href="../reference/get_n_generated.html">get_n_generated</a></span>(env, <span class="st">"arrival1_"</span>) +<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_n_generated</a></span>(env, <span class="st">"arrival4_"</span>)
 <span class="co">#&gt; [1] 10539</span>
 dplyr::<span class="kw">count</span>(arr)
-<span class="co">#&gt; Source: local data frame [5 x 3]</span>
-<span class="co">#&gt; Groups: generator [?]</span>
-<span class="co">#&gt; </span>
 <span class="co">#&gt; # A tibble: 5 x 3</span>
+<span class="co">#&gt; # Groups:   generator, resource [5]</span>
 <span class="co">#&gt;   generator resource     n</span>
 <span class="co">#&gt;       &lt;chr&gt;    &lt;chr&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1  arrival1    md1_3  3951</span>
@@ -337,7 +336,8 @@ dplyr::<span class="kw">count</span>(arr)
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#the-mm1-system">The M/M/1 system</a></li>
       <li><a href="#mmck-systems">M/M/c/k systems</a></li>
