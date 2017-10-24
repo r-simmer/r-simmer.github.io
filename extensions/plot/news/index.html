@@ -114,12 +114,25 @@
     </div>
 
     <div class="contents">
-    <div id="simmer-plot-0-1-10" class="section level1">
+    <div id="simmer-plot-0-1-11" class="section level1">
 <h1 class="hasAnchor">
-<a href="#simmer-plot-0-1-10" class="anchor"></a>simmer.plot 0.1.10</h1>
+<a href="#simmer-plot-0-1-11" class="anchor"></a>simmer.plot 0.1.11</h1>
 <div id="minor-changes-and-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
+<ul>
+<li>Fix trajectory parsing with variable-length pointers (#9).</li>
+<li>Update to tidyr 0.7.x (da58045).</li>
+<li>Update to DiagrammeR 0.9.1 (247aa4f).</li>
+</ul>
+</div>
+</div>
+    <div id="simmer-plot-0-1-10" class="section level1">
+<h1 class="hasAnchor">
+<a href="#simmer-plot-0-1-10" class="anchor"></a>simmer.plot 0.1.10</h1>
+<div id="minor-changes-and-fixes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-and-fixes-1" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li>Fix resource utilization plot with varying resource capacity (#8).</li>
 <li>Fix trajectory parsing with yet another NULL pointer format: <code>(nil)</code> (#4).</li>
@@ -130,9 +143,9 @@
     <div id="simmer-plot-0-1-9" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simmer-plot-0-1-9" class="anchor"></a>simmer.plot 0.1.9</h1>
-<div id="minor-changes-and-fixes-1" class="section level2">
+<div id="minor-changes-and-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-1" class="anchor"></a>Minor changes and fixes</h2>
+<a href="#minor-changes-and-fixes-2" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li>Workaround for Solaris SPARC (#2).</li>
 <li>Remove ignored edges in <code>clone()</code> (#6).</li>
@@ -143,9 +156,9 @@
     <div id="simmer-plot-0-1-8" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simmer-plot-0-1-8" class="anchor"></a>simmer.plot 0.1.8</h1>
-<div id="minor-changes-and-fixes-2" class="section level2">
+<div id="minor-changes-and-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-2" class="anchor"></a>Minor changes and fixes</h2>
+<a href="#minor-changes-and-fixes-3" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li>Fix forks with a single path (5fa5937).</li>
 <li>Re-arrange dataframes in tests (6cc4f0a).</li>
@@ -156,9 +169,9 @@
     <div id="simmer-plot-0-1-7" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simmer-plot-0-1-7" class="anchor"></a>simmer.plot 0.1.7</h1>
-<div id="minor-changes-and-fixes-3" class="section level2">
+<div id="minor-changes-and-fixes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-3" class="anchor"></a>Minor changes and fixes</h2>
+<a href="#minor-changes-and-fixes-4" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li>Fix trajectory parsing (8295c52). Parsing DOT is definitely unreliable. Rely entirely on DiagrammeR.</li>
 </ul>
@@ -167,9 +180,9 @@
     <div id="simmer-plot-0-1-6" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simmer-plot-0-1-6" class="anchor"></a>simmer.plot 0.1.6</h1>
-<div id="minor-changes-and-fixes-4" class="section level2">
+<div id="minor-changes-and-fixes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-4" class="anchor"></a>Minor changes and fixes</h2>
+<a href="#minor-changes-and-fixes-5" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li>More robust testing (d4879ee, trying to address #2).</li>
 <li>Visual improvements for <code><a href="../reference/plot.trajectory.html">plot.trajectory()</a></code> (9b49f83, d84a469).</li>
@@ -183,9 +196,9 @@
     <div id="simmer-plot-0-1-5" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simmer-plot-0-1-5" class="anchor"></a>simmer.plot 0.1.5</h1>
-<div id="minor-changes-and-fixes-5" class="section level2">
+<div id="minor-changes-and-fixes-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-5" class="anchor"></a>Minor changes and fixes</h2>
+<a href="#minor-changes-and-fixes-6" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li>Fix plot of trajectories without forks or rollbacks (332ec61).</li>
 <li>Fix plot of trajectories with a single node (f787c95).</li>
@@ -199,9 +212,9 @@
     <div id="simmer-plot-0-1-4" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simmer-plot-0-1-4" class="anchor"></a>simmer.plot 0.1.4</h1>
-<div id="minor-changes-and-fixes-6" class="section level2">
+<div id="minor-changes-and-fixes-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-6" class="anchor"></a>Minor changes and fixes</h2>
+<a href="#minor-changes-and-fixes-7" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li>Fix trajectory parsing (da45863). Different compilers represent NULL pointers in different ways: <code>0</code>, <code>(nil)</code>…</li>
 </ul>
@@ -210,9 +223,9 @@
     <div id="simmer-plot-0-1-3" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simmer-plot-0-1-3" class="anchor"></a>simmer.plot 0.1.3</h1>
-<div id="minor-changes-and-fixes-7" class="section level2">
+<div id="minor-changes-and-fixes-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-7" class="anchor"></a>Minor changes and fixes</h2>
+<a href="#minor-changes-and-fixes-8" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li>Reduce the footprint caused by the “Plotting simmer trajectories” vignette, thus solving also a WARN in Solaris builds (9cb833a).</li>
 <li>Assign reproducible identifiers to nodes instead of using external pointers in <code><a href="../reference/plot.trajectory.html">plot.trajectory()</a></code>. The DOT output can be verified regardless of the ordering (3c3bc9b).</li>
@@ -238,6 +251,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#simmer-plot-0-1-11">0.1.11</a></li>
         <li><a href="#simmer-plot-0-1-10">0.1.10</a></li>
         <li><a href="#simmer-plot-0-1-9">0.1.9</a></li>
         <li><a href="#simmer-plot-0-1-8">0.1.8</a></li>

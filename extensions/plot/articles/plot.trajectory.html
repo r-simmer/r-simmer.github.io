@@ -89,7 +89,7 @@
       <h1>Plotting simmer trajectories</h1>
                         <h4 class="author">Iñaki Ucar, Bart Smeets</h4>
             
-            <h4 class="date">2017-07-22</h4>
+            <h4 class="date">2017-10-24</h4>
           </div>
 
     
@@ -98,29 +98,29 @@
 <p>Simulation trajectories may grow considerably, and they are not always easy to inspect to ensure their compliance with the model that we are trying to build. For instance, let us consider this pretty complex one:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 
-t0 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>() %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"res0"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/branch">branch</a></span>(function() <span class="dv">1</span>, <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>),
-         <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>() %&gt;%
+t0 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"res0"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/branch">branch</a></span>(<span class="cf">function</span>() <span class="dv">1</span>, <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>),
+         <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>() <span class="op">%&gt;%</span>
 <span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/clone">clone</a></span>(<span class="dv">2</span>,
-                 <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>() %&gt;%
-<span class="st">                   </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"res1"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">                   </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="dv">1</span>) %&gt;%
+                 <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">                   </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"res1"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">                   </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">                   </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">release</a></span>(<span class="st">"res1"</span>, <span class="dv">1</span>),
-                 <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>() %&gt;%
+                 <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>() <span class="op">%&gt;%</span>
 <span class="st">                   </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/send">trap</a></span>(<span class="st">"signal"</span>,
-                        <span class="dt">handler=</span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>() %&gt;%
-<span class="st">                          </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="dv">1</span>)) %&gt;%
+                        <span class="dt">handler=</span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">                          </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="dv">1</span>)) <span class="op">%&gt;%</span>
 <span class="st">                   </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="dv">1</span>)),
-         <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>() %&gt;%
-<span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/set_attribute">set_attribute</a></span>(<span class="st">"dummy"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"res2"</span>, function() <span class="dv">1</span>) %&gt;%
-<span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(function() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">20</span>)) %&gt;%
-<span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">release</a></span>(<span class="st">"res2"</span>, function() <span class="dv">1</span>) %&gt;%
-<span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">release</a></span>(<span class="st">"res0"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/rollback">rollback</a></span>(<span class="dv">11</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/clone">synchronize</a></span>() %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/rollback">rollback</a></span>(<span class="dv">2</span>) %&gt;%
+         <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/set_attribute">set_attribute</a></span>(<span class="st">"dummy"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"res2"</span>, <span class="cf">function</span>() <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">20</span>)) <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">release</a></span>(<span class="st">"res2"</span>, <span class="cf">function</span>() <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">release</a></span>(<span class="st">"res0"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/rollback">rollback</a></span>(<span class="dv">11</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/clone">synchronize</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/rollback">rollback</a></span>(<span class="dv">2</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">release</a></span>(<span class="st">"res0"</span>, <span class="dv">1</span>)</code></pre></div>
 <p>We must ensure that:</p>
 <ul>
@@ -133,7 +133,7 @@ t0 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumenta
 <p>Note that colors are assigned to seizes and releases as a function of the resource that these are applied to. By default, resources are mapped to a qualitative Color Brewer palette, but you can override this using the optional parameter <code>fill</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer.plot)
 
-get_palette &lt;-<span class="st"> </span>scales::<span class="kw">brewer_pal</span>(<span class="dt">type =</span> <span class="st">"qual"</span>, <span class="dt">palette =</span> <span class="dv">1</span>)
+get_palette &lt;-<span class="st"> </span>scales<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/brewer_pal">brewer_pal</a></span>(<span class="dt">type =</span> <span class="st">"qual"</span>, <span class="dt">palette =</span> <span class="dv">1</span>)
 <span class="kw">plot</span>(t0, <span class="dt">fill =</span> get_palette)</code></pre></div>
 <div class="figure">
 <img src="includes/trajectory.svg">

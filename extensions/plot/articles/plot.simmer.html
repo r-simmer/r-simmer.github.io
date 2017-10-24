@@ -89,7 +89,7 @@
       <h1>Plotting simmer statistics</h1>
                         <h4 class="author">Bart Smeets, Iñaki Ucar</h4>
             
-            <h4 class="date">2017-07-22</h4>
+            <h4 class="date">2017-10-24</h4>
           </div>
 
     
@@ -102,27 +102,27 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 <span class="kw">library</span>(parallel)
 
-patient &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>(<span class="st">"patients' path"</span>) %&gt;%
+patient &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>(<span class="st">"patients' path"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>## add an intake activity 
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"nurse"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(function() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">15</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">release</a></span>(<span class="st">"nurse"</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"nurse"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">15</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">release</a></span>(<span class="st">"nurse"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>## add a consultation activity
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"doctor"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(function() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">20</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">release</a></span>(<span class="st">"doctor"</span>, <span class="dv">1</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"doctor"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">20</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">release</a></span>(<span class="st">"doctor"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>## add a planning activity
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"administration"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(function() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">5</span>)) %&gt;%
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"administration"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">5</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">release</a></span>(<span class="st">"administration"</span>, <span class="dv">1</span>)
 
-envs &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span>:<span class="dv">100</span>, function(i) {
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/simmer">simmer</a></span>(<span class="st">"SuperDuperSim"</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/add_resource">add_resource</a></span>(<span class="st">"nurse"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/add_resource">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="dv">2</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/add_resource">add_resource</a></span>(<span class="st">"administration"</span>, <span class="dv">1</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/add_generator">add_generator</a></span>(<span class="st">"patient"</span>, patient, function() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">2</span>)) %&gt;%
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/run">run</a></span>(<span class="dv">80</span>) %&gt;%
+envs &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="cf">function</span>(i) {
+  <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/simmer">simmer</a></span>(<span class="st">"SuperDuperSim"</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/add_resource">add_resource</a></span>(<span class="st">"nurse"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/add_resource">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/add_resource">add_resource</a></span>(<span class="st">"administration"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/add_generator">add_generator</a></span>(<span class="st">"patient"</span>, patient, <span class="cf">function</span>() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/run">run</a></span>(<span class="dv">80</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/wrap">wrap</a></span>()
 })</code></pre></div>
 </div>
