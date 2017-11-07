@@ -1,0 +1,22 @@
+---
+title: "simmer 3.6.4"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The fourth update of the 3.6.x release of [simmer](http://r-simmer.org/), the Discrete-Event Simulator for R, is on CRAN. This release patches several bugs regarding resource priority and preemption management when seized amounts greater than one were involved. Check the examples available in the corresponding issues on GitHub ([#114](https://github.com/r-simmer/simmer/issues/114), [#115](https://github.com/r-simmer/simmer/issues/115), [#116](https://github.com/r-simmer/simmer/issues/116)) to know if you are affected.
+
+It can be noted that we already broke the intended bi-monthly release cycle, but it is for a good reason, since we are preparing a journal publication. Further details to come.
+
+### Minor changes and fixes:
+
+* Fix preemption in non-saturated multi-server resources when seizing amounts > 1 (#114).
+* Fix queue priority in non-saturated finite-queue resources when seizing amounts > 1 (#115).
+* Fix resource seizing: avoid jumping the queue when there is room in the server but other arrivals are waiting (#116).
