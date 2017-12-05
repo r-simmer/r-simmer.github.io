@@ -18,7 +18,7 @@ Our [`simmer`](https://cran.r-project.org/package=simmer) package has seven vign
 ```{r}
 required <- c("pkg1", "pkg2", "pkgn")
 
-if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
+if (!all(sapply(required, requireNamespace, quietly = TRUE)))
   knitr::opts_chunk$set(eval = FALSE)
 ```
 
