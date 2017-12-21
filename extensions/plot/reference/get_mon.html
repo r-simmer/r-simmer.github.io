@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot Method for <code>simmer</code> Objects — plot.simmer • simmer.plot</title>
+<title>Monitoring Statistics — get_mon • simmer.plot</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -132,61 +132,36 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot Method for <code>simmer</code> Objects</h1>
+    <h1>Monitoring Statistics</h1>
     </div>
 
     
-    <p>Deprecated. See <code>plot.mon</code> instead.</p>
+    <p>Replacements for <code><a href='http://www.rdocumentation.org/packages/simmer/topics/get_mon'>get_mon_arrivals</a></code>,
+<code><a href='http://www.rdocumentation.org/packages/simmer/topics/get_mon'>get_mon_attributes</a></code> and
+<code><a href='http://www.rdocumentation.org/packages/simmer/topics/get_mon'>get_mon_resources</a></code>.
+These versions just add a new class (<code>arrivals</code>, <code>attributes</code> or
+<code>resources</code> respectively) to the resulting data frame.</p>
     
 
-    <pre class="usage"><span class='co'># S3 method for simmer</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>what</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"resources"</span>, <span class='st'>"arrivals"</span>, <span class='st'>"attributes"</span>),
-  <span class='kw'>metric</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>get_mon_arrivals</span>(<span class='no'>...</span>)
+
+<span class='fu'>get_mon_attributes</span>(<span class='no'>...</span>)
+
+<span class='fu'>get_mon_resources</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>a single simmer environment or a list of environments representing several replications.</p></td>
-    </tr>
-    <tr>
-      <th>what</th>
-      <td><p>type of plot, one of <code>c("resources", "arrivals", "attributes")</code>.</p></td>
-    </tr>
-    <tr>
-      <th>metric</th>
-      <td><p>specific metric for each type of plot.</p><dl class='dl-horizontal'>
-  <dt><code>what = "resources"</code></dt><dd><p>one of <code>c("usage", "utilization")</code>.</p></dd>
-  <dt><code>what = "arrivals"</code></dt><dd><p>one of <code>c("activity_time", "waiting_time", "flow_time")</code>.</p></dd>
-  <dt><code>what = "attributes"</code></dt><dd><p>no metrics at the moment.</p></dd>
-</dl></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>further arguments for each kind of plot.</p><dl class='dl-horizontal'>
-  <dt><code>what = "resources"</code></dt><dd><p><dl class='dl-horizontal'>
-    <dt>all metrics</dt><dd><p><dl class='dl-horizontal'>
-      <dt><code>names</code></dt><dd><p>the name of the resource(s) (a single string or a character
-      vector) to show.</p></dd>
-    </dl></p></dd>
-    <dt><code>metric = "usage"</code></dt><dd><p><dl class='dl-horizontal'>
-      <dt><code>items</code></dt><dd><p>the components of the resource to be plotted, one or more
-      of <code>c("system", "queue", "server")</code>.</p></dd>
-      <dt><code>steps</code></dt><dd><p>if <code>TRUE</code>, shows the instantaneous usage instead
-      of the cumulative average.</p></dd>
-    </dl></p></dd>
-  </dl></p></dd>
-  <dt><code>what = "attributes"</code></dt><dd><p><dl class='dl-horizontal'>
-    <dt>keys</dt><dd><p>the keys of attributes you want to plot (if left empty, all attributes are shown).</p></dd>
-  </dl></p></dd>
-</dl></td>
+      <td><p>see <code><a href='http://www.rdocumentation.org/packages/simmer/topics/get_mon'>get_mon</a></code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a ggplot2 object.</p>
+    <p>Returns a data frame of class <code>arrivals</code>, <code>attributes</code> or
+<code>resources</code>.</p>
     
 
   </div>
