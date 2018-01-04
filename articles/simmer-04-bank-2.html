@@ -68,6 +68,9 @@
     <li>
       <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
+    <li>
+      <a href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -88,6 +91,15 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="../extensions/plot">simmer.plot</a>
+    </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.bricks">simmer.bricks</a>
+    </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
+    </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.json">simmer.json</a>
     </li>
   </ul>
 </li>
@@ -114,7 +126,7 @@
       <h1>The Bank Tutorial: Part II</h1>
                         <h4 class="author">Duncan Garmonsway</h4>
             
-            <h4 class="date">2017-07-28</h4>
+            <h4 class="date">2018-01-04</h4>
           </div>
 
     
@@ -123,7 +135,7 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>This tutorial is adapted from a tutorial for the Python 2 package ‘SimPy’, <a href="https://pythonhosted.org/SimPy/Tutorials/TheBank2.html">here</a>. Users familiar with SimPy may find this tutorial helpful for transitioning to simmer. Some very basic material is not covered. Beginners should first read the vignettes <a href="A-introduction.html"><em>Introduction to simmer</em></a>, <a href="B-terminology.html"><em>Terminology</em></a>, <a href="C-trajectories.html"><em>Advanced Trajectory Usage</em></a> and <a href="D-bank-1.html"><em>The Bank Tutorial: Part I</em></a>.</p>
+<p>This tutorial is adapted from a tutorial for the Python 2 package ‘SimPy’, <a href="https://pythonhosted.org/SimPy/Tutorials/TheBank2.html">here</a>. Users familiar with SimPy may find this tutorial helpful for transitioning to simmer. Some very basic material is not covered. Beginners should first read the vignettes <a href="simmer-01-introduction.html"><em>Introduction to simmer</em></a>, <a href="simmer-02-terminology.html"><em>Terminology</em></a>, <a href="simmer-03-trajectories.html"><em>Advanced Trajectory Usage</em></a> and <a href="simmer-04-bank-1.html"><em>The Bank Tutorial: Part I</em></a>.</p>
 </div>
 <div id="priority-customers" class="section level2">
 <h2 class="hasAnchor">
@@ -144,24 +156,24 @@
 bank &lt;-<span class="st"> </span><span class="kw">simmer</span>()
 
 customer &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, function() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="cf">function</span>() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {
          <span class="kw">paste</span>(<span class="st">"Queue is"</span>, <span class="kw"><a href="../reference/get_capacity.html">get_queue_count</a></span>(bank, <span class="st">"counter"</span>), <span class="st">"on arrival"</span>)
-         }) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">12</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) %&gt;%
+         }) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">12</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Completed"</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span>/<span class="dv">10</span>), -<span class="dv">1</span>)}) %&gt;%
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="cf">function</span>() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>), <span class="op">-</span><span class="dv">1</span>)}) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Guido"</span>, customer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">23</span>), <span class="dt">priority =</span> <span class="dv">1</span>)
 
-bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)
+bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)
 <span class="co">#&gt; 0: Customer0: Queue is 0 on arrival</span>
 <span class="co">#&gt; 0: Customer0: Waited 0</span>
 <span class="co">#&gt; 0.177365: Customer1: Queue is 0 on arrival</span>
@@ -184,9 +196,9 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 <span class="co">#&gt; { Generator: Guido | monitored: 1 | n_generated: 1 }</span>
-bank %&gt;%
-<span class="st">  </span>get_mon_arrivals %&gt;%
-<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+bank <span class="op">%&gt;%</span>
+<span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0  0.0000000       12            12     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1  0.1773647       24            12     TRUE           1</span>
@@ -215,24 +227,24 @@ bank %&gt;%
 bank &lt;-<span class="st"> </span><span class="kw">simmer</span>()
 
 customer &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, function() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="cf">function</span>() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {
          <span class="kw">paste</span>(<span class="st">"Queue is"</span>, <span class="kw"><a href="../reference/get_capacity.html">get_queue_count</a></span>(bank, <span class="st">"counter"</span>), <span class="st">"on arrival"</span>)
-         }) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">12</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) %&gt;%
+         }) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">12</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Completed"</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>, <span class="dt">preemptive =</span> <span class="ot">TRUE</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span>/<span class="dv">10</span>), -<span class="dv">1</span>)}) %&gt;%
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>, <span class="dt">preemptive =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="cf">function</span>() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>), <span class="op">-</span><span class="dv">1</span>)}) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Guido"</span>, customer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">23</span>), <span class="dt">priority =</span> <span class="dv">1</span>)
 
-bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)
+bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)
 <span class="co">#&gt; 0: Customer0: Queue is 0 on arrival</span>
 <span class="co">#&gt; 0: Customer0: Waited 0</span>
 <span class="co">#&gt; 0.177365: Customer1: Queue is 0 on arrival</span>
@@ -255,9 +267,9 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 <span class="co">#&gt; { Generator: Guido | monitored: 1 | n_generated: 1 }</span>
-bank %&gt;%
-<span class="st">  </span>get_mon_arrivals %&gt;%
-<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+bank <span class="op">%&gt;%</span>
+<span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0  0.0000000       12            12     TRUE           1</span>
 <span class="co">#&gt; 2    Guido0 23.0000000       35            12     TRUE           1</span>
@@ -291,7 +303,7 @@ timeInBank &lt;-<span class="st"> </span><span class="dv">12</span> <span class=
 ARRint &lt;-<span class="st"> </span><span class="dv">10</span>     <span class="co"># mean, minutes</span>
 numServers &lt;-<span class="st"> </span><span class="dv">1</span>  <span class="co"># servers</span>
 maxInSystem &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># customers</span>
-maxInQueue &lt;-<span class="st"> </span>maxInSystem -<span class="st"> </span>numServers
+maxInQueue &lt;-<span class="st"> </span>maxInSystem <span class="op">-</span><span class="st"> </span>numServers
 
 maxNumber &lt;-<span class="st"> </span><span class="dv">8</span>
 maxTime &lt;-<span class="st"> </span><span class="dv">400</span>  <span class="co"># minutes</span>
@@ -300,29 +312,29 @@ maxTime &lt;-<span class="st"> </span><span class="dv">400</span>  <span class="
 bank &lt;-<span class="st"> </span><span class="kw">simmer</span>()
 
 customer &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, function() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="cf">function</span>() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>,
         <span class="dt">continue =</span> <span class="ot">FALSE</span>,
         <span class="dt">reject =</span>
-          <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Balked customer"</span>) %&gt;%
-<span class="st">          </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"BALKING"</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/timeInBank)}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) %&gt;%
+          <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Balked customer"</span>) <span class="op">%&gt;%</span>
+<span class="st">          </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"BALKING"</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span>timeInBank)}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished"</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) %&gt;%
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>,
                <span class="dt">capacity =</span> numServers,
-               <span class="dt">queue_size =</span> maxInQueue) %&gt;%
+               <span class="dt">queue_size =</span> maxInQueue) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>,
                 customer,
-                <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">rexp</span>(maxNumber -<span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span> /<span class="st"> </span>ARRint)))))
+                <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">rexp</span>(maxNumber <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>ARRint)))))
 
-bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> maxTime)
+bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> maxTime)
 <span class="co">#&gt; 0: Customer0: Here I am</span>
 <span class="co">#&gt; 0: Customer0: Waited 0</span>
 <span class="co">#&gt; 0.822239: Customer1: Here I am</span>
@@ -346,8 +358,8 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(1) }</span>
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 8 }</span>
 
-number_balked &lt;-<span class="st"> </span><span class="kw">sum</span>(!<span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(bank)$finished)
-<span class="kw">paste</span>(<span class="st">"Balking rate is"</span>, number_balked /<span class="st"> </span><span class="kw"><a href="../reference/now.html">now</a></span>(bank), <span class="st">"customers per minute."</span>)
+number_balked &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(bank)<span class="op">$</span>finished)
+<span class="kw">paste</span>(<span class="st">"Balking rate is"</span>, number_balked <span class="op">/</span><span class="st"> </span><span class="kw"><a href="../reference/now.html">now</a></span>(bank), <span class="st">"customers per minute."</span>)
 <span class="co">#&gt; [1] "Balking rate is 0 customers per minute."</span></code></pre></div>
 <p>When Customer2 arrives, Customer0 is already in service and Customer1 is waiting. There is no room, so Customer2 balks. By the vagaries of exponential random numbers, Customer0 takes a very long time to serve (22.7358 minutes) so the first one to find room is number Customer6 at 25.5339.</p>
 </div>
@@ -370,30 +382,30 @@ maxWaitTime &lt;-<span class="st"> </span><span class="dv">12</span> <span class
 bank &lt;-<span class="st"> </span><span class="kw">simmer</span>()
 
 customer &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, function() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="cf">function</span>() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_in</a></span>(maxWaitTime,
-            <span class="dt">out =</span> <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Reneging customer"</span>) %&gt;%
-<span class="st">              </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {
-                     <span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>), <span class="st">"I am off"</span>)
-                   })) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_abort</a></span>() %&gt;%<span class="st"> </span><span class="co"># Stay if I'm being attended within maxWaitTime</span>
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/timeInBank)}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) %&gt;%
+            <span class="dt">out =</span> <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Reneging customer"</span>) <span class="op">%&gt;%</span>
+<span class="st">              </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {
+                     <span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>), <span class="st">"I am off"</span>)
+                   })) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_abort</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Stay if I'm being attended within maxWaitTime</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span>timeInBank)}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Completed"</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) %&gt;%
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>,
-               <span class="dt">capacity =</span> numServers) %&gt;%
+               <span class="dt">capacity =</span> numServers) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>,
                 customer,
-                <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">rexp</span>(maxNumber -<span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span> /<span class="st"> </span>ARRint)))))
+                <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">rexp</span>(maxNumber <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>ARRint)))))
 
-bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> maxTime)
+bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> maxTime)
 <span class="co">#&gt; 0: Customer0: Here I am</span>
 <span class="co">#&gt; 0: Customer0: Waited 0</span>
 <span class="co">#&gt; 16.5058: Customer1: Here I am</span>
@@ -431,38 +443,38 @@ maxTime    &lt;-<span class="st"> </span><span class="dv">100</span>
 bank &lt;-<span class="st"> </span><span class="kw">simmer</span>()
 
 customer &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">trap</a></span>(<span class="st">"phonecall"</span>,
-       <span class="dt">handler =</span> <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">         </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Excuse me"</span>) %&gt;%
+       <span class="dt">handler =</span> <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Excuse me"</span>) <span class="op">%&gt;%</span>
 <span class="st">         </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(
-           <span class="st">"timeleft"</span>, function() {
-             <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"timeleft"</span>) -<span class="st"> </span>(<span class="kw"><a href="../reference/now.html">now</a></span>(bank) -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start"</span>))
-         }) %&gt;%
-<span class="st">         </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Hello! I'll call back"</span>) %&gt;%
-<span class="st">         </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(onphone) %&gt;%
-<span class="st">         </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Sorry, where were we?"</span>) %&gt;%
-<span class="st">         </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start"</span>, function() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) %&gt;%
-<span class="st">         </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {<span class="kw">paste</span>(<span class="st">"Time left:"</span>, <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"timeleft"</span>))}) %&gt;%
-<span class="st">         </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() {<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"timeleft"</span>)})
-       ) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"timeleft"</span>, timeInBank) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start"</span>, function() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(timeInBank) %&gt;%
+           <span class="st">"timeleft"</span>, <span class="cf">function</span>() {
+             <span class="kw">sum</span>(<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="kw">c</span>(<span class="st">"timeleft"</span>, <span class="st">"start"</span>))) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/now.html">now</a></span>(bank)
+         }) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Hello! I'll call back"</span>) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(onphone) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Sorry, where were we?"</span>) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start"</span>, <span class="cf">function</span>() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {<span class="kw">paste</span>(<span class="st">"Time left:"</span>, <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"timeleft"</span>))}) <span class="op">%&gt;%</span>
+<span class="st">         </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() {<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"timeleft"</span>)})
+       ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"timeleft"</span>, timeInBank) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start"</span>, <span class="cf">function</span>() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(timeInBank) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Completed"</span>)
 
 phone &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Phone"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Ringgg!"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Phone"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Ringgg!"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="st">"phonecall"</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Klaus"</span>, customer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Phone"</span>, phone, <span class="kw"><a href="../reference/at.html">at</a></span>(timeOfCall, timeOfCall +<span class="st"> </span><span class="dv">7</span>))
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Klaus"</span>, customer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Phone"</span>, phone, <span class="kw"><a href="../reference/at.html">at</a></span>(timeOfCall, timeOfCall <span class="op">+</span><span class="st"> </span><span class="dv">7</span>))
 
-bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> maxTime)
+bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> maxTime)
 <span class="co">#&gt; 0: Klaus0: Here I am</span>
 <span class="co">#&gt; 9: Phone0: Ringgg!</span>
 <span class="co">#&gt; 9: Klaus0: Excuse me</span>
@@ -494,43 +506,43 @@ maxTime =<span class="st"> </span><span class="dv">400</span>
 bank &lt;-<span class="st"> </span><span class="kw">simmer</span>()
 
 customer &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {
          capacity &lt;-
-<span class="st">           </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(bank) %&gt;%
-<span class="st">           </span>dplyr::<span class="kw">filter</span>(resource ==<span class="st"> "door"</span>) %&gt;%
-<span class="st">           </span>.$capacity
-         if (<span class="kw">length</span>(capacity) ==<span class="st"> </span><span class="dv">0</span> ||<span class="st"> </span><span class="kw">tail</span>(capacity, <span class="dv">1</span>) ==<span class="st"> </span><span class="dv">0</span>) {
+<span class="st">           </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(bank) <span class="op">%&gt;%</span>
+<span class="st">           </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(resource <span class="op">==</span><span class="st"> "door"</span>) <span class="op">%&gt;%</span>
+<span class="st">           </span>.<span class="op">$</span>capacity
+         <span class="cf">if</span> (<span class="kw">length</span>(capacity) <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">||</span><span class="st"> </span><span class="kw">tail</span>(capacity, <span class="dv">1</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {
            <span class="kw">return</span>(<span class="st">"Here I am but the door is shut."</span>)
          }
          <span class="st">"Here I am and the door is open."</span>
-       }) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"door"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"I can go in!"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"door"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/<span class="dv">10</span>)}) %&gt;%
+       }) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"door"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"I can go in!"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"door"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>)}) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>)
 
-openTime &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/<span class="dv">10</span>)
+openTime &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>)
 
 door_schedule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/schedule.html">schedule</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, openTime), <span class="kw">c</span>(<span class="dv">0</span>, <span class="ot">Inf</span>))
 
 doorman &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(openTime) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(openTime) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Ladies and Gentlemen! You may all enter."</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"door"</span>, <span class="dt">capacity =</span> door_schedule) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) %&gt;%
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"door"</span>, <span class="dt">capacity =</span> door_schedule) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>,
                 customer,
-                <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">rexp</span>(<span class="dv">5</span> -<span class="st"> </span><span class="dv">1</span>, <span class="fl">0.1</span>))))) %&gt;%
+                <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">rexp</span>(<span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="fl">0.1</span>))))) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Doorman"</span>, doorman, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>))
 
-bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> maxTime)
+bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> maxTime)
 <span class="co">#&gt; 0: Customer0: Here I am but the door is shut.</span>
 <span class="co">#&gt; 6.44076: Customer1: Here I am but the door is shut.</span>
 <span class="co">#&gt; 8.77564: Customer2: Here I am but the door is shut.</span>
@@ -547,9 +559,9 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 <span class="co">#&gt; { Generator: Doorman | monitored: 1 | n_generated: 1 }</span>
-bank %&gt;%
-<span class="st">  </span>get_mon_arrivals %&gt;%
-<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+bank <span class="op">%&gt;%</span>
+<span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1  Doorman0   0.000000 19.72408     19.724085     TRUE           1</span>
 <span class="co">#&gt; 2 Customer0   0.000000 46.61084     26.886751     TRUE           1</span>
@@ -578,34 +590,34 @@ bank %&gt;%
 maxTime =<span class="st"> </span><span class="dv">150</span>
 
 customer &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am, but the door is shut."</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, function() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"door"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"The door is open!"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"door"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/<span class="dv">10</span>)}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am, but the door is shut."</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="cf">function</span>() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"door"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"The door is open!"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"door"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>)}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished."</span>)
 
 door_schedule &lt;-<span class="st"> </span><span class="kw"><a href="../reference/schedule.html">schedule</a></span>(<span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">30</span>), <span class="kw">c</span>(<span class="ot">Inf</span>, <span class="dv">0</span>), <span class="dt">period =</span> <span class="dv">30</span>)
 
 doorman &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Doorman"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">30</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"You may enter."</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Doorman"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">30</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"You may enter."</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dv">2</span>, <span class="dt">times =</span> <span class="ot">Inf</span>)
 
 <span class="kw">set.seed</span>(<span class="dv">393939</span>)
 bank &lt;-<span class="st"> </span><span class="kw">simmer</span>(<span class="st">"bank"</span>)
-bank %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"door"</span>, <span class="dt">capacity =</span> door_schedule) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) %&gt;%
+bank <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"door"</span>, <span class="dt">capacity =</span> door_schedule) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>,
                 customer,
-                <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">rexp</span>(<span class="dv">5</span> -<span class="st"> </span><span class="dv">1</span>, <span class="fl">0.1</span>))))) %&gt;%
+                <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">rexp</span>(<span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="fl">0.1</span>))))) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Doorman"</span>, doorman, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>))
 <span class="co">#&gt; simmer environment: bank | now: 0 | next: 0</span>
 <span class="co">#&gt; { Resource: door | monitored: TRUE | server status: 0(0) | queue status: 0(Inf) }</span>
@@ -613,7 +625,7 @@ bank %&gt;%
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 0 }</span>
 <span class="co">#&gt; { Generator: Doorman | monitored: 1 | n_generated: 0 }</span>
 
-bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> maxTime)
+bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> maxTime)
 <span class="co">#&gt; 0: Customer0: Here I am, but the door is shut.</span>
 <span class="co">#&gt; 25.4605: Customer1: Here I am, but the door is shut.</span>
 <span class="co">#&gt; 30: Doorman0: You may enter.</span>
@@ -643,9 +655,9 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 <span class="co">#&gt; { Generator: Doorman | monitored: 1 | n_generated: 1 }</span>
-bank %&gt;%
-<span class="st">  </span>get_mon_arrivals %&gt;%
-<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+bank <span class="op">%&gt;%</span>
+<span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0    0.00000 36.05646      6.056458     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1   25.46048 48.74417     12.687713     TRUE           1</span>
@@ -666,32 +678,32 @@ bank %&gt;%
 maxTime =<span class="st"> </span><span class="dv">150</span>
 
 customer &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am, but the door is shut."</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, function() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/batch.html">batch</a></span>(<span class="dt">n =</span> <span class="ot">Inf</span>, <span class="dt">timeout =</span> <span class="dv">30</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/batch.html">separate</a></span>() %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"The door is open!"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/<span class="dv">10</span>)}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am, but the door is shut."</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="cf">function</span>() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/batch.html">batch</a></span>(<span class="dt">n =</span> <span class="ot">Inf</span>, <span class="dt">timeout =</span> <span class="dv">30</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/batch.html">separate</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"The door is open!"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>)}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished."</span>)
 
 doorman &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Doorman"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">30</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"You may enter."</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Doorman"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">30</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"You may enter."</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dv">2</span>, <span class="dt">times =</span> <span class="ot">Inf</span>)
 
 <span class="kw">set.seed</span>(<span class="dv">393939</span>)
 bank &lt;-<span class="st"> </span><span class="kw">simmer</span>(<span class="st">"bank"</span>)
-bank %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"door"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) %&gt;%
+bank <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"door"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>,
                 customer,
-                <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">rexp</span>(<span class="dv">5</span> -<span class="st"> </span><span class="dv">1</span>, <span class="fl">0.1</span>))))) %&gt;%
+                <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">rexp</span>(<span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="fl">0.1</span>))))) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Doorman"</span>, doorman, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>))
 <span class="co">#&gt; simmer environment: bank | now: 0 | next: 0</span>
 <span class="co">#&gt; { Resource: door | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
@@ -699,7 +711,7 @@ bank %&gt;%
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 0 }</span>
 <span class="co">#&gt; { Generator: Doorman | monitored: 1 | n_generated: 0 }</span>
 
-bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> maxTime)
+bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> maxTime)
 <span class="co">#&gt; 0: Customer0: Here I am, but the door is shut.</span>
 <span class="co">#&gt; 25.4605: Customer1: Here I am, but the door is shut.</span>
 <span class="co">#&gt; 30: Doorman0: You may enter.</span>
@@ -729,9 +741,9 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 <span class="co">#&gt; { Generator: Doorman | monitored: 1 | n_generated: 1 }</span>
-bank %&gt;%
-<span class="st">  </span>get_mon_arrivals %&gt;%
-<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">waiting_time =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
+bank <span class="op">%&gt;%</span>
+<span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0    0.00000 36.05646      6.056458     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1   25.46048 48.74417     12.687713     TRUE           1</span>
@@ -766,33 +778,38 @@ get_server_count</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
 <span class="kw">library</span>(simmer.plot)
 <span class="co">#&gt; Loading required package: ggplot2</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'simmer.plot'</span>
+<span class="co">#&gt; The following objects are masked from 'package:simmer':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     get_mon_arrivals, get_mon_attributes, get_mon_resources</span>
 <span class="co"># library(ggplot2) # (automatically loaded with simmer.plot)</span>
 
 bank &lt;-<span class="st"> </span><span class="kw">simmer</span>()
 
 customer &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">12</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">12</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>)
 
 <span class="kw">set.seed</span>(<span class="dv">393939</span>)
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) %&gt;%
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>,
                 customer,
-                <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">rexp</span>(<span class="dv">20</span> -<span class="st"> </span><span class="dv">1</span>, <span class="fl">0.1</span>)))))
+                <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">rexp</span>(<span class="dv">20</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="fl">0.1</span>)))))
 
-bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">400</span>)
+bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dv">400</span>)
 <span class="co">#&gt; simmer environment: bank | now: 253.460482171601 | next: </span>
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 20 }</span>
-bank %&gt;%
-<span class="st">  </span>get_mon_arrivals %&gt;%
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(end_time -<span class="st"> </span>start_time)) +
-<span class="st">  </span><span class="kw">geom_histogram</span>() +
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Time spent in the system"</span>) +
+bank <span class="op">%&gt;%</span>
+<span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(end_time <span class="op">-</span><span class="st"> </span>start_time)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Time spent in the system"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Number of customers"</span>)
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="simmer-04-bank-2_files/figure-html/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;"></p>
@@ -809,22 +826,22 @@ bank %&gt;%
 bank &lt;-<span class="st"> </span><span class="kw">simmer</span>()
 
 customer &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Arrived"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, function() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Got counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(function() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) -<span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">12</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Arrived"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="cf">function</span>() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Got counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {<span class="kw">paste</span>(<span class="st">"Waited"</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(bank, <span class="st">"start_time"</span>))}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="dv">12</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished"</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span>/<span class="dv">10</span>), -<span class="dv">1</span>)})
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="cf">function</span>() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>), <span class="op">-</span><span class="dv">1</span>)})
 
-bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)
+bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)
 <span class="co">#&gt; 0: Customer0: Arrived</span>
 <span class="co">#&gt; 0: Customer0: Got counter</span>
 <span class="co">#&gt; 0: Customer0: Waited 0</span>
@@ -849,20 +866,20 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 customer_monitor &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(bank) %&gt;%
-<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">wait =</span> end_time -<span class="st"> </span>start_time -<span class="st"> </span>activity_time)
-mean_waiting_time &lt;-<span class="st"> </span><span class="kw">mean</span>(customer_monitor$wait)
+<span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(bank) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">wait =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
+mean_waiting_time &lt;-<span class="st"> </span><span class="kw">mean</span>(customer_monitor<span class="op">$</span>wait)
 
 resource_monitor &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(bank)
 
-queue_state &lt;-<span class="st"> </span><span class="kw">head</span>(resource_monitor$queue, -<span class="dv">1</span>)
-server_state &lt;-<span class="st"> </span><span class="kw">head</span>(resource_monitor$server, -<span class="dv">1</span>)
+queue_state &lt;-<span class="st"> </span><span class="kw">head</span>(resource_monitor<span class="op">$</span>queue, <span class="op">-</span><span class="dv">1</span>)
+server_state &lt;-<span class="st"> </span><span class="kw">head</span>(resource_monitor<span class="op">$</span>server, <span class="op">-</span><span class="dv">1</span>)
 
-time_state_lasted &lt;-<span class="st"> </span><span class="kw">diff</span>(resource_monitor$time)
-time_at_end &lt;-<span class="st"> </span><span class="kw">max</span>(resource_monitor$time)
+time_state_lasted &lt;-<span class="st"> </span><span class="kw">diff</span>(resource_monitor<span class="op">$</span>time)
+time_at_end &lt;-<span class="st"> </span><span class="kw">max</span>(resource_monitor<span class="op">$</span>time)
 
-mean_active_customers &lt;-<span class="st"> </span><span class="kw">sum</span>(server_state *<span class="st"> </span>time_state_lasted) /<span class="st"> </span>time_at_end
-mean_waiting_customers &lt;-<span class="st"> </span><span class="kw">sum</span>(queue_state *<span class="st"> </span>time_state_lasted) /<span class="st"> </span>time_at_end
+mean_active_customers &lt;-<span class="st"> </span><span class="kw">sum</span>(server_state <span class="op">*</span><span class="st"> </span>time_state_lasted) <span class="op">/</span><span class="st"> </span>time_at_end
+mean_waiting_customers &lt;-<span class="st"> </span><span class="kw">sum</span>(queue_state <span class="op">*</span><span class="st"> </span>time_state_lasted) <span class="op">/</span><span class="st"> </span>time_at_end
 
 <span class="kw">cat</span>(<span class="st">" Average waiting = "</span>, mean_waiting_customers, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>,
     <span class="st">"Average active  = "</span>, mean_active_customers, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)
@@ -884,18 +901,18 @@ timeInBank &lt;-<span class="st"> </span><span class="dv">12</span> <span class=
 bank &lt;-<span class="st"> </span><span class="kw">simmer</span>()
 
 customer &lt;-
-<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, function() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span>/timeInBank)}) %&gt;%
+<span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="cf">function</span>() {<span class="kw"><a href="../reference/now.html">now</a></span>(bank)}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() {<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span>timeInBank)}) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, function() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">19</span>, <span class="dv">1</span>/<span class="dv">10</span>), -<span class="dv">1</span>)})
+<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="cf">function</span>() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">19</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>), <span class="op">-</span><span class="dv">1</span>)})
 
-bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)
+bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)
 <span class="co">#&gt; simmer environment: bank | now: 248.706140163915 | next: </span>
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 20 }</span>
@@ -905,7 +922,10 @@ bank %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.h
      <span class="dt">metric =</span> <span class="st">"usage"</span>,
      <span class="dt">names =</span> <span class="st">"counter"</span>,
      <span class="dt">items =</span> <span class="st">"system"</span>,
-     <span class="dt">steps =</span> <span class="ot">TRUE</span>)</code></pre></div>
+     <span class="dt">steps =</span> <span class="ot">TRUE</span>)
+<span class="co">#&gt; Warning: 'plot.simmer' is deprecated.</span>
+<span class="co">#&gt; Use 'plot(get_mon_resources(x))' instead.</span>
+<span class="co">#&gt; See help("Deprecated")</span></code></pre></div>
 <p><img src="simmer-04-bank-2_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>

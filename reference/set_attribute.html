@@ -91,6 +91,9 @@
     <li>
       <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
+    <li>
+      <a href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -111,6 +114,15 @@
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../extensions/plot">simmer.plot</a>
+    </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.bricks">simmer.bricks</a>
+    </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
+    </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.json">simmer.json</a>
     </li>
   </ul>
 </li>
@@ -138,12 +150,12 @@
     </div>
 
     
-    <p>Activity for modifying an arrival's attribute in the form of a key/value pair.</p>
+    <p>Activity for modifying an arrival's attributes.</p>
     
 
-    <pre class="usage"><span class='fu'>set_attribute</span>(<span class='no'>.trj</span>, <span class='no'>key</span>, <span class='no'>value</span>, <span class='kw'>global</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>set_attribute</span>(<span class='no'>.trj</span>, <span class='no'>keys</span>, <span class='no'>values</span>, <span class='kw'>global</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>set_global</span>(<span class='no'>.trj</span>, <span class='no'>key</span>, <span class='no'>value</span>)</pre>
+<span class='fu'>set_global</span>(<span class='no'>.trj</span>, <span class='no'>keys</span>, <span class='no'>values</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -153,13 +165,14 @@
       <td><p>the trajectory object.</p></td>
     </tr>
     <tr>
-      <th>key</th>
-      <td><p>the attribute name.</p></td>
+      <th>keys</th>
+      <td><p>the attribute name(s), or a callable object (a function) which
+must return attribute name(s).</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>the value to set, accepts either a numeric or a callable object
-(a function) which must return a numeric.</p></td>
+      <th>values</th>
+      <td><p>numeric value(s) to set, or a callable object (a function) which
+must return numeric value(s).</p></td>
     </tr>
     <tr>
       <th>global</th>

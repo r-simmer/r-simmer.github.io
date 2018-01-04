@@ -68,6 +68,9 @@
     <li>
       <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
+    <li>
+      <a href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -88,6 +91,15 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="../extensions/plot">simmer.plot</a>
+    </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.bricks">simmer.bricks</a>
+    </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
+    </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.json">simmer.json</a>
     </li>
   </ul>
 </li>
@@ -114,7 +126,7 @@
       <h1>Continuous-Time Markov Chains</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2017-07-28</h4>
+            <h4 class="date">2018-01-04</h4>
           </div>
 
     
@@ -157,88 +169,91 @@ p\lambda &amp; -\lambda &amp; (1-p) \lambda \\
 <p>The solution <span class="math inline">\(p\)</span> represents the probability of being at each state in the long-term. Therefore, we can calculate the average number of vehicles in the system by summing these probabilities multiplied by the number of vehicles at each state. In our case,</p>
 <p><span class="math display">\[N = 1\cdot p_1 + 0\cdot p_2 + 1\cdot p_3\]</span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Arrival rate</span>
-lambda &lt;-<span class="st"> </span><span class="dv">3</span>/<span class="dv">20</span>
+lambda &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">/</span><span class="dv">20</span>
 <span class="co"># Service rate (cars, motorcycles)</span>
-mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>/<span class="dv">8</span>, <span class="dv">1</span>/<span class="dv">3</span>)
+mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">8</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)
 <span class="co"># Probability of car</span>
 p &lt;-<span class="st"> </span><span class="fl">0.75</span>
 
 <span class="co"># Theoretical resolution</span>
 A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,   mu[<span class="dv">1</span>],            <span class="dv">0</span>,
-              <span class="dv">1</span>, -lambda, (<span class="dv">1</span>-p)*lambda,
-              <span class="dv">1</span>,   mu[<span class="dv">2</span>],       -mu[<span class="dv">2</span>]), <span class="dt">byrow=</span>T, <span class="dt">ncol=</span><span class="dv">3</span>)
+              <span class="dv">1</span>, <span class="op">-</span>lambda, (<span class="dv">1</span><span class="op">-</span>p)<span class="op">*</span>lambda,
+              <span class="dv">1</span>,   mu[<span class="dv">2</span>],       <span class="op">-</span>mu[<span class="dv">2</span>]), <span class="dt">byrow=</span>T, <span class="dt">ncol=</span><span class="dv">3</span>)
 B &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)
 P &lt;-<span class="st"> </span><span class="kw">solve</span>(<span class="kw">t</span>(A), B)
-N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P *<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) ; N_average_theor
+N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) ; N_average_theor
 <span class="co">#&gt; [1] 0.5031056</span></code></pre></div>
 <p>Now, we are going to simulate the system with <code>simmer</code> and verify that it converges to the theoretical solution. There are various options for selecting the model. As a first approach, due to the properties of Poisson processes, we can break down the problem into two trajectories (one for each type of vehicle), which differ in their service time only, and therefore two generators with rates <span class="math inline">\(\lambda_\mathrm{c} = p\lambda\)</span> and <span class="math inline">\(\lambda_\mathrm{m} = (1-p)\lambda\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option<span class="fl">.1</span> &lt;-<span class="st"> </span>function(t) {
-  car &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(t) {
+  car &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>)
   
-  mcycle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) %&gt;%
+  mcycle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>)
   
-  <span class="kw">simmer</span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">0</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, function() <span class="kw">rexp</span>(<span class="dv">1</span>, p*lambda)) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"mcycle"</span>, mcycle, function() <span class="kw">rexp</span>(<span class="dv">1</span>, (<span class="dv">1</span>-p)*lambda)) %&gt;%
+  <span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, p<span class="op">*</span>lambda)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"mcycle"</span>, mcycle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, (<span class="dv">1</span><span class="op">-</span>p)<span class="op">*</span>lambda)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
 }</code></pre></div>
 <p>Other arrival processes may not have this property, so we would define a single generator for all kind of vehicles and a single trajectory as follows. In order to distinguish between cars and motorcycles, we could define a branch after seizing the resource to select the proper service time.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option<span class="fl">.2</span> &lt;-<span class="st"> </span>function(t) {
-  vehicle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/branch.html">branch</a></span>(function() <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="dt">prob=</span><span class="kw">c</span>(p, <span class="dv">1</span>-p)), <span class="kw">c</span>(T, T), 
-           <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"car"</span>) %&gt;%
-<span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])),
-           <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"mcycle"</span>) %&gt;%
-<span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>]))) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(t) {
+  vehicle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/branch.html">branch</a></span>(<span class="cf">function</span>() <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="dt">prob=</span><span class="kw">c</span>(p, <span class="dv">1</span><span class="op">-</span>p)), <span class="kw">c</span>(T, T), 
+           <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"car"</span>) <span class="op">%&gt;%</span>
+<span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])),
+           <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"mcycle"</span>) <span class="op">%&gt;%</span>
+<span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>]))) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>)
   
-  <span class="kw">simmer</span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">0</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, function() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) %&gt;%
+  <span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
 }</code></pre></div>
 <p>But this option adds an unnecessary overhead since there is an additional call to an R function to select the branch, and therefore performance decreases. A much better option is to select the service time directly inside the <code>timeout</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option<span class="fl">.3</span> &lt;-<span class="st"> </span>function(t) {
-  vehicle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() {
-      if (<span class="kw">runif</span>(<span class="dv">1</span>) &lt;<span class="st"> </span>p) <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])  <span class="co"># car</span>
-      else <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])               <span class="co"># mcycle</span>
-    }) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option.<span class="dv">3</span> &lt;-<span class="st"> </span><span class="cf">function</span>(t) {
+  vehicle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() {
+      <span class="cf">if</span> (<span class="kw">runif</span>(<span class="dv">1</span>) <span class="op">&lt;</span><span class="st"> </span>p) <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])  <span class="co"># car</span>
+      <span class="cf">else</span> <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])               <span class="co"># mcycle</span>
+    }) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>)
   
-  <span class="kw">simmer</span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">0</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, function() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) %&gt;%
+  <span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
 }</code></pre></div>
 <p>This <code>option.3</code> is equivalent to <code>option.1</code> in terms of performance. But, of course, the three of them lead us to the same result. For instance,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gas.station &lt;-<span class="st"> </span><span class="kw">option.3</span>(<span class="dv">5000</span>)
 
 <span class="co"># Evolution + theoretical value</span>
-<span class="kw">plot</span>(gas.station, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"pump"</span>, <span class="dt">items=</span><span class="st">"system"</span>) +
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>N_average_theor)</code></pre></div>
+<span class="kw">plot</span>(gas.station, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"pump"</span>, <span class="dt">items=</span><span class="st">"system"</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>N_average_theor)
+<span class="co">#&gt; Warning: 'plot.simmer' is deprecated.</span>
+<span class="co">#&gt; Use 'plot(get_mon_resources(x))' instead.</span>
+<span class="co">#&gt; See help("Deprecated")</span></code></pre></div>
 <p><img src="simmer-07-ctmc_files/figure-html/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>And these are some performance results:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(microbenchmark)
 
-t &lt;-<span class="st"> </span><span class="dv">1000</span>/lambda
+t &lt;-<span class="st"> </span><span class="dv">1000</span><span class="op">/</span>lambda
 tm &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/microbenchmark/topics/microbenchmark">microbenchmark</a></span>(<span class="kw">option.1</span>(t), 
                      <span class="kw">option.2</span>(t), 
                      <span class="kw">option.3</span>(t))
-<span class="kw">autoplot</span>(tm) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">scale_y_log10</span>(<span class="dt">breaks=</span>function(limits) <span class="kw">pretty</span>(limits, <span class="dv">5</span>)) +
+<span class="kw">autoplot</span>(tm) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_y_log10</span>(<span class="dt">breaks=</span><span class="cf">function</span>(limits) <span class="kw">pretty</span>(limits, <span class="dv">5</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Time [milliseconds]"</span>)</code></pre></div>
 <div style="text-align:center">
-<img src="includes/ctmc_1.png">
+<img src="includes/ctmc-1.png">
 </div>
 </div>
 <div id="example-2" class="section level2">
@@ -265,73 +280,73 @@ tm &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumenta
 <p><span class="math display">\[N = 2(p_1 + p_5) + p_2 + p_4\]</span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Theoretical resolution</span>
 A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,                   <span class="dv">0</span>,       <span class="dv">0</span>,               mu[<span class="dv">1</span>],            <span class="dv">0</span>,
-              <span class="dv">1</span>, -(<span class="dv">1</span>-p)*lambda-mu[<span class="dv">1</span>],   mu[<span class="dv">1</span>],                   <span class="dv">0</span>,            <span class="dv">0</span>,
-              <span class="dv">1</span>,            p*lambda, -lambda,        (<span class="dv">1</span>-p)*lambda,            <span class="dv">0</span>,
-              <span class="dv">1</span>,                   <span class="dv">0</span>,   mu[<span class="dv">2</span>], -(<span class="dv">1</span>-p)*lambda-mu[<span class="dv">2</span>], (<span class="dv">1</span>-p)*lambda,
-              <span class="dv">1</span>,                   <span class="dv">0</span>,       <span class="dv">0</span>,               mu[<span class="dv">2</span>],       -mu[<span class="dv">2</span>]), 
+              <span class="dv">1</span>, <span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>p)<span class="op">*</span>lambda<span class="op">-</span>mu[<span class="dv">1</span>],   mu[<span class="dv">1</span>],                   <span class="dv">0</span>,            <span class="dv">0</span>,
+              <span class="dv">1</span>,            p<span class="op">*</span>lambda, <span class="op">-</span>lambda,        (<span class="dv">1</span><span class="op">-</span>p)<span class="op">*</span>lambda,            <span class="dv">0</span>,
+              <span class="dv">1</span>,                   <span class="dv">0</span>,   mu[<span class="dv">2</span>], <span class="op">-</span>(<span class="dv">1</span><span class="op">-</span>p)<span class="op">*</span>lambda<span class="op">-</span>mu[<span class="dv">2</span>], (<span class="dv">1</span><span class="op">-</span>p)<span class="op">*</span>lambda,
+              <span class="dv">1</span>,                   <span class="dv">0</span>,       <span class="dv">0</span>,               mu[<span class="dv">2</span>],       <span class="op">-</span>mu[<span class="dv">2</span>]), 
             <span class="dt">byrow=</span>T, <span class="dt">ncol=</span><span class="dv">5</span>)
 B &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)
 P &lt;-<span class="st"> </span><span class="kw">solve</span>(<span class="kw">t</span>(A), B)
-N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P *<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)) ; N_average_theor
+N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)) ; N_average_theor
 <span class="co">#&gt; [1] 0.6349615</span></code></pre></div>
 <p>As in the first example, we can simulate this chain by breaking down the problem into two trajectories (one for each type of vehicle and service rate) and two generators. But in order to disallow cars to stay in the pump’s queue, we need to introduce a little trick in the cars’ <code>seize</code>: the argument <code>amount</code> is a function that returns 1 if the pump is vacant and 2 otherwise. This implies that the car gets rejected, because there is only one position in queue and that <code>seize</code> is requesting two positions. Note also that the environment <code>env</code> must be defined <strong>before</strong> running, as it is needed inside the trajectory.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option<span class="fl">.1</span> &lt;-<span class="st"> </span>function(t) {
-  car &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span>function() {
-      if (env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/get_capacity.html">get_server_count</a></span>(<span class="st">"pump"</span>)) <span class="dv">2</span>  <span class="co"># rejection</span>
-      else <span class="dv">1</span>                                   <span class="co"># serve</span>
-    }) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(t) {
+  car &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="cf">function</span>() {
+      <span class="cf">if</span> (env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/get_capacity.html">get_server_count</a></span>(<span class="st">"pump"</span>)) <span class="dv">2</span>  <span class="co"># rejection</span>
+      <span class="cf">else</span> <span class="dv">1</span>                                   <span class="co"># serve</span>
+    }) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>)
   
-  mcycle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) %&gt;%
+  mcycle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>)
   
-  env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">1</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, function() <span class="kw">rexp</span>(<span class="dv">1</span>, p*lambda)) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"mcycle"</span>, mcycle, function() <span class="kw">rexp</span>(<span class="dv">1</span>, (<span class="dv">1</span>-p)*lambda))
-  env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
+  env &lt;-<span class="st"> </span><span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, p<span class="op">*</span>lambda)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"mcycle"</span>, mcycle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, (<span class="dv">1</span><span class="op">-</span>p)<span class="op">*</span>lambda))
+  env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
 }</code></pre></div>
 <p>The same idea using a branch, with a single generator and a single trajectory.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option<span class="fl">.2</span> &lt;-<span class="st"> </span>function(t) {
-  vehicle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/branch.html">branch</a></span>(function() <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="dt">prob=</span><span class="kw">c</span>(p, <span class="dv">1</span>-p)), <span class="kw">c</span>(F, F), 
-           <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"car"</span>) %&gt;%
-<span class="st">             </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span>function() {
-               if (env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/get_capacity.html">get_server_count</a></span>(<span class="st">"pump"</span>)) <span class="dv">2</span>  <span class="co"># rejection</span>
-               else <span class="dv">1</span>                                   <span class="co"># serve</span>
-             }) %&gt;%
-<span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(t) {
+  vehicle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/branch.html">branch</a></span>(<span class="cf">function</span>() <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="dt">prob=</span><span class="kw">c</span>(p, <span class="dv">1</span><span class="op">-</span>p)), <span class="kw">c</span>(F, F), 
+           <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"car"</span>) <span class="op">%&gt;%</span>
+<span class="st">             </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="cf">function</span>() {
+               <span class="cf">if</span> (env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/get_capacity.html">get_server_count</a></span>(<span class="st">"pump"</span>)) <span class="dv">2</span>  <span class="co"># rejection</span>
+               <span class="cf">else</span> <span class="dv">1</span>                                   <span class="co"># serve</span>
+             }) <span class="op">%&gt;%</span>
+<span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])) <span class="op">%&gt;%</span>
 <span class="st">             </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>),                 <span class="co"># always 1</span>
-           <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"mcycle"</span>) %&gt;%
-<span class="st">             </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>) %&gt;%
-<span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) %&gt;%
+           <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"mcycle"</span>) <span class="op">%&gt;%</span>
+<span class="st">             </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) <span class="op">%&gt;%</span>
 <span class="st">             </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>))
   
-  env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">1</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, function() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda))
-  env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
+  env &lt;-<span class="st"> </span><span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda))
+  env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
 }</code></pre></div>
 <p>We may also avoid messing up things with branches and subtrajectories. We can decide the type of vehicle and set it as an attribute of the arrival with <code><a href="../reference/set_attribute.html">set_attribute()</a></code>. Then, those attributes can be retrieved using <code><a href="../reference/get_n_generated.html">get_attribute()</a></code>. Although the branch option is a little bit faster, this one is nicer, because there are no subtrajectories involved.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option<span class="fl">.3</span> &lt;-<span class="st"> </span>function(t) {
-  vehicle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"car"</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"vehicle"</span>, function() <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="dt">prob=</span><span class="kw">c</span>(p, <span class="dv">1</span>-p))) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span>function() {
-      if (<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"vehicle"</span>) ==<span class="st"> </span><span class="dv">1</span> &amp;&amp;
-<span class="st">          </span>env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/get_capacity.html">get_server_count</a></span>(<span class="st">"pump"</span>)) <span class="dv">2</span>    <span class="co"># car rejection</span>
-      else <span class="dv">1</span>                                     <span class="co"># serve</span>
-    }) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"vehicle"</span>)])) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option.<span class="dv">3</span> &lt;-<span class="st"> </span><span class="cf">function</span>(t) {
+  vehicle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"car"</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"vehicle"</span>, <span class="cf">function</span>() <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="dt">prob=</span><span class="kw">c</span>(p, <span class="dv">1</span><span class="op">-</span>p))) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="cf">function</span>() {
+      <span class="cf">if</span> (<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"vehicle"</span>) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;&amp;</span>
+<span class="st">          </span>env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/get_capacity.html">get_server_count</a></span>(<span class="st">"pump"</span>)) <span class="dv">2</span>    <span class="co"># car rejection</span>
+      <span class="cf">else</span> <span class="dv">1</span>                                     <span class="co"># serve</span>
+    }) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"vehicle"</span>)])) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>)                    <span class="co"># always 1</span>
   
-  env &lt;-<span class="st"> </span><span class="kw">simmer</span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">1</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, function() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda))
-  env %&gt;%<span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
+  env &lt;-<span class="st"> </span><span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda))
+  env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
 }</code></pre></div>
 <p>But if performance is a requirement, we can play cleverly with the resource capacity and the queue size, and with the amounts requested in each <code>seize</code>, in order to model the problem without checking the status of the resource. Think about this:</p>
 <ul>
@@ -346,82 +361,85 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P *<sp
 <li>One motorcycle (2 units) in the server [and optionally one motorcycle (2 units) in the queue].</li>
 </ul>
 <p>Just as expected! So, let’s try:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option<span class="fl">.4</span> &lt;-<span class="st"> </span>function(t) {
-  vehicle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/branch.html">branch</a></span>(function() <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="dt">prob=</span><span class="kw">c</span>(p, <span class="dv">1</span>-p)), <span class="kw">c</span>(F, F), 
-           <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"car"</span>) %&gt;%
-<span class="st">             </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">3</span>) %&gt;%
-<span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option.<span class="dv">4</span> &lt;-<span class="st"> </span><span class="cf">function</span>(t) {
+  vehicle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/branch.html">branch</a></span>(<span class="cf">function</span>() <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="dt">prob=</span><span class="kw">c</span>(p, <span class="dv">1</span><span class="op">-</span>p)), <span class="kw">c</span>(F, F), 
+           <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"car"</span>) <span class="op">%&gt;%</span>
+<span class="st">             </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">3</span>) <span class="op">%&gt;%</span>
+<span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])) <span class="op">%&gt;%</span>
 <span class="st">             </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">3</span>),
-           <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"mcycle"</span>) %&gt;%
-<span class="st">             </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">2</span>) %&gt;%
-<span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) %&gt;%
+           <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"mcycle"</span>) <span class="op">%&gt;%</span>
+<span class="st">             </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) <span class="op">%&gt;%</span>
 <span class="st">             </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">2</span>))
   
-  <span class="kw">simmer</span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">3</span>, <span class="dt">queue_size=</span><span class="dv">2</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, function() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) %&gt;%
+  <span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">3</span>, <span class="dt">queue_size=</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
 }</code></pre></div>
 <p>We are still wasting time in the <code>branch</code> decision. We can mix this solution above with the <code>option.1</code> to gain extra performance:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option<span class="fl">.5</span> &lt;-<span class="st"> </span>function(t) {
-  car &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">3</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">option.<span class="dv">5</span> &lt;-<span class="st"> </span><span class="cf">function</span>(t) {
+  car &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">3</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">3</span>)
   
-  mcycle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">2</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(function() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) %&gt;%
+  mcycle &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">2</span>)
   
-  <span class="kw">simmer</span>() %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">3</span>, <span class="dt">queue_size=</span><span class="dv">2</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, function() <span class="kw">rexp</span>(<span class="dv">1</span>, p*lambda)) %&gt;%
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"mcycle"</span>, mcycle, function() <span class="kw">rexp</span>(<span class="dv">1</span>, (<span class="dv">1</span>-p)*lambda)) %&gt;%
+  <span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">3</span>, <span class="dt">queue_size=</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, p<span class="op">*</span>lambda)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"mcycle"</span>, mcycle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, (<span class="dv">1</span><span class="op">-</span>p)<span class="op">*</span>lambda)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
 }</code></pre></div>
 <p>Options 1, 2 and 3 are slower, but they give us the correct numbers, because the parameters (capacity, queue size, amounts) in the model remain unchanged compared to the problem. For instance,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gas.station &lt;-<span class="st"> </span><span class="kw">option.1</span>(<span class="dv">5000</span>)
 
 <span class="co"># Evolution + theoretical value</span>
-<span class="kw">plot</span>(gas.station, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"pump"</span>, <span class="dt">items=</span><span class="st">"system"</span>) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>N_average_theor)</code></pre></div>
+<span class="kw">plot</span>(gas.station, <span class="st">"resources"</span>, <span class="st">"usage"</span>, <span class="st">"pump"</span>, <span class="dt">items=</span><span class="st">"system"</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>N_average_theor)
+<span class="co">#&gt; Warning: 'plot.simmer' is deprecated.</span>
+<span class="co">#&gt; Use 'plot(get_mon_resources(x))' instead.</span>
+<span class="co">#&gt; See help("Deprecated")</span></code></pre></div>
 <p><img src="simmer-07-ctmc_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>However, it is not the case in options 4 and 5. The parameters of these models are <em>adulterated</em> to fit our performance purposes. Therefore, we need to extract the RAW data, rescale the numbers and plot them. And, of course, we get the same figure:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gas.station &lt;-<span class="st"> </span><span class="kw">option.5</span>(<span class="dv">5000</span>)
 
 limits &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">item =</span> <span class="kw">c</span>(<span class="st">"system"</span>), <span class="dt">value =</span> <span class="kw">c</span>(<span class="dv">2</span>))
 
-<span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(gas.station) %&gt;%<span class="st"> </span>
-<span class="st">  </span>tidyr::<span class="kw">gather</span>(item, value, server, queue, system) %&gt;%
-<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">value =</span> <span class="kw">round</span>(value *<span class="st"> </span><span class="dv">2</span>/<span class="dv">5</span>),                  <span class="co"># rescaling here &lt;------</span>
-         <span class="dt">item =</span> <span class="kw">factor</span>(item)) %&gt;%
-<span class="st">  </span>dplyr::<span class="kw">filter</span>(item %in%<span class="st"> "system"</span>) %&gt;%
-<span class="st">  </span>dplyr::<span class="kw">group_by</span>(resource, replication, item) %&gt;%
-<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">mean =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">head</span>(value, -<span class="dv">1</span>) *<span class="st"> </span><span class="kw">diff</span>(time))) /<span class="st"> </span>time) %&gt;%<span class="st"> </span>
-<span class="st">  </span>dplyr::<span class="kw">ungroup</span>() %&gt;%
-<span class="st">  </span><span class="kw">ggplot</span>() +<span class="st"> </span><span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">color=</span>item) +
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>mean, <span class="dt">group=</span><span class="kw">interaction</span>(replication, item))) +
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">"Resource usage: pump"</span>) +
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">"in use"</span>) +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">"time"</span>) +<span class="st"> </span><span class="kw">expand_limits</span>(<span class="dt">y=</span><span class="dv">0</span>) +
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept=</span>value, <span class="dt">color=</span>item), limits, <span class="dt">lty=</span><span class="dv">2</span>) +<span class="st"> </span>
+<span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(gas.station) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/gather">gather</a></span>(item, value, server, queue, system) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">value =</span> <span class="kw">round</span>(value <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">/</span><span class="dv">5</span>),                  <span class="co"># rescaling here &lt;------</span>
+         <span class="dt">item =</span> <span class="kw">factor</span>(item)) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(item <span class="op">%in%</span><span class="st"> "system"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(resource, replication, item) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">mean =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">head</span>(value, <span class="op">-</span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">diff</span>(time))) <span class="op">/</span><span class="st"> </span>time) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">ungroup</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">color=</span>item) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>mean, <span class="dt">group=</span><span class="kw">interaction</span>(replication, item))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">"Resource usage: pump"</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">"in use"</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">"time"</span>) <span class="op">+</span><span class="st"> </span><span class="kw">expand_limits</span>(<span class="dt">y=</span><span class="dv">0</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept=</span>value, <span class="dt">color=</span>item), limits, <span class="dt">lty=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span>N_average_theor)</code></pre></div>
 <p><img src="simmer-07-ctmc_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>Finally, these are some performance results:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(microbenchmark)
 
-t &lt;-<span class="st"> </span><span class="dv">1000</span>/lambda
+t &lt;-<span class="st"> </span><span class="dv">1000</span><span class="op">/</span>lambda
 tm &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/microbenchmark/topics/microbenchmark">microbenchmark</a></span>(<span class="kw">option.1</span>(t), 
                      <span class="kw">option.2</span>(t), 
                      <span class="kw">option.3</span>(t),
                      <span class="kw">option.4</span>(t),
                      <span class="kw">option.5</span>(t))
-<span class="kw">autoplot</span>(tm) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">scale_y_log10</span>(<span class="dt">breaks=</span>function(limits) <span class="kw">pretty</span>(limits, <span class="dv">5</span>)) +
+<span class="kw">autoplot</span>(tm) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_y_log10</span>(<span class="dt">breaks=</span><span class="cf">function</span>(limits) <span class="kw">pretty</span>(limits, <span class="dv">5</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Time [milliseconds]"</span>)</code></pre></div>
 <div style="text-align:center">
-<img src="includes/ctmc_2.png">
+<img src="includes/ctmc-2.png">
 </div>
 </div>
 </div>

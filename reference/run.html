@@ -91,6 +91,9 @@
     <li>
       <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
+    <li>
+      <a href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -111,6 +114,15 @@
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../extensions/plot">simmer.plot</a>
+    </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.bricks">simmer.bricks</a>
+    </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
+    </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.json">simmer.json</a>
     </li>
   </ul>
 </li>
@@ -143,7 +155,9 @@
 
     <pre class="usage"><span class='fu'>run</span>(<span class='no'>.env</span>, <span class='kw'>until</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='fl'>10</span>)
 
-<span class='fu'>onestep</span>(<span class='no'>.env</span>)</pre>
+<span class='fu'>onestep</span>(<span class='no'>.env</span>)
+
+<span class='fu'>stepn</span>(<span class='no'>.env</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -165,6 +179,10 @@ completed ratio is periodically passed as argument to the callback.</p></td>
       <th>steps</th>
       <td><p>number of steps to show as progress (it takes effect only if
 <code>progress</code> is provided).</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>number of events to simulate.</p></td>
     </tr>
     </table>
     
