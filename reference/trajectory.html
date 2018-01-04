@@ -86,7 +86,7 @@
       <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/simmer-06-queueing-systems.html">Queueing Systems</a>
+      <a href="../articles/simmer-06-queueing.html">Queueing Systems</a>
     </li>
     <li>
       <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
@@ -207,13 +207,13 @@ activities that can be attached to a generator.</p>
 
 <span class='no'>t0</span></div><div class='output co'>#&gt; trajectory: my trajectory, 9 activities
 #&gt; { Activity: Seize        | resource: nurse, amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x98fc708 }
+#&gt; { Activity: Timeout      | delay: 0x72551e0 }
 #&gt; { Activity: Release      | resource: nurse, amount: 1 }
 #&gt; { Activity: Seize        | resource: doctor, amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x9b4b1a8 }
+#&gt; { Activity: Timeout      | delay: 0x7126100 }
 #&gt; { Activity: Release      | resource: doctor, amount: 1 }
 #&gt; { Activity: Seize        | resource: administration, amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x9aa2a30 }
+#&gt; { Activity: Timeout      | delay: 0x6e665b0 }
 #&gt; { Activity: Release      | resource: administration, amount: 1 }</div><div class='input'>
 <span class='no'>t1</span> <span class='kw'>&lt;-</span> <span class='fu'>trajectory</span>(<span class='st'>"trajectory with a branch"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"server"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
@@ -231,14 +231,14 @@ activities that can be attached to a generator.</p>
 
 <span class='no'>t1</span></div><div class='output co'>#&gt; trajectory: trajectory with a branch, 7 activities
 #&gt; { Activity: Seize        | resource: server, amount: 1 }
-#&gt; { Activity: Branch       | option: 0x6e00f78 }
+#&gt; { Activity: Branch       | option: 0x646ccf0 }
 #&gt;   Fork 1, continue,  trajectory: branch1, 1 activities
-#&gt;   { Activity: Timeout      | delay: 0x90cdd78 }
+#&gt;   { Activity: Timeout      | delay: 0x6124f60 }
 #&gt;   Fork 2, stop,  trajectory: branch2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x87ff238 }
+#&gt;   { Activity: Timeout      | delay: 0x604a820 }
 #&gt;   { Activity: Release      | resource: server, amount: 1 }
 #&gt; { Activity: Release      | resource: server, amount: 1 }
-#&gt; { Activity: Timeout      | delay: 0x96d3410 }</div></pre>
+#&gt; { Activity: Timeout      | delay: 0x5da8180 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

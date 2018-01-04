@@ -63,7 +63,7 @@
       <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/simmer-06-queueing-systems.html">Queueing Systems</a>
+      <a href="../articles/simmer-06-queueing.html">Queueing Systems</a>
     </li>
     <li>
       <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
@@ -245,12 +245,12 @@ envs <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>()
 <span class="co">#&gt;   resource      time server queue capacity queue_size system limit</span>
-<span class="co">#&gt; 1    nurse  7.925606      1     0        1        Inf      1   Inf</span>
-<span class="co">#&gt; 2    nurse 15.675546      1     1        1        Inf      2   Inf</span>
-<span class="co">#&gt; 3    nurse 22.715688      1     0        1        Inf      1   Inf</span>
-<span class="co">#&gt; 4   doctor 22.715688      1     0        2        Inf      1   Inf</span>
-<span class="co">#&gt; 5    nurse 28.694852      1     1        1        Inf      2   Inf</span>
-<span class="co">#&gt; 6    nurse 36.646665      1     2        1        Inf      3   Inf</span>
+<span class="co">#&gt; 1    nurse  9.983116      1     0        1        Inf      1   Inf</span>
+<span class="co">#&gt; 2    nurse 19.719168      1     1        1        Inf      2   Inf</span>
+<span class="co">#&gt; 3    nurse 23.131705      1     0        1        Inf      1   Inf</span>
+<span class="co">#&gt; 4   doctor 23.131705      1     0        2        Inf      1   Inf</span>
+<span class="co">#&gt; 5    nurse 30.409403      1     1        1        Inf      2   Inf</span>
+<span class="co">#&gt; 6    nurse 37.145897      1     0        1        Inf      1   Inf</span>
 <span class="co">#&gt;   replication</span>
 <span class="co">#&gt; 1           1</span>
 <span class="co">#&gt; 2           1</span>
@@ -262,12 +262,12 @@ envs <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>()
 <span class="co">#&gt;       name start_time end_time activity_time finished replication</span>
-<span class="co">#&gt; 1 patient0   7.925606 48.11193      40.18632     TRUE           1</span>
-<span class="co">#&gt; 2 patient1  15.675546 65.29765      42.58197     TRUE           1</span>
-<span class="co">#&gt; 3 patient0   9.529902 48.15061      38.62071     TRUE           2</span>
-<span class="co">#&gt; 4 patient1  19.486083 61.68144      37.19081     TRUE           2</span>
-<span class="co">#&gt; 5 patient2  29.933173 79.99469      41.90137     TRUE           2</span>
-<span class="co">#&gt; 6 patient0   9.845316 47.34885      37.50353     TRUE           3</span></code></pre></div>
+<span class="co">#&gt; 1 patient0   9.983116 46.65138      36.66826     TRUE           1</span>
+<span class="co">#&gt; 2 patient1  19.719168 60.67419      37.54249     TRUE           1</span>
+<span class="co">#&gt; 3 patient2  30.409403 73.48004      36.33414     TRUE           1</span>
+<span class="co">#&gt; 4 patient0  11.647195 49.53683      37.88964     TRUE           2</span>
+<span class="co">#&gt; 5 patient1  22.800404 62.86063      37.61263     TRUE           2</span>
+<span class="co">#&gt; 6 patient0   6.602153 47.03773      40.43558     TRUE           3</span></code></pre></div>
 <p>Unfortunately, as the C++ simulation cores are destroyed, the downside of this kind of parallelization is that one cannot resume execution of the replicas.</p>
 </div>
 <div id="basic-visualisation-tools" class="section level2">
