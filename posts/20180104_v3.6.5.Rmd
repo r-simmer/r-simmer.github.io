@@ -1,0 +1,31 @@
+---
+title: "simmer 3.6.5"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The fifth update of the 3.6.x release of [simmer](http://r-simmer.org/), the Discrete-Event Simulator for R, is on CRAN. This release extends the attributes API by allowing users to set/get multiple attributes at once (a pretty straightforward change as well as useful; I don't know why it didn't occurred to me before...). Vectors as attributes and other data types are not supported yet, but they are on the roadmap.
+
+This version also fixes some minor bugs (many thanks to the users of the [simmer-devel](https://groups.google.com/forum/#!forum/simmer-devel) mailing list for taking their simulations to edge cases, where these bugs arise), deprecates the `onestep()` function and provides the new `stepn()` instead. Since `onestep()` serves primarily for debugging purposes, the transition to the new one may go unnoticed. Finally, there is a new vignette about the [*Dining Philosophers Problem*](http://r-simmer.org/articles/simmer-08-philosophers.html).
+
+### New features:
+
+* `set_attribute()` (and `set_global()` by extension) can set multiple attributes at once by providing vectors of `keys` and `values` (or functions returning such `keys` and/or `values`). `get_attribute()` (and `get_global()` by extension) can retrieve multiple `keys` (#122).
+* New `stepn()` method deprecates `onestep()` (e452975).
+
+### Minor changes and fixes:
+
+* Restore `ostream` after formatting (9ff11f8).
+* Fix arrival cloning to copy attributes over to the clone (#118).
+* Fix self-induced preemption through `set_capacity()` (#125).
+* Update "Queueing Systems" vignette (a0409a0, 8f03f4f).
+* Update "Advanced Trajectory Usage" vignette (4501927).
+* Fix print methods to return the object invisibly (#128).
+* New "Dining Philosophers Problem" vignette (ff6137e).
