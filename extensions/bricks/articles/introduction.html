@@ -149,24 +149,24 @@ patient.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient.<span class="dv">1</span>
 <span class="co">#&gt; trajectory: patients' path, 9 activities</span>
 <span class="co">#&gt; { Activity: Seize        | resource: nurse, amount: 1 }</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0x55aac8967f48 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0x5573c74144d8 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: nurse, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Seize        | resource: doctor, amount: 1 }</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0x55aac7bb31c0 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0x5573c599d758 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: doctor, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Seize        | resource: administration, amount: 1 }</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0x55aac7b778f0 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0x5573c628e260 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: administration, amount: 1 }</span>
 patient.<span class="dv">2</span>
 <span class="co">#&gt; trajectory: patients' path, 9 activities</span>
 <span class="co">#&gt; { Activity: Seize        | resource: nurse, amount: 1 }</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0x55aac78354d8 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0x5573c5f24540 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: nurse, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Seize        | resource: doctor, amount: 1 }</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0x55aac77974e8 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0x5573c5ecc658 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: doctor, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Seize        | resource: administration, amount: 1 }</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0x55aac7736310 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0x5573c5e6c248 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: administration, amount: 1 }</span></code></pre></div>
 <p>which means that you must have this in mind if you want to use a <code><a href="http://www.rdocumentation.org/packages/simmer/topics/rollback">rollback()</a></code> to loop over some part of the trajectory.</p>
 <p>In summary, the <code>simmer.bricks</code> package is a repository of <code>simmer</code> activity patterns like this one. See <code>help(package="simmer.bricks")</code> for a comprehensive list.</p>
@@ -188,9 +188,11 @@ t &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentat
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/log_">log_</a></span>(<span class="st">"res1 seized"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">seize</a></span>(<span class="st">"res2"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/log_">log_</a></span>(<span class="st">"res2 seized"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/delayed_release.html">delayed_release</a></span>(env, <span class="st">"res1"</span>, <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># inoperative for 2 units of time</span>
+<span class="st">  </span><span class="co"># inoperative for 2 units of time</span>
+<span class="st">  </span><span class="kw"><a href="../reference/delayed_release.html">delayed_release</a></span>(env, <span class="st">"res1"</span>, <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/log_">log_</a></span>(<span class="st">"res1 released"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/delayed_release.html">delayed_release</a></span>(env, <span class="st">"res2"</span>, <span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># inoperative for 5 units of time</span>
+<span class="st">  </span><span class="co"># inoperative for 5 units of time</span>
+<span class="st">  </span><span class="kw"><a href="../reference/delayed_release.html">delayed_release</a></span>(env, <span class="st">"res2"</span>, <span class="dv">5</span>, <span class="dt">preemptive=</span><span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/log_">log_</a></span>(<span class="st">"res1 released"</span>)
 
 env <span class="op">%&gt;%</span>
@@ -199,11 +201,11 @@ env <span class="op">%&gt;%</span>
 <span class="co">#&gt; 0: dummy0: res1 seized</span>
 <span class="co">#&gt; 0: dummy0: res2 seized</span>
 <span class="co">#&gt; 0: dummy0: res1 released</span>
+<span class="co">#&gt; 0: dummy0: res1 released</span>
 <span class="co">#&gt; 2: dummy1: res1 seized</span>
-<span class="co">#&gt; 5: dummy0: res1 released</span>
 <span class="co">#&gt; 5: dummy1: res2 seized</span>
 <span class="co">#&gt; 5: dummy1: res1 released</span>
-<span class="co">#&gt; 10: dummy1: res1 released</span></code></pre></div>
+<span class="co">#&gt; 5: dummy1: res1 released</span></code></pre></div>
 <p>If you are curious, you can print the trajectory above to see what happens behind the scenes.</p>
 </div>
 <div id="parallel-tasks" class="section level3">
