@@ -1,0 +1,62 @@
+---
+title: "simmer.bricks 0.1.0: new add-on for simmer"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The new package `simmer.bricks` has found its way to CRAN. The [simmer](http://r-simmer.org/) package provides a rich and flexible API to build discrete-event simulations. However, there are certain recurring patterns that are typed over and over again, higher-level tasks which can be conceptualised in concrete activity sequences. This new package is intended to capture this kind of patterns into usable *bricks*, i.e., methods that can be used as `simmer` activities, but return an arrangement of activities implementing higher-level tasks.
+
+For instance, consider an entity visiting a resource:
+
+```{r}
+library(simmer)
+
+trajectory("customer") %>%
+  seize("clerk") %>%
+  timeout(10) %>%
+  release("clerk")
+```
+
+The `simmer.bricks` package wraps this pattern into the `visit()` brick:
+
+```{r}
+library(simmer.bricks)
+
+trajectory("customer") %>%
+  visit("clerk", 10)
+```
+
+This is a very naive example though. As a more compelling use case, consider a resource that becomes inoperative for some time after each release; i.e., the clerk above needs to do some paperwork after each customer leaves. There are several ways of programming this with `simmer`. The most compact implementation requires a `clone()` activity to let a clone hold the resource for some more time while the original entity continues its way. This package encapsulates all this logic in a very easy-to-use brick called `delayed_release()`:
+
+```{r}
+env <- simmer()
+
+customer <- trajectory("customer") %>%
+  log_("waiting") %>%
+  seize("clerk") %>%
+  log_("being attended") %>%
+  timeout(10) %>%
+  # inoperative for 5 units of time
+  delayed_release(env, "clerk", 5) %>%
+  log_("leaving")
+
+env %>%
+  add_resource("clerk") %>%
+  add_generator("customer", customer, at(0, 1)) %>%
+  run() %>% invisible
+```
+
+The [reference index](http://r-simmer.org/extensions/bricks/reference/index.html) lists all the available bricks included in this inital release. The examples included in the help page for each method show the equivalence in plain activities. This is very important if you want to mix bricks with rollbacks to produce loops, since the `rollback()` activity works in terms of the number of activities. For instance, this is what a `delayed_release()` does behind the scenes:
+
+```{r}
+customer
+```
+
+As always, we are more than happy to receive feedback and suggestions, either via [the mailing list](https://groups.google.com/forum/#!forum/simmer-devel) or via GitHub issues and PRs. If you identify any pattern that you frequently use in your simulations and you think it could become a useful `simmer` brick, please don't hesitate to share it!
