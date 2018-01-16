@@ -193,11 +193,11 @@ line per clone.</p></td>
   <span class='fu'>delayed_release</span>(<span class='no'>env</span>, <span class='st'>"res1"</span>, <span class='fl'>5</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 6 activities
 #&gt; { Activity: Clone        | n: 2 }
 #&gt;   Fork 1, continue,  trajectory: anonymous, 2 activities
-#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x5637468e7408 }
+#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x55eb0396b358 }
 #&gt;   { Activity: Release      | resource: res1, amount: 1 }
 #&gt;   Fork 2, continue,  trajectory: anonymous, 2 activities
 #&gt;   { Activity: Timeout      | delay: 5 }
-#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x563746112fa0 }
+#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x55eb02f97d00 }
 #&gt; { Activity: Synchronize  | wait: 0 }</div><div class='input'>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>clone</span>(
@@ -214,11 +214,11 @@ line per clone.</p></td>
   <span class='fu'>synchronize</span>(<span class='kw'>wait</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 6 activities
 #&gt; { Activity: Clone        | n: 2 }
 #&gt;   Fork 1, continue,  trajectory: anonymous, 2 activities
-#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x563747719c18 }
+#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x55eb04bd0a70 }
 #&gt;   { Activity: Release      | resource: res1, amount: 1 }
 #&gt;   Fork 2, continue,  trajectory: anonymous, 2 activities
 #&gt;   { Activity: Timeout      | delay: 5 }
-#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x5637469f0388 }
+#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x55eb0466a2a8 }
 #&gt; { Activity: Synchronize  | wait: 0 }</div><div class='input'>
 <span class='co'>## These are equivalent if the resource is preemptive:</span>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
@@ -249,7 +249,7 @@ line per clone.</p></td>
 #&gt;   Fork 1, continue,  trajectory: anonymous, 1 activities
 #&gt;   { Activity: Release      | resource: res2, amount: 1 }
 #&gt;   Fork 2, continue,  trajectory: anonymous, 4 activities
-#&gt;   { Activity: SetPrior     | values: 0x563747e87bb8 }
+#&gt;   { Activity: SetPrior     | values: 0x55eb03f58768 }
 #&gt;   { Activity: Seize        | resource: res2, amount: 1 }
 #&gt;   { Activity: Timeout      | delay: 5 }
 #&gt;   { Activity: Release      | resource: res2, amount: 1 }

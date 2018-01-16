@@ -192,16 +192,16 @@ line per clone.</p></td>
   )</div><div class='output co'>#&gt; trajectory: anonymous, 10 activities
 #&gt; { Activity: Clone        | n: 3 }
 #&gt;   Fork 1, continue,  trajectory: original, 4 activities
-#&gt;   { Activity: Trap         | signals: 0x563748a3d1b8 }
+#&gt;   { Activity: Trap         | signals: 0x55eb05364c30 }
 #&gt;   { Activity: Wait         |  }
 #&gt;   { Activity: Wait         |  }
-#&gt;   { Activity: UnTrap       | signals: 0x563748a3d1b8 }
+#&gt;   { Activity: UnTrap       | signals: 0x55eb05364c30 }
 #&gt;   Fork 2, continue,  trajectory: task 1, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x5637479b6b28 }
-#&gt;   { Activity: Send         | signals: 0x563748a3d1b8, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: 0x55eb02b3f468 }
+#&gt;   { Activity: Send         | signals: 0x55eb05364c30, delay: 0 }
 #&gt;   Fork 3, continue,  trajectory: task 2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x56374710fef8 }
-#&gt;   { Activity: Send         | signals: 0x563748a3d1b8, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: 0x55eb02897ef0 }
+#&gt;   { Activity: Send         | signals: 0x55eb05364c30, delay: 0 }
 #&gt; { Activity: Synchronize  | wait: 1 }</div><div class='input'>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>clone</span>(
@@ -218,16 +218,16 @@ line per clone.</p></td>
   <span class='fu'>synchronize</span>(<span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 10 activities
 #&gt; { Activity: Clone        | n: 3 }
 #&gt;   Fork 1, continue,  trajectory: original, 4 activities
-#&gt;   { Activity: Trap         | signals: 0x5637476a8f78 }
+#&gt;   { Activity: Trap         | signals: 0x55eb02ed59e8 }
 #&gt;   { Activity: Wait         |  }
 #&gt;   { Activity: Wait         |  }
-#&gt;   { Activity: UnTrap       | signals: 0x5637476a8f78 }
+#&gt;   { Activity: UnTrap       | signals: 0x55eb02ed59e8 }
 #&gt;   Fork 2, continue,  trajectory: task 1, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x5637479b6b28 }
-#&gt;   { Activity: Send         | signals: 0x5637476a8f78, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: 0x55eb02b3f468 }
+#&gt;   { Activity: Send         | signals: 0x55eb02ed59e8, delay: 0 }
 #&gt;   Fork 3, continue,  trajectory: task 2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x56374710fef8 }
-#&gt;   { Activity: Send         | signals: 0x5637476a8f78, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: 0x55eb02897ef0 }
+#&gt;   { Activity: Send         | signals: 0x55eb02ed59e8, delay: 0 }
 #&gt; { Activity: Synchronize  | wait: 1 }</div><div class='input'>
 <span class='co'>## These are equivalent:</span>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
@@ -238,16 +238,16 @@ line per clone.</p></td>
   )</div><div class='output co'>#&gt; trajectory: anonymous, 9 activities
 #&gt; { Activity: Clone        | n: 3 }
 #&gt;   Fork 1, continue,  trajectory: original, 1 activities
-#&gt;   { Activity: Trap         | signals: 0x563748a10a08 }
+#&gt;   { Activity: Trap         | signals: 0x55eb036d19e8 }
 #&gt;   Fork 2, continue,  trajectory: task 1, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x5637479b6b28 }
-#&gt;   { Activity: Send         | signals: 0x563748a10a08, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: 0x55eb02b3f468 }
+#&gt;   { Activity: Send         | signals: 0x55eb036d19e8, delay: 0 }
 #&gt;   Fork 3, continue,  trajectory: task 2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x56374710fef8 }
-#&gt;   { Activity: Send         | signals: 0x563748a10a08, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: 0x55eb02897ef0 }
+#&gt;   { Activity: Send         | signals: 0x55eb036d19e8, delay: 0 }
 #&gt; { Activity: Synchronize  | wait: 0 }
 #&gt; { Activity: Wait         |  }
-#&gt; { Activity: UnTrap       | signals: 0x563748a10a08 }</div><div class='input'>
+#&gt; { Activity: UnTrap       | signals: 0x55eb036d19e8 }</div><div class='input'>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>clone</span>(
     <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>3</span>,
@@ -262,16 +262,16 @@ line per clone.</p></td>
   <span class='fu'>untrap</span>(<span class='no'>signal</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 9 activities
 #&gt; { Activity: Clone        | n: 3 }
 #&gt;   Fork 1, continue,  trajectory: original, 1 activities
-#&gt;   { Activity: Trap         | signals: 0x5637476a8f78 }
+#&gt;   { Activity: Trap         | signals: 0x55eb02ed59e8 }
 #&gt;   Fork 2, continue,  trajectory: task 1, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x5637479b6b28 }
-#&gt;   { Activity: Send         | signals: 0x5637476a8f78, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: 0x55eb02b3f468 }
+#&gt;   { Activity: Send         | signals: 0x55eb02ed59e8, delay: 0 }
 #&gt;   Fork 3, continue,  trajectory: task 2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x56374710fef8 }
-#&gt;   { Activity: Send         | signals: 0x5637476a8f78, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: 0x55eb02897ef0 }
+#&gt;   { Activity: Send         | signals: 0x55eb02ed59e8, delay: 0 }
 #&gt; { Activity: Synchronize  | wait: 0 }
 #&gt; { Activity: Wait         |  }
-#&gt; { Activity: UnTrap       | signals: 0x5637476a8f78 }</div><div class='input'>
+#&gt; { Activity: UnTrap       | signals: 0x55eb02ed59e8 }</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

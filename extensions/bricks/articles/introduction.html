@@ -110,7 +110,7 @@
 </h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2018-01-15</h4>
+            <h4 class="date">2018-01-16</h4>
           </div>
 
     
@@ -149,24 +149,24 @@ patient.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">patient.<span class="dv">1</span>
 <span class="co">#&gt; trajectory: patients' path, 9 activities</span>
 <span class="co">#&gt; { Activity: Seize        | resource: nurse, amount: 1 }</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0x55cbb1233110 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0x55aac8967f48 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: nurse, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Seize        | resource: doctor, amount: 1 }</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0x55cbb07e95f8 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0x55aac7bb31c0 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: doctor, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Seize        | resource: administration, amount: 1 }</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0x55cbb07adfe0 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0x55aac7b778f0 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: administration, amount: 1 }</span>
 patient.<span class="dv">2</span>
 <span class="co">#&gt; trajectory: patients' path, 9 activities</span>
 <span class="co">#&gt; { Activity: Seize        | resource: nurse, amount: 1 }</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0x55cbafd0db50 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0x55aac78354d8 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: nurse, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Seize        | resource: doctor, amount: 1 }</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0x55cbb0477c48 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0x55aac77974e8 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: doctor, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Seize        | resource: administration, amount: 1 }</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0x55cbb0360bc0 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0x55aac7736310 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: administration, amount: 1 }</span></code></pre></div>
 <p>which means that you must have this in mind if you want to use a <code><a href="http://www.rdocumentation.org/packages/simmer/topics/rollback">rollback()</a></code> to loop over some part of the trajectory.</p>
 <p>In summary, the <code>simmer.bricks</code> package is a repository of <code>simmer</code> activity patterns like this one. See <code>help(package="simmer.bricks")</code> for a comprehensive list.</p>
@@ -237,9 +237,11 @@ t &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentat
 <span class="st">  </span><span class="kw"><a href="../reference/do_parallel.html">do_parallel</a></span>(
     env,
     <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>(<span class="st">"doctor"</span>) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="dv">1</span>),
+<span class="st">      </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/log_">log_</a></span>(<span class="st">"doctor path done"</span>),
     <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/trajectory">trajectory</a></span>(<span class="st">"nurse"</span>) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="dv">2</span>)
+<span class="st">      </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/log_">log_</a></span>(<span class="st">"nurse path done"</span>)
   ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/timeout">timeout</a></span>(<span class="fl">0.5</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/seize">release</a></span>(<span class="st">"room"</span>,<span class="dv">1</span>) <span class="op">%&gt;%</span>
@@ -250,6 +252,8 @@ env <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/add_generator">add_generator</a></span>(<span class="st">"visit"</span>, t, <span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/at">at</a></span>(<span class="dv">0</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/run">run</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>invisible
 <span class="co">#&gt; 0: visit0: room seized</span>
+<span class="co">#&gt; 1: visit0: doctor path done</span>
+<span class="co">#&gt; 2: visit0: nurse path done</span>
 <span class="co">#&gt; 2.5: visit0: room released</span></code></pre></div>
 <p>And everything just works.</p>
 </div>
