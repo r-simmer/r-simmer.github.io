@@ -1,7 +1,5 @@
 ## ---- 3.configuration
 
-rm(list=ls())
-
 m <- 9            # number of RA retries
 Ps <- 0.03        # sleep power consumption [mW]
 Pi <- 10          # idle power consumption [mW]

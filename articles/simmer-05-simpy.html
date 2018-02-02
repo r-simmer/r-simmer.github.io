@@ -48,7 +48,7 @@
       <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/simmer-02-terminology.html">Terminology</a>
+      <a href="../articles/simmer-02-jss.pdf">JSS paper</a>
     </li>
     <li>
       <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
@@ -71,6 +71,9 @@
     <li>
       <a href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
     </li>
+    <li>
+      <a href="../articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -90,10 +93,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="/extensions/plot">simmer.plot</a>
+      <a href="../extensions/plot">simmer.plot</a>
     </li>
     <li>
-      <a href="/extensions/bricks">simmer.bricks</a>
+      <a href="../extensions/bricks">simmer.bricks</a>
     </li>
     <li>
       <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
@@ -126,7 +129,7 @@
       <h1>Other SimPy Examples</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2018-01-04</h4>
+            <h4 class="date">2018-02-02</h4>
           </div>
 
     
@@ -135,7 +138,7 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>These examples are adapted from the Python package ‘SimPy’, <a href="https://simpy.readthedocs.io/en/latest/examples">here</a>. Users familiar with SimPy may find these examples helpful for transitioning to <code>simmer</code>. Some very basic material is not covered. Beginners should first read the vignettes <a href="simmer-01-introduction.html"><em>Introduction to simmer</em></a>, <a href="simmer-02-terminology.html"><em>Terminology</em></a>, <a href="simmer-03-trajectories.html"><em>Advanced Trajectory Usage</em></a> and <em><a href="simmer-04-bank-1.html">The Bank Tutorial: Part I</a> &amp; <a href="simmer-04-bank-2.html">Part II</a></em>.</p>
+<p>These examples are adapted from the Python package ‘SimPy’, <a href="https://simpy.readthedocs.io/en/latest/examples">here</a>. Users familiar with SimPy may find these examples helpful for transitioning to <code>simmer</code>. Some very basic material is not covered. Beginners should first read <em><a href="simmer-04-bank-1.html">The Bank Tutorial: Part I</a> &amp; <a href="simmer-04-bank-2.html">Part II</a></em>.</p>
 </div>
 <div id="carwash" class="section level2">
 <h2 class="hasAnchor">
@@ -160,7 +163,7 @@ SIM_TIME &lt;-<span class="st"> </span><span class="dv">20</span>     <span clas
 
 <span class="co"># setup</span>
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
-env &lt;-<span class="st"> </span><span class="kw">simmer</span>()</code></pre></div>
+env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()</code></pre></div>
 <p>The implementation with <code>simmer</code> is as simple as defining the trajectory each arriving <code>car</code> will share and follow. This trajectory comprises seizing a wash machine, spending some time and releasing it. The process takes <code>WASHTIME</code> and removes some random percentage of dirt between 50 and 90%. The <code><a href="../reference/log_.html">log_()</a></code> messages are merely illustrative.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">car &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"arrives at the carwash"</span>) <span class="op">%&gt;%</span>
@@ -237,14 +240,14 @@ SIM_TIME &lt;-<span class="st"> </span>WEEKS <span class="op">*</span><span clas
 
 <span class="co"># setup</span>
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
-env &lt;-<span class="st"> </span><span class="kw">simmer</span>()</code></pre></div>
+env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()</code></pre></div>
 <p>The <code>make_parts</code> trajectory defines a machine’s operating loop. A worker seizes the machine and starts manufacturing and counting parts in an infinite loop. Provided we want more than one machine, we parametrise the trajectory as a function of the machine:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">make_parts &lt;-<span class="st"> </span><span class="cf">function</span>(machine)
   <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"parts"</span>, <span class="dv">0</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(machine, <span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rnorm</span>(<span class="dv">1</span>, PT_MEAN, PT_SIGMA)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"parts"</span>, <span class="cf">function</span>() <span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"parts"</span>) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"parts"</span>, <span class="dv">1</span>, <span class="dt">mod=</span><span class="st">"+"</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dv">2</span>, <span class="ot">Inf</span>) <span class="co"># go to 'timeout' over and over</span></code></pre></div>
 <p>Repairman’s <em>unimportant</em> jobs may be modelled in the same way (without the accounting part):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">other_jobs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
@@ -278,23 +281,23 @@ failure &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tra
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(SIM_TIME) <span class="op">%&gt;%</span><span class="st"> </span>invisible</code></pre></div>
 <p>The last value per worker from the attributes table reports the number of parts made:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(name) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/slice">slice</a></span>(<span class="kw">n</span>()) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/arrange">arrange</a></span>(name)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(name) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/slice.html">slice</a></span>(<span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(name)
 <span class="co">#&gt; # A tibble: 10 x 5</span>
 <span class="co">#&gt; # Groups:   name [10]</span>
 <span class="co">#&gt;     time name             key   value replication</span>
 <span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt; &lt;dbl&gt;       &lt;int&gt;</span>
-<span class="co">#&gt;  1 40313 machine0_worker0 parts  3234           1</span>
-<span class="co">#&gt;  2 40313 machine1_worker0 parts  3369           1</span>
-<span class="co">#&gt;  3 40318 machine2_worker0 parts  3345           1</span>
-<span class="co">#&gt;  4 40316 machine3_worker0 parts  3269           1</span>
-<span class="co">#&gt;  5 40312 machine4_worker0 parts  3310           1</span>
-<span class="co">#&gt;  6 40314 machine5_worker0 parts  3266           1</span>
-<span class="co">#&gt;  7 40317 machine6_worker0 parts  3371           1</span>
-<span class="co">#&gt;  8 40314 machine7_worker0 parts  3386           1</span>
-<span class="co">#&gt;  9 40315 machine8_worker0 parts  3216           1</span>
-<span class="co">#&gt; 10 40319 machine9_worker0 parts  3401           1</span></code></pre></div>
+<span class="co">#&gt;  1 40314 machine0_worker0 parts  3073           1</span>
+<span class="co">#&gt;  2 40310 machine1_worker0 parts  3281           1</span>
+<span class="co">#&gt;  3 40315 machine2_worker0 parts  3284           1</span>
+<span class="co">#&gt;  4 40308 machine3_worker0 parts  3241           1</span>
+<span class="co">#&gt;  5 40256 machine4_worker0 parts  3288           1</span>
+<span class="co">#&gt;  6 40232 machine5_worker0 parts  3377           1</span>
+<span class="co">#&gt;  7 40230 machine6_worker0 parts  3362           1</span>
+<span class="co">#&gt;  8 40320 machine7_worker0 parts  3429           1</span>
+<span class="co">#&gt;  9 40275 machine8_worker0 parts  3443           1</span>
+<span class="co">#&gt; 10 40311 machine9_worker0 parts  3323           1</span></code></pre></div>
 </div>
 <div id="movie-renege" class="section level2">
 <h2 class="hasAnchor">
@@ -319,7 +322,7 @@ movies &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">
 
 <span class="co"># setup</span>
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
-env &lt;-<span class="st"> </span><span class="kw">simmer</span>()</code></pre></div>
+env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()</code></pre></div>
 <p>The main actor of this simulation is the <em>moviegoer</em>, a process that will try to buy a number of tickets for a certain movie. The logic is as follows:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -402,39 +405,39 @@ env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a h
 env <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"moviegoer"</span>, moviegoer, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="fl">0.5</span>), <span class="dt">mon=</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(SIM_TIME)
-<span class="co">#&gt; simmer environment: anonymous | now: 120 | next: 120.289360000071</span>
+<span class="co">#&gt; simmer environment: anonymous | now: 120 | next: 120.121103789898</span>
 <span class="co">#&gt; { Resource: R Unchained | monitored: TRUE | server status: 50(0) | queue status: 0(0) }</span>
-<span class="co">#&gt; { Resource: Kill Process | monitored: TRUE | server status: 49(0) | queue status: 0(0) }</span>
+<span class="co">#&gt; { Resource: Kill Process | monitored: TRUE | server status: 50(0) | queue status: 0(0) }</span>
 <span class="co">#&gt; { Resource: Pulp Implementation | monitored: TRUE | server status: 49(0) | queue status: 0(0) }</span>
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
-<span class="co">#&gt; { Generator: moviegoer | monitored: 2 | n_generated: 227 }</span></code></pre></div>
+<span class="co">#&gt; { Generator: moviegoer | monitored: 2 | n_generated: 243 }</span></code></pre></div>
 <p>The analysis is performed with the help of <code>dplyr</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get the three rows with the sold out instants</span>
 sold_time &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(env) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(resource <span class="op">!=</span><span class="st"> "counter"</span> <span class="op">&amp;</span><span class="st"> </span>capacity <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(resource <span class="op">!=</span><span class="st"> "counter"</span> <span class="op">&amp;</span><span class="st"> </span>capacity <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)
 
 <span class="co"># get the arrivals that left at the sold out instants</span>
 <span class="co"># count the number of arrivals per movie</span>
-n_reneges &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/join">left_join</a></span>(
+n_reneges &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(
   <span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env) <span class="op">%&gt;%</span>
-<span class="st">    </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(finished <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>end_time <span class="op">%in%</span><span class="st"> </span>sold_time<span class="op">$</span>time),
+<span class="st">    </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(finished <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>end_time <span class="op">%in%</span><span class="st"> </span>sold_time<span class="op">$</span>time),
   <span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)
 ) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">resource =</span> movies[value]) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(resource) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/tally">count</a></span>()
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">resource =</span> movies[value]) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(resource) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/tally.html">count</a></span>()
 
 <span class="co"># merge the info  and print</span>
-<span class="kw">invisible</span>(<span class="kw">apply</span>(dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/join">left_join</a></span>(sold_time, n_reneges), <span class="dv">1</span>, <span class="cf">function</span>(i) {
+<span class="kw">invisible</span>(<span class="kw">apply</span>(dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(sold_time, n_reneges), <span class="dv">1</span>, <span class="cf">function</span>(i) {
   <span class="kw">cat</span>(<span class="st">"Movie '"</span>, i[<span class="st">"resource"</span>], <span class="st">"' was sold out in "</span>, i[<span class="st">"time"</span>], <span class="st">" minutes.</span><span class="ch">\n</span><span class="st">"</span>, 
       <span class="st">"  Number of people that left the queue: "</span>, i[<span class="st">"n"</span>], <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="dt">sep=</span><span class="st">""</span>)
 }))
 <span class="co">#&gt; Movie 'Pulp Implementation' was sold out in 31.09917 minutes.</span>
-<span class="co">#&gt;   Number of people that left the queue: 18</span>
-<span class="co">#&gt; Movie 'R Unchained' was sold out in 40.59917 minutes.</span>
-<span class="co">#&gt;   Number of people that left the queue: 14</span>
-<span class="co">#&gt; Movie 'Kill Process' was sold out in 41.59917 minutes.</span>
-<span class="co">#&gt;   Number of people that left the queue: 10</span></code></pre></div>
+<span class="co">#&gt;   Number of people that left the queue: 16</span>
+<span class="co">#&gt; Movie 'R Unchained' was sold out in 39.09917 minutes.</span>
+<span class="co">#&gt;   Number of people that left the queue: 16</span>
+<span class="co">#&gt; Movie 'Kill Process' was sold out in 45.09917 minutes.</span>
+<span class="co">#&gt;   Number of people that left the queue:  7</span></code></pre></div>
 </div>
 <div id="gas-station-refuelling" class="section level2">
 <h2 class="hasAnchor">
@@ -469,7 +472,7 @@ SIM_TIME &lt;-<span class="st"> </span><span class="dv">1000</span>            <
 
 <span class="co"># setup</span>
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
-env &lt;-<span class="st"> </span><span class="kw">simmer</span>()</code></pre></div>
+env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()</code></pre></div>
 <p>SimPy solves this problem using a special kind of resource called <em>container</em>, which is not present in <code>simmer</code> so far. However, a container is nothing more than an embellished counter. Therefore, we can implement this in <code>simmer</code> with a global counter (<code>GAS_STATION_LEVEL</code> here), some signaling and some care checking the counter bounds.</p>
 <p>Let us consider just the refuelling process in the first place. A car needs to check whether there is enough fuel available to fill its tank. If not, it needs to block until the gas station is refilled.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GAS_STATION_LEVEL &lt;-<span class="st"> </span>GAS_STATION_SIZE
@@ -529,39 +532,37 @@ refuelling &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, <span class="cf">function</span>() <span class="kw">sample</span>(T_INTER[<span class="dv">1</span>]<span class="op">:</span>T_INTER[<span class="dv">2</span>], <span class="dv">1</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(SIM_TIME)
 <span class="co">#&gt; 94: car0: arriving at gas station</span>
-<span class="co">#&gt; 113.5: car0: finished refuelling in 19.5 seconds</span>
-<span class="co">#&gt; 190: car1: arriving at gas station</span>
-<span class="co">#&gt; 206: car1: finished refuelling in 16 seconds</span>
-<span class="co">#&gt; 278: car2: arriving at gas station</span>
-<span class="co">#&gt; 293: car2: finished refuelling in 15 seconds</span>
-<span class="co">#&gt; 344: car3: arriving at gas station</span>
-<span class="co">#&gt; 360: car3: finished refuelling in 16 seconds</span>
-<span class="co">#&gt; 383: car4: arriving at gas station</span>
-<span class="co">#&gt; 401: car4: finished refuelling in 18 seconds</span>
-<span class="co">#&gt; 463: car5: arriving at gas station</span>
-<span class="co">#&gt; 470: controller0: calling the tank truck</span>
-<span class="co">#&gt; 476: car5: finished refuelling in 13 seconds</span>
-<span class="co">#&gt; 544: car6: arriving at gas station</span>
-<span class="co">#&gt; 592: car7: arriving at gas station</span>
-<span class="co">#&gt; 688: car8: arriving at gas station</span>
-<span class="co">#&gt; 726: car9: arriving at gas station</span>
-<span class="co">#&gt; 770: controller0: tank truck arriving at gas station</span>
-<span class="co">#&gt; 770: controller0: tank truck refilling 195 liters</span>
-<span class="co">#&gt; 782.5: car7: finished refuelling in 190.5 seconds</span>
-<span class="co">#&gt; 788: car6: finished refuelling in 244 seconds</span>
-<span class="co">#&gt; 795: car10: arriving at gas station</span>
-<span class="co">#&gt; 800.5: car8: finished refuelling in 112.5 seconds</span>
-<span class="co">#&gt; 801.5: car9: finished refuelling in 75.5 seconds</span>
-<span class="co">#&gt; 813: car10: finished refuelling in 18 seconds</span>
-<span class="co">#&gt; 834: car11: arriving at gas station</span>
-<span class="co">#&gt; 840: controller0: calling the tank truck</span>
-<span class="co">#&gt; 856: car11: finished refuelling in 22 seconds</span>
-<span class="co">#&gt; 931: car12: arriving at gas station</span>
-<span class="co">#&gt; 997: car13: arriving at gas station</span>
-<span class="co">#&gt; simmer environment: anonymous | now: 1000 | next: 1091</span>
+<span class="co">#&gt; 107: car0: finished refuelling in 13 seconds</span>
+<span class="co">#&gt; 144: car1: arriving at gas station</span>
+<span class="co">#&gt; 158: car1: finished refuelling in 14 seconds</span>
+<span class="co">#&gt; 219: car2: arriving at gas station</span>
+<span class="co">#&gt; 236.5: car2: finished refuelling in 17.5 seconds</span>
+<span class="co">#&gt; 301: car3: arriving at gas station</span>
+<span class="co">#&gt; 322.5: car3: finished refuelling in 21.5 seconds</span>
+<span class="co">#&gt; 377: car4: arriving at gas station</span>
+<span class="co">#&gt; 392.5: car4: finished refuelling in 15.5 seconds</span>
+<span class="co">#&gt; 439: car5: arriving at gas station</span>
+<span class="co">#&gt; 440: controller0: calling the tank truck</span>
+<span class="co">#&gt; 454: car5: finished refuelling in 15 seconds</span>
+<span class="co">#&gt; 535: car6: arriving at gas station</span>
+<span class="co">#&gt; 597: car7: arriving at gas station</span>
+<span class="co">#&gt; 696: car8: arriving at gas station</span>
+<span class="co">#&gt; 740: controller0: tank truck arriving at gas station</span>
+<span class="co">#&gt; 740: controller0: tank truck refilling 193 liters</span>
+<span class="co">#&gt; 753: car7: finished refuelling in 156 seconds</span>
+<span class="co">#&gt; 759: car9: arriving at gas station</span>
+<span class="co">#&gt; 760: car6: finished refuelling in 225 seconds</span>
+<span class="co">#&gt; 774.5: car8: finished refuelling in 78.5 seconds</span>
+<span class="co">#&gt; 777: car9: finished refuelling in 18 seconds</span>
+<span class="co">#&gt; 853: car10: arriving at gas station</span>
+<span class="co">#&gt; 860: controller0: calling the tank truck</span>
+<span class="co">#&gt; 874.5: car10: finished refuelling in 21.5 seconds</span>
+<span class="co">#&gt; 953: car11: arriving at gas station</span>
+<span class="co">#&gt; 988: car12: arriving at gas station</span>
+<span class="co">#&gt; simmer environment: anonymous | now: 1000 | next: 1045</span>
 <span class="co">#&gt; { Resource: pump | monitored: TRUE | server status: 2(2) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Generator: controller | monitored: 1 | n_generated: 1 }</span>
-<span class="co">#&gt; { Generator: car | monitored: 1 | n_generated: 15 }</span></code></pre></div>
+<span class="co">#&gt; { Generator: car | monitored: 1 | n_generated: 14 }</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -588,7 +589,7 @@ refuelling &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

@@ -71,7 +71,7 @@
       <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/simmer-02-terminology.html">Terminology</a>
+      <a href="../articles/simmer-02-jss.pdf">JSS paper</a>
     </li>
     <li>
       <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
@@ -94,6 +94,9 @@
     <li>
       <a href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
     </li>
+    <li>
+      <a href="../articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -113,10 +116,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="/extensions/plot">simmer.plot</a>
+      <a href="../extensions/plot">simmer.plot</a>
     </li>
     <li>
-      <a href="/extensions/bricks">simmer.bricks</a>
+      <a href="../extensions/bricks">simmer.bricks</a>
     </li>
     <li>
       <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
@@ -153,7 +156,7 @@
     <p>Activity for modifying an arrival's prioritization values.</p>
     
 
-    <pre class="usage"><span class='fu'>set_prioritization</span>(<span class='no'>.trj</span>, <span class='no'>values</span>)</pre>
+    <pre class="usage"><span class='fu'>set_prioritization</span>(<span class='no'>.trj</span>, <span class='no'>values</span>, <span class='kw'>mod</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='st'>"+"</span>, <span class='st'>"*"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -168,6 +171,10 @@
 returning a vector/list of three values <code>c(priority, preemptible, restart)</code>.
 A negative value leaves the corresponding parameter unchanged.
 See <code><a href='add_generator.html'>add_generator</a></code> for more information about these parameters.</p></td>
+    </tr>
+    <tr>
+      <th>mod</th>
+      <td><p>if set, <code>values</code> modify the attributes rather than substituting them.</p></td>
     </tr>
     </table>
     
@@ -200,7 +207,7 @@ See <code><a href='add_generator.html'>add_generator</a></code> for more informa
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

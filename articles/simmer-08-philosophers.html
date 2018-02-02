@@ -48,7 +48,7 @@
       <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/simmer-02-terminology.html">Terminology</a>
+      <a href="../articles/simmer-02-jss.pdf">JSS paper</a>
     </li>
     <li>
       <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
@@ -71,6 +71,9 @@
     <li>
       <a href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
     </li>
+    <li>
+      <a href="../articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -90,10 +93,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="/extensions/plot">simmer.plot</a>
+      <a href="../extensions/plot">simmer.plot</a>
     </li>
     <li>
-      <a href="/extensions/bricks">simmer.bricks</a>
+      <a href="../extensions/bricks">simmer.bricks</a>
     </li>
     <li>
       <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
@@ -126,7 +129,7 @@
       <h1>Dining Philosophers Problem</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2018-01-04</h4>
+            <h4 class="date">2018-02-02</h4>
           </div>
 
     
@@ -169,7 +172,7 @@ simulate &lt;-<span class="st"> </span><span class="cf">function</span>(fork_seq
 {
   <span class="kw">set.seed</span>(seed)
 
-  env &lt;-<span class="st"> </span><span class="kw">simmer</span>(<span class="st">"Dining philosophers"</span>)
+  env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"Dining philosophers"</span>)
 
   <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(fork_seq)) {
     philosopher &lt;-<span class="st"> </span><span class="kw">names</span>(fork_seq)[[i]]
@@ -199,8 +202,8 @@ simulate &lt;-<span class="st"> </span><span class="cf">function</span>(fork_seq
 philosophers_gantt &lt;-<span class="st"> </span><span class="cf">function</span>(env, <span class="dt">size=</span><span class="dv">15</span>) env <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(<span class="dt">per_resource=</span><span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/separate">separate</a></span>(name, <span class="kw">c</span>(<span class="st">"philosopher"</span>, <span class="st">"index"</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(philosopher, end_time) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">state =</span> <span class="kw">factor</span>(states, states)) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(philosopher, end_time) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">state =</span> <span class="kw">factor</span>(states, states)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">y=</span>philosopher, <span class="dt">yend=</span>philosopher)) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">"time"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x=</span>start_time, <span class="dt">xend=</span>end_time, <span class="dt">color=</span>state), <span class="dt">size=</span>size)</code></pre></div>
 <p>With the simplest algorithm, each philosopher would take, for example, the right fork first and then the left one. But it is easy to see that this policy may result in starvation:</p>
@@ -264,7 +267,7 @@ philosophers_gantt &lt;-<span class="st"> </span><span class="cf">function</span
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

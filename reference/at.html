@@ -71,7 +71,7 @@
       <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/simmer-02-terminology.html">Terminology</a>
+      <a href="../articles/simmer-02-jss.pdf">JSS paper</a>
     </li>
     <li>
       <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
@@ -94,6 +94,9 @@
     <li>
       <a href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
     </li>
+    <li>
+      <a href="../articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -113,10 +116,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="/extensions/plot">simmer.plot</a>
+      <a href="../extensions/plot">simmer.plot</a>
     </li>
     <li>
-      <a href="/extensions/bricks">simmer.bricks</a>
+      <a href="../extensions/bricks">simmer.bricks</a>
     </li>
     <li>
       <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
@@ -216,7 +219,7 @@ union of the last two.</p>
     <pre class="examples"><div class='input'><span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>0</span>)
 
-<span class='fu'>simmer</span>() <span class='kw'>%&gt;%</span>
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>t0</span>, <span class='fu'>at</span>(<span class='fl'>0</span>, <span class='fu'>c</span>(<span class='fl'>1</span>,<span class='fl'>10</span>,<span class='fl'>30</span>), <span class='fl'>40</span>, <span class='fl'>43</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>100</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='get_mon.html'>get_mon_arrivals</a></span>()</div><div class='output co'>#&gt;     name start_time end_time activity_time finished replication
@@ -228,7 +231,7 @@ union of the last two.</p>
 #&gt; 6 dummy5         43       43             0     TRUE           1</div><div class='input'><span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>0</span>)
 
-<span class='fu'>simmer</span>() <span class='kw'>%&gt;%</span>
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>t0</span>, <span class='fu'>from</span>(<span class='fl'>5</span>, <span class='kw'>function</span>() <span class='fu'>runif</span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>))) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>10</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='get_mon.html'>get_mon_arrivals</a></span>()</div><div class='output co'>#&gt;     name start_time end_time activity_time finished replication
@@ -238,7 +241,7 @@ union of the last two.</p>
 #&gt; 4 dummy3   9.515844 9.515844             0     TRUE           1</div><div class='input'><span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>0</span>)
 
-<span class='fu'>simmer</span>() <span class='kw'>%&gt;%</span>
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>t0</span>, <span class='fu'>to</span>(<span class='fl'>5</span>, <span class='kw'>function</span>() <span class='fu'>runif</span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>))) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>10</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='get_mon.html'>get_mon_arrivals</a></span>()</div><div class='output co'>#&gt;     name start_time end_time activity_time finished replication
@@ -248,7 +251,7 @@ union of the last two.</p>
   <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>0</span>)
 
 <span class='co'># from 8 to 16 h every 24 h:</span>
-<span class='fu'>simmer</span>() <span class='kw'>%&gt;%</span>
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>t0</span>, <span class='fu'>from_to</span>(<span class='fl'>8</span>, <span class='fl'>16</span>, <span class='kw'>function</span>() <span class='fu'>runif</span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>every</span><span class='kw'>=</span><span class='fl'>24</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>48</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='get_mon.html'>get_mon_arrivals</a></span>()</div><div class='output co'>#&gt;       name start_time  end_time activity_time finished replication
@@ -288,7 +291,7 @@ union of the last two.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

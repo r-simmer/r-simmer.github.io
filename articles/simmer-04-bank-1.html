@@ -48,7 +48,7 @@
       <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/simmer-02-terminology.html">Terminology</a>
+      <a href="../articles/simmer-02-jss.pdf">JSS paper</a>
     </li>
     <li>
       <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
@@ -71,6 +71,9 @@
     <li>
       <a href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
     </li>
+    <li>
+      <a href="../articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -90,10 +93,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="/extensions/plot">simmer.plot</a>
+      <a href="../extensions/plot">simmer.plot</a>
     </li>
     <li>
-      <a href="/extensions/bricks">simmer.bricks</a>
+      <a href="../extensions/bricks">simmer.bricks</a>
     </li>
     <li>
       <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
@@ -126,7 +129,7 @@
       <h1>The Bank Tutorial: Part I</h1>
                         <h4 class="author">Duncan Garmonsway</h4>
             
-            <h4 class="date">2018-01-04</h4>
+            <h4 class="date">2018-02-02</h4>
           </div>
 
     
@@ -135,7 +138,7 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>This tutorial is adapted from a tutorial for the Python 2 package ‘SimPy’, <a href="https://pythonhosted.org/SimPy/Tutorials/TheBank.html">here</a>. Users familiar with SimPy may find this tutorial helpful for transitioning to simmer. Some very basic material is not covered. Beginners should first read the vignettes <a href="simmer-01-introduction.html"><em>Introduction to simmer</em></a>, <a href="simmer-02-terminology.html"><em>Terminology</em></a> and <a href="simmer-03-trajectories.html"><em>Advanced Trajectory Usage</em></a>.</p>
+<p>This tutorial is adapted from a tutorial for the Python 2 package ‘SimPy’, <a href="https://pythonhosted.org/SimPy/Tutorials/TheBank.html">here</a>. Users familiar with SimPy may find this tutorial helpful for transitioning to <code>simmer</code>.</p>
 </div>
 <div id="a-single-customer" class="section level2">
 <h2 class="hasAnchor">
@@ -157,7 +160,7 @@ customer &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"I must leave"</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">5</span>))
 
 bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">100</span>)
@@ -186,7 +189,7 @@ customer &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"I must leave"</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">5</span>)))
 
 bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">100</span>)
@@ -253,7 +256,7 @@ customer &lt;-
 
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">12</span>))
 
 bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)
@@ -309,7 +312,7 @@ Evelyn
 <span class="co">#&gt; { Activity: Log          | message }</span>
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Klaus"</span>, Klaus, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">5</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Tony"</span>, Tony, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">2</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Evelyn"</span>, Evelyn, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">12</span>))
@@ -346,7 +349,7 @@ customer &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"I must leave"</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="kw"><a href="../reference/at.html">from_to</a></span>(<span class="dv">0</span>, <span class="dv">41</span>, <span class="cf">function</span>() {<span class="dv">10</span>}))
 
 bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)
@@ -387,7 +390,7 @@ customer &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"I must leave"</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="cf">function</span>() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>), <span class="op">-</span><span class="dv">1</span>)})
 
 bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)
@@ -426,7 +429,7 @@ bank <span class="op">%&gt;%</span><span class="st"> </span>get_mon_arrivals
 
 <span class="kw">set.seed</span>(<span class="dv">1234</span>)
 
-bank &lt;-<span class="st"> </span><span class="kw">simmer</span>()
+bank &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()
 
 customer &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="op">%&gt;%</span>
@@ -439,7 +442,7 @@ customer &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {<span class="kw">paste</span>(<span class="st">"Finished: "</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank))})
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="cf">function</span>() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>), <span class="op">-</span><span class="dv">1</span>)})
 
@@ -464,7 +467,7 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0    0.00000 12.00000            12     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1   25.01759 37.01759            12     TRUE           1</span>
@@ -502,7 +505,7 @@ customer &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {<span class="kw">paste</span>(<span class="st">"Finished: "</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank))})
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="cf">function</span>() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>), <span class="op">-</span><span class="dv">1</span>)})
 
@@ -527,7 +530,7 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time  end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0   0.000000  4.915215      4.915215     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1   3.683648 21.055183     16.139968     TRUE           1</span>
@@ -567,7 +570,7 @@ customer &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {<span class="kw">paste</span>(<span class="st">"Finished: "</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank))})
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>, <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Here is the change</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="cf">function</span>() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>), <span class="op">-</span><span class="dv">1</span>)})
 
@@ -592,7 +595,7 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time  end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0   0.000000  4.915215      4.915215     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1   3.683648 19.823616     16.139968     TRUE           1</span>
@@ -629,7 +632,7 @@ customer &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {<span class="kw">paste</span>(<span class="st">"Finished: "</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(bank))})
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter1"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter2"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="cf">function</span>() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">4</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>), <span class="op">-</span><span class="dv">1</span>)})
@@ -656,8 +659,8 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">service_start_time =</span> end_time <span class="op">-</span><span class="st"> </span>activity_time) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/arrange">arrange</a></span>(start_time)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">service_start_time =</span> end_time <span class="op">-</span><span class="st"> </span>activity_time) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(start_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0    0.00000 62.10372    62.1037152     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1   23.71444 33.94103    10.2265939     TRUE           1</span>
@@ -672,7 +675,7 @@ bank <span class="op">%&gt;%</span>
 <span class="co">#&gt; 5           48.85593</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_resources <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/arrange">arrange</a></span>(time)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(time)
 <span class="co">#&gt;    resource     time server queue capacity queue_size system limit</span>
 <span class="co">#&gt; 1  counter1  0.00000      1     0        1        Inf      1   Inf</span>
 <span class="co">#&gt; 2  counter2 23.71444      1     0        1        Inf      1   Inf</span>
@@ -713,7 +716,7 @@ customer &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>)
 
 bank &lt;-
-<span class="st">  </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>, <span class="dv">2</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="cf">function</span>() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">49</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>), <span class="op">-</span><span class="dv">1</span>)})
 
@@ -725,7 +728,7 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 result &lt;-
 <span class="st">  </span>bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)</code></pre></div>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)</code></pre></div>
 <p>The average waiting time for 50 customers in this 2-counter system is more reliable (i.e., less subject to random simulation effects) than the times we measured before but it is still not sufficiently reliable for real-world decisions. We should also replicate the runs using different random number seeds. The result of this run is:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">"Average wait for "</span>, <span class="kw">sum</span>(result<span class="op">$</span>finished), <span class="st">" completions was "</span>,
       <span class="kw">mean</span>(result<span class="op">$</span>waiting_time), <span class="st">"minutes."</span>)
@@ -749,7 +752,7 @@ customer &lt;-
   <span class="kw">set.seed</span>(the_seed)
 
   bank &lt;-
-<span class="st">    </span><span class="kw">simmer</span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>, <span class="dv">2</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="cf">function</span>() {<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rexp</span>(<span class="dv">49</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>), <span class="op">-</span><span class="dv">1</span>)})
 
@@ -757,7 +760,7 @@ customer &lt;-
   result &lt;-
 <span class="st">    </span>bank <span class="op">%&gt;%</span>
 <span class="st">    </span>get_mon_arrivals <span class="op">%&gt;%</span>
-<span class="st">    </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
+<span class="st">    </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
   <span class="kw">paste</span>(<span class="st">"Average wait for "</span>, <span class="kw">sum</span>(result<span class="op">$</span>finished), <span class="st">" completions was "</span>,
         <span class="kw">mean</span>(result<span class="op">$</span>waiting_time), <span class="st">"minutes."</span>)
 }) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unlist</span>()
@@ -792,7 +795,7 @@ customer &lt;-
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

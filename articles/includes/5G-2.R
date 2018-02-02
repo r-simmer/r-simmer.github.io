@@ -1,7 +1,5 @@
 ## ---- 2.configuration
 
-rm(list=ls())
-
 C <- 1.25e9                           # link capacity [bps]
 Tg <- 1e-6                            # guard time [s]
 

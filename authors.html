@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Authors • simmer</title>
+<title>Citation and Authors • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-authors">
+    <div class="container template-citation-authors">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -71,7 +71,7 @@
       <a href="articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="articles/simmer-02-terminology.html">Terminology</a>
+      <a href="articles/simmer-02-jss.pdf">JSS paper</a>
     </li>
     <li>
       <a href="articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
@@ -94,6 +94,9 @@
     <li>
       <a href="articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
     </li>
+    <li>
+      <a href="articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -113,10 +116,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="/extensions/plot">simmer.plot</a>
+      <a href="extensions/plot">simmer.plot</a>
     </li>
     <li>
-      <a href="/extensions/bricks">simmer.bricks</a>
+      <a href="extensions/bricks">simmer.bricks</a>
     </li>
     <li>
       <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
@@ -144,7 +147,34 @@
       </header>
 
       <div class="row">
-  <div class="contents col-md-12">
+  <div class="contents col-md-9">
+
+    <div class="page-header">
+      <h1>Citation</h1>
+    </div>
+
+    <p>Ucar I, Smeets B and Azcorra A (2018).
+&ldquo;simmer: Discrete-Event Simulation for R.&rdquo;
+<em>Journal of Statistical Software</em>, <b>accepted for publication</b>. 
+</p>
+    <pre>@Article{,
+  title = {{simmer}: Discrete-Event Simulation for {R}},
+  author = {Iñaki Ucar and Bart Smeets and Arturo Azcorra},
+  year = {2018},
+  journal = {Journal of Statistical Software},
+  volume = {accepted for publication},
+}</pre>
+    <p>Ucar I, Hernández JA, Serrano P and Azcorra A (2018).
+&ldquo;Design and Analysis of 5G Scenarios with simmer: An R Package for Fast DES Prototyping.&rdquo;
+<em>IEEE Communications Magazine</em>, <b>accepted for publication</b>. 
+</p>
+    <pre>@Article{,
+  title = {Design and Analysis of 5G Scenarios with {simmer}: An {R} Package for Fast DES Prototyping},
+  author = {Iñaki Ucar and José Alberto Hernández and Pablo Serrano and Arturo Azcorra},
+  year = {2018},
+  journal = {IEEE Communications Magazine},
+  volume = {accepted for publication},
+}</pre>
     <div class="page-header">
       <h1>Authors</h1>
     </div>
@@ -171,7 +201,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

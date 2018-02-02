@@ -48,7 +48,7 @@
       <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/simmer-02-terminology.html">Terminology</a>
+      <a href="../articles/simmer-02-jss.pdf">JSS paper</a>
     </li>
     <li>
       <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
@@ -71,6 +71,9 @@
     <li>
       <a href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
     </li>
+    <li>
+      <a href="../articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -90,10 +93,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="/extensions/plot">simmer.plot</a>
+      <a href="../extensions/plot">simmer.plot</a>
     </li>
     <li>
-      <a href="/extensions/bricks">simmer.bricks</a>
+      <a href="../extensions/bricks">simmer.bricks</a>
     </li>
     <li>
       <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
@@ -126,7 +129,7 @@
       <h1>Continuous-Time Markov Chains</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2018-01-04</h4>
+            <h4 class="date">2018-02-02</h4>
           </div>
 
     
@@ -195,7 +198,7 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P <spa
 <span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>)
   
-  <span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+  <span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">0</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, p<span class="op">*</span>lambda)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"mcycle"</span>, mcycle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, (<span class="dv">1</span><span class="op">-</span>p)<span class="op">*</span>lambda)) <span class="op">%&gt;%</span>
@@ -212,7 +215,7 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P <spa
 <span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>]))) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>)
   
-  <span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+  <span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">0</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
@@ -227,7 +230,7 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P <spa
     }) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>)
   
-  <span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+  <span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">0</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
@@ -304,7 +307,7 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P <spa
 <span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>)
   
-  env &lt;-<span class="st"> </span><span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+  env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, p<span class="op">*</span>lambda)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"mcycle"</span>, mcycle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, (<span class="dv">1</span><span class="op">-</span>p)<span class="op">*</span>lambda))
@@ -326,7 +329,7 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P <spa
 <span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) <span class="op">%&gt;%</span>
 <span class="st">             </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>))
   
-  env &lt;-<span class="st"> </span><span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+  env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda))
   env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
@@ -343,7 +346,7 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P <spa
 <span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"vehicle"</span>)])) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">1</span>)                    <span class="co"># always 1</span>
   
-  env &lt;-<span class="st"> </span><span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+  env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">1</span>, <span class="dt">queue_size=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda))
   env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
@@ -373,7 +376,7 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P <spa
 <span class="st">             </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) <span class="op">%&gt;%</span>
 <span class="st">             </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">2</span>))
   
-  <span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+  <span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">3</span>, <span class="dt">queue_size=</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"vehicle"</span>, vehicle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, lambda)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>t)
@@ -390,7 +393,7 @@ N_average_theor &lt;-<span class="st"> </span><span class="kw">sum</span>(P <spa
 <span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dt">amount=</span><span class="dv">2</span>)
   
-  <span class="kw">simmer</span>() <span class="op">%&gt;%</span>
+  <span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dt">capacity=</span><span class="dv">3</span>, <span class="dt">queue_size=</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, p<span class="op">*</span>lambda)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"mcycle"</span>, mcycle, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, (<span class="dv">1</span><span class="op">-</span>p)<span class="op">*</span>lambda)) <span class="op">%&gt;%</span>
@@ -413,12 +416,12 @@ limits &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span cl
 
 <span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(gas.station) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/gather">gather</a></span>(item, value, server, queue, system) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">value =</span> <span class="kw">round</span>(value <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">/</span><span class="dv">5</span>),                  <span class="co"># rescaling here &lt;------</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">value =</span> <span class="kw">round</span>(value <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">/</span><span class="dv">5</span>),                  <span class="co"># rescaling here &lt;------</span>
          <span class="dt">item =</span> <span class="kw">factor</span>(item)) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(item <span class="op">%in%</span><span class="st"> "system"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(resource, replication, item) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">mean =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">head</span>(value, <span class="op">-</span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">diff</span>(time))) <span class="op">/</span><span class="st"> </span>time) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">ungroup</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(item <span class="op">%in%</span><span class="st"> "system"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(resource, replication, item) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">mean =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(<span class="kw">head</span>(value, <span class="op">-</span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">diff</span>(time))) <span class="op">/</span><span class="st"> </span>time) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">color=</span>item) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>mean, <span class="dt">group=</span><span class="kw">interaction</span>(replication, item))) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">"Resource usage: pump"</span>) <span class="op">+</span>
@@ -464,7 +467,7 @@ tm &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumenta
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
