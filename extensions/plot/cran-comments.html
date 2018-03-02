@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot Method for <code>trajectory</code> Objects — plot.trajectory • simmer.plot</title>
+<title>/home/inaki/Documentos/repos/simmer.plot/cran-comments.md • simmer.plot</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -22,15 +22,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="jquery.sticky-kit.min.js"></script>
+<script src="pkgdown.js"></script>
   
   
-<meta property="og:title" content="Plot Method for <code>trajectory</code> Objects — plot.trajectory" />
-
-<meta property="og:description" content="A method for the plot generic that plots a diagram of the given trajectory." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="/home/inaki/Documentos/repos/simmer.plot/cran-comments.md" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -43,7 +40,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -53,7 +50,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">simmer.plot</a>
+      <a class="navbar-brand" href="index.html">simmer.plot</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -65,7 +62,7 @@
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">
+  <a href="reference/index.html">
     <span class="fa fa-gears"></span>
      
     Reference
@@ -81,15 +78,15 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/plot.simmer.html">Plotting simmer statistics</a>
+      <a href="articles/plot.simmer.html">Plotting simmer statistics</a>
     </li>
     <li>
-      <a href="../articles/plot.trajectory.html">Plotting simmer trajectories</a>
+      <a href="articles/plot.trajectory.html">Plotting simmer trajectories</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">
+  <a href="news/index.html">
     <span class="fa fa-newspaper-o"></span>
      
     News
@@ -105,10 +102,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../../plot">simmer.plot</a>
+      <a href="../plot">simmer.plot</a>
     </li>
     <li>
-      <a href="../../bricks">simmer.bricks</a>
+      <a href="../bricks">simmer.bricks</a>
     </li>
     <li>
       <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
@@ -136,70 +133,42 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-12">
     <div class="page-header">
-    <h1>Plot Method for <code>trajectory</code> Objects</h1>
+      <h1>/home/inaki/Documentos/repos/simmer.plot/cran-comments.md</h1>
     </div>
 
-    
-    <p>A method for the <code>plot</code> generic that plots a diagram of the given trajectory.</p>
-    
 
-    <pre class="usage"><span class='co'># S3 method for trajectory</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>engine</span> <span class='kw'>=</span> <span class='st'>"dot"</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/scales/topics/brewer_pal'>brewer_pal</a></span>(<span class='st'>"qual"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>a simmer trajectory.</p></td>
-    </tr>
-    <tr>
-      <th>engine</th>
-      <td><p>a string specifying a layout engine (see <code>grViz</code>).</p></td>
-    </tr>
-    <tr>
-      <th>fill</th>
-      <td><p>discrete color palette for resource identification.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>show additional info directly in the labels.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional parameters for <code>render_graph</code>.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Returns an <code>htmlwidget</code>.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>seize</span>(<span class='st'>"res"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>timeout</span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>release</span>(<span class='st'>"res"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>rollback</span>(<span class='fl'>3</span>)
-
-<span class='fu'>plot</span>(<span class='no'>x</span>)</div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-  </div>
+<div id="maintenance-release" class="section level2">
+<h2 class="hasAnchor">
+<a href="#maintenance-release" class="anchor"></a>Maintenance release</h2>
+<p>Update to the new version of DiagrammeR.</p>
 </div>
+<div id="test-environments" class="section level2">
+<h2 class="hasAnchor">
+<a href="#test-environments" class="anchor"></a>Test environments</h2>
+<ul>
+<li>Fedora 27 + GCC + clang (local), R 3.4.3</li>
+<li>Ubuntu 14.04 + GCC (on travis-ci), R 3.3.3, 3.4.2, devel</li>
+<li>win-builder, R devel</li>
+</ul>
+</div>
+<div id="r-cmd-check-results" class="section level2">
+<h2 class="hasAnchor">
+<a href="#r-cmd-check-results" class="anchor"></a>R CMD check results</h2>
+<p>There were no ERRORs, WARNINGs or NOTEs.</p>
+</div>
+<div id="downstream-dependencies" class="section level2">
+<h2 class="hasAnchor">
+<a href="#downstream-dependencies" class="anchor"></a>Downstream dependencies</h2>
+<p>There is one downstream dependency, simmer, for which I’m the maintainer too.</p>
+</div>
+
+
+  </div>
+
+</div>
+
 
       <footer>
       <div class="copyright">

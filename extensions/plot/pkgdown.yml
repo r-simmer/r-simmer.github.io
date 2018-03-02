@@ -1,0 +1,8 @@
+pandoc: 1.19.2.1
+pkgdown: 0.1.0.9000
+pkgdown_sha: ~
+articles:
+  trajectory.svg: includes/trajectory.svg
+  plot.simmer: plot.simmer.html
+  plot.trajectory: plot.trajectory.html
+
