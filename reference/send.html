@@ -18,6 +18,8 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -25,6 +27,16 @@
 <script src="../pkgdown.js"></script>
   
   
+<meta property="og:title" content="Inter-arrival Communication — send" />
+
+<meta property="og:description" content="These activities enable asynchronous programming. send() broadcasts a signal or a list
+of signals. Arrivals can subscribe to signals and (optionally) assign a handler with
+trap(). Note that, while inside a batch, all the signals subscribed before entering
+the batch are ignored. Upon a signal reception, the arrival stops the current activity and
+executes the handler (if provided). Then, the execution returns to the activity following the
+point of the interruption. untrap() can be used to unsubscribe from signals.
+wait() blocks until a signal is received." />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 

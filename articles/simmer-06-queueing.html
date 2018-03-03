@@ -8,8 +8,11 @@
 <title>Queueing Systems • simmer</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="Queueing Systems">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -129,7 +132,7 @@
       <h1>Queueing Systems</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2018-02-02</h4>
+            <h4 class="date">2018-03-03</h4>
           </div>
 
     
@@ -159,8 +162,8 @@ mm23.env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/si
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mm23.arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(mm23.env)
 
 rejection_rate &lt;-<span class="st"> </span>mm23.arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">rejection_rate =</span> <span class="kw">sum</span>(<span class="op">!</span>finished)<span class="op">/</span><span class="kw">length</span>(finished)) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(rejection_rate)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise">summarise</a></span>(<span class="dt">rejection_rate =</span> <span class="kw">sum</span>(<span class="op">!</span>finished)<span class="op">/</span><span class="kw">length</span>(finished)) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/pull">pull</a></span>(rejection_rate)
 rejection_rate
 <span class="co">#&gt; [1] 0.04714804</span></code></pre></div>
 <p>By solving the balance equations for this system, we obtain the following:</p>
@@ -246,16 +249,16 @@ env <span class="op">%&gt;%</span>
 <span class="co">#&gt; { Generator: arrival4_ | monitored: 2 | n_generated: 2391 }</span></code></pre></div>
 <p>In the analysis, we filter arrivals from generator 1 that reach queues 3 and 4, and we examine the average waiting time and the total number of messages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env, <span class="dt">per_resource =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(name, resource) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(resource <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"md1_3"</span>, <span class="st">"md1_4"</span>))
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(name, resource) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(resource <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"md1_3"</span>, <span class="st">"md1_4"</span>))
 arr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>(start_time <span class="op">+</span><span class="st"> </span>activity_time),
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>(start_time <span class="op">+</span><span class="st"> </span>activity_time),
                 <span class="dt">generator =</span> <span class="kw">regmatches</span>(name, <span class="kw">regexpr</span>(<span class="st">"arrival[[:digit:]]"</span>, name))) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(res) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(generator, resource)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/join">left_join</a></span>(res) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(generator, resource)
 <span class="co">#&gt; Joining, by = "name"</span>
 
-dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(arr, <span class="dt">average =</span> <span class="kw">sum</span>(waiting_time) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>())
+dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise">summarise</a></span>(arr, <span class="dt">average =</span> <span class="kw">sum</span>(waiting_time) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>())
 <span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt; # Groups:   generator [?]</span>
 <span class="co">#&gt;   generator resource average</span>
@@ -267,7 +270,7 @@ dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.
 <span class="co">#&gt; 5 arrival4  md1_4      0.522</span>
 <span class="kw"><a href="../reference/get_n_generated.html">get_n_generated</a></span>(env, <span class="st">"arrival1_"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_n_generated</a></span>(env, <span class="st">"arrival4_"</span>)
 <span class="co">#&gt; [1] 10365</span>
-dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/tally.html">count</a></span>(arr)
+dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/tally">count</a></span>(arr)
 <span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt; # Groups:   generator, resource [5]</span>
 <span class="co">#&gt;   generator resource     n</span>

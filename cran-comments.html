@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set Prioritization Values — set_prioritization • simmer</title>
+<title>/home/inaki/Documentos/repos/simmer/cran-comments.md • simmer</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -22,15 +22,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="jquery.sticky-kit.min.js"></script>
+<script src="pkgdown.js"></script>
   
   
-<meta property="og:title" content="Set Prioritization Values — set_prioritization" />
-
-<meta property="og:description" content="Activity for modifying an arrival's prioritization values." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="/home/inaki/Documentos/repos/simmer/cran-comments.md" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -43,7 +40,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -53,12 +50,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">simmer | DES for R</a>
+      <a class="navbar-brand" href="index.html">simmer | DES for R</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">
+  <a href="reference/index.html">
     <span class="fa fa-gears"></span>
      
     Reference
@@ -74,39 +71,39 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
+      <a href="articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/simmer-02-jss.pdf">JSS paper</a>
+      <a href="articles/simmer-02-jss.pdf">JSS paper</a>
     </li>
     <li>
-      <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
+      <a href="articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
     </li>
     <li>
-      <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
+      <a href="articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
-      <a href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
+      <a href="articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
     </li>
     <li>
-      <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
+      <a href="articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/simmer-06-queueing.html">Queueing Systems</a>
+      <a href="articles/simmer-06-queueing.html">Queueing Systems</a>
     </li>
     <li>
-      <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
+      <a href="articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
     <li>
-      <a href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
+      <a href="articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
     </li>
     <li>
-      <a href="../articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
+      <a href="articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">
+  <a href="news/index.html">
     <span class="fa fa-newspaper-o"></span>
      
     News
@@ -122,10 +119,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../extensions/plot">simmer.plot</a>
+      <a href="extensions/plot">simmer.plot</a>
     </li>
     <li>
-      <a href="../extensions/bricks">simmer.bricks</a>
+      <a href="extensions/bricks">simmer.bricks</a>
     </li>
     <li>
       <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
@@ -153,59 +150,51 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-12">
     <div class="page-header">
-    <h1>Set Prioritization Values</h1>
+      <h1>/home/inaki/Documentos/repos/simmer/cran-comments.md</h1>
     </div>
 
-    
-    <p>Activity for modifying an arrival's prioritization values.</p>
-    
 
-    <pre class="usage"><span class='fu'>set_prioritization</span>(<span class='no'>.trj</span>, <span class='no'>values</span>, <span class='kw'>mod</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='st'>"+"</span>, <span class='st'>"*"</span>))</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>.trj</th>
-      <td><p>the trajectory object.</p></td>
-    </tr>
-    <tr>
-      <th>values</th>
-      <td><p>expects either a vector/list or a callable object (a function)
-returning a vector/list of three values <code>c(priority, preemptible, restart)</code>.
-A negative value leaves the corresponding parameter unchanged.
-See <code><a href='add_generator.html'>add_generator</a></code> for more information about these parameters.</p></td>
-    </tr>
-    <tr>
-      <th>mod</th>
-      <td><p>if set, <code>values</code> modify the attributes rather than substituting them.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Returns the trajectory object.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p><code><a href='get_n_generated.html'>get_prioritization</a></code>.</p>
-    
-
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
-  </div>
+<div id="minor-release" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-release" class="anchor"></a>Minor release</h2>
+<ul>
+<li>Several API improvements and bug fixes.</li>
+<li>Deprecations from the v3.6.x series have been removed.</li>
+<li>A paper accepted for publication in the Journal of Statistical Software has been included as a vignette.</li>
+<li>Supplementary materials for a paper accepted for publication in the IEEE Communications Magazine have been included as a vignette.</li>
+<li>We haven’t included any reference to those papers in the DESCRIPTION because there is no DOI assigned yet. We do have included a CITATION file with provisional references.</li>
+</ul>
+<p>Regarding the package title, Uwe asked us in our last submission to remove “for R” because it is redundant. If it is not an issue, we would like to keep it in our case. The reason is that simmer is the only DES framework for R, and “Discrete-Event Simulation for R” has become a distinctive tag as compared to our most direct competitors, which are “SimPy: Discrete event simulation for Python” and “SimJulia: A discrete event process oriented simulation framework written in Julia”.</p>
 </div>
+<div id="test-environments" class="section level2">
+<h2 class="hasAnchor">
+<a href="#test-environments" class="anchor"></a>Test environments</h2>
+<ul>
+<li>Fedora 27 + GCC + clang (local), R 3.4.3</li>
+<li>Ubuntu 14.04 + GCC (on Travis-CI), R 3.3.3, 3.4.2, devel</li>
+<li>linux-x86_64-rocker-gcc-san (on r-hub)</li>
+<li>ubuntu-rchk (on r-hub)</li>
+<li>win-builder, R devel</li>
+</ul>
+</div>
+<div id="r-cmd-check-results" class="section level2">
+<h2 class="hasAnchor">
+<a href="#r-cmd-check-results" class="anchor"></a>R CMD check results</h2>
+<p>There were no ERRORs, WARNINGs or NOTEs.</p>
+</div>
+<div id="downstream-dependencies" class="section level2">
+<h2 class="hasAnchor">
+<a href="#downstream-dependencies" class="anchor"></a>Downstream dependencies</h2>
+<p>There are 2 downstream dependencies, simmer.plot and simmer.bricks, for which I’m the maintainer too.</p>
+</div>
+
+
+  </div>
+
+</div>
+
 
       <footer>
       <div class="copyright">

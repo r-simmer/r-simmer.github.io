@@ -8,8 +8,11 @@
 <title>The Bank Tutorial: Part II • simmer</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="The Bank Tutorial: Part II">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -129,7 +132,7 @@
       <h1>The Bank Tutorial: Part II</h1>
                         <h4 class="author">Duncan Garmonsway</h4>
             
-            <h4 class="date">2018-02-02</h4>
+            <h4 class="date">2018-03-03</h4>
           </div>
 
     
@@ -201,7 +204,7 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; { Generator: Guido | monitored: 1 | n_generated: 1 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0  0.0000000       12            12     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1  0.1773647       24            12     TRUE           1</span>
@@ -272,7 +275,7 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; { Generator: Guido | monitored: 1 | n_generated: 1 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0  0.0000000       12            12     TRUE           1</span>
 <span class="co">#&gt; 2    Guido0 23.0000000       35            12     TRUE           1</span>
@@ -513,7 +516,7 @@ customer &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {
          capacity &lt;-
 <span class="st">           </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(bank) <span class="op">%&gt;%</span>
-<span class="st">           </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(resource <span class="op">==</span><span class="st"> "door"</span>) <span class="op">%&gt;%</span>
+<span class="st">           </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(resource <span class="op">==</span><span class="st"> "door"</span>) <span class="op">%&gt;%</span>
 <span class="st">           </span>.<span class="op">$</span>capacity
          <span class="cf">if</span> (<span class="kw">length</span>(capacity) <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">||</span><span class="st"> </span><span class="kw">tail</span>(capacity, <span class="dv">1</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {
            <span class="kw">return</span>(<span class="st">"Here I am but the door is shut."</span>)
@@ -564,7 +567,7 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; { Generator: Doorman | monitored: 1 | n_generated: 1 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1  Doorman0   0.000000 19.72408     19.724085     TRUE           1</span>
 <span class="co">#&gt; 2 Customer0   0.000000 46.61084     26.886751     TRUE           1</span>
@@ -660,7 +663,7 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; { Generator: Doorman | monitored: 1 | n_generated: 1 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0    0.00000 36.05646      6.056458     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1   25.46048 48.74417     12.687713     TRUE           1</span>
@@ -746,7 +749,7 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; { Generator: Doorman | monitored: 1 | n_generated: 1 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0    0.00000 36.05646      6.056458     TRUE           1</span>
 <span class="co">#&gt; 2 Customer1   25.46048 48.74417     12.687713     TRUE           1</span>
@@ -870,7 +873,7 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
 customer_monitor &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(bank) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">wait =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">wait =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
 mean_waiting_time &lt;-<span class="st"> </span><span class="kw">mean</span>(customer_monitor<span class="op">$</span>wait)
 
 resource_monitor &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(bank)

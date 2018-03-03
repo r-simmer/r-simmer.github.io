@@ -8,8 +8,11 @@
 <title>Other SimPy Examples • simmer</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="Other SimPy Examples">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -129,7 +132,7 @@
       <h1>Other SimPy Examples</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2018-02-02</h4>
+            <h4 class="date">2018-03-03</h4>
           </div>
 
     
@@ -281,23 +284,23 @@ failure &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tra
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(SIM_TIME) <span class="op">%&gt;%</span><span class="st"> </span>invisible</code></pre></div>
 <p>The last value per worker from the attributes table reports the number of parts made:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(name) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/slice.html">slice</a></span>(<span class="kw">n</span>()) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(name)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(name) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/slice">slice</a></span>(<span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/arrange">arrange</a></span>(name)
 <span class="co">#&gt; # A tibble: 10 x 5</span>
 <span class="co">#&gt; # Groups:   name [10]</span>
-<span class="co">#&gt;     time name             key   value replication</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt; &lt;dbl&gt;       &lt;int&gt;</span>
-<span class="co">#&gt;  1 40314 machine0_worker0 parts  3073           1</span>
-<span class="co">#&gt;  2 40310 machine1_worker0 parts  3281           1</span>
-<span class="co">#&gt;  3 40315 machine2_worker0 parts  3284           1</span>
-<span class="co">#&gt;  4 40308 machine3_worker0 parts  3241           1</span>
-<span class="co">#&gt;  5 40256 machine4_worker0 parts  3288           1</span>
-<span class="co">#&gt;  6 40232 machine5_worker0 parts  3377           1</span>
-<span class="co">#&gt;  7 40230 machine6_worker0 parts  3362           1</span>
-<span class="co">#&gt;  8 40320 machine7_worker0 parts  3429           1</span>
-<span class="co">#&gt;  9 40275 machine8_worker0 parts  3443           1</span>
-<span class="co">#&gt; 10 40311 machine9_worker0 parts  3323           1</span></code></pre></div>
+<span class="co">#&gt;      time name             key   value replication</span>
+<span class="co">#&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt; &lt;dbl&gt;       &lt;int&gt;</span>
+<span class="co">#&gt;  1 40314. machine0_worker0 parts 3073.           1</span>
+<span class="co">#&gt;  2 40310. machine1_worker0 parts 3281.           1</span>
+<span class="co">#&gt;  3 40315. machine2_worker0 parts 3284.           1</span>
+<span class="co">#&gt;  4 40308. machine3_worker0 parts 3241.           1</span>
+<span class="co">#&gt;  5 40256. machine4_worker0 parts 3288.           1</span>
+<span class="co">#&gt;  6 40232. machine5_worker0 parts 3377.           1</span>
+<span class="co">#&gt;  7 40230. machine6_worker0 parts 3362.           1</span>
+<span class="co">#&gt;  8 40320. machine7_worker0 parts 3429.           1</span>
+<span class="co">#&gt;  9 40275. machine8_worker0 parts 3443.           1</span>
+<span class="co">#&gt; 10 40311. machine9_worker0 parts 3323.           1</span></code></pre></div>
 </div>
 <div id="movie-renege" class="section level2">
 <h2 class="hasAnchor">
@@ -414,21 +417,21 @@ env <span class="op">%&gt;%</span>
 <p>The analysis is performed with the help of <code>dplyr</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get the three rows with the sold out instants</span>
 sold_time &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(env) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(resource <span class="op">!=</span><span class="st"> "counter"</span> <span class="op">&amp;</span><span class="st"> </span>capacity <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(resource <span class="op">!=</span><span class="st"> "counter"</span> <span class="op">&amp;</span><span class="st"> </span>capacity <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)
 
 <span class="co"># get the arrivals that left at the sold out instants</span>
 <span class="co"># count the number of arrivals per movie</span>
-n_reneges &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(
+n_reneges &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/join">left_join</a></span>(
   <span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env) <span class="op">%&gt;%</span>
-<span class="st">    </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(finished <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>end_time <span class="op">%in%</span><span class="st"> </span>sold_time<span class="op">$</span>time),
+<span class="st">    </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(finished <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>end_time <span class="op">%in%</span><span class="st"> </span>sold_time<span class="op">$</span>time),
   <span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)
 ) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">resource =</span> movies[value]) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(resource) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/tally.html">count</a></span>()
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">resource =</span> movies[value]) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(resource) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/tally">count</a></span>()
 
 <span class="co"># merge the info  and print</span>
-<span class="kw">invisible</span>(<span class="kw">apply</span>(dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(sold_time, n_reneges), <span class="dv">1</span>, <span class="cf">function</span>(i) {
+<span class="kw">invisible</span>(<span class="kw">apply</span>(dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/join">left_join</a></span>(sold_time, n_reneges), <span class="dv">1</span>, <span class="cf">function</span>(i) {
   <span class="kw">cat</span>(<span class="st">"Movie '"</span>, i[<span class="st">"resource"</span>], <span class="st">"' was sold out in "</span>, i[<span class="st">"time"</span>], <span class="st">" minutes.</span><span class="ch">\n</span><span class="st">"</span>, 
       <span class="st">"  Number of people that left the queue: "</span>, i[<span class="st">"n"</span>], <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="dt">sep=</span><span class="st">""</span>)
 }))
