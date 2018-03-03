@@ -1,0 +1,38 @@
+---
+title: "simmer 3.7.0"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The 3.7.0 release of [simmer](http://r-simmer.org/), the Discrete-Event Simulator for R, is on CRAN. It includes several API improvements and bug fixes. Among the former, the new `timeout_from_attribute()` activity makes it easier and more efficient the common task of placing a timeout based on a previously set attribute. Another common task is to increment or decrement a given attribute. To this end, `set_attribute` and other _setters_ get a new argument `mod` which, if set to `"+"` or `"*"`, modifies the value correspondingly instead of substituting it.
+
+This minor release also includes some minor breaking changes. In particular, all deprecations from the v3.6.x series have been finally removed, which should come as no surprise. Besides, `get_mon_resources()` loses the `data` argument, which was there for historical reasons and probably nobody was using it.
+
+Finally, there are two additional vignettes:
+
+- ["simmer: Discrete-Event Simulation for R"](https://r-simmer.org/articles/simmer-02-jss.pdf) describes the internal design, the R API, provides some modelling examples and a performance evaluation. We are very proud to officially announce that it has been accepted for publication in the _Journal of Statistical Software_.
+- ["Design and Analysis of 5G Scenarios"](https://r-simmer.org/articles/simmer-aa-5g) contains supplementary materials for a homonymous paper that has been accepted for publication in the _IEEE Communications Magazine_.
+
+See the [citation information](https://cran.r-project.org/web/packages/simmer/citation.html) for further details.
+
+### New features:
+
+* New `timeout_from_attribute()` activity makes it easier to set a timeout based on an attribute (#129).
+* The activities `set_attribute()`, `set_prioritization()`, `set_capacity()` and `set_queue_size()` get a new argument `mod` which, if set to `"+"` or `"*"`, modifies the corresponding value instead of substituting it. This makes it easier to increment, decrement or scale one of these values (#130).
+* New `*_selected()` versions for the already available resource getters: `get_capacity()`, `get_queue seize()`, `get_server_count()` and `get_queue_count()` (#134).
+
+### Minor changes and fixes:
+
+* Broadcast signals with higher priority to prevent an arrival to catch its own signal with a `trap()` after a `send()` (#135).
+* Generate new arrivals with minimum priority to avoid wrong interactions with simultaneous activities (#136).
+* Remove v3.6.x deprecations: the old attribute retrieval system (see notes for v3.6.3), as well as methods `create_trajectory()` and `onestep()` (#117).
+* Remove `get_mon_resources()`'s `data` argument. It was there for historical reasons and probably nobody was using it (851d34b).
+* New vignette, "simmer: Discrete-Event Simuation for R", paper accepted for publication in the Journal of Statistical Software. Remove "Terminology" vignette (#127).
+* New vignette, "Design and Analysis of 5G Scenarios", supplementary materials for a paper accepted for publication in the IEEE Communications Magazine (#137).
