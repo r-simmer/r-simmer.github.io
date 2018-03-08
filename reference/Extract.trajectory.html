@@ -40,6 +40,18 @@
 <![endif]-->
 
 
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-115358925-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
   </head>
 
   <body>
@@ -209,6 +221,61 @@ match the corresponding extent.</p>
     <p><code><a href='length.trajectory.html'>length.trajectory</a></code>, <code><a href='length.trajectory.html'>get_n_activities</a></code>, <code><a href='join.html'>join</a></code>.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='join.html'>join</a></span>(<span class='fu'>lapply</span>(<span class='fl'>1</span>:<span class='fl'>12</span>, <span class='kw'>function</span>(<span class='no'>i</span>)
+  <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='no'>i</span>)
+))
+<span class='no'>x</span></div><div class='output co'>#&gt; trajectory: anonymous, 12 activities
+#&gt; { Activity: Timeout      | delay: 1 }
+#&gt; { Activity: Timeout      | delay: 2 }
+#&gt; { Activity: Timeout      | delay: 3 }
+#&gt; { Activity: Timeout      | delay: 4 }
+#&gt; { Activity: Timeout      | delay: 5 }
+#&gt; { Activity: Timeout      | delay: 6 }
+#&gt; { Activity: Timeout      | delay: 7 }
+#&gt; { Activity: Timeout      | delay: 8 }
+#&gt; { Activity: Timeout      | delay: 9 }
+#&gt; { Activity: Timeout      | delay: 10 }
+#&gt; { Activity: Timeout      | delay: 11 }
+#&gt; { Activity: Timeout      | delay: 12 }</div><div class='input'>
+<span class='no'>x</span>[<span class='fl'>10</span>]                 <span class='co'># the tenth element of x</span></div><div class='output co'>#&gt; trajectory: anonymous, 1 activities
+#&gt; { Activity: Timeout      | delay: 10 }</div><div class='input'><span class='no'>x</span>[-<span class='fl'>1</span>]                 <span class='co'># delete the 1st element of x</span></div><div class='output co'>#&gt; trajectory: anonymous, 11 activities
+#&gt; { Activity: Timeout      | delay: 2 }
+#&gt; { Activity: Timeout      | delay: 3 }
+#&gt; { Activity: Timeout      | delay: 4 }
+#&gt; { Activity: Timeout      | delay: 5 }
+#&gt; { Activity: Timeout      | delay: 6 }
+#&gt; { Activity: Timeout      | delay: 7 }
+#&gt; { Activity: Timeout      | delay: 8 }
+#&gt; { Activity: Timeout      | delay: 9 }
+#&gt; { Activity: Timeout      | delay: 10 }
+#&gt; { Activity: Timeout      | delay: 11 }
+#&gt; { Activity: Timeout      | delay: 12 }</div><div class='input'><span class='no'>x</span>[<span class='fu'>c</span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>)]     <span class='co'># logical indexing</span></div><div class='output co'>#&gt; trajectory: anonymous, 6 activities
+#&gt; { Activity: Timeout      | delay: 1 }
+#&gt; { Activity: Timeout      | delay: 3 }
+#&gt; { Activity: Timeout      | delay: 5 }
+#&gt; { Activity: Timeout      | delay: 7 }
+#&gt; { Activity: Timeout      | delay: 9 }
+#&gt; { Activity: Timeout      | delay: 11 }</div><div class='input'><span class='no'>x</span>[<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>2</span>, <span class='fl'>12</span>, <span class='fl'>4</span>)]  <span class='co'># numeric indexing</span></div><div class='output co'>#&gt; trajectory: anonymous, 5 activities
+#&gt; { Activity: Timeout      | delay: 1 }
+#&gt; { Activity: Timeout      | delay: 5 }
+#&gt; { Activity: Timeout      | delay: 2 }
+#&gt; { Activity: Timeout      | delay: 12 }
+#&gt; { Activity: Timeout      | delay: 4 }</div><div class='input'><span class='no'>x</span>[<span class='fu'>c</span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>)] <span class='kw'>&lt;-</span> <span class='no'>x</span>[<span class='fu'>c</span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>)] <span class='co'># replacing</span>
+<span class='no'>x</span></div><div class='output co'>#&gt; trajectory: anonymous, 12 activities
+#&gt; { Activity: Timeout      | delay: 1 }
+#&gt; { Activity: Timeout      | delay: 1 }
+#&gt; { Activity: Timeout      | delay: 3 }
+#&gt; { Activity: Timeout      | delay: 3 }
+#&gt; { Activity: Timeout      | delay: 5 }
+#&gt; { Activity: Timeout      | delay: 5 }
+#&gt; { Activity: Timeout      | delay: 7 }
+#&gt; { Activity: Timeout      | delay: 7 }
+#&gt; { Activity: Timeout      | delay: 9 }
+#&gt; { Activity: Timeout      | delay: 9 }
+#&gt; { Activity: Timeout      | delay: 11 }
+#&gt; { Activity: Timeout      | delay: 11 }</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -218,7 +285,9 @@ match the corresponding extent.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

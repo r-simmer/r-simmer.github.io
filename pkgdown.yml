@@ -2,7 +2,6 @@ pandoc: 1.19.2.1
 pkgdown: 0.1.0.9000
 pkgdown_sha: ~
 articles:
-  _simmer-02-jss: _simmer-02-jss.html
   5G-1-results-a.png: includes/5G-1-results-a.png
   5G-1-results-b.png: includes/5G-1-results-b.png
   5G-1-scenario.png: includes/5G-1-scenario.png
