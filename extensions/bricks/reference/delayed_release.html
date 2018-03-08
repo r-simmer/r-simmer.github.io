@@ -18,6 +18,8 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -25,6 +27,12 @@
 <script src="../pkgdown.js"></script>
   
   
+<meta property="og:title" content="Delayed Release of a Resource — delayed_release" />
+
+<meta property="og:description" content="This brick encapsulates a delayed release: the arrival releases the resource
+and continues its way immediately, but the resource is busy for an additional
+period of time." />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -33,6 +41,18 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-115358925-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
   </head>
 
@@ -96,10 +116,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="/extensions/plot">simmer.plot</a>
+      <a href="../../plot">simmer.plot</a>
     </li>
     <li>
-      <a href="/extensions/bricks">simmer.bricks</a>
+      <a href="../../bricks">simmer.bricks</a>
     </li>
     <li>
       <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
@@ -193,11 +213,11 @@ line per clone.</p></td>
   <span class='fu'>delayed_release</span>(<span class='no'>env</span>, <span class='st'>"res1"</span>, <span class='fl'>5</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 6 activities
 #&gt; { Activity: Clone        | n: 2 }
 #&gt;   Fork 1, continue,  trajectory: anonymous, 2 activities
-#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x55eb0396b358 }
+#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x6398ed8, mod: N }
 #&gt;   { Activity: Release      | resource: res1, amount: 1 }
 #&gt;   Fork 2, continue,  trajectory: anonymous, 2 activities
 #&gt;   { Activity: Timeout      | delay: 5 }
-#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x55eb02f97d00 }
+#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x966b540, mod: N }
 #&gt; { Activity: Synchronize  | wait: 0 }</div><div class='input'>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>clone</span>(
@@ -214,11 +234,11 @@ line per clone.</p></td>
   <span class='fu'>synchronize</span>(<span class='kw'>wait</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 6 activities
 #&gt; { Activity: Clone        | n: 2 }
 #&gt;   Fork 1, continue,  trajectory: anonymous, 2 activities
-#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x55eb04bd0a70 }
+#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x9fb6cf0, mod: N }
 #&gt;   { Activity: Release      | resource: res1, amount: 1 }
 #&gt;   Fork 2, continue,  trajectory: anonymous, 2 activities
 #&gt;   { Activity: Timeout      | delay: 5 }
-#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x55eb0466a2a8 }
+#&gt;   { Activity: SetCapacity  | resource: res1, value: 0x9ca6928, mod: N }
 #&gt; { Activity: Synchronize  | wait: 0 }</div><div class='input'>
 <span class='co'>## These are equivalent if the resource is preemptive:</span>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
@@ -227,7 +247,7 @@ line per clone.</p></td>
 #&gt;   Fork 1, continue,  trajectory: anonymous, 1 activities
 #&gt;   { Activity: Release      | resource: res2, amount: 1 }
 #&gt;   Fork 2, continue,  trajectory: anonymous, 4 activities
-#&gt;   { Activity: SetPrior     | values: [2147483647, 2147483647, 0, ] }
+#&gt;   { Activity: SetPrior     | values: [2147483647, 2147483647, 0, ], mod: N }
 #&gt;   { Activity: Seize        | resource: res2, amount: 1 }
 #&gt;   { Activity: Timeout      | delay: 5 }
 #&gt;   { Activity: Release      | resource: res2, amount: 1 }
@@ -249,7 +269,7 @@ line per clone.</p></td>
 #&gt;   Fork 1, continue,  trajectory: anonymous, 1 activities
 #&gt;   { Activity: Release      | resource: res2, amount: 1 }
 #&gt;   Fork 2, continue,  trajectory: anonymous, 4 activities
-#&gt;   { Activity: SetPrior     | values: 0x55eb03f58768 }
+#&gt;   { Activity: SetPrior     | values: 0x913c208, mod: N }
 #&gt;   { Activity: Seize        | resource: res2, amount: 1 }
 #&gt;   { Activity: Timeout      | delay: 5 }
 #&gt;   { Activity: Release      | resource: res2, amount: 1 }
@@ -275,7 +295,7 @@ line per clone.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
