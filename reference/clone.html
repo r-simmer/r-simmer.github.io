@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Clone/Synchronize Arrivals — clone • simmer</title>
+<title>Clone/Synchronize Arrivals — clone • simmer | DES for R</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,14 +25,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
 <meta property="og:title" content="Clone/Synchronize Arrivals — clone" />
 
 <meta property="og:description" content="Activities for defining a parallel fork and removing the copies. clone
 replicates an arrival n times (the original one + n-1 copies).
 synchronize removes all but one clone for each set of clones." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -42,16 +45,14 @@ synchronize removes all but one clone for each set of clones." />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115358925-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-115358925-1', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-115358925-1');
 </script>
 
   </head>
@@ -67,8 +68,11 @@ synchronize removes all but one clone for each set of clones." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">simmer | DES for R</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">simmer | DES for R</a>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -159,6 +163,7 @@ synchronize removes all but one clone for each set of clones." />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -166,23 +171,27 @@ synchronize removes all but one clone for each set of clones." />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Clone/Synchronize Arrivals</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer/blob/master/R/trajectory-activities.R'><code>R/trajectory-activities.R</code></a></small>
+    <div class="hidden name"><code>clone.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Activities for defining a parallel fork and removing the copies. <code>clone</code>
 replicates an arrival <code>n</code> times (the original one + <code>n-1</code> copies).
 <code>synchronize</code> removes all but one clone for each set of clones.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>clone</span>(<span class='no'>.trj</span>, <span class='no'>n</span>, <span class='no'>...</span>)
 
 <span class='fu'>synchronize</span>(<span class='no'>.trj</span>, <span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>mon_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -196,8 +205,8 @@ replicates an arrival <code>n</code> times (the original one + <code>n-1</code> 
     </tr>
     <tr>
       <th>...</th>
-      <td><p>optional parallel sub-trajectories. Each clone will follow
-a different sub-trajectory if available.</p></td>
+      <td><p>a number of optional parallel sub-trajectories (or a list of
+sub-trajectories). Each clone will follow a different sub-trajectory if available.</p></td>
     </tr>
     <tr>
       <th>wait</th>
@@ -240,5 +249,8 @@ line per clone.</p></td>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

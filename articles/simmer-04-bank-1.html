@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Bank Tutorial: Part I • simmer</title>
+<title>The Bank Tutorial: Part I • simmer | DES for R</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -15,19 +15,16 @@
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Google analytics --><script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-115358925-1"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-115358925-1', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-115358925-1');
 </script>
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -36,8 +33,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">simmer | DES for R</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">simmer | DES for R</a>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -136,17 +136,20 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>The Bank Tutorial: Part I</h1>
                         <h4 class="author">Duncan Garmonsway</h4>
             
-            <h4 class="date">2018-03-08</h4>
-          </div>
+            <h4 class="date">2018-05-02</h4>
+      
+      <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-04-bank-1.Rmd"><code>vignettes/simmer-04-bank-1.Rmd</code></a></small>
+      <div class="hidden name"><code>simmer-04-bank-1.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
@@ -179,7 +182,8 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; 5: Customer0: Here I am</span>
 <span class="co">#&gt; 15: Customer0: I must leave</span>
 <span class="co">#&gt; simmer environment: bank | now: 15 | next: </span>
-<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 1 }</span>
+<span class="co">#&gt; { Monitor: in memory }</span>
+<span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 1 }</span>
 bank <span class="op">%&gt;%</span><span class="st"> </span>get_mon_arrivals
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0          5       15            10     TRUE           1</span></code></pre></div>
@@ -208,7 +212,8 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; 7.8393: Customer0: Here I am</span>
 <span class="co">#&gt; 17.8393: Customer0: I must leave</span>
 <span class="co">#&gt; simmer environment: bank | now: 17.8393046225526 | next: </span>
-<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 1 }</span>
+<span class="co">#&gt; { Monitor: in memory }</span>
+<span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 1 }</span>
 bank <span class="op">%&gt;%</span><span class="st"> </span>get_mon_arrivals
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0   7.839305  17.8393            10     TRUE           1</span></code></pre></div>
@@ -279,7 +284,8 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; 15: Customer1: I must leave</span>
 <span class="co">#&gt; 32: Customer2: I must leave</span>
 <span class="co">#&gt; simmer environment: bank | now: 32 | next: </span>
-<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 3 }</span>
+<span class="co">#&gt; { Monitor: in memory }</span>
+<span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 3 }</span>
 bank <span class="op">%&gt;%</span><span class="st"> </span>get_mon_arrivals
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0          2        9             7     TRUE           1</span>
@@ -337,9 +343,10 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; 15: Klaus0: I must leave</span>
 <span class="co">#&gt; 32: Evelyn0: I must leave</span>
 <span class="co">#&gt; simmer environment: bank | now: 32 | next: </span>
-<span class="co">#&gt; { Generator: Klaus | monitored: 1 | n_generated: 1 }</span>
-<span class="co">#&gt; { Generator: Tony | monitored: 1 | n_generated: 1 }</span>
-<span class="co">#&gt; { Generator: Evelyn | monitored: 1 | n_generated: 1 }</span>
+<span class="co">#&gt; { Monitor: in memory }</span>
+<span class="co">#&gt; { Source: Klaus | monitored: 1 | n_generated: 1 }</span>
+<span class="co">#&gt; { Source: Tony | monitored: 1 | n_generated: 1 }</span>
+<span class="co">#&gt; { Source: Evelyn | monitored: 1 | n_generated: 1 }</span>
 bank <span class="op">%&gt;%</span><span class="st"> </span>get_mon_arrivals
 <span class="co">#&gt;      name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1   Tony0          2        9             7     TRUE           1</span>
@@ -376,7 +383,8 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; 42: Customer3: I must leave</span>
 <span class="co">#&gt; 52: Customer4: I must leave</span>
 <span class="co">#&gt; simmer environment: bank | now: 52 | next: </span>
-<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
+<span class="co">#&gt; { Monitor: in memory }</span>
+<span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span>
 bank <span class="op">%&gt;%</span><span class="st"> </span>get_mon_arrivals
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0          0       12            12     TRUE           1</span>
@@ -417,7 +425,8 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; 47.8506: Customer3: I must leave</span>
 <span class="co">#&gt; 50.2706: Customer4: I must leave</span>
 <span class="co">#&gt; simmer environment: bank | now: 50.2705868901582 | next: </span>
-<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
+<span class="co">#&gt; { Monitor: in memory }</span>
+<span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span>
 bank <span class="op">%&gt;%</span><span class="st"> </span>get_mon_arrivals
 <span class="co">#&gt;        name start_time end_time activity_time finished replication</span>
 <span class="co">#&gt; 1 Customer0    0.00000 12.00000            12     TRUE           1</span>
@@ -475,8 +484,9 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; 61.0176: Customer4: Waited:  16.0391307005949</span>
 <span class="co">#&gt; 73.0176: Customer4: Finished:  73.0175860496223</span>
 <span class="co">#&gt; simmer environment: bank | now: 73.0175860496223 | next: </span>
+<span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
-<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
+<span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
@@ -538,8 +548,9 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; 80.1134: Customer4: Waited:  67.6990166719428</span>
 <span class="co">#&gt; 93.7286: Customer4: Finished:  93.7285504163997</span>
 <span class="co">#&gt; simmer environment: bank | now: 93.7285504163997 | next: </span>
+<span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
-<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
+<span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
@@ -603,8 +614,9 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; 48.2406: Customer4: Finished:  48.2406153584756</span>
 <span class="co">#&gt; 49.1716: Customer2: Finished:  49.1715828181142</span>
 <span class="co">#&gt; simmer environment: bank | now: 49.1715828181142 | next: </span>
+<span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(2) | queue status: 0(Inf) }</span>
-<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
+<span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)
@@ -666,9 +678,10 @@ bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a 
 <span class="co">#&gt; 62.1037: Customer2: Waited:  31.7026170465295</span>
 <span class="co">#&gt; 62.3885: Customer2: Finished:  62.3885266177193</span>
 <span class="co">#&gt; simmer environment: bank | now: 62.3885266177193 | next: </span>
+<span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: counter1 | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Resource: counter2 | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
-<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 5 }</span>
+<span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span>
 bank <span class="op">%&gt;%</span>
 <span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">service_start_time =</span> end_time <span class="op">-</span><span class="st"> </span>activity_time) <span class="op">%&gt;%</span>
@@ -734,8 +747,9 @@ bank &lt;-
 
 bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">1000</span>)
 <span class="co">#&gt; simmer environment: bank | now: 650.615510598544 | next: </span>
+<span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(2) | queue status: 0(Inf) }</span>
-<span class="co">#&gt; { Generator: Customer | monitored: 1 | n_generated: 50 }</span>
+<span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 50 }</span>
 
 result &lt;-
 <span class="st">  </span>bank <span class="op">%&gt;%</span>
@@ -783,7 +797,6 @@ customer &lt;-
 <p>The results show some variation. Remember, though, that the system is still only operating for 50 customers, so the system may not be in steady-state.</p>
 </div>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -812,6 +825,8 @@ customer &lt;-
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

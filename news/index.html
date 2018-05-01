@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • simmer</title>
+<title>Changelog • simmer | DES for R</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,9 +25,12 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
-<meta property="og:title" content="All news" />
+
+
+
+<meta property="og:title" content="Changelog" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -37,16 +40,14 @@
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115358925-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-115358925-1', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-115358925-1');
 </script>
 
   </head>
@@ -62,8 +63,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">simmer | DES for R</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">simmer | DES for R</a>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -154,6 +158,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -161,29 +166,56 @@
       
       </header>
 
-      <div class="row">
-
-  <div class="col-md-9">
+<div class="row">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/r-simmer/simmer/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="contents">
-    <div id="simmer-3-7-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-7-0" class="anchor"></a>simmer 3.7.0</h1>
+    <div id="simmer-3-8-0" class="section level1">
+<h1 class="page-header">
+<a href="#simmer-3-8-0" class="anchor"></a>simmer 3.8.0<small> 2018-05-01 </small>
+</h1>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features:</h2>
+<ul>
+<li>New data source <code>add_dataframe</code> enables the attachment of precomputed data, in the form of a data frame, to a trajectory. It can be used instead of (or along with) <code>add_generator</code>. The most notable advantage over the latter is that <code>add_dataframe</code> is able to automatically set attributes and prioritisation values per arrival based on columns of the provided data frame (<a href='https://github.com/r-simmer/simmer/issues/140'>#140</a> closing <a href='https://github.com/r-simmer/simmer/issues/123'>#123</a>).</li>
+<li>New <code>set_source</code> activity deprecates <code><a href="../reference/set_trajectory.html">set_distribution()</a></code>. It works both for generators and data sources (275a09c, as part of <a href='https://github.com/r-simmer/simmer/issues/140'>#140</a>).</li>
+<li>New monitoring interface allows for disk offloading. The <code><a href="../reference/simmer.html">simmer()</a></code> constructor gains a new argument <code>mon</code> to provide different types of monitors. By default, monitoring is performed in-memory, as usual. Additionally, monitoring can be offloaded to disk through <code>monitor_delim</code> and <code>monitor_csv</code>, which produce flat delimited files. But more importantly, the C++ interface has been refactorised to enable the development of new monitoring backends (<a href='https://github.com/r-simmer/simmer/issues/146'>#146</a> closing <a href='https://github.com/r-simmer/simmer/issues/119'>#119</a>).</li>
+</ul>
+</div>
+<div id="minor-changes-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes:</h2>
+<ul>
+<li>Some documentation improvements (1e14ed7, 194ed05).</li>
+<li>New default <code>until=Inf</code> for the <code>run</code> method (3e6aae9, as part of <a href='https://github.com/r-simmer/simmer/issues/140'>#140</a>).</li>
+<li>
+<code>branch</code> and <code>clone</code> now accept lists of trajectories, in the same way as <code>join</code>, so that there is no need to use <code>do.call</code> (<a href='https://github.com/r-simmer/simmer/issues/142'>#142</a>).</li>
+<li>The argument <code>continue</code> (present in <code>seize</code> and <code>branch</code>) is recycled if only one value is provided but several sub-trajectories are defined (<a href='https://github.com/r-simmer/simmer/issues/143'>#143</a>).</li>
+<li>Fix process reset: sources are reset in strict order of creation (e7d909b).</li>
+<li>Fix infinite timeouts (<a href='https://github.com/r-simmer/simmer/issues/144'>#144</a>).</li>
+</ul>
+</div>
+</div>
+    <div id="simmer-3-7-0" class="section level1">
+<h1 class="page-header">
+<a href="#simmer-3-7-0" class="anchor"></a>simmer 3.7.0<small> 2018-03-03 </small>
+</h1>
+<div id="new-features-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features-1" class="anchor"></a>New features:</h2>
 <ul>
 <li>New <code><a href="../reference/timeout.html">timeout_from_attribute()</a></code> activity makes it easier to set a timeout based on an attribute (<a href='https://github.com/r-simmer/simmer/issues/129'>#129</a>).</li>
 <li>The activities <code><a href="../reference/set_attribute.html">set_attribute()</a></code>, <code><a href="../reference/set_prioritization.html">set_prioritization()</a></code>, <code><a href="../reference/set_capacity.html">set_capacity()</a></code> and <code><a href="../reference/set_capacity.html">set_queue_size()</a></code> get a new argument <code>mod</code> which, if set to <code>"+"</code> or <code>"*"</code>, modifies the corresponding value instead of substituting it. This makes it easier to increment, decrement or scale one of these values (<a href='https://github.com/r-simmer/simmer/issues/130'>#130</a>).</li>
 <li>New <code>*_selected()</code> versions for the already available resource getters: <code><a href="../reference/get_capacity.html">get_capacity()</a></code>, <code>get_queue seize()</code>, <code><a href="../reference/get_capacity.html">get_server_count()</a></code> and <code><a href="../reference/get_capacity.html">get_queue_count()</a></code> (<a href='https://github.com/r-simmer/simmer/issues/134'>#134</a>).</li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes" class="section level2">
+<div id="minor-changes-and-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-1" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Broadcast signals with higher priority to prevent an arrival to catch its own signal with a <code><a href="../reference/send.html">trap()</a></code> after a <code><a href="../reference/send.html">send()</a></code> (<a href='https://github.com/r-simmer/simmer/issues/135'>#135</a>).</li>
 <li>Generate new arrivals with minimum priority to avoid wrong interactions with simultaneous activities (<a href='https://github.com/r-simmer/simmer/issues/136'>#136</a>).</li>
@@ -195,20 +227,21 @@
 </div>
 </div>
     <div id="simmer-3-6-5" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-6-5" class="anchor"></a>simmer 3.6.5</h1>
-<div id="new-features-1" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-6-5" class="anchor"></a>simmer 3.6.5<small> 2018-01-04 </small>
+</h1>
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features:</h2>
+<a href="#new-features-2" class="anchor"></a>New features:</h2>
 <ul>
 <li>
 <code><a href="../reference/set_attribute.html">set_attribute()</a></code> (and <code><a href="../reference/set_attribute.html">set_global()</a></code> by extension) can set multiple attributes at once by providing vectors of <code>keys</code> and <code>values</code> (or functions returning such <code>keys</code> and/or <code>values</code>). <code><a href="../reference/get_n_generated.html">get_attribute()</a></code> (and <code><a href="../reference/get_n_generated.html">get_global()</a></code> by extension) can retrieve multiple <code>keys</code> (<a href='https://github.com/r-simmer/simmer/issues/122'>#122</a>).</li>
 <li>New <code><a href="../reference/run.html">stepn()</a></code> method deprecates <code>onestep()</code> (e452975).</li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-1" class="section level2">
+<div id="minor-changes-and-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-1" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-2" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Restore <code>ostream</code> after formatting (9ff11f8).</li>
 <li>Fix arrival cloning to copy attributes over to the clone (<a href='https://github.com/r-simmer/simmer/issues/118'>#118</a>).</li>
@@ -221,11 +254,12 @@
 </div>
 </div>
     <div id="simmer-3-6-4" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-6-4" class="anchor"></a>simmer 3.6.4</h1>
-<div id="minor-changes-and-fixes-2" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-6-4" class="anchor"></a>simmer 3.6.4<small> 2017-11-04 </small>
+</h1>
+<div id="minor-changes-and-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-2" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-3" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Fix preemption in non-saturated multi-server resources when seizing amounts &gt; 1 (<a href='https://github.com/r-simmer/simmer/issues/114'>#114</a>).</li>
 <li>Fix queue priority in non-saturated finite-queue resources when seizing amounts &gt; 1 (<a href='https://github.com/r-simmer/simmer/issues/115'>#115</a>).</li>
@@ -234,11 +268,12 @@
 </div>
 </div>
     <div id="simmer-3-6-3" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-6-3" class="anchor"></a>simmer 3.6.3</h1>
-<div id="new-features-2" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-6-3" class="anchor"></a>simmer 3.6.3<small> 2017-07-28 </small>
+</h1>
+<div id="new-features-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-2" class="anchor"></a>New features:</h2>
+<a href="#new-features-3" class="anchor"></a>New features:</h2>
 <ul>
 <li>Show simulation progress via an optional <code>progress</code> callback in <code><a href="../reference/run.html">run()</a></code> (<a href='https://github.com/r-simmer/simmer/issues/103'>#103</a>).</li>
 <li>New “The Bank Tutorial: Part II” vignette, by Duncan Garmonsway <a href='http://github.com/nacnudus'>@nacnudus</a> (<a href='https://github.com/r-simmer/simmer/issues/106'>#106</a>).</li>
@@ -255,9 +290,9 @@
 <li>New shortcuts for global attributes (<a href='https://github.com/r-simmer/simmer/issues/110'>#110</a>): <code><a href="../reference/set_attribute.html">set_global()</a></code> and <code><a href="../reference/get_n_generated.html">get_global()</a></code>, equivalent to <code><a href="../reference/set_attribute.html">set_attribute(global=TRUE)</a></code> and <code><a href="../reference/get_n_generated.html">get_attribute(global=TRUE)</a></code> respectively.</li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-3" class="section level2">
+<div id="minor-changes-and-fixes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-3" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-4" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Some code refactoring and performance improvements (2f4b484, ffafe1e, f16912a, fb7941b, 2783cd8).</li>
 <li>Use <code>Rcpp::DataFrame</code> instead of <code>Rcpp::List</code> (<a href='https://github.com/r-simmer/simmer/issues/104'>#104</a>).</li>
@@ -267,11 +302,12 @@
 </div>
 </div>
     <div id="simmer-3-6-2" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-6-2" class="anchor"></a>simmer 3.6.2</h1>
-<div id="minor-changes-and-fixes-4" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-6-2" class="anchor"></a>simmer 3.6.2<small> 2017-05-30 </small>
+</h1>
+<div id="minor-changes-and-fixes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-4" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-5" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Update “The Bank Tutorial: Part I” vignette (<a href='http://github.com/nacnudus'>@nacnudus</a> in <a href='https://github.com/r-simmer/simmer/issues/90'>#90</a>).</li>
 <li>Fix <code><a href="../reference/send.html">trap()</a></code>’s handler cloning and associated test (<a href='https://github.com/r-simmer/simmer/issues/91'>#91</a>).</li>
@@ -285,11 +321,12 @@
 </div>
 </div>
     <div id="simmer-3-6-1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-6-1" class="anchor"></a>simmer 3.6.1</h1>
-<div id="minor-changes-and-fixes-5" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-6-1" class="anchor"></a>simmer 3.6.1<small> 2017-03-30 </small>
+</h1>
+<div id="minor-changes-and-fixes-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-5" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-6" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Recycle logical indexes when subsetting (2526e75).</li>
 <li>Implement replacement operators, <code>[&lt;-</code> and <code>[[&lt;-</code> (<a href='https://github.com/r-simmer/simmer/issues/88'>#88</a>).</li>
@@ -302,19 +339,20 @@
 </div>
 </div>
     <div id="simmer-3-6-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-6-0" class="anchor"></a>simmer 3.6.0</h1>
-<div id="new-features-3" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-6-0" class="anchor"></a>simmer 3.6.0<small> 2016-12-28 </small>
+</h1>
+<div id="new-features-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-3" class="anchor"></a>New features:</h2>
+<a href="#new-features-4" class="anchor"></a>New features:</h2>
 <ul>
 <li>New subsetting operators, <code>[</code> and <code>[[</code>, for trajectories (1847898). Think about trajectories as lists of activities and these operators will do (almost) everything you expect. As a side effect, the generics <code>head()</code> and <code>tail()</code> automatically work with trajectories also as expected.</li>
 <li>New <code>length()</code> method to obtain the number of first-level activities in a trajectory (f86375a). Useful in combination with the subsetting operators.</li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-6" class="section level2">
+<div id="minor-changes-and-fixes-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-6" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-7" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>
 <code>create_trajectory()</code> has been deprecated in favor of <code><a href="../reference/trajectory.html">trajectory()</a></code> (76c1317).</li>
@@ -329,20 +367,21 @@
 </div>
 </div>
     <div id="simmer-3-5-1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-5-1" class="anchor"></a>simmer 3.5.1</h1>
-<div id="new-features-4" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-5-1" class="anchor"></a>simmer 3.5.1<small> 2016-11-26 </small>
+</h1>
+<div id="new-features-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-4" class="anchor"></a>New features:</h2>
+<a href="#new-features-5" class="anchor"></a>New features:</h2>
 <ul>
 <li>New <code><a href="../reference/renege_in.html">renege_if()</a></code> activity triggers reneging upon reception of a signal broadcasted with <code><a href="../reference/send.html">send()</a></code> (<a href='https://github.com/r-simmer/simmer/issues/84'>#84</a>).</li>
 <li>Add support for uninterruptible handlers in <code><a href="../reference/send.html">trap()</a></code> (bb2aa46).</li>
 <li>Add support for global attributes in <code><a href="../reference/set_attribute.html">set_attribute()</a></code> (<a href='https://github.com/r-simmer/simmer/issues/82'>#82</a>).</li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-7" class="section level2">
+<div id="minor-changes-and-fixes-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-7" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-8" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Fix bug in <code><a href="../reference/set_capacity.html">set_queue_size()</a></code> with <code>queue_size_strict=TRUE</code>: arrivals were not being dropped (<a href='https://github.com/r-simmer/simmer/issues/83'>#83</a>).</li>
 <li>Fix bug in <code><a href="../reference/set_capacity.html">set_capacity()</a></code> with a preemptive resource when the old value was <code>Inf</code>: arrivals were not being preempted (63beb2c).</li>
@@ -354,11 +393,12 @@
 </div>
 </div>
     <div id="simmer-3-5-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-5-0" class="anchor"></a>simmer 3.5.0</h1>
-<div id="new-features-5" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-5-0" class="anchor"></a>simmer 3.5.0<small> 2016-10-27 </small>
+</h1>
+<div id="new-features-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-5" class="anchor"></a>New features:</h2>
+<a href="#new-features-6" class="anchor"></a>New features:</h2>
 <ul>
 <li>
 <code><a href="../reference/set_capacity.html">set_capacity()</a></code> and <code><a href="../reference/set_capacity.html">set_queue_size()</a></code> become activities (<a href='https://github.com/r-simmer/simmer/issues/77'>#77</a>). Just like <code><a href="../reference/seize.html">seize()</a></code> and <code><a href="../reference/seize.html">release()</a></code>, they have the associated <code><a href="../reference/set_capacity.html">set_capacity_selected()</a></code> and <code><a href="../reference/set_capacity.html">set_queue_size_selected()</a></code> for a joint use together with <code><a href="../reference/select.html">select()</a></code>.</li>
@@ -369,9 +409,9 @@
 <li>New <code><a href="../reference/log_.html">log_()</a></code> activity simply prints messages for debugging purposes (eaa4554).</li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-8" class="section level2">
+<div id="minor-changes-and-fixes-9" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-8" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-9" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Store inline trajectory objects inside the simulation environment to prevent them to be garbage-collected.</li>
 <li>Update “Advanced Trajectory Usage” vignette.</li>
@@ -379,22 +419,24 @@
 </div>
 </div>
     <div id="simmer-3-4-4" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-4-4" class="anchor"></a>simmer 3.4.4</h1>
-<div id="minor-changes-and-fixes-9" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-4-4" class="anchor"></a>simmer 3.4.4<small> 2016-10-06 </small>
+</h1>
+<div id="minor-changes-and-fixes-10" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-9" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-10" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Fix non-defined behaviour caused by a race condition in object destruction under some platforms.</li>
 </ul>
 </div>
 </div>
     <div id="simmer-3-4-3" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-4-3" class="anchor"></a>simmer 3.4.3</h1>
-<div id="minor-changes-and-fixes-10" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-4-3" class="anchor"></a>simmer 3.4.3<small> 2016-10-02 </small>
+</h1>
+<div id="minor-changes-and-fixes-11" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-10" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-11" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Remove warnings for unused arguments in <code><a href="../reference/seize.html">seize()</a></code> and <code><a href="../reference/seize.html">seize_selected()</a></code> (1c8c3bb).</li>
 <li>Fix crash on arrival reneging in non-triggered batches (8713d95).</li>
@@ -405,18 +447,19 @@
 </div>
 </div>
     <div id="simmer-3-4-2" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-4-2" class="anchor"></a>simmer 3.4.2</h1>
-<div id="new-features-6" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-4-2" class="anchor"></a>simmer 3.4.2<small> 2016-09-03 </small>
+</h1>
+<div id="new-features-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-6" class="anchor"></a>New features:</h2>
+<a href="#new-features-7" class="anchor"></a>New features:</h2>
 <ul>
 <li>Ongoing (unfinished) arrivals are reported with <code><a href="../reference/get_mon.html">get_mon_arrivals(ongoing = TRUE)</a></code> (<a href='https://github.com/r-simmer/simmer/issues/73'>#73</a>).</li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-11" class="section level2">
+<div id="minor-changes-and-fixes-12" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-11" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-12" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Simplify Rcpp glue: remove unnecessary <code>as&lt;&gt;()</code> calls (ec4e51a).</li>
 <li>Simplify trajectory’s head/tail management (06432a8).</li>
@@ -427,11 +470,12 @@
 </div>
 </div>
     <div id="simmer-3-4-1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-4-1" class="anchor"></a>simmer 3.4.1</h1>
-<div id="minor-changes-and-fixes-12" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-4-1" class="anchor"></a>simmer 3.4.1<small> 2016-08-11 </small>
+</h1>
+<div id="minor-changes-and-fixes-13" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-12" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-13" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Fix memtest notes on CRAN (heap-use-after-free).</li>
 <li>Fix memory leaks.</li>
@@ -439,11 +483,12 @@
 </div>
 </div>
     <div id="simmer-3-4-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-4-0" class="anchor"></a>simmer 3.4.0</h1>
-<div id="new-features-7" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-4-0" class="anchor"></a>simmer 3.4.0<small> 2016-08-09 </small>
+</h1>
+<div id="new-features-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-7" class="anchor"></a>New features:</h2>
+<a href="#new-features-8" class="anchor"></a>New features:</h2>
 <ul>
 <li>Prioritization (<code>priority</code>, <code>preemptible</code>, <code>restart</code>) has been moved from <code><a href="../reference/seize.html">seize()</a></code> to <code><a href="../reference/add_generator.html">add_generator()</a></code> (<a href='https://github.com/r-simmer/simmer/issues/69'>#69</a>). This leads to a more natural interpretation of prioritization values as attributes of arrivals from the same generator, rather than attributes of a <code><a href="../reference/seize.html">seize()</a></code>. Still, prioritization values can be redefined dynamically from inside a trajectory with the new activity <code><a href="../reference/set_prioritization.html">set_prioritization()</a></code>.</li>
 <li>New optional <code>post.seize</code> and <code>reject</code> subtrajectories in <code><a href="../reference/seize.html">seize()</a></code> and <code><a href="../reference/seize.html">seize_selected()</a></code> (<a href='https://github.com/r-simmer/simmer/issues/49'>#49</a>). This feature allows us to fine-tune what happens to an arrival if it cannot seize a resource: instead of getting dropped, it may execute a given subtrajectory.</li>
@@ -452,9 +497,9 @@
 <li>New <code><a href="../reference/renege_in.html">renege_in()</a></code> and <code><a href="../reference/renege_in.html">renege_abort()</a></code> activities (<a href='https://github.com/r-simmer/simmer/issues/58'>#58</a>). They can be used to set or unset a timer after which the arrival will abandon.</li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-13" class="section level2">
+<div id="minor-changes-and-fixes-14" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-13" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-14" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>If a <code><a href="../reference/branch.html">branch()</a></code>’s <code>option</code> returns <code>0</code>, the arrival skips the <code><a href="../reference/branch.html">branch()</a></code> and continues to the next activity instead of throwing an <code>index out of range</code> error (<a href='https://github.com/r-simmer/simmer/issues/70'>#70</a>).</li>
 <li>Throw errors on incorrect releases (<a href='https://github.com/r-simmer/simmer/issues/72'>#72</a>).</li>
@@ -465,11 +510,12 @@
 </div>
 </div>
     <div id="simmer-3-3-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-3-0" class="anchor"></a>simmer 3.3.0</h1>
-<div id="new-features-8" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-3-0" class="anchor"></a>simmer 3.3.0<small> 2016-06-28 </small>
+</h1>
+<div id="new-features-9" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-8" class="anchor"></a>New features:</h2>
+<a href="#new-features-9" class="anchor"></a>New features:</h2>
 <ul>
 <li>New <code><a href="../reference/join.html">join()</a></code> activity to concatenate trajectories (<a href='https://github.com/r-simmer/simmer/issues/50'>#50</a>).</li>
 <li>Batched generation: the generation function can return more than one interarrival value at a time (<a href='https://github.com/r-simmer/simmer/issues/65'>#65</a>).</li>
@@ -486,9 +532,9 @@
 <li>Fix per-resource activity time monitoring (<a href='https://github.com/r-simmer/simmer/issues/67'>#67</a>). The problem emerged when an arrival revisited a resource and it was enqueued. An uninitialised variable could lead to an activity time greater than <code>end_time - start_time</code>. All versions 3.2.x are affected by this bug.</li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-14" class="section level2">
+<div id="minor-changes-and-fixes-15" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-14" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-15" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Fix the description of <code>preemptible</code> in the documentation of <code><a href="../reference/seize.html">seize()</a></code> and force <code>preemptible</code> to be equal or greater than <code>priority</code> (<a href='https://github.com/r-simmer/simmer/issues/53'>#53</a>).</li>
 <li>Reset finite generators (<a href='https://github.com/r-simmer/simmer/issues/51'>#51</a>).</li>
@@ -504,19 +550,20 @@
 </div>
 </div>
     <div id="simmer-3-2-1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-2-1" class="anchor"></a>simmer 3.2.1</h1>
-<div id="new-features-9" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-2-1" class="anchor"></a>simmer 3.2.1<small> 2016-04-29 </small>
+</h1>
+<div id="new-features-10" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-9" class="anchor"></a>New features:</h2>
+<a href="#new-features-10" class="anchor"></a>New features:</h2>
 <ul>
 <li>Add time-specific resource availability support (<a href='https://github.com/r-simmer/simmer/issues/21'>#21</a>). Both resources’ <code>capacity</code> and <code>queue_size</code> can change over time following a user-defined scheduling, which can be generated with the new function <code><a href="../reference/schedule.html">schedule()</a></code>.</li>
 <li>Advanced peek: inspect any number of future events in the event queue (8147820). For more details, see <code><a href="../reference/peek.html">?peek</a></code>.</li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-15" class="section level2">
+<div id="minor-changes-and-fixes-16" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-15" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-16" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Fix steps grouping in <code>plot_resource_usage()</code> (8da9b97).</li>
 <li>Fix incorrect trajectory behaviour when a rejection occurs inside a branch with <code>merge=TRUE</code> (<a href='https://github.com/r-simmer/simmer/issues/46'>#46</a>).</li>
@@ -531,8 +578,9 @@
 </div>
 </div>
     <div id="simmer-3-2-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-2-0" class="anchor"></a>simmer 3.2.0</h1>
+<h1 class="page-header">
+<a href="#simmer-3-2-0" class="anchor"></a>simmer 3.2.0<small> 2016-04-04 </small>
+</h1>
 <div id="major-fix" class="section level2">
 <h2 class="hasAnchor">
 <a href="#major-fix" class="anchor"></a>Major fix:</h2>
@@ -540,9 +588,9 @@
 <li>In previous versions, resources were monitored <strong>before</strong> performing the corresponding seize/release activity, before changing the status of the system. Thus, <code>t=3, queue=2</code> meant that, until <code>t=3</code>, the queue had 2 customers, and at <code>t=3</code> the system changed (because of a new arrival or a new departure). The idea was to keep the values and time vectors aligned (see <a href='https://github.com/r-simmer/simmer/issues/28'>#28</a>). But from this moment on, the resources are monitored __after_ changing the status of the system. This is more consistent with what a user would expect, and more consistent with the behaviour of other related R functions (e.g., see <code>stepfun()</code>, from the <code>stats</code> package). Wrapping up and from now on, <code>t=3, queue=2</code> means that some event happened at <code>t=3</code> whose immediate and subsequent result was a queue with 2 customers.</li>
 </ul>
 </div>
-<div id="new-features-10" class="section level2">
+<div id="new-features-11" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-10" class="anchor"></a>New features:</h2>
+<a href="#new-features-11" class="anchor"></a>New features:</h2>
 <ul>
 <li>Add preemption functionality (<a href='https://github.com/r-simmer/simmer/issues/34'>#34</a>). Preemption comes into play when a resource is specified as <code>preemptive=TRUE</code>. Arrivals in the server can be preempted on a <code>preempt_order="fifo"</code> or <code>preempt_order="lifo"</code> basis. Each <code><a href="../reference/seize.html">seize()</a></code> has three basic properties:
 <ul>
@@ -556,9 +604,9 @@
 </li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-16" class="section level2">
+<div id="minor-changes-and-fixes-17" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-16" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-17" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Remove deprecated functions <code>show_activity()</code> and <code>show_trajectory()</code>.</li>
 <li>Add <code>every()</code>, <code><a href="../reference/at.html">to()</a></code> and <code><a href="../reference/at.html">from_to()</a></code> convenience functions (8e524cd).</li>
@@ -570,18 +618,19 @@
 </div>
 </div>
     <div id="simmer-3-1-2" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-1-2" class="anchor"></a>simmer 3.1.2</h1>
-<div id="new-features-11" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-1-2" class="anchor"></a>simmer 3.1.2<small> 2016-01-04 </small>
+</h1>
+<div id="new-features-12" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-11" class="anchor"></a>New features:</h2>
+<a href="#new-features-12" class="anchor"></a>New features:</h2>
 <ul>
 <li>Monitor arrivals’ start/activity/end times on a per-resource basis (<a href='https://github.com/r-simmer/simmer/issues/38'>#38</a>). So far, the function <code><a href="../reference/get_mon.html">get_mon_arrivals()</a></code> returned the start/activity/end times per arrival for the whole trajectory. This behaviour remains, but additionally, <code><a href="../reference/get_mon.html">get_mon_arrivals(per_resource = TRUE)</a></code> returns these times per resource, so that it is possible to retrieve queueing/system times per resource.</li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-17" class="section level2">
+<div id="minor-changes-and-fixes-18" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-17" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-18" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Fix testing ERRORs reported on platforms using clang and Sparc Solaris.</li>
 <li>
@@ -591,20 +640,21 @@
 </div>
 </div>
     <div id="simmer-3-1-1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-1-1" class="anchor"></a>simmer 3.1.1</h1>
-<div id="new-features-12" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-1-1" class="anchor"></a>simmer 3.1.1<small> 2015-12-16 </small>
+</h1>
+<div id="new-features-13" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-12" class="anchor"></a>New features:</h2>
+<a href="#new-features-13" class="anchor"></a>New features:</h2>
 <ul>
 <li>Add attributes to arrivals and new <code><a href="../reference/set_attribute.html">set_attribute()</a></code> activity (<a href='https://github.com/r-simmer/simmer/issues/16'>#16</a>).</li>
 <li>New <code><a href="../reference/rollback.html">rollback()</a></code> activity (<a href='https://github.com/r-simmer/simmer/issues/17'>#17</a> and <a href='https://github.com/r-simmer/simmer/issues/22'>#22</a>).</li>
 <li>Add priorities to resources’ queue (<a href='https://github.com/r-simmer/simmer/issues/20'>#20</a>).</li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-18" class="section level2">
+<div id="minor-changes-and-fixes-19" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-18" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-19" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Performance improvements with Boost (1b654fd).</li>
 <li>Fix arrivals’ timing issues (<a href='https://github.com/r-simmer/simmer/issues/24'>#24</a>).</li>
@@ -617,11 +667,12 @@
 </div>
 </div>
     <div id="simmer-3-0-1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-0-1" class="anchor"></a>simmer 3.0.1</h1>
-<div id="minor-changes-and-fixes-19" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-0-1" class="anchor"></a>simmer 3.0.1<small> 2015-11-17 </small>
+</h1>
+<div id="minor-changes-and-fixes-20" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-19" class="anchor"></a>Minor changes and fixes:</h2>
+<a href="#minor-changes-and-fixes-20" class="anchor"></a>Minor changes and fixes:</h2>
 <ul>
 <li>Complete test coverage (<a href='https://github.com/r-simmer/simmer/issues/12'>#12</a>).</li>
 <li>Minor fix in the documentation (42363d2).</li>
@@ -631,11 +682,12 @@
 </div>
 </div>
     <div id="simmer-3-0-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#simmer-3-0-0" class="anchor"></a>simmer 3.0.0</h1>
-<div id="new-features-13" class="section level2">
+<h1 class="page-header">
+<a href="#simmer-3-0-0" class="anchor"></a>simmer 3.0.0<small> 2015-11-15 </small>
+</h1>
+<div id="new-features-14" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-13" class="anchor"></a>New features:</h2>
+<a href="#new-features-14" class="anchor"></a>New features:</h2>
 <ul>
 <li>First major release submitted to CRAN. The philosophy and workflow of the pre-release remain with a more robust event-based C++ backend and a more flexible frontend.</li>
 <li>
@@ -649,13 +701,13 @@
 </ul>
 </div>
 </div>
-    </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#simmer-3-8-0">3.8.0</a></li>
         <li><a href="#simmer-3-7-0">3.7.0</a></li>
         <li><a href="#simmer-3-6-5">3.6.5</a></li>
         <li><a href="#simmer-3-6-4">3.6.4</a></li>
@@ -695,5 +747,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

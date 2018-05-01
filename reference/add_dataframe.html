@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Batch/Separate Arrivals — batch • simmer | DES for R</title>
+<title>Add a Data Frame — add_dataframe • simmer | DES for R</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -28,10 +28,9 @@
 
 
 
-<meta property="og:title" content="Batch/Separate Arrivals — batch" />
+<meta property="og:title" content="Add a Data Frame — add_dataframe" />
 
-<meta property="og:description" content="Activities for collecting a number of arrivals before they can continue processing
-and splitting a previously established batch." />
+<meta property="og:description" content="Attach a new source of arrivals to a trajectory from a data frame." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -173,59 +172,109 @@ and splitting a previously established batch." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Batch/Separate Arrivals</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer/blob/master/R/trajectory-activities.R'><code>R/trajectory-activities.R</code></a></small>
-    <div class="hidden name"><code>batch.Rd</code></div>
+    <h1>Add a Data Frame</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer/blob/master/R/simmer-methods.R'><code>R/simmer-methods.R</code></a></small>
+    <div class="hidden name"><code>add_dataframe.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Activities for collecting a number of arrivals before they can continue processing
-and splitting a previously established batch.</p>
+    <p>Attach a new source of arrivals to a trajectory from a data frame.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>batch</span>(<span class='no'>.trj</span>, <span class='no'>n</span>, <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>permanent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>rule</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>separate</span>(<span class='no'>.trj</span>)</pre>
+    <pre class="usage"><span class='fu'>add_dataframe</span>(<span class='no'>.env</span>, <span class='no'>name_prefix</span>, <span class='no'>trajectory</span>, <span class='no'>data</span>, <span class='kw'>mon</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>batch</span> <span class='kw'>=</span> <span class='fl'>50</span>,
+  <span class='kw'>col_time</span> <span class='kw'>=</span> <span class='st'>"time"</span>, <span class='kw'>time</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"interarrival"</span>, <span class='st'>"absolute"</span>),
+  <span class='kw'>col_attributes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>col_priority</span> <span class='kw'>=</span> <span class='st'>"priority"</span>,
+  <span class='kw'>col_preemptible</span> <span class='kw'>=</span> <span class='no'>col_priority</span>, <span class='kw'>col_restart</span> <span class='kw'>=</span> <span class='st'>"restart"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.trj</th>
-      <td><p>the trajectory object.</p></td>
+      <th>.env</th>
+      <td><p>the simulation environment.</p></td>
     </tr>
     <tr>
-      <th>n</th>
-      <td><p>batch size, accepts a numeric.</p></td>
+      <th>name_prefix</th>
+      <td><p>the name prefix of the generated arrivals.</p></td>
     </tr>
     <tr>
-      <th>timeout</th>
-      <td><p>set an optional timer which triggers batches every <code>timeout</code> time
-units even if the batch size has not been fulfilled, accepts a numeric or a callable
-object (a function) which must return a numeric (0 = disabled).</p></td>
+      <th>trajectory</th>
+      <td><p>the trajectory that the generated arrivals will follow (see
+<code><a href='trajectory.html'>trajectory</a></code>).</p></td>
     </tr>
     <tr>
-      <th>permanent</th>
-      <td><p>if <code>TRUE</code>, batches cannot be split.</p></td>
+      <th>data</th>
+      <td><p>a data frame with, at least, a column of (inter)arrival times (see details).</p></td>
     </tr>
     <tr>
-      <th>name</th>
-      <td><p>optional string. Unnamed batches from different <code>batch</code> activities are
-independent. However, if you want to feed arrivals from different trajectories into a
-same batch, you need to specify a common name across all your <code>batch</code> activities.</p></td>
+      <th>mon</th>
+      <td><p>whether the simulator must monitor the generated arrivals or not
+(0 = no monitoring, 1 = simple arrival monitoring, 2 = level 1 + arrival
+attribute monitoring)</p></td>
     </tr>
     <tr>
-      <th>rule</th>
-      <td><p>an optional callable object (a function) which will be applied to
-every arrival to determine whether it should be included into the batch, thus</p></td>
+      <th>batch</th>
+      <td><p>number of arrivals generated at a time. Arrivals are read from
+the data frame and attached to the trajectory in batches depending on this
+value. In general, it should not be changed.</p></td>
+    </tr>
+    <tr>
+      <th>col_time</th>
+      <td><p>name of the time column in the data frame.</p></td>
+    </tr>
+    <tr>
+      <th>time</th>
+      <td><p>type of time column: <em>interarrival</em>, if the time column
+contains interarrival times, or <em>absolute</em>, if the time column contains
+absolute arrival times.</p></td>
+    </tr>
+    <tr>
+      <th>col_attributes</th>
+      <td><p>vector of names of the attributes columns (see details).</p></td>
+    </tr>
+    <tr>
+      <th>col_priority</th>
+      <td><p>name of the priority column.</p></td>
+    </tr>
+    <tr>
+      <th>col_preemptible</th>
+      <td><p>name of the preemptible column.</p></td>
+    </tr>
+    <tr>
+      <th>col_restart</th>
+      <td><p>name of the restart column.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns the trajectory object.</p>
+    <p>Returns the simulation environment.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The data frame provided must have, at least, a column of (inter)arrival
+times. This method will look for it under the name <code>"time"</code> by default,
+although this can be changed with the <code>col_time</code> parameter.</p>
+<p>If there is any column named <code>col_priority="priority"</code>,
+<code>col_preemptible=priority</code> or <code>col_restart="restart"</code>, they will be
+used to set the prioritization values for each arrival (see <code><a href='add_generator.html'>add_generator</a></code>).</p>
+<p>If there are additional columns (with <code>col_attributes=NULL</code>, by default),
+they will be assigned to arrival attributes named after each column name. All
+these columns must be numeric (or logical). Otherwise, if a vector of column
+names is specified, only these will be assigned as attributes and the rest of
+the columns will be ignored.</p>
+<p>A value of <code>batch=Inf</code> means that the whole data frame will be attached
+at the beginning of the simulation. This is not desirable in general, because
+the performance of the event queue is degraded when it is populated with too
+many events. On the other hand, a low value results in an increased overhead
+due to many function calls. The default value has been tested to provide a
+good trade-off.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other sources: <code><a href='add_generator.html'>add_generator</a></code>.</p></div>
     
 
   </div>
@@ -235,6 +284,10 @@ every arrival to determine whether it should be included into the batch, thus</p
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

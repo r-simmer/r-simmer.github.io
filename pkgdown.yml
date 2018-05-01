@@ -1,27 +1,9 @@
 pandoc: 1.19.2.1
-pkgdown: 0.1.0.9000
+pkgdown: 1.0.0
 pkgdown_sha: ~
 articles:
-  5G-1-results-a.png: includes/5G-1-results-a.png
-  5G-1-results-b.png: includes/5G-1-results-b.png
-  5G-1-scenario.png: includes/5G-1-scenario.png
-  5G-1.R: includes/5G-1.R
-  5G-2-results.png: includes/5G-2-results.png
-  5G-2-scenario.png: includes/5G-2-scenario.png
-  5G-2.R: includes/5G-2.R
-  5G-3-results.png: includes/5G-3-results.png
-  5G-3-scenario.png: includes/5G-3-scenario.png
-  5G-3.R: includes/5G-3.R
-  ctmc-1.png: includes/ctmc-1.png
-  ctmc-2.png: includes/ctmc-2.png
-  jss-benchmark-batched.pdf: includes/jss-benchmark-batched.pdf
-  jss-benchmark-boxplot.pdf: includes/jss-benchmark-boxplot.pdf
-  jss-job-shop.pdf: includes/jss-job-shop.pdf
-  jss-simmer-design.pdf: includes/jss-simmer-design.pdf
-  philosophers.png: includes/philosophers.png
-  queueing-network.svg: includes/queueing-network.svg
-  jss.bib: jss.bib
   simmer-01-introduction: simmer-01-introduction.html
+  simmer-02-jss: simmer-02-jss.html
   simmer-03-trajectories: simmer-03-trajectories.html
   simmer-04-bank-1: simmer-04-bank-1.html
   simmer-04-bank-2: simmer-04-bank-2.html
@@ -30,4 +12,7 @@ articles:
   simmer-07-ctmc: simmer-07-ctmc.html
   simmer-08-philosophers: simmer-08-philosophers.html
   simmer-aa-5G: simmer-aa-5G.html
+urls:
+  reference: https://r-simmer.org/reference
+  article: https://r-simmer.org/articles
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Logging — log_ • simmer | DES for R</title>
+<title>License • simmer | DES for R</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -22,16 +22,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="jquery.sticky-kit.min.js"></script>
+<script src="pkgdown.js"></script>
 
 
 
-<meta property="og:title" content="Logging — log_" />
-
-<meta property="og:description" content="Activity for displaying messages preceded by the simulation time and the name of the arrival." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="License" />
 
 
 <!-- mathjax -->
@@ -56,7 +53,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -67,14 +64,14 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">simmer | DES for R</a>
+        <a class="navbar-link" href="index.html">simmer | DES for R</a>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">
+  <a href="reference/index.html">
     <span class="fa fa-gears"></span>
      
     Reference
@@ -90,39 +87,39 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
+      <a href="articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/simmer-02-jss.pdf">JSS paper</a>
+      <a href="articles/simmer-02-jss.pdf">JSS paper</a>
     </li>
     <li>
-      <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
+      <a href="articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
     </li>
     <li>
-      <a href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
+      <a href="articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
     </li>
     <li>
-      <a href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
+      <a href="articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
     </li>
     <li>
-      <a href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
+      <a href="articles/simmer-05-simpy.html">Other SimPy Examples</a>
     </li>
     <li>
-      <a href="../articles/simmer-06-queueing.html">Queueing Systems</a>
+      <a href="articles/simmer-06-queueing.html">Queueing Systems</a>
     </li>
     <li>
-      <a href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
+      <a href="articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
     </li>
     <li>
-      <a href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
+      <a href="articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
     </li>
     <li>
-      <a href="../articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
+      <a href="articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">
+  <a href="news/index.html">
     <span class="fa fa-newspaper-o"></span>
      
     News
@@ -138,10 +135,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../extensions/plot">simmer.plot</a>
+      <a href="extensions/plot">simmer.plot</a>
     </li>
     <li>
-      <a href="../extensions/bricks">simmer.bricks</a>
+      <a href="extensions/bricks">simmer.bricks</a>
     </li>
     <li>
       <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
@@ -170,51 +167,19 @@
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>Logging</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer/blob/master/R/trajectory-activities.R'><code>R/trajectory-activities.R</code></a></small>
-    <div class="hidden name"><code>log_.Rd</code></div>
+      <h1>License</h1>
     </div>
 
-    <div class="ref-description">
-    
-    <p>Activity for displaying messages preceded by the simulation time and the name of the arrival.</p>
-    
-    </div>
-
-    <pre class="usage"><span class='fu'>log_</span>(<span class='no'>.trj</span>, <span class='no'>message</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>.trj</th>
-      <td><p>the trajectory object.</p></td>
-    </tr>
-    <tr>
-      <th>message</th>
-      <td><p>the message to display, accepts either a string or a callable object
-(a function) which must return a string.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Returns the trajectory object.</p>
-    
+<pre>YEAR: 2014-2018
+COPYRIGHT HOLDER: Bart Smeets, Iñaki Ucar
+</pre>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
 
-  </div>
 </div>
+
 
       <footer>
       <div class="copyright">

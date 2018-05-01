@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Other SimPy Examples • simmer</title>
+<title>Other SimPy Examples • simmer | DES for R</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -15,19 +15,16 @@
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Google analytics --><script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-115358925-1"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-115358925-1', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-115358925-1');
 </script>
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -36,8 +33,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">simmer | DES for R</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">simmer | DES for R</a>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -136,17 +136,20 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Other SimPy Examples</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2018-03-08</h4>
-          </div>
+            <h4 class="date">2018-05-02</h4>
+      
+      <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-05-simpy.Rmd"><code>vignettes/simmer-05-simpy.Rmd</code></a></small>
+      <div class="hidden name"><code>simmer-05-simpy.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
@@ -219,9 +222,10 @@ env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.
 <span class="co">#&gt; 18: car1: arrives at the carwash</span>
 <span class="co">#&gt; 18: car1: enters the carwash</span>
 <span class="co">#&gt; simmer environment: anonymous | now: 20 | next: 23</span>
+<span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: wash | monitored: TRUE | server status: 1(2) | queue status: 0(Inf) }</span>
-<span class="co">#&gt; { Generator: car_initial | monitored: 1 | n_generated: 4 }</span>
-<span class="co">#&gt; { Generator: car | monitored: 1 | n_generated: 3 }</span></code></pre></div>
+<span class="co">#&gt; { Source: car_initial | monitored: 1 | n_generated: 4 }</span>
+<span class="co">#&gt; { Source: car | monitored: 1 | n_generated: 3 }</span></code></pre></div>
 </div>
 <div id="machine-shop" class="section level2">
 <h2 class="hasAnchor">
@@ -408,6 +412,7 @@ moviegoer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/t
 <span class="co"># add ticket counter with capacity 1 and infinite queue</span>
 env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>, <span class="dv">1</span>, <span class="ot">Inf</span>)
 <span class="co">#&gt; simmer environment: anonymous | now: 0 | next: </span>
+<span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: R Unchained | monitored: TRUE | server status: 0(50) | queue status: 0(0) }</span>
 <span class="co">#&gt; { Resource: Kill Process | monitored: TRUE | server status: 0(50) | queue status: 0(0) }</span>
 <span class="co">#&gt; { Resource: Pulp Implementation | monitored: TRUE | server status: 0(50) | queue status: 0(0) }</span>
@@ -417,12 +422,13 @@ env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a h
 env <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"moviegoer"</span>, moviegoer, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="fl">0.5</span>), <span class="dt">mon=</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(SIM_TIME)
-<span class="co">#&gt; simmer environment: anonymous | now: 120 | next: 120.121103789898</span>
-<span class="co">#&gt; { Resource: R Unchained | monitored: TRUE | server status: 50(0) | queue status: 0(0) }</span>
+<span class="co">#&gt; simmer environment: anonymous | now: 120 | next: 120.719252450748</span>
+<span class="co">#&gt; { Monitor: in memory }</span>
+<span class="co">#&gt; { Resource: R Unchained | monitored: TRUE | server status: 49(0) | queue status: 0(0) }</span>
 <span class="co">#&gt; { Resource: Kill Process | monitored: TRUE | server status: 50(0) | queue status: 0(0) }</span>
-<span class="co">#&gt; { Resource: Pulp Implementation | monitored: TRUE | server status: 49(0) | queue status: 0(0) }</span>
+<span class="co">#&gt; { Resource: Pulp Implementation | monitored: TRUE | server status: 50(0) | queue status: 0(0) }</span>
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
-<span class="co">#&gt; { Generator: moviegoer | monitored: 2 | n_generated: 243 }</span></code></pre></div>
+<span class="co">#&gt; { Source: moviegoer | monitored: 2 | n_generated: 230 }</span></code></pre></div>
 <p>The analysis is performed with the help of <code>dplyr</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get the three rows with the sold out instants</span>
 sold_time &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(env) <span class="op">%&gt;%</span>
@@ -444,12 +450,12 @@ n_reneges &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span cla
   <span class="kw">cat</span>(<span class="st">"Movie '"</span>, i[<span class="st">"resource"</span>], <span class="st">"' was sold out in "</span>, i[<span class="st">"time"</span>], <span class="st">" minutes.</span><span class="ch">\n</span><span class="st">"</span>, 
       <span class="st">"  Number of people that left the queue: "</span>, i[<span class="st">"n"</span>], <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="dt">sep=</span><span class="st">""</span>)
 }))
-<span class="co">#&gt; Movie 'Pulp Implementation' was sold out in 31.09917 minutes.</span>
-<span class="co">#&gt;   Number of people that left the queue: 16</span>
-<span class="co">#&gt; Movie 'R Unchained' was sold out in 39.09917 minutes.</span>
-<span class="co">#&gt;   Number of people that left the queue: 16</span>
-<span class="co">#&gt; Movie 'Kill Process' was sold out in 45.09917 minutes.</span>
-<span class="co">#&gt;   Number of people that left the queue:  7</span></code></pre></div>
+<span class="co">#&gt; Movie 'Pulp Implementation' was sold out in 33.09917 minutes.</span>
+<span class="co">#&gt;   Number of people that left the queue:  5</span>
+<span class="co">#&gt; Movie 'Kill Process' was sold out in 34.09917 minutes.</span>
+<span class="co">#&gt;   Number of people that left the queue:  8</span>
+<span class="co">#&gt; Movie 'R Unchained' was sold out in 38.09917 minutes.</span>
+<span class="co">#&gt;   Number of people that left the queue: 11</span></code></pre></div>
 </div>
 <div id="gas-station-refuelling" class="section level2">
 <h2 class="hasAnchor">
@@ -572,10 +578,10 @@ refuelling &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <span class="co">#&gt; 953: car11: arriving at gas station</span>
 <span class="co">#&gt; 988: car12: arriving at gas station</span>
 <span class="co">#&gt; simmer environment: anonymous | now: 1000 | next: 1045</span>
+<span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: pump | monitored: TRUE | server status: 2(2) | queue status: 0(Inf) }</span>
-<span class="co">#&gt; { Generator: controller | monitored: 1 | n_generated: 1 }</span>
-<span class="co">#&gt; { Generator: car | monitored: 1 | n_generated: 14 }</span></code></pre></div>
-</div>
+<span class="co">#&gt; { Source: controller | monitored: 1 | n_generated: 1 }</span>
+<span class="co">#&gt; { Source: car | monitored: 1 | n_generated: 14 }</span></code></pre></div>
 </div>
   </div>
 
@@ -606,6 +612,8 @@ refuelling &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

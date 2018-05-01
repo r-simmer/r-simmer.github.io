@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Select Resources — select • simmer</title>
+<title>Select Resources — select • simmer | DES for R</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,13 +25,16 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
 <meta property="og:title" content="Select Resources — select" />
 
 <meta property="og:description" content="Activity for selecting a resource for a subsequent seize/release or setting
 its parameters (capacity or queue size)." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -41,16 +44,14 @@ its parameters (capacity or queue size)." />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115358925-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-115358925-1', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-115358925-1');
 </script>
 
   </head>
@@ -66,8 +67,11 @@ its parameters (capacity or queue size)." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">simmer | DES for R</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">simmer | DES for R</a>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -158,6 +162,7 @@ its parameters (capacity or queue size)." />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -165,21 +170,25 @@ its parameters (capacity or queue size)." />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Select Resources</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer/blob/master/R/trajectory-activities.R'><code>R/trajectory-activities.R</code></a></small>
+    <div class="hidden name"><code>select.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Activity for selecting a resource for a subsequent seize/release or setting
 its parameters (capacity or queue size).</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>select</span>(<span class='no'>.trj</span>, <span class='no'>resources</span>, <span class='kw'>policy</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"shortest-queue"</span>, <span class='st'>"round-robin"</span>,
   <span class='st'>"first-available"</span>, <span class='st'>"random"</span>), <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -211,8 +220,8 @@ and 'random' selects one at random.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='seize.html'>seize_selected</a></code>, <code><a href='seize.html'>release_selected</a></code>,
-<code><a href='set_capacity.html'>set_capacity_selected</a></code>, <code><a href='set_capacity.html'>set_queue_size_selected</a></code>.</p>
+    <div class='dont-index'><p><code><a href='seize.html'>seize_selected</a></code>, <code><a href='seize.html'>release_selected</a></code>,
+<code><a href='set_capacity.html'>set_capacity_selected</a></code>, <code><a href='set_capacity.html'>set_queue_size_selected</a></code>.</p></div>
     
 
   </div>
@@ -241,5 +250,8 @@ and 'random' selects one at random.</p></td>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
