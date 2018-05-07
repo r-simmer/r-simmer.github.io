@@ -1,0 +1,131 @@
+---
+title: "simmer 3.8.0"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The 3.8.0 release of [simmer](http://r-simmer.org/), the Discrete-Event Simulator for R, hit CRAN almost a week ago, and Windows binaries are already available. This version includes two highly requested new features that justify this second consecutive minor release.
+
+### Attachment of precomputed data
+
+Until v3.7.0, the *generator* was the only means to attach data to trajectories, and it was primarily intended for dynamic generation of arrivals:
+
+```{r}
+library(simmer)
+set.seed(42)
+
+hello_sayer <- trajectory() %>%
+  log_("hello!")
+
+simmer() %>%
+  add_generator("dummy", hello_sayer, function() rexp(1, 1)) %>%
+  run(until=2)
+```
+
+Although it may be used to attach precomputed data too, especially using the `at()` adaptor:
+
+```{r}
+simmer() %>%
+  add_generator("dummy", hello_sayer, at(seq(0, 10, 0.5))) %>%
+  run(until=2)
+```
+
+Now, let's say that we want to attach some empirical data, and our observations not only include arrival times, but also priorities and some attributes (e.g., measured service times), as in [this question](https://stackoverflow.com/questions/44865924/using-simmer-to-build-a-specific-model) on StackOverflow:
+
+```{r}
+myData <- data.frame(
+  time = c(1:10,1:5), 
+  priority = 1:3, 
+  duration = rnorm(15, 50, 5)) %>%
+  dplyr::arrange(time)
+```
+
+This is indeed possible using generators, but it requires some trickery; more specifically, the clever usage of a *consumer* function as follows:
+
+```{r}
+consume <- function(x, prio=FALSE) {
+  i <- 0
+  function() {
+    i <<- i + 1
+    if (prio) c(x[[i]], x[[i]], FALSE)
+    else x[[i]]
+  }
+}
+
+activityTraj <- trajectory() %>%
+  seize("worker") %>%
+  timeout_from_attribute("duration") %>%
+  release("worker")
+
+initialization <- trajectory() %>%
+  set_prioritization(consume(myData$priority, TRUE)) %>%
+  set_attribute("duration", consume(myData$duration)) %>%
+  join(activityTraj)
+
+arrivals_gen <- simmer() %>%
+  add_resource("worker", 2, preemptive=TRUE) %>%
+  add_generator("dummy_", initialization, at(myData$time)) %>%
+  run() %>%
+  get_mon_arrivals()
+
+# check the resulting duration times
+activity_time <- arrivals_gen %>%
+  tidyr::separate(name, c("prefix", "n"), convert=TRUE) %>%
+  dplyr::arrange(n) %>%
+  dplyr::pull(activity_time)
+
+all(activity_time == myData$duration)
+```
+
+Since this v3.8.0, the new data source `add_dataframe` greatly simplifies this process:
+
+```{r}
+arrivals_df <- simmer() %>%
+  add_resource("worker", 2, preemptive=TRUE) %>%
+  add_dataframe("dummy_", activityTraj, myData, time="absolute") %>%
+  run() %>%
+  get_mon_arrivals()
+
+identical(arrivals_gen, arrivals_df)
+```
+
+### On-disk monitoring
+
+As some users noted (see [1](https://groups.google.com/d/msg/simmer-devel/A4M7uP0Lmgw/f_0wkctKBQAJ), [2](https://groups.google.com/d/msg/simmer-devel/sO1OlQTpoXw/VL4-_iTBAQAJ)), the default in-memory monitoring capabilities can turn problematic for very long simulations. To address this issue, the `simmer()` constructor gains a new argument, `mon`, to provide different types of monitors. Monitoring is still performed in-memory by default, but as of v3.8.0, it can be offloaded to disk through `monitor_delim()` and `monitor_csv()`, which produce flat delimited files.
+
+```{r}
+mon <- monitor_csv()
+mon
+
+env <- simmer(mon=mon) %>%
+  add_generator("dummy", hello_sayer, function() rexp(1, 1)) %>%
+  run(until=2)
+env
+
+read.csv(mon$handlers["arrivals"]) # direct access
+get_mon_arrivals(env)              # adds the "replication" column
+```
+
+See below for a comprehensive list of changes.
+
+### New features:
+
+* New data source `add_dataframe` enables the attachment of precomputed data, in the form of a data frame, to a trajectory. It can be used instead of (or along with) `add_generator`. The most notable advantage over the latter is that `add_dataframe` is able to automatically set attributes and prioritisation values per arrival based on columns of the provided data frame (#140 closing #123).
+* New `set_source` activity deprecates `set_distribution()`. It works both for generators and data sources (275a09c, as part of #140).
+* New monitoring interface allows for disk offloading. The `simmer()` constructor gains a new argument `mon` to provide different types of monitors. By default, monitoring is performed in-memory, as usual. Additionally, monitoring can be offloaded to disk through `monitor_delim` and `monitor_csv`, which produce flat delimited files. But more importantly, the C++ interface has been refactorised to enable the development of new monitoring backends (#146 closing #119).
+
+### Minor changes and fixes:
+
+* Some documentation improvements (1e14ed7, 194ed05).
+* New default `until=Inf` for the `run` method (3e6aae9, as part of #140).
+* `branch` and `clone` now accept lists of trajectories, in the same way as `join`, so that there is no need to use `do.call` (#142).
+* The argument `continue` (present in `seize` and `branch`) is recycled if only one value is provided but several sub-trajectories are defined (#143).
+* Fix process reset: sources are reset in strict order of creation (e7d909b).
+* Fix infinite timeouts (#144).
