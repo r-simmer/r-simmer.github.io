@@ -8,8 +8,8 @@
 <title>Discrete-Event Simulation for R • simmer | DES for R</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><meta property="og:title" content="Discrete-Event Simulation for R">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script><meta property="og:title" content="Discrete-Event Simulation for R">
 <meta property="og:description" content="A process-oriented and trajectory-based Discrete-Event Simulation
     (DES) package for R. It is designed as a generic yet powerful framework. The
     architecture encloses a robust and fast simulation core written in 'C++' with
@@ -40,8 +40,8 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">simmer | DES for R</a>
-      </span>
-    </div>
+    </span>
+</div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -121,6 +121,9 @@
     <li>
       <a href="https://github.com/r-simmer/simmer.json">simmer.json</a>
     </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.mon">simmer.mon</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -151,12 +154,7 @@
 <div id="extensions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#extensions" class="anchor"></a>Extensions</h2>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="20%">
-<col width="57%">
-<col width="22%">
-</colgroup>
+<table class="table">
 <thead><tr class="header">
 <th>Package</th>
 <th>Description</th>
@@ -176,12 +174,17 @@
 <tr class="odd">
 <td><a href="https://github.com/r-simmer/simmer.optim"><strong>simmer.optim</strong></a></td>
 <td>Parameter Optimization Functions for ‘simmer’</td>
-<td><a href="https://cran.r-project.org/package=simmer.optim"><embed src="https://www.r-pkg.org/badges/version/simmer.optim"></embed></a></td>
+<td><a href="https://www.tidyverse.org/lifecycle/#dormant"><img src="https://img.shields.io/badge/lifecycle-dormant-blue.svg" alt="Status_Badge"></a></td>
 </tr>
 <tr class="even">
 <td><a href="https://github.com/r-simmer/simmer.json"><strong>simmer.json</strong></a></td>
 <td>Read / Load ‘simmer’ Definitions in JSON Format</td>
-<td><a href="https://cran.r-project.org/package=simmer.json"><embed src="https://www.r-pkg.org/badges/version/simmer.json"></embed></a></td>
+<td><a href="https://www.tidyverse.org/lifecycle/#dormant"><img src="https://img.shields.io/badge/lifecycle-dormant-blue.svg" alt="Status_Badge"></a></td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/r-simmer/simmer.mon"><strong>simmer.mon</strong></a></td>
+<td>Monitoring Backends for ‘simmer’</td>
+<td><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Status_Badge"></a></td>
 </tr>
 </tbody>
 </table>
@@ -195,20 +198,21 @@
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
 <p>Documentation is available at <a href="http://r-simmer.org/reference">r-simmer.org/reference</a>. To get started, please explore our <a href="http://r-simmer.org/articles/">vignettes online</a>, or in R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="dt">package =</span> <span class="st">"simmer"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">vignette</span>(<span class="dt">package =</span> <span class="st">"simmer"</span>)</a></code></pre></div>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install the release version from CRAN:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"simmer"</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"simmer"</span>)</a></code></pre></div>
 <p>The installation from GitHub requires the <a href="https://cran.r-project.org/package=remotes">remotes</a> package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"r-simmer/simmer"</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"r-simmer/simmer"</span>)</a></code></pre></div>
 <p>Please note that the package contains some C++ code and thus you need a development environment to build the package (e.g. <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> for Windows).</p>
 </div>
 <div id="hexagon-stickers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#hexagon-stickers" class="anchor"></a>Hexagon stickers!</h2>
+<p>You can purchase <code>simmer</code> hex stickers on Redbubble (<a href="https://www.redbubble.com/es/people/puratura/works/32157547-simmer-des-for-r?p=sticker">sticker 1</a>, <a href="https://www.redbubble.com/es/people/puratura/works/32155608-simmer-des-for-r?p=sticker">sticker 2</a>). Browse there for more stuff such as T-shirts and mugs!</p>
 <p><img src="http://r-simmer.org/images/simmer-hex-01.svg" alt="design1" width="150">     <img src="http://r-simmer.org/images/simmer-hex-02.svg" alt="design2" width="150"></p>
 </div>
 </div>
@@ -229,9 +233,7 @@
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li>
-<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
-</li>
+<li>GPL (&gt;= 2)</li>
 </ul>
 </div>
 <div class="citation">

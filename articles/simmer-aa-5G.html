@@ -8,8 +8,8 @@
 <title>Design and Analysis of 5G Scenarios • simmer | DES for R</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="Design and Analysis of 5G Scenarios">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Design and Analysis of 5G Scenarios">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -35,8 +35,8 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-      </span>
-    </div>
+    </span>
+</div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -116,6 +116,9 @@
     <li>
       <a href="https://github.com/r-simmer/simmer.json">simmer.json</a>
     </li>
+    <li>
+      <a href="https://github.com/r-simmer/simmer.mon">simmer.mon</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -141,7 +144,7 @@
       <h1>Design and Analysis of 5G Scenarios</h1>
                         <h4 class="author">Iñaki Ucar, José Alberto Hernández, Pablo Serrano, Arturo Azcorra</h4>
             
-            <h4 class="date">2018-05-02</h4>
+            <h4 class="date">2018-07-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-aa-5G.Rmd"><code>vignettes/simmer-aa-5G.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-aa-5G.Rmd</code></div>
@@ -164,115 +167,113 @@
 <p>This scenario is motivated by the Cloud Radio Access Network (C-RAN) paradigm, where the mobile base station functionality is split into simple Remote Radio Heads (RRH), spread across the deployment and connected by fiber to centralized (and possibly virtualized) Base-Band Units (BBU), at the operators’ premises.</p>
 <p>In this C-RAN paradigm, fronthaul (FH) traffic from the RRH has stringent delay requirements, while backhaul (BH) traffic from the BBU has mild delay requirements. In a general topology, such as the one illustrated in the figure, packet switches will forward both types of traffic. We use <code>simmer</code> to simulate the scenario and decide whether introducing service differentiation might improve the ability to fulfil the delivery guarantees of FH traffic.</p>
 <div style="text-align:center">
-<div class="figure">
-<img src="includes/5G-1-scenario.png">
-</div>
+<p><img src="includes/5G-1-scenario.png"></p>
 </div>
 <p>These are the configuration parameters considered:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">C &lt;-<span class="st"> </span><span class="fl">40e9</span>                                   <span class="co"># link capacity [bps]</span>
-rho &lt;-<span class="st"> </span><span class="fl">0.75</span>                                 <span class="co"># utilization</span>
-
-FH_EX &lt;-<span class="st"> </span>(<span class="dv">80</span> <span class="op">+</span><span class="st"> </span><span class="dv">46</span>) <span class="op">*</span><span class="st"> </span><span class="dv">8</span> <span class="op">/</span><span class="st"> </span>C                  <span class="co"># avg. FH interarrival time [s]</span>
-BH_bytes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">576</span>, <span class="dv">1500</span>)                <span class="co"># BH traffic distribution</span>
-Weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="dv">12</span>                  <span class="co">#</span>
-BH_EX &lt;-<span class="st"> </span><span class="kw">sum</span>(Weights <span class="op">*</span><span class="st"> </span>(<span class="dv">8</span> <span class="op">*</span><span class="st"> </span>BH_bytes <span class="op">/</span><span class="st"> </span>C))  <span class="co"># avg. BH interarrival time [s]</span>
-
-FH_w &lt;-<span class="st"> </span><span class="fl">0.5</span>                                 <span class="co"># FH traffic ratio</span>
-BH_w &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>FH_w                            <span class="co"># BH traffic ratio</span>
-FH_lambda &lt;-<span class="st"> </span>FH_w <span class="op">*</span><span class="st"> </span>rho <span class="op">/</span><span class="st"> </span>FH_EX             <span class="co"># FH avg. rate [pkts/s]</span>
-BH_lambda &lt;-<span class="st"> </span>BH_w <span class="op">*</span><span class="st"> </span>rho <span class="op">/</span><span class="st"> </span>BH_EX             <span class="co"># BH avg. rate [pkts/s]</span>
-
-Tsim &lt;-<span class="st"> </span><span class="fl">1e5</span> <span class="op">/</span><span class="st"> </span>(FH_lambda <span class="op">+</span><span class="st"> </span>BH_lambda)       <span class="co"># simulation time</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">C &lt;-<span class="st"> </span><span class="fl">40e9</span>                                   <span class="co"># link capacity [bps]</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">rho &lt;-<span class="st"> </span><span class="fl">0.75</span>                                 <span class="co"># utilization</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">FH_EX &lt;-<span class="st"> </span>(<span class="dv">80</span> <span class="op">+</span><span class="st"> </span><span class="dv">46</span>) <span class="op">*</span><span class="st"> </span><span class="dv">8</span> <span class="op">/</span><span class="st"> </span>C                  <span class="co"># avg. FH interarrival time [s]</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">BH_bytes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">576</span>, <span class="dv">1500</span>)                <span class="co"># BH traffic distribution</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">Weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="dv">12</span>                  <span class="co">#</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">BH_EX &lt;-<span class="st"> </span><span class="kw">sum</span>(Weights <span class="op">*</span><span class="st"> </span>(<span class="dv">8</span> <span class="op">*</span><span class="st"> </span>BH_bytes <span class="op">/</span><span class="st"> </span>C))  <span class="co"># avg. BH interarrival time [s]</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">FH_w &lt;-<span class="st"> </span><span class="fl">0.5</span>                                 <span class="co"># FH traffic ratio</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">BH_w &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>FH_w                            <span class="co"># BH traffic ratio</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">FH_lambda &lt;-<span class="st"> </span>FH_w <span class="op">*</span><span class="st"> </span>rho <span class="op">/</span><span class="st"> </span>FH_EX             <span class="co"># FH avg. rate [pkts/s]</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">BH_lambda &lt;-<span class="st"> </span>BH_w <span class="op">*</span><span class="st"> </span>rho <span class="op">/</span><span class="st"> </span>BH_EX             <span class="co"># BH avg. rate [pkts/s]</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">Tsim &lt;-<span class="st"> </span><span class="fl">1e5</span> <span class="op">/</span><span class="st"> </span>(FH_lambda <span class="op">+</span><span class="st"> </span>BH_lambda)       <span class="co"># simulation time</span></a></code></pre></div>
 <p>The model is defined and encapsulated into the <code>simulate</code> function. Then, several scenarios with different parameters are defined in <code>cases</code>, which can be run in parallel:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
-
-<span class="kw">set.seed</span>(<span class="dv">1234</span>)
-
-<span class="co"># parametrized simulation function</span>
-<span class="co"># - param[["n_switch"]] is the number of switches</span>
-<span class="co"># - param[["fh_prio"]] is the priority level for FH traffic</span>
-<span class="co"># - param[["preemptive"]] is the preemptiveness flag for switches</span>
-simulate &lt;-<span class="st"> </span><span class="cf">function</span>(param) {
-
-  <span class="co"># single FH traffic trajectory traversing n_switch elements sequentially</span>
-  fh_traffic &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span>param[[<span class="st">"n_switch"</span>]], <span class="cf">function</span>(i) {
-    <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="kw">paste0</span>(<span class="st">"switch"</span>, i)) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(FH_EX) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="kw">paste0</span>(<span class="st">"switch"</span>, i))
-  }) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/join.html">join</a></span>()
-
-  <span class="co"># list of n_switch trajectories, one per element, modeling the interfering BH traffic</span>
-  bh_traffic &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span>param[[<span class="st">"n_switch"</span>]], <span class="cf">function</span>(i) {
-    <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="kw">paste0</span>(<span class="st">"switch"</span>, i)) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">sample</span>(BH_bytes<span class="op">*</span><span class="dv">8</span><span class="op">/</span>C, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>Weights)) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="kw">paste0</span>(<span class="st">"switch"</span>, i))
-  })
-
-  <span class="co"># simulation environment</span>
-  env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="co"># generator of FH traffic</span>
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"FH_0_"</span>, fh_traffic, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">100</span>, FH_lambda), <span class="dt">priority=</span>param[[<span class="st">"fh_prio"</span>]])
-
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>param[[<span class="st">"n_switch"</span>]])
-    env <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="co"># n_switch resources, one per switch</span>
-<span class="st">      </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="kw">paste0</span>(<span class="st">"switch"</span>, i), <span class="dv">1</span>, <span class="ot">Inf</span>, <span class="dt">mon=</span><span class="ot">FALSE</span>, <span class="dt">preemptive=</span>param[[<span class="st">"preemptive"</span>]]) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="co"># n_switch generators of BH traffic</span>
-<span class="st">      </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="kw">paste0</span>(<span class="st">"BH_"</span>, i, <span class="st">"_"</span>), bh_traffic[[i]], <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">100</span>, BH_lambda))
-
-  env <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>Tsim) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/wrap.html">wrap</a></span>()
-}
-
-<span class="co"># grid of scenarios</span>
-cases &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">n_switch =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>),
-                     <span class="dt">fh_prio =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
-                     <span class="dt">preemptive =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>))
-
-<span class="co"># parallel simulation</span>
-<span class="kw">system.time</span>({
-  envs &lt;-<span class="st"> </span>parallel<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="kw">split</span>(cases, <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(cases)), simulate,
-                             <span class="dt">mc.cores=</span><span class="kw">nrow</span>(cases), <span class="dt">mc.set.seed=</span><span class="ot">FALSE</span>)
-})</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(simmer)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">set.seed</span>(<span class="dv">1234</span>)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co"># parametrized simulation function</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co"># - param[["n_switch"]] is the number of switches</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># - param[["fh_prio"]] is the priority level for FH traffic</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co"># - param[["preemptive"]] is the preemptiveness flag for switches</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">simulate &lt;-<span class="st"> </span><span class="cf">function</span>(param) {</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">  <span class="co"># single FH traffic trajectory traversing n_switch elements sequentially</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">  fh_traffic &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span>param[[<span class="st">"n_switch"</span>]], <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">    <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="st">      </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="kw">paste0</span>(<span class="st">"switch"</span>, i)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="st">      </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(FH_EX) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="st">      </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="kw">paste0</span>(<span class="st">"switch"</span>, i))</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">  }) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/join.html">join</a></span>()</a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">  <span class="co"># list of n_switch trajectories, one per element, modeling the interfering BH traffic</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">  bh_traffic &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span>param[[<span class="st">"n_switch"</span>]], <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">    <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="st">      </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="kw">paste0</span>(<span class="st">"switch"</span>, i)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="st">      </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">sample</span>(BH_bytes<span class="op">*</span><span class="dv">8</span><span class="op">/</span>C, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>Weights)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="st">      </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="kw">paste0</span>(<span class="st">"switch"</span>, i))</a>
+<a class="sourceLine" id="cb2-25" data-line-number="25">  })</a>
+<a class="sourceLine" id="cb2-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb2-27" data-line-number="27">  <span class="co"># simulation environment</span></a>
+<a class="sourceLine" id="cb2-28" data-line-number="28">  env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="st">    </span><span class="co"># generator of FH traffic</span></a>
+<a class="sourceLine" id="cb2-30" data-line-number="30"><span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"FH_0_"</span>, fh_traffic, <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">100</span>, FH_lambda), <span class="dt">priority=</span>param[[<span class="st">"fh_prio"</span>]])</a>
+<a class="sourceLine" id="cb2-31" data-line-number="31"></a>
+<a class="sourceLine" id="cb2-32" data-line-number="32">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>param[[<span class="st">"n_switch"</span>]])</a>
+<a class="sourceLine" id="cb2-33" data-line-number="33">    env <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-34" data-line-number="34"><span class="st">      </span><span class="co"># n_switch resources, one per switch</span></a>
+<a class="sourceLine" id="cb2-35" data-line-number="35"><span class="st">      </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="kw">paste0</span>(<span class="st">"switch"</span>, i), <span class="dv">1</span>, <span class="ot">Inf</span>, <span class="dt">mon=</span><span class="ot">FALSE</span>, <span class="dt">preemptive=</span>param[[<span class="st">"preemptive"</span>]]) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-36" data-line-number="36"><span class="st">      </span><span class="co"># n_switch generators of BH traffic</span></a>
+<a class="sourceLine" id="cb2-37" data-line-number="37"><span class="st">      </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="kw">paste0</span>(<span class="st">"BH_"</span>, i, <span class="st">"_"</span>), bh_traffic[[i]], <span class="cf">function</span>() <span class="kw">rexp</span>(<span class="dv">100</span>, BH_lambda))</a>
+<a class="sourceLine" id="cb2-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb2-39" data-line-number="39">  env <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-40" data-line-number="40"><span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>Tsim) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-41" data-line-number="41"><span class="st">    </span><span class="kw"><a href="../reference/wrap.html">wrap</a></span>()</a>
+<a class="sourceLine" id="cb2-42" data-line-number="42">}</a>
+<a class="sourceLine" id="cb2-43" data-line-number="43"></a>
+<a class="sourceLine" id="cb2-44" data-line-number="44"><span class="co"># grid of scenarios</span></a>
+<a class="sourceLine" id="cb2-45" data-line-number="45">cases &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">n_switch =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb2-46" data-line-number="46">                     <span class="dt">fh_prio =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb2-47" data-line-number="47">                     <span class="dt">preemptive =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>))</a>
+<a class="sourceLine" id="cb2-48" data-line-number="48"></a>
+<a class="sourceLine" id="cb2-49" data-line-number="49"><span class="co"># parallel simulation</span></a>
+<a class="sourceLine" id="cb2-50" data-line-number="50"><span class="kw">system.time</span>({</a>
+<a class="sourceLine" id="cb2-51" data-line-number="51">  envs &lt;-<span class="st"> </span>parallel<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="kw">split</span>(cases, <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(cases)), simulate,</a>
+<a class="sourceLine" id="cb2-52" data-line-number="52">                             <span class="dt">mc.cores=</span><span class="kw">nrow</span>(cases), <span class="dt">mc.set.seed=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb2-53" data-line-number="53">})</a></code></pre></div>
 <p>Finally, the information is extracted, summarised and represented in a few lines of code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-
-bp.vals &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.95</span>)) {
-  r &lt;-<span class="st"> </span><span class="kw">quantile</span>(x, <span class="dt">probs=</span>probs, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-  <span class="kw">names</span>(r) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"ymin"</span>, <span class="st">"lower"</span>, <span class="st">"middle"</span>, <span class="st">"upper"</span>, <span class="st">"ymax"</span>)
-  r
-}
-
-arrivals &lt;-<span class="st"> </span>envs <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">left_join</span>(<span class="kw">rowid_to_column</span>(cases, <span class="st">"replication"</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(fh_prio<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>preemptive<span class="op">==</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/batch.html">separate</a></span>(name, <span class="kw">c</span>(<span class="st">"Flow"</span>, <span class="st">"index"</span>, <span class="st">"n"</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time,
-         <span class="dt">waiting_time =</span> total_time <span class="op">-</span><span class="st"> </span>activity_time,
-         <span class="dt">Queue =</span> forcats<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/forcats/topics/fct_recode">fct_recode</a></span>(<span class="kw">interaction</span>(fh_prio, preemptive),
-           <span class="st">"without SP"</span> =<span class="st"> "0.FALSE"</span>,
-           <span class="st">"with SP"</span> =<span class="st"> "1.FALSE"</span>,
-           <span class="st">"with SP &amp; preemption"</span> =<span class="st"> "1.TRUE"</span>))
-
-arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(n_switch <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># plot</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Queue, waiting_time<span class="op">*</span><span class="fl">1e9</span>, <span class="dt">color=</span>Flow)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data=</span>bp.vals, <span class="dt">geom=</span><span class="st">"boxplot"</span>, <span class="dt">position=</span><span class="st">"dodge"</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.justification=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">legend.position=</span><span class="kw">c</span>(.<span class="dv">02</span>, .<span class="dv">98</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">"Queueing Delay [ns]"</span>, <span class="dt">x =</span> <span class="kw">element_blank</span>())
-
-arrivals <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(Flow <span class="op">==</span><span class="st"> "FH"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># plot</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">factor</span>(n_switch), waiting_time<span class="op">*</span><span class="fl">1e9</span>, <span class="dt">color=</span>Queue)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data=</span>bp.vals, <span class="dt">geom=</span><span class="st">"boxplot"</span>, <span class="dt">position=</span><span class="st">"dodge"</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.justification=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">legend.position=</span><span class="kw">c</span>(.<span class="dv">02</span>, .<span class="dv">98</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">"Queueing Delay [ns]"</span>, <span class="dt">x =</span> <span class="st">"No. of switches"</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">bp.vals &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.95</span>)) {</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  r &lt;-<span class="st"> </span><span class="kw">quantile</span>(x, <span class="dt">probs=</span>probs, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="kw">names</span>(r) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"ymin"</span>, <span class="st">"lower"</span>, <span class="st">"middle"</span>, <span class="st">"upper"</span>, <span class="st">"ymax"</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  r</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">arrivals &lt;-<span class="st"> </span>envs <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="st">  </span><span class="kw">left_join</span>(<span class="kw">rowid_to_column</span>(cases, <span class="st">"replication"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(fh_prio<span class="op">==</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>preemptive<span class="op">==</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="../reference/batch.html">separate</a></span>(name, <span class="kw">c</span>(<span class="st">"Flow"</span>, <span class="st">"index"</span>, <span class="st">"n"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time,</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">         <span class="dt">waiting_time =</span> total_time <span class="op">-</span><span class="st"> </span>activity_time,</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">         <span class="dt">Queue =</span> forcats<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/forcats/topics/fct_recode">fct_recode</a></span>(<span class="kw">interaction</span>(fh_prio, preemptive),</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">           <span class="st">"without SP"</span> =<span class="st"> "0.FALSE"</span>,</a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">           <span class="st">"with SP"</span> =<span class="st"> "1.FALSE"</span>,</a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">           <span class="st">"with SP &amp; preemption"</span> =<span class="st"> "1.TRUE"</span>))</a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21">arrivals <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="st">  </span><span class="kw">filter</span>(n_switch <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="st">  </span><span class="co"># plot</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Queue, waiting_time<span class="op">*</span><span class="fl">1e9</span>, <span class="dt">color=</span>Flow)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data=</span>bp.vals, <span class="dt">geom=</span><span class="st">"boxplot"</span>, <span class="dt">position=</span><span class="st">"dodge"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.justification=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">legend.position=</span><span class="kw">c</span>(.<span class="dv">02</span>, <span class="fl">.98</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">"Queueing Delay [ns]"</span>, <span class="dt">x =</span> <span class="kw">element_blank</span>())</a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29">arrivals <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="st">  </span><span class="kw">filter</span>(Flow <span class="op">==</span><span class="st"> "FH"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="st">  </span><span class="co"># plot</span></a>
+<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">factor</span>(n_switch), waiting_time<span class="op">*</span><span class="fl">1e9</span>, <span class="dt">color=</span>Queue)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-33" data-line-number="33"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data=</span>bp.vals, <span class="dt">geom=</span><span class="st">"boxplot"</span>, <span class="dt">position=</span><span class="st">"dodge"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-34" data-line-number="34"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.justification=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">legend.position=</span><span class="kw">c</span>(.<span class="dv">02</span>, <span class="fl">.98</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-35" data-line-number="35"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">"Queueing Delay [ns]"</span>, <span class="dt">x =</span> <span class="st">"No. of switches"</span>)</a></code></pre></div>
 <div style="text-align:center">
 <p><img src="includes/5G-1-results-a.png" style="width:47.0%"><img src="includes/5G-1-results-b.png" style="width:47.0%"></p>
 </div>
@@ -287,191 +288,187 @@ arrivals <span class="op">%&gt;%</span>
 </ul>
 <p>In both cases, we analyze the upstream channel of a Time-Division Multiplexed Passive Optical Network (TDM-PON) providing broadband access to the residential users and the mobile users.</p>
 <div style="text-align:center">
-<div class="figure">
-<img src="includes/5G-2-scenario.png">
-</div>
+<p><img src="includes/5G-2-scenario.png"></p>
 </div>
 <p>These are the configuration parameters considered:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">C &lt;-<span class="st"> </span><span class="fl">1.25e9</span>                           <span class="co"># link capacity [bps]</span>
-Tg &lt;-<span class="st"> </span><span class="fl">1e-6</span>                            <span class="co"># guard time [s]</span>
-
-bytes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">576</span>, <span class="dv">1500</span>)             <span class="co"># traffic distribution</span>
-Weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="dv">12</span>            <span class="co">#</span>
-EX &lt;-<span class="st"> </span><span class="kw">sum</span>(Weights <span class="op">*</span><span class="st"> </span>(<span class="dv">8</span> <span class="op">*</span><span class="st"> </span>bytes <span class="op">/</span><span class="st"> </span>C))  <span class="co"># avg. interarrival time [s]</span>
-burst &lt;-<span class="st"> </span><span class="dv">20</span>                           <span class="co"># burst length [pkts]</span>
-
-ONU_lambda &lt;-<span class="st"> </span><span class="fl">20e6</span> <span class="op">/</span><span class="st"> </span>C <span class="op">/</span><span class="st"> </span>EX           <span class="co"># avg. rate per ONU [pkts/s]</span>
-SC_lambda &lt;-<span class="st"> </span><span class="fl">150e6</span> <span class="op">/</span><span class="st"> </span>C <span class="op">/</span><span class="st"> </span>EX           <span class="co"># avg. rate for the SC [pkts/s]</span>
-RRH_on &lt;-<span class="st"> </span><span class="dv">8</span> <span class="op">*</span><span class="st"> </span><span class="dv">6000</span> <span class="op">/</span><span class="st"> </span>C                <span class="co"># RRH on period [s]</span>
-RRH_period &lt;-<span class="st"> </span>RRH_on <span class="op">*</span><span class="st"> </span>C <span class="op">/</span><span class="st"> </span><span class="fl">720e6</span>      <span class="co"># RRH total period [s]</span>
-RRH_off &lt;-<span class="st"> </span>RRH_period <span class="op">-</span><span class="st"> </span>RRH_on        <span class="co"># RRH off period [s]</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">C &lt;-<span class="st"> </span><span class="fl">1.25e9</span>                           <span class="co"># link capacity [bps]</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">Tg &lt;-<span class="st"> </span><span class="fl">1e-6</span>                            <span class="co"># guard time [s]</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">bytes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">576</span>, <span class="dv">1500</span>)             <span class="co"># traffic distribution</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">Weights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="dv">12</span>            <span class="co">#</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">EX &lt;-<span class="st"> </span><span class="kw">sum</span>(Weights <span class="op">*</span><span class="st"> </span>(<span class="dv">8</span> <span class="op">*</span><span class="st"> </span>bytes <span class="op">/</span><span class="st"> </span>C))  <span class="co"># avg. interarrival time [s]</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">burst &lt;-<span class="st"> </span><span class="dv">20</span>                           <span class="co"># burst length [pkts]</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">ONU_lambda &lt;-<span class="st"> </span><span class="fl">20e6</span> <span class="op">/</span><span class="st"> </span>C <span class="op">/</span><span class="st"> </span>EX           <span class="co"># avg. rate per ONU [pkts/s]</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">SC_lambda &lt;-<span class="st"> </span><span class="fl">150e6</span> <span class="op">/</span><span class="st"> </span>C <span class="op">/</span><span class="st"> </span>EX           <span class="co"># avg. rate for the SC [pkts/s]</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">RRH_on &lt;-<span class="st"> </span><span class="dv">8</span> <span class="op">*</span><span class="st"> </span><span class="dv">6000</span> <span class="op">/</span><span class="st"> </span>C                <span class="co"># RRH on period [s]</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">RRH_period &lt;-<span class="st"> </span>RRH_on <span class="op">*</span><span class="st"> </span>C <span class="op">/</span><span class="st"> </span><span class="fl">720e6</span>      <span class="co"># RRH total period [s]</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">RRH_off &lt;-<span class="st"> </span>RRH_period <span class="op">-</span><span class="st"> </span>RRH_on        <span class="co"># RRH off period [s]</span></a></code></pre></div>
 <p>The model is defined and encapsulated into the <code>simulate</code> function. Then, several scenarios with different parameters are defined in <code>cases</code>, which can be run in parallel:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># helper function: round-robin-based selection of ONUs</span>
-cyclic_counter &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
-  n &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(n)
-  i &lt;-<span class="st"> </span><span class="dv">1</span>
-  <span class="cf">function</span>(op) {
-    <span class="cf">if</span> (<span class="op">!</span><span class="kw">missing</span>(op)) {
-      i &lt;&lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span>op
-      <span class="cf">if</span> (i <span class="op">&gt;</span><span class="st"> </span>n) i &lt;&lt;-<span class="st"> </span><span class="dv">1</span>
-      <span class="cf">else</span> <span class="cf">if</span> (i <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>) i &lt;&lt;-<span class="st"> </span>n
-    }
-    i
-  }
-}
-
-<span class="co"># helper function: generator of packet sizes of n packets</span>
-gen_pkts &lt;-<span class="st"> </span><span class="cf">function</span>(n) <span class="kw">sample</span>(bytes<span class="op">*</span><span class="dv">8</span><span class="op">/</span>C, <span class="dt">size=</span>n, <span class="dt">prob=</span>Weights, <span class="dt">replace=</span><span class="ot">TRUE</span>)
-
-<span class="co"># helper function: double-exponential generator of interarrival times</span>
-gen_exp &lt;-<span class="st"> </span><span class="cf">function</span>(lambda, burst) <span class="cf">function</span>()
-  <span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="kw">rexp</span>(<span class="dv">100</span><span class="op">/</span>burst, lambda<span class="op">/</span>burst), <span class="cf">function</span>(i) <span class="kw">c</span>(i, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">rpois</span>(<span class="dv">1</span>, burst)))))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
-
-<span class="kw">set.seed</span>(<span class="dv">1234</span>)
-
-<span class="co"># parametrized simulation function</span>
-<span class="co"># - param[["scenario"]] is the scenario identifier (A=small cell, B=RRH)</span>
-<span class="co"># - param[["ONU_n"]] is the number of ONUs</span>
-<span class="co"># - param[["limit"]] is the max. transmission window</span>
-simulate &lt;-<span class="st"> </span><span class="cf">function</span>(param) {
-
-  <span class="co"># global variables</span>
-  lambda &lt;-<span class="st"> </span><span class="kw">rep</span>(ONU_lambda, param[[<span class="st">"ONU_n"</span>]])
-  limit &lt;-<span class="st"> </span><span class="kw">rep</span>(param[[<span class="st">"limit"</span>]], param[[<span class="st">"ONU_n"</span>]]) <span class="op">*</span><span class="st"> </span><span class="dv">8</span> <span class="op">/</span><span class="st"> </span>C
-  <span class="cf">if</span> (param[[<span class="st">"scenario"</span>]] <span class="op">==</span><span class="st"> "A"</span>) {
-    param[[<span class="st">"ONU_n"</span>]] &lt;-<span class="st"> </span>param[[<span class="st">"ONU_n"</span>]] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
-    lambda &lt;-<span class="st"> </span><span class="kw">c</span>(lambda, SC_lambda)
-    limit &lt;-<span class="st"> </span><span class="kw">c</span>(limit, <span class="ot">Inf</span>)
-    tx_t &lt;-<span class="st"> </span>RRH_on <span class="op">+</span><span class="st"> </span>Tg <span class="op">+</span><span class="st"> </span>Tg <span class="op">*</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span>param[[<span class="st">"ONU_n"</span>]]
-  } <span class="cf">else</span> {
-    Tg_n &lt;-<span class="st"> </span>RRH_off <span class="op">%/%</span><span class="st"> </span>Tg <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
-    Tg_i &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>Tg_n, <span class="dt">length.out=</span>param[[<span class="st">"ONU_n"</span>]]<span class="op">+</span><span class="dv">1</span>)
-    period_i &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span><span class="op">:</span>param[[<span class="st">"ONU_n"</span>]], <span class="dt">each=</span>Tg_n, <span class="dt">length.out=</span>param[[<span class="st">"ONU_n"</span>]]<span class="op">+</span><span class="dv">1</span>)
-    tx_t &lt;-<span class="st"> </span>RRH_on <span class="op">+</span><span class="st"> </span>RRH_period <span class="op">*</span><span class="st"> </span>period_i <span class="op">+</span><span class="st"> </span>Tg <span class="op">*</span><span class="st"> </span>Tg_i
-  }
-  eq_pkts &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">list</span>(<span class="ot">NULL</span>), param[[<span class="st">"ONU_n"</span>]])
-  tx_pkts &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">list</span>(<span class="ot">NULL</span>), param[[<span class="st">"ONU_n"</span>]])
-  t_head &lt;-<span class="st"> </span><span class="kw">tail</span>(tx_t, <span class="dv">1</span>)
-  onu_i &lt;-<span class="st"> </span><span class="kw">cyclic_counter</span>(param[[<span class="st">"ONU_n"</span>]])
-  remaining &lt;-<span class="st"> </span><span class="ot">Inf</span>
-
-  <span class="co"># DBA logic</span>
-  set_next_window &lt;-<span class="st"> </span><span class="cf">function</span>() {
-    <span class="co"># time until the next RRH_on</span>
-    <span class="cf">if</span> (param[[<span class="st">"scenario"</span>]] <span class="op">==</span><span class="st"> "B"</span>)
-      remaining &lt;-<span class="st"> </span>(t_head <span class="op">%/%</span><span class="st"> </span>RRH_period <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>RRH_period <span class="op">-</span><span class="st"> </span>t_head
-    <span class="co"># generate new pkt lengths</span>
-    pkts &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_capacity.html">get_queue_count</a></span>(env, <span class="kw">paste0</span>(<span class="st">"ONU"</span>, <span class="kw">onu_i</span>()))
-    eq_pkts[[<span class="kw">onu_i</span>()]] &lt;&lt;-<span class="st"> </span><span class="kw">c</span>(eq_pkts[[<span class="kw">onu_i</span>()]], <span class="kw">gen_pkts</span>(pkts <span class="op">-</span><span class="st"> </span><span class="kw">length</span>(eq_pkts[[<span class="kw">onu_i</span>()]])))
-    <span class="co"># reserve the next transmission window</span>
-    eq_cumsum &lt;-<span class="st"> </span><span class="kw">cumsum</span>(eq_pkts[[<span class="kw">onu_i</span>()]])
-    n &lt;-<span class="st"> </span><span class="kw">sum</span>(eq_cumsum <span class="op">&lt;=</span><span class="st"> </span><span class="kw">min</span>(limit[[<span class="kw">onu_i</span>()]], remaining <span class="op">-</span><span class="st"> </span>Tg))
-    <span class="cf">if</span> ((pkts <span class="op">&amp;&amp;</span><span class="st"> </span><span class="op">!</span>n) <span class="op">||</span><span class="st"> </span>(remaining <span class="op">&lt;=</span><span class="st"> </span>Tg)) {
-      <span class="co"># go past the next RRH_on</span>
-      t_head &lt;&lt;-<span class="st"> </span>t_head <span class="op">+</span><span class="st"> </span>remaining <span class="op">+</span><span class="st"> </span>RRH_on <span class="op">+</span><span class="st"> </span>Tg
-      n &lt;-<span class="st"> </span><span class="kw">sum</span>(eq_cumsum <span class="op">&lt;=</span><span class="st"> </span><span class="kw">min</span>(limit[[<span class="kw">onu_i</span>()]], RRH_off <span class="op">-</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>Tg))
-    }
-    tx_pkts[[<span class="kw">onu_i</span>()]] &lt;&lt;-<span class="st"> </span><span class="kw">head</span>(eq_pkts[[<span class="kw">onu_i</span>()]], n)
-    eq_pkts[[<span class="kw">onu_i</span>()]] &lt;&lt;-<span class="st"> </span><span class="kw">tail</span>(eq_pkts[[<span class="kw">onu_i</span>()]], <span class="op">-</span>n)
-    tx_t[[<span class="kw">onu_i</span>()]] &lt;&lt;-<span class="st"> </span>t_head
-    t_head &lt;&lt;-<span class="st"> </span>t_head <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>(tx_pkts[[<span class="kw">onu_i</span>()]]) <span class="op">+</span><span class="st"> </span>Tg
-    index &lt;&lt;-<span class="st"> </span><span class="dv">0</span>
-    tx_t[[<span class="kw">onu_i</span>(<span class="dv">1</span>)]] <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/now.html">now</a></span>(env)
-  }
-
-  <span class="co"># list of ONU_n trajectories, one per ONU</span>
-  ONUs &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span>param[[<span class="st">"ONU_n"</span>]], <span class="cf">function</span>(i) {
-    <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="kw">paste0</span>(<span class="st">"ONU"</span>, i)) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/set_capacity.html">set_capacity</a></span>(<span class="kw">paste0</span>(<span class="st">"ONU"</span>, i), <span class="dv">0</span>) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"link"</span>) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() {
-        index &lt;&lt;-<span class="st"> </span>index <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
-        tx_pkts[[i]][index]
-      }) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"link"</span>) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="kw">paste0</span>(<span class="st">"ONU"</span>, i))
-  })
-
-  <span class="co"># OLT logic</span>
-  OLT &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
-<span class="st">    </span>simmer<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/select">select</a></span>(<span class="cf">function</span>() <span class="kw">paste0</span>(<span class="st">"ONU"</span>, <span class="kw">onu_i</span>())) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"ONU"</span>, <span class="cf">function</span>() <span class="kw">onu_i</span>()) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/set_capacity.html">set_capacity_selected</a></span>(<span class="cf">function</span>() <span class="kw">length</span>(tx_pkts[[<span class="kw">onu_i</span>()]])) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">sum</span>(tx_pkts[[<span class="kw">onu_i</span>()]])) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(set_next_window) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dt">amount=</span><span class="dv">6</span>, <span class="dt">times=</span><span class="ot">Inf</span>)
-
-  <span class="co"># RRH logic</span>
-  RRH &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"link"</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(RRH_on) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"link"</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(RRH_off) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dt">amount=</span><span class="dv">4</span>, <span class="dt">times=</span><span class="ot">Inf</span>)
-
-  <span class="co"># simulation environment</span>
-  env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="co"># the fiber link as a resource</span>
-<span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"link"</span>, <span class="dv">1</span>, <span class="ot">Inf</span>)
-
-  <span class="cf">if</span> (param[[<span class="st">"scenario"</span>]] <span class="op">==</span><span class="st"> "B"</span>)
-    <span class="co"># RRH worker</span>
-    env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"RRH_"</span>, RRH, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>))
-
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>param[[<span class="st">"ONU_n"</span>]])
-    env <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="co"># ONU_n resources, one per ONU</span>
-<span class="st">      </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="kw">paste0</span>(<span class="st">"ONU"</span>, i), <span class="dv">0</span>, <span class="ot">Inf</span>) <span class="op">%&gt;%</span>
-<span class="st">      </span><span class="co"># ONU_n traffic generators, one per ONU</span>
-<span class="st">      </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="kw">paste0</span>(<span class="st">"ONU_"</span>, i, <span class="st">"_"</span>), ONUs[[i]], <span class="kw">gen_exp</span>(lambda[i], burst))
-
-  env <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="co"># OLT worker</span>
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"token_"</span>, OLT, <span class="kw"><a href="../reference/at.html">at</a></span>(RRH_on <span class="op">+</span><span class="st"> </span>Tg), <span class="dt">mon=</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span><span class="fl">1e5</span><span class="op">/</span><span class="kw">sum</span>(lambda)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/wrap.html">wrap</a></span>()
-}
-
-<span class="co"># grid of scenarios</span>
-cases &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">scenario =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">"A"</span>, <span class="dv">4</span>), <span class="kw">rep</span>(<span class="st">"B"</span>, <span class="dv">1</span>)),
-                    <span class="dt">ONU_n =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">31</span>, <span class="dv">4</span>), <span class="kw">rep</span>(<span class="dv">7</span>, <span class="dv">1</span>)),
-                    <span class="dt">limit =</span> <span class="kw">c</span>(<span class="ot">Inf</span>, <span class="dv">1500</span>, <span class="dv">3000</span>, <span class="dv">6000</span>, <span class="ot">Inf</span>))
-
-<span class="co"># parallel simulation</span>
-<span class="kw">system.time</span>({
-  envs &lt;-<span class="st"> </span>parallel<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="kw">split</span>(cases, <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(cases)), simulate,
-                             <span class="dt">mc.cores=</span><span class="kw">nrow</span>(cases), <span class="dt">mc.set.seed=</span><span class="ot">FALSE</span>)
-})</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># helper function: round-robin-based selection of ONUs</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">cyclic_counter &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(n)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  i &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="cf">function</span>(op) {</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="cf">if</span> (<span class="op">!</span><span class="kw">missing</span>(op)) {</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">      i &lt;&lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span>op</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">      <span class="cf">if</span> (i <span class="op">&gt;</span><span class="st"> </span>n) i &lt;&lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">      <span class="cf">else</span> <span class="cf">if</span> (i <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>) i &lt;&lt;-<span class="st"> </span>n</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">    }</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">    i</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">  }</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">}</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co"># helper function: generator of packet sizes of n packets</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">gen_pkts &lt;-<span class="st"> </span><span class="cf">function</span>(n) <span class="kw">sample</span>(bytes<span class="op">*</span><span class="dv">8</span><span class="op">/</span>C, <span class="dt">size=</span>n, <span class="dt">prob=</span>Weights, <span class="dt">replace=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co"># helper function: double-exponential generator of interarrival times</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">gen_exp &lt;-<span class="st"> </span><span class="cf">function</span>(lambda, burst) <span class="cf">function</span>()</a>
+<a class="sourceLine" id="cb5-20" data-line-number="20">  <span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="kw">rexp</span>(<span class="dv">100</span><span class="op">/</span>burst, lambda<span class="op">/</span>burst), <span class="cf">function</span>(i) <span class="kw">c</span>(i, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">rpois</span>(<span class="dv">1</span>, burst)))))</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(simmer)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">set.seed</span>(<span class="dv">1234</span>)</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co"># parametrized simulation function</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co"># - param[["scenario"]] is the scenario identifier (A=small cell, B=RRH)</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co"># - param[["ONU_n"]] is the number of ONUs</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co"># - param[["limit"]] is the max. transmission window</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">simulate &lt;-<span class="st"> </span><span class="cf">function</span>(param) {</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">  <span class="co"># global variables</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">  lambda &lt;-<span class="st"> </span><span class="kw">rep</span>(ONU_lambda, param[[<span class="st">"ONU_n"</span>]])</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">  limit &lt;-<span class="st"> </span><span class="kw">rep</span>(param[[<span class="st">"limit"</span>]], param[[<span class="st">"ONU_n"</span>]]) <span class="op">*</span><span class="st"> </span><span class="dv">8</span> <span class="op">/</span><span class="st"> </span>C</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">  <span class="cf">if</span> (param[[<span class="st">"scenario"</span>]] <span class="op">==</span><span class="st"> "A"</span>) {</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">    param[[<span class="st">"ONU_n"</span>]] &lt;-<span class="st"> </span>param[[<span class="st">"ONU_n"</span>]] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">    lambda &lt;-<span class="st"> </span><span class="kw">c</span>(lambda, SC_lambda)</a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">    limit &lt;-<span class="st"> </span><span class="kw">c</span>(limit, <span class="ot">Inf</span>)</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">    tx_t &lt;-<span class="st"> </span>RRH_on <span class="op">+</span><span class="st"> </span>Tg <span class="op">+</span><span class="st"> </span>Tg <span class="op">*</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span>param[[<span class="st">"ONU_n"</span>]]</a>
+<a class="sourceLine" id="cb6-19" data-line-number="19">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">    Tg_n &lt;-<span class="st"> </span>RRH_off <span class="op">%/%</span><span class="st"> </span>Tg <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">    Tg_i &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>Tg_n, <span class="dt">length.out=</span>param[[<span class="st">"ONU_n"</span>]]<span class="op">+</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb6-22" data-line-number="22">    period_i &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span><span class="op">:</span>param[[<span class="st">"ONU_n"</span>]], <span class="dt">each=</span>Tg_n, <span class="dt">length.out=</span>param[[<span class="st">"ONU_n"</span>]]<span class="op">+</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb6-23" data-line-number="23">    tx_t &lt;-<span class="st"> </span>RRH_on <span class="op">+</span><span class="st"> </span>RRH_period <span class="op">*</span><span class="st"> </span>period_i <span class="op">+</span><span class="st"> </span>Tg <span class="op">*</span><span class="st"> </span>Tg_i</a>
+<a class="sourceLine" id="cb6-24" data-line-number="24">  }</a>
+<a class="sourceLine" id="cb6-25" data-line-number="25">  eq_pkts &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">list</span>(<span class="ot">NULL</span>), param[[<span class="st">"ONU_n"</span>]])</a>
+<a class="sourceLine" id="cb6-26" data-line-number="26">  tx_pkts &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">list</span>(<span class="ot">NULL</span>), param[[<span class="st">"ONU_n"</span>]])</a>
+<a class="sourceLine" id="cb6-27" data-line-number="27">  t_head &lt;-<span class="st"> </span><span class="kw">tail</span>(tx_t, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb6-28" data-line-number="28">  onu_i &lt;-<span class="st"> </span><span class="kw">cyclic_counter</span>(param[[<span class="st">"ONU_n"</span>]])</a>
+<a class="sourceLine" id="cb6-29" data-line-number="29">  remaining &lt;-<span class="st"> </span><span class="ot">Inf</span></a>
+<a class="sourceLine" id="cb6-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb6-31" data-line-number="31">  <span class="co"># DBA logic</span></a>
+<a class="sourceLine" id="cb6-32" data-line-number="32">  set_next_window &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb6-33" data-line-number="33">    <span class="co"># time until the next RRH_on</span></a>
+<a class="sourceLine" id="cb6-34" data-line-number="34">    <span class="cf">if</span> (param[[<span class="st">"scenario"</span>]] <span class="op">==</span><span class="st"> "B"</span>)</a>
+<a class="sourceLine" id="cb6-35" data-line-number="35">      remaining &lt;-<span class="st"> </span>(t_head <span class="op">%/%</span><span class="st"> </span>RRH_period <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>RRH_period <span class="op">-</span><span class="st"> </span>t_head</a>
+<a class="sourceLine" id="cb6-36" data-line-number="36">    <span class="co"># generate new pkt lengths</span></a>
+<a class="sourceLine" id="cb6-37" data-line-number="37">    pkts &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_capacity.html">get_queue_count</a></span>(env, <span class="kw">paste0</span>(<span class="st">"ONU"</span>, <span class="kw">onu_i</span>()))</a>
+<a class="sourceLine" id="cb6-38" data-line-number="38">    eq_pkts[[<span class="kw">onu_i</span>()]] &lt;&lt;-<span class="st"> </span><span class="kw">c</span>(eq_pkts[[<span class="kw">onu_i</span>()]], <span class="kw">gen_pkts</span>(pkts <span class="op">-</span><span class="st"> </span><span class="kw">length</span>(eq_pkts[[<span class="kw">onu_i</span>()]])))</a>
+<a class="sourceLine" id="cb6-39" data-line-number="39">    <span class="co"># reserve the next transmission window</span></a>
+<a class="sourceLine" id="cb6-40" data-line-number="40">    eq_cumsum &lt;-<span class="st"> </span><span class="kw">cumsum</span>(eq_pkts[[<span class="kw">onu_i</span>()]])</a>
+<a class="sourceLine" id="cb6-41" data-line-number="41">    n &lt;-<span class="st"> </span><span class="kw">sum</span>(eq_cumsum <span class="op">&lt;=</span><span class="st"> </span><span class="kw">min</span>(limit[[<span class="kw">onu_i</span>()]], remaining <span class="op">-</span><span class="st"> </span>Tg))</a>
+<a class="sourceLine" id="cb6-42" data-line-number="42">    <span class="cf">if</span> ((pkts <span class="op">&amp;&amp;</span><span class="st"> </span><span class="op">!</span>n) <span class="op">||</span><span class="st"> </span>(remaining <span class="op">&lt;=</span><span class="st"> </span>Tg)) {</a>
+<a class="sourceLine" id="cb6-43" data-line-number="43">      <span class="co"># go past the next RRH_on</span></a>
+<a class="sourceLine" id="cb6-44" data-line-number="44">      t_head &lt;&lt;-<span class="st"> </span>t_head <span class="op">+</span><span class="st"> </span>remaining <span class="op">+</span><span class="st"> </span>RRH_on <span class="op">+</span><span class="st"> </span>Tg</a>
+<a class="sourceLine" id="cb6-45" data-line-number="45">      n &lt;-<span class="st"> </span><span class="kw">sum</span>(eq_cumsum <span class="op">&lt;=</span><span class="st"> </span><span class="kw">min</span>(limit[[<span class="kw">onu_i</span>()]], RRH_off <span class="op">-</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>Tg))</a>
+<a class="sourceLine" id="cb6-46" data-line-number="46">    }</a>
+<a class="sourceLine" id="cb6-47" data-line-number="47">    tx_pkts[[<span class="kw">onu_i</span>()]] &lt;&lt;-<span class="st"> </span><span class="kw">head</span>(eq_pkts[[<span class="kw">onu_i</span>()]], n)</a>
+<a class="sourceLine" id="cb6-48" data-line-number="48">    eq_pkts[[<span class="kw">onu_i</span>()]] &lt;&lt;-<span class="st"> </span><span class="kw">tail</span>(eq_pkts[[<span class="kw">onu_i</span>()]], <span class="op">-</span>n)</a>
+<a class="sourceLine" id="cb6-49" data-line-number="49">    tx_t[[<span class="kw">onu_i</span>()]] &lt;&lt;-<span class="st"> </span>t_head</a>
+<a class="sourceLine" id="cb6-50" data-line-number="50">    t_head &lt;&lt;-<span class="st"> </span>t_head <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>(tx_pkts[[<span class="kw">onu_i</span>()]]) <span class="op">+</span><span class="st"> </span>Tg</a>
+<a class="sourceLine" id="cb6-51" data-line-number="51">    index &lt;&lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb6-52" data-line-number="52">    tx_t[[<span class="kw">onu_i</span>(<span class="dv">1</span>)]] <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/now.html">now</a></span>(env)</a>
+<a class="sourceLine" id="cb6-53" data-line-number="53">  }</a>
+<a class="sourceLine" id="cb6-54" data-line-number="54"></a>
+<a class="sourceLine" id="cb6-55" data-line-number="55">  <span class="co"># list of ONU_n trajectories, one per ONU</span></a>
+<a class="sourceLine" id="cb6-56" data-line-number="56">  ONUs &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span>param[[<span class="st">"ONU_n"</span>]], <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb6-57" data-line-number="57">    <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-58" data-line-number="58"><span class="st">      </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="kw">paste0</span>(<span class="st">"ONU"</span>, i)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-59" data-line-number="59"><span class="st">      </span><span class="kw"><a href="../reference/set_capacity.html">set_capacity</a></span>(<span class="kw">paste0</span>(<span class="st">"ONU"</span>, i), <span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-60" data-line-number="60"><span class="st">      </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"link"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-61" data-line-number="61"><span class="st">      </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb6-62" data-line-number="62">        index &lt;&lt;-<span class="st"> </span>index <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-63" data-line-number="63">        tx_pkts[[i]][index]</a>
+<a class="sourceLine" id="cb6-64" data-line-number="64">      }) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-65" data-line-number="65"><span class="st">      </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"link"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-66" data-line-number="66"><span class="st">      </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="kw">paste0</span>(<span class="st">"ONU"</span>, i))</a>
+<a class="sourceLine" id="cb6-67" data-line-number="67">  })</a>
+<a class="sourceLine" id="cb6-68" data-line-number="68"></a>
+<a class="sourceLine" id="cb6-69" data-line-number="69">  <span class="co"># OLT logic</span></a>
+<a class="sourceLine" id="cb6-70" data-line-number="70">  OLT &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-71" data-line-number="71"><span class="st">    </span>simmer<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/select">select</a></span>(<span class="cf">function</span>() <span class="kw">paste0</span>(<span class="st">"ONU"</span>, <span class="kw">onu_i</span>())) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-72" data-line-number="72"><span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"ONU"</span>, <span class="cf">function</span>() <span class="kw">onu_i</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-73" data-line-number="73"><span class="st">    </span><span class="kw"><a href="../reference/set_capacity.html">set_capacity_selected</a></span>(<span class="cf">function</span>() <span class="kw">length</span>(tx_pkts[[<span class="kw">onu_i</span>()]])) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-74" data-line-number="74"><span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">sum</span>(tx_pkts[[<span class="kw">onu_i</span>()]])) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-75" data-line-number="75"><span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(set_next_window) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-76" data-line-number="76"><span class="st">    </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dt">amount=</span><span class="dv">6</span>, <span class="dt">times=</span><span class="ot">Inf</span>)</a>
+<a class="sourceLine" id="cb6-77" data-line-number="77"></a>
+<a class="sourceLine" id="cb6-78" data-line-number="78">  <span class="co"># RRH logic</span></a>
+<a class="sourceLine" id="cb6-79" data-line-number="79">  RRH &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-80" data-line-number="80"><span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"link"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-81" data-line-number="81"><span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(RRH_on) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-82" data-line-number="82"><span class="st">    </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"link"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-83" data-line-number="83"><span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(RRH_off) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-84" data-line-number="84"><span class="st">    </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dt">amount=</span><span class="dv">4</span>, <span class="dt">times=</span><span class="ot">Inf</span>)</a>
+<a class="sourceLine" id="cb6-85" data-line-number="85"></a>
+<a class="sourceLine" id="cb6-86" data-line-number="86">  <span class="co"># simulation environment</span></a>
+<a class="sourceLine" id="cb6-87" data-line-number="87">  env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-88" data-line-number="88"><span class="st">    </span><span class="co"># the fiber link as a resource</span></a>
+<a class="sourceLine" id="cb6-89" data-line-number="89"><span class="st">    </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"link"</span>, <span class="dv">1</span>, <span class="ot">Inf</span>)</a>
+<a class="sourceLine" id="cb6-90" data-line-number="90"></a>
+<a class="sourceLine" id="cb6-91" data-line-number="91">  <span class="cf">if</span> (param[[<span class="st">"scenario"</span>]] <span class="op">==</span><span class="st"> "B"</span>)</a>
+<a class="sourceLine" id="cb6-92" data-line-number="92">    <span class="co"># RRH worker</span></a>
+<a class="sourceLine" id="cb6-93" data-line-number="93">    env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"RRH_"</span>, RRH, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb6-94" data-line-number="94"></a>
+<a class="sourceLine" id="cb6-95" data-line-number="95">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>param[[<span class="st">"ONU_n"</span>]])</a>
+<a class="sourceLine" id="cb6-96" data-line-number="96">    env <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-97" data-line-number="97"><span class="st">      </span><span class="co"># ONU_n resources, one per ONU</span></a>
+<a class="sourceLine" id="cb6-98" data-line-number="98"><span class="st">      </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="kw">paste0</span>(<span class="st">"ONU"</span>, i), <span class="dv">0</span>, <span class="ot">Inf</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-99" data-line-number="99"><span class="st">      </span><span class="co"># ONU_n traffic generators, one per ONU</span></a>
+<a class="sourceLine" id="cb6-100" data-line-number="100"><span class="st">      </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="kw">paste0</span>(<span class="st">"ONU_"</span>, i, <span class="st">"_"</span>), ONUs[[i]], <span class="kw">gen_exp</span>(lambda[i], burst))</a>
+<a class="sourceLine" id="cb6-101" data-line-number="101"></a>
+<a class="sourceLine" id="cb6-102" data-line-number="102">  env <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-103" data-line-number="103"><span class="st">    </span><span class="co"># OLT worker</span></a>
+<a class="sourceLine" id="cb6-104" data-line-number="104"><span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"token_"</span>, OLT, <span class="kw"><a href="../reference/at.html">at</a></span>(RRH_on <span class="op">+</span><span class="st"> </span>Tg), <span class="dt">mon=</span><span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-105" data-line-number="105"><span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span><span class="fl">1e5</span><span class="op">/</span><span class="kw">sum</span>(lambda)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-106" data-line-number="106"><span class="st">    </span><span class="kw"><a href="../reference/wrap.html">wrap</a></span>()</a>
+<a class="sourceLine" id="cb6-107" data-line-number="107">}</a>
+<a class="sourceLine" id="cb6-108" data-line-number="108"></a>
+<a class="sourceLine" id="cb6-109" data-line-number="109"><span class="co"># grid of scenarios</span></a>
+<a class="sourceLine" id="cb6-110" data-line-number="110">cases &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">scenario =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">"A"</span>, <span class="dv">4</span>), <span class="kw">rep</span>(<span class="st">"B"</span>, <span class="dv">1</span>)),</a>
+<a class="sourceLine" id="cb6-111" data-line-number="111">                    <span class="dt">ONU_n =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">31</span>, <span class="dv">4</span>), <span class="kw">rep</span>(<span class="dv">7</span>, <span class="dv">1</span>)),</a>
+<a class="sourceLine" id="cb6-112" data-line-number="112">                    <span class="dt">limit =</span> <span class="kw">c</span>(<span class="ot">Inf</span>, <span class="dv">1500</span>, <span class="dv">3000</span>, <span class="dv">6000</span>, <span class="ot">Inf</span>))</a>
+<a class="sourceLine" id="cb6-113" data-line-number="113"></a>
+<a class="sourceLine" id="cb6-114" data-line-number="114"><span class="co"># parallel simulation</span></a>
+<a class="sourceLine" id="cb6-115" data-line-number="115"><span class="kw">system.time</span>({</a>
+<a class="sourceLine" id="cb6-116" data-line-number="116">  envs &lt;-<span class="st"> </span>parallel<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="kw">split</span>(cases, <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(cases)), simulate,</a>
+<a class="sourceLine" id="cb6-117" data-line-number="117">                             <span class="dt">mc.cores=</span><span class="kw">nrow</span>(cases), <span class="dt">mc.set.seed=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb6-118" data-line-number="118">})</a></code></pre></div>
 <p>Finally, the information is extracted, summarised and represented in a few lines of code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-
-bp.vals &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.95</span>)) {
-  r &lt;-<span class="st"> </span><span class="kw">quantile</span>(x, <span class="dt">probs=</span>probs, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-  <span class="kw">names</span>(r) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"ymin"</span>, <span class="st">"lower"</span>, <span class="st">"middle"</span>, <span class="st">"upper"</span>, <span class="st">"ymax"</span>)
-  r
-}
-
-envs <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">left_join</span>(<span class="kw">rowid_to_column</span>(cases, <span class="st">"replication"</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">scenario =</span> forcats<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/forcats/topics/fct_recode">fct_recode</a></span>(
-    scenario, <span class="st">`</span><span class="dt">SmallCell + 31 ONUs</span><span class="st">`</span>=<span class="st">"A"</span>, <span class="st">`</span><span class="dt">RRH + 7 ONUs</span><span class="st">`</span>=<span class="st">"B"</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/batch.html">separate</a></span>(name, <span class="kw">c</span>(<span class="st">"flow"</span>, <span class="st">"index"</span>, <span class="st">"n"</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">flow =</span> <span class="kw">if_else</span>(index <span class="op">==</span><span class="st"> </span>ONU_n<span class="op">+</span><span class="dv">1</span>, <span class="st">"SmallCell"</span>, flow)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time,
-         <span class="dt">waiting_time =</span> total_time <span class="op">-</span><span class="st"> </span>activity_time) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># plot</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(forcats<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/forcats/topics/fct_rev">fct_rev</a></span>(flow), waiting_time<span class="op">*</span><span class="fl">1e6</span>, <span class="dt">color=</span><span class="kw">factor</span>(limit))) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_grid</span>(<span class="op">~</span>scenario, <span class="dt">scales=</span><span class="st">"free"</span>, <span class="dt">space=</span><span class="st">"free"</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data=</span>bp.vals, <span class="dt">geom=</span><span class="st">"boxplot"</span>, <span class="dt">position=</span><span class="st">"dodge"</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.justification=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">legend.position=</span><span class="kw">c</span>(.<span class="dv">02</span>, .<span class="dv">98</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">"Queueing Delay ["</span>, mu, <span class="st">"s]"</span>)), <span class="dt">x=</span><span class="kw">element_blank</span>(), <span class="dt">color=</span><span class="st">"Limit [bytes]"</span>)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">bp.vals &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.95</span>)) {</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">  r &lt;-<span class="st"> </span><span class="kw">quantile</span>(x, <span class="dt">probs=</span>probs, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">  <span class="kw">names</span>(r) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"ymin"</span>, <span class="st">"lower"</span>, <span class="st">"middle"</span>, <span class="st">"upper"</span>, <span class="st">"ymax"</span>)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">  r</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">envs <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="st">  </span><span class="kw">left_join</span>(<span class="kw">rowid_to_column</span>(cases, <span class="st">"replication"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">scenario =</span> forcats<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/forcats/topics/fct_recode">fct_recode</a></span>(</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">    scenario, <span class="st">`</span><span class="dt">SmallCell + 31 ONUs</span><span class="st">`</span>=<span class="st">"A"</span>, <span class="st">`</span><span class="dt">RRH + 7 ONUs</span><span class="st">`</span>=<span class="st">"B"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="../reference/batch.html">separate</a></span>(name, <span class="kw">c</span>(<span class="st">"flow"</span>, <span class="st">"index"</span>, <span class="st">"n"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">flow =</span> <span class="kw">if_else</span>(index <span class="op">==</span><span class="st"> </span>ONU_n<span class="op">+</span><span class="dv">1</span>, <span class="st">"SmallCell"</span>, flow)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time,</a>
+<a class="sourceLine" id="cb7-17" data-line-number="17">         <span class="dt">waiting_time =</span> total_time <span class="op">-</span><span class="st"> </span>activity_time) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="st">  </span><span class="co"># plot</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(forcats<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/forcats/topics/fct_rev">fct_rev</a></span>(flow), waiting_time<span class="op">*</span><span class="fl">1e6</span>, <span class="dt">color=</span><span class="kw">factor</span>(limit))) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="st">  </span><span class="kw">facet_grid</span>(<span class="op">~</span>scenario, <span class="dt">scales=</span><span class="st">"free"</span>, <span class="dt">space=</span><span class="st">"free"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data=</span>bp.vals, <span class="dt">geom=</span><span class="st">"boxplot"</span>, <span class="dt">position=</span><span class="st">"dodge"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.justification=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">legend.position=</span><span class="kw">c</span>(.<span class="dv">02</span>, <span class="fl">.98</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">"Queueing Delay ["</span>, mu, <span class="st">"s]"</span>)), <span class="dt">x=</span><span class="kw">element_blank</span>(), <span class="dt">color=</span><span class="st">"Limit [bytes]"</span>)</a></code></pre></div>
 <div style="text-align:center">
-<div class="figure">
-<img src="includes/5G-2-results.png">
-</div>
+<p><img src="includes/5G-2-results.png"></p>
 </div>
 </div>
 <div id="energy-efficiency-for-massive-iot" class="section level2">
@@ -479,130 +476,126 @@ envs <span class="op">%&gt;%</span>
 <a href="#energy-efficiency-for-massive-iot" class="anchor"></a>Energy efficiency for massive IoT</h2>
 <p>Finally, we consider the case of a massive Internet-of-Things (mIoT) scenario, a use case for Long Term Evolution (LTE) and next-generation 5G networks, as defined by the Third Generation Partnership Project (3GPP). As the figure (left) illustrates, we consider a single LTE macrocell in a dense urban area. The buildings in the cell area are populated with <span class="math inline">\(N\)</span> smart meters (for electricity, gas and water), and each meter operates independently as a Narrowband IoT (NB-IoT) device. The devices’ behaviour is modeled following the diagram depicted in the figure (right).</p>
 <div style="text-align:center">
-<div class="figure">
-<img src="includes/5G-3-scenario.png">
-</div>
+<p><img src="includes/5G-3-scenario.png"></p>
 </div>
 <p>These are the configuration parameters considered:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="dv">9</span>            <span class="co"># number of RA retries</span>
-Ps &lt;-<span class="st"> </span><span class="fl">0.03</span>        <span class="co"># sleep power consumption [mW]</span>
-Pi &lt;-<span class="st"> </span><span class="dv">10</span>          <span class="co"># idle power consumption [mW]</span>
-Prx &lt;-<span class="st"> </span><span class="dv">100</span>        <span class="co"># rx power consumption [mW]</span>
-Prbp &lt;-<span class="st"> </span><span class="fl">32.18</span>     <span class="co"># tx power consumption per RB pair [mW]</span>
-Ppre &lt;-<span class="st"> </span><span class="fl">32.18</span>     <span class="co"># preamble tx power consumption [mW]</span>
-
-Tbpre &lt;-<span class="st"> </span><span class="fl">0.0025</span>   <span class="co"># time before preamble transmission [s]</span>
-Tpre &lt;-<span class="st"> </span><span class="fl">0.0014</span>    <span class="co"># time for preamble transmission [s]</span>
-Trarx &lt;-<span class="st"> </span><span class="fl">0.01</span>     <span class="co"># rx time to perform RA [s]</span>
-Tcrcp &lt;-<span class="st"> </span><span class="fl">0.016</span>    <span class="co"># sum of processing delays to establish a connection [s]</span>
-Twait &lt;-<span class="st"> </span><span class="fl">0.054</span>    <span class="co"># S1 processing and transfer delay [s]</span>
-
-Brbp &lt;-<span class="st"> </span><span class="dv">36</span>        <span class="co"># bytes per RB pair (QPSK modulation)</span>
-Breq &lt;-<span class="st"> </span><span class="dv">7</span>         <span class="co"># RRC request message size (bytes)</span>
-Bcompcp &lt;-<span class="st"> </span><span class="dv">129</span>    <span class="co"># RRC setup complete + NAS control plane SR + data for CP (bytes)</span>
-
-Tra &lt;-<span class="st"> </span>Tbpre <span class="op">+</span><span class="st"> </span>Trarx <span class="op">+</span><span class="st"> </span>Tpre
-Pra &lt;-<span class="st"> </span>(Tbpre<span class="op">*</span>Pi <span class="op">+</span><span class="st"> </span>Trarx<span class="op">*</span>Prx <span class="op">+</span><span class="st"> </span>Tpre<span class="op">*</span>Ppre) <span class="op">/</span><span class="st"> </span>Tra
-rbs &lt;-<span class="st"> </span>(<span class="kw">ceiling</span>(Breq<span class="op">/</span>Brbp) <span class="op">+</span><span class="st"> </span><span class="kw">ceiling</span>(Bcompcp<span class="op">/</span>Brbp)) <span class="op">*</span><span class="st"> </span><span class="fl">1e-3</span>
-Ttx &lt;-<span class="st"> </span>Tcrcp <span class="op">+</span><span class="st"> </span>rbs <span class="op">+</span><span class="st"> </span>Twait
-Ptx &lt;-<span class="st"> </span>(Tcrcp<span class="op">*</span>Prx <span class="op">+</span><span class="st"> </span>rbs<span class="op">*</span>Prbp <span class="op">+</span><span class="st"> </span>Twait<span class="op">*</span>Prx) <span class="op">/</span><span class="st"> </span>Ttx
-
-tx_period &lt;-<span class="st"> </span><span class="dv">3600</span> <span class="co"># time between transmissions (seconds)</span>
-Tsim &lt;-<span class="st"> </span><span class="dv">24</span><span class="op">*</span><span class="dv">3600</span>   <span class="co"># simulation time (seconds)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">m &lt;-<span class="st"> </span><span class="dv">9</span>            <span class="co"># number of RA retries</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">Ps &lt;-<span class="st"> </span><span class="fl">0.03</span>        <span class="co"># sleep power consumption [mW]</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">Pi &lt;-<span class="st"> </span><span class="dv">10</span>          <span class="co"># idle power consumption [mW]</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">Prx &lt;-<span class="st"> </span><span class="dv">100</span>        <span class="co"># rx power consumption [mW]</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">Prbp &lt;-<span class="st"> </span><span class="fl">32.18</span>     <span class="co"># tx power consumption per RB pair [mW]</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">Ppre &lt;-<span class="st"> </span><span class="fl">32.18</span>     <span class="co"># preamble tx power consumption [mW]</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">Tbpre &lt;-<span class="st"> </span><span class="fl">0.0025</span>   <span class="co"># time before preamble transmission [s]</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">Tpre &lt;-<span class="st"> </span><span class="fl">0.0014</span>    <span class="co"># time for preamble transmission [s]</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">Trarx &lt;-<span class="st"> </span><span class="fl">0.01</span>     <span class="co"># rx time to perform RA [s]</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">Tcrcp &lt;-<span class="st"> </span><span class="fl">0.016</span>    <span class="co"># sum of processing delays to establish a connection [s]</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">Twait &lt;-<span class="st"> </span><span class="fl">0.054</span>    <span class="co"># S1 processing and transfer delay [s]</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14">Brbp &lt;-<span class="st"> </span><span class="dv">36</span>        <span class="co"># bytes per RB pair (QPSK modulation)</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15">Breq &lt;-<span class="st"> </span><span class="dv">7</span>         <span class="co"># RRC request message size (bytes)</span></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16">Bcompcp &lt;-<span class="st"> </span><span class="dv">129</span>    <span class="co"># RRC setup complete + NAS control plane SR + data for CP (bytes)</span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18">Tra &lt;-<span class="st"> </span>Tbpre <span class="op">+</span><span class="st"> </span>Trarx <span class="op">+</span><span class="st"> </span>Tpre</a>
+<a class="sourceLine" id="cb8-19" data-line-number="19">Pra &lt;-<span class="st"> </span>(Tbpre<span class="op">*</span>Pi <span class="op">+</span><span class="st"> </span>Trarx<span class="op">*</span>Prx <span class="op">+</span><span class="st"> </span>Tpre<span class="op">*</span>Ppre) <span class="op">/</span><span class="st"> </span>Tra</a>
+<a class="sourceLine" id="cb8-20" data-line-number="20">rbs &lt;-<span class="st"> </span>(<span class="kw">ceiling</span>(Breq<span class="op">/</span>Brbp) <span class="op">+</span><span class="st"> </span><span class="kw">ceiling</span>(Bcompcp<span class="op">/</span>Brbp)) <span class="op">*</span><span class="st"> </span><span class="fl">1e-3</span></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21">Ttx &lt;-<span class="st"> </span>Tcrcp <span class="op">+</span><span class="st"> </span>rbs <span class="op">+</span><span class="st"> </span>Twait</a>
+<a class="sourceLine" id="cb8-22" data-line-number="22">Ptx &lt;-<span class="st"> </span>(Tcrcp<span class="op">*</span>Prx <span class="op">+</span><span class="st"> </span>rbs<span class="op">*</span>Prbp <span class="op">+</span><span class="st"> </span>Twait<span class="op">*</span>Prx) <span class="op">/</span><span class="st"> </span>Ttx</a>
+<a class="sourceLine" id="cb8-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb8-24" data-line-number="24">tx_period &lt;-<span class="st"> </span><span class="dv">3600</span> <span class="co"># time between transmissions (seconds)</span></a>
+<a class="sourceLine" id="cb8-25" data-line-number="25">Tsim &lt;-<span class="st"> </span><span class="dv">24</span><span class="op">*</span><span class="dv">3600</span>   <span class="co"># simulation time (seconds)</span></a></code></pre></div>
 <p>The model is defined and encapsulated into the <code>simulate</code> function. Then, several scenarios with different parameters are defined in <code>cases</code>, which can be run in parallel:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simmer)
-
-<span class="kw">set.seed</span>(<span class="dv">1234</span>)
-
-<span class="co"># parametrized simulation function</span>
-<span class="co"># - param[["meter_n"]] is the number of IoT devices in the cell</span>
-<span class="co"># - param[["backoff"]] is the backoff time</span>
-simulate &lt;-<span class="st"> </span><span class="cf">function</span>(param) {
-
-  <span class="co"># identifiers for RA preambles</span>
-  preambles &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"preamble_"</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">54</span>)
-
-  <span class="co"># IoT device logic</span>
-  meter &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/send.html">trap</a></span>(<span class="st">"reading"</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="co"># sleep</span>
-<span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"P"</span>, <span class="dv">0</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/send.html">wait</a></span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, param[[<span class="st">"backoff"</span>]]), <span class="dv">3</span>)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="co"># ra start</span>
-<span class="st">    </span>simmer<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/select">select</a></span>(preambles, <span class="dt">policy=</span><span class="st">"random"</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize_selected</a></span>(
-      <span class="dt">continue=</span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>),
-      <span class="co"># ra &amp; tx</span>
-      <span class="dt">post.seize=</span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"P"</span>, Pra) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(Tra) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw"><a href="../reference/seize.html">release_selected</a></span>() <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"P"</span>, Ptx) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(Ttx),
-      <span class="co"># ra &amp; backoff &amp; retry</span>
-      <span class="dt">reject=</span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"P"</span>, Pra) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(Tra) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"P"</span>, Pi) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="fl">1e-3</span>) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dv">6</span>, <span class="dt">times=</span>m)
-    ) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dv">5</span>, <span class="dt">times=</span><span class="ot">Inf</span>)
-
-  <span class="co"># trigger a reading for all the meters every tx_period</span>
-  trigger &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(tx_period) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="st">"reading"</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dv">2</span>, <span class="dt">times=</span><span class="ot">Inf</span>)
-
-  <span class="co"># simulation environment</span>
-  env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="co"># IoT device workers</span>
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"meter_"</span>, meter, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">rep</span>(<span class="dv">0</span>, param[[<span class="st">"meter_n"</span>]])), <span class="dt">mon=</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="co"># trigger worker</span>
-<span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"trigger_"</span>, trigger, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon=</span><span class="dv">0</span>)
-
-  <span class="cf">for</span> (i <span class="cf">in</span> preambles)
-    <span class="co"># one resource per preamble</span>
-    env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(i, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dt">mon=</span><span class="ot">FALSE</span>)
-
-  env <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>Tsim) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="../reference/wrap.html">wrap</a></span>()
-}
-
-<span class="co"># grid of scenarios</span>
-cases &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">meter_n =</span> <span class="kw">c</span>(<span class="fl">5e3</span>, <span class="fl">1e4</span>, <span class="fl">3e4</span>), <span class="dt">backoff =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">60</span>))
-
-<span class="co"># parallel simulation</span>
-<span class="kw">system.time</span>({
-  envs &lt;-<span class="st"> </span>parallel<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="kw">split</span>(cases, <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(cases)), simulate,
-                             <span class="dt">mc.cores=</span><span class="kw">nrow</span>(cases), <span class="dt">mc.set.seed=</span><span class="ot">FALSE</span>)
-})</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">library</span>(simmer)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">set.seed</span>(<span class="dv">1234</span>)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co"># parametrized simulation function</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co"># - param[["meter_n"]] is the number of IoT devices in the cell</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co"># - param[["backoff"]] is the backoff time</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">simulate &lt;-<span class="st"> </span><span class="cf">function</span>(param) {</a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10">  <span class="co"># identifiers for RA preambles</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11">  preambles &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"preamble_"</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">54</span>)</a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13">  <span class="co"># IoT device logic</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14">  meter &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="st">    </span><span class="kw"><a href="../reference/send.html">trap</a></span>(<span class="st">"reading"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="st">    </span><span class="co"># sleep</span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"P"</span>, <span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="st">    </span><span class="kw"><a href="../reference/send.html">wait</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, param[[<span class="st">"backoff"</span>]]), <span class="dv">3</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="st">    </span><span class="co"># ra start</span></a>
+<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="st">    </span>simmer<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/select">select</a></span>(preambles, <span class="dt">policy=</span><span class="st">"random"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-22" data-line-number="22"><span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize_selected</a></span>(</a>
+<a class="sourceLine" id="cb9-23" data-line-number="23">      <span class="dt">continue=</span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb9-24" data-line-number="24">      <span class="co"># ra &amp; tx</span></a>
+<a class="sourceLine" id="cb9-25" data-line-number="25">      <span class="dt">post.seize=</span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-26" data-line-number="26"><span class="st">        </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"P"</span>, Pra) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-27" data-line-number="27"><span class="st">        </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(Tra) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-28" data-line-number="28"><span class="st">        </span><span class="kw"><a href="../reference/seize.html">release_selected</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-29" data-line-number="29"><span class="st">        </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"P"</span>, Ptx) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-30" data-line-number="30"><span class="st">        </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(Ttx),</a>
+<a class="sourceLine" id="cb9-31" data-line-number="31">      <span class="co"># ra &amp; backoff &amp; retry</span></a>
+<a class="sourceLine" id="cb9-32" data-line-number="32">      <span class="dt">reject=</span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-33" data-line-number="33"><span class="st">        </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"P"</span>, Pra) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-34" data-line-number="34"><span class="st">        </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(Tra) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-35" data-line-number="35"><span class="st">        </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"P"</span>, Pi) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-36" data-line-number="36"><span class="st">        </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="fl">1e-3</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-37" data-line-number="37"><span class="st">        </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dv">6</span>, <span class="dt">times=</span>m)</a>
+<a class="sourceLine" id="cb9-38" data-line-number="38">    ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-39" data-line-number="39"><span class="st">    </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dv">5</span>, <span class="dt">times=</span><span class="ot">Inf</span>)</a>
+<a class="sourceLine" id="cb9-40" data-line-number="40"></a>
+<a class="sourceLine" id="cb9-41" data-line-number="41">  <span class="co"># trigger a reading for all the meters every tx_period</span></a>
+<a class="sourceLine" id="cb9-42" data-line-number="42">  trigger &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-43" data-line-number="43"><span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(tx_period) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-44" data-line-number="44"><span class="st">    </span><span class="kw"><a href="../reference/send.html">send</a></span>(<span class="st">"reading"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-45" data-line-number="45"><span class="st">    </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dv">2</span>, <span class="dt">times=</span><span class="ot">Inf</span>)</a>
+<a class="sourceLine" id="cb9-46" data-line-number="46"></a>
+<a class="sourceLine" id="cb9-47" data-line-number="47">  <span class="co"># simulation environment</span></a>
+<a class="sourceLine" id="cb9-48" data-line-number="48">  env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-49" data-line-number="49"><span class="st">    </span><span class="co"># IoT device workers</span></a>
+<a class="sourceLine" id="cb9-50" data-line-number="50"><span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"meter_"</span>, meter, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">rep</span>(<span class="dv">0</span>, param[[<span class="st">"meter_n"</span>]])), <span class="dt">mon=</span><span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-51" data-line-number="51"><span class="st">    </span><span class="co"># trigger worker</span></a>
+<a class="sourceLine" id="cb9-52" data-line-number="52"><span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"trigger_"</span>, trigger, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon=</span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb9-53" data-line-number="53"></a>
+<a class="sourceLine" id="cb9-54" data-line-number="54">  <span class="cf">for</span> (i <span class="cf">in</span> preambles)</a>
+<a class="sourceLine" id="cb9-55" data-line-number="55">    <span class="co"># one resource per preamble</span></a>
+<a class="sourceLine" id="cb9-56" data-line-number="56">    env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(i, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dt">mon=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb9-57" data-line-number="57"></a>
+<a class="sourceLine" id="cb9-58" data-line-number="58">  env <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-59" data-line-number="59"><span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span>Tsim) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-60" data-line-number="60"><span class="st">    </span><span class="kw"><a href="../reference/wrap.html">wrap</a></span>()</a>
+<a class="sourceLine" id="cb9-61" data-line-number="61">}</a>
+<a class="sourceLine" id="cb9-62" data-line-number="62"></a>
+<a class="sourceLine" id="cb9-63" data-line-number="63"><span class="co"># grid of scenarios</span></a>
+<a class="sourceLine" id="cb9-64" data-line-number="64">cases &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">meter_n =</span> <span class="kw">c</span>(<span class="fl">5e3</span>, <span class="fl">1e4</span>, <span class="fl">3e4</span>), <span class="dt">backoff =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">60</span>))</a>
+<a class="sourceLine" id="cb9-65" data-line-number="65"></a>
+<a class="sourceLine" id="cb9-66" data-line-number="66"><span class="co"># parallel simulation</span></a>
+<a class="sourceLine" id="cb9-67" data-line-number="67"><span class="kw">system.time</span>({</a>
+<a class="sourceLine" id="cb9-68" data-line-number="68">  envs &lt;-<span class="st"> </span>parallel<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="kw">split</span>(cases, <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(cases)), simulate,</a>
+<a class="sourceLine" id="cb9-69" data-line-number="69">                             <span class="dt">mc.cores=</span><span class="kw">nrow</span>(cases), <span class="dt">mc.set.seed=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb9-70" data-line-number="70">})</a></code></pre></div>
 <p>Finally, the information is extracted, summarised and represented in a few lines of code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-
-bp.vals &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.95</span>)) {
-  r &lt;-<span class="st"> </span><span class="kw">quantile</span>(x, <span class="dt">probs=</span>probs, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-  <span class="kw">names</span>(r) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"ymin"</span>, <span class="st">"lower"</span>, <span class="st">"middle"</span>, <span class="st">"upper"</span>, <span class="st">"ymax"</span>)
-  r
-}
-
-envs <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(replication, name) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">dE =</span> <span class="kw">sum</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">head</span>(value, <span class="op">-</span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">diff</span>(time)))) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">left_join</span>(<span class="kw">rowid_to_column</span>(cases, <span class="st">"replication"</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># plot</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">factor</span>(meter_n), dE<span class="op">*</span>tx_period<span class="op">/</span>Tsim, <span class="dt">color=</span><span class="kw">factor</span>(backoff))) <span class="op">+</span>
-<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data=</span>bp.vals, <span class="dt">geom=</span><span class="st">"boxplot"</span>, <span class="dt">position=</span><span class="st">"dodge"</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.justification=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">legend.position=</span><span class="kw">c</span>(.<span class="dv">02</span>, .<span class="dv">98</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">"Energy per Tx [mJ]"</span>, <span class="dt">x=</span><span class="st">"No. of devices"</span>, <span class="dt">color=</span><span class="st">"Backoff window [s]"</span>)</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">bp.vals &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.95</span>)) {</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">  r &lt;-<span class="st"> </span><span class="kw">quantile</span>(x, <span class="dt">probs=</span>probs, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">  <span class="kw">names</span>(r) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"ymin"</span>, <span class="st">"lower"</span>, <span class="st">"middle"</span>, <span class="st">"upper"</span>, <span class="st">"ymax"</span>)</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">  r</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">envs <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="st">  </span><span class="kw">group_by</span>(replication, name) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">dE =</span> <span class="kw">sum</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">head</span>(value, <span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">diff</span>(time)))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="st">  </span><span class="kw">left_join</span>(<span class="kw">rowid_to_column</span>(cases, <span class="st">"replication"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="st">  </span><span class="co"># plot</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">factor</span>(meter_n), dE<span class="op">*</span>tx_period<span class="op">/</span>Tsim, <span class="dt">color=</span><span class="kw">factor</span>(backoff))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data=</span>bp.vals, <span class="dt">geom=</span><span class="st">"boxplot"</span>, <span class="dt">position=</span><span class="st">"dodge"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.justification=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">legend.position=</span><span class="kw">c</span>(.<span class="dv">02</span>, <span class="fl">.98</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">"Energy per Tx [mJ]"</span>, <span class="dt">x=</span><span class="st">"No. of devices"</span>, <span class="dt">color=</span><span class="st">"Backoff window [s]"</span>)</a></code></pre></div>
 <div style="text-align:center">
-<div class="figure">
-<img src="includes/5G-3-results.png">
-</div>
+<p><img src="includes/5G-3-results.png"></p>
 </div>
 </div>
   </div>
