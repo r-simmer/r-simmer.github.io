@@ -41,6 +41,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="../index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">
     <span class="fa fa-gears"></span>
      
@@ -60,7 +66,7 @@
       <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/simmer-02-jss.pdf">JSS paper</a>
+      <a href="../articles/simmer-02-jss.pdf">JSS paper (PDF)</a>
     </li>
     <li>
       <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
@@ -144,7 +150,7 @@
       <h1>The Bank Tutorial: Part I</h1>
                         <h4 class="author">Duncan Garmonsway</h4>
             
-            <h4 class="date">2018-07-20</h4>
+            <h4 class="date">2018-07-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-04-bank-1.Rmd"><code>vignettes/simmer-04-bank-1.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-04-bank-1.Rmd</code></div>
@@ -318,19 +324,19 @@
 <a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co"># Check that the modifications worked</span></a>
 <a class="sourceLine" id="cb5-21" data-line-number="21">Klaus</a>
 <a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; trajectory: Customer's path, 3 activities</span></a>
-<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt; { Activity: Log          | messagemessage, level: 0 }</span></a>
+<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt; { Activity: Log          | message: Here I am, level: 0 }</span></a>
 <a class="sourceLine" id="cb5-24" data-line-number="24"><span class="co">#&gt; { Activity: Timeout      | delay: 10 }</span></a>
-<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="co">#&gt; { Activity: Log          | messagemessage, level: 0 }</span></a>
+<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="co">#&gt; { Activity: Log          | message: I must lea..., level: 0 }</span></a>
 <a class="sourceLine" id="cb5-26" data-line-number="26">Tony</a>
 <a class="sourceLine" id="cb5-27" data-line-number="27"><span class="co">#&gt; trajectory: Customer's path, 3 activities</span></a>
-<a class="sourceLine" id="cb5-28" data-line-number="28"><span class="co">#&gt; { Activity: Log          | messagemessage, level: 0 }</span></a>
+<a class="sourceLine" id="cb5-28" data-line-number="28"><span class="co">#&gt; { Activity: Log          | message: Here I am, level: 0 }</span></a>
 <a class="sourceLine" id="cb5-29" data-line-number="29"><span class="co">#&gt; { Activity: Timeout      | delay: 7 }</span></a>
-<a class="sourceLine" id="cb5-30" data-line-number="30"><span class="co">#&gt; { Activity: Log          | messagemessage, level: 0 }</span></a>
+<a class="sourceLine" id="cb5-30" data-line-number="30"><span class="co">#&gt; { Activity: Log          | message: I must lea..., level: 0 }</span></a>
 <a class="sourceLine" id="cb5-31" data-line-number="31">Evelyn</a>
 <a class="sourceLine" id="cb5-32" data-line-number="32"><span class="co">#&gt; trajectory: Customer's path, 3 activities</span></a>
-<a class="sourceLine" id="cb5-33" data-line-number="33"><span class="co">#&gt; { Activity: Log          | messagemessage, level: 0 }</span></a>
+<a class="sourceLine" id="cb5-33" data-line-number="33"><span class="co">#&gt; { Activity: Log          | message: Here I am, level: 0 }</span></a>
 <a class="sourceLine" id="cb5-34" data-line-number="34"><span class="co">#&gt; { Activity: Timeout      | delay: 20 }</span></a>
-<a class="sourceLine" id="cb5-35" data-line-number="35"><span class="co">#&gt; { Activity: Log          | messagemessage, level: 0 }</span></a>
+<a class="sourceLine" id="cb5-35" data-line-number="35"><span class="co">#&gt; { Activity: Log          | message: I must lea..., level: 0 }</span></a>
 <a class="sourceLine" id="cb5-36" data-line-number="36"></a>
 <a class="sourceLine" id="cb5-37" data-line-number="37">bank &lt;-</a>
 <a class="sourceLine" id="cb5-38" data-line-number="38"><span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span></a>

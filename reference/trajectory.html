@@ -78,6 +78,12 @@ of available activities by category." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">
     <span class="fa fa-gears"></span>
      
@@ -97,7 +103,7 @@ of available activities by category." />
       <a href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
     </li>
     <li>
-      <a href="../articles/simmer-02-jss.pdf">JSS paper</a>
+      <a href="../articles/simmer-02-jss.pdf">JSS paper (PDF)</a>
     </li>
     <li>
       <a href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
@@ -250,21 +256,21 @@ of available activities by category.</p>
   <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"leaving!"</span>)
 <span class='no'>x</span></div><div class='output co'>#&gt; trajectory: my trajectory, 3 activities
-#&gt; { Activity: Log          | messagemessage, level: 0 }
+#&gt; { Activity: Log          | message: here I am!, level: 0 }
 #&gt; { Activity: Timeout      | delay: 5 }
-#&gt; { Activity: Log          | messagemessage, level: 0 }</div><div class='input'>
+#&gt; { Activity: Log          | message: leaving!, level: 0 }</div><div class='input'>
 <span class='co'>## join trajectories</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='join.html'>join</a></span>(<span class='no'>x</span>, <span class='no'>x</span>)
 
 <span class='co'>## extract and replace</span>
 <span class='no'>x</span>[<span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>4</span>)] <span class='kw'>&lt;-</span> <span class='no'>x</span>[<span class='fl'>2</span>]
 <span class='no'>x</span></div><div class='output co'>#&gt; trajectory: my trajectory, 6 activities
-#&gt; { Activity: Log          | messagemessage, level: 0 }
+#&gt; { Activity: Log          | message: here I am!, level: 0 }
 #&gt; { Activity: Timeout      | delay: 5 }
 #&gt; { Activity: Timeout      | delay: 5 }
 #&gt; { Activity: Timeout      | delay: 5 }
 #&gt; { Activity: Timeout      | delay: 5 }
-#&gt; { Activity: Log          | messagemessage, level: 0 }</div><div class='input'>
+#&gt; { Activity: Log          | message: leaving!, level: 0 }</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
