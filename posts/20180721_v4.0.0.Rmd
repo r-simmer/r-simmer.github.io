@@ -1,0 +1,73 @@
+---
+title: "simmer 4.0.0"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The 4.0.0 release of [simmer](http://r-simmer.org/), the Discrete-Event Simulator for R, is on CRAN under a new license: we decided to switch to GPL >= 2. Most notably in this major release, the C++ core has been refactorised and exposed under `inst/include`. This is not a big deal for most users, but it enables extensions. As an example of this, [`simmer.mon`](https://github.com/r-simmer/simmer.mon) is an experimental package that links to `simmer` and extends its monitoring facilities to provide a new DBI-based backend. Not a very efficient one, but it demonstrates how to extend the `simmer` core from another package.
+
+Exception handling has been remarkably improved. In previous releases, errors were reported to happen in the `run()` method, which is... everything that can happen, obviously. In this version, errors are catched and more information is provided, particularly about the simulation time, the arrival and the activity involved:
+
+```{r, error=TRUE}
+library(simmer)
+
+bad.traj <- trajectory() %>%
+  timeout(function() NA)
+
+simmer() %>%
+  add_generator("dummy", bad.traj, at(pi)) %>%
+  run()
+```
+
+Another improvement has to do with attributes. These are commonly used to build incremental indices, but some boilerplate was needed to initialise them. Now this is automatic (and configurable):
+
+```{r}
+index.traj <- trajectory() %>%
+  set_global("index", 1, mod="+", init=10)
+
+simmer() %>%
+  add_generator("dummy", index.traj, at(1:3), mon=2) %>%
+  run() %>%
+  get_mon_attributes()
+```
+
+Finally, the `log_` activity was created for occasional debugging, but we noticed that `simmer` users use it a lot more to know what is happening when they build models, but so much output is annoying when a model is complete. Therefore, we have implemented simulation-scoped logging levels to be able to turn on and off specific messages on demand:
+
+```{r}
+log.traj <- trajectory() %>%
+  log_("This will be always printed") %>% # level=0
+  log_("This can be disabled", level=1)
+
+simmer(log_level=1) %>%
+  add_generator("dummy", log.traj, at(pi)) %>%
+  run() %>% invisible()
+
+simmer() %>% # log_level=0
+  add_generator("dummy", log.traj, at(pi)) %>%
+  run() %>% invisible()
+```
+
+See below for a comprehensive list of changes.
+
+### New features:
+
+* The C++ core has been refactorised into a header-only library under `inst/include` (#147 closing #145). Therefore, from now on it is possible to extend the C++ API from another package by listing `simmer` under the `LinkingTo` field in the DESCRIPTION file.
+* New generic `monitor` constructor enables the development of new monitoring backends in other packages (179f656, as part of #147).
+* New simulation-scoped logging levels. The `log_` activity has a new argument `level` which determines whether the message is printed depending on a global `log_level` defined in the `simmer` constructor (#152).
+* `set_attribute` and `set_global` gain a new argument to automatically initialise new attributes (#157). Useful to update counters and indexes in a single line, without initialisation boilerplate.
+
+### Minor changes and fixes:
+
+* Enhanced exception handling, with more informative error messages (#148).
+* Refactorisation of the printing methods and associated code (#149).
+* Allow empty trajectories in sources and activities with sub-trajectories (#151 closing #150).
+* Enable `-DRCPP_PROTECTED_EVAL` (Rcpp >= 0.12.17.3), which provides fast evaluation of R expressions by leveraging the new stack unwinding protection API (R >= 3.5.0).
+* Replace backspace usage in vector's `ostream` method (2b2f43e).
+* Fix namespace clashes with `rlang` and `purrr` (#154).
