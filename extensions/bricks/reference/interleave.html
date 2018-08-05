@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wait a Number of Signals — wait_n • simmer.bricks</title>
+<title>Interleaved Resources — interleave • simmer.bricks</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,10 +30,12 @@
 
 
 
-<meta property="og:title" content="Wait a Number of Signals — wait_n" />
+<meta property="og:title" content="Interleaved Resources — interleave" />
 
-<meta property="og:description" content="These bricks encapsulate n stops: wait for a sequence of n
-signals. wait_until also traps and untraps the required signals." />
+<meta property="og:description" content="This brick encapsulates a chain of interleaved resources, i.e., the current
+resource is not released until the next one in the chain is available. An
+interesting property of such a pattern is that, if one resource is blocked for
+some reason, the whole chain stops." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -163,21 +165,21 @@ signals. wait_until also traps and untraps the required signals." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Wait a Number of Signals</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer.bricks/blob/master/R/wait_until.R'><code>R/wait_until.R</code></a></small>
-    <div class="hidden name"><code>wait_n.Rd</code></div>
+    <h1>Interleaved Resources</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer.bricks/blob/master/R/interleave.R'><code>R/interleave.R</code></a></small>
+    <div class="hidden name"><code>interleave.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These bricks encapsulate <code>n</code> stops: wait for a sequence of <code>n</code>
-signals. <code>wait_until</code> also traps and untraps the required signals.</p>
+    <p>This brick encapsulates a chain of interleaved resources, i.e., the current
+resource is not released until the next one in the chain is available. An
+interesting property of such a pattern is that, if one resource is blocked for
+some reason, the whole chain stops.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>wait_n</span>(<span class='no'>.trj</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-
-<span class='fu'>wait_until</span>(<span class='no'>.trj</span>, <span class='no'>signals</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>interleave</span>(<span class='no'>.trj</span>, <span class='no'>resources</span>, <span class='no'>task</span>, <span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,67 +189,76 @@ signals. <code>wait_until</code> also traps and untraps the required signals.</p
       <td><p>the trajectory object.</p></td>
     </tr>
     <tr>
-      <th>n</th>
-      <td><p>number of <code>wait</code> activities to chain.</p></td>
+      <th>resources</th>
+      <td><p>character vector of resource names.</p></td>
     </tr>
     <tr>
-      <th>signals</th>
-      <td><p>signal or list of signals, accepts either a string, a list of strings or a
-callable object (a function) which must return a string or a list of strings.</p></td>
+      <th>task</th>
+      <td><p>the timeout duration supplied by either passing a numeric or a
+callable object (a function) which must return a numeric (negative values are
+automatically coerced to positive).</p></td>
+    </tr>
+    <tr>
+      <th>amount</th>
+      <td><p>the amount to seize/release, accepts either a numeric or a callable
+object (a function) which must return a numeric.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>wait_n</code> returns <code>n</code> times <code><a href='http://www.rdocumentation.org/packages/simmer/topics/send'>wait</a></code>.
-<code>wait_until</code> also adds <code><a href='http://www.rdocumentation.org/packages/simmer/topics/send'>trap</a></code> and
-<code><a href='http://www.rdocumentation.org/packages/simmer/topics/send'>untrap</a></code> at the beginning and end, respectively,
-of the chain of <code>wait</code>s (see examples below).</p>
+    <p>Returns the following chain of activities: <code><a href='http://www.rdocumentation.org/packages/simmer/topics/seize'>seize</a></code>
+(1) &gt; <code><a href='http://www.rdocumentation.org/packages/simmer/topics/timeout'>timeout</a></code> &gt; [<code><a href='http://www.rdocumentation.org/packages/simmer/topics/seize'>seize</a></code> (token to 2)
+&gt; <code><a href='http://www.rdocumentation.org/packages/simmer/topics/seize'>release</a></code> (1) &gt; <code><a href='http://www.rdocumentation.org/packages/simmer/topics/seize'>seize</a></code> (2) &gt;
+<code><a href='http://www.rdocumentation.org/packages/simmer/topics/timeout'>timeout</a></code> &gt; <code><a href='http://www.rdocumentation.org/packages/simmer/topics/seize'>release</a></code> (2) &gt;
+<code><a href='http://www.rdocumentation.org/packages/simmer/topics/seize'>release</a></code> (token to 2) &gt; ... (repeat) ]
+(see examples below). Thus, the total number of activities appended is
+<code>length(resources) * 3 + (length(resources)-1) * 2</code>.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Both <code>task</code> and <code>amount</code> accept a list of values/functions,
+instead of a single one, that should be of the same length as <code>resources</code>,
+so that each value/function is applied to the resource of the same index.</p>
+<p>The transition to the second and subsequent resources is guarded by a token,
+an auxiliary resource whose capacity must be equal to the capacity + queue
+size of the guarded resource, and its queue size must be infinite. For example,
+if two resources are provided, <code>c("A", "B")</code>, the auxiliary resource will
+be named <code>"B_token"</code>. If <code>capacity=2</code> and <code>queue_size=1</code> for B,
+then <code>capacity=3</code> and <code>queue_size=Inf</code> must be the values for
+B_token. But note that the user is responsible for adding such an auxiliary
+resource to the simulation environment with the appropriate parameters.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## These are equivalent:</span>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>wait_n</span>(<span class='fl'>3</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 3 activities
-#&gt; { Activity: Wait         |  }
-#&gt; { Activity: Wait         |  }
-#&gt; { Activity: Wait         |  }</div><div class='input'>
+  <span class='fu'>interleave</span>(<span class='fu'>c</span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>), <span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>10</span>), <span class='fl'>1</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 8 activities
+#&gt; { Activity: Seize        | resource: A, amount: 1 }
+#&gt; { Activity: Timeout      | delay: 2 }
+#&gt; { Activity: Seize        | resource: B_token, amount: 1 }
+#&gt; { Activity: Release      | resource: A, amount: 1 }
+#&gt; { Activity: Seize        | resource: B, amount: 1 }
+#&gt; { Activity: Timeout      | delay: 10 }
+#&gt; { Activity: Release      | resource: B, amount: 1 }
+#&gt; { Activity: Release      | resource: B_token, amount: 1 }</div><div class='input'>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>wait</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>wait</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>wait</span>()</div><div class='output co'>#&gt; trajectory: anonymous, 3 activities
-#&gt; { Activity: Wait         |  }
-#&gt; { Activity: Wait         |  }
-#&gt; { Activity: Wait         |  }</div><div class='input'>
-<span class='co'>## These are equivalent:</span>
-<span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>wait_until</span>(<span class='st'>"green"</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 3 activities
-#&gt; { Activity: Trap         | signals: [green] }
-#&gt; { Activity: Wait         |  }
-#&gt; { Activity: UnTrap       | signals: [green] }</div><div class='input'>
-<span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>trap</span>(<span class='st'>"green"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>wait</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>untrap</span>(<span class='st'>"green"</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 3 activities
-#&gt; { Activity: Trap         | signals: [green] }
-#&gt; { Activity: Wait         |  }
-#&gt; { Activity: UnTrap       | signals: [green] }</div><div class='input'>
-<span class='co'>## These are equivalent:</span>
-<span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>wait_until</span>(<span class='fu'>c</span>(<span class='st'>"one"</span>, <span class='st'>"another"</span>), <span class='fl'>2</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 4 activities
-#&gt; { Activity: Trap         | signals: [one, another] }
-#&gt; { Activity: Wait         |  }
-#&gt; { Activity: Wait         |  }
-#&gt; { Activity: UnTrap       | signals: [one, another] }</div><div class='input'>
-<span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>trap</span>(<span class='fu'>c</span>(<span class='st'>"one"</span>, <span class='st'>"another"</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>wait</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>wait</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>untrap</span>(<span class='fu'>c</span>(<span class='st'>"one"</span>, <span class='st'>"another"</span>))</div><div class='output co'>#&gt; trajectory: anonymous, 4 activities
-#&gt; { Activity: Trap         | signals: [one, another] }
-#&gt; { Activity: Wait         |  }
-#&gt; { Activity: Wait         |  }
-#&gt; { Activity: UnTrap       | signals: [one, another] }</div><div class='input'>
+  <span class='fu'>seize</span>(<span class='st'>"A"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>timeout</span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>seize</span>(<span class='st'>"B_token"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>release</span>(<span class='st'>"A"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>seize</span>(<span class='st'>"B"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>timeout</span>(<span class='fl'>10</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>release</span>(<span class='st'>"B"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>release</span>(<span class='st'>"B_token"</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 8 activities
+#&gt; { Activity: Seize        | resource: A, amount: 1 }
+#&gt; { Activity: Timeout      | delay: 2 }
+#&gt; { Activity: Seize        | resource: B_token, amount: 1 }
+#&gt; { Activity: Release      | resource: A, amount: 1 }
+#&gt; { Activity: Seize        | resource: B, amount: 1 }
+#&gt; { Activity: Timeout      | delay: 10 }
+#&gt; { Activity: Release      | resource: B, amount: 1 }
+#&gt; { Activity: Release      | resource: B_token, amount: 1 }</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -256,6 +267,8 @@ of the chain of <code>wait</code>s (see examples below).</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

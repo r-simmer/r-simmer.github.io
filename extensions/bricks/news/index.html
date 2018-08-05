@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><span class="pkg">simmer.bricks</span>: Helper Methods for <span class="pkg">simmer</span> Trajectories — simmer.bricks-package • simmer.bricks</title>
+<title>Changelog • simmer.bricks</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,10 +30,7 @@
 
 
 
-<meta property="og:title" content="<span class="pkg">simmer.bricks</span>: Helper Methods for <span class="pkg">simmer</span> Trajectories — simmer.bricks-package" />
-
-<meta property="og:description" content="Provides wrappers for common activity patterns in simmer trajectories." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -59,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -162,37 +159,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><span class="pkg">simmer.bricks</span>: Helper Methods for <span class="pkg">simmer</span> Trajectories</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer.bricks/blob/master/R/simmer.bricks.R'><code>R/simmer.bricks.R</code></a></small>
-    <div class="hidden name"><code>simmer.bricks-package.Rd</code></div>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/r-simmer/simmer.bricks/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    
-    <p>Provides wrappers for common activity patterns in <span class="pkg">simmer</span> trajectories.</p>
-    
-    </div>
-
-        
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><span class="pkg">simmer</span>'s homepage <a href='http://r-simmer.org'>http://r-simmer.org</a> and
-GitHub repository <a href='https://github.com/r-simmer/simmer.bricks'>https://github.com/r-simmer/simmer.bricks</a>.</p></div>
-    
-
+    <div id="simmer-bricks-0-2-0" class="section level1">
+<h1 class="page-header">
+<a href="#simmer-bricks-0-2-0" class="anchor"></a>simmer.bricks 0.2.0<small> 2018-08-05 </small>
+</h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>Implement <code><a href="../reference/delayed_release.html">delayed_release_selected()</a></code> (<a href='https://github.com/r-simmer/simmer.bricks/issues/9'>#9</a> addressing <a href='https://github.com/r-simmer/simmer.bricks/issues/4'>#4</a>).</li>
+<li>New <code><a href="../reference/interleave.html">interleave()</a></code> brick to set up interleaved resources (<a href='https://github.com/r-simmer/simmer.bricks/issues/11'>#11</a> addressing <a href='https://github.com/r-simmer/simmer.bricks/issues/7'>#7</a>).</li>
+</ul>
+</div>
+<div id="minor-changes-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
+<ul>
+<li>Fix <code><a href="../reference/do_parallel.html">do_parallel()</a></code> to also accept lists of trajectories as input (<a href='https://github.com/r-simmer/simmer.bricks/issues/6'>#6</a>).</li>
+<li>Simplify <code><a href="../reference/delayed_release.html">delayed_release()</a></code> interface (as part of <a href='https://github.com/r-simmer/simmer.bricks/issues/9'>#9</a>).</li>
+<li>Change <code><a href="../reference/do_parallel.html">do_parallel()</a></code> interface: move the environment after the dots to force the user to name it (<a href='https://github.com/r-simmer/simmer.bricks/issues/10'>#10</a>).</li>
+</ul>
+</div>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
-    <h2>Author</h2>
-    
-Iñaki Ucar
-
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#simmer-bricks-0-2-0">0.2.0</a></li>
+      </ul>
+    </div>
   </div>
+
 </div>
 
       <footer>

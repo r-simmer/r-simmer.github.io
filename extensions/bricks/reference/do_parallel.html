@@ -21,17 +21,23 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
 <meta property="og:title" content="Perform Parallel Tasks — do_parallel" />
 
 <meta property="og:description" content="This brick encapsulates the activity of n workers running parallel
 sub-trajectories." />
 <meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -41,16 +47,14 @@ sub-trajectories." />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115358925-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-115358925-1', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-115358925-1');
 </script>
 
   </head>
@@ -66,15 +70,17 @@ sub-trajectories." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">simmer.bricks</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">simmer.bricks</a>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="http://r-simmer.org">
+  <a href=".././">
     <span class="fa fa-home"></span>
      
-    Home
   </a>
 </li>
 <li>
@@ -105,6 +111,23 @@ sub-trajectories." />
     News
   </a>
 </li>
+<li>
+  <a href="https://github.com/r-simmer/simmer.bricks">
+    <span class="fa fa-github"></span>
+     
+    GitHub
+  </a>
+</li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="http://r-simmer.org">
+    <span class="fa fa-coffee"></span>
+     
+    simmer
+  </a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
@@ -130,14 +153,6 @@ sub-trajectories." />
 </li>
       </ul>
       
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/r-simmer/simmer.bricks">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -145,20 +160,24 @@ sub-trajectories." />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Perform Parallel Tasks</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer.bricks/blob/master/R/do_parallel.R'><code>R/do_parallel.R</code></a></small>
+    <div class="hidden name"><code>do_parallel.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This brick encapsulates the activity of <code>n</code> workers running parallel
 sub-trajectories.</p>
     
+    </div>
 
-    <pre class="usage"><span class='fu'>do_parallel</span>(<span class='no'>.trj</span>, <span class='no'>.env</span>, <span class='no'>...</span>, <span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>mon_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>do_parallel</span>(<span class='no'>.trj</span>, <span class='no'>...</span>, <span class='no'>.env</span>, <span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>mon_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -166,12 +185,12 @@ sub-trajectories.</p>
       <td><p>the trajectory object.</p></td>
     </tr>
     <tr>
-      <th>.env</th>
-      <td><p>the simulation environment.</p></td>
+      <th>...</th>
+      <td><p>sub-trajectories or list of sub-trajectories to parallelise.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>parallel sub-trajectories.</p></td>
+      <th>.env</th>
+      <td><p>the simulation environment.</p></td>
     </tr>
     <tr>
       <th>wait</th>
@@ -205,22 +224,22 @@ line per clone.</p></td>
 <span class='co'>## These are equivalent:</span>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>do_parallel</span>(
-    <span class='no'>env</span>, <span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
     <span class='no'>task.1</span>,
-    <span class='no'>task.2</span>
+    <span class='no'>task.2</span>,
+    <span class='kw'>.env</span> <span class='kw'>=</span> <span class='no'>env</span>, <span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
   )</div><div class='output co'>#&gt; trajectory: anonymous, 10 activities
 #&gt; { Activity: Clone        | n: 3 }
 #&gt;   Fork 1, continue,  trajectory: original, 4 activities
-#&gt;   { Activity: Trap         | signals: 0x629e020 }
+#&gt;   { Activity: Trap         | signals: function() }
 #&gt;   { Activity: Wait         |  }
 #&gt;   { Activity: Wait         |  }
-#&gt;   { Activity: UnTrap       | signals: 0x629e020 }
+#&gt;   { Activity: UnTrap       | signals: function() }
 #&gt;   Fork 2, continue,  trajectory: task 1, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x68aa398 }
-#&gt;   { Activity: Send         | signals: 0x629e020, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: function() }
+#&gt;   { Activity: Send         | signals: function(), delay: 0 }
 #&gt;   Fork 3, continue,  trajectory: task 2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x63c26b8 }
-#&gt;   { Activity: Send         | signals: 0x629e020, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: function() }
+#&gt;   { Activity: Send         | signals: function(), delay: 0 }
 #&gt; { Activity: Synchronize  | wait: 1 }</div><div class='input'>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>clone</span>(
@@ -237,36 +256,36 @@ line per clone.</p></td>
   <span class='fu'>synchronize</span>(<span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 10 activities
 #&gt; { Activity: Clone        | n: 3 }
 #&gt;   Fork 1, continue,  trajectory: original, 4 activities
-#&gt;   { Activity: Trap         | signals: 0x6773c40 }
+#&gt;   { Activity: Trap         | signals: function() }
 #&gt;   { Activity: Wait         |  }
 #&gt;   { Activity: Wait         |  }
-#&gt;   { Activity: UnTrap       | signals: 0x6773c40 }
+#&gt;   { Activity: UnTrap       | signals: function() }
 #&gt;   Fork 2, continue,  trajectory: task 1, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x68aa398 }
-#&gt;   { Activity: Send         | signals: 0x6773c40, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: function() }
+#&gt;   { Activity: Send         | signals: function(), delay: 0 }
 #&gt;   Fork 3, continue,  trajectory: task 2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x63c26b8 }
-#&gt;   { Activity: Send         | signals: 0x6773c40, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: function() }
+#&gt;   { Activity: Send         | signals: function(), delay: 0 }
 #&gt; { Activity: Synchronize  | wait: 1 }</div><div class='input'>
 <span class='co'>## These are equivalent:</span>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>do_parallel</span>(
-    <span class='no'>env</span>, <span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
     <span class='no'>task.1</span>,
-    <span class='no'>task.2</span>
+    <span class='no'>task.2</span>,
+    <span class='kw'>.env</span> <span class='kw'>=</span> <span class='no'>env</span>, <span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
   )</div><div class='output co'>#&gt; trajectory: anonymous, 9 activities
 #&gt; { Activity: Clone        | n: 3 }
 #&gt;   Fork 1, continue,  trajectory: original, 1 activities
-#&gt;   { Activity: Trap         | signals: 0x8678820 }
+#&gt;   { Activity: Trap         | signals: function() }
 #&gt;   Fork 2, continue,  trajectory: task 1, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x68aa398 }
-#&gt;   { Activity: Send         | signals: 0x8678820, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: function() }
+#&gt;   { Activity: Send         | signals: function(), delay: 0 }
 #&gt;   Fork 3, continue,  trajectory: task 2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x63c26b8 }
-#&gt;   { Activity: Send         | signals: 0x8678820, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: function() }
+#&gt;   { Activity: Send         | signals: function(), delay: 0 }
 #&gt; { Activity: Synchronize  | wait: 0 }
 #&gt; { Activity: Wait         |  }
-#&gt; { Activity: UnTrap       | signals: 0x8678820 }</div><div class='input'>
+#&gt; { Activity: UnTrap       | signals: function() }</div><div class='input'>
 <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>clone</span>(
     <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>3</span>,
@@ -281,16 +300,16 @@ line per clone.</p></td>
   <span class='fu'>untrap</span>(<span class='no'>signal</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 9 activities
 #&gt; { Activity: Clone        | n: 3 }
 #&gt;   Fork 1, continue,  trajectory: original, 1 activities
-#&gt;   { Activity: Trap         | signals: 0x6773c40 }
+#&gt;   { Activity: Trap         | signals: function() }
 #&gt;   Fork 2, continue,  trajectory: task 1, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x68aa398 }
-#&gt;   { Activity: Send         | signals: 0x6773c40, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: function() }
+#&gt;   { Activity: Send         | signals: function(), delay: 0 }
 #&gt;   Fork 3, continue,  trajectory: task 2, 2 activities
-#&gt;   { Activity: Timeout      | delay: 0x63c26b8 }
-#&gt;   { Activity: Send         | signals: 0x6773c40, delay: 0 }
+#&gt;   { Activity: Timeout      | delay: function() }
+#&gt;   { Activity: Send         | signals: function(), delay: 0 }
 #&gt; { Activity: Synchronize  | wait: 0 }
 #&gt; { Activity: Wait         |  }
-#&gt; { Activity: UnTrap       | signals: 0x6773c40 }</div><div class='input'>
+#&gt; { Activity: UnTrap       | signals: function() }</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -318,5 +337,8 @@ line per clone.</p></td>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
