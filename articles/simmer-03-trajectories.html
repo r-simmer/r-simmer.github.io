@@ -35,13 +35,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-    </span>
-</div>
+      </span>
+    </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
+  <a href=".././">
     <span class="fa fa-home"></span>
      
   </a>
@@ -101,6 +101,15 @@
     News
   </a>
 </li>
+<li>
+  <a href="https://github.com/r-simmer/simmer">
+    <span class="fa fa-github"></span>
+     
+    GitHub
+  </a>
+</li>
+      </ul>
+<ul class="nav navbar-nav navbar-right">
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
@@ -128,14 +137,6 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/r-simmer/simmer">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -150,7 +151,7 @@
       <h1>Advanced Trajectory Usage</h1>
                         <h4 class="author">Iñaki Ucar, Bart Smeets</h4>
             
-            <h4 class="date">2018-07-21</h4>
+            <h4 class="date">2018-08-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-03-trajectories.Rmd"><code>vignettes/simmer-03-trajectories.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-03-trajectories.Rmd</code></div>
@@ -276,11 +277,11 @@
 <a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; { Source: patient | monitored: 2 | n_generated: 1 }</span></a>
 <a class="sourceLine" id="cb8-16" data-line-number="16"></a>
 <a class="sourceLine" id="cb8-17" data-line-number="17"><span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)</a>
-<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;   time     name             key      value replication</span></a>
-<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; 1    0 patient0          my_key 123.000000           1</span></a>
-<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; 2    5 patient0          my_key 124.000000           1</span></a>
-<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; 3   10 patient0   dependent_key   0.000000           1</span></a>
-<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; 4   15 patient0 independent_key   0.272532           1</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;   time     name             key       value replication</span></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; 1    0 patient0          my_key 123.0000000           1</span></a>
+<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; 2    5 patient0          my_key 124.0000000           1</span></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; 3   10 patient0   dependent_key   0.0000000           1</span></a>
+<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; 4   15 patient0 independent_key   0.5705552           1</span></a></code></pre></div>
 <p>Attributes are <em>per arrival</em> by default (<code>global=FALSE</code>), meaning that each arrival has its own set of attributes, not visible by anyone else:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">writer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="dt">keys =</span> <span class="st">"my_key"</span>, <span class="dt">values =</span> <span class="dv">123</span>)</a>
@@ -350,16 +351,16 @@
 <a class="sourceLine" id="cb12-8" data-line-number="8">env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, patient_traj, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb12-10" data-line-number="10">env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>()</a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; simmer environment: anonymous | now: 54.0557448871899 | next: </span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; simmer environment: anonymous | now: 140.205235549054 | next: </span></a>
 <a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; { Monitor: in memory }</span></a>
 <a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt; { Source: patient | monitored: 2 | n_generated: 1 }</span></a>
 <a class="sourceLine" id="cb12-14" data-line-number="14"></a>
 <a class="sourceLine" id="cb12-15" data-line-number="15"><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env)</a>
 <a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt;       name start_time end_time activity_time finished replication</span></a>
-<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt; 1 patient0          0 54.05574      54.05574     TRUE           1</span></a>
+<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt; 1 patient0          0 140.2052      140.2052     TRUE           1</span></a>
 <a class="sourceLine" id="cb12-18" data-line-number="18"><span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)</a>
 <a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt;   time     name    key value replication</span></a>
-<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt; 1    0 patient0 health    73           1</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt; 1    0 patient0 health    30           1</span></a></code></pre></div>
 <p>Be aware that if you want the <code><a href="../reference/timeout.html">timeout()</a></code>’s <code>task</code> parameter to be evaluated dynamically, you should supply a callable function. For example in <code><a href="../reference/timeout.html">timeout(function() rexp(1, 10))</a></code>, <code>rexp(1, 10)</code> will be evaluated every time the timeout activity is executed. However, if you supply it in the form of <code><a href="../reference/timeout.html">timeout(rexp(1, 10))</a></code>, it will only be evaluated at the initalization and will remain static after that.</p>
 <p>Of course, this <code>task</code>, supplied as a function, may be as complex as you need and, for instance, it may check a resource’s status, interact with other entities in your simulation model… The same applies to all the activities when they accept a function as a parameter.</p>
 <p>If you simply need a delay previously set as an attribute, you may use <code><a href="../reference/timeout.html">timeout_from_attribute(., key, global=FALSE)</a></code>. Thus, the following timeouts are equivalent, but the second one is much simpler and faster:</p>
@@ -420,7 +421,7 @@
 <a class="sourceLine" id="cb15-20" data-line-number="20"><span class="co">#&gt; 2   doctor    3      0     0        2        Inf      0   Inf           1</span></a>
 <a class="sourceLine" id="cb15-21" data-line-number="21"><span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)</a>
 <a class="sourceLine" id="cb15-22" data-line-number="22"><span class="co">#&gt;   time     name           key value replication</span></a>
-<a class="sourceLine" id="cb15-23" data-line-number="23"><span class="co">#&gt; 1    0 patient0        health    43           1</span></a>
+<a class="sourceLine" id="cb15-23" data-line-number="23"><span class="co">#&gt; 1    0 patient0        health    36           1</span></a>
 <a class="sourceLine" id="cb15-24" data-line-number="24"><span class="co">#&gt; 2    0 patient0 docs_to_seize     1           1</span></a></code></pre></div>
 <p>By default, an unsuccessful <code><a href="../reference/seize.html">seize()</a></code> results in the rejection of the arrival. In the following example, the second patient tries to seize the only doctor while the first patient is being attended. There is no waiting room available, therefore it is rejected:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">patient_traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="dt">name =</span> <span class="st">"patient_trajectory"</span>) <span class="op">%&gt;%</span></a>
