@@ -21,16 +21,23 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
 <meta property="og:title" content="Plot Methods for <code>simmer</code> Monitoring Statistics — plot.mon" />
 
-<meta property="og:description" content="Methods for the plot generic." />
+<meta property="og:description" content="Methods for the plot generic. See below for details about each
+metric available." />
 <meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -40,16 +47,14 @@
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115358925-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-115358925-1', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-115358925-1');
 </script>
 
   </head>
@@ -65,15 +70,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">simmer.plot</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">simmer.plot</a>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="http://r-simmer.org">
+  <a href=".././">
     <span class="fa fa-home"></span>
      
-    Home
   </a>
 </li>
 <li>
@@ -107,6 +114,23 @@
     News
   </a>
 </li>
+<li>
+  <a href="https://github.com/r-simmer/simmer.plot">
+    <span class="fa fa-github"></span>
+     
+    GitHub
+  </a>
+</li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="http://r-simmer.org">
+    <span class="fa fa-coffee"></span>
+     
+    simmer
+  </a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
@@ -132,14 +156,6 @@
 </li>
       </ul>
       
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/r-simmer/simmer.plot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -147,15 +163,20 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot Methods for <code>simmer</code> Monitoring Statistics</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer.plot/blob/master/R/plot.arrivals.R'><code>R/plot.arrivals.R</code></a>, <a href='https://github.com/r-simmer/simmer.plot/blob/master/R/plot.attributes.R'><code>R/plot.attributes.R</code></a>, <a href='https://github.com/r-simmer/simmer.plot/blob/master/R/plot.resources.R'><code>R/plot.resources.R</code></a>, and 2 more</small>
+    <div class="hidden name"><code>plot.mon.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
-    <p>Methods for the <code>plot</code> generic.</p>
+    <p>Methods for the <code>plot</code> generic. See below for details about each
+metric available.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for arrivals</span>
 <span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"activity_time"</span>, <span class='st'>"waiting_time"</span>,
@@ -165,15 +186,16 @@
 <span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>keys</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for resources</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"usage"</span>, <span class='st'>"utilization"</span>), <span class='no'>names</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"usage"</span>, <span class='st'>"utilization"</span>), <span class='no'>names</span>,
+  <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
       <td><p>a data frame of class <code>arrivals</code>/<code>attributes</code>/<code>resources</code>
-(see <code>get_mon</code>).</p></td>
+(see <code><a href='get_mon.html'>get_mon</a></code>).</p></td>
     </tr>
     <tr>
       <th>metric</th>
@@ -202,6 +224,32 @@
 
     <p>Returns a ggplot2 object.</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The S3 method for 'arrivals' provides three metrics: <code>"activity_time"</code>,
+<code>"waiting_time"</code>, and <code>"flow_time"</code>. The <code>"activity_time"</code> is
+the amount of time spent in active state (i.e., in <code>timeout</code> activities),
+and it is already provided in the output of <code>get_mon_arrivals</code>. The
+<code>"flow_time"</code> is the amount of time spent in the system, and it is
+computed as follows: <code>flow = end_time - start_time</code>. Finally, the
+<code>"waiting_time"</code> is the amount of time spent waiting (e.g., in resources'
+queues, or due to a <code>wait</code> activity...), and it is computed as follows:
+<code>waiting_time = flow_time - activity_time</code>. This method does not apply
+any summary, but just shows a line plot of the values throughout the simulation.</p>
+<p>The S3 method for 'attributes' does not support any metric. It simply
+shows a stairstep graph of the values throughout the simulation for the keys
+provided (or all the collected attributes if no key is provided).</p>
+<p>The S3 method for 'resources' provides two metrics: <code>"usage"</code>
+and <code>"utilization"</code>. The <code>"usage"</code> metric shows a line graph of
+the cumulative average resource usage throughout the simulation, for each
+resource, replication and item (by default, queue, server and system, which
+is the sum of queue and server). If <code>steps=TRUE</code>, a stairstep graph with
+the instantaneous values is provided instead. The <code>"utilization"</code> metric
+shows a bar plot of the average resource utilization (total time in use
+divided by the total simulation time). For multiple replications, the bar
+represents the median, and the error bars represent the quartiles. Thus, if
+a single replication is provided, the bar and the error bar coincide.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'>trajectory</span>(<span class='st'>"my trajectory"</span>) <span class='kw'>%&gt;%</span>
@@ -228,7 +276,7 @@
 <span class='no'>resources</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_mon.html'>get_mon_resources</a></span>(<span class='no'>env</span>)
 <span class='no'>arrivals</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_mon.html'>get_mon_arrivals</a></span>(<span class='no'>env</span>)
 
-<span class='fu'>plot</span>(<span class='no'>resources</span>, <span class='kw'>metric</span><span class='kw'>=</span><span class='st'>"usage"</span>, <span class='st'>"doctor"</span>, <span class='kw'>items</span> <span class='kw'>=</span> <span class='st'>"server"</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='plot.mon-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>resources</span>, <span class='kw'>metric</span><span class='kw'>=</span><span class='st'>"utilization"</span>, <span class='fu'>c</span>(<span class='st'>"nurse"</span>, <span class='st'>"doctor"</span>, <span class='st'>"administration"</span>))</div><div class='img'><img src='plot.mon-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>arrivals</span>, <span class='kw'>metric</span><span class='kw'>=</span><span class='st'>"waiting_time"</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: span too small.   fewer data values than degrees of freedom.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: pseudoinverse used at 49.089</span></div><div class='output co'>#&gt; <span class='warning'>Warning: neighborhood radius 9.4368</span></div><div class='output co'>#&gt; <span class='warning'>Warning: reciprocal condition number  0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: There are other near singularities as well. 380.29</span></div><div class='output co'>#&gt; <span class='warning'>Warning: span too small.   fewer data values than degrees of freedom.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: pseudoinverse used at 49.089</span></div><div class='output co'>#&gt; <span class='warning'>Warning: neighborhood radius 9.4368</span></div><div class='output co'>#&gt; <span class='warning'>Warning: reciprocal condition number  0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: There are other near singularities as well. 380.29</span></div><div class='img'><img src='plot.mon-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>resources</span>, <span class='kw'>metric</span><span class='kw'>=</span><span class='st'>"usage"</span>, <span class='st'>"doctor"</span>, <span class='kw'>items</span> <span class='kw'>=</span> <span class='st'>"server"</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='plot.mon-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>resources</span>, <span class='kw'>metric</span><span class='kw'>=</span><span class='st'>"utilization"</span>, <span class='fu'>c</span>(<span class='st'>"nurse"</span>, <span class='st'>"doctor"</span>, <span class='st'>"administration"</span>))</div><div class='img'><img src='plot.mon-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>arrivals</span>, <span class='kw'>metric</span><span class='kw'>=</span><span class='st'>"waiting_time"</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: span too small.   fewer data values than degrees of freedom.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: pseudoinverse used at 49.089</span></div><div class='output co'>#&gt; <span class='warning'>Warning: neighborhood radius 9.4368</span></div><div class='output co'>#&gt; <span class='warning'>Warning: reciprocal condition number  0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: There are other near singularities as well. 380.29</span></div><div class='output co'>#&gt; <span class='warning'>Warning: span too small.   fewer data values than degrees of freedom.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: pseudoinverse used at 49.089</span></div><div class='output co'>#&gt; <span class='warning'>Warning: neighborhood radius 9.4368</span></div><div class='output co'>#&gt; <span class='warning'>Warning: reciprocal condition number  0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: There are other near singularities as well. 380.29</span></div><div class='img'><img src='plot.mon-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -237,6 +285,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
@@ -256,5 +306,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

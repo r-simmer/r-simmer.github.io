@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot Method for <code>trajectory</code> Objects — plot.trajectory • simmer.plot</title>
+<title>License • simmer.plot</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,15 +25,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script>
 
 
 
-<meta property="og:title" content="Plot Method for <code>trajectory</code> Objects — plot.trajectory" />
-
-<meta property="og:description" content="A method for the plot generic that plots a diagram of the given trajectory." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="License" />
 
 
 
@@ -59,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -70,20 +67,20 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">simmer.plot</a>
+        <a class="navbar-link" href="index.html">simmer.plot</a>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href=".././">
+  <a href="./">
     <span class="fa fa-home"></span>
      
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">
+  <a href="reference/index.html">
     <span class="fa fa-gears"></span>
      
     Reference
@@ -99,15 +96,15 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/plot.simmer.html">Plotting simmer statistics</a>
+      <a href="articles/plot.simmer.html">Plotting simmer statistics</a>
     </li>
     <li>
-      <a href="../articles/plot.trajectory.html">Plotting simmer trajectories</a>
+      <a href="articles/plot.trajectory.html">Plotting simmer trajectories</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">
+  <a href="news/index.html">
     <span class="fa fa-newspaper-o"></span>
      
     News
@@ -140,10 +137,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../../plot">simmer.plot</a>
+      <a href="../plot">simmer.plot</a>
     </li>
     <li>
-      <a href="../../bricks">simmer.bricks</a>
+      <a href="../bricks">simmer.bricks</a>
     </li>
     <li>
       <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
@@ -163,74 +160,19 @@
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>Plot Method for <code>trajectory</code> Objects</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer.plot/blob/master/R/plot.trajectory.R'><code>R/plot.trajectory.R</code></a></small>
-    <div class="hidden name"><code>plot.trajectory.Rd</code></div>
+      <h1>License</h1>
     </div>
 
-    <div class="ref-description">
-    
-    <p>A method for the <code>plot</code> generic that plots a diagram of the given trajectory.</p>
-    
-    </div>
-
-    <pre class="usage"><span class='co'># S3 method for trajectory</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>engine</span> <span class='kw'>=</span> <span class='st'>"dot"</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/scales/topics/brewer_pal'>brewer_pal</a></span>(<span class='st'>"qual"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>a simmer trajectory.</p></td>
-    </tr>
-    <tr>
-      <th>engine</th>
-      <td><p>a string specifying a layout engine (see <code>grViz</code>).</p></td>
-    </tr>
-    <tr>
-      <th>fill</th>
-      <td><p>discrete color palette for resource identification.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>show additional info directly in the labels.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional parameters for <code>render_graph</code>.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Returns an <code>htmlwidget</code>.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>trajectory</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>seize</span>(<span class='st'>"res"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>timeout</span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>release</span>(<span class='st'>"res"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>rollback</span>(<span class='fl'>3</span>)
-
-<span class='fu'>plot</span>(<span class='no'>x</span>)</div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+<pre>YEAR: 2016-2018
+COPYRIGHT HOLDER: Bart Smeets, Iñaki Ucar
+</pre>
 
   </div>
+
 </div>
+
 
       <footer>
       <div class="copyright">
