@@ -151,7 +151,7 @@
       <h1>Queueing Systems</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2018-08-06</h4>
+            <h4 class="date">2018-09-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-06-queueing.Rmd"><code>vignettes/simmer-06-queueing.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-06-queueing.Rmd</code></div>
@@ -184,8 +184,8 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">mm23.arrivals &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(mm23.env)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">rejection_rate &lt;-<span class="st"> </span>mm23.arrivals <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise">summarise</a></span>(<span class="dt">rejection_rate =</span> <span class="kw">sum</span>(<span class="op">!</span>finished)<span class="op">/</span><span class="kw">length</span>(finished)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/pull">pull</a></span>(rejection_rate)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">rejection_rate =</span> <span class="kw">sum</span>(<span class="op">!</span>finished)<span class="op">/</span><span class="kw">length</span>(finished)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(rejection_rate)</a>
 <a class="sourceLine" id="cb3-6" data-line-number="6">rejection_rate</a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; [1] 0.04714804</span></a></code></pre></div>
 <p>By solving the balance equations for this system, we obtain the following:</p>
@@ -272,16 +272,16 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; { Source: arrival4_ | monitored: 2 | n_generated: 2395 }</span></a></code></pre></div>
 <p>In the analysis, we filter arrivals from generator 1 that reach queues 3 and 4, and we examine the average waiting time and the total number of messages:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env, <span class="dt">per_resource =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(name, resource) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(resource <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"md1_3"</span>, <span class="st">"md1_4"</span>))</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(name, resource) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(resource <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"md1_3"</span>, <span class="st">"md1_4"</span>))</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">arr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>(start_time <span class="op">+</span><span class="st"> </span>activity_time),</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>(start_time <span class="op">+</span><span class="st"> </span>activity_time),</a>
 <a class="sourceLine" id="cb8-6" data-line-number="6">                <span class="dt">generator =</span> <span class="kw">regmatches</span>(name, <span class="kw">regexpr</span>(<span class="st">"arrival[[:digit:]]"</span>, name))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/join">left_join</a></span>(res) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/group_by">group_by</a></span>(generator, resource)</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(res) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(generator, resource)</a>
 <a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; Joining, by = "name"</span></a>
 <a class="sourceLine" id="cb8-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11">dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/summarise">summarise</a></span>(arr, <span class="dt">average =</span> <span class="kw">sum</span>(waiting_time) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>())</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(arr, <span class="dt">average =</span> <span class="kw">sum</span>(waiting_time) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>())</a>
 <a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; # A tibble: 5 x 3</span></a>
 <a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; # Groups:   generator [?]</span></a>
 <a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt;   generator resource average</span></a>
@@ -293,7 +293,7 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; 5 arrival4  md1_4      0.434</span></a>
 <a class="sourceLine" id="cb8-21" data-line-number="21"><span class="kw"><a href="../reference/get_n_generated.html">get_n_generated</a></span>(env, <span class="st">"arrival1_"</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_n_generated</a></span>(env, <span class="st">"arrival4_"</span>)</a>
 <a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; [1] 10373</span></a>
-<a class="sourceLine" id="cb8-23" data-line-number="23">dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/tally">count</a></span>(arr)</a>
+<a class="sourceLine" id="cb8-23" data-line-number="23">dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/tally.html">count</a></span>(arr)</a>
 <a class="sourceLine" id="cb8-24" data-line-number="24"><span class="co">#&gt; # A tibble: 5 x 3</span></a>
 <a class="sourceLine" id="cb8-25" data-line-number="25"><span class="co">#&gt; # Groups:   generator, resource [5]</span></a>
 <a class="sourceLine" id="cb8-26" data-line-number="26"><span class="co">#&gt;   generator resource     n</span></a>

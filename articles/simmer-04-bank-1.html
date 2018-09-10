@@ -151,7 +151,7 @@
       <h1>The Bank Tutorial: Part I</h1>
                         <h4 class="author">Duncan Garmonsway</h4>
             
-            <h4 class="date">2018-08-06</h4>
+            <h4 class="date">2018-09-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-04-bank-1.Rmd"><code>vignettes/simmer-04-bank-1.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-04-bank-1.Rmd</code></div>
@@ -186,7 +186,7 @@
 <a class="sourceLine" id="cb1-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9">bank &lt;-</a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="dv">5</span>))</a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13">bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt; 5: Customer0: Here I am</span></a>
@@ -216,7 +216,7 @@
 <a class="sourceLine" id="cb2-10" data-line-number="10"></a>
 <a class="sourceLine" id="cb2-11" data-line-number="11">bank &lt;-</a>
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">5</span>)))</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="kw">rexp</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">5</span>)))</a>
 <a class="sourceLine" id="cb2-14" data-line-number="14"></a>
 <a class="sourceLine" id="cb2-15" data-line-number="15">bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; 7.8393: Customer0: Here I am</span></a>
@@ -258,7 +258,7 @@
 <a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt; [1] 7</span></a></code></pre></div>
 <p>The technical term for the <code>loop</code> function is a ‘closure’. How closures work is beyond the scope of this vignette; if you wish to learn more, then <a href="http://adv-r.had.co.nz/Functional-programming.html#closures">Advanced R</a> by Hadley Wickam has a good explanation.</p>
 <p>When we use <code>loop</code> in the <code>timeout</code> function, we don’t need to assign its output to a name; it can be an ‘anonymous’ function. It will be called whenever a customer is about to wait and needs to know how long to wait for. Because only three customers are generated, and their first step is the timeout step, they are assigned 7, 10, and 20 in order.</p>
-<p>Note that this code differs from the SimPy in the order that customers are defined. Here, the first customer to be defined is the one who arrives at 2 and waits for 7. That is because the arguments to <code><a href="../reference/at.html">at()</a></code> must be in ascending order.</p>
+<p>Note that this code differs from the SimPy in the order that customers are defined. Here, the first customer to be defined is the one who arrives at 2 and waits for 7. That is because the arguments to <code><a href="../reference/generators.html">at()</a></code> must be in ascending order.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(simmer)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co"># Function to specify a series of waiting times in a loop</span></a>
@@ -284,7 +284,7 @@
 <a class="sourceLine" id="cb4-23" data-line-number="23"></a>
 <a class="sourceLine" id="cb4-24" data-line-number="24">bank &lt;-</a>
 <a class="sourceLine" id="cb4-25" data-line-number="25"><span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">12</span>))</a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">12</span>))</a>
 <a class="sourceLine" id="cb4-27" data-line-number="27"></a>
 <a class="sourceLine" id="cb4-28" data-line-number="28">bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)</a>
 <a class="sourceLine" id="cb4-29" data-line-number="29"><span class="co">#&gt; 2: Customer0: Here I am</span></a>
@@ -341,9 +341,9 @@
 <a class="sourceLine" id="cb5-36" data-line-number="36"></a>
 <a class="sourceLine" id="cb5-37" data-line-number="37">bank &lt;-</a>
 <a class="sourceLine" id="cb5-38" data-line-number="38"><span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-39" data-line-number="39"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Klaus"</span>, Klaus, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">5</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-40" data-line-number="40"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Tony"</span>, Tony, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-41" data-line-number="41"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Evelyn"</span>, Evelyn, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">12</span>))</a>
+<a class="sourceLine" id="cb5-39" data-line-number="39"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Klaus"</span>, Klaus, <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="dv">5</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-40" data-line-number="40"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Tony"</span>, Tony, <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-41" data-line-number="41"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Evelyn"</span>, Evelyn, <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="dv">12</span>))</a>
 <a class="sourceLine" id="cb5-42" data-line-number="42"></a>
 <a class="sourceLine" id="cb5-43" data-line-number="43">bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)</a>
 <a class="sourceLine" id="cb5-44" data-line-number="44"><span class="co">#&gt; 2: Tony0: Here I am</span></a>
@@ -379,7 +379,7 @@
 <a class="sourceLine" id="cb6-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb6-9" data-line-number="9">bank &lt;-</a>
 <a class="sourceLine" id="cb6-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="kw"><a href="../reference/at.html">from_to</a></span>(<span class="dv">0</span>, <span class="dv">41</span>, <span class="cf">function</span>() {<span class="dv">10</span>}))</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, customer, <span class="kw"><a href="../reference/generators.html">from_to</a></span>(<span class="dv">0</span>, <span class="dv">41</span>, <span class="cf">function</span>() {<span class="dv">10</span>}))</a>
 <a class="sourceLine" id="cb6-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb6-13" data-line-number="13">bank <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until =</span> <span class="dv">400</span>)</a>
 <a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; 0: Customer0: Here I am</span></a>
@@ -499,7 +499,7 @@
 <a class="sourceLine" id="cb8-41" data-line-number="41"><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></a>
 <a class="sourceLine" id="cb8-42" data-line-number="42">bank <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb8-43" data-line-number="43"><span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-44" data-line-number="44"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)</a>
+<a class="sourceLine" id="cb8-44" data-line-number="44"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)</a>
 <a class="sourceLine" id="cb8-45" data-line-number="45"><span class="co">#&gt;        name start_time end_time activity_time finished replication</span></a>
 <a class="sourceLine" id="cb8-46" data-line-number="46"><span class="co">#&gt; 1 Customer0    0.00000 12.00000            12     TRUE           1</span></a>
 <a class="sourceLine" id="cb8-47" data-line-number="47"><span class="co">#&gt; 2 Customer1   25.01759 37.01759            12     TRUE           1</span></a>
@@ -563,7 +563,7 @@
 <a class="sourceLine" id="cb9-42" data-line-number="42"><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></a>
 <a class="sourceLine" id="cb9-43" data-line-number="43">bank <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-44" data-line-number="44"><span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-45" data-line-number="45"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)</a>
+<a class="sourceLine" id="cb9-45" data-line-number="45"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)</a>
 <a class="sourceLine" id="cb9-46" data-line-number="46"><span class="co">#&gt;        name start_time  end_time activity_time finished replication</span></a>
 <a class="sourceLine" id="cb9-47" data-line-number="47"><span class="co">#&gt; 1 Customer0   0.000000  4.915215      4.915215     TRUE           1</span></a>
 <a class="sourceLine" id="cb9-48" data-line-number="48"><span class="co">#&gt; 2 Customer1   3.683648 21.055183     16.139968     TRUE           1</span></a>
@@ -629,7 +629,7 @@
 <a class="sourceLine" id="cb10-39" data-line-number="39"><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></a>
 <a class="sourceLine" id="cb10-40" data-line-number="40">bank <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-41" data-line-number="41"><span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-42" data-line-number="42"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)</a>
+<a class="sourceLine" id="cb10-42" data-line-number="42"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)</a>
 <a class="sourceLine" id="cb10-43" data-line-number="43"><span class="co">#&gt;        name start_time  end_time activity_time finished replication</span></a>
 <a class="sourceLine" id="cb10-44" data-line-number="44"><span class="co">#&gt; 1 Customer0   0.000000  4.915215      4.915215     TRUE           1</span></a>
 <a class="sourceLine" id="cb10-45" data-line-number="45"><span class="co">#&gt; 2 Customer1   3.683648 19.823616     16.139968     TRUE           1</span></a>
@@ -694,8 +694,8 @@
 <a class="sourceLine" id="cb11-42" data-line-number="42"><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></a>
 <a class="sourceLine" id="cb11-43" data-line-number="43">bank <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-44" data-line-number="44"><span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-45" data-line-number="45"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">service_start_time =</span> end_time <span class="op">-</span><span class="st"> </span>activity_time) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-46" data-line-number="46"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/arrange">arrange</a></span>(start_time)</a>
+<a class="sourceLine" id="cb11-45" data-line-number="45"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">service_start_time =</span> end_time <span class="op">-</span><span class="st"> </span>activity_time) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-46" data-line-number="46"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(start_time)</a>
 <a class="sourceLine" id="cb11-47" data-line-number="47"><span class="co">#&gt;        name start_time end_time activity_time finished replication</span></a>
 <a class="sourceLine" id="cb11-48" data-line-number="48"><span class="co">#&gt; 1 Customer0    0.00000 62.10372    62.1037152     TRUE           1</span></a>
 <a class="sourceLine" id="cb11-49" data-line-number="49"><span class="co">#&gt; 2 Customer1   23.71444 33.94103    10.2265939     TRUE           1</span></a>
@@ -710,7 +710,7 @@
 <a class="sourceLine" id="cb11-58" data-line-number="58"><span class="co">#&gt; 5           48.85593</span></a>
 <a class="sourceLine" id="cb11-59" data-line-number="59">bank <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-60" data-line-number="60"><span class="st">  </span>get_mon_resources <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-61" data-line-number="61"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/arrange">arrange</a></span>(time)</a>
+<a class="sourceLine" id="cb11-61" data-line-number="61"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(time)</a>
 <a class="sourceLine" id="cb11-62" data-line-number="62"><span class="co">#&gt;    resource     time server queue capacity queue_size system limit</span></a>
 <a class="sourceLine" id="cb11-63" data-line-number="63"><span class="co">#&gt; 1  counter1  0.00000      1     0        1        Inf      1   Inf</span></a>
 <a class="sourceLine" id="cb11-64" data-line-number="64"><span class="co">#&gt; 2  counter2 23.71444      1     0        1        Inf      1   Inf</span></a>
@@ -764,7 +764,7 @@
 <a class="sourceLine" id="cb12-22" data-line-number="22">result &lt;-</a>
 <a class="sourceLine" id="cb12-23" data-line-number="23"><span class="st">  </span>bank <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-24" data-line-number="24"><span class="st">  </span>get_mon_arrivals <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-25" data-line-number="25"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)</a></code></pre></div>
+<a class="sourceLine" id="cb12-25" data-line-number="25"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)</a></code></pre></div>
 <p>The average waiting time for 50 customers in this 2-counter system is more reliable (i.e., less subject to random simulation effects) than the times we measured before but it is still not sufficiently reliable for real-world decisions. We should also replicate the runs using different random number seeds. The result of this run is:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">"Average wait for "</span>, <span class="kw">sum</span>(result<span class="op">$</span>finished), <span class="st">" completions was "</span>,</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">      <span class="kw">mean</span>(result<span class="op">$</span>waiting_time), <span class="st">"minutes."</span>)</a>
@@ -796,7 +796,7 @@
 <a class="sourceLine" id="cb14-19" data-line-number="19">  result &lt;-</a>
 <a class="sourceLine" id="cb14-20" data-line-number="20"><span class="st">    </span>bank <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb14-21" data-line-number="21"><span class="st">    </span>get_mon_arrivals <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="st">    </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)</a>
+<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="st">    </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">waiting_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time <span class="op">-</span><span class="st"> </span>activity_time)</a>
 <a class="sourceLine" id="cb14-23" data-line-number="23">  <span class="kw">paste</span>(<span class="st">"Average wait for "</span>, <span class="kw">sum</span>(result<span class="op">$</span>finished), <span class="st">" completions was "</span>,</a>
 <a class="sourceLine" id="cb14-24" data-line-number="24">        <span class="kw">mean</span>(result<span class="op">$</span>waiting_time), <span class="st">"minutes."</span>)</a>
 <a class="sourceLine" id="cb14-25" data-line-number="25">}) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unlist</span>()</a>

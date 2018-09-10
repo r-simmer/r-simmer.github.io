@@ -220,7 +220,7 @@ must return numeric value(s).</p></td>
     </tr>
     <tr>
       <th>global</th>
-      <td><p>if <code>TRUE</code>, the attribute will be global instead of per-arrival.</p></td>
+      <td><p><code>global=TRUE</code> is deprecated. Use <code>*_global</code> instead.</p></td>
     </tr>
     <tr>
       <th>mod</th>
@@ -237,13 +237,10 @@ not previously initialised. Useful for counters or indexes.</p></td>
 
     <p>Returns the trajectory object.</p>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p><code>set_global</code> is a shortcut for <code>set_attribute(global=TRUE)</code>.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='get_n_generated.html'>get_attribute</a></code>.</p></div>
+    <div class='dont-index'><p><code><a href='get_n_generated.html'>get_attribute</a></code>, <code><a href='get_n_generated.html'>get_global</a></code>,
+<code><a href='timeout.html'>timeout_from_attribute</a></code>, <code><a href='timeout.html'>timeout_from_global</a></code>.</p></div>
     
 
   </div>
@@ -253,8 +250,6 @@ not previously initialised. Useful for counters or indexes.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

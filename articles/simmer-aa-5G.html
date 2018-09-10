@@ -151,7 +151,7 @@
       <h1>Design and Analysis of 5G Scenarios</h1>
                         <h4 class="author">Iñaki Ucar, José Alberto Hernández, Pablo Serrano, Arturo Azcorra</h4>
             
-            <h4 class="date">2018-08-06</h4>
+            <h4 class="date">2018-09-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-aa-5G.Rmd"><code>vignettes/simmer-aa-5G.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-aa-5G.Rmd</code></div>
@@ -402,7 +402,7 @@
 <a class="sourceLine" id="cb6-68" data-line-number="68"></a>
 <a class="sourceLine" id="cb6-69" data-line-number="69">  <span class="co"># OLT logic</span></a>
 <a class="sourceLine" id="cb6-70" data-line-number="70">  OLT &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-71" data-line-number="71"><span class="st">    </span>simmer<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/select">select</a></span>(<span class="cf">function</span>() <span class="kw">paste0</span>(<span class="st">"ONU"</span>, <span class="kw">onu_i</span>())) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-71" data-line-number="71"><span class="st">    </span>simmer<span class="op">::</span><span class="kw"><a href="https://r-simmer.org/reference/select.html">select</a></span>(<span class="cf">function</span>() <span class="kw">paste0</span>(<span class="st">"ONU"</span>, <span class="kw">onu_i</span>())) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-72" data-line-number="72"><span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"ONU"</span>, <span class="cf">function</span>() <span class="kw">onu_i</span>()) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-73" data-line-number="73"><span class="st">    </span><span class="kw"><a href="../reference/set_capacity.html">set_capacity_selected</a></span>(<span class="cf">function</span>() <span class="kw">length</span>(tx_pkts[[<span class="kw">onu_i</span>()]])) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-74" data-line-number="74"><span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">sum</span>(tx_pkts[[<span class="kw">onu_i</span>()]])) <span class="op">%&gt;%</span></a>
@@ -424,7 +424,7 @@
 <a class="sourceLine" id="cb6-90" data-line-number="90"></a>
 <a class="sourceLine" id="cb6-91" data-line-number="91">  <span class="cf">if</span> (param[[<span class="st">"scenario"</span>]] <span class="op">==</span><span class="st"> "B"</span>)</a>
 <a class="sourceLine" id="cb6-92" data-line-number="92">    <span class="co"># RRH worker</span></a>
-<a class="sourceLine" id="cb6-93" data-line-number="93">    env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"RRH_"</span>, RRH, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb6-93" data-line-number="93">    env <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"RRH_"</span>, RRH, <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="dv">0</span>))</a>
 <a class="sourceLine" id="cb6-94" data-line-number="94"></a>
 <a class="sourceLine" id="cb6-95" data-line-number="95">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>param[[<span class="st">"ONU_n"</span>]])</a>
 <a class="sourceLine" id="cb6-96" data-line-number="96">    env <span class="op">%&gt;%</span></a>
@@ -435,7 +435,7 @@
 <a class="sourceLine" id="cb6-101" data-line-number="101"></a>
 <a class="sourceLine" id="cb6-102" data-line-number="102">  env <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-103" data-line-number="103"><span class="st">    </span><span class="co"># OLT worker</span></a>
-<a class="sourceLine" id="cb6-104" data-line-number="104"><span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"token_"</span>, OLT, <span class="kw"><a href="../reference/at.html">at</a></span>(RRH_on <span class="op">+</span><span class="st"> </span>Tg), <span class="dt">mon=</span><span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-104" data-line-number="104"><span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"token_"</span>, OLT, <span class="kw"><a href="../reference/generators.html">at</a></span>(RRH_on <span class="op">+</span><span class="st"> </span>Tg), <span class="dt">mon=</span><span class="dv">2</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-105" data-line-number="105"><span class="st">    </span><span class="kw"><a href="../reference/run.html">run</a></span>(<span class="dt">until=</span><span class="fl">1e5</span><span class="op">/</span><span class="kw">sum</span>(lambda)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-106" data-line-number="106"><span class="st">    </span><span class="kw"><a href="../reference/wrap.html">wrap</a></span>()</a>
 <a class="sourceLine" id="cb6-107" data-line-number="107">}</a>
@@ -532,7 +532,7 @@
 <a class="sourceLine" id="cb9-18" data-line-number="18"><span class="st">    </span><span class="kw"><a href="../reference/send.html">wait</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-19" data-line-number="19"><span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, param[[<span class="st">"backoff"</span>]]), <span class="dv">3</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-20" data-line-number="20"><span class="st">    </span><span class="co"># ra start</span></a>
-<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="st">    </span>simmer<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/simmer/topics/select">select</a></span>(preambles, <span class="dt">policy=</span><span class="st">"random"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="st">    </span>simmer<span class="op">::</span><span class="kw"><a href="https://r-simmer.org/reference/select.html">select</a></span>(preambles, <span class="dt">policy=</span><span class="st">"random"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-22" data-line-number="22"><span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize_selected</a></span>(</a>
 <a class="sourceLine" id="cb9-23" data-line-number="23">      <span class="dt">continue=</span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>),</a>
 <a class="sourceLine" id="cb9-24" data-line-number="24">      <span class="co"># ra &amp; tx</span></a>
@@ -561,9 +561,9 @@
 <a class="sourceLine" id="cb9-47" data-line-number="47">  <span class="co"># simulation environment</span></a>
 <a class="sourceLine" id="cb9-48" data-line-number="48">  env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-49" data-line-number="49"><span class="st">    </span><span class="co"># IoT device workers</span></a>
-<a class="sourceLine" id="cb9-50" data-line-number="50"><span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"meter_"</span>, meter, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="kw">rep</span>(<span class="dv">0</span>, param[[<span class="st">"meter_n"</span>]])), <span class="dt">mon=</span><span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-50" data-line-number="50"><span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"meter_"</span>, meter, <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="kw">rep</span>(<span class="dv">0</span>, param[[<span class="st">"meter_n"</span>]])), <span class="dt">mon=</span><span class="dv">2</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-51" data-line-number="51"><span class="st">    </span><span class="co"># trigger worker</span></a>
-<a class="sourceLine" id="cb9-52" data-line-number="52"><span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"trigger_"</span>, trigger, <span class="kw"><a href="../reference/at.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon=</span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb9-52" data-line-number="52"><span class="st">    </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"trigger_"</span>, trigger, <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon=</span><span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb9-53" data-line-number="53"></a>
 <a class="sourceLine" id="cb9-54" data-line-number="54">  <span class="cf">for</span> (i <span class="cf">in</span> preambles)</a>
 <a class="sourceLine" id="cb9-55" data-line-number="55">    <span class="co"># one resource per preamble</span></a>

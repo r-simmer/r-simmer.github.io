@@ -19,9 +19,6 @@
     <loc>https://r-simmer.org/reference/add_resource.html</loc>
   </url>
   <url>
-    <loc>https://r-simmer.org/reference/at.html</loc>
-  </url>
-  <url>
     <loc>https://r-simmer.org/reference/batch.html</loc>
   </url>
   <url>
@@ -31,6 +28,9 @@
     <loc>https://r-simmer.org/reference/clone.html</loc>
   </url>
   <url>
+    <loc>https://r-simmer.org/reference/generators.html</loc>
+  </url>
+  <url>
     <loc>https://r-simmer.org/reference/get_capacity.html</loc>
   </url>
   <url>
@@ -38,6 +38,9 @@
   </url>
   <url>
     <loc>https://r-simmer.org/reference/get_n_generated.html</loc>
+  </url>
+  <url>
+    <loc>https://r-simmer.org/reference/get_sources.html</loc>
   </url>
   <url>
     <loc>https://r-simmer.org/reference/join.html</loc>
