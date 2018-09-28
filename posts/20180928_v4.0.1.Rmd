@@ -1,0 +1,51 @@
+---
+title: "simmer 4.0.1"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The 4.0.1 release of [simmer](http://r-simmer.org/), the Discrete-Event Simulator for R, is on CRAN since a couple of weeks ago. There are few changes, notably new getters (`get_sources()`, `get_resources()`, `get_trajectory()`) for `simmer` environments and some improvements in resource selection policies (see details in `help(select)`).
+
+A new convenience function, `when_activated`, makes it easier to generate arrivals on demand, triggered from trajectories. Let us consider, for instance, a simple restocking pattern:
+
+```{r}
+library(simmer)
+
+restock <- trajectory() %>%
+  log_("restock")
+
+serve <- trajectory() %>%
+  log_("serve") %>%
+  activate("Restock")
+
+env <- simmer() %>%
+  add_generator("Customer", serve, at(1, 2, 3)) %>%
+  add_generator("Restock", restock, when_activated()) %>%
+  run()
+```
+
+Finally, this release leverages the [new fast evaluation framework](https://www.enchufa2.es/archives/boost-the-speed-of-r-calls-from-rcpp.html) offered by `Rcpp` (>= 0.12.18) by default, and includes some minor improvements and bug fixes.
+
+### New features:
+
+* New getters (#159):
+    * `get_sources()` and `get_resources()` retrieve a character vector of source/resource names defined in a simulation environment.
+    * `get_trajectory()` retrieves a trajectory to which a given source is attached.
+* New resource selection policies: `shortest-queue-available`, `round-robin-available`, `random-available` (#156). These are the same as the existing non-`available` ones, but they exclude unavailable resources (capacity set to zero). Thus, if all resources are unavailable, an error is raised.
+
+### Minor changes and fixes:
+
+* Rename `-DRCPP_PROTECTED_EVAL` (Rcpp >= 0.12.17.4) as `-DRCPP_USE_UNWIND_PROTECT` (6d27671).
+* Keep compilation quieter with `-DBOOST_NO_AUTO_PTR` (70328b6).
+* Improve `log_` print (7c2e3b1).
+* Add `when_activated()` convenience function to easily generate arrivals on demand from trajectories (#161 closing #160).
+* Enhance `schedule` printing (9c66285).
+* Fix generator-manager name clashing (#163).
+* Deprecate `set_attribute(global=TRUE)`, `get_attribute(global=TRUE)` and `timeout_from_attribute(global=TRUE)` (#164), the `*_global` versions should be used instead.
