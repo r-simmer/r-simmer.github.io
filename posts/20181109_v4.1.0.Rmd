@@ -1,0 +1,61 @@
+---
+title: "simmer 4.1.0"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The 4.1.0 release of [simmer](http://r-simmer.org/), the Discrete-Event Simulator for R, is on CRAN. As per request in the mailing list, now `get_global()` is able to work inside a generator function. Moreover, the new `add_global()` method attaches a global attribute to a simulator.
+
+```{r}
+library(simmer)
+
+env <- simmer()
+
+hello_sayer <- trajectory() %>%
+  log_("hello world!") %>%
+  set_global("interarrival", 1, mod="+")
+
+generator <- function() get_global(env, "interarrival")
+
+env %>%
+  add_global("interarrival", 1) %>%
+  add_generator("dummy", hello_sayer, generator) %>%
+  run(7) %>%
+  get_global("interarrival")
+```
+
+Compared to plain global variables, these ones are automatically managed and thus reinitialised if the environment is reset.
+
+```{r}
+env %>%
+  reset() %>%
+  get_global("interarrival")
+
+env %>%
+  run(7) %>%
+  get_global("interarrival")
+```
+
+There has been a small refactoring of some parts of the C++ core, which motivates the minor version bump, but this shouldn't be noticeable to the users. Finally, several bug fixes and improvements complete this release. See below for a complete list.
+
+### New features:
+
+* New getter `get_selected()` retrieves names of selected resources via the `select()` activity (#172 addressing #171).
+* Source and resource getters have been vectorised to retrieve parameters from multiple entities (as part of #172).
+* Simplify C++ `Simulator` interface for adding processes and resources (#162). The responsibility of building the objects has been moved to the caller.
+* New `add_global()` method to attach global attributes to a simulation environment (#174 addressing #158).
+
+### Minor changes and fixes:
+
+* Remove 3.8.0 and 4.0.1 deprecations (#170 addressing #165).
+* Fix `get_global()` to work outside trajectories (#170 addressing #165).
+* Fix `rollback()` with an infinite amount (#173).
+* Fix and improve schedules and managers (as part of #174).
+* Fix `reset()` to avoid overwriting the simulation environment (#175).
