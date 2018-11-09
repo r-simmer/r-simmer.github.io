@@ -151,7 +151,7 @@
       <h1>Introduction to simmer</h1>
                         <h4 class="author">Bart Smeets, Iñaki Ucar</h4>
             
-            <h4 class="date">2018-09-10</h4>
+            <h4 class="date">2018-11-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-01-introduction.Rmd"><code>vignettes/simmer-01-introduction.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-01-introduction.Rmd</code></div>
@@ -174,15 +174,15 @@
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; { Monitor: in memory }</span></a></code></pre></div>
 <p>Set-up a simple trajectory. Let’s say we want to simulate an ambulatory consultation where a patient is first seen by a nurse for an intake, next by a doctor for the consultation and finally by administrative staff to schedule a follow-up appointment.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">patient &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"patients' path"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span>## add an intake activity </a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span><span class="co">## add an intake activity </span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"nurse"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">15</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"nurse"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">  </span>## add a consultation activity</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">  </span><span class="co">## add a consultation activity</span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"doctor"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">20</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"doctor"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">  </span>## add a planning activity</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">  </span><span class="co">## add a planning activity</span></a>
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"administration"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">5</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"administration"</span>, <span class="dv">1</span>)</a></code></pre></div>
@@ -276,13 +276,13 @@
 <a class="sourceLine" id="cb10-7" data-line-number="7">envs <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb10-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-9" data-line-number="9"><span class="st">  </span><span class="kw">head</span>()</a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt;   resource     time server queue capacity queue_size system limit</span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; 1    nurse  9.09303      1     0        1        Inf      1   Inf</span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 2    nurse 20.77317      1     1        1        Inf      2   Inf</span></a>
-<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; 3    nurse 24.09680      1     0        1        Inf      1   Inf</span></a>
-<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; 4   doctor 24.09680      1     0        2        Inf      1   Inf</span></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; 5    nurse 27.93624      1     1        1        Inf      2   Inf</span></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 6    nurse 36.47693      1     2        1        Inf      3   Inf</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt;   resource      time server queue capacity queue_size system limit</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; 1    nurse  8.125547      1     0        1        Inf      1   Inf</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 2    nurse 18.847888      1     1        1        Inf      2   Inf</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; 3    nurse 23.128320      1     2        1        Inf      3   Inf</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; 4    nurse 23.496504      1     1        1        Inf      2   Inf</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; 5   doctor 23.496504      1     0        2        Inf      1   Inf</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 6    nurse 37.124891      1     2        1        Inf      3   Inf</span></a>
 <a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt;   replication</span></a>
 <a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; 1           1</span></a>
 <a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; 2           1</span></a>
@@ -294,12 +294,12 @@
 <a class="sourceLine" id="cb10-25" data-line-number="25"><span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-26" data-line-number="26"><span class="st">  </span><span class="kw">head</span>()</a>
 <a class="sourceLine" id="cb10-27" data-line-number="27"><span class="co">#&gt;       name start_time end_time activity_time finished replication</span></a>
-<a class="sourceLine" id="cb10-28" data-line-number="28"><span class="co">#&gt; 1 patient0   9.093030 46.21541      37.12238     TRUE           1</span></a>
-<a class="sourceLine" id="cb10-29" data-line-number="29"><span class="co">#&gt; 2 patient1  20.773167 65.44161      41.34481     TRUE           1</span></a>
-<a class="sourceLine" id="cb10-30" data-line-number="30"><span class="co">#&gt; 3 patient2  27.936239 79.29818      39.91848     TRUE           1</span></a>
-<a class="sourceLine" id="cb10-31" data-line-number="31"><span class="co">#&gt; 4 patient0   9.339651 48.62858      39.28893     TRUE           2</span></a>
-<a class="sourceLine" id="cb10-32" data-line-number="32"><span class="co">#&gt; 5 patient1  18.836419 61.53200      39.01889     TRUE           2</span></a>
-<a class="sourceLine" id="cb10-33" data-line-number="33"><span class="co">#&gt; 6 patient2  28.580508 76.71418      40.02403     TRUE           2</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-28" data-line-number="28"><span class="co">#&gt; 1 patient0   8.125547 48.23833      40.11278     TRUE           1</span></a>
+<a class="sourceLine" id="cb10-29" data-line-number="29"><span class="co">#&gt; 2 patient1  18.847888 63.17196      39.67545     TRUE           1</span></a>
+<a class="sourceLine" id="cb10-30" data-line-number="30"><span class="co">#&gt; 3 patient2  23.128320 78.44255      39.13396     TRUE           1</span></a>
+<a class="sourceLine" id="cb10-31" data-line-number="31"><span class="co">#&gt; 4 patient0  11.231249 50.86748      39.63624     TRUE           2</span></a>
+<a class="sourceLine" id="cb10-32" data-line-number="32"><span class="co">#&gt; 5 patient1  21.831705 64.24246      39.26779     TRUE           2</span></a>
+<a class="sourceLine" id="cb10-33" data-line-number="33"><span class="co">#&gt; 6 patient0   9.793726 49.04807      39.25434     TRUE           3</span></a></code></pre></div>
 <p>Unfortunately, as the C++ simulation cores are destroyed, the downside of this kind of parallelization is that one cannot resume execution of the replicas.</p>
 </div>
 <div id="basic-visualisation-tools" class="section level2">
