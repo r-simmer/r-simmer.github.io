@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.1</span>
       </span>
     </div>
 
@@ -271,7 +271,7 @@
 <a class="sourceLine" id="cb9-11" data-line-number="11">})</a></code></pre></div>
 <p>This helper function brings the simulation data back to R and makes it accessible through the same methods that would ordinarily be used for a <code>simmer</code> environment.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">envs[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_n_generated</a></span>(<span class="st">"patient"</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; [1] 9</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; [1] 8</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3">envs[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/get_capacity.html">get_queue_count</a></span>(<span class="st">"doctor"</span>)</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; [1] 0</span></a>
 <a class="sourceLine" id="cb10-5" data-line-number="5">envs[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/get_capacity.html">get_queue_size</a></span>(<span class="st">"doctor"</span>)</a>
@@ -280,12 +280,12 @@
 <a class="sourceLine" id="cb10-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>()</a>
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt;   resource      time server queue capacity queue_size system limit</span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; 1    nurse  8.873024      1     0        1        Inf      1   Inf</span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 2    nurse 20.030473      1     1        1        Inf      2   Inf</span></a>
-<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; 3    nurse 23.079798      1     0        1        Inf      1   Inf</span></a>
-<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; 4   doctor 23.079798      1     0        2        Inf      1   Inf</span></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; 5    nurse 27.337777      1     1        1        Inf      2   Inf</span></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 6    nurse 37.406048      1     2        1        Inf      3   Inf</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; 1    nurse  9.418304      1     0        1        Inf      1   Inf</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 2    nurse 20.239508      1     1        1        Inf      2   Inf</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; 3    nurse 23.236253      1     0        1        Inf      1   Inf</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; 4   doctor 23.236253      1     0        2        Inf      1   Inf</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; 5    nurse 28.585246      1     1        1        Inf      2   Inf</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 6    nurse 37.882532      1     0        1        Inf      1   Inf</span></a>
 <a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt;   replication</span></a>
 <a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; 1           1</span></a>
 <a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; 2           1</span></a>
@@ -297,12 +297,12 @@
 <a class="sourceLine" id="cb10-25" data-line-number="25"><span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-26" data-line-number="26"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>()</a>
 <a class="sourceLine" id="cb10-27" data-line-number="27"><span class="co">#&gt;       name start_time end_time activity_time finished replication</span></a>
-<a class="sourceLine" id="cb10-28" data-line-number="28"><span class="co">#&gt; 1 patient0   8.873024 50.34521      41.47219     TRUE           1</span></a>
-<a class="sourceLine" id="cb10-29" data-line-number="29"><span class="co">#&gt; 2 patient1  20.030473 63.30520      40.22540     TRUE           1</span></a>
-<a class="sourceLine" id="cb10-30" data-line-number="30"><span class="co">#&gt; 3 patient2  27.337777 79.22517      41.61291     TRUE           1</span></a>
-<a class="sourceLine" id="cb10-31" data-line-number="31"><span class="co">#&gt; 4 patient0   8.767664 51.44862      42.68096     TRUE           2</span></a>
-<a class="sourceLine" id="cb10-32" data-line-number="32"><span class="co">#&gt; 5 patient1  19.510598 61.90536      37.19263     TRUE           2</span></a>
-<a class="sourceLine" id="cb10-33" data-line-number="33"><span class="co">#&gt; 6 patient0  13.078667 55.70125      42.62258     TRUE           3</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-28" data-line-number="28"><span class="co">#&gt; 1 patient0   9.418304 48.46019      39.04189     TRUE           1</span></a>
+<a class="sourceLine" id="cb10-29" data-line-number="29"><span class="co">#&gt; 2 patient1  20.239508 62.11364      38.87738     TRUE           1</span></a>
+<a class="sourceLine" id="cb10-30" data-line-number="30"><span class="co">#&gt; 3 patient2  28.585246 78.62688      40.74435     TRUE           1</span></a>
+<a class="sourceLine" id="cb10-31" data-line-number="31"><span class="co">#&gt; 4 patient0   7.927326 47.26136      39.33403     TRUE           2</span></a>
+<a class="sourceLine" id="cb10-32" data-line-number="32"><span class="co">#&gt; 5 patient1  14.601672 63.29367      39.55219     TRUE           2</span></a>
+<a class="sourceLine" id="cb10-33" data-line-number="33"><span class="co">#&gt; 6 patient2  26.491111 75.42380      35.94158     TRUE           2</span></a></code></pre></div>
 <p>Unfortunately, as the C++ simulation cores are destroyed, the downside of this kind of parallelization is that one cannot resume execution of the replicas.</p>
 </div>
 <div id="basic-visualisation-tools" class="section level2">
