@@ -46,6 +46,9 @@
     <loc>https://r-simmer.org/reference/get_sources.html</loc>
   </url>
   <url>
+    <loc>https://r-simmer.org/reference/handle_unfinished.html</loc>
+  </url>
+  <url>
     <loc>https://r-simmer.org/reference/join.html</loc>
   </url>
   <url>
@@ -146,8 +149,5 @@
   </url>
   <url>
     <loc>https://r-simmer.org/articles/simmer-08-philosophers.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/articles/simmer-aa-5G.html</loc>
   </url>
 </urlset>
