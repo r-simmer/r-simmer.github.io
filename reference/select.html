@@ -35,7 +35,8 @@
 <meta property="og:title" content="Select Resources — select" />
 
 <meta property="og:description" content="Activity for selecting a resource for a subsequent seize/release or setting
-its parameters (capacity or queue size)." />
+its parameters (capacity or queue size). Resources must be defined in the
+simulation environment (see add_resource)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -76,7 +77,7 @@ its parameters (capacity or queue size)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.3.0</span>
       </span>
     </div>
 
@@ -199,7 +200,8 @@ its parameters (capacity or queue size)." />
     <div class="ref-description">
     
     <p>Activity for selecting a resource for a subsequent seize/release or setting
-its parameters (capacity or queue size).</p>
+its parameters (capacity or queue size). Resources must be defined in the
+simulation environment (see <code><a href='add_resource.html'>add_resource</a></code>).</p>
     
     </div>
 
@@ -250,9 +252,56 @@ resources are unavailable.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='seize.html'>seize_selected</a></code>, <code><a href='seize.html'>release_selected</a></code>,
-<code><a href='set_capacity.html'>set_capacity_selected</a></code>, <code><a href='set_capacity.html'>set_queue_size_selected</a></code>.</p></div>
+<code><a href='set_capacity.html'>set_capacity_selected</a></code>, <code><a href='set_capacity.html'>set_queue_size_selected</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## predefined policy</span>
+<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>select</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"doctor"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>), <span class='st'>"round-robin"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='seize.html'>seize_selected</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='seize.html'>release_selected</a></span>(<span class='fl'>1</span>)
+
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"doctor1"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"doctor2"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"doctor3"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"patient"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='get_mon.html'>get_mon_resources</a></span>()</div><div class='output co'>#&gt;   resource time server queue capacity queue_size system limit replication
+#&gt; 1  doctor1    0      1     0        1        Inf      1   Inf           1
+#&gt; 2  doctor2    1      1     0        1        Inf      1   Inf           1
+#&gt; 3  doctor3    2      1     0        1        Inf      1   Inf           1
+#&gt; 4  doctor1    5      0     0        1        Inf      0   Inf           1
+#&gt; 5  doctor2    6      0     0        1        Inf      0   Inf           1
+#&gt; 6  doctor3    7      0     0        1        Inf      0   Inf           1</div><div class='input'>
+<span class='co'>## custom policy</span>
+<span class='no'>env</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='simmer.html'>simmer</a></span>()
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"doctor"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>)
+
+<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>select</span>(<span class='kw'>function</span>() {
+    <span class='no'>occ</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_capacity.html'>get_server_count</a></span>(<span class='no'>env</span>, <span class='no'>res</span>) + <span class='fu'><a href='get_capacity.html'>get_queue_count</a></span>(<span class='no'>env</span>, <span class='no'>res</span>)
+    <span class='no'>res</span>[<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/which.min'>which.min</a></span>(<span class='no'>occ</span>)[<span class='fl'>1</span>]]
+  }) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='seize.html'>seize_selected</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='seize.html'>release_selected</a></span>(<span class='fl'>1</span>)
+
+<span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='no'>res</span>) <span class='no'>env</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='no'>i</span>)
+<span class='no'>env</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"patient"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='get_mon.html'>get_mon_resources</a></span>()</div><div class='output co'>#&gt;   resource time server queue capacity queue_size system limit replication
+#&gt; 1  doctor1    0      1     0        1        Inf      1   Inf           1
+#&gt; 2  doctor2    1      1     0        1        Inf      1   Inf           1
+#&gt; 3  doctor3    2      1     0        1        Inf      1   Inf           1
+#&gt; 4  doctor1    5      0     0        1        Inf      0   Inf           1
+#&gt; 5  doctor2    6      0     0        1        Inf      0   Inf           1
+#&gt; 6  doctor3    7      0     0        1        Inf      0   Inf           1</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -264,7 +313,9 @@ resources are unavailable.</p>
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

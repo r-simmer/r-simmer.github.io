@@ -34,7 +34,9 @@
   
 <meta property="og:title" content="Seize/Release Resources — seize" />
 
-<meta property="og:description" content="Activities for seizing/releasing a resource, by name or a previously selected one." />
+<meta property="og:description" content="Activities for seizing/releasing a resource, by name or a previously selected
+one. Resources must be defined in the simulation environment (see
+add_resource)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -75,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.3.0</span>
       </span>
     </div>
 
@@ -197,7 +199,9 @@
 
     <div class="ref-description">
     
-    <p>Activities for seizing/releasing a resource, by name or a previously selected one.</p>
+    <p>Activities for seizing/releasing a resource, by name or a previously selected
+one. Resources must be defined in the simulation environment (see
+<code><a href='add_resource.html'>add_resource</a></code>).</p>
     
     </div>
 
@@ -265,9 +269,99 @@ handling all kinds of unfinished arrivals.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='select.html'>select</a></code>, <code><a href='set_capacity.html'>set_capacity</a></code>, <code><a href='set_capacity.html'>set_queue_size</a></code>,
-<code><a href='set_capacity.html'>set_capacity_selected</a></code>, <code><a href='set_capacity.html'>set_queue_size_selected</a></code>.</p></div>
+<code><a href='set_capacity.html'>set_capacity_selected</a></code>, <code><a href='set_capacity.html'>set_queue_size_selected</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## simple seize, delay, then release</span>
+<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>seize</span>(<span class='st'>"doctor"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>3</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>release</span>(<span class='st'>"doctor"</span>, <span class='fl'>1</span>)
+
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"doctor"</span>, <span class='kw'>capacity</span><span class='kw'>=</span><span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"patient"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='get_mon.html'>get_mon_resources</a></span>()</div><div class='output co'>#&gt;   resource time server queue capacity queue_size system limit replication
+#&gt; 1   doctor    0      1     0        1        Inf      1   Inf           1
+#&gt; 2   doctor    1      1     1        1        Inf      2   Inf           1
+#&gt; 3   doctor    3      1     0        1        Inf      1   Inf           1
+#&gt; 4   doctor    6      0     0        1        Inf      0   Inf           1</div><div class='input'>
+<span class='co'>## arrival rejection (no space left in the queue)</span>
+<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"arriving..."</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>seize</span>(<span class='st'>"doctor"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='co'># the second patient won't reach this point</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"doctor seized"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>release</span>(<span class='st'>"doctor"</span>, <span class='fl'>1</span>)
+
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"doctor"</span>, <span class='kw'>capacity</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>queue_size</span><span class='kw'>=</span><span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"patient"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: patient0: arriving...
+#&gt; 0: patient0: doctor seized
+#&gt; 1: patient1: arriving...</div><div class='input'>
+<span class='co'>## capturing rejection to retry</span>
+<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"arriving..."</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>seize</span>(
+    <span class='st'>"doctor"</span>, <span class='fl'>1</span>, <span class='kw'>continue</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+    <span class='kw'>reject</span> <span class='kw'>=</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"rejected!"</span>) <span class='kw'>%&gt;%</span>
+      <span class='co'># go for a walk and try again</span>
+      <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"retrying..."</span>) <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='rollback.html'>rollback</a></span>(<span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>Inf</span>)) <span class='kw'>%&gt;%</span>
+  <span class='co'># the second patient will reach this point after a couple of walks</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"doctor seized"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>release</span>(<span class='st'>"doctor"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"leaving"</span>)
+
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"doctor"</span>, <span class='kw'>capacity</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>queue_size</span><span class='kw'>=</span><span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"patient"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: patient0: arriving...
+#&gt; 0: patient0: doctor seized
+#&gt; 1: patient1: arriving...
+#&gt; 1: patient1: rejected!
+#&gt; 3: patient1: retrying...
+#&gt; 3: patient1: rejected!
+#&gt; 5: patient1: retrying...
+#&gt; 5: patient0: leaving
+#&gt; 5: patient1: doctor seized
+#&gt; 10: patient1: leaving</div><div class='input'>
+<span class='co'>## combining post.seize and reject</span>
+<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"arriving..."</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>seize</span>(
+    <span class='st'>"doctor"</span>, <span class='fl'>1</span>, <span class='kw'>continue</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>TRUE</span>),
+    <span class='kw'>post.seize</span> <span class='kw'>=</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>(<span class='st'>"admitted patient"</span>) <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"admitted"</span>) <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
+      <span class='fu'>release</span>(<span class='st'>"doctor"</span>, <span class='fl'>1</span>),
+    <span class='kw'>reject</span> <span class='kw'>=</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>(<span class='st'>"rejected patient"</span>) <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"rejected!"</span>) <span class='kw'>%&gt;%</span>
+      <span class='fu'>seize</span>(<span class='st'>"nurse"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
+      <span class='fu'>release</span>(<span class='st'>"nurse"</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
+  <span class='co'># both patients will reach this point, as continue = c(TRUE, TRUE)</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>10</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"leaving..."</span>)
+
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"doctor"</span>, <span class='kw'>capacity</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>queue_size</span><span class='kw'>=</span><span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"nurse"</span>, <span class='kw'>capacity</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>queue_size</span><span class='kw'>=</span><span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"patient"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: patient0: arriving...
+#&gt; 0: patient0: admitted
+#&gt; 1: patient1: arriving...
+#&gt; 1: patient1: rejected!
+#&gt; 13: patient1: leaving...
+#&gt; 15: patient0: leaving...</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -277,7 +371,9 @@ handling all kinds of unfinished arrivals.</p></td>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

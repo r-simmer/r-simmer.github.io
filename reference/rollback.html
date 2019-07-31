@@ -34,7 +34,8 @@
   
 <meta property="og:title" content="Rollback a Number of Activities — rollback" />
 
-<meta property="og:description" content="Activity for going backwards to a previous point in the trajectory. Useful to implement loops." />
+<meta property="og:description" content="Activity for going backwards to a previous point in the trajectory. Useful to
+implement loops." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -75,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.3.0</span>
       </span>
     </div>
 
@@ -197,7 +198,8 @@
 
     <div class="ref-description">
     
-    <p>Activity for going backwards to a previous point in the trajectory. Useful to implement loops.</p>
+    <p>Activity for going backwards to a previous point in the trajectory. Useful to
+implement loops.</p>
     
     </div>
 
@@ -212,7 +214,8 @@
     </tr>
     <tr>
       <th>amount</th>
-      <td><p>the amount of activities (of the same or parent trajectories) to roll back.</p></td>
+      <td><p>the amount of activities (of the same or parent trajectories)
+to roll back.</p></td>
     </tr>
     <tr>
       <th>times</th>
@@ -231,6 +234,38 @@ function to check whether the rollback must be done or not.</p></td>
     <p>Returns the trajectory object.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## rollback a specific number of times</span>
+<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"hello!"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>rollback</span>(<span class='fl'>2</span>, <span class='fl'>3</span>)
+
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"hello_sayer"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: hello_sayer0: hello!
+#&gt; 1: hello_sayer0: hello!
+#&gt; 2: hello_sayer0: hello!
+#&gt; 3: hello_sayer0: hello!</div><div class='input'>
+<span class='co'>## custom check</span>
+<span class='no'>env</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='simmer.html'>simmer</a></span>()
+
+<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='set_attribute.html'>set_attribute</a></span>(<span class='st'>"var"</span>, <span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='kw'>function</span>()
+    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(<span class='st'>"attribute level is at:"</span>, <span class='fu'><a href='get_n_generated.html'>get_attribute</a></span>(<span class='no'>env</span>, <span class='st'>"var"</span>))) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='set_attribute.html'>set_attribute</a></span>(<span class='st'>"var"</span>, <span class='fl'>25</span>, <span class='kw'>mod</span><span class='kw'>=</span><span class='st'>"+"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>rollback</span>(<span class='fl'>2</span>, <span class='kw'>check</span><span class='kw'>=</span><span class='kw'>function</span>() <span class='fu'><a href='get_n_generated.html'>get_attribute</a></span>(<span class='no'>env</span>, <span class='st'>"var"</span>) <span class='kw'>&lt;</span> <span class='fl'>100</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"done"</span>)
+
+<span class='no'>env</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: dummy0: attribute level is at: 0
+#&gt; 0: dummy0: attribute level is at: 25
+#&gt; 0: dummy0: attribute level is at: 50
+#&gt; 0: dummy0: attribute level is at: 75
+#&gt; 0: dummy0: done</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -238,7 +273,9 @@ function to check whether the rollback must be done or not.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

@@ -34,13 +34,14 @@
   
 <meta property="og:title" content="Inter-arrival Communication — send" />
 
-<meta property="og:description" content="These activities enable asynchronous programming. send() broadcasts a signal or a list
-of signals. Arrivals can subscribe to signals and (optionally) assign a handler with
-trap(). Note that, while inside a batch, all the signals subscribed before entering
-the batch are ignored. Upon a signal reception, the arrival stops the current activity and
-executes the handler (if provided). Then, the execution returns to the activity following the
-point of the interruption. untrap() can be used to unsubscribe from signals.
-wait() blocks until a signal is received." />
+<meta property="og:description" content="These activities enable asynchronous programming. send() broadcasts a
+signal or a list of signals. Arrivals can subscribe to signals and (optionally)
+assign a handler with trap(). Note that, while inside a batch, all the
+signals subscribed before entering the batch are ignored. Upon a signal
+reception, the arrival stops the current activity and executes the handler
+(if provided). Then, the execution returns to the activity following the
+point of the interruption. untrap() can be used to unsubscribe from
+signals. wait() blocks until a signal is received." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -81,7 +82,7 @@ wait() blocks until a signal is received." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.3.0</span>
       </span>
     </div>
 
@@ -203,13 +204,14 @@ wait() blocks until a signal is received." />
 
     <div class="ref-description">
     
-    <p>These activities enable asynchronous programming. <code>send()</code> broadcasts a signal or a list
-of signals. Arrivals can subscribe to signals and (optionally) assign a handler with
-<code>trap()</code>. Note that, while inside a batch, all the signals subscribed before entering
-the batch are ignored. Upon a signal reception, the arrival stops the current activity and
-executes the handler (if provided). Then, the execution returns to the activity following the
-point of the interruption. <code>untrap()</code> can be used to unsubscribe from signals.
-<code>wait()</code> blocks until a signal is received.</p>
+    <p>These activities enable asynchronous programming. <code>send()</code> broadcasts a
+signal or a list of signals. Arrivals can subscribe to signals and (optionally)
+assign a handler with <code>trap()</code>. Note that, while inside a batch, all the
+signals subscribed before entering the batch are ignored. Upon a signal
+reception, the arrival stops the current activity and executes the handler
+(if provided). Then, the execution returns to the activity following the
+point of the interruption. <code>untrap()</code> can be used to unsubscribe from
+signals. <code>wait()</code> blocks until a signal is received.</p>
     
     </div>
 
@@ -230,13 +232,14 @@ point of the interruption. <code>untrap()</code> can be used to unsubscribe from
     </tr>
     <tr>
       <th>signals</th>
-      <td><p>signal or list of signals, accepts either a string, a list of strings or a
-callable object (a function) which must return a string or a list of strings.</p></td>
+      <td><p>signal or list of signals, accepts either a string, a list of
+strings or a callable object (a function) which must return a string or a
+list of strings.</p></td>
     </tr>
     <tr>
       <th>delay</th>
-      <td><p>optional timeout to trigger the signals, accepts either a numeric or a callable
-object (a function) which must return a numeric.</p></td>
+      <td><p>optional timeout to trigger the signals, accepts either a
+numeric or a callable object (a function) which must return a numeric.</p></td>
     </tr>
     <tr>
       <th>handler</th>
@@ -257,6 +260,51 @@ object (a function) which must return a numeric.</p></td>
     <div class='dont-index'><p><code><a href='renege_in.html'>renege_if</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## block, signal and continue with a handler</span>
+<span class='no'>signal</span> <span class='kw'>&lt;-</span> <span class='st'>"you shall pass"</span>
+
+<span class='no'>t_blocked</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>trap</span>(
+    <span class='no'>signal</span>,
+    <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"executing the handler"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"waiting..."</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>wait</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"continuing!"</span>)
+
+<span class='no'>t_signaler</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='no'>signal</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>send</span>(<span class='no'>signal</span>)
+
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"blocked"</span>, <span class='no'>t_blocked</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"signaler"</span>, <span class='no'>t_signaler</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>5</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: blocked0: waiting...
+#&gt; 5: signaler0: you shall pass
+#&gt; 5: blocked0: executing the handler
+#&gt; 5: blocked0: continuing!</div><div class='input'>
+<span class='co'>## handlers can be interrupted, unless interruptible=FALSE</span>
+<span class='no'>t_worker</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>trap</span>(
+  <span class='no'>signal</span>,
+  <span class='kw'>handler</span> <span class='kw'>=</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"ok, I'm packing..."</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"performing a looong task..."</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>100</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"and I'm leaving!"</span>)
+
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"worker"</span>, <span class='no'>t_worker</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"signaler"</span>, <span class='no'>t_signaler</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>5</span>, <span class='fl'>5.5</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: worker0: performing a looong task...
+#&gt; 5: signaler0: you shall pass
+#&gt; 5: worker0: ok, I'm packing...
+#&gt; 5.5: signaler1: you shall pass
+#&gt; 5.5: worker0: ok, I'm packing...
+#&gt; 6.5: worker0: and I'm leaving!</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -266,7 +314,9 @@ object (a function) which must return a numeric.</p></td>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

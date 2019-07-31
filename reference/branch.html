@@ -75,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.3.0</span>
       </span>
     </div>
 
@@ -235,6 +235,30 @@ describing each sub-trajectory.</p></td>
     <p>Returns the trajectory object.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>env</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='simmer.html'>simmer</a></span>()
+
+<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='set_attribute.html'>set_global</a></span>(<span class='st'>"path"</span>, <span class='fl'>1</span>, <span class='kw'>mod</span><span class='kw'>=</span><span class='st'>"+"</span>, <span class='kw'>init</span><span class='kw'>=</span>-<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='kw'>function</span>() <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(<span class='st'>"Path"</span>, <span class='fu'><a href='get_n_generated.html'>get_global</a></span>(<span class='no'>env</span>, <span class='st'>"path"</span>), <span class='st'>"selected"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>branch</span>(
+    <span class='kw'>function</span>() <span class='fu'><a href='get_n_generated.html'>get_global</a></span>(<span class='no'>env</span>, <span class='st'>"path"</span>), <span class='kw'>continue</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>),
+    <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"following path 1"</span>),
+    <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+      <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"following path 2"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"continuing after the branch (path 0)"</span>)
+
+<span class='no'>env</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>:<span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: dummy0: Path 0 selected
+#&gt; 0: dummy0: continuing after the branch (path 0)
+#&gt; 1: dummy1: Path 1 selected
+#&gt; 1: dummy1: following path 1
+#&gt; 1: dummy1: continuing after the branch (path 0)
+#&gt; 2: dummy2: Path 2 selected
+#&gt; 2: dummy2: following path 2</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -242,7 +266,9 @@ describing each sub-trajectory.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

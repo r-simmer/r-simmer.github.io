@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.3.0</span>
       </span>
     </div>
 
@@ -154,7 +154,7 @@
       <h1>Design and Analysis of 5G Scenarios</h1>
                         <h4 class="author">Iñaki Ucar, José Alberto Hernández, Pablo Serrano, Arturo Azcorra</h4>
             
-            <h4 class="date">2019-03-15</h4>
+            <h4 class="date">2019-07-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-aa-5G.Rmd"><code>vignettes/simmer-aa-5G.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-aa-5G.Rmd</code></div>
@@ -264,7 +264,7 @@
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="../reference/batch.html">separate</a></span>(name, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Flow"</span>, <span class="st">"index"</span>, <span class="st">"n"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time,</a>
 <a class="sourceLine" id="cb3-15" data-line-number="15">         <span class="dt">waiting_time =</span> total_time <span class="op">-</span><span class="st"> </span>activity_time,</a>
-<a class="sourceLine" id="cb3-16" data-line-number="16">         <span class="dt">Queue =</span> forcats<span class="op">::</span><span class="kw">fct_recode</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/interaction">interaction</a></span>(fh_prio, preemptive),</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">         <span class="dt">Queue =</span> forcats<span class="op">::</span><span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_recode.html">fct_recode</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/interaction">interaction</a></span>(fh_prio, preemptive),</a>
 <a class="sourceLine" id="cb3-17" data-line-number="17">           <span class="st">"without SP"</span> =<span class="st"> "0.FALSE"</span>,</a>
 <a class="sourceLine" id="cb3-18" data-line-number="18">           <span class="st">"with SP"</span> =<span class="st"> "1.FALSE"</span>,</a>
 <a class="sourceLine" id="cb3-19" data-line-number="19">           <span class="st">"with SP &amp; preemption"</span> =<span class="st"> "1.TRUE"</span>))</a>
@@ -465,14 +465,14 @@
 <a class="sourceLine" id="cb7-9" data-line-number="9">envs <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-11" data-line-number="11"><span class="st">  </span><span class="kw">left_join</span>(<span class="kw">rowid_to_column</span>(cases, <span class="st">"replication"</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">scenario =</span> forcats<span class="op">::</span><span class="kw">fct_recode</span>(</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">scenario =</span> forcats<span class="op">::</span><span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_recode.html">fct_recode</a></span>(</a>
 <a class="sourceLine" id="cb7-13" data-line-number="13">    scenario, <span class="st">`</span><span class="dt">SmallCell + 31 ONUs</span><span class="st">`</span>=<span class="st">"A"</span>, <span class="st">`</span><span class="dt">RRH + 7 ONUs</span><span class="st">`</span>=<span class="st">"B"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="../reference/batch.html">separate</a></span>(name, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"flow"</span>, <span class="st">"index"</span>, <span class="st">"n"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-15" data-line-number="15"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">flow =</span> <span class="kw">if_else</span>(index <span class="op">==</span><span class="st"> </span>ONU_n<span class="op">+</span><span class="dv">1</span>, <span class="st">"SmallCell"</span>, flow)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-16" data-line-number="16"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total_time =</span> end_time <span class="op">-</span><span class="st"> </span>start_time,</a>
 <a class="sourceLine" id="cb7-17" data-line-number="17">         <span class="dt">waiting_time =</span> total_time <span class="op">-</span><span class="st"> </span>activity_time) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-18" data-line-number="18"><span class="st">  </span><span class="co"># plot</span></a>
-<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(forcats<span class="op">::</span><span class="kw">fct_rev</span>(flow), waiting_time<span class="op">*</span><span class="fl">1e6</span>, <span class="dt">color=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(limit))) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(forcats<span class="op">::</span><span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_rev.html">fct_rev</a></span>(flow), waiting_time<span class="op">*</span><span class="fl">1e6</span>, <span class="dt">color=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(limit))) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb7-20" data-line-number="20"><span class="st">  </span><span class="kw">facet_grid</span>(<span class="op">~</span>scenario, <span class="dt">scales=</span><span class="st">"free"</span>, <span class="dt">space=</span><span class="st">"free"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb7-21" data-line-number="21"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data=</span>bp.vals, <span class="dt">geom=</span><span class="st">"boxplot"</span>, <span class="dt">position=</span><span class="st">"dodge"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb7-22" data-line-number="22"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.justification=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">legend.position=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(.<span class="dv">02</span>, <span class="fl">.98</span>)) <span class="op">+</span></a>

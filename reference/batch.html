@@ -76,7 +76,7 @@ and splitting a previously established batch." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.3.0</span>
       </span>
     </div>
 
@@ -221,9 +221,10 @@ and splitting a previously established batch.</p>
     </tr>
     <tr>
       <th>timeout</th>
-      <td><p>set an optional timer which triggers batches every <code>timeout</code> time
-units even if the batch size has not been fulfilled, accepts a numeric or a callable
-object (a function) which must return a numeric (0 = disabled).</p></td>
+      <td><p>set an optional timer which triggers batches every
+<code>timeout</code> time units even if the batch size has not been fulfilled,
+accepts a numeric or a callable object (a function) which must return a
+numeric (0 = disabled).</p></td>
     </tr>
     <tr>
       <th>permanent</th>
@@ -231,9 +232,10 @@ object (a function) which must return a numeric (0 = disabled).</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>optional string. Unnamed batches from different <code>batch</code> activities are
-independent. However, if you want to feed arrivals from different trajectories into a
-same batch, you need to specify a common name across all your <code>batch</code> activities.</p></td>
+      <td><p>optional string. Unnamed batches from different <code>batch</code>
+activities are independent. However, if you want to feed arrivals from
+different trajectories into a same batch, you need to specify a common name
+across all your <code>batch</code> activities.</p></td>
     </tr>
     <tr>
       <th>rule</th>
@@ -247,6 +249,70 @@ every arrival to determine whether it should be included into the batch, thus</p
     <p>Returns the trajectory object.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## unnamed batch with a timeout</span>
+<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"arrived"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>batch</span>(<span class='fl'>2</span>, <span class='kw'>timeout</span><span class='kw'>=</span><span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"in a batch"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>separate</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"leaving"</span>)
+
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>:<span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: dummy0: arrived
+#&gt; 1: dummy1: arrived
+#&gt; 1: batch0: in a batch
+#&gt; 2: dummy2: arrived
+#&gt; 6: dummy0: leaving
+#&gt; 6: dummy1: leaving
+#&gt; 7: batch1: in a batch
+#&gt; 12: dummy2: leaving</div><div class='input'>
+<span class='co'>## batching based on some dynamic rule</span>
+<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"arrived"</span>) <span class='kw'>%&gt;%</span>
+  <span class='co'># always FALSE -&gt; no batches</span>
+  <span class='fu'>batch</span>(<span class='fl'>2</span>, <span class='kw'>rule</span><span class='kw'>=</span><span class='kw'>function</span>() <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"not in a batch"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>separate</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"leaving"</span>)
+
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>:<span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: dummy0: arrived
+#&gt; 0: dummy0: not in a batch
+#&gt; 1: dummy1: arrived
+#&gt; 1: dummy1: not in a batch
+#&gt; 2: dummy2: arrived
+#&gt; 2: dummy2: not in a batch
+#&gt; 5: dummy0: leaving
+#&gt; 6: dummy1: leaving
+#&gt; 7: dummy2: leaving</div><div class='input'>
+<span class='co'>## named batch, shared across trajectories</span>
+<span class='no'>traj0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"arrived traj0"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>batch</span>(<span class='fl'>2</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"mybatch"</span>)
+
+<span class='no'>traj1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"arrived traj1"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>batch</span>(<span class='fl'>2</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"mybatch"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"in a batch"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>separate</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"leaving traj1"</span>)
+
+<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy0"</span>, <span class='no'>traj0</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy1"</span>, <span class='no'>traj1</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: dummy00: arrived traj0
+#&gt; 0: dummy10: arrived traj1
+#&gt; 1: batch_mybatch: in a batch
+#&gt; 3: dummy00: leaving traj1
+#&gt; 3: dummy10: leaving traj1</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -254,7 +320,9 @@ every arrival to determine whether it should be included into the batch, thus</p
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

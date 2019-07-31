@@ -75,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.3.0</span>
       </span>
     </div>
 
@@ -203,7 +203,7 @@
 
     <pre class="usage"><span class='fu'>add_resource</span>(<span class='no'>.env</span>, <span class='no'>name</span>, <span class='kw'>capacity</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>queue_size</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>mon</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>preemptive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>preempt_order</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"fifo"</span>, <span class='st'>"lifo"</span>),
-  <span class='kw'>queue_size_strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>queue_size_strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>queue_priority</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>Inf</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -255,6 +255,12 @@ will set the <code>finished</code> flag to <code>FALSE</code> in the output of
 <code><a href='get_mon.html'>get_mon_arrivals</a></code>. Unfinished arrivals can be handled with a
 drop-out trajectory that can be set using the <code><a href='handle_unfinished.html'>handle_unfinished</a></code>
 activity.</p></td>
+    </tr>
+    <tr>
+      <th>queue_priority</th>
+      <td><p>the priority range required to be able to access the
+queue if there is no room in the server (if a single value is provided, it is
+treated as the minimum priority). By default, all arrivals can be enqueued.</p></td>
     </tr>
     </table>
     
