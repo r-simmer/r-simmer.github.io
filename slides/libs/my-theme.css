@@ -1,0 +1,68 @@
+.title-slide {
+  background-image: url("https://r-simmer.org/favicon.ico");
+  background-position: right 55px bottom 338px;
+  background-size: 120px;
+}
+
+.remark-slide-content:not(.title-slide):not(.inverse) h1::after {
+  background-image: url("https://r-simmer.org/favicon.ico");
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: '';
+  position: absolute;
+  top: 14px;
+  right: 45px;
+  width: 50px;
+  height: 50px;
+  filter: invert(100%);
+}
+
+.hexagon {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124.71 144"><path style="fill:%23EB811B;fill-opacity:1" d="M 62.359375 0 L 0 36 L 0 108 L 62.349609 144 L 124.71094 108 L 124.71094 36 L 62.359375 0 z M 62.359375 2.3105469 C 82.476562 13.92513 102.59375 25.539714 122.71094 37.154297 L 122.71094 106.8457 C 102.59049 118.46029 82.470052 130.07487 62.349609 141.68945 C 42.233073 130.07487 22.116536 118.46029 2 106.8457 L 2 37.154297 L 62.359375 2.3105469 z " /></svg>');
+  background-repeat: no-repeat;
+  position:absolute;
+  width: 130px;
+  height: 158px;
+}
+
+.left-column h2:first-child, .right-column h2:first-child,
+.pull-left h2:first-child, .pull-right h2:first-child {
+  margin-top: 0;
+}
+
+.right-column {
+  padding-top: 0;
+}
+
+.hljs-default .hljs {
+  background-color: #e7e8e2;
+}
+
+.pull-left ~ *, .pull-right ~ * {
+  clear: none;
+}
+
+.footnote {
+  bottom: 1em;
+}
+
+hr, .title-slide h2::after, .mline h1::after {
+  content: '';
+  display: block;
+  border: none;
+  background-color: #EB811B;
+  color: #EB811B;
+  height: 1px;
+}
+
+hr, .mline h1::after {
+  margin: 1em 15px 0 15px;
+}
+
+.title-slide h2::after {
+  margin: 10px 15px 35px 0;
+}
+
+.mline h1::after {
+  margin: 10px 15px 0 15px;
+}
