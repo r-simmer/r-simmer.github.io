@@ -1,0 +1,38 @@
+---
+title: "simmer 4.3.0 + JSS publication"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The 4.3.0 release of [simmer](http://r-simmer.org/), the Discrete-Event Simulator for R, is on CRAN. Along with this update, we are very glad to announce that our homonymous paper finally appeared in the *Journal of Statistical Software*. Please, use the following reference for citations (see `citation("simmer")`):
+
+- Ucar I, Smeets B, Azcorra A (2019). "simmer: Discrete-Event Simulation for R." _Journal of Statistical Software_, **90**(2),
+1-30. doi: 10.18637/jss.v090.i02 (URL: https://doi.org/10.18637/jss.v090.i02).
+
+It took quite a lot of work and time, but we are very proud of the final result. We would like to thank the editorial team for their hard work, with special thanks to the anonymous referee for their thorough reviews and valuable comments, and [Norman Matloff](https://matloff.wordpress.com) for his advice and support. Last but not least, we are very grateful for all the discussion and fruitful ideas that our growing community provides via the [simmer-devel](https://groups.google.com/forum/#!forum/simmer-devel) mailing list and [GitHub](https://github.com/r-simmer/simmer).
+
+The new release bring us the ability to keep seized resources after reneging, as well as to define a range of arrival priorities that are allowed to access a resource's queue if there is no room in the server. We moved a lot of activity usage examples that were scattered in a far too long vignette to the appropriate help pages, and of course there is the usual share of bug fixes. See below for a complete list of changes.
+
+Special thanks to [Tom Lawton](https://github.com/thigger) for his contributions to this release, and to Benjamin Sawicki for his generous donation.
+
+### New features
+
+- Add ability to `keep_seized` resources after reneging (#204 addressing #200).
+- Add ability to define a range of arrival priorities that are allowed to access
+  a resource's queue if there is no room in the server (#205 addressing #202).
+
+### Minor changes and fixes:
+
+- Drop R6 as a dependency (#193 addressing #190).
+- Small fix in `from` and `from_to` + documentation update (75a9569).
+- Move activity usage examples to help pages (#194).
+- Fix shortest-queue selection policies (#196).
+- Fix batch triggering (#203).
+- Update JSS paper, CITATION, references and DOI.
