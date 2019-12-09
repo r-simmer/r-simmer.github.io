@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Advanced Trajectory Usage • simmer | DES for R</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Advanced Trajectory Usage">
 <meta property="og:description" content="">
@@ -37,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.0</span>
       </span>
     </div>
 
@@ -148,13 +149,14 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Advanced Trajectory Usage</h1>
                         <h4 class="author">Iñaki Ucar, Bart Smeets</h4>
             
-            <h4 class="date">2019-07-31</h4>
+            <h4 class="date">2019-12-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-03-trajectories.Rmd"><code>vignettes/simmer-03-trajectories.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-03-trajectories.Rmd</code></div>
@@ -163,7 +165,7 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(simmer)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(simmer)</a></code></pre></div>
 <div id="available-set-of-activities" class="section level2">
 <h2 class="hasAnchor">
 <a href="#available-set-of-activities" class="anchor"></a>Available set of activities</h2>
@@ -174,46 +176,39 @@
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="dt">resource =</span> <span class="st">"doctor"</span>, <span class="dt">amount =</span> <span class="dv">1</span>)</a></code></pre></div>
 <p>Here we create a trajectory where a patient <em>seizes</em> a doctor for 3 minutes and then <em>releases</em> him again. This is a very straightforward example, however, most of the trajectory-related functions allow for more advanced usage.</p>
 <p>Usage examples are provided in the help page for each activity. The complete set of activities can be found and navigated in the <a href="https://r-simmer.org/reference/#section-add-activities-to-trajectories">reference page</a>, or you can list them as follows:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/methods">methods</a></span>(<span class="dt">class=</span><span class="st">"trajectory"</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt;  [1] [                       [[                     </span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;  [3] [[&lt;-                    [&lt;-                    </span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;  [5] activate                batch                  </span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;  [7] branch                  clone                  </span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;  [9] deactivate              get_n_activities       </span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; [11] handle_unfinished       join                   </span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; [13] leave                   length                 </span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; [15] log_                    print                  </span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; [17] release_all             release_selected_all   </span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; [19] release_selected        release                </span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; [21] renege_abort            renege_if              </span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; [23] renege_in               rep                    </span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; [25] rollback                seize_selected         </span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; [27] seize                   select                 </span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; [29] send                    separate               </span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; [31] set_attribute           set_capacity_selected  </span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; [33] set_capacity            set_global             </span></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt; [35] set_prioritization      set_queue_size_selected</span></a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt; [37] set_queue_size          set_source             </span></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt; [39] set_trajectory          stop_if                </span></a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt; [41] synchronize             timeout_from_attribute </span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt; [43] timeout                 trap                   </span></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt; [45] untrap                  wait                   </span></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt; see '?methods' for accessing help and source code</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span>(<span class="dt">class=</span><span class="st">"trajectory"</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt;  [1] [                       [[                      [[&lt;-                   </span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;  [4] [&lt;-                     activate                batch                  </span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;  [7] branch                  clone                   deactivate             </span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; [10] get_n_activities        handle_unfinished       join                   </span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; [13] leave                   length                  log_                   </span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; [16] print                   release_all             release_selected_all   </span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; [19] release_selected        release                 renege_abort           </span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; [22] renege_if               renege_in               rep                    </span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; [25] rollback                seize_selected          seize                  </span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; [28] select                  send                    separate               </span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; [31] set_attribute           set_capacity_selected   set_capacity           </span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; [34] set_global              set_prioritization      set_queue_size_selected</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; [37] set_queue_size          set_source              set_trajectory         </span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; [40] stop_if                 synchronize             timeout_from_attribute </span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; [43] timeout                 trap                    untrap                 </span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; [46] wait                   </span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; see '?methods' for accessing help and source code</span></a></code></pre></div>
 <p>Additionally, you may want to try the <code>simmer.bricks</code> package, a plugin for <code>simmer</code> which provides helper methods for trajectories. Each <em>brick</em> wraps a common activity pattern that can be used to build trajectories more conveniently (see the <a href="http://r-simmer.org/extensions/bricks/articles/introduction.html"><em>Introduction to <code>simmer.bricks</code></em></a>).</p>
 </div>
 <div id="dynamic-arguments" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dynamic-arguments" class="anchor"></a>Dynamic arguments</h2>
-<p>Many activities accept functions as arguments to be evaluated dynamically during the simulation. For example, see <code><a href="https://www.rdocumentation.org/packages/utils/topics/help">help(timeout)</a></code>:</p>
+<p>Many activities accept functions as arguments to be evaluated dynamically during the simulation. For example, see <code><a href="https://rdrr.io/r/utils/help.html">help(timeout)</a></code>:</p>
 <blockquote>
 <p>task: the timeout duration supplied by either passing a numeric or a callable object (a function) which must return a numeric.</p>
 </blockquote>
-<p>Be aware that if you want the <code><a href="../reference/timeout.html">timeout()</a></code>’s <code>task</code> parameter to be evaluated dynamically, you should supply a callable function. For example in <code><a href="../reference/timeout.html">timeout(function() rexp(1, 10))</a></code>, <code><a href="https://www.rdocumentation.org/packages/stats/topics/Exponential">rexp(1, 10)</a></code> will be evaluated every time the timeout activity is executed. However, if you supply it in the form of <code><a href="../reference/timeout.html">timeout(rexp(1, 10))</a></code>, it will only be evaluated once when the trajectory is defined, and will remain static after that.</p>
+<p>Be aware that if you want the <code><a href="../reference/timeout.html">timeout()</a></code>’s <code>task</code> parameter to be evaluated dynamically, you should supply a callable function. For example in <code><a href="../reference/timeout.html">timeout(function() rexp(1, 10))</a></code>, <code><a href="https://rdrr.io/r/stats/Exponential.html">rexp(1, 10)</a></code> will be evaluated every time the timeout activity is executed. However, if you supply it in the form of <code><a href="../reference/timeout.html">timeout(rexp(1, 10))</a></code>, it will only be evaluated once when the trajectory is defined, and will remain static after that.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Exponential">rexp</a></span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="op">%&gt;%</span><span class="st">        </span><span class="co"># fixed</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Exponential">rexp</a></span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="co"># dynamic</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="op">%&gt;%</span><span class="st">        </span><span class="co"># fixed</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="co"># dynamic</span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; trajectory: anonymous, 2 activities</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; { Activity: Timeout      | delay: 0.355775 }</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; { Activity: Timeout      | delay: 0.123566 }</span></a>
 <a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; { Activity: Timeout      | delay: function() }</span></a></code></pre></div>
 <p>Of course, this <code>task</code>, supplied as a function, may be as complex as you need and, for instance, it may check the status of a particular resource, interact with other entities in your simulation model… The same applies to all the activities when they accept a function as a parameter.</p>
 </div>
@@ -223,7 +218,7 @@
 <p>Dynamic arguments may interact with the environment to extract parameters of interest such as the current simulation time (see <code><a href="../reference/now.html">?now</a></code>), status of resources (see <code><a href="../reference/get_capacity.html">?get_capacity</a></code>), status of generators (see <code><a href="../reference/get_n_generated.html">?get_n_generated</a></code>), or directly to gather the history of monitored values (see <code><a href="../reference/get_mon.html">?get_mon</a></code>). The only requirement is that the simulation environment must be in the scope of the trajectory.</p>
 <p>Therefore, this will not work:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(<span class="kw"><a href="../reference/now.html">now</a></span>(env)))</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="kw"><a href="../reference/now.html">now</a></span>(env)))</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, traj, <span class="cf">function</span>() <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
@@ -232,7 +227,7 @@
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; Error in now(env): object 'env' not found</span></a></code></pre></div>
 <p>because the global <code>env</code> is not available at runtime: the simulation runs <em>and then</em> the resulting object is assigned to <code>env</code>. For <code>env</code> to be in the scope of <code>t</code> during this simulation, it is enough to detach the <code><a href="../reference/run.html">run()</a></code> method from the definition pipe:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(<span class="kw"><a href="../reference/now.html">now</a></span>(env)))</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="kw"><a href="../reference/now.html">now</a></span>(env)))</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, traj, <span class="cf">function</span>() <span class="dv">1</span>)</a>
@@ -247,7 +242,7 @@
 <a class="sourceLine" id="cb7-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># here I'm using it</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5">traj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(<span class="kw"><a href="../reference/now.html">now</a></span>(env)))</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="kw"><a href="../reference/now.html">now</a></span>(env)))</a>
 <a class="sourceLine" id="cb7-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co"># and finally, run it</span></a>
 <a class="sourceLine" id="cb7-9" data-line-number="9">env <span class="op">%&gt;%</span></a>
@@ -282,19 +277,19 @@
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span></a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></a></code></pre></div>
 <p>You can think about a trajectory object as a list of activities that has a length</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(t0)</a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(t0)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; [1] 3</span></a></code></pre></div>
-<p>and can be subset using the standard operator <code>[</code>. For instance, you can select the activities you want with a logical vector:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">t0[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
+<p>and can be subset using the standard operator <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>. For instance, you can select the activities you want with a logical vector:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">t0[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; trajectory: anonymous, 2 activities</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span></a>
 <a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></a></code></pre></div>
 <p>Or a set of indices that respect the order given:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">t0[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">3</span>)]</a>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">t0[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">3</span>)]</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; trajectory: anonymous, 2 activities</span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">t0[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">3</span>, <span class="dv">1</span>)]</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">t0[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">3</span>, <span class="dv">1</span>)]</a>
 <a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; trajectory: anonymous, 2 activities</span></a>
 <a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></a>
 <a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span></a></code></pre></div>
@@ -304,11 +299,11 @@
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></a></code></pre></div>
 <p>Or by name, but note that this does <strong>not</strong> respect the order given though, because it performs a match:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">t0[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"seize"</span>, <span class="st">"release"</span>)]</a>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">t0[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"seize"</span>, <span class="st">"release"</span>)]</a>
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; trajectory: anonymous, 2 activities</span></a>
 <a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span></a>
 <a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">t0[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"release"</span>, <span class="st">"seize"</span>)]</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">t0[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"release"</span>, <span class="st">"seize"</span>)]</a>
 <a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt; trajectory: anonymous, 2 activities</span></a>
 <a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span></a>
 <a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></a></code></pre></div>
@@ -319,16 +314,16 @@
 <a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span></a>
 <a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></a></code></pre></div>
 <p>In fact, you are <strong>cloning</strong> the trajectory with the latter command. It is equivalent to <code>t0[1:length(t0)]</code> or <code><a href="../reference/join.html">join(t0)</a></code>.</p>
-<p>The generics <code><a href="https://www.rdocumentation.org/packages/utils/topics/head">head()</a></code> and <code><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail()</a></code> use the <code>[</code> operator under the hood, thus you can use them as well:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(t0, <span class="dv">2</span>)</a>
+<p>The generics <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> and <code><a href="https://rdrr.io/r/utils/head.html">tail()</a></code> use the <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> operator under the hood, thus you can use them as well:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(t0, <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; trajectory: anonymous, 2 activities</span></a>
 <a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span></a>
 <a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>(t0, <span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(t0, <span class="dv">-1</span>)</a>
 <a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt; trajectory: anonymous, 2 activities</span></a>
 <a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span></a>
 <a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></a></code></pre></div>
-<p>The <code>[[</code> operator can also be used to extract <strong>only one</strong> element:</p>
+<p>The <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> operator can also be used to extract <strong>only one</strong> element:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">t0[[<span class="dv">2</span>]]</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; trajectory: anonymous, 1 activities</span></a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span></a></code></pre></div>
@@ -344,6 +339,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -359,17 +355,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Iñaki Ucar, Bart Smeets.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

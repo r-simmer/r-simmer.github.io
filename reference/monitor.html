@@ -8,21 +8,25 @@
 
 <title>Create a Monitor — monitor • simmer | DES for R</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,10 +36,11 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Create a Monitor — monitor" />
 
+<meta property="og:title" content="Create a Monitor — monitor" />
 <meta property="og:description" content="Methods for creating monitor objects for simulation environments." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -59,6 +64,7 @@
   gtag('config', 'UA-115358925-1');
 </script>
 
+
   </head>
 
   <body>
@@ -75,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.0</span>
       </span>
     </div>
 
@@ -150,7 +156,6 @@
   </a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -185,6 +190,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -196,9 +202,7 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Methods for creating <code>monitor</code> objects for simulation environments.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>monitor</span>(<span class='no'>name</span>, <span class='no'>xptr</span>, <span class='no'>get_arrivals</span>, <span class='no'>get_attributes</span>, <span class='no'>get_resources</span>,
@@ -206,13 +210,12 @@
 
 <span class='fu'>monitor_mem</span>()
 
-<span class='fu'>monitor_delim</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>(), <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>" "</span>,
-  <span class='kw'>ext</span> <span class='kw'>=</span> <span class='st'>".txt"</span>, <span class='kw'>reader</span> <span class='kw'>=</span> <span class='no'>read.delim</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>stringsAsFactors</span> <span class='kw'>=</span>
-  <span class='fl'>FALSE</span>))
+<span class='fu'>monitor_delim</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>" "</span>, <span class='kw'>ext</span> <span class='kw'>=</span> <span class='st'>".txt"</span>,
+  <span class='kw'>reader</span> <span class='kw'>=</span> <span class='no'>read.delim</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))
 
-<span class='fu'>monitor_csv</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>(), <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>reader</span> <span class='kw'>=</span> <span class='no'>read.csv</span>,
-  <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</pre>
-    
+<span class='fu'>monitor_csv</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>reader</span> <span class='kw'>=</span> <span class='no'>read.csv</span>,
+  <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -280,11 +283,10 @@ files when the monitor is destroyed.</p></td>
       <td><p>a list of further arguments for <code>reader</code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>monitor</code> object.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <code>monitor</code> method is a generic function to instantiate a
@@ -296,32 +298,31 @@ and it should the fastest.</p>
 consider monitoring to disk. To that end, <code>monitor_delim</code> stores the values
 in flat delimited files. The usual <code><a href='get_mon.html'>get_mon</a>_*</code> methods retrieve
 data frames from such files using the <code>reader</code> provided. By default,
-<code><a href='https://www.rdocumentation.org/packages/utils/topics/read.table'>read.delim</a></code> is used, but you may consider using faster
+<code><a href='https://rdrr.io/r/utils/read.table.html'>read.delim</a></code> is used, but you may consider using faster
 alternatives from other packages. It is also possible to <code>keep</code> the
 files in a custom directory to read and post-process them in a separate
 workflow.</p>
 <p><code>monitor_csv</code> is a special case of <code>monitor_delim</code> with
 <code>sep=","</code> and <code>ext=".csv"</code>.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>mon</span> <span class='kw'>&lt;-</span> <span class='fu'>monitor_csv</span>()
 <span class='no'>mon</span></div><div class='output co'>#&gt; simmer monitor: to disk (delimited files)
-#&gt; { arrivals: /tmp/RtmputjULB/file461b2b13fb4d_arrivals.csv }
-#&gt; { releases: /tmp/RtmputjULB/file461b2b13fb4d_releases.csv }
-#&gt; { attributes: /tmp/RtmputjULB/file461b2b13fb4d_attributes.csv }
-#&gt; { resources: /tmp/RtmputjULB/file461b2b13fb4d_resources.csv }</div><div class='input'>
+#&gt; { arrivals: /tmp/RtmpjgGx5D/filea1416b954ba9_arrivals.csv }
+#&gt; { releases: /tmp/RtmpjgGx5D/filea1416b954ba9_releases.csv }
+#&gt; { attributes: /tmp/RtmpjgGx5D/filea1416b954ba9_attributes.csv }
+#&gt; { resources: /tmp/RtmpjgGx5D/filea1416b954ba9_resources.csv }</div><div class='input'>
 <span class='no'>env</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='simmer.html'>simmer</a></span>(<span class='kw'>mon</span><span class='kw'>=</span><span class='no'>mon</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>1</span>), <span class='kw'>function</span>() <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>10</span>)
 <span class='no'>env</span></div><div class='output co'>#&gt; simmer environment: anonymous | now: 10 | next: 10
 #&gt; { Monitor: to disk (delimited files) }
-#&gt;   { arrivals: /tmp/RtmputjULB/file461b2b13fb4d_arrivals.csv }
-#&gt;   { releases: /tmp/RtmputjULB/file461b2b13fb4d_releases.csv }
-#&gt;   { attributes: /tmp/RtmputjULB/file461b2b13fb4d_attributes.csv }
-#&gt;   { resources: /tmp/RtmputjULB/file461b2b13fb4d_resources.csv }
+#&gt;   { arrivals: /tmp/RtmpjgGx5D/filea1416b954ba9_arrivals.csv }
+#&gt;   { releases: /tmp/RtmpjgGx5D/filea1416b954ba9_releases.csv }
+#&gt;   { attributes: /tmp/RtmpjgGx5D/filea1416b954ba9_attributes.csv }
+#&gt;   { resources: /tmp/RtmpjgGx5D/filea1416b954ba9_resources.csv }
 #&gt; { Source: dummy | monitored: 1 | n_generated: 10 }</div><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/read.table'>read.csv</a></span>(<span class='no'>mon</span>$<span class='no'>handlers</span>$<span class='no'>arrivals</span>) <span class='co'># direct access</span></div><div class='output co'>#&gt;     name start_time end_time activity_time finished
+<span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span>(<span class='no'>mon</span>$<span class='no'>handlers</span>$<span class='no'>arrivals</span>) <span class='co'># direct access</span></div><div class='output co'>#&gt;     name start_time end_time activity_time finished
 #&gt; 1 dummy0          1        2             1        1
 #&gt; 2 dummy1          2        3             1        1
 #&gt; 3 dummy2          3        4             1        1
@@ -344,16 +345,14 @@ workflow.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -361,13 +360,16 @@ workflow.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

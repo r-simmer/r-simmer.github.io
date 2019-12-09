@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Other SimPy Examples • simmer | DES for R</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Other SimPy Examples">
 <meta property="og:description" content="">
@@ -37,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.0</span>
       </span>
     </div>
 
@@ -148,13 +149,14 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Other SimPy Examples</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2019-07-31</h4>
+            <h4 class="date">2019-12-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-05-simpy.Rmd"><code>vignettes/simmer-05-simpy.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-05-simpy.Rmd</code></div>
@@ -182,7 +184,7 @@
 <p>A carwash has a limited number of washing machines and defines a washing process that takes some time. Cars arrive at the carwash at a random time. If one washing machine is available, they start the washing process and wait for it to finish. If not, they wait until they an use one.</p>
 </blockquote>
 <p>Parameters and setup:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(simmer)</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(simmer)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">NUM_MACHINES &lt;-<span class="st"> </span><span class="dv">2</span>  <span class="co"># Number of machines in the carwash</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">WASHTIME &lt;-<span class="st"> </span><span class="dv">5</span>      <span class="co"># Minutes it takes to clean a car</span></a>
@@ -190,7 +192,7 @@
 <a class="sourceLine" id="cb1-6" data-line-number="6">SIM_TIME &lt;-<span class="st"> </span><span class="dv">20</span>     <span class="co"># Simulation time in minutes</span></a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># setup</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">42</span>)</a>
 <a class="sourceLine" id="cb1-10" data-line-number="10">env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()</a></code></pre></div>
 <p>The implementation with <code>simmer</code> is as simple as defining the trajectory each arriving <code>car</code> will share and follow. This trajectory comprises seizing a wash machine, spending some time and releasing it. The process takes <code>WASHTIME</code> and removes some random percentage of dirt between 50 and 90%. The <code><a href="../reference/log_.html">log_()</a></code> messages are merely illustrative.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">car &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
@@ -198,18 +200,18 @@
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"wash"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"enters the carwash"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(WASHTIME) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"dirt_removed"</span>, <span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(<span class="dv">50</span><span class="op">:</span><span class="dv">99</span>, <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"dirt_removed"</span>, <span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="dv">50</span><span class="op">:</span><span class="dv">99</span>, <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() </a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"dirt_removed"</span>), <span class="st">"% of dirt was removed"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"dirt_removed"</span>), <span class="st">"% of dirt was removed"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"wash"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"leaves the carwash"</span>)</a></code></pre></div>
 <p>Finally, we setup the resources and feed the trajectory with a couple of generators. The result is shown below:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">env <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"wash"</span>, NUM_MACHINES) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="co"># feed the trajectory with 4 initial cars</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car_initial"</span>, car, <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="dv">0</span>, <span class="dv">4</span>))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car_initial"</span>, car, <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, <span class="dv">4</span>))) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">  </span><span class="co"># new cars approx. every T_INTER minutes</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, <span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>((T_INTER<span class="dv">-2</span>)<span class="op">:</span>(T_INTER<span class="op">+</span><span class="dv">2</span>), <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, <span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>((T_INTER<span class="dv">-2</span>)<span class="op">:</span>(T_INTER<span class="op">+</span><span class="dv">2</span>), <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="st">  </span><span class="co"># start the simulation</span></a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(SIM_TIME)</a>
 <a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; 0: car_initial0: arrives at the carwash</span></a>
@@ -218,27 +220,31 @@
 <a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; 0: car_initial1: enters the carwash</span></a>
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; 0: car_initial2: arrives at the carwash</span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; 0: car_initial3: arrives at the carwash</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 5: car_initial0: 96% of dirt was removed</span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; 5: car_initial1: 64% of dirt was removed</span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; 5: car_initial0: leaves the carwash</span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; 5: car_initial1: leaves the carwash</span></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt; 5: car_initial2: enters the carwash</span></a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt; 5: car_initial3: enters the carwash</span></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt; 9: car0: arrives at the carwash</span></a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt; 10: car_initial2: 82% of dirt was removed</span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt; 10: car_initial3: 75% of dirt was removed</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 5: car0: arrives at the carwash</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; 5: car_initial0: 86% of dirt was removed</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; 5: car_initial1: 50% of dirt was removed</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; 5: car_initial0: leaves the carwash</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt; 5: car_initial1: leaves the carwash</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt; 5: car_initial2: enters the carwash</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt; 5: car_initial3: enters the carwash</span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt; 10: car_initial2: 59% of dirt was removed</span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt; 10: car_initial3: 85% of dirt was removed</span></a>
 <a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt; 10: car_initial2: leaves the carwash</span></a>
 <a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt; 10: car_initial3: leaves the carwash</span></a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt; 10: car0: enters the carwash</span></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt; 15: car0: 86% of dirt was removed</span></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt; 15: car0: leaves the carwash</span></a>
-<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt; 18: car1: arrives at the carwash</span></a>
-<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt; 18: car1: enters the carwash</span></a>
-<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt; simmer environment: anonymous | now: 20 | next: 23</span></a>
-<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; { Monitor: in memory }</span></a>
-<a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt; { Resource: wash | monitored: TRUE | server status: 1(2) | queue status: 0(Inf) }</span></a>
-<a class="sourceLine" id="cb3-34" data-line-number="34"><span class="co">#&gt; { Source: car_initial | monitored: 1 | n_generated: 4 }</span></a>
-<a class="sourceLine" id="cb3-35" data-line-number="35"><span class="co">#&gt; { Source: car | monitored: 1 | n_generated: 3 }</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt; 10: car1: arrives at the carwash</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt; 10: car1: enters the carwash</span></a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt; 10: car0: enters the carwash</span></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt; 15: car1: 98% of dirt was removed</span></a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt; 15: car0: 96% of dirt was removed</span></a>
+<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt; 15: car1: leaves the carwash</span></a>
+<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; 15: car0: leaves the carwash</span></a>
+<a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt; 16: car2: arrives at the carwash</span></a>
+<a class="sourceLine" id="cb3-34" data-line-number="34"><span class="co">#&gt; 16: car2: enters the carwash</span></a>
+<a class="sourceLine" id="cb3-35" data-line-number="35"><span class="co">#&gt; simmer environment: anonymous | now: 20 | next: 21</span></a>
+<a class="sourceLine" id="cb3-36" data-line-number="36"><span class="co">#&gt; { Monitor: in memory }</span></a>
+<a class="sourceLine" id="cb3-37" data-line-number="37"><span class="co">#&gt; { Resource: wash | monitored: TRUE | server status: 1(2) | queue status: 0(Inf) }</span></a>
+<a class="sourceLine" id="cb3-38" data-line-number="38"><span class="co">#&gt; { Source: car_initial | monitored: 1 | n_generated: 4 }</span></a>
+<a class="sourceLine" id="cb3-39" data-line-number="39"><span class="co">#&gt; { Source: car | monitored: 1 | n_generated: 4 }</span></a></code></pre></div>
 </div>
 <div id="machine-shop" class="section level2">
 <h2 class="hasAnchor">
@@ -255,7 +261,7 @@
 <p>This example comprises a workshop with <code>n</code> identical machines. A stream of jobs (enough to keep the machines busy) arrives. Each machine breaks down periodically. Repairs are carried out by one repairman. The repairman has other, less important tasks to perform, too. Broken machines preempt theses tasks. The repairman continues them when he is done with the machine repair. The workshop works continuously.</p>
 </blockquote>
 <p>First of all, we load the libraries and prepare the environment.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(simmer)</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(simmer)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">PT_MEAN &lt;-<span class="st"> </span><span class="fl">10.0</span>         <span class="co"># Avg. processing time in minutes</span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4">PT_SIGMA &lt;-<span class="st"> </span><span class="fl">2.0</span>         <span class="co"># Sigma of processing time</span></a>
@@ -268,13 +274,13 @@
 <a class="sourceLine" id="cb4-11" data-line-number="11">SIM_TIME &lt;-<span class="st"> </span>WEEKS <span class="op">*</span><span class="st"> </span><span class="dv">7</span> <span class="op">*</span><span class="st"> </span><span class="dv">24</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span>  <span class="co"># Simulation time in minutes</span></a>
 <a class="sourceLine" id="cb4-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co"># setup</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">42</span>)</a>
 <a class="sourceLine" id="cb4-15" data-line-number="15">env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()</a></code></pre></div>
 <p>The <code>make_parts</code> trajectory defines a machine’s operating loop. A worker seizes the machine and starts manufacturing and counting parts in an infinite loop. Provided we want more than one machine, we parametrise the trajectory as a function of the machine:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">make_parts &lt;-<span class="st"> </span><span class="cf">function</span>(machine)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(machine, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">1</span>, PT_MEAN, PT_SIGMA)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">1</span>, PT_MEAN, PT_SIGMA)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"parts"</span>, <span class="dv">1</span>, <span class="dt">mod=</span><span class="st">"+"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="st">    </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dv">2</span>, <span class="ot">Inf</span>) <span class="co"># go to 'timeout' over and over</span></a></code></pre></div>
 <p>Repairman’s <em>unimportant</em> jobs may be modelled in the same way (without the accounting part):</p>
@@ -283,7 +289,7 @@
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(JOB_DURATION) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/rollback.html">rollback</a></span>(<span class="dv">1</span>, <span class="ot">Inf</span>)</a></code></pre></div>
 <p>Failures are high-priority arrivals, both for the machines and for the repairman. Each random generated failure will randomly select and seize (break) a machine, and will seize (call) the repairman. After the machine is repaired, both resources are released and the corresponding workers begin where they left.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">machines &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"machine"</span>, <span class="dv">1</span><span class="op">:</span>NUM_MACHINES<span class="dv">-1</span>)</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">machines &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"machine"</span>, <span class="dv">1</span><span class="op">:</span>NUM_MACHINES<span class="dv">-1</span>)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">failure &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/select.html">select</a></span>(machines, <span class="dt">policy =</span> <span class="st">"random"</span>) <span class="op">%&gt;%</span></a>
@@ -295,7 +301,7 @@
 <p>The machines and their workers are appended to the simulation environment. Note that each machine, which is defined as preemptive, has space for one worker (or a failure) and no space in queue.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="cf">for</span> (i <span class="cf">in</span> machines) env <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(i, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dt">preemptive =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(i, <span class="st">"_worker"</span>), <span class="kw">make_parts</span>(i), <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(i, <span class="st">"_worker"</span>), <span class="kw">make_parts</span>(i), <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="dv">0</span>), <span class="dt">mon =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p>The same for the repairman, but this time the queue is infinite, since there could be any number of machines at any time waiting for repairments.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">env <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"repairman"</span>, <span class="dv">1</span>, <span class="ot">Inf</span>, <span class="dt">preemptive =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
@@ -304,22 +310,22 @@
 <p>Finally, the failure generator is defined with <code>priority=1</code> (default: 0), and the simulation begins:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">env <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"failure"</span>, failure, </a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">                <span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Exponential">rexp</a></span>(<span class="dv">1</span>, BREAK_MEAN <span class="op">*</span><span class="st"> </span>NUM_MACHINES), </a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">                <span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="dv">1</span>, BREAK_MEAN <span class="op">*</span><span class="st"> </span>NUM_MACHINES), </a>
 <a class="sourceLine" id="cb10-4" data-line-number="4">                <span class="dt">priority =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(SIM_TIME) <span class="op">%&gt;%</span><span class="st"> </span>invisible</a></code></pre></div>
 <p>The last value per worker from the attributes table reports the number of parts made:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/aggregate">aggregate</a></span>(value <span class="op">~</span><span class="st"> </span>name, <span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env), max)</a>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span>(value <span class="op">~</span><span class="st"> </span>name, <span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env), max)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt;                name value</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; 1  machine0_worker0  3073</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; 2  machine1_worker0  3281</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; 3  machine2_worker0  3284</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; 4  machine3_worker0  3241</span></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; 5  machine4_worker0  3288</span></a>
-<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; 6  machine5_worker0  3377</span></a>
-<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; 7  machine6_worker0  3362</span></a>
-<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; 8  machine7_worker0  3429</span></a>
-<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; 9  machine8_worker0  3443</span></a>
-<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt; 10 machine9_worker0  3323</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; 1  machine0_worker0  3279</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; 2  machine1_worker0  3306</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; 3  machine2_worker0  3370</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; 4  machine3_worker0  3393</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; 5  machine4_worker0  3345</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; 6  machine5_worker0  3415</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; 7  machine6_worker0  3385</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; 8  machine7_worker0  3320</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; 9  machine8_worker0  3332</span></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt; 10 machine9_worker0  3377</span></a></code></pre></div>
 </div>
 <div id="movie-renege" class="section level2">
 <h2 class="hasAnchor">
@@ -336,14 +342,14 @@
 <p>This example models a movie theater with one ticket counter selling tickets for three movies (next show only). People arrive at random times and try to buy a random number (1-6) of tickets for a random movie. When a movie is sold out, all people waiting to buy a ticket for that movie renege (leave the queue).</p>
 </blockquote>
 <p>First of all, we load the libraries and prepare the environment.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(simmer)</a>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(simmer)</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">TICKETS &lt;-<span class="st"> </span><span class="dv">50</span>     <span class="co"># Number of tickets per movie</span></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4">SIM_TIME &lt;-<span class="st"> </span><span class="dv">120</span>   <span class="co"># Simulate until</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">movies &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"R Unchained"</span>, <span class="st">"Kill Process"</span>, <span class="st">"Pulp Implementation"</span>)</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">movies &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"R Unchained"</span>, <span class="st">"Kill Process"</span>, <span class="st">"Pulp Implementation"</span>)</a>
 <a class="sourceLine" id="cb12-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co"># setup</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">42</span>)</a>
 <a class="sourceLine" id="cb12-9" data-line-number="9">env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()</a></code></pre></div>
 <p>The main actor of this simulation is the <em>moviegoer</em>, a process that will try to buy a number of tickets for a certain movie. The logic is as follows:</p>
 <ol style="list-style-type: decimal">
@@ -375,30 +381,30 @@
 </ol>
 <p>This recipe is directly translated into a <code>simmer</code> trajectory as follows:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">get_movie &lt;-<span class="st"> </span><span class="cf">function</span>() movies[<span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"movie"</span>)]</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">soldout_signal &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="kw">get_movie</span>(), <span class="st">" sold out"</span>)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">soldout_signal &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="kw">get_movie</span>(), <span class="st">" sold out"</span>)</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3">check_soldout &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw"><a href="../reference/get_capacity.html">get_capacity</a></span>(env, <span class="kw">get_movie</span>()) <span class="op">==</span><span class="st"> </span><span class="dv">0</span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4">check_tickets_available &lt;-<span class="st"> </span><span class="cf">function</span>()</a>
 <a class="sourceLine" id="cb13-5" data-line-number="5">  <span class="kw"><a href="../reference/get_capacity.html">get_server_count</a></span>(env, <span class="kw">get_movie</span>()) <span class="op">&gt;</span><span class="st"> </span>(TICKETS <span class="op">-</span><span class="st"> </span><span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb13-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb13-7" data-line-number="7">moviegoer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-8" data-line-number="8"><span class="st">  </span><span class="co"># select a movie</span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"movie"</span>, <span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(<span class="dv">3</span>, <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"movie"</span>, <span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="dv">3</span>, <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="../reference/select.html">select</a></span>(get_movie) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-11" data-line-number="11"><span class="st">  </span><span class="co"># set reneging condition</span></a>
-<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_if</a></span>(soldout_signal) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="../reference/renege.html">renege_if</a></span>(soldout_signal) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-13" data-line-number="13"><span class="st">  </span><span class="co"># leave immediately if the movie was already sold out</span></a>
-<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="../reference/leave.html">leave</a></span>(check_soldout) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="../reference/renege.html">leave</a></span>(check_soldout) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-15" data-line-number="15"><span class="st">  </span><span class="co"># wait for my turn</span></a>
 <a class="sourceLine" id="cb13-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-17" data-line-number="17"><span class="st">  </span><span class="co"># buy tickets</span></a>
 <a class="sourceLine" id="cb13-18" data-line-number="18"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize_selected</a></span>(</a>
-<a class="sourceLine" id="cb13-19" data-line-number="19">    <span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(<span class="dv">6</span>, <span class="dv">1</span>), <span class="dt">continue =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb13-19" data-line-number="19">    <span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="dv">6</span>, <span class="dv">1</span>), <span class="dt">continue =</span> <span class="ot">FALSE</span>,</a>
 <a class="sourceLine" id="cb13-20" data-line-number="20">    <span class="dt">reject =</span> <span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-21" data-line-number="21"><span class="st">      </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">0.5</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-22" data-line-number="22"><span class="st">      </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>, <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb13-23" data-line-number="23">  ) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-24" data-line-number="24"><span class="st">  </span><span class="co"># abort reneging condition</span></a>
-<a class="sourceLine" id="cb13-25" data-line-number="25"><span class="st">  </span><span class="kw"><a href="../reference/renege_in.html">renege_abort</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-25" data-line-number="25"><span class="st">  </span><span class="kw"><a href="../reference/renege.html">renege_abort</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-26" data-line-number="26"><span class="st">  </span><span class="co"># check the tickets available</span></a>
 <a class="sourceLine" id="cb13-27" data-line-number="27"><span class="st">  </span><span class="kw"><a href="../reference/branch.html">branch</a></span>(</a>
 <a class="sourceLine" id="cb13-28" data-line-number="28">    check_tickets_available, <span class="dt">continue =</span> <span class="ot">TRUE</span>,</a>
@@ -426,39 +432,39 @@
 <p>And finally, we attach an exponential <em>moviegoer</em> generator to the <code>moviegoer</code> trajectory and the simulation starts:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># add a moviegoer generator and start simulation</span></a>
 <a class="sourceLine" id="cb15-2" data-line-number="2">env <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"moviegoer"</span>, moviegoer, <span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Exponential">rexp</a></span>(<span class="dv">1</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="fl">0.5</span>), <span class="dt">mon=</span><span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"moviegoer"</span>, moviegoer, <span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="dv">1</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="fl">0.5</span>), <span class="dt">mon=</span><span class="dv">2</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(SIM_TIME)</a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; simmer environment: anonymous | now: 120 | next: 120.121103789898</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; simmer environment: anonymous | now: 120 | next: 120.027892152333</span></a>
 <a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; { Monitor: in memory }</span></a>
 <a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; { Resource: R Unchained | monitored: TRUE | server status: 50(0) | queue status: 0(0) }</span></a>
 <a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; { Resource: Kill Process | monitored: TRUE | server status: 50(0) | queue status: 0(0) }</span></a>
 <a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt; { Resource: Pulp Implementation | monitored: TRUE | server status: 49(0) | queue status: 0(0) }</span></a>
 <a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span></a>
-<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co">#&gt; { Source: moviegoer | monitored: 2 | n_generated: 243 }</span></a></code></pre></div>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co">#&gt; { Source: moviegoer | monitored: 2 | n_generated: 223 }</span></a></code></pre></div>
 <p>The analysis is performed with standard R tools:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co"># get the three rows with the sold out instants</span></a>
 <a class="sourceLine" id="cb16-2" data-line-number="2">sold_time &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_resources</a></span>(env) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(resource <span class="op">!=</span><span class="st"> "counter"</span> <span class="op">&amp;</span><span class="st"> </span>capacity <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(resource <span class="op">!=</span><span class="st"> "counter"</span> <span class="op">&amp;</span><span class="st"> </span>capacity <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb16-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co"># get the arrivals that left at the sold out instants</span></a>
 <a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co"># count the number of arrivals per movie</span></a>
 <a class="sourceLine" id="cb16-7" data-line-number="7">n_reneges &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(env) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(finished <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>end_time <span class="op">%in%</span><span class="st"> </span>sold_time<span class="op">$</span>time) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/merge">merge</a></span>(<span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/transform">transform</a></span>(<span class="dt">resource =</span> movies[value]) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/aggregate">aggregate</a></span>(value <span class="op">~</span><span class="st"> </span>resource, <span class="dt">data=</span>., length)</a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(finished <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">&amp;</span><span class="st"> </span>end_time <span class="op">%in%</span><span class="st"> </span>sold_time<span class="op">$</span>time) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/merge.html">merge</a></span>(<span class="kw"><a href="../reference/get_mon.html">get_mon_attributes</a></span>(env)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(<span class="dt">resource =</span> movies[value]) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span>(value <span class="op">~</span><span class="st"> </span>resource, <span class="dt">data=</span>., length)</a>
 <a class="sourceLine" id="cb16-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb16-13" data-line-number="13"><span class="co"># merge the info  and print</span></a>
-<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/invisible">invisible</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/merge">merge</a></span>(sold_time, n_reneges), <span class="dv">1</span>, <span class="cf">function</span>(i) {</a>
-<a class="sourceLine" id="cb16-15" data-line-number="15">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cat">cat</a></span>(<span class="st">"Movie '"</span>, i[<span class="st">"resource"</span>], <span class="st">"' was sold out in "</span>, i[<span class="st">"time"</span>], <span class="st">" minutes.</span><span class="ch">\n</span><span class="st">"</span>, </a>
+<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/merge.html">merge</a></span>(sold_time, n_reneges), <span class="dv">1</span>, <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb16-15" data-line-number="15">  <span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Movie '"</span>, i[<span class="st">"resource"</span>], <span class="st">"' was sold out in "</span>, i[<span class="st">"time"</span>], <span class="st">" minutes.</span><span class="ch">\n</span><span class="st">"</span>, </a>
 <a class="sourceLine" id="cb16-16" data-line-number="16">      <span class="st">"  Number of people that left the queue: "</span>, i[<span class="st">"value"</span>], <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="dt">sep=</span><span class="st">""</span>)</a>
 <a class="sourceLine" id="cb16-17" data-line-number="17">}))</a>
-<a class="sourceLine" id="cb16-18" data-line-number="18"><span class="co">#&gt; Movie 'Kill Process' was sold out in 45.09917 minutes.</span></a>
-<a class="sourceLine" id="cb16-19" data-line-number="19"><span class="co">#&gt;   Number of people that left the queue:  7</span></a>
-<a class="sourceLine" id="cb16-20" data-line-number="20"><span class="co">#&gt; Movie 'Pulp Implementation' was sold out in 31.09917 minutes.</span></a>
-<a class="sourceLine" id="cb16-21" data-line-number="21"><span class="co">#&gt;   Number of people that left the queue: 16</span></a>
-<a class="sourceLine" id="cb16-22" data-line-number="22"><span class="co">#&gt; Movie 'R Unchained' was sold out in 39.09917 minutes.</span></a>
-<a class="sourceLine" id="cb16-23" data-line-number="23"><span class="co">#&gt;   Number of people that left the queue: 16</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-18" data-line-number="18"><span class="co">#&gt; Movie 'Kill Process' was sold out in 53.09917 minutes.</span></a>
+<a class="sourceLine" id="cb16-19" data-line-number="19"><span class="co">#&gt;   Number of people that left the queue: 9</span></a>
+<a class="sourceLine" id="cb16-20" data-line-number="20"><span class="co">#&gt; Movie 'Pulp Implementation' was sold out in 51.59917 minutes.</span></a>
+<a class="sourceLine" id="cb16-21" data-line-number="21"><span class="co">#&gt;   Number of people that left the queue: 9</span></a>
+<a class="sourceLine" id="cb16-22" data-line-number="22"><span class="co">#&gt; Movie 'R Unchained' was sold out in 33.09917 minutes.</span></a>
+<a class="sourceLine" id="cb16-23" data-line-number="23"><span class="co">#&gt;   Number of people that left the queue: 8</span></a></code></pre></div>
 </div>
 <div id="gas-station-refuelling" class="section level2">
 <h2 class="hasAnchor">
@@ -480,19 +486,19 @@
 <p>The fuel level is reqularly monitored by a controller. When the level drops below a certain threshold, a tank truck is called for refilling the tank.</p>
 </blockquote>
 <p>Parameters and setup:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(simmer)</a>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(simmer)</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb17-3" data-line-number="3">GAS_STATION_SIZE &lt;-<span class="st"> </span><span class="dv">200</span>     <span class="co"># liters</span></a>
 <a class="sourceLine" id="cb17-4" data-line-number="4">THRESHOLD &lt;-<span class="st"> </span><span class="dv">10</span>             <span class="co"># Threshold for calling the tank truck (in %)</span></a>
 <a class="sourceLine" id="cb17-5" data-line-number="5">FUEL_TANK_SIZE &lt;-<span class="st"> </span><span class="dv">50</span>        <span class="co"># liters</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6">FUEL_TANK_LEVEL &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>, <span class="dv">25</span>) <span class="co"># Min/max levels of fuel tanks (in liters)</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">FUEL_TANK_LEVEL &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">5</span>, <span class="dv">25</span>) <span class="co"># Min/max levels of fuel tanks (in liters)</span></a>
 <a class="sourceLine" id="cb17-7" data-line-number="7">REFUELING_SPEED &lt;-<span class="st"> </span><span class="dv">2</span>        <span class="co"># liters / second</span></a>
 <a class="sourceLine" id="cb17-8" data-line-number="8">TANK_TRUCK_TIME &lt;-<span class="st"> </span><span class="dv">300</span>      <span class="co"># Seconds it takes the tank truck to arrive</span></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9">T_INTER &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">30</span>, <span class="dv">100</span>)       <span class="co"># Create a car every [min, max] seconds</span></a>
+<a class="sourceLine" id="cb17-9" data-line-number="9">T_INTER &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">30</span>, <span class="dv">100</span>)       <span class="co"># Create a car every [min, max] seconds</span></a>
 <a class="sourceLine" id="cb17-10" data-line-number="10">SIM_TIME &lt;-<span class="st"> </span><span class="dv">1000</span>            <span class="co"># Simulation time in seconds</span></a>
 <a class="sourceLine" id="cb17-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co"># setup</span></a>
-<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">42</span>)</a>
 <a class="sourceLine" id="cb17-14" data-line-number="14">env &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simmer.html">simmer</a></span>()</a></code></pre></div>
 <p>SimPy solves this problem using a special kind of resource called <em>container</em>, which is not present in <code>simmer</code> so far. However, a container is nothing more than an embellished counter. Therefore, we can implement this in <code>simmer</code> with a global counter (<code>GAS_STATION_LEVEL</code> here), some signaling and some care checking the counter bounds.</p>
 <p>Let us consider just the refuelling process in the first place. A car needs to check whether there is enough fuel available to fill its tank. If not, it needs to block until the gas station is refilled.</p>
@@ -513,19 +519,19 @@
 <a class="sourceLine" id="cb18-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(<span class="cf">function</span>() {</a>
 <a class="sourceLine" id="cb18-16" data-line-number="16">    liters_required &lt;-<span class="st"> </span>FUEL_TANK_SIZE <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"level"</span>)</a>
 <a class="sourceLine" id="cb18-17" data-line-number="17">    GAS_STATION_LEVEL &lt;&lt;-<span class="st"> </span>GAS_STATION_LEVEL <span class="op">-</span><span class="st"> </span>liters_required</a>
-<a class="sourceLine" id="cb18-18" data-line-number="18">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/function">return</a></span>(liters_required <span class="op">/</span><span class="st"> </span>REFUELING_SPEED)</a>
+<a class="sourceLine" id="cb18-18" data-line-number="18">    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(liters_required <span class="op">/</span><span class="st"> </span>REFUELING_SPEED)</a>
 <a class="sourceLine" id="cb18-19" data-line-number="19">  })</a></code></pre></div>
 <p>Now a car’s trajectory is straightforward. First, the starting time is saved as well as the tank level. Then, the car seizes a pump, refuels and leaves.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">car &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"start"</span>, <span class="st">"level"</span>), <span class="cf">function</span>() </a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="../reference/now.html">now</a></span>(env), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(FUEL_TANK_LEVEL[<span class="dv">1</span>]<span class="op">:</span>FUEL_TANK_LEVEL[<span class="dv">2</span>], <span class="dv">1</span>))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"start"</span>, <span class="st">"level"</span>), <span class="cf">function</span>() </a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">    <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="../reference/now.html">now</a></span>(env), <span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(FUEL_TANK_LEVEL[<span class="dv">1</span>]<span class="op">:</span>FUEL_TANK_LEVEL[<span class="dv">2</span>], <span class="dv">1</span>))) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb19-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="st">"arriving at gas station"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb19-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">seize</a></span>(<span class="st">"pump"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb19-6" data-line-number="6"><span class="st">  </span><span class="co"># 'join()' concatenates the refuelling trajectory here</span></a>
 <a class="sourceLine" id="cb19-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="../reference/join.html">join</a></span>(refuelling) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb19-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/seize.html">release</a></span>(<span class="st">"pump"</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb19-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() </a>
-<a class="sourceLine" id="cb19-10" data-line-number="10">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"finished refuelling in "</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(env) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"start"</span>), <span class="st">" seconds"</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb19-10" data-line-number="10">    <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"finished refuelling in "</span>, <span class="kw"><a href="../reference/now.html">now</a></span>(env) <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/get_n_generated.html">get_attribute</a></span>(env, <span class="st">"start"</span>), <span class="st">" seconds"</span>))</a></code></pre></div>
 <p>The tank truck takes some time to arrive. Then, the gas station is completely refilled and the signal “gas station refilled” is sent to the blocked cars.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">tank_truck &lt;-<span class="st"> </span><span class="kw"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb20-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/timeout.html">timeout</a></span>(TANK_TRUCK_TIME) <span class="op">%&gt;%</span></a>
@@ -533,7 +539,7 @@
 <a class="sourceLine" id="cb20-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/log_.html">log_</a></span>(<span class="cf">function</span>() {</a>
 <a class="sourceLine" id="cb20-5" data-line-number="5">    refill &lt;-<span class="st"> </span>GAS_STATION_SIZE <span class="op">-</span><span class="st"> </span>GAS_STATION_LEVEL</a>
 <a class="sourceLine" id="cb20-6" data-line-number="6">    GAS_STATION_LEVEL &lt;&lt;-<span class="st"> </span>GAS_STATION_SIZE</a>
-<a class="sourceLine" id="cb20-7" data-line-number="7">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"tank truck refilling "</span>, refill, <span class="st">" liters"</span>)</a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">    <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"tank truck refilling "</span>, refill, <span class="st">" liters"</span>)</a>
 <a class="sourceLine" id="cb20-8" data-line-number="8">  }) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb20-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/send.html">send</a></span>(signal)</a></code></pre></div>
 <p>The controller periodically checks the <code>GAS_STATION_LEVEL</code> and calls the tank truck when needed.</p>
@@ -550,45 +556,39 @@
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">env <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"pump"</span>, <span class="dv">2</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb22-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"controller"</span>, controller, <span class="kw"><a href="../reference/generators.html">at</a></span>(<span class="dv">0</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, <span class="cf">function</span>() <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(T_INTER[<span class="dv">1</span>]<span class="op">:</span>T_INTER[<span class="dv">2</span>], <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"car"</span>, car, <span class="cf">function</span>() <span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(T_INTER[<span class="dv">1</span>]<span class="op">:</span>T_INTER[<span class="dv">2</span>], <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb22-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/run.html">run</a></span>(SIM_TIME)</a>
-<a class="sourceLine" id="cb22-6" data-line-number="6"><span class="co">#&gt; 94: car0: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="co">#&gt; 107: car0: finished refuelling in 13 seconds</span></a>
-<a class="sourceLine" id="cb22-8" data-line-number="8"><span class="co">#&gt; 144: car1: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-9" data-line-number="9"><span class="co">#&gt; 158: car1: finished refuelling in 14 seconds</span></a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"><span class="co">#&gt; 78: car0: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="co">#&gt; 98.5: car0: finished refuelling in 20.5 seconds</span></a>
+<a class="sourceLine" id="cb22-8" data-line-number="8"><span class="co">#&gt; 172: car1: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-9" data-line-number="9"><span class="co">#&gt; 190: car1: finished refuelling in 18 seconds</span></a>
 <a class="sourceLine" id="cb22-10" data-line-number="10"><span class="co">#&gt; 219: car2: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-11" data-line-number="11"><span class="co">#&gt; 236.5: car2: finished refuelling in 17.5 seconds</span></a>
-<a class="sourceLine" id="cb22-12" data-line-number="12"><span class="co">#&gt; 301: car3: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-13" data-line-number="13"><span class="co">#&gt; 322.5: car3: finished refuelling in 21.5 seconds</span></a>
-<a class="sourceLine" id="cb22-14" data-line-number="14"><span class="co">#&gt; 377: car4: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-15" data-line-number="15"><span class="co">#&gt; 392.5: car4: finished refuelling in 15.5 seconds</span></a>
-<a class="sourceLine" id="cb22-16" data-line-number="16"><span class="co">#&gt; 439: car5: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-17" data-line-number="17"><span class="co">#&gt; 440: controller0: calling the tank truck</span></a>
-<a class="sourceLine" id="cb22-18" data-line-number="18"><span class="co">#&gt; 454: car5: finished refuelling in 15 seconds</span></a>
-<a class="sourceLine" id="cb22-19" data-line-number="19"><span class="co">#&gt; 535: car6: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-20" data-line-number="20"><span class="co">#&gt; 597: car7: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-21" data-line-number="21"><span class="co">#&gt; 696: car8: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; 740: controller0: tank truck arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-23" data-line-number="23"><span class="co">#&gt; 740: controller0: tank truck refilling 193 liters</span></a>
-<a class="sourceLine" id="cb22-24" data-line-number="24"><span class="co">#&gt; 753: car7: finished refuelling in 156 seconds</span></a>
-<a class="sourceLine" id="cb22-25" data-line-number="25"><span class="co">#&gt; 759: car9: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-26" data-line-number="26"><span class="co">#&gt; 760: car6: finished refuelling in 225 seconds</span></a>
-<a class="sourceLine" id="cb22-27" data-line-number="27"><span class="co">#&gt; 774.5: car8: finished refuelling in 78.5 seconds</span></a>
-<a class="sourceLine" id="cb22-28" data-line-number="28"><span class="co">#&gt; 777: car9: finished refuelling in 18 seconds</span></a>
-<a class="sourceLine" id="cb22-29" data-line-number="29"><span class="co">#&gt; 853: car10: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-30" data-line-number="30"><span class="co">#&gt; 860: controller0: calling the tank truck</span></a>
-<a class="sourceLine" id="cb22-31" data-line-number="31"><span class="co">#&gt; 874.5: car10: finished refuelling in 21.5 seconds</span></a>
-<a class="sourceLine" id="cb22-32" data-line-number="32"><span class="co">#&gt; 953: car11: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-33" data-line-number="33"><span class="co">#&gt; 988: car12: arriving at gas station</span></a>
-<a class="sourceLine" id="cb22-34" data-line-number="34"><span class="co">#&gt; simmer environment: anonymous | now: 1000 | next: 1045</span></a>
-<a class="sourceLine" id="cb22-35" data-line-number="35"><span class="co">#&gt; { Monitor: in memory }</span></a>
-<a class="sourceLine" id="cb22-36" data-line-number="36"><span class="co">#&gt; { Resource: pump | monitored: TRUE | server status: 2(2) | queue status: 0(Inf) }</span></a>
-<a class="sourceLine" id="cb22-37" data-line-number="37"><span class="co">#&gt; { Source: controller | monitored: 1 | n_generated: 1 }</span></a>
-<a class="sourceLine" id="cb22-38" data-line-number="38"><span class="co">#&gt; { Source: car | monitored: 1 | n_generated: 14 }</span></a></code></pre></div>
+<a class="sourceLine" id="cb22-11" data-line-number="11"><span class="co">#&gt; 233.5: car2: finished refuelling in 14.5 seconds</span></a>
+<a class="sourceLine" id="cb22-12" data-line-number="12"><span class="co">#&gt; 295: car3: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-13" data-line-number="13"><span class="co">#&gt; 314.5: car3: finished refuelling in 19.5 seconds</span></a>
+<a class="sourceLine" id="cb22-14" data-line-number="14"><span class="co">#&gt; 361: car4: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-15" data-line-number="15"><span class="co">#&gt; 377: car4: finished refuelling in 16 seconds</span></a>
+<a class="sourceLine" id="cb22-16" data-line-number="16"><span class="co">#&gt; 410: car5: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-17" data-line-number="17"><span class="co">#&gt; 442: car6: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-18" data-line-number="18"><span class="co">#&gt; 498: car7: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-19" data-line-number="19"><span class="co">#&gt; 532: car8: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-20" data-line-number="20"><span class="co">#&gt; 595: car9: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-21" data-line-number="21"><span class="co">#&gt; 627: car10: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; 698: car11: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-23" data-line-number="23"><span class="co">#&gt; 742: car12: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-24" data-line-number="24"><span class="co">#&gt; 807: car13: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-25" data-line-number="25"><span class="co">#&gt; 854: car14: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-26" data-line-number="26"><span class="co">#&gt; 952: car15: arriving at gas station</span></a>
+<a class="sourceLine" id="cb22-27" data-line-number="27"><span class="co">#&gt; simmer environment: anonymous | now: 1000 | next: 1000</span></a>
+<a class="sourceLine" id="cb22-28" data-line-number="28"><span class="co">#&gt; { Monitor: in memory }</span></a>
+<a class="sourceLine" id="cb22-29" data-line-number="29"><span class="co">#&gt; { Resource: pump | monitored: TRUE | server status: 2(2) | queue status: 9(Inf) }</span></a>
+<a class="sourceLine" id="cb22-30" data-line-number="30"><span class="co">#&gt; { Source: controller | monitored: 1 | n_generated: 1 }</span></a>
+<a class="sourceLine" id="cb22-31" data-line-number="31"><span class="co">#&gt; { Source: car | monitored: 1 | n_generated: 17 }</span></a></code></pre></div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -605,17 +605,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Iñaki Ucar, Bart Smeets.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

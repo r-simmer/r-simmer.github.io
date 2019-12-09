@@ -52,9 +52,6 @@
     <loc>https://r-simmer.org/reference/join.html</loc>
   </url>
   <url>
-    <loc>https://r-simmer.org/reference/leave.html</loc>
-  </url>
-  <url>
     <loc>https://r-simmer.org/reference/length.trajectory.html</loc>
   </url>
   <url>
@@ -73,7 +70,7 @@
     <loc>https://r-simmer.org/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>https://r-simmer.org/reference/renege_in.html</loc>
+    <loc>https://r-simmer.org/reference/renege.html</loc>
   </url>
   <url>
     <loc>https://r-simmer.org/reference/reset.html</loc>
@@ -149,8 +146,5 @@
   </url>
   <url>
     <loc>https://r-simmer.org/articles/simmer-08-philosophers.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/articles/simmer-aa-5G.html</loc>
   </url>
 </urlset>

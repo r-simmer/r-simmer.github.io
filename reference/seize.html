@@ -8,21 +8,25 @@
 
 <title>Seize/Release Resources — seize • simmer | DES for R</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,12 +36,13 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Seize/Release Resources — seize" />
 
+<meta property="og:title" content="Seize/Release Resources — seize" />
 <meta property="og:description" content="Activities for seizing/releasing a resource, by name or a previously selected
 one. Resources must be defined in the simulation environment (see
 add_resource)." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -61,6 +66,7 @@ add_resource)." />
   gtag('config', 'UA-115358925-1');
 </script>
 
+
   </head>
 
   <body>
@@ -77,7 +83,7 @@ add_resource)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.0</span>
       </span>
     </div>
 
@@ -152,7 +158,6 @@ add_resource)." />
   </a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -187,6 +192,7 @@ add_resource)." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -198,11 +204,9 @@ add_resource)." />
     </div>
 
     <div class="ref-description">
-    
     <p>Activities for seizing/releasing a resource, by name or a previously selected
 one. Resources must be defined in the simulation environment (see
 <code><a href='add_resource.html'>add_resource</a></code>).</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>seize</span>(<span class='no'>.trj</span>, <span class='no'>resource</span>, <span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>continue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>post.seize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -218,7 +222,7 @@ one. Resources must be defined in the simulation environment (see
 <span class='fu'>release_all</span>(<span class='no'>.trj</span>, <span class='no'>resource</span>)
 
 <span class='fu'>release_selected_all</span>(<span class='no'>.trj</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -250,27 +254,32 @@ a successful seize.</p></td>
     <tr>
       <th>reject</th>
       <td><p>an optional trajectory object which will be followed if the
-arrival is rejected. Note that if the arrival is accepted (either in the
-queue or in the server) and then it is dropped afterwards due to preemption
-or resource shrinkage, then this trajectory won't be executed. Instead, see
-<code><a href='handle_unfinished.html'>handle_unfinished</a></code> for another, more general, method for
-handling all kinds of unfinished arrivals.</p></td>
+arrival is rejected (dropped).</p></td>
     </tr>
     <tr>
       <th>id</th>
       <td><p>selection identifier for nested usage.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns the trajectory object.</p>
-    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Rejection happens when a resource is at full capacity and there is
+no room in the queue (either because there is a finite <code>queue_size</code> and
+it is full, or because <code>queue_size=0</code> and thus it is disabled). In those
+cases, the <code>reject</code> parameter defines a fallback trajectory. Note,
+however, that, if the arrival is accepted (either in the queue or in the
+server) and then it is dropped afterwards due to preemption or resource
+shrinkage, then this trajectory will not be executed. Instead, see
+<code><a href='handle_unfinished.html'>handle_unfinished</a></code> for another, more general, method for
+handling all kinds of unfinished arrivals.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='select.html'>select</a></code>, <code><a href='set_capacity.html'>set_capacity</a></code>, <code><a href='set_capacity.html'>set_queue_size</a></code>,
 <code><a href='set_capacity.html'>set_capacity_selected</a></code>, <code><a href='set_capacity.html'>set_queue_size_selected</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## simple seize, delay, then release</span>
@@ -337,7 +346,7 @@ handling all kinds of unfinished arrivals.</p></td>
 <span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"arriving..."</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>seize</span>(
-    <span class='st'>"doctor"</span>, <span class='fl'>1</span>, <span class='kw'>continue</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>TRUE</span>),
+    <span class='st'>"doctor"</span>, <span class='fl'>1</span>, <span class='kw'>continue</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>TRUE</span>),
     <span class='kw'>post.seize</span> <span class='kw'>=</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>(<span class='st'>"admitted patient"</span>) <span class='kw'>%&gt;%</span>
       <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"admitted"</span>) <span class='kw'>%&gt;%</span>
       <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
@@ -367,16 +376,15 @@ handling all kinds of unfinished arrivals.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
+      <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -384,13 +392,16 @@ handling all kinds of unfinished arrivals.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
