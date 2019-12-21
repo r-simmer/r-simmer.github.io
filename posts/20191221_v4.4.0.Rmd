@@ -1,0 +1,38 @@
+---
+title: "simmer 4.4.0 on CRAN"
+author: "Iñaki Ucar"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The 4.4.0 release of [simmer](http://r-simmer.org/), the Discrete-Event Simulator for R, is on CRAN. This update stabilises a new pace of a couple of new releases per year, which is more appropriate given the maturity that the project has reached.
+
+This release brings us a dozen bug fixes and improvements, including the unification of the `leave`/`renege` API, further enhancements of convenience function to set up generators, and performance improvements for the simulation environment definition thanks to the vectorisation of `add_resource` and `add_generator`. See below for a complete list of changes.
+
+### New features
+
+- Add `out` and `keep_seized` parameters to `leave()` with the same behaviour as
+  in `renege_in()` and `renege_if()`. Code and documentation of these functions
+  are now integrated under `help(renege)` (#208, #217).
+- Convenience functions `from`, `to` and `from_to` accept dynamic parameters
+  for arguments `start_time`, `stop_time` and `every` (#219).
+- Activities to interact with sources have been vectorised to modify multiple
+  sources at once (#222).
+- Several generators or resources with the same parameters can be added with a
+  single call to `add_generator()` and `add_resource()` respectively if a vector
+  of names is provided (#221).
+
+### Minor changes and fixes:
+
+- Fix `get_mon_*()` dispatch for named lists (#210).
+- Get/put the RNG state when random numbers are required in the backend (#218).
+- Fix convenience functions `from`, `to` and `from_to` to preserve the
+  environment of the supplied functions (as part of #219).
+- Documentation improvements (#212, #220).
+- Fix queueing in multiple resources after preemption (#224 addressing #206).
