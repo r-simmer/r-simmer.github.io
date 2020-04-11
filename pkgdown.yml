@@ -1,8 +1,7 @@
-pandoc: 2.3.1
-pkgdown: 1.4.1
+pandoc: '2.5'
+pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
-  _simmer-aa-5G: _simmer-aa-5G.html
   simmer-01-introduction: simmer-01-introduction.html
   simmer-02-jss: simmer-02-jss.html
   simmer-03-trajectories: simmer-03-trajectories.html
@@ -12,6 +11,8 @@ articles:
   simmer-06-queueing: simmer-06-queueing.html
   simmer-07-ctmc: simmer-07-ctmc.html
   simmer-08-philosophers: simmer-08-philosophers.html
+  simmer-aa-5G: simmer-aa-5G.html
+last_built: 2020-04-11T18:18Z
 urls:
   reference: https://r-simmer.org/reference
   article: https://r-simmer.org/articles
