@@ -1,7 +1,8 @@
-pandoc: 2.3.1
-pkgdown: 1.3.0
+pandoc: '2.5'
+pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   plot.simmer: plot.simmer.html
   plot.trajectory: plot.trajectory.html
+last_built: 2020-04-25T19:00Z
 

@@ -8,21 +8,29 @@
 
 <title>Plot Methods for <code>simmer</code> Monitoring Statistics — plot.mon • simmer.plot</title>
 
-<!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,11 +40,11 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Plot Methods for <code>simmer</code> Monitoring Statistics — plot.mon" />
 
+<meta property="og:title" content="Plot Methods for <code>simmer</code> Monitoring Statistics — plot.mon" />
 <meta property="og:description" content="Methods for the plot generic. See below for details about each
 metric available." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -60,9 +68,10 @@ metric available." />
   gtag('config', 'UA-115358925-1');
 </script>
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,7 +85,7 @@ metric available." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer.plot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.15</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.16</span>
       </span>
     </div>
 
@@ -127,7 +136,6 @@ metric available." />
   </a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://r-simmer.org">
@@ -166,34 +174,31 @@ metric available." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot Methods for <code>simmer</code> Monitoring Statistics</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer.plot/blob/master/R/plot.arrivals.R'><code>R/plot.arrivals.R</code></a>, <a href='https://github.com/r-simmer/simmer.plot/blob/master/R/plot.attributes.R'><code>R/plot.attributes.R</code></a>, <a href='https://github.com/r-simmer/simmer.plot/blob/master/R/plot.resources.R'><code>R/plot.resources.R</code></a>, and 2 more</small>
+    <small class="dont-index">Source: <a href='https://github.com/r-simmer/simmer.plot/blob/master/R/plot.arrivals.R'><code>R/plot.arrivals.R</code></a>, <a href='https://github.com/r-simmer/simmer.plot/blob/master/R/plot.attributes.R'><code>R/plot.attributes.R</code></a>, <a href='https://github.com/r-simmer/simmer.plot/blob/master/R/plot.resources.R'><code>R/plot.resources.R</code></a>, and 1 more</small>
     <div class="hidden name"><code>plot.mon.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-    <p>Methods for the <code><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></code> generic. See below for details about each
+    <p>Methods for the <code><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></code> generic. See below for details about each
 metric available.</p>
-    
     </div>
 
     <pre class="usage"><span class='co'># S3 method for arrivals</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"activity_time"</span>, <span class='st'>"waiting_time"</span>,
-  <span class='st'>"flow_time"</span>), <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"activity_time"</span>, <span class='st'>"waiting_time"</span>, <span class='st'>"flow_time"</span>), <span class='no'>...</span>)
 
 <span class='co'># S3 method for attributes</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>keys</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>keys</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for resources</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"usage"</span>, <span class='st'>"utilization"</span>), <span class='no'>names</span>,
-  <span class='no'>...</span>)</pre>
-    
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>metric</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"usage"</span>, <span class='st'>"utilization"</span>), <span class='no'>names</span>, <span class='no'>...</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -208,11 +213,12 @@ metric available.</p>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>further arguments</p><dl class='dl-horizontal'>
+      <td><p>further arguments</p><dl'>
   <dt><code>items</code>, for <code>plot.resources(metric="usage")</code></dt><dd><p>components of
-  the resource to plot, one or more of <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("system", "queue", "server")</a></code>.</p></dd>
+  the resource to plot, one or more of <code><a href='https://rdrr.io/r/base/c.html'>c("system", "queue", "server")</a></code>.</p></dd>
   <dt><code>steps</code>, for <code>plot.resources(metric="usage")</code></dt><dd><p>if <code>TRUE</code>,
   shows the instantaneous usage instead of the cumulative average.</p></dd>
+
 </dl></td>
     </tr>
     <tr>
@@ -224,11 +230,10 @@ metric available.</p>
       <td><p>resources to plot (if left empty, all resources are shown).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns a ggplot2 object.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The S3 method for 'arrivals' provides three metrics: <code>"activity_time"</code>,
@@ -254,50 +259,42 @@ shows a bar plot of the average resource utilization (total time in use
 divided by the total simulation time). For multiple replications, the bar
 represents the median, and the error bars represent the quartiles. Thus, if
 a single replication is provided, the bar and the error bar coincide.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'>trajectory</span>(<span class='st'>"my trajectory"</span>) <span class='kw'>%&gt;%</span>
   <span class='co'>## add an intake activity</span>
   <span class='fu'>seize</span>(<span class='st'>"nurse"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>timeout</span>(<span class='kw'>function</span>() <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1</span>, <span class='fl'>15</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>timeout</span>(<span class='kw'>function</span>() <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>1</span>, <span class='fl'>15</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'>release</span>(<span class='st'>"nurse"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='co'>## add a consultation activity</span>
   <span class='fu'>seize</span>(<span class='st'>"doctor"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>timeout</span>(<span class='kw'>function</span>() <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1</span>, <span class='fl'>20</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>timeout</span>(<span class='kw'>function</span>() <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>1</span>, <span class='fl'>20</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'>release</span>(<span class='st'>"doctor"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='co'>## add a planning activity</span>
   <span class='fu'>seize</span>(<span class='st'>"administration"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>timeout</span>(<span class='kw'>function</span>() <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>timeout</span>(<span class='kw'>function</span>() <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'>release</span>(<span class='st'>"administration"</span>, <span class='fl'>1</span>)
 
 <span class='no'>env</span> <span class='kw'>&lt;-</span> <span class='fu'>simmer</span>(<span class='st'>"SuperDuperSim"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>add_resource</span>(<span class='st'>"nurse"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>add_resource</span>(<span class='st'>"doctor"</span>, <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>add_resource</span>(<span class='st'>"administration"</span>, <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>add_generator</span>(<span class='st'>"patient"</span>, <span class='no'>t0</span>, <span class='kw'>function</span>() <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1</span>, <span class='fl'>10</span>, <span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>add_generator</span>(<span class='st'>"patient"</span>, <span class='no'>t0</span>, <span class='kw'>function</span>() <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>1</span>, <span class='fl'>10</span>, <span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'>run</span>(<span class='kw'>until</span><span class='kw'>=</span><span class='fl'>80</span>)
 
 <span class='no'>resources</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_mon.html'>get_mon_resources</a></span>(<span class='no'>env</span>)
 <span class='no'>arrivals</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_mon.html'>get_mon_arrivals</a></span>(<span class='no'>env</span>)
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>resources</span>, <span class='kw'>metric</span><span class='kw'>=</span><span class='st'>"usage"</span>, <span class='st'>"doctor"</span>, <span class='kw'>items</span> <span class='kw'>=</span> <span class='st'>"server"</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='plot.mon-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>resources</span>, <span class='kw'>metric</span><span class='kw'>=</span><span class='st'>"utilization"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"nurse"</span>, <span class='st'>"doctor"</span>, <span class='st'>"administration"</span>))</div><div class='img'><img src='plot.mon-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>arrivals</span>, <span class='kw'>metric</span><span class='kw'>=</span><span class='st'>"waiting_time"</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: span too small.   fewer data values than degrees of freedom.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: pseudoinverse used at 49.089</span></div><div class='output co'>#&gt; <span class='warning'>Warning: neighborhood radius 9.4368</span></div><div class='output co'>#&gt; <span class='warning'>Warning: reciprocal condition number  0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: There are other near singularities as well. 380.29</span></div><div class='output co'>#&gt; <span class='warning'>Warning: span too small.   fewer data values than degrees of freedom.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: pseudoinverse used at 49.089</span></div><div class='output co'>#&gt; <span class='warning'>Warning: neighborhood radius 9.4368</span></div><div class='output co'>#&gt; <span class='warning'>Warning: reciprocal condition number  0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: There are other near singularities as well. 380.29</span></div><div class='img'><img src='plot.mon-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>resources</span>, <span class='kw'>metric</span><span class='kw'>=</span><span class='st'>"usage"</span>, <span class='st'>"doctor"</span>, <span class='kw'>items</span> <span class='kw'>=</span> <span class='st'>"server"</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='plot.mon-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>resources</span>, <span class='kw'>metric</span><span class='kw'>=</span><span class='st'>"utilization"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"nurse"</span>, <span class='st'>"doctor"</span>, <span class='st'>"administration"</span>))</div><div class='img'><img src='plot.mon-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>arrivals</span>, <span class='kw'>metric</span><span class='kw'>=</span><span class='st'>"waiting_time"</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: span too small.   fewer data values than degrees of freedom.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: pseudoinverse used at 45.221</span></div><div class='output co'>#&gt; <span class='warning'>Warning: neighborhood radius 13.017</span></div><div class='output co'>#&gt; <span class='warning'>Warning: reciprocal condition number  0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: There are other near singularities as well. 210.04</span></div><div class='output co'>#&gt; <span class='warning'>Warning: span too small.   fewer data values than degrees of freedom.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: pseudoinverse used at 45.221</span></div><div class='output co'>#&gt; <span class='warning'>Warning: neighborhood radius 13.017</span></div><div class='output co'>#&gt; <span class='warning'>Warning: reciprocal condition number  0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: There are other near singularities as well. 210.04</span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to max; returning -Inf</span></div><div class='img'><img src='plot.mon-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -305,13 +302,16 @@ a single replication is provided, the bar and the error bar coincide.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
