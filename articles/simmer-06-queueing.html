@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
       </span>
     </div>
 
@@ -156,7 +156,7 @@
       <h1 data-toc-skip>Queueing Systems</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2020-04-11</h4>
+            <h4 class="date">2020-06-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-06-queueing.Rmd"><code>vignettes/simmer-06-queueing.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-06-queueing.Rmd</code></div>
@@ -329,7 +329,7 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <a href="#queueing-networks" class="anchor"></a>Queueing Networks</h2>
 <p>Let us consider the following network of queues (example taken from <a href="http://www.grotto-networking.com/DiscreteEventPython.html#NetQueues">Grotto Networking</a>):</p>
 <div class="figure">
-<img src="includes/queueing-network.svg" alt="A network of queues."><p class="caption">A network of queues.</p>
+<img src="includes/queueing-network.svg" alt=""><p class="caption">A network of queues.</p>
 </div>
 <p>There are three exponential generators (<span class="math inline">\(\lambda_1\)</span>, <span class="math inline">\(\lambda_2\)</span>, <span class="math inline">\(\lambda_4\)</span>) that inject messages with exponential size of mean 100 bytes. There are four M/D/1 queues with a deterministic rate equal to 220 bytes/s. There is a 25% probability that messages from <span class="math inline">\(\lambda_1\)</span> are dropped before the second queue, and a fork 35/65% for the output of the second queue to reach queues 3 and 4. We are interested, for instance, in the accumulated waiting time for messages entering queue 1 and exiting queue 3 or 4.</p>
 <p>We’ll start by setting up the main constants and a couple of functions to set the message size and seize an M/D/1 queue:</p>

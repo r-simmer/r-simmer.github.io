@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
       </span>
     </div>
 
@@ -156,7 +156,7 @@
       <h1 data-toc-skip>Advanced Trajectory Usage</h1>
                         <h4 class="author">Iñaki Ucar, Bart Smeets</h4>
             
-            <h4 class="date">2020-04-11</h4>
+            <h4 class="date">2020-06-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-03-trajectories.Rmd"><code>vignettes/simmer-03-trajectories.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-03-trajectories.Rmd</code></div>
@@ -208,7 +208,7 @@
   <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="fl">10</span>)) <span class="kw">%&gt;%</span>        <span class="co"># fixed</span>
   <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="fl">10</span>)) <span class="co"># dynamic</span>
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0.0769885 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0.153938 }</span>
 <span class="co">#&gt; { Activity: Timeout      | delay: function() }</span></pre></body></html></div>
 <p>Of course, this <code>task</code>, supplied as a function, may be as complex as you need and, for instance, it may check the status of a particular resource, interact with other entities in your simulation model… The same applies to all the activities when they accept a function as a parameter.</p>
 </div>

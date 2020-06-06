@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
       </span>
     </div>
 
@@ -156,7 +156,7 @@
       <h1 data-toc-skip>Introduction to simmer</h1>
                         <h4 class="author">Bart Smeets, Iñaki Ucar</h4>
             
-            <h4 class="date">2020-04-11</h4>
+            <h4 class="date">2020-06-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-01-introduction.Rmd"><code>vignettes/simmer-01-introduction.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-01-introduction.Rmd</code></div>
@@ -280,22 +280,22 @@
   <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>()
 <span class="co">#&gt;   resource     time server queue capacity queue_size system limit replication</span>
-<span class="co">#&gt; 1    nurse 10.81634      1     0        1        Inf      1   Inf           1</span>
-<span class="co">#&gt; 2    nurse 19.41864      1     1        1        Inf      2   Inf           1</span>
-<span class="co">#&gt; 3    nurse 26.15449      1     0        1        Inf      1   Inf           1</span>
-<span class="co">#&gt; 4   doctor 26.15449      1     0        2        Inf      1   Inf           1</span>
-<span class="co">#&gt; 5    nurse 28.22811      1     1        1        Inf      2   Inf           1</span>
-<span class="co">#&gt; 6    nurse 35.15753      1     2        1        Inf      3   Inf           1</span>
+<span class="co">#&gt; 1    nurse 10.31374      1     0        1        Inf      1   Inf           1</span>
+<span class="co">#&gt; 2    nurse 21.16746      1     1        1        Inf      2   Inf           1</span>
+<span class="co">#&gt; 3    nurse 26.17583      1     0        1        Inf      1   Inf           1</span>
+<span class="co">#&gt; 4   doctor 26.17583      1     0        2        Inf      1   Inf           1</span>
+<span class="co">#&gt; 5    nurse 33.43760      1     1        1        Inf      2   Inf           1</span>
+<span class="co">#&gt; 6    nurse 42.31718      1     0        1        Inf      1   Inf           1</span>
 <span class="no">envs</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>()
 <span class="co">#&gt;       name start_time end_time activity_time finished replication</span>
-<span class="co">#&gt; 1 patient0  10.816338 51.18260      40.36626     TRUE           1</span>
-<span class="co">#&gt; 2 patient1  19.418643 68.29488      42.14039     TRUE           1</span>
-<span class="co">#&gt; 3 patient0   7.848448 49.01513      41.16668     TRUE           2</span>
-<span class="co">#&gt; 4 patient1  20.965136 62.07754      39.35349     TRUE           2</span>
-<span class="co">#&gt; 5 patient2  28.272793 78.22929      40.02786     TRUE           2</span>
-<span class="co">#&gt; 6 patient0   9.343075 47.53255      38.18948     TRUE           3</span></pre></body></html></div>
+<span class="co">#&gt; 1 patient0  10.313742 50.18011      39.86636     TRUE           1</span>
+<span class="co">#&gt; 2 patient1  21.167455 67.01512      40.83929     TRUE           1</span>
+<span class="co">#&gt; 3 patient0   7.545482 46.33585      38.79037     TRUE           2</span>
+<span class="co">#&gt; 4 patient1  17.216065 63.88347      40.67124     TRUE           2</span>
+<span class="co">#&gt; 5 patient0  12.086554 52.11226      40.02571     TRUE           3</span>
+<span class="co">#&gt; 6 patient1  23.346820 64.90209      37.47253     TRUE           3</span></pre></body></html></div>
 <p>Unfortunately, as the C++ simulation cores are destroyed, the downside of this kind of parallelization is that one cannot resume execution of the replicas.</p>
 </div>
 <div id="basic-visualisation-tools" class="section level2">
