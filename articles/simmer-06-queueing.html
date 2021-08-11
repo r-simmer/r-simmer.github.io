@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
       </span>
     </div>
 
@@ -150,13 +150,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="simmer-06-queueing_files/header-attrs-2.10/header-attrs.js"></script><script src="simmer-06-queueing_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Queueing Systems</h1>
                         <h4 class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2020-06-06</h4>
+            <h4 class="date">2021-08-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-06-queueing.Rmd"><code>vignettes/simmer-06-queueing.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-06-queueing.Rmd</code></div>
@@ -165,30 +165,33 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer.plot</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">1234</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://r-simmer.org">simmer.plot</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></code></pre></div>
 <div id="mmck-systems" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mmck-systems" class="anchor"></a>M/M/c/k systems</h2>
 <p>In Kendall’s notation, an M/M/c/k system has exponential arrivals (<strong>M</strong>/M/c/k), a <span class="math inline">\(c\)</span> servers (M/M/<strong>c</strong>/k) with exponential service time (M/<strong>M</strong>/c/k) and an <span class="math inline">\(k-c\)</span> positions in queue (M/M/c/<strong>k</strong>). For instance, a router may have several processors to handle packets, and the in/out queues are necessarily finite.</p>
 <p>This is the simulation of an M/M/2/3 system (2 server, 1 position in queue). Note that the trajectory is identical to an M/M/1 system (one server, infinite queue).</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">lambda</span> <span class="kw">&lt;-</span> <span class="fl">3</span>
-<span class="no">mu</span> <span class="kw">&lt;-</span> <span class="fl">4</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">3</span>
+<span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">4</span>
 
-<span class="no">m.queue</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"server"</span>, <span class="kw">amount</span><span class="kw">=</span><span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="no">mu</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"server"</span>, <span class="kw">amount</span><span class="kw">=</span><span class="fl">1</span>)
+<span class="va">m.queue</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"server"</span>, amount<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">mu</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"server"</span>, amount<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 
-<span class="no">mm23.env</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"server"</span>, <span class="kw">capacity</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">queue_size</span><span class="kw">=</span><span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival"</span>, <span class="no">m.queue</span>, <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="no">lambda</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="kw">until</span><span class="kw">=</span><span class="fl">2000</span>)</pre></body></html></div>
+<span class="va">mm23.env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"server"</span>, capacity<span class="op">=</span><span class="fl">2</span>, queue_size<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"arrival"</span>, <span class="va">m.queue</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">lambda</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span>until<span class="op">=</span><span class="fl">2000</span><span class="op">)</span></code></pre></div>
 <p>There are rejections when the queue is full.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(<span class="no">mm23.env</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(!<span class="no">finished</span>) / <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">finished</span>))
-<span class="co">#&gt; [1] 0.04253894</span></pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">mm23.env</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="va">finished</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">finished</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.04253894</span></code></pre></div>
 <p>By solving the balance equations for this system, we obtain the following:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -197,14 +200,15 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 \end{aligned}
 \]</span></p>
 <p>where <span class="math inline">\(r=\lambda/\mu\)</span>. Finally, we can see how the simulation quickly converges to the theoretical average number of customers in the system <span class="math inline">\(N\)</span>:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># Theoretical value</span>
-<span class="no">rho</span> <span class="kw">&lt;-</span> <span class="no">lambda</span>/<span class="no">mu</span>
-<span class="no">div</span> <span class="kw">&lt;-</span> <span class="fl">1</span> / <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span>(<span class="fl">2</span>) * <span class="fl">2</span>^(<span class="fl">2</span>:<span class="fl">3</span>-<span class="fl">2</span>))
-<span class="no">mm23.N</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="fl">0</span>:<span class="fl">3</span> * <span class="no">rho</span>^(<span class="fl">0</span>:<span class="fl">3</span>) * <span class="no">div</span>) / <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">rho</span>^(<span class="fl">0</span>:<span class="fl">3</span>) * <span class="no">div</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Theoretical value</span>
+<span class="va">rho</span> <span class="op">&lt;-</span> <span class="va">lambda</span><span class="op">/</span><span class="va">mu</span>
+<span class="va">div</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span><span class="op">^</span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">mm23.N</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span> <span class="op">*</span> <span class="va">rho</span><span class="op">^</span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="va">div</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">rho</span><span class="op">^</span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="va">div</span><span class="op">)</span>
 
 <span class="co"># Evolution of the average number of customers in the system</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span>(<span class="no">mm23.env</span>), <span class="st">"usage"</span>, <span class="st">"server"</span>, <span class="kw">items</span><span class="kw">=</span><span class="st">"system"</span>) +
-  <span class="fu">geom_hline</span>(<span class="kw">yintercept</span><span class="kw">=</span><span class="no">mm23.N</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="va">mm23.env</span><span class="op">)</span>, <span class="st">"usage"</span>, <span class="st">"server"</span>, items<span class="op">=</span><span class="st">"system"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_hline</span><span class="op">(</span>yintercept<span class="op">=</span><span class="va">mm23.N</span><span class="op">)</span></code></pre></div>
 <p><img src="simmer-06-queueing_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="custom-service-policies" class="section level2">
@@ -212,59 +216,61 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <a href="#custom-service-policies" class="anchor"></a>Custom service policies</h2>
 <p>Resources implement a FIFO (or FCFS) priority queue, which means that arrivals with a higher priority are processed first, and among those with the same priority, the first-in-first-out policy applies. These priorities can be statically assigned to all arrivals coming from a particular source (using the <code>priority</code> argument in <code><a href="../reference/add_generator.html">add_generator()</a></code> or a dedicated column in the data frame passed to <code><a href="../reference/add_dataframe.html">add_dataframe()</a></code>).</p>
 <p>However, there is a useful activity to change priorities dynamically (as well as the other two prioritization values, <code>preemtible</code> and <code>restart</code>), and that is <code><a href="../reference/set_prioritization.html">set_prioritization()</a></code>. Such an activity allows us, for example, to implement a LIFO queue just by assigning an increasing priority to incoming arrivals:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">env</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>()
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">lifo</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_global</a></span>(<span class="st">"resource prio"</span>, <span class="fl">1</span>, <span class="kw">mod</span><span class="kw">=</span><span class="st">"+"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_prioritization.html">set_prioritization</a></span>(<span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="../reference/get_n_generated.html">get_global</a></span>(<span class="no">env</span>, <span class="st">"resource prio"</span>), <span class="fl">NA</span>, <span class="fl">NA</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"resource"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"processing"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">5</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"resource"</span>)
+<span class="va">lifo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_global</a></span><span class="op">(</span><span class="st">"resource prio"</span>, <span class="fl">1</span>, mod<span class="op">=</span><span class="st">"+"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_prioritization.html">set_prioritization</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_n_generated.html">get_global</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"resource prio"</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"resource"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"processing"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"resource"</span><span class="op">)</span>
 
-<span class="no">env</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"resource"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, <span class="no">lifo</span>, <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fl">0</span>:<span class="fl">4</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/run.html">run</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>()
+<span class="va">env</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"resource"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"dummy"</span>, <span class="va">lifo</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; 0: dummy0: processing</span>
 <span class="co">#&gt; 5: dummy4: processing</span>
 <span class="co">#&gt; 10: dummy3: processing</span>
 <span class="co">#&gt; 15: dummy2: processing</span>
-<span class="co">#&gt; 20: dummy1: processing</span></pre></body></html></div>
+<span class="co">#&gt; 20: dummy1: processing</span></code></pre></div>
 <p>This mechanism, together with signaling, serves as the basis to implement any custom servicing policy. The main idea is to signal whenever an arrival is going to release the resource so that all the arrivals in the queue can leave the queue momentarily to recompute their priorities:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">env</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>()
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">custom</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"arrival time"</span>, <span class="kw">function</span>() <span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">env</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/renege.html">renege_if</a></span>(
+<span class="va">custom</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"arrival time"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/renege.html">renege_if</a></span><span class="op">(</span>
     <span class="st">"recompute priority"</span>,
-    <span class="kw">out</span> <span class="kw">=</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span>
+    out <span class="op">=</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
       <span class="co"># e.g., increase priority if wait_time &lt; 3</span>
-      <span class="fu"><a href="../reference/set_prioritization.html">set_prioritization</a></span>(<span class="kw">function</span>() {
-        <span class="kw">if</span> (<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">env</span>) - <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">env</span>, <span class="st">"arrival time"</span>) <span class="kw">&lt;</span> <span class="fl">3</span>)
-          <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">NA</span>, <span class="fl">NA</span>)     <span class="co"># only change the priority</span>
-        <span class="kw">else</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">NA</span>, <span class="fl">NA</span>, <span class="fl">NA</span>) <span class="co"># don't change anything</span>
-      }, <span class="kw">mod</span><span class="kw">=</span><span class="st">"+"</span>) <span class="kw">%&gt;%</span>
+      <span class="fu"><a href="../reference/set_prioritization.html">set_prioritization</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+        <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"arrival time"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">3</span><span class="op">)</span>
+          <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>     <span class="co"># only change the priority</span>
+        <span class="kw">else</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span> <span class="co"># don't change anything</span>
+      <span class="op">}</span>, mod<span class="op">=</span><span class="st">"+"</span><span class="op">)</span> <span class="op">%&gt;%</span>
       <span class="co"># go 2 steps back to renege_if</span>
-      <span class="fu"><a href="../reference/rollback.html">rollback</a></span>(<span class="fl">2</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"resource"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/renege.html">renege_abort</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"processing"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">5</span>) <span class="kw">%&gt;%</span>
+      <span class="fu"><a href="../reference/rollback.html">rollback</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"resource"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/renege.html">renege_abort</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"processing"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># trigger this before releasing the resource</span>
-  <span class="fu"><a href="../reference/send.html">send</a></span>(<span class="st">"recompute priority"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">0</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"resource"</span>)
+  <span class="fu"><a href="../reference/send.html">send</a></span><span class="op">(</span><span class="st">"recompute priority"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"resource"</span><span class="op">)</span>
 
-<span class="no">env</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"resource"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"dummy"</span>, <span class="no">custom</span>, <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fl">0</span>:<span class="fl">4</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/run.html">run</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>()
+<span class="va">env</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"resource"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"dummy"</span>, <span class="va">custom</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; 0: dummy0: processing</span>
 <span class="co">#&gt; 5: dummy3: processing</span>
 <span class="co">#&gt; 10: dummy4: processing</span>
 <span class="co">#&gt; 15: dummy1: processing</span>
-<span class="co">#&gt; 20: dummy2: processing</span></pre></body></html></div>
+<span class="co">#&gt; 20: dummy2: processing</span></code></pre></div>
 <p>Note that a null timeout was added so that the resource is released in the last place. In this way, all arrivals recompute their priorities and enter the queue again before the resource is released.</p>
 </div>
 <div id="state-dependent-service-rates" class="section level2">
@@ -281,101 +287,107 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <code>delay</code>: service delay applied to the last <code>timeout</code> activity.</li>
 </ul>
 <p>The new delay is the time left scaled by the last and new multipliers.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">update.delay</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"start"</span>, <span class="st">"multiplier"</span>, <span class="st">"delay"</span>), <span class="kw">function</span>() {
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">update.delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"start"</span>, <span class="st">"multiplier"</span>, <span class="st">"delay"</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
     <span class="co"># previous multiplier, service time left</span>
-    <span class="no">multiplier</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">env</span>, <span class="st">"multiplier"</span>)
-    <span class="no">left</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">env</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"start"</span>, <span class="st">"delay"</span>))) - <span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">env</span>)
+    <span class="va">multiplier</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"multiplier"</span><span class="op">)</span>
+    <span class="va">left</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">env</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"start"</span>, <span class="st">"delay"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span>
     <span class="co"># distribute processing capacity</span>
-    <span class="no">new_multiplier</span> <span class="kw">&lt;-</span> <span class="no">capacity</span> / <span class="fu"><a href="../reference/get_capacity.html">get_server_count</a></span>(<span class="no">env</span>, <span class="st">"sd.server"</span>)
+    <span class="va">new_multiplier</span> <span class="op">&lt;-</span> <span class="va">capacity</span> <span class="op">/</span> <span class="fu"><a href="../reference/get_capacity.html">get_server_count</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"sd.server"</span><span class="op">)</span>
     <span class="co"># return new values</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">env</span>), <span class="no">new_multiplier</span>, <span class="no">left</span> * <span class="no">multiplier</span> / <span class="no">new_multiplier</span>)
-  }) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout_from_attribute</a></span>(<span class="st">"delay"</span>)</pre></body></html></div>
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span>, <span class="va">new_multiplier</span>, <span class="va">left</span> <span class="op">*</span> <span class="va">multiplier</span> <span class="op">/</span> <span class="va">new_multiplier</span><span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout_from_attribute</a></span><span class="op">(</span><span class="st">"delay"</span><span class="op">)</span></code></pre></div>
 <p>The main trajectory below first seizes the server and initialises the three attributes. Then, the arrivals need to follow the <code>update.delay</code> trajectory and must be interrupted at any given time to re-run it, thus re-computing the service time left. In <code>simmer</code>, this can be done with some signaling (see <code><a href="../reference/send.html">help(trap)</a></code>): a signal is subscribed and <code>update.delay</code> is registered as a handler. The first <code>send</code> signals the arriving entity, causing all the arrivals to execute the handler. Eventually, the handler finishes and the execution path returns to unregister the handler, release the server and signal the departing entity.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">sd.queue</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"sd.server"</span>) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sd.queue</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"sd.server"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># initialisation</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"start"</span>, <span class="st">"multiplier"</span>, <span class="st">"delay"</span>), <span class="kw">function</span>()
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">env</span>), <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="no">mu</span>))) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"start"</span>, <span class="st">"multiplier"</span>, <span class="st">"delay"</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">mu</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># set the handler and trigger it</span>
-  <span class="fu"><a href="../reference/send.html">trap</a></span>(<span class="st">"update delay"</span>, <span class="kw">handler</span><span class="kw">=</span><span class="no">update.delay</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/send.html">send</a></span>(<span class="st">"update delay"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/send.html">trap</a></span><span class="op">(</span><span class="st">"update delay"</span>, handler<span class="op">=</span><span class="va">update.delay</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/send.html">send</a></span><span class="op">(</span><span class="st">"update delay"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># returning point</span>
-  <span class="fu"><a href="../reference/send.html">untrap</a></span>(<span class="st">"update delay"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"sd.server"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/send.html">send</a></span>(<span class="st">"update delay"</span>)</pre></body></html></div>
+  <span class="fu"><a href="../reference/send.html">untrap</a></span><span class="op">(</span><span class="st">"update delay"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"sd.server"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/send.html">send</a></span><span class="op">(</span><span class="st">"update delay"</span><span class="op">)</span></code></pre></div>
 <p>In the following, we compare an M/M/2 with this state-dependent system. Both systems are fed with the same interarrival times and, as expected, the average resource usage is significantly reduced.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">lambda</span> <span class="kw">&lt;-</span> <span class="no">mu</span> <span class="kw">&lt;-</span> <span class="fl">4</span>
-<span class="no">capacity</span> <span class="kw">&lt;-</span> <span class="fl">2</span>
-<span class="no">arrivals</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">time</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">2000</span>*<span class="no">lambda</span>, <span class="no">lambda</span>))
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">4</span>
+<span class="va">capacity</span> <span class="op">&lt;-</span> <span class="fl">2</span>
+<span class="va">arrivals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>time<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">2000</span><span class="op">*</span><span class="va">lambda</span>, <span class="va">lambda</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">env</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>() <span class="kw">%&gt;%</span>
+<span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># M/M/2</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"server"</span>, <span class="no">capacity</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_dataframe.html">add_dataframe</a></span>(<span class="st">"arrival"</span>, <span class="no">m.queue</span>, <span class="no">arrivals</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"server"</span>, <span class="va">capacity</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_dataframe.html">add_dataframe</a></span><span class="op">(</span><span class="st">"arrival"</span>, <span class="va">m.queue</span>, <span class="va">arrivals</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># state-dependent service rate</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"sd.server"</span>, <span class="no">capacity</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_dataframe.html">add_dataframe</a></span>(<span class="st">"sd.arrival"</span>, <span class="no">sd.queue</span>, <span class="no">arrivals</span>)
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"sd.server"</span>, <span class="va">capacity</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_dataframe.html">add_dataframe</a></span><span class="op">(</span><span class="st">"sd.arrival"</span>, <span class="va">sd.queue</span>, <span class="va">arrivals</span><span class="op">)</span>
 
-<span class="no">env</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/run.html">run</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="kw">metric</span><span class="kw">=</span><span class="st">"usage"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"server"</span>, <span class="st">"sd.server"</span>))</pre></body></html></div>
+<span class="va">env</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>metric<span class="op">=</span><span class="st">"usage"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"server"</span>, <span class="st">"sd.server"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="simmer-06-queueing_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="queueing-networks" class="section level2">
 <h2 class="hasAnchor">
 <a href="#queueing-networks" class="anchor"></a>Queueing Networks</h2>
-<p>Let us consider the following network of queues (example taken from <a href="http://www.grotto-networking.com/DiscreteEventPython.html#NetQueues">Grotto Networking</a>):</p>
+<p>Let us consider the following network of queues (example taken from <a href="https://www.grotto-networking.com/DiscreteEventPython.html#NetQueues">Grotto Networking</a>):</p>
 <div class="figure">
 <img src="includes/queueing-network.svg" alt=""><p class="caption">A network of queues.</p>
 </div>
 <p>There are three exponential generators (<span class="math inline">\(\lambda_1\)</span>, <span class="math inline">\(\lambda_2\)</span>, <span class="math inline">\(\lambda_4\)</span>) that inject messages with exponential size of mean 100 bytes. There are four M/D/1 queues with a deterministic rate equal to 220 bytes/s. There is a 25% probability that messages from <span class="math inline">\(\lambda_1\)</span> are dropped before the second queue, and a fork 35/65% for the output of the second queue to reach queues 3 and 4. We are interested, for instance, in the accumulated waiting time for messages entering queue 1 and exiting queue 3 or 4.</p>
 <p>We’ll start by setting up the main constants and a couple of functions to set the message size and seize an M/D/1 queue:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">mean_pkt_size</span> <span class="kw">&lt;-</span> <span class="fl">100</span>        <span class="co"># bytes</span>
-<span class="no">lambda1</span> <span class="kw">&lt;-</span> <span class="fl">2</span>                <span class="co"># pkts/s</span>
-<span class="no">lambda3</span> <span class="kw">&lt;-</span> <span class="fl">0.5</span>              <span class="co"># pkts/s</span>
-<span class="no">lambda4</span> <span class="kw">&lt;-</span> <span class="fl">0.6</span>              <span class="co"># pkts/s</span>
-<span class="no">rate</span> <span class="kw">&lt;-</span> <span class="fl">2.2</span> * <span class="no">mean_pkt_size</span> <span class="co"># bytes/s</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mean_pkt_size</span> <span class="op">&lt;-</span> <span class="fl">100</span>        <span class="co"># bytes</span>
+<span class="va">lambda1</span> <span class="op">&lt;-</span> <span class="fl">2</span>                <span class="co"># pkts/s</span>
+<span class="va">lambda3</span> <span class="op">&lt;-</span> <span class="fl">0.5</span>              <span class="co"># pkts/s</span>
+<span class="va">lambda4</span> <span class="op">&lt;-</span> <span class="fl">0.6</span>              <span class="co"># pkts/s</span>
+<span class="va">rate</span> <span class="op">&lt;-</span> <span class="fl">2.2</span> <span class="op">*</span> <span class="va">mean_pkt_size</span> <span class="co"># bytes/s</span>
 
 <span class="co"># set an exponential message size of mean mean_pkt_size</span>
-<span class="no">set_msg_size</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">.</span>)
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="no">.</span>, <span class="st">"size"</span>, <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="fl">1</span>/<span class="no">mean_pkt_size</span>))
+<span class="va">set_msg_size</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"size"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">/</span><span class="va">mean_pkt_size</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># seize an M/D/1 queue by id; the timeout is function of the message size</span>
-<span class="no">md1</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">.</span>, <span class="no">id</span>)
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="no">.</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"md1_"</span>, <span class="no">id</span>), <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">env</span>, <span class="st">"size"</span>) / <span class="no">rate</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"md1_"</span>, <span class="no">id</span>), <span class="fl">1</span>)</pre></body></html></div>
+<span class="va">md1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">.</span>, <span class="va">id</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"md1_"</span>, <span class="va">id</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"size"</span><span class="op">)</span> <span class="op">/</span> <span class="va">rate</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"md1_"</span>, <span class="va">id</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>The next step is to set up the three points of attachment for our generators:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">to_queue_1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu">set_msg_size</span>() <span class="kw">%&gt;%</span>
-  <span class="fu">md1</span>(<span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/renege.html">leave</a></span>(<span class="fl">0.25</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">md1</span>(<span class="fl">2</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/branch.html">branch</a></span>(
-    <span class="kw">function</span>() (<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">1</span>) <span class="kw">&gt;</span> <span class="fl">0.65</span>) + <span class="fl">1</span>, <span class="kw">continue</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">F</span>, <span class="no">F</span>),
-    <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span> <span class="fu">md1</span>(<span class="fl">3</span>),
-    <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span> <span class="fu">md1</span>(<span class="fl">4</span>)
-  )
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">to_queue_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">set_msg_size</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">md1</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/renege.html">leave</a></span><span class="op">(</span><span class="fl">0.25</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">md1</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/branch.html">branch</a></span><span class="op">(</span>
+    <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.65</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span>, continue<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">F</span>, <span class="cn">F</span><span class="op">)</span>,
+    <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">md1</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,
+    <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">md1</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>
+  <span class="op">)</span>
 
-<span class="no">to_queue_3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu">set_msg_size</span>() <span class="kw">%&gt;%</span>
-  <span class="fu">md1</span>(<span class="fl">3</span>)
+<span class="va">to_queue_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">set_msg_size</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">md1</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
 
-<span class="no">to_queue_4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu">set_msg_size</span>() <span class="kw">%&gt;%</span>
-  <span class="fu">md1</span>(<span class="fl">4</span>)</pre></body></html></div>
+<span class="va">to_queue_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">set_msg_size</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">md1</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
 <p>Finally, we prepare and run the simulation environment with the resources and generators required:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">env</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>()
-<span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fl">4</span>) <span class="no">env</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"md1_"</span>, <span class="no">i</span>))
-<span class="no">env</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival1_"</span>, <span class="no">to_queue_1</span>, <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="no">lambda1</span>), <span class="kw">mon</span><span class="kw">=</span><span class="fl">2</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival3_"</span>, <span class="no">to_queue_3</span>, <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="no">lambda3</span>), <span class="kw">mon</span><span class="kw">=</span><span class="fl">2</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"arrival4_"</span>, <span class="no">to_queue_4</span>, <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="no">lambda4</span>), <span class="kw">mon</span><span class="kw">=</span><span class="fl">2</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="fl">4000</span>)
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span> <span class="va">env</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"md1_"</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span>
+<span class="va">env</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"arrival1_"</span>, <span class="va">to_queue_1</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">lambda1</span><span class="op">)</span>, mon<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"arrival3_"</span>, <span class="va">to_queue_3</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">lambda3</span><span class="op">)</span>, mon<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"arrival4_"</span>, <span class="va">to_queue_4</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">lambda4</span><span class="op">)</span>, mon<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="fl">4000</span><span class="op">)</span>
 <span class="co">#&gt; simmer environment: anonymous | now: 4000 | next: 4000.0322040152</span>
 <span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: md1_1 | monitored: TRUE | server status: 1(1) | queue status: 0(Inf) }</span>
@@ -384,30 +396,31 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <span class="co">#&gt; { Resource: md1_4 | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Source: arrival1_ | monitored: 2 | n_generated: 8079 }</span>
 <span class="co">#&gt; { Source: arrival3_ | monitored: 2 | n_generated: 2044 }</span>
-<span class="co">#&gt; { Source: arrival4_ | monitored: 2 | n_generated: 2402 }</span></pre></body></html></div>
+<span class="co">#&gt; { Source: arrival4_ | monitored: 2 | n_generated: 2402 }</span></code></pre></div>
 <p>In the analysis, we filter arrivals from generator 1 that reach queues 3 and 4, and we examine the average waiting time and the total number of messages:</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">res</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(<span class="no">env</span>, <span class="kw">per_resource</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">resource</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"md1_3"</span>, <span class="st">"md1_4"</span>), <span class="kw">select</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"name"</span>, <span class="st">"resource"</span>))
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">env</span>, per_resource <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">resource</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"md1_3"</span>, <span class="st">"md1_4"</span><span class="op">)</span>, select<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"resource"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">arr</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(<span class="no">env</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(<span class="kw">waiting_time</span> <span class="kw">=</span> <span class="no">end_time</span> - (<span class="no">start_time</span> + <span class="no">activity_time</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(<span class="kw">generator</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/regmatches.html">regmatches</a></span>(<span class="no">name</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html">regexpr</a></span>(<span class="st">"arrival[[:digit:]]"</span>, <span class="no">name</span>))) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span>(<span class="no">res</span>)
+<span class="va">arr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span>waiting_time <span class="op">=</span> <span class="va">end_time</span> <span class="op">-</span> <span class="op">(</span><span class="va">start_time</span> <span class="op">+</span> <span class="va">activity_time</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span>generator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/regmatches.html">regmatches</a></span><span class="op">(</span><span class="va">name</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html">regexpr</a></span><span class="op">(</span><span class="st">"arrival[[:digit:]]"</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span>(<span class="no">waiting_time</span> ~ <span class="no">generator</span> + <span class="no">resource</span>, <span class="no">arr</span>, <span class="kw">function</span>(<span class="no">x</span>) <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">x</span>)/<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">x</span>))
+<span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">waiting_time</span> <span class="op">~</span> <span class="va">generator</span> <span class="op">+</span> <span class="va">resource</span>, <span class="va">arr</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   generator resource waiting_time</span>
 <span class="co">#&gt; 1  arrival1    md1_3    5.1816915</span>
 <span class="co">#&gt; 2  arrival3    md1_3    0.6969347</span>
 <span class="co">#&gt; 3  arrival1    md1_4    4.9417576</span>
 <span class="co">#&gt; 4  arrival4    md1_4    0.4751263</span>
-<span class="fu"><a href="../reference/get_n_generated.html">get_n_generated</a></span>(<span class="no">env</span>, <span class="st">"arrival1_"</span>) + <span class="fu"><a href="../reference/get_n_generated.html">get_n_generated</a></span>(<span class="no">env</span>, <span class="st">"arrival4_"</span>)
+<span class="fu"><a href="../reference/get_n_generated.html">get_n_generated</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"arrival1_"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/get_n_generated.html">get_n_generated</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"arrival4_"</span><span class="op">)</span>
 <span class="co">#&gt; [1] 10481</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span>(<span class="no">waiting_time</span> ~ <span class="no">generator</span> + <span class="no">resource</span>, <span class="no">arr</span>, <span class="no">length</span>)
+<span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">waiting_time</span> <span class="op">~</span> <span class="va">generator</span> <span class="op">+</span> <span class="va">resource</span>, <span class="va">arr</span>, <span class="va">length</span><span class="op">)</span>
 <span class="co">#&gt;   generator resource waiting_time</span>
 <span class="co">#&gt; 1  arrival1    md1_3         3867</span>
 <span class="co">#&gt; 2  arrival3    md1_3         2042</span>
 <span class="co">#&gt; 3  arrival1    md1_4         2166</span>
-<span class="co">#&gt; 4  arrival4    md1_4         2401</span></pre></body></html></div>
+<span class="co">#&gt; 4  arrival4    md1_4         2401</span></code></pre></div>
 </div>
   </div>
 
@@ -426,7 +439,7 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
       </span>
     </div>
 
@@ -150,13 +150,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="simmer-04-bank-2_files/header-attrs-2.10/header-attrs.js"></script><script src="simmer-04-bank-2_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>The Bank Tutorial: Part II</h1>
                         <h4 class="author">Duncan Garmonsway</h4>
             
-            <h4 class="date">2020-06-06</h4>
+            <h4 class="date">2021-08-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-04-bank-2.Rmd"><code>vignettes/simmer-04-bank-2.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-04-bank-2.Rmd</code></div>
@@ -182,31 +182,32 @@
 <p>Here, we give each customer a priority. Since the default is <code>priority = 0</code> this is easy for most of them.</p>
 <p>To observe the priority in action, while all other customers have the default priority of 0, we create and activate one special customer, Guido, with priority 1 who arrives at time 23. This is to ensure that he arrives after Customer2.</p>
 <p>Since the activity trace does not produce the waiting time by default, this is calculated and appended using the <code>transform</code> function.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">1933</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1933</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>()
+<span class="va">bank</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">customer</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="kw">function</span>() {<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="kw">function</span>() {
-         <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Queue is"</span>, <span class="fu"><a href="../reference/get_capacity.html">get_queue_count</a></span>(<span class="no">bank</span>, <span class="st">"counter"</span>), <span class="st">"on arrival"</span>)
-         }) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>) - <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">bank</span>, <span class="st">"start_time"</span>))}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">12</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Completed"</span>)
+<span class="va">customer</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Customer's path"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"start_time"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+         <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Queue is"</span>, <span class="fu"><a href="../reference/get_capacity.html">get_queue_count</a></span><span class="op">(</span><span class="va">bank</span>, <span class="st">"counter"</span><span class="op">)</span>, <span class="st">"on arrival"</span><span class="op">)</span>
+         <span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">bank</span>, <span class="st">"start_time"</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Completed"</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, <span class="no">customer</span>, <span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">4</span>, <span class="fl">1</span>/<span class="fl">10</span>), -<span class="fl">1</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Guido"</span>, <span class="no">customer</span>, <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fl">23</span>), <span class="kw">priority</span> <span class="kw">=</span> <span class="fl">1</span>)
+<span class="va">bank</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"bank"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Customer"</span>, <span class="va">customer</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Guido"</span>, <span class="va">customer</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">23</span><span class="op">)</span>, priority <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="kw">until</span> <span class="kw">=</span> <span class="fl">400</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="fl">400</span><span class="op">)</span>
 <span class="co">#&gt; 0: Customer0: Queue is 0 on arrival</span>
 <span class="co">#&gt; 0: Customer0: Waited 0</span>
 <span class="co">#&gt; 0.177365: Customer1: Queue is 0 on arrival</span>
@@ -230,16 +231,16 @@
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span>
 <span class="co">#&gt; { Source: Guido | monitored: 1 | n_generated: 1 }</span>
-<span class="no">bank</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(<span class="kw">waiting_time</span> <span class="kw">=</span> <span class="no">end_time</span> - <span class="no">start_time</span> - <span class="no">activity_time</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span>waiting_time <span class="op">=</span> <span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span> <span class="op">-</span> <span class="va">activity_time</span><span class="op">)</span>
 <span class="co">#&gt;        name start_time end_time activity_time finished replication waiting_time</span>
 <span class="co">#&gt; 1 Customer0  0.0000000       12            12     TRUE           1      0.00000</span>
 <span class="co">#&gt; 2 Customer1  0.1773647       24            12     TRUE           1     11.82264</span>
 <span class="co">#&gt; 3    Guido0 23.0000000       36            12     TRUE           1      1.00000</span>
 <span class="co">#&gt; 4 Customer2  8.6410598       48            12     TRUE           1     27.35894</span>
 <span class="co">#&gt; 5 Customer3 21.1345850       60            12     TRUE           1     26.86541</span>
-<span class="co">#&gt; 6 Customer4 28.0923489       72            12     TRUE           1     31.90765</span></pre></body></html></div>
+<span class="co">#&gt; 6 Customer4 28.0923489       72            12     TRUE           1     31.90765</span></code></pre></div>
 <p>The output above displays the number of customers in the queue just as each one arrives. That count does not include any customer in service.</p>
 <p>Reading carefully one can see that when Guido arrives Customer0 has been served and left at 12, Customer1 is in service and two (customers 2 and 3) are queueing. Guido has priority over those waiting and is served before them at 24. When Guido leaves at 36, Customer2 starts service.</p>
 </div>
@@ -247,31 +248,32 @@
 <h3 class="hasAnchor">
 <a href="#priority-customers-with-preemption" class="anchor"></a>Priority customers with preemption</h3>
 <p>Now we allow Guido to have preemptive priority. He will displace any customer in service when he arrives. That customer will resume when Guido finishes (unless higher priority customers intervene). It requires only a change to one line of the program, adding the argument, <code>preemptive = TRUE</code> to the <code>add_resource</code> function call.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">1933</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1933</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>()
+<span class="va">bank</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">customer</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="kw">function</span>() {<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="kw">function</span>() {
-         <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Queue is"</span>, <span class="fu"><a href="../reference/get_capacity.html">get_queue_count</a></span>(<span class="no">bank</span>, <span class="st">"counter"</span>), <span class="st">"on arrival"</span>)
-         }) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>) - <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">bank</span>, <span class="st">"start_time"</span>))}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">12</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Completed"</span>)
+<span class="va">customer</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Customer's path"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"start_time"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+         <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Queue is"</span>, <span class="fu"><a href="../reference/get_capacity.html">get_queue_count</a></span><span class="op">(</span><span class="va">bank</span>, <span class="st">"counter"</span><span class="op">)</span>, <span class="st">"on arrival"</span><span class="op">)</span>
+         <span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">bank</span>, <span class="st">"start_time"</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Completed"</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>, <span class="kw">preemptive</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, <span class="no">customer</span>, <span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">4</span>, <span class="fl">1</span>/<span class="fl">10</span>), -<span class="fl">1</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Guido"</span>, <span class="no">customer</span>, <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fl">23</span>), <span class="kw">priority</span> <span class="kw">=</span> <span class="fl">1</span>)
+<span class="va">bank</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"bank"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"counter"</span>, preemptive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Customer"</span>, <span class="va">customer</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Guido"</span>, <span class="va">customer</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">23</span><span class="op">)</span>, priority <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="kw">until</span> <span class="kw">=</span> <span class="fl">400</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="fl">400</span><span class="op">)</span>
 <span class="co">#&gt; 0: Customer0: Queue is 0 on arrival</span>
 <span class="co">#&gt; 0: Customer0: Waited 0</span>
 <span class="co">#&gt; 0.177365: Customer1: Queue is 0 on arrival</span>
@@ -295,16 +297,16 @@
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span>
 <span class="co">#&gt; { Source: Guido | monitored: 1 | n_generated: 1 }</span>
-<span class="no">bank</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(<span class="kw">waiting_time</span> <span class="kw">=</span> <span class="no">end_time</span> - <span class="no">start_time</span> - <span class="no">activity_time</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span>waiting_time <span class="op">=</span> <span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span> <span class="op">-</span> <span class="va">activity_time</span><span class="op">)</span>
 <span class="co">#&gt;        name start_time end_time activity_time finished replication waiting_time</span>
 <span class="co">#&gt; 1 Customer0  0.0000000       12            12     TRUE           1      0.00000</span>
 <span class="co">#&gt; 2    Guido0 23.0000000       35            12     TRUE           1      0.00000</span>
 <span class="co">#&gt; 3 Customer1  0.1773647       36            12     TRUE           1     23.82264</span>
 <span class="co">#&gt; 4 Customer2  8.6410598       48            12     TRUE           1     27.35894</span>
 <span class="co">#&gt; 5 Customer3 21.1345850       60            12     TRUE           1     26.86541</span>
-<span class="co">#&gt; 6 Customer4 28.0923489       72            12     TRUE           1     31.90765</span></pre></body></html></div>
+<span class="co">#&gt; 6 Customer4 28.0923489       72            12     TRUE           1     31.90765</span></code></pre></div>
 <p>Though Guido arrives at the same time, 23, he no longer has to wait and immediately goes into service, displacing the incumbent, Customer1. That customer had already completed 23 - 12 = 11 minutes of his service. When Guido finishes at 35, Customer1 resumes service and takes 36 - 35 = 1 minutes to finish. His total service time is the same as before (12 minutes).</p>
 </div>
 </div>
@@ -318,44 +320,45 @@
 <p>Another term for a system with balking customers is one where “blocked customers” are “cleared”, termed by engineers a BCC system. This is very convenient analytically in queueing theory and formulae developed using this assumption are used extensively for planning communication systems. The easiest case is when no queueing is allowed.</p>
 <p>As an example let us investigate a BCC system with a single server but the waiting space is limited. We will estimate the rate of balking when the maximum number in the queue is set to 1. On arrival into the system the customer must first check to see if there is room. If there is not enough room, the customer balks.</p>
 <p>To get the balking rate, we first count the number of arrivals that didn’t finish, using the data given by <code><a href="../reference/get_mon.html">get_mon_arrivals()</a></code>. Then we divide it by the current model time from <code><a href="../reference/now.html">now(bank)</a></code>.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
 
-<span class="no">timeInBank</span> <span class="kw">&lt;-</span> <span class="fl">12</span> <span class="co"># mean, minutes</span>
-<span class="no">ARRint</span> <span class="kw">&lt;-</span> <span class="fl">10</span>     <span class="co"># mean, minutes</span>
-<span class="no">numServers</span> <span class="kw">&lt;-</span> <span class="fl">1</span>  <span class="co"># servers</span>
-<span class="no">maxInSystem</span> <span class="kw">&lt;-</span> <span class="fl">2</span> <span class="co"># customers</span>
-<span class="no">maxInQueue</span> <span class="kw">&lt;-</span> <span class="no">maxInSystem</span> - <span class="no">numServers</span>
+<span class="va">timeInBank</span> <span class="op">&lt;-</span> <span class="fl">12</span> <span class="co"># mean, minutes</span>
+<span class="va">ARRint</span> <span class="op">&lt;-</span> <span class="fl">10</span>     <span class="co"># mean, minutes</span>
+<span class="va">numServers</span> <span class="op">&lt;-</span> <span class="fl">1</span>  <span class="co"># servers</span>
+<span class="va">maxInSystem</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># customers</span>
+<span class="va">maxInQueue</span> <span class="op">&lt;-</span> <span class="va">maxInSystem</span> <span class="op">-</span> <span class="va">numServers</span>
 
-<span class="no">maxNumber</span> <span class="kw">&lt;-</span> <span class="fl">8</span>
-<span class="no">maxTime</span> <span class="kw">&lt;-</span> <span class="fl">400</span>  <span class="co"># minutes</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">59098</span>)
+<span class="va">maxNumber</span> <span class="op">&lt;-</span> <span class="fl">8</span>
+<span class="va">maxTime</span> <span class="op">&lt;-</span> <span class="fl">400</span>  <span class="co"># minutes</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">59098</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>()
+<span class="va">bank</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">customer</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="kw">function</span>() {<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>,
-        <span class="kw">continue</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-        <span class="kw">reject</span> <span class="kw">=</span>
-          <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Balked customer"</span>) <span class="kw">%&gt;%</span>
-          <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"BALKING"</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>) - <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">bank</span>, <span class="st">"start_time"</span>))}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="fl">1</span>/<span class="no">timeInBank</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished"</span>)
+<span class="va">customer</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Customer's path"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Here I am"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"start_time"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"counter"</span>,
+        continue <span class="op">=</span> <span class="cn">FALSE</span>,
+        reject <span class="op">=</span>
+          <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Balked customer"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+          <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"BALKING"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">bank</span>, <span class="st">"start_time"</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">/</span><span class="va">timeInBank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Finished"</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>,
-               <span class="kw">capacity</span> <span class="kw">=</span> <span class="no">numServers</span>,
-               <span class="kw">queue_size</span> <span class="kw">=</span> <span class="no">maxInQueue</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>,
-                <span class="no">customer</span>,
-                <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="no">maxNumber</span> - <span class="fl">1</span>, <span class="fl">1</span> / <span class="no">ARRint</span>)))))
+<span class="va">bank</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"bank"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"counter"</span>,
+               capacity <span class="op">=</span> <span class="va">numServers</span>,
+               queue_size <span class="op">=</span> <span class="va">maxInQueue</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Customer"</span>,
+                <span class="va">customer</span>,
+                <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="va">maxNumber</span> <span class="op">-</span> <span class="fl">1</span>, <span class="fl">1</span> <span class="op">/</span> <span class="va">ARRint</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="kw">until</span> <span class="kw">=</span> <span class="no">maxTime</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">maxTime</span><span class="op">)</span>
 <span class="co">#&gt; 0: Customer0: Here I am</span>
 <span class="co">#&gt; 0: Customer0: Waited 0</span>
 <span class="co">#&gt; 0.822239: Customer1: Here I am</span>
@@ -380,9 +383,9 @@
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(1) }</span>
 <span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 8 }</span>
 
-<span class="no">number_balked</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(!<span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(<span class="no">bank</span>)$<span class="no">finished</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Balking rate is"</span>, <span class="no">number_balked</span> / <span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>), <span class="st">"customers per minute."</span>)
-<span class="co">#&gt; [1] "Balking rate is 0 customers per minute."</span></pre></body></html></div>
+<span class="va">number_balked</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span><span class="op">$</span><span class="va">finished</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Balking rate is"</span>, <span class="va">number_balked</span> <span class="op">/</span> <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span>, <span class="st">"customers per minute."</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Balking rate is 0 customers per minute."</span></code></pre></div>
 <p>When Customer2 arrives, Customer0 is already in service and Customer1 is waiting. There is no room, so Customer2 balks. By the vagaries of exponential random numbers, Customer0 takes a very long time to serve (22.7358 minutes) so the first one to find room is number Customer6 at 25.5339.</p>
 </div>
 <div id="reneging-or-abandoning-customers" class="section level3">
@@ -390,44 +393,45 @@
 <a href="#reneging-or-abandoning-customers" class="anchor"></a>Reneging (or abandoning) customers</h3>
 <p>Often in practice an impatient customer will leave the queue before being served. Simmer can model this reneging behaviour using the <code><a href="../reference/renege.html">renege_in()</a></code> function in a trajectory. This defines the maximum time that a customer will wait before reneging, as well as an ‘out’ trajectory for them to follow when they renege.</p>
 <p>If the customer reaches the server before reneging, then their impatience must be cancelled with the <code><a href="../reference/renege.html">renege_abort()</a></code> function.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
 
-<span class="no">timeInBank</span> <span class="kw">&lt;-</span> <span class="fl">15</span> <span class="co"># mean, minutes</span>
-<span class="no">ARRint</span> <span class="kw">&lt;-</span> <span class="fl">10</span>     <span class="co"># mean, minutes</span>
-<span class="no">numServers</span> <span class="kw">&lt;-</span> <span class="fl">1</span>  <span class="co"># servers</span>
+<span class="va">timeInBank</span> <span class="op">&lt;-</span> <span class="fl">15</span> <span class="co"># mean, minutes</span>
+<span class="va">ARRint</span> <span class="op">&lt;-</span> <span class="fl">10</span>     <span class="co"># mean, minutes</span>
+<span class="va">numServers</span> <span class="op">&lt;-</span> <span class="fl">1</span>  <span class="co"># servers</span>
 
-<span class="no">maxNumber</span> <span class="kw">&lt;-</span> <span class="fl">5</span>
-<span class="no">maxTime</span> <span class="kw">&lt;-</span> <span class="fl">400</span>   <span class="co"># minutes</span>
-<span class="no">maxWaitTime</span> <span class="kw">&lt;-</span> <span class="fl">12</span> <span class="co"># minutes, maximum time to wait before reneging</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">59030</span>)
+<span class="va">maxNumber</span> <span class="op">&lt;-</span> <span class="fl">5</span>
+<span class="va">maxTime</span> <span class="op">&lt;-</span> <span class="fl">400</span>   <span class="co"># minutes</span>
+<span class="va">maxWaitTime</span> <span class="op">&lt;-</span> <span class="fl">12</span> <span class="co"># minutes, maximum time to wait before reneging</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">59030</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>()
+<span class="va">bank</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">customer</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="kw">function</span>() {<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/renege.html">renege_in</a></span>(<span class="no">maxWaitTime</span>,
-            <span class="kw">out</span> <span class="kw">=</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Reneging customer"</span>) <span class="kw">%&gt;%</span>
-              <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="kw">function</span>() {
-                     <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>) - <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">bank</span>, <span class="st">"start_time"</span>), <span class="st">"I am off"</span>)
-                   })) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/renege.html">renege_abort</a></span>() <span class="kw">%&gt;%</span> <span class="co"># Stay if I'm being attended within maxWaitTime</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>) - <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">bank</span>, <span class="st">"start_time"</span>))}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="fl">1</span>/<span class="no">timeInBank</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Completed"</span>)
+<span class="va">customer</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Customer's path"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Here I am"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"start_time"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/renege.html">renege_in</a></span><span class="op">(</span><span class="va">maxWaitTime</span>,
+            out <span class="op">=</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Reneging customer"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+              <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+                     <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">bank</span>, <span class="st">"start_time"</span><span class="op">)</span>, <span class="st">"I am off"</span><span class="op">)</span>
+                   <span class="op">}</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/renege.html">renege_abort</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># Stay if I'm being attended within maxWaitTime</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">bank</span>, <span class="st">"start_time"</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">/</span><span class="va">timeInBank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Completed"</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>,
-               <span class="kw">capacity</span> <span class="kw">=</span> <span class="no">numServers</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>,
-                <span class="no">customer</span>,
-                <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="no">maxNumber</span> - <span class="fl">1</span>, <span class="fl">1</span> / <span class="no">ARRint</span>)))))
+<span class="va">bank</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"bank"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"counter"</span>,
+               capacity <span class="op">=</span> <span class="va">numServers</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Customer"</span>,
+                <span class="va">customer</span>,
+                <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="va">maxNumber</span> <span class="op">-</span> <span class="fl">1</span>, <span class="fl">1</span> <span class="op">/</span> <span class="va">ARRint</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="kw">until</span> <span class="kw">=</span> <span class="no">maxTime</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">maxTime</span><span class="op">)</span>
 <span class="co">#&gt; 0: Customer0: Here I am</span>
 <span class="co">#&gt; 0: Customer0: Waited 0</span>
 <span class="co">#&gt; 16.5058: Customer1: Here I am</span>
@@ -443,7 +447,7 @@
 <span class="co">#&gt; simmer environment: bank | now: 64.6856688172597 | next: </span>
 <span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
-<span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></pre></body></html></div>
+<span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></code></pre></div>
 <p>Customer1 arrives after Customer0 but has only 12 minutes patience. After that time in the queue (at time 28.5058) he abandons the queue to leave Customer2 to take his place. Customer2 and Customer3 also renege. Customer4 is served within 12 minutes.</p>
 </div>
 </div>
@@ -456,48 +460,49 @@
 <p>Supposing the phone <em>does</em> ring, then Klaus would enter the sub-trajectory defined within the <code>trap</code> function as a ‘handler’. In that trajectory, he makes his excuses, answers the phone, then returns to business. At the end of the trajectory, he continues the original trajectory at the next step <em>following</em> the original <code>timeout</code>, without spending the rest of the 20 minutes on his banking.</p>
 <p>To make Klaus spend a full 20 minutes banking, we add a <code>timeout</code> activity to the end of the ‘handler’, but first we have to calculate how much time remains after the interruption. This is done by storing the ‘start’ time in an attribute, and calculating how much time is left when the phone rings.</p>
 <p>By default, interruptions can themselves be interrupted, as illustrated in this example by the phone ringing twice. This could be avoided by setting <code>interruptible = FALSE</code> in the <code>trap</code> activity.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
 
-<span class="no">timeInBank</span> <span class="kw">&lt;-</span>  <span class="fl">20</span>
-<span class="no">timeOfCall</span> <span class="kw">&lt;-</span>   <span class="fl">9</span>
-<span class="no">onphone</span>    <span class="kw">&lt;-</span>   <span class="fl">3</span>
-<span class="no">maxTime</span>    <span class="kw">&lt;-</span> <span class="fl">100</span>
+<span class="va">timeInBank</span> <span class="op">&lt;-</span>  <span class="fl">20</span>
+<span class="va">timeOfCall</span> <span class="op">&lt;-</span>   <span class="fl">9</span>
+<span class="va">onphone</span>    <span class="op">&lt;-</span>   <span class="fl">3</span>
+<span class="va">maxTime</span>    <span class="op">&lt;-</span> <span class="fl">100</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>()
+<span class="va">bank</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">customer</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/send.html">trap</a></span>(<span class="st">"phonecall"</span>,
-       <span class="kw">handler</span> <span class="kw">=</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span>
-         <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Excuse me"</span>) <span class="kw">%&gt;%</span>
-         <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(
-           <span class="st">"timeleft"</span>, <span class="kw">function</span>() {
-             <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">bank</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"timeleft"</span>, <span class="st">"start"</span>))) - <span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>)
-         }) <span class="kw">%&gt;%</span>
-         <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Hello! I'll call back"</span>) <span class="kw">%&gt;%</span>
-         <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="no">onphone</span>) <span class="kw">%&gt;%</span>
-         <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Sorry, where were we?"</span>) <span class="kw">%&gt;%</span>
-         <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start"</span>, <span class="kw">function</span>() {<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>)}) <span class="kw">%&gt;%</span>
-         <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Time left:"</span>, <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">bank</span>, <span class="st">"timeleft"</span>))}) <span class="kw">%&gt;%</span>
-         <span class="fu"><a href="../reference/timeout.html">timeout_from_attribute</a></span>(<span class="st">"timeleft"</span>)
-       ) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"timeleft"</span>, <span class="no">timeInBank</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start"</span>, <span class="kw">function</span>() {<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="no">timeInBank</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Completed"</span>)
+<span class="va">customer</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Customer's path"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/send.html">trap</a></span><span class="op">(</span><span class="st">"phonecall"</span>,
+       handler <span class="op">=</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+         <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Excuse me"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+         <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span>
+           <span class="st">"timeleft"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+             <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">bank</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"timeleft"</span>, <span class="st">"start"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span>
+         <span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+         <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Hello! I'll call back"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+         <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="va">onphone</span><span class="op">)</span> <span class="op">%&gt;%</span>
+         <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Sorry, where were we?"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+         <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"start"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+         <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Time left:"</span>, <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">bank</span>, <span class="st">"timeleft"</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+         <span class="fu"><a href="../reference/timeout.html">timeout_from_attribute</a></span><span class="op">(</span><span class="st">"timeleft"</span><span class="op">)</span>
+       <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Here I am"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"timeleft"</span>, <span class="va">timeInBank</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"start"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="va">timeInBank</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Completed"</span><span class="op">)</span>
 
-<span class="no">phone</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Phone"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Ringgg!"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/send.html">send</a></span>(<span class="st">"phonecall"</span>)
+<span class="va">phone</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Phone"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Ringgg!"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/send.html">send</a></span><span class="op">(</span><span class="st">"phonecall"</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Klaus"</span>, <span class="no">customer</span>, <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fl">0</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Phone"</span>, <span class="no">phone</span>, <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="no">timeOfCall</span>, <span class="no">timeOfCall</span> + <span class="fl">7</span>))
+<span class="va">bank</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"bank"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Klaus"</span>, <span class="va">customer</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Phone"</span>, <span class="va">phone</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="va">timeOfCall</span>, <span class="va">timeOfCall</span> <span class="op">+</span> <span class="fl">7</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="kw">until</span> <span class="kw">=</span> <span class="no">maxTime</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">maxTime</span><span class="op">)</span>
 <span class="co">#&gt; 0: Klaus0: Here I am</span>
 <span class="co">#&gt; 9: Phone0: Ringgg!</span>
 <span class="co">#&gt; 9: Klaus0: Excuse me</span>
@@ -513,7 +518,7 @@
 <span class="co">#&gt; simmer environment: bank | now: 26 | next: </span>
 <span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Source: Klaus | monitored: 1 | n_generated: 1 }</span>
-<span class="co">#&gt; { Source: Phone | monitored: 1 | n_generated: 2 }</span></pre></body></html></div>
+<span class="co">#&gt; { Source: Phone | monitored: 1 | n_generated: 2 }</span></code></pre></div>
 <p>As this has no random numbers the results are reasonably clear: the first interrupting call occurs at 9. It takes Klaus 3 minutes to listen to the message and he resumes the conversation with the bank manager at 12. The phone rings again at 16, he listens for three more minutes, and resumes the conversation at 19, finally finishing at 26. The total time of conversation is 9 + 4 + 7 = 20 minutes, the same as it would have been if the interrupt had not occurred.</p>
 </div>
 <div id="wait-until-the-bank-door-opens" class="section level2">
@@ -522,46 +527,47 @@
 <p>Customers arrive at random, some of them getting to the bank before the door is opened by a doorman. They wait for the door to be opened and then rush in and queue to be served.</p>
 <p>This model defines the door as a resource, just like the counter. The capacity of the door is defined according to the <code>schedule</code> function, so that it has zero capacity when it is shut, and infinite capacity when it is open. Customers ‘seize’ the door and must then wait until it has capacity to ‘serve’ them. Once it is available, all waiting customers are ‘served’ immediately (i.e. they pass through the door). There is no <code>timeout</code> between ‘seizing’ and ‘releasing’ the door.</p>
 <p>For the sake of announcing in the log that the door has been opened, a doorman trajectory is defined.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
 
-<span class="no">maxTime</span> <span class="kw">=</span> <span class="fl">400</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">393937</span>)
+<span class="va">maxTime</span> <span class="op">=</span> <span class="fl">400</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">393937</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>()
+<span class="va">bank</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">customer</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="kw">function</span>()
-    <span class="kw">if</span> (<span class="fu"><a href="../reference/get_capacity.html">get_capacity</a></span>(<span class="no">bank</span>, <span class="st">"door"</span>) <span class="kw">==</span> <span class="fl">0</span>)
+<span class="va">customer</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Customer's path"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/get_capacity.html">get_capacity</a></span><span class="op">(</span><span class="va">bank</span>, <span class="st">"door"</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span>
       <span class="st">"Here I am but the door is shut."</span>
     <span class="kw">else</span> <span class="st">"Here I am and the door is open."</span>
-  ) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"door"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"I can go in!"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"door"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="fl">1</span>/<span class="fl">10</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>)
+  <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"door"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"I can go in!"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"door"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span>
 
-<span class="no">openTime</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="fl">1</span>/<span class="fl">10</span>)
+<span class="va">openTime</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>
 
-<span class="no">door_schedule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/schedule.html">schedule</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="no">openTime</span>), <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">Inf</span>))
+<span class="va">door_schedule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/schedule.html">schedule</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">openTime</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">doorman</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="no">openTime</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Ladies and Gentlemen! You may all enter."</span>)
+<span class="va">doorman</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="va">openTime</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Ladies and Gentlemen! You may all enter."</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"door"</span>, <span class="kw">capacity</span> <span class="kw">=</span> <span class="no">door_schedule</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>,
-                <span class="no">customer</span>,
-                <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">5</span> - <span class="fl">1</span>, <span class="fl">0.1</span>))))) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Doorman"</span>, <span class="no">doorman</span>, <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fl">0</span>))
+<span class="va">bank</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"bank"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"door"</span>, capacity <span class="op">=</span> <span class="va">door_schedule</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Customer"</span>,
+                <span class="va">customer</span>,
+                <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">5</span> <span class="op">-</span> <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Doorman"</span>, <span class="va">doorman</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="kw">until</span> <span class="kw">=</span> <span class="no">maxTime</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">maxTime</span><span class="op">)</span>
 <span class="co">#&gt; 0: Customer0: Here I am but the door is shut.</span>
 <span class="co">#&gt; 6.44076: Customer1: Here I am but the door is shut.</span>
 <span class="co">#&gt; 8.77564: Customer2: Here I am but the door is shut.</span>
@@ -579,16 +585,16 @@
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span>
 <span class="co">#&gt; { Source: Doorman | monitored: 1 | n_generated: 1 }</span>
-<span class="no">bank</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(<span class="kw">waiting_time</span> <span class="kw">=</span> <span class="no">end_time</span> - <span class="no">start_time</span> - <span class="no">activity_time</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span>waiting_time <span class="op">=</span> <span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span> <span class="op">-</span> <span class="va">activity_time</span><span class="op">)</span>
 <span class="co">#&gt;        name start_time end_time activity_time finished replication waiting_time</span>
 <span class="co">#&gt; 1  Doorman0   0.000000 19.72408     19.724085     TRUE           1      0.00000</span>
 <span class="co">#&gt; 2 Customer0   0.000000 46.61084     26.886751     TRUE           1     19.72408</span>
 <span class="co">#&gt; 3 Customer1   6.440758 64.20811     17.597279     TRUE           1     40.17008</span>
 <span class="co">#&gt; 4 Customer2   8.775635 71.50006      7.291950     TRUE           1     55.43248</span>
 <span class="co">#&gt; 5 Customer3  24.203687 73.96270      2.462632     TRUE           1     47.29638</span>
-<span class="co">#&gt; 6 Customer4  33.357600 79.25421      5.291510     TRUE           1     40.60510</span></pre></body></html></div>
+<span class="co">#&gt; 6 Customer4  33.357600 79.25421      5.291510     TRUE           1     40.60510</span></code></pre></div>
 <p>The output above programs shows how the first two customers have to wait until the door is opened.</p>
 </div>
 <div id="wait-for-the-doorman-to-give-a-signal" class="section level1">
@@ -598,40 +604,41 @@
 <p>There are at least two ways to implement this model. The first example uses a schedule, and the second uses batching.</p>
 <p>The principle behind the schedule is that the door is modelled as a server with zero capacity for 30 minutes, then infinite capacity for zero minutes, then repeat the 30-minute cycle. In the moment that it has infinite capacity, all the customers will pass through the door (i.e. they will be ‘served’).</p>
 <p>For the sake of announcing in the log that the door has been opened, a doorman trajectory is defined. The doorman has a <code>rollback</code> step so that it keeps opening and shutting the door every 30 minutes for ever.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
 
-<span class="no">maxTime</span> <span class="kw">=</span> <span class="fl">150</span>
+<span class="va">maxTime</span> <span class="op">=</span> <span class="fl">150</span>
 
-<span class="no">customer</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am, but the door is shut."</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="kw">function</span>() {<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"door"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"The door is open!"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>) - <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">bank</span>, <span class="st">"start_time"</span>))}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"door"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="fl">1</span>/<span class="fl">10</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished."</span>)
+<span class="va">customer</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Customer's path"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Here I am, but the door is shut."</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"start_time"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"door"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"The door is open!"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">bank</span>, <span class="st">"start_time"</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"door"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Finished."</span><span class="op">)</span>
 
-<span class="no">door_schedule</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/schedule.html">schedule</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">30</span>, <span class="fl">30</span>), <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">Inf</span>, <span class="fl">0</span>), <span class="kw">period</span> <span class="kw">=</span> <span class="fl">30</span>)
+<span class="va">door_schedule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/schedule.html">schedule</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">30</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">Inf</span>, <span class="fl">0</span><span class="op">)</span>, period <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
 
-<span class="no">doorman</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Doorman"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">30</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"You may enter."</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/rollback.html">rollback</a></span>(<span class="fl">2</span>, <span class="kw">times</span> <span class="kw">=</span> <span class="fl">Inf</span>)
+<span class="va">doorman</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Doorman"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"You may enter."</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/rollback.html">rollback</a></span><span class="op">(</span><span class="fl">2</span>, times <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">393939</span>)
-<span class="no">bank</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>)
-<span class="no">bank</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"door"</span>, <span class="kw">capacity</span> <span class="kw">=</span> <span class="no">door_schedule</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>,
-                <span class="no">customer</span>,
-                <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">5</span> - <span class="fl">1</span>, <span class="fl">0.1</span>))))) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Doorman"</span>, <span class="no">doorman</span>, <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fl">0</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">393939</span><span class="op">)</span>
+<span class="va">bank</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"bank"</span><span class="op">)</span>
+<span class="va">bank</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"door"</span>, capacity <span class="op">=</span> <span class="va">door_schedule</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Customer"</span>,
+                <span class="va">customer</span>,
+                <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">5</span> <span class="op">-</span> <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Doorman"</span>, <span class="va">doorman</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; simmer environment: bank | now: 0 | next: 0</span>
 <span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: door | monitored: TRUE | server status: 0(0) | queue status: 0(Inf) }</span>
@@ -639,7 +646,7 @@
 <span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 0 }</span>
 <span class="co">#&gt; { Source: Doorman | monitored: 1 | n_generated: 0 }</span>
 
-<span class="no">bank</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="kw">until</span> <span class="kw">=</span> <span class="no">maxTime</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">maxTime</span><span class="op">)</span>
 <span class="co">#&gt; 0: Customer0: Here I am, but the door is shut.</span>
 <span class="co">#&gt; 25.4605: Customer1: Here I am, but the door is shut.</span>
 <span class="co">#&gt; 30: Doorman0: You may enter.</span>
@@ -670,50 +677,51 @@
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span>
 <span class="co">#&gt; { Source: Doorman | monitored: 1 | n_generated: 1 }</span>
-<span class="no">bank</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(<span class="kw">waiting_time</span> <span class="kw">=</span> <span class="no">end_time</span> - <span class="no">start_time</span> - <span class="no">activity_time</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span>waiting_time <span class="op">=</span> <span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span> <span class="op">-</span> <span class="va">activity_time</span><span class="op">)</span>
 <span class="co">#&gt;        name start_time end_time activity_time finished replication waiting_time</span>
 <span class="co">#&gt; 1 Customer0    0.00000 36.05646      6.056458     TRUE           1     30.00000</span>
 <span class="co">#&gt; 2 Customer1   25.46048 48.74417     12.687713     TRUE           1     10.59598</span>
 <span class="co">#&gt; 3 Customer2   35.43338 66.77625      6.776253     TRUE           1     24.56662</span>
 <span class="co">#&gt; 4 Customer3   40.64133 71.39816      4.621910     TRUE           1     26.13493</span>
-<span class="co">#&gt; 5 Customer4   49.06301 79.57954      8.181380     TRUE           1     22.33516</span></pre></body></html></div>
+<span class="co">#&gt; 5 Customer4   49.06301 79.57954      8.181380     TRUE           1     22.33516</span></code></pre></div>
 <p>The output run for this program shows how the first two customers have to wait until the door is opened, and then the next three have to wait.</p>
 <p>The second method is batching. Customers can be collected into batches of a given size, or for a given time, or whichever occurs first. Here, they are collected for periods of 30, and the number of customers in each batch is unrestricted.</p>
 <p>After the batch is created with <code>batch</code>, usually the customers will all be processed together by a server, before separating with <code>separate</code>. In this example, there is no need for a server – the door is modelled by the batch itself – so the customers are separated immediately after the batch.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
 
-<span class="no">maxTime</span> <span class="kw">=</span> <span class="fl">150</span>
+<span class="va">maxTime</span> <span class="op">=</span> <span class="fl">150</span>
 
-<span class="no">customer</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Here I am, but the door is shut."</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="kw">function</span>() {<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/batch.html">batch</a></span>(<span class="kw">n</span> <span class="kw">=</span> <span class="fl">Inf</span>, <span class="kw">timeout</span> <span class="kw">=</span> <span class="fl">30</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/batch.html">separate</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"The door is open!"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>) - <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">bank</span>, <span class="st">"start_time"</span>))}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="fl">1</span>/<span class="fl">10</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished."</span>)
+<span class="va">customer</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Customer's path"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Here I am, but the door is shut."</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"start_time"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/batch.html">batch</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span>, timeout <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/batch.html">separate</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"The door is open!"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">bank</span>, <span class="st">"start_time"</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Finished."</span><span class="op">)</span>
 
-<span class="no">doorman</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Doorman"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">30</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"You may enter."</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/rollback.html">rollback</a></span>(<span class="fl">2</span>, <span class="kw">times</span> <span class="kw">=</span> <span class="fl">Inf</span>)
+<span class="va">doorman</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Doorman"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"You may enter."</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/rollback.html">rollback</a></span><span class="op">(</span><span class="fl">2</span>, times <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">393939</span>)
-<span class="no">bank</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>)
-<span class="no">bank</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"door"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>,
-                <span class="no">customer</span>,
-                <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">5</span> - <span class="fl">1</span>, <span class="fl">0.1</span>))))) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Doorman"</span>, <span class="no">doorman</span>, <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fl">0</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">393939</span><span class="op">)</span>
+<span class="va">bank</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"bank"</span><span class="op">)</span>
+<span class="va">bank</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"door"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Customer"</span>,
+                <span class="va">customer</span>,
+                <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">5</span> <span class="op">-</span> <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Doorman"</span>, <span class="va">doorman</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; simmer environment: bank | now: 0 | next: 0</span>
 <span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: door | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
@@ -721,7 +729,7 @@
 <span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 0 }</span>
 <span class="co">#&gt; { Source: Doorman | monitored: 1 | n_generated: 0 }</span>
 
-<span class="no">bank</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="kw">until</span> <span class="kw">=</span> <span class="no">maxTime</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">maxTime</span><span class="op">)</span>
 <span class="co">#&gt; 0: Customer0: Here I am, but the door is shut.</span>
 <span class="co">#&gt; 25.4605: Customer1: Here I am, but the door is shut.</span>
 <span class="co">#&gt; 30: Doorman0: You may enter.</span>
@@ -752,36 +760,38 @@
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span>
 <span class="co">#&gt; { Source: Doorman | monitored: 1 | n_generated: 1 }</span>
-<span class="no">bank</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(<span class="kw">waiting_time</span> <span class="kw">=</span> <span class="no">end_time</span> - <span class="no">start_time</span> - <span class="no">activity_time</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span>waiting_time <span class="op">=</span> <span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span> <span class="op">-</span> <span class="va">activity_time</span><span class="op">)</span>
 <span class="co">#&gt;        name start_time end_time activity_time finished replication waiting_time</span>
 <span class="co">#&gt; 1 Customer0    0.00000 36.05646      6.056458     TRUE           1     30.00000</span>
 <span class="co">#&gt; 2 Customer1   25.46048 48.74417     12.687713     TRUE           1     10.59598</span>
 <span class="co">#&gt; 3 Customer2   35.43338 72.20964      6.776253     TRUE           1     30.00000</span>
 <span class="co">#&gt; 4 Customer3   40.64133 76.83155      4.621910     TRUE           1     31.56831</span>
-<span class="co">#&gt; 5 Customer4   49.06301 85.01293      8.181380     TRUE           1     27.76854</span></pre></body></html></div>
+<span class="co">#&gt; 5 Customer4   49.06301 85.01293      8.181380     TRUE           1     27.76854</span></code></pre></div>
 <p>This second method gives the same output as the first.</p>
 <div id="monitors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#monitors" class="anchor"></a>Monitors</h2>
 <p>Monitors record events in a simulation. Unlike SimPy, Simmer does this by default, so the records are available after – in fact, even during – a simulation. Data that is collected by monitors is available from the following functions:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">get_capacity</span>
-<span class="no">get_mon_arrivals</span>
-<span class="no">get_mon_attributes</span>
-<span class="no">get_mon_resources</span>
-<span class="no">get_n_activities</span>
-<span class="no">get_n_generated</span>
-<span class="no">get_queue_count</span>
-<span class="no">get_queue_size</span>
-<span class="no">get_server_count</span></pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">get_capacity</span>
+<span class="va">get_mon_arrivals</span>
+<span class="va">get_mon_attributes</span>
+<span class="va">get_mon_resources</span>
+<span class="va">get_n_activities</span>
+<span class="va">get_n_generated</span>
+<span class="va">get_queue_count</span>
+<span class="va">get_queue_size</span>
+<span class="va">get_server_count</span></code></pre></div>
 <p>The <code>get_mon_*()</code> functions return a data frame (which is growing during the simulation, so that, although possible, it is computationally expensive to call them from inside a trajectory). The others return a numeric value.</p>
 <div id="plotting-a-histogram-of-monitor-results" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plotting-a-histogram-of-monitor-results" class="anchor"></a>Plotting a histogram of monitor results</h3>
 <p>A histogram of the amount of time that customers spend in the bank can be plotted by taking some basic information – start and end time of each customer – from the <code><a href="../reference/get_mon.html">get_mon_arrivals()</a></code> function, and then calculating the elapsed time. This example draws the plot with the <code>ggplot2</code> package, but other plotting packages, and base R graphics, could do something similar.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer.plot</span>)
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://r-simmer.org">simmer.plot</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'simmer.plot'</span>
@@ -790,34 +800,34 @@
 <span class="co">#&gt;     get_mon_arrivals, get_mon_attributes, get_mon_resources</span>
 <span class="co"># library(ggplot2) # (automatically loaded with simmer.plot)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>()
+<span class="va">bank</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">customer</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">12</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>)
+<span class="va">customer</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Customer's path"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">393939</span>)
-<span class="no">bank</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>,
-                <span class="no">customer</span>,
-                <span class="fu"><a href="../reference/generators.html">at</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">20</span> - <span class="fl">1</span>, <span class="fl">0.1</span>)))))
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">393939</span><span class="op">)</span>
+<span class="va">bank</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"bank"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Customer"</span>,
+                <span class="va">customer</span>,
+                <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">20</span> <span class="op">-</span> <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="fl">400</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="fl">400</span><span class="op">)</span>
 <span class="co">#&gt; simmer environment: bank | now: 253.460482171601 | next: </span>
 <span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 20 }</span>
-<span class="no">bank</span> <span class="kw">%&gt;%</span>
-  <span class="no">get_mon_arrivals</span> <span class="kw">%&gt;%</span>
-  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="no">end_time</span> - <span class="no">start_time</span>)) +
-  <span class="fu">geom_histogram</span>() +
-  <span class="fu">xlab</span>(<span class="st">"Time spent in the system"</span>) +
-  <span class="fu">ylab</span>(<span class="st">"Number of customers"</span>)
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
+<span class="va">bank</span> <span class="op">%&gt;%</span>
+  <span class="va">get_mon_arrivals</span> <span class="op">%&gt;%</span>
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Time spent in the system"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Number of customers"</span><span class="op">)</span>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="simmer-04-bank-2_files/figure-html/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div id="monitoring-a-resource" class="section level3">
@@ -825,29 +835,30 @@
 <a href="#monitoring-a-resource" class="anchor"></a>Monitoring a resource</h3>
 <p>Now consider observing the number of customers waiting or active in a Resource.</p>
 <p><code><a href="../reference/get_mon.html">get_mon_resources()</a></code> returns a table of states and times for the counter. Whenever a customer enters/leaves a queue/counter, a new row is created recording the number of customers in the queue, the counter and the system as a whole. We call this the ‘state’. The amount of time that the state lasts is the difference in time between one state and the next, which we calculate with the <code><a href="https://rdrr.io/r/base/diff.html">diff()</a></code> function. Finally, we multiply the number of customers in each state by the duration of the state, and divide by the duration of the simulation (the time at the end) to get the average.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">1234</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>()
+<span class="va">bank</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">customer</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Arrived"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="kw">function</span>() {<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Got counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>) - <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span>(<span class="no">bank</span>, <span class="st">"start_time"</span>))}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="fl">12</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span>(<span class="st">"Finished"</span>)
+<span class="va">customer</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Customer's path"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Arrived"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"start_time"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Got counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Waited"</span>, <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">bank</span>, <span class="st">"start_time"</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Finished"</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, <span class="no">customer</span>, <span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">4</span>, <span class="fl">1</span>/<span class="fl">10</span>), -<span class="fl">1</span>)})
+<span class="va">bank</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"bank"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Customer"</span>, <span class="va">customer</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">}</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="kw">until</span> <span class="kw">=</span> <span class="fl">400</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="fl">400</span><span class="op">)</span>
 <span class="co">#&gt; 0: Customer0: Arrived</span>
 <span class="co">#&gt; 0: Customer0: Got counter</span>
 <span class="co">#&gt; 0: Customer0: Waited 0</span>
@@ -872,68 +883,69 @@
 <span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span>
-<span class="no">customer_monitor</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(<span class="no">bank</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(<span class="kw">wait</span> <span class="kw">=</span> <span class="no">end_time</span> - <span class="no">start_time</span> - <span class="no">activity_time</span>)
-<span class="no">mean_waiting_time</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">customer_monitor</span>$<span class="no">wait</span>)
+<span class="va">customer_monitor</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span>wait <span class="op">=</span> <span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span> <span class="op">-</span> <span class="va">activity_time</span><span class="op">)</span>
+<span class="va">mean_waiting_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">customer_monitor</span><span class="op">$</span><span class="va">wait</span><span class="op">)</span>
 
-<span class="no">resource_monitor</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span>(<span class="no">bank</span>)
+<span class="va">resource_monitor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span>
 
-<span class="no">queue_state</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">resource_monitor</span>$<span class="no">queue</span>, -<span class="fl">1</span>)
-<span class="no">server_state</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">resource_monitor</span>$<span class="no">server</span>, -<span class="fl">1</span>)
+<span class="va">queue_state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">resource_monitor</span><span class="op">$</span><span class="va">queue</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">server_state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">resource_monitor</span><span class="op">$</span><span class="va">server</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
 
-<span class="no">time_state_lasted</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span>(<span class="no">resource_monitor</span>$<span class="no">time</span>)
-<span class="no">time_at_end</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="no">resource_monitor</span>$<span class="no">time</span>)
+<span class="va">time_state_lasted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">resource_monitor</span><span class="op">$</span><span class="va">time</span><span class="op">)</span>
+<span class="va">time_at_end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">resource_monitor</span><span class="op">$</span><span class="va">time</span><span class="op">)</span>
 
-<span class="no">mean_active_customers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">server_state</span> * <span class="no">time_state_lasted</span>) / <span class="no">time_at_end</span>
-<span class="no">mean_waiting_customers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">queue_state</span> * <span class="no">time_state_lasted</span>) / <span class="no">time_at_end</span>
+<span class="va">mean_active_customers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">server_state</span> <span class="op">*</span> <span class="va">time_state_lasted</span><span class="op">)</span> <span class="op">/</span> <span class="va">time_at_end</span>
+<span class="va">mean_waiting_customers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">queue_state</span> <span class="op">*</span> <span class="va">time_state_lasted</span><span class="op">)</span> <span class="op">/</span> <span class="va">time_at_end</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">" Average waiting = "</span>, <span class="no">mean_waiting_customers</span>, <span class="st">"\n"</span>,
-    <span class="st">"Average active  = "</span>, <span class="no">mean_active_customers</span>, <span class="st">"\n"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">" Average waiting = "</span>, <span class="va">mean_waiting_customers</span>, <span class="st">"\n"</span>,
+    <span class="st">"Average active  = "</span>, <span class="va">mean_active_customers</span>, <span class="st">"\n"</span><span class="op">)</span>
 <span class="co">#&gt;  Average waiting =  0.6442028 </span>
-<span class="co">#&gt;  Average active  =  0.8217199</span></pre></body></html></div>
+<span class="co">#&gt;  Average active  =  0.8217199</span></code></pre></div>
 </div>
 <div id="plotting-from-resource-monitors" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plotting-from-resource-monitors" class="anchor"></a>Plotting from resource monitors</h3>
 <p>All the <code>get_mon_*()</code> return information that enables us to graph the output. Alternative plotting packages can be used; here we use the <code>simmer.plot</code> package just to graph the number of customers waiting for the counter.</p>
-<p>The <code>simmer.plot</code> package is imported at line 2. The function <code><a href="../reference/get_mon.html">get_mon_resources()</a></code> is not called because the function <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code> calles <code><a href="../reference/get_mon.html">get_mon_resources()</a></code> itself. The <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code> function has arguments to specifiy what to plot.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer.plot</span>)
+<p>The <code>simmer.plot</code> package is imported at line 2. The function <code><a href="../reference/get_mon.html">get_mon_resources()</a></code> is not called because the function <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> calles <code><a href="../reference/get_mon.html">get_mon_resources()</a></code> itself. The <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function has arguments to specifiy what to plot.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://r-simmer.org">simmer.plot</a></span><span class="op">)</span>
 
-<span class="no">timeInBank</span> <span class="kw">&lt;-</span> <span class="fl">12</span> <span class="co"># mean, minutes</span>
+<span class="va">timeInBank</span> <span class="op">&lt;-</span> <span class="fl">12</span> <span class="co"># mean, minutes</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">1234</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>()
+<span class="va">bank</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">customer</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"Customer's path"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span>(<span class="st">"start_time"</span>, <span class="kw">function</span>() {<span class="fu"><a href="../reference/now.html">now</a></span>(<span class="no">bank</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">1</span>, <span class="fl">1</span>/<span class="no">timeInBank</span>)}) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"counter"</span>)
+<span class="va">customer</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"Customer's path"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"start_time"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">/</span><span class="va">timeInBank</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"bank"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"counter"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"Customer"</span>, <span class="no">customer</span>, <span class="kw">function</span>() {<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span>(<span class="fl">19</span>, <span class="fl">1</span>/<span class="fl">10</span>), -<span class="fl">1</span>)})
+<span class="va">bank</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"bank"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"counter"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Customer"</span>, <span class="va">customer</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">19</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">}</span><span class="op">)</span>
 
-<span class="no">bank</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="kw">until</span> <span class="kw">=</span> <span class="fl">400</span>)
+<span class="va">bank</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="fl">400</span><span class="op">)</span>
 <span class="co">#&gt; simmer environment: bank | now: 248.706140163915 | next: </span>
 <span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 20 }</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">bank</span>,
-     <span class="kw">what</span> <span class="kw">=</span> <span class="st">"resources"</span>,
-     <span class="kw">metric</span> <span class="kw">=</span> <span class="st">"usage"</span>,
-     <span class="kw">names</span> <span class="kw">=</span> <span class="st">"counter"</span>,
-     <span class="kw">items</span> <span class="kw">=</span> <span class="st">"system"</span>,
-     <span class="kw">steps</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">bank</span>,
+     what <span class="op">=</span> <span class="st">"resources"</span>,
+     metric <span class="op">=</span> <span class="st">"usage"</span>,
+     names <span class="op">=</span> <span class="st">"counter"</span>,
+     items <span class="op">=</span> <span class="st">"system"</span>,
+     steps <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Warning: 'plot.simmer' is deprecated.</span>
 <span class="co">#&gt; Use 'plot(get_mon_resources(x))' instead.</span>
-<span class="co">#&gt; See help("Deprecated")</span></pre></body></html></div>
+<span class="co">#&gt; See help("Deprecated")</span></code></pre></div>
 <p><img src="simmer-04-bank-2_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -955,7 +967,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

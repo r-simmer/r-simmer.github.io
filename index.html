@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
       </span>
     </div>
 
@@ -166,7 +166,7 @@
 <a href="#section" class="anchor"></a><img src="https://raw.githubusercontent.com/r-simmer/r-simmer.github.io/master/images/simmer-logo.png" alt="simmer" width="200">
 </h1></div>
 
-<p><strong>simmer</strong> is a process-oriented and trajectory-based Discrete-Event Simulation (DES) package for R. Designed to be a generic framework like <a href="https://simpy.readthedocs.org">SimPy</a> or <a href="http://simjuliajl.readthedocs.org">SimJulia</a>, it leverages the power of <a href="http://www.rcpp.org/">Rcpp</a> to boost the performance and turning DES in R feasible. As a noteworthy characteristic, simmer exploits the concept of <em>trajectory</em>: a common path in the simulation model for entities of the same type. It is pretty flexible and simple to use, and leverages the chaining/piping workflow introduced by the <a href="https://github.com/smbache/magrittr">magrittr</a> package.</p>
+<p><strong>simmer</strong> is a process-oriented and trajectory-based Discrete-Event Simulation (DES) package for R. Designed to be a generic framework like <a href="https://simpy.readthedocs.org">SimPy</a> or <a href="https://simjuliajl.readthedocs.org">SimJulia</a>, it leverages the power of <a href="http://www.rcpp.org/">Rcpp</a> to boost the performance and turning DES in R feasible. As a noteworthy characteristic, simmer exploits the concept of <em>trajectory</em>: a common path in the simulation model for entities of the same type. It is pretty flexible and simple to use, and leverages the chaining/piping workflow introduced by the <a href="https://github.com/smbache/magrittr">magrittr</a> package.</p>
 <div id="extensions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#extensions" class="anchor"></a>Extensions</h2>
@@ -178,13 +178,13 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><a href="http://r-simmer.org/extensions/plot"><strong>simmer.plot</strong></a></td>
+<td><a href="https://r-simmer.org/extensions/plot"><strong>simmer.plot</strong></a></td>
 <td>Plotting Methods for <code>simmer</code>
 </td>
 <td><a href="https://cran.r-project.org/package=simmer.plot"><img src="https://www.r-pkg.org/badges/version/simmer.plot" alt="CRAN_Status_Badge"></a></td>
 </tr>
 <tr class="even">
-<td><a href="http://r-simmer.org/extensions/bricks"><strong>simmer.bricks</strong></a></td>
+<td><a href="https://r-simmer.org/extensions/bricks"><strong>simmer.bricks</strong></a></td>
 <td>Helper Methods for <code>simmer</code> Trajectories</td>
 <td><a href="https://cran.r-project.org/package=simmer.bricks"><img src="https://www.r-pkg.org/badges/version/simmer.bricks" alt="CRAN_Status_Badge"></a></td>
 </tr>
@@ -216,16 +216,19 @@
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
-<p>Documentation is available at <a href="http://r-simmer.org/reference">r-simmer.org/reference</a>. To get started, please explore our <a href="http://r-simmer.org/articles/">vignettes online</a>, or in R:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"simmer"</span>)</pre></div>
+<p>Documentation is available at <a href="https://r-simmer.org/reference">r-simmer.org/reference</a>. To get started, please explore our <a href="https://r-simmer.org/articles/">vignettes online</a>, or in R:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"simmer"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install the release version from CRAN:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"simmer"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"simmer"</span><span class="op">)</span></code></pre></div>
 <p>The installation from GitHub requires the <a href="https://cran.r-project.org/package=remotes">remotes</a> package.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"r-simmer/simmer"</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"r-simmer/simmer"</span><span class="op">)</span></code></pre></div>
 <p>Please note that the package contains some C++ code and thus you need a development environment to build the package (e.g., <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> for Windows).</p>
 </div>
 <div id="hexagon-stickers" class="section level2">
@@ -272,9 +275,8 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/r-simmer/simmer"><img src="https://travis-ci.org/r-simmer/simmer.svg?branch=master" alt="Build Status"></a></li>
+<li><a href="https://github.com/r-simmer/simmer/actions/workflows/build.yml"><img src="https://github.com/r-simmer/simmer/actions/workflows/build.yml/badge.svg" alt="build"></a></li>
 <li><a href="https://codecov.io/gh/r-simmer/simmer"><img src="https://codecov.io/gh/r-simmer/simmer/branch/master/graph/badge.svg" alt="Coverage Status"></a></li>
-<li><a href="https://scan.coverity.com/projects/r-simmer-simmer"><img src="https://scan.coverity.com/projects/13226/badge.svg?flat=1" alt="Coverity Status"></a></li>
 <li><a href="https://cran.r-project.org/package=simmer"><img src="https://www.r-pkg.org/badges/version/simmer" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://cran.r-project.org/package=simmer"><img src="https://cranlogs.r-pkg.org/badges/simmer" alt="Downloads"></a></li>
 <li><a href="https://doi.org/10.18637/jss.v090.i02"><img src="https://img.shields.io/badge/doi-10.18637/jss.v090.i02-informational.svg" alt="DOI"></a></li>
@@ -289,7 +291,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

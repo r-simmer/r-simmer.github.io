@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
       </span>
     </div>
 
@@ -150,13 +150,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="simmer-01-introduction_files/header-attrs-2.10/header-attrs.js"></script><script src="simmer-01-introduction_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to simmer</h1>
                         <h4 class="author">Bart Smeets, Iñaki Ucar</h4>
             
-            <h4 class="date">2020-06-06</h4>
+            <h4 class="date">2021-08-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-01-introduction.Rmd"><code>vignettes/simmer-01-introduction.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-01-introduction.Rmd</code></div>
@@ -169,53 +169,58 @@
 <h2 class="hasAnchor">
 <a href="#basic-usage" class="anchor"></a>Basic usage</h2>
 <p>First, load the package and instantiate a new simulation environment.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">42</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
 
-<span class="no">env</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"SuperDuperSim"</span>)
-<span class="no">env</span>
+<span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"SuperDuperSim"</span><span class="op">)</span>
+<span class="va">env</span>
 <span class="co">#&gt; simmer environment: SuperDuperSim | now: 0 | next: </span>
-<span class="co">#&gt; { Monitor: in memory }</span></pre></body></html></div>
+<span class="co">#&gt; { Monitor: in memory }</span></code></pre></div>
 <p>Set-up a simple trajectory. Let’s say we want to simulate an ambulatory consultation where a patient is first seen by a nurse for an intake, next by a doctor for the consultation and finally by administrative staff to schedule a follow-up appointment.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">patient</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span>(<span class="st">"patients' path"</span>) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">patient</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="st">"patients' path"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co">## add an intake activity </span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"nurse"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1</span>, <span class="fl">15</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"nurse"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"nurse"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"nurse"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co">## add a consultation activity</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"doctor"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1</span>, <span class="fl">20</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"doctor"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"doctor"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"doctor"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co">## add a planning activity</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span>(<span class="st">"administration"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1</span>, <span class="fl">5</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">release</a></span>(<span class="st">"administration"</span>, <span class="fl">1</span>)</pre></body></html></div>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"administration"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"administration"</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>In this case, the argument of the <code>timeout</code> activity is a function, which is evaluated dynamically to produce an stochastic waiting time, but it could be a constant too. Apart from that, this function may be as complex as you need and may do whatever you want: interact with entities in your simulation model, get resources’ status, make decisions according to the latter…</p>
 <p>Once the trajectory is known, you may attach arrivals to it and define the resources needed. In the example below, three types of resources are added: the <em>nurse</em> and <em>administration</em> resources, each one with a capacity of 1, and the <em>doctor</em> resource, with a capacity of 2. The last method adds a generator of arrivals (patients) following the trajectory <code>patient</code>. The time between patients is about 10 minutes (a Gaussian of <code>mean=10</code> and <code>sd=2</code>). (Note: returning a negative interarrival time at some point would stop the generator).</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">env</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"nurse"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="fl">2</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"administration"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, <span class="no">patient</span>, <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">2</span>))
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">env</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"nurse"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"doctor"</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"administration"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"patient"</span>, <span class="va">patient</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; simmer environment: SuperDuperSim | now: 0 | next: 0</span>
 <span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: nurse | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Resource: doctor | monitored: TRUE | server status: 0(2) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Resource: administration | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
-<span class="co">#&gt; { Source: patient | monitored: 1 | n_generated: 0 }</span></pre></body></html></div>
+<span class="co">#&gt; { Source: patient | monitored: 1 | n_generated: 0 }</span></code></pre></div>
 <p>The simulation is now ready for a test run; just let it <em>simmer</em> for a bit. Below, we specify that we want to limit the runtime to 80 time units using the <code>until</code> argument. After that, we verify the current simulation time (<code>now</code>) and when will be the next 3 events (<code>peek</code>).</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">env</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="fl">80</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/now.html">now</a></span>()
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">env</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="fl">80</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] 80</span>
-<span class="no">env</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/peek.html">peek</a></span>(<span class="fl">3</span>)
-<span class="co">#&gt; [1] 80.69540 81.62105 81.62105</span></pre></body></html></div>
+<span class="va">env</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/peek.html">peek</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
+<span class="co">#&gt; [1] 80.69540 81.62105 81.62105</span></code></pre></div>
 <p>It is possible to run the simulation step by step, and such a method is chainable too.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">env</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/run.html">stepn</a></span>() <span class="kw">%&gt;%</span> <span class="co"># 1 step</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/run.html">stepn</a></span>(<span class="fl">3</span>)    <span class="co"># 3 steps</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">env</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/run.html">stepn</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># 1 step</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/run.html">stepn</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>    <span class="co"># 3 steps</span>
 <span class="co">#&gt; simmer environment: SuperDuperSim | now: 80.6953988949657 | next: 80.6953988949657</span>
 <span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: nurse | monitored: TRUE | server status: 1(1) | queue status: 1(Inf) }</span>
@@ -228,74 +233,79 @@
 <span class="co">#&gt; { Resource: doctor | monitored: TRUE | server status: 1(2) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Resource: administration | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span>
 <span class="co">#&gt; { Source: patient | monitored: 1 | n_generated: 7 }</span>
-<span class="no">env</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/peek.html">peek</a></span>(<span class="fl">Inf</span>, <span class="kw">verbose</span><span class="kw">=</span><span class="fl">TRUE</span>)
+<span class="va">env</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/peek.html">peek</a></span><span class="op">(</span><span class="cn">Inf</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt;       time  process</span>
 <span class="co">#&gt; 1 81.62105  patient</span>
 <span class="co">#&gt; 2 86.74154 patient4</span>
-<span class="co">#&gt; 3 89.36934 patient3</span></pre></body></html></div>
+<span class="co">#&gt; 3 89.36934 patient3</span></code></pre></div>
 <p>Also, it is possible to resume the automatic execution simply by specifying a longer runtime. Below, we continue the execution until 120 time units.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">env</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="fl">120</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/now.html">now</a></span>()
-<span class="co">#&gt; [1] 120</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">env</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="fl">120</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 120</span></code></pre></div>
 <p>You can also reset the simulation, flush all results, resources and generators, and restart from the beginning.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">env</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/reset.html">reset</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="fl">80</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/now.html">now</a></span>()
-<span class="co">#&gt; [1] 80</span></pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">env</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/reset.html">reset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="fl">80</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 80</span></code></pre></div>
 </div>
 <div id="replication" class="section level2">
 <h2 class="hasAnchor">
 <a href="#replication" class="anchor"></a>Replication</h2>
 <p>It is very easy to replicate a simulation multiple times using standard R functions.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">envs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="fl">1</span>:<span class="fl">100</span>, <span class="kw">function</span>(<span class="no">i</span>) {
-  <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"SuperDuperSim"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"nurse"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="fl">2</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"administration"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, <span class="no">patient</span>, <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">2</span>)) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="fl">80</span>)
-})</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">envs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"SuperDuperSim"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"nurse"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"doctor"</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"administration"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"patient"</span>, <span class="va">patient</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="fl">80</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
 <p>The advantage of the latter approach is that, if the individual replicas are heavy, it is straightforward to parallelise their execution (for instance, in the next example we use the function <code>mclapply</code> from the <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf">parallel</a>) package. However, the external pointers to the C++ simmer core are no longer valid when the parallelised execution ends. Thus, it is necessary to extract the results for each thread at the end of the execution. This can be done with the helper function <code>wrap</code> as follows.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">parallel</span>)
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span>
 
-<span class="no">envs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/mclapply.html">mclapply</a></span>(<span class="fl">1</span>:<span class="fl">100</span>, <span class="kw">function</span>(<span class="no">i</span>) {
-  <span class="fu"><a href="../reference/simmer.html">simmer</a></span>(<span class="st">"SuperDuperSim"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"nurse"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="fl">2</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span>(<span class="st">"administration"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, <span class="no">patient</span>, <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">2</span>)) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/run.html">run</a></span>(<span class="fl">80</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/wrap.html">wrap</a></span>()
-})</pre></body></html></div>
+<span class="va">envs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/mclapply.html">mclapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"SuperDuperSim"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"nurse"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"doctor"</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"administration"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"patient"</span>, <span class="va">patient</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="fl">80</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/wrap.html">wrap</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
 <p>This helper function brings the simulation data back to R and makes it accessible through the same methods that would ordinarily be used for a <code>simmer</code> environment.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">envs</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_n_generated.html">get_n_generated</a></span>(<span class="st">"patient"</span>)
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">envs</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/get_n_generated.html">get_n_generated</a></span><span class="op">(</span><span class="st">"patient"</span><span class="op">)</span>
 <span class="co">#&gt; [1] 9</span>
-<span class="no">envs</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_capacity.html">get_queue_count</a></span>(<span class="st">"doctor"</span>)
+<span class="va">envs</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/get_capacity.html">get_queue_count</a></span><span class="op">(</span><span class="st">"doctor"</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0</span>
-<span class="no">envs</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/get_capacity.html">get_queue_size</a></span>(<span class="st">"doctor"</span>)
+<span class="va">envs</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/get_capacity.html">get_queue_size</a></span><span class="op">(</span><span class="st">"doctor"</span><span class="op">)</span>
 <span class="co">#&gt; [1] Inf</span>
-<span class="no">envs</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>()
-<span class="co">#&gt;   resource     time server queue capacity queue_size system limit replication</span>
-<span class="co">#&gt; 1    nurse 10.31374      1     0        1        Inf      1   Inf           1</span>
-<span class="co">#&gt; 2    nurse 21.16746      1     1        1        Inf      2   Inf           1</span>
-<span class="co">#&gt; 3    nurse 26.17583      1     0        1        Inf      1   Inf           1</span>
-<span class="co">#&gt; 4   doctor 26.17583      1     0        2        Inf      1   Inf           1</span>
-<span class="co">#&gt; 5    nurse 33.43760      1     1        1        Inf      2   Inf           1</span>
-<span class="co">#&gt; 6    nurse 42.31718      1     0        1        Inf      1   Inf           1</span>
-<span class="no">envs</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>()
+<span class="va">envs</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt;   resource      time server queue capacity queue_size system limit replication</span>
+<span class="co">#&gt; 1    nurse  9.807634      1     0        1        Inf      1   Inf           1</span>
+<span class="co">#&gt; 2    nurse 22.213842      1     1        1        Inf      2   Inf           1</span>
+<span class="co">#&gt; 3    nurse 26.004805      1     0        1        Inf      1   Inf           1</span>
+<span class="co">#&gt; 4   doctor 26.004805      1     0        2        Inf      1   Inf           1</span>
+<span class="co">#&gt; 5    nurse 29.818827      1     1        1        Inf      2   Inf           1</span>
+<span class="co">#&gt; 6    nurse 41.979411      1     2        1        Inf      3   Inf           1</span>
+<span class="va">envs</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;       name start_time end_time activity_time finished replication</span>
-<span class="co">#&gt; 1 patient0  10.313742 50.18011      39.86636     TRUE           1</span>
-<span class="co">#&gt; 2 patient1  21.167455 67.01512      40.83929     TRUE           1</span>
-<span class="co">#&gt; 3 patient0   7.545482 46.33585      38.79037     TRUE           2</span>
-<span class="co">#&gt; 4 patient1  17.216065 63.88347      40.67124     TRUE           2</span>
-<span class="co">#&gt; 5 patient0  12.086554 52.11226      40.02571     TRUE           3</span>
-<span class="co">#&gt; 6 patient1  23.346820 64.90209      37.47253     TRUE           3</span></pre></body></html></div>
+<span class="co">#&gt; 1 patient0   9.807634 51.07864      41.27101     TRUE           1</span>
+<span class="co">#&gt; 2 patient1  22.213842 68.51849      42.51369     TRUE           1</span>
+<span class="co">#&gt; 3 patient0   9.197738 50.96381      41.76607     TRUE           2</span>
+<span class="co">#&gt; 4 patient1  18.941052 64.80405      38.67962     TRUE           2</span>
+<span class="co">#&gt; 5 patient0   5.461767 45.61589      40.15412     TRUE           3</span>
+<span class="co">#&gt; 6 patient1  16.144327 61.89973      42.42465     TRUE           3</span></code></pre></div>
 <p>Unfortunately, as the C++ simulation cores are destroyed, the downside of this kind of parallelization is that one cannot resume execution of the replicas.</p>
 </div>
 <div id="basic-visualisation-tools" class="section level2">
@@ -303,9 +313,9 @@
 <a href="#basic-visualisation-tools" class="anchor"></a>Basic visualisation tools</h2>
 <p>You may want to try the <code>simmer.plot</code> package, a plugin for <code>simmer</code> that provides some basic visualisation tools to help you take a quick glance at your simulation results or debug a trajectory object:</p>
 <ul>
-<li><a href="http://r-simmer.org/extensions/plot/articles/plot.simmer.html"><em>Plotting simmer statistics</em></a></li>
+<li><a href="https://r-simmer.org/extensions/plot/articles/plot.simmer.html"><em>Plotting simmer statistics</em></a></li>
 <li>
-<a href="http://r-simmer.org/extensions/plot/articles/plot.trajectory.html"><em>Plotting simmer trajectories</em></a>.</li>
+<a href="https://r-simmer.org/extensions/plot/articles/plot.trajectory.html"><em>Plotting simmer trajectories</em></a>.</li>
 </ul>
 </div>
   </div>
@@ -325,7 +335,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

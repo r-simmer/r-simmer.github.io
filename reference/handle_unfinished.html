@@ -86,7 +86,7 @@ rejected seize) or those that leave a trajectory." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
       </span>
     </div>
 
@@ -212,7 +212,7 @@ those dropped from a resource (due to preemption, resource shrinkage or a
 rejected <code><a href='seize.html'>seize</a></code>) or those that <code><a href='renege.html'>leave</a></code> a trajectory.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>handle_unfinished</span>(<span class='no'>.trj</span>, <span class='no'>handler</span>)</pre>
+    <pre class="usage"><span class='fu'>handle_unfinished</span><span class='op'>(</span><span class='va'>.trj</span>, <span class='va'>handler</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,22 +236,23 @@ value will unset the drop-out trajectory.</p></td>
     <div class='dont-index'><p><code><a href='renege.html'>leave</a></code>, <code><a href='set_capacity.html'>set_capacity</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"arrived"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>handle_unfinished</span>(
-    <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
-      <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"preempted!"</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"res"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"resource seized"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>10</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"res"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"leaving"</span>)
+    <pre class="examples"><div class='input'><span class='va'>traj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span><span class='op'>(</span><span class='st'>"arrived"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>handle_unfinished</span><span class='op'>(</span>
+    <span class='fu'><a href='trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+      <span class='fu'><a href='log_.html'>log_</a></span><span class='op'>(</span><span class='st'>"preempted!"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='seize.html'>seize</a></span><span class='op'>(</span><span class='st'>"res"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span><span class='op'>(</span><span class='st'>"resource seized"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='seize.html'>release</a></span><span class='op'>(</span><span class='st'>"res"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span><span class='op'>(</span><span class='st'>"leaving"</span><span class='op'>)</span>
 
-<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"res"</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='kw'>preemptive</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>queue_size_strict</span><span class='kw'>=</span><span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"priority_dummy"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>5</span>), <span class='kw'>priority</span><span class='kw'>=</span><span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: dummy0: arrived
+<span class='fu'><a href='simmer.html'>simmer</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_resource.html'>add_resource</a></span><span class='op'>(</span><span class='st'>"res"</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, preemptive<span class='op'>=</span><span class='cn'>TRUE</span>, queue_size_strict<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span><span class='op'>(</span><span class='st'>"dummy"</span>, <span class='va'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span><span class='op'>(</span><span class='st'>"priority_dummy"</span>, <span class='va'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span>, priority<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='va'>invisible</span>
+</div><div class='output co'>#&gt; 0: dummy0: arrived
 #&gt; 0: dummy0: resource seized
 #&gt; 5: priority_dummy0: arrived
 #&gt; 5: priority_dummy0: resource seized
@@ -273,7 +274,7 @@ value will unset the drop-out trajectory.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

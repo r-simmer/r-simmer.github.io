@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
       </span>
     </div>
 
@@ -208,8 +208,8 @@
     <p>Attach a new source of arrivals to a trajectory from a generator function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_generator</span>(<span class='no'>.env</span>, <span class='no'>name_prefix</span>, <span class='no'>trajectory</span>, <span class='no'>distribution</span>, <span class='kw'>mon</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>priority</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>preemptible</span> <span class='kw'>=</span> <span class='no'>priority</span>, <span class='kw'>restart</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>add_generator</span><span class='op'>(</span><span class='va'>.env</span>, <span class='va'>name_prefix</span>, <span class='va'>trajectory</span>, <span class='va'>distribution</span>, mon <span class='op'>=</span> <span class='fl'>1</span>,
+  priority <span class='op'>=</span> <span class='fl'>0</span>, preemptible <span class='op'>=</span> <span class='va'>priority</span>, restart <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -231,7 +231,7 @@ names are provided, several generators will be defined with the same parameters.
     <tr>
       <th>distribution</th>
       <td><p>a function modelling the interarrival times (returning a
-negative value stops the generator).</p></td>
+negative value or a missing value stops the generator).</p></td>
     </tr>
     <tr>
       <th>mon</th>
@@ -282,7 +282,7 @@ thus only higher priority arrivals can trigger preemption.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

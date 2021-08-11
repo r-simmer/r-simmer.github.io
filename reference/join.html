@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
       </span>
     </div>
 
@@ -208,7 +208,7 @@
     <p>Concatenate any number of trajectories in the specified order.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>join</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>join</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -228,20 +228,22 @@
 <code><a href='length.trajectory.html'>get_n_activities</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>t1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"dummy"</span>, <span class='fl'>1</span>)
-<span class='no'>t2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>1</span>)
-<span class='no'>t3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"dummy"</span>, <span class='fl'>1</span>)
+    <pre class="examples"><div class='input'><span class='va'>t1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='seize.html'>seize</a></span><span class='op'>(</span><span class='st'>"dummy"</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>t2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='timeout.html'>timeout</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>t3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='seize.html'>release</a></span><span class='op'>(</span><span class='st'>"dummy"</span>, <span class='fl'>1</span><span class='op'>)</span>
 
 <span class='co'>## join can be used alone</span>
-<span class='fu'>join</span>(<span class='no'>t1</span>, <span class='no'>t2</span>, <span class='no'>t3</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 3 activities
+<span class='fu'>join</span><span class='op'>(</span><span class='va'>t1</span>, <span class='va'>t2</span>, <span class='va'>t3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; trajectory: anonymous, 3 activities
 #&gt; { Activity: Seize        | resource: dummy, amount: 1 }
 #&gt; { Activity: Timeout      | delay: 1 }
 #&gt; { Activity: Release      | resource: dummy, amount: 1 }</div><div class='input'>
 <span class='co'>## or can be chained in a trajectory definition</span>
-<span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>join</span>(<span class='no'>t1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>join</span>(<span class='no'>t3</span>)</div><div class='output co'>#&gt; trajectory: anonymous, 3 activities
+<span class='fu'><a href='trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>join</span><span class='op'>(</span><span class='va'>t1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>join</span><span class='op'>(</span><span class='va'>t3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; trajectory: anonymous, 3 activities
 #&gt; { Activity: Seize        | resource: dummy, amount: 1 }
 #&gt; { Activity: Timeout      | delay: 1 }
 #&gt; { Activity: Release      | resource: dummy, amount: 1 }</div><div class='input'>
@@ -261,7 +263,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

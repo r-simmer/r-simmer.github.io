@@ -85,7 +85,7 @@ implement loops." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
       </span>
     </div>
 
@@ -210,7 +210,7 @@ implement loops." />
 implement loops.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rollback</span>(<span class='no'>.trj</span>, <span class='no'>amount</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>check</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>rollback</span><span class='op'>(</span><span class='va'>.trj</span>, <span class='va'>amount</span>, times <span class='op'>=</span> <span class='cn'>Inf</span>, check <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -242,31 +242,33 @@ function to check whether the rollback must be done or not.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## rollback a specific number of times</span>
-<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"hello!"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>rollback</span>(<span class='fl'>2</span>, <span class='fl'>3</span>)
+<span class='va'>traj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span><span class='op'>(</span><span class='st'>"hello!"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>rollback</span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span>
 
-<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"hello_sayer"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: hello_sayer0: hello!
+<span class='fu'><a href='simmer.html'>simmer</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span><span class='op'>(</span><span class='st'>"hello_sayer"</span>, <span class='va'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='va'>invisible</span>
+</div><div class='output co'>#&gt; 0: hello_sayer0: hello!
 #&gt; 1: hello_sayer0: hello!
 #&gt; 2: hello_sayer0: hello!
 #&gt; 3: hello_sayer0: hello!</div><div class='input'>
 <span class='co'>## custom check</span>
-<span class='no'>env</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='simmer.html'>simmer</a></span>()
+<span class='va'>env</span> <span class='op'>&lt;-</span> <span class='fu'><a href='simmer.html'>simmer</a></span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='set_attribute.html'>set_attribute</a></span>(<span class='st'>"var"</span>, <span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='kw'>function</span>()
-    <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"attribute level is at:"</span>, <span class='fu'><a href='get_n_generated.html'>get_attribute</a></span>(<span class='no'>env</span>, <span class='st'>"var"</span>))) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='set_attribute.html'>set_attribute</a></span>(<span class='st'>"var"</span>, <span class='fl'>25</span>, <span class='kw'>mod</span><span class='kw'>=</span><span class='st'>"+"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>rollback</span>(<span class='fl'>2</span>, <span class='kw'>check</span><span class='kw'>=</span><span class='kw'>function</span>() <span class='fu'><a href='get_n_generated.html'>get_attribute</a></span>(<span class='no'>env</span>, <span class='st'>"var"</span>) <span class='kw'>&lt;</span> <span class='fl'>100</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"done"</span>)
+<span class='va'>traj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='set_attribute.html'>set_attribute</a></span><span class='op'>(</span><span class='st'>"var"</span>, <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"attribute level is at:"</span>, <span class='fu'><a href='get_n_generated.html'>get_attribute</a></span><span class='op'>(</span><span class='va'>env</span>, <span class='st'>"var"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='set_attribute.html'>set_attribute</a></span><span class='op'>(</span><span class='st'>"var"</span>, <span class='fl'>25</span>, mod<span class='op'>=</span><span class='st'>"+"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>rollback</span><span class='op'>(</span><span class='fl'>2</span>, check<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='fu'><a href='get_n_generated.html'>get_attribute</a></span><span class='op'>(</span><span class='va'>env</span>, <span class='st'>"var"</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='fl'>100</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span><span class='op'>(</span><span class='st'>"done"</span><span class='op'>)</span>
 
-<span class='no'>env</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span> <span class='no'>invisible</span></div><div class='output co'>#&gt; 0: dummy0: attribute level is at: 0
+<span class='va'>env</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span><span class='op'>(</span><span class='st'>"dummy"</span>, <span class='va'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='va'>invisible</span>
+</div><div class='output co'>#&gt; 0: dummy0: attribute level is at: 0
 #&gt; 0: dummy0: attribute level is at: 25
 #&gt; 0: dummy0: attribute level is at: 50
 #&gt; 0: dummy0: attribute level is at: 75
@@ -287,7 +289,7 @@ function to check whether the rollback must be done or not.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

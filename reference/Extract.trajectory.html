@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
       </span>
     </div>
 
@@ -256,10 +256,11 @@ if necessary to match the corresponding extent.</p>
 <code><a href='join.html'>join</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='join.html'>join</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='fl'>1</span>:<span class='fl'>12</span>, <span class='kw'>function</span>(<span class='no'>i</span>)
-  <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='no'>i</span>)
-))
-<span class='no'>x</span></div><div class='output co'>#&gt; trajectory: anonymous, 12 activities
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='join.html'>join</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>i</span><span class='op'>)</span>
+  <span class='fu'><a href='trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='timeout.html'>timeout</a></span><span class='op'>(</span><span class='va'>i</span><span class='op'>)</span>
+<span class='op'>)</span><span class='op'>)</span>
+<span class='va'>x</span>
+</div><div class='output co'>#&gt; trajectory: anonymous, 12 activities
 #&gt; { Activity: Timeout      | delay: 1 }
 #&gt; { Activity: Timeout      | delay: 2 }
 #&gt; { Activity: Timeout      | delay: 3 }
@@ -272,8 +273,10 @@ if necessary to match the corresponding extent.</p>
 #&gt; { Activity: Timeout      | delay: 10 }
 #&gt; { Activity: Timeout      | delay: 11 }
 #&gt; { Activity: Timeout      | delay: 12 }</div><div class='input'>
-<span class='no'>x</span>[<span class='fl'>10</span>]                 <span class='co'># the tenth element of x</span></div><div class='output co'>#&gt; trajectory: anonymous, 1 activities
-#&gt; { Activity: Timeout      | delay: 10 }</div><div class='input'><span class='no'>x</span>[-<span class='fl'>1</span>]                 <span class='co'># delete the 1st element of x</span></div><div class='output co'>#&gt; trajectory: anonymous, 11 activities
+<span class='va'>x</span><span class='op'>[</span><span class='fl'>10</span><span class='op'>]</span>                 <span class='co'># the tenth element of x</span>
+</div><div class='output co'>#&gt; trajectory: anonymous, 1 activities
+#&gt; { Activity: Timeout      | delay: 10 }</div><div class='input'><span class='va'>x</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>                 <span class='co'># delete the 1st element of x</span>
+</div><div class='output co'>#&gt; trajectory: anonymous, 11 activities
 #&gt; { Activity: Timeout      | delay: 2 }
 #&gt; { Activity: Timeout      | delay: 3 }
 #&gt; { Activity: Timeout      | delay: 4 }
@@ -284,19 +287,22 @@ if necessary to match the corresponding extent.</p>
 #&gt; { Activity: Timeout      | delay: 9 }
 #&gt; { Activity: Timeout      | delay: 10 }
 #&gt; { Activity: Timeout      | delay: 11 }
-#&gt; { Activity: Timeout      | delay: 12 }</div><div class='input'><span class='no'>x</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>)]     <span class='co'># logical indexing</span></div><div class='output co'>#&gt; trajectory: anonymous, 6 activities
+#&gt; { Activity: Timeout      | delay: 12 }</div><div class='input'><span class='va'>x</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>]</span>     <span class='co'># logical indexing</span>
+</div><div class='output co'>#&gt; trajectory: anonymous, 6 activities
 #&gt; { Activity: Timeout      | delay: 1 }
 #&gt; { Activity: Timeout      | delay: 3 }
 #&gt; { Activity: Timeout      | delay: 5 }
 #&gt; { Activity: Timeout      | delay: 7 }
 #&gt; { Activity: Timeout      | delay: 9 }
-#&gt; { Activity: Timeout      | delay: 11 }</div><div class='input'><span class='no'>x</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>2</span>, <span class='fl'>12</span>, <span class='fl'>4</span>)]  <span class='co'># numeric indexing</span></div><div class='output co'>#&gt; trajectory: anonymous, 5 activities
+#&gt; { Activity: Timeout      | delay: 11 }</div><div class='input'><span class='va'>x</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>2</span>, <span class='fl'>12</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>]</span>  <span class='co'># numeric indexing</span>
+</div><div class='output co'>#&gt; trajectory: anonymous, 5 activities
 #&gt; { Activity: Timeout      | delay: 1 }
 #&gt; { Activity: Timeout      | delay: 5 }
 #&gt; { Activity: Timeout      | delay: 2 }
 #&gt; { Activity: Timeout      | delay: 12 }
-#&gt; { Activity: Timeout      | delay: 4 }</div><div class='input'><span class='no'>x</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>)] <span class='kw'>&lt;-</span> <span class='no'>x</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>)] <span class='co'># replacing</span>
-<span class='no'>x</span></div><div class='output co'>#&gt; trajectory: anonymous, 12 activities
+#&gt; { Activity: Timeout      | delay: 4 }</div><div class='input'><span class='va'>x</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>FALSE</span>, <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>x</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>]</span> <span class='co'># replacing</span>
+<span class='va'>x</span>
+</div><div class='output co'>#&gt; trajectory: anonymous, 12 activities
 #&gt; { Activity: Timeout      | delay: 1 }
 #&gt; { Activity: Timeout      | delay: 1 }
 #&gt; { Activity: Timeout      | delay: 3 }
@@ -325,7 +331,7 @@ if necessary to match the corresponding extent.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

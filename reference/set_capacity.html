@@ -86,7 +86,7 @@ simulation environment (see add_resource)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
       </span>
     </div>
 
@@ -212,13 +212,13 @@ size, by name or a previously selected one. Resources must be defined in the
 simulation environment (see <code><a href='add_resource.html'>add_resource</a></code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_capacity</span>(<span class='no'>.trj</span>, <span class='no'>resource</span>, <span class='no'>value</span>, <span class='kw'>mod</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"+"</span>, <span class='st'>"*"</span>))
+    <pre class="usage"><span class='fu'>set_capacity</span><span class='op'>(</span><span class='va'>.trj</span>, <span class='va'>resource</span>, <span class='va'>value</span>, mod <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"+"</span>, <span class='st'>"*"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>set_capacity_selected</span>(<span class='no'>.trj</span>, <span class='no'>value</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>mod</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"+"</span>, <span class='st'>"*"</span>))
+<span class='fu'>set_capacity_selected</span><span class='op'>(</span><span class='va'>.trj</span>, <span class='va'>value</span>, id <span class='op'>=</span> <span class='fl'>0</span>, mod <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"+"</span>, <span class='st'>"*"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>set_queue_size</span>(<span class='no'>.trj</span>, <span class='no'>resource</span>, <span class='no'>value</span>, <span class='kw'>mod</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"+"</span>, <span class='st'>"*"</span>))
+<span class='fu'>set_queue_size</span><span class='op'>(</span><span class='va'>.trj</span>, <span class='va'>resource</span>, <span class='va'>value</span>, mod <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"+"</span>, <span class='st'>"*"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>set_queue_size_selected</span>(<span class='no'>.trj</span>, <span class='no'>value</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>mod</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"+"</span>, <span class='st'>"*"</span>))</pre>
+<span class='fu'>set_queue_size_selected</span><span class='op'>(</span><span class='va'>.trj</span>, <span class='va'>value</span>, id <span class='op'>=</span> <span class='fl'>0</span>, mod <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"+"</span>, <span class='st'>"*"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -233,7 +233,7 @@ simulation environment (see <code><a href='add_resource.html'>add_resource</a></
     </tr>
     <tr>
       <th>value</th>
-      <td><p>new value to set.</p></td>
+      <td><p>numeric value to set, or a callable object (a function) which must return a numeric value.</p></td>
     </tr>
     <tr>
       <th>mod</th>
@@ -256,18 +256,19 @@ simulation environment (see <code><a href='add_resource.html'>add_resource</a></
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## a resource with a queue size equal to the number of arrivals waiting</span>
-<span class='no'>traj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>set_queue_size</span>(<span class='st'>"res"</span>, <span class='fl'>1</span>, <span class='kw'>mod</span><span class='kw'>=</span><span class='st'>"+"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='seize.html'>seize</a></span>(<span class='st'>"res"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>set_queue_size</span>(<span class='st'>"res"</span>, -<span class='fl'>1</span>, <span class='kw'>mod</span><span class='kw'>=</span><span class='st'>"+"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>10</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='seize.html'>release</a></span>(<span class='st'>"res"</span>)
+<span class='va'>traj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>set_queue_size</span><span class='op'>(</span><span class='st'>"res"</span>, <span class='fl'>1</span>, mod<span class='op'>=</span><span class='st'>"+"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='seize.html'>seize</a></span><span class='op'>(</span><span class='st'>"res"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>set_queue_size</span><span class='op'>(</span><span class='st'>"res"</span>, <span class='op'>-</span><span class='fl'>1</span>, mod<span class='op'>=</span><span class='st'>"+"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='timeout.html'>timeout</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='seize.html'>release</a></span><span class='op'>(</span><span class='st'>"res"</span><span class='op'>)</span>
 
-<span class='fu'><a href='simmer.html'>simmer</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_resource.html'>add_resource</a></span>(<span class='st'>"res"</span>, <span class='fl'>1</span>, <span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span>(<span class='fl'>0</span>:<span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='run.html'>run</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='get_mon.html'>get_mon_resources</a></span>()</div><div class='output co'>#&gt;    resource time server queue capacity queue_size system limit replication
+<span class='fu'><a href='simmer.html'>simmer</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_resource.html'>add_resource</a></span><span class='op'>(</span><span class='st'>"res"</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span><span class='op'>(</span><span class='st'>"dummy"</span>, <span class='va'>traj</span>, <span class='fu'><a href='generators.html'>at</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='get_mon.html'>get_mon_resources</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    resource time server queue capacity queue_size system limit replication
 #&gt; 1       res    0      0     0        1          1      0     2           1
 #&gt; 2       res    0      1     0        1          1      1     2           1
 #&gt; 3       res    0      1     0        1          0      1     1           1
@@ -296,7 +297,7 @@ simulation environment (see <code><a href='add_resource.html'>add_resource</a></
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
       </span>
     </div>
 
@@ -208,7 +208,7 @@
     <p>This method initialises a simulation environment.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>simmer</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"anonymous"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>mon</span> <span class='kw'>=</span> <span class='fu'><a href='monitor.html'>monitor_mem</a></span>(), <span class='kw'>log_level</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>simmer</span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"anonymous"</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span>, mon <span class='op'>=</span> <span class='fu'><a href='monitor.html'>monitor_mem</a></span><span class='op'>(</span><span class='op'>)</span>, log_level <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -258,24 +258,30 @@ other options.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## a simple trajectory that prints a message</span>
-<span class='no'>t0</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span>(<span class='st'>"my trajectory"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='log_.html'>log_</a></span>(<span class='st'>"arrival generated"</span>)
+<span class='va'>t0</span> <span class='op'>&lt;-</span> <span class='fu'><a href='trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='st'>"my trajectory"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='log_.html'>log_</a></span><span class='op'>(</span><span class='st'>"arrival generated"</span><span class='op'>)</span>
 
 <span class='co'>## create an empty simulation environment</span>
-<span class='no'>env</span> <span class='kw'>&lt;-</span> <span class='fu'>simmer</span>(<span class='st'>"SuperDuperSim"</span>)
-<span class='no'>env</span></div><div class='output co'>#&gt; simmer environment: SuperDuperSim | now: 0 | next: 
+<span class='va'>env</span> <span class='op'>&lt;-</span> <span class='fu'>simmer</span><span class='op'>(</span><span class='st'>"SuperDuperSim"</span><span class='op'>)</span>
+<span class='va'>env</span>
+</div><div class='output co'>#&gt; simmer environment: SuperDuperSim | now: 0 | next: 
 #&gt; { Monitor: in memory }</div><div class='input'>
 <span class='co'>## add a generator and attach it to the trajectory above</span>
-<span class='no'>env</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='no'>t0</span>, <span class='kw'>function</span>() <span class='fl'>1</span>)</div><div class='output co'>#&gt; simmer environment: SuperDuperSim | now: 0 | next: 0
+<span class='va'>env</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='add_generator.html'>add_generator</a></span><span class='op'>(</span><span class='st'>"dummy"</span>, <span class='va'>t0</span>, <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; simmer environment: SuperDuperSim | now: 0 | next: 0
 #&gt; { Monitor: in memory }
 #&gt; { Source: dummy | monitored: 1 | n_generated: 0 }</div><div class='input'>
 <span class='co'>## run for some time</span>
-<span class='no'>env</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='run.html'>run</a></span>(<span class='kw'>until</span><span class='kw'>=</span><span class='fl'>4.5</span>)</div><div class='output co'>#&gt; 1: dummy0: arrival generated
+<span class='va'>env</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='run.html'>run</a></span><span class='op'>(</span>until<span class='op'>=</span><span class='fl'>4.5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 1: dummy0: arrival generated
 #&gt; 2: dummy1: arrival generated
 #&gt; 3: dummy2: arrival generated
 #&gt; 4: dummy3: arrival generated</div><div class='output co'>#&gt; simmer environment: SuperDuperSim | now: 4.5 | next: 5
 #&gt; { Monitor: in memory }
-#&gt; { Source: dummy | monitored: 1 | n_generated: 5 }</div><div class='input'><span class='no'>env</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='now.html'>now</a></span>()           <span class='co'># current simulation time</span></div><div class='output co'>#&gt; [1] 4.5</div><div class='input'><span class='no'>env</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='peek.html'>peek</a></span>()          <span class='co'># time for the next event</span></div><div class='output co'>#&gt; [1] 5</div><div class='input'><span class='no'>env</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='run.html'>stepn</a></span>()         <span class='co'># execute next event</span></div><div class='output co'>#&gt; 5: dummy4: arrival generated</div><div class='output co'>#&gt; simmer environment: SuperDuperSim | now: 5 | next: 5
+#&gt; { Source: dummy | monitored: 1 | n_generated: 5 }</div><div class='input'><span class='va'>env</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='now.html'>now</a></span><span class='op'>(</span><span class='op'>)</span>           <span class='co'># current simulation time</span>
+</div><div class='output co'>#&gt; [1] 4.5</div><div class='input'><span class='va'>env</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='peek.html'>peek</a></span><span class='op'>(</span><span class='op'>)</span>          <span class='co'># time for the next event</span>
+</div><div class='output co'>#&gt; [1] 5</div><div class='input'><span class='va'>env</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='run.html'>stepn</a></span><span class='op'>(</span><span class='op'>)</span>         <span class='co'># execute next event</span>
+</div><div class='output co'>#&gt; 5: dummy4: arrival generated</div><div class='output co'>#&gt; simmer environment: SuperDuperSim | now: 5 | next: 5
 #&gt; { Monitor: in memory }
 #&gt; { Source: dummy | monitored: 1 | n_generated: 5 }</div><div class='input'>
 </div></pre>
@@ -294,7 +300,7 @@ other options.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

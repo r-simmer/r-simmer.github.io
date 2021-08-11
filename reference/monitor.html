@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
       </span>
     </div>
 
@@ -208,16 +208,16 @@
     <p>Methods for creating <code>monitor</code> objects for simulation environments.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>monitor</span>(<span class='no'>name</span>, <span class='no'>xptr</span>, <span class='no'>get_arrivals</span>, <span class='no'>get_attributes</span>, <span class='no'>get_resources</span>,
-  <span class='kw'>handlers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>finalize</span> <span class='kw'>=</span> <span class='kw'>function</span>() { })
+    <pre class="usage"><span class='fu'>monitor</span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>xptr</span>, <span class='va'>get_arrivals</span>, <span class='va'>get_attributes</span>, <span class='va'>get_resources</span>,
+  handlers <span class='op'>=</span> <span class='cn'>NULL</span>, finalize <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span> <span class='op'>}</span><span class='op'>)</span>
 
-<span class='fu'>monitor_mem</span>()
+<span class='fu'>monitor_mem</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'>monitor_delim</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>" "</span>, <span class='kw'>ext</span> <span class='kw'>=</span> <span class='st'>".txt"</span>,
-  <span class='kw'>reader</span> <span class='kw'>=</span> <span class='no'>read.delim</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))
+<span class='fu'>monitor_delim</span><span class='op'>(</span>path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, keep <span class='op'>=</span> <span class='cn'>FALSE</span>, sep <span class='op'>=</span> <span class='st'>" "</span>, ext <span class='op'>=</span> <span class='st'>".txt"</span>,
+  reader <span class='op'>=</span> <span class='va'>read.delim</span>, args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>stringsAsFactors <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>monitor_csv</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>reader</span> <span class='kw'>=</span> <span class='no'>read.csv</span>,
-  <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</pre>
+<span class='fu'>monitor_csv</span><span class='op'>(</span>path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, keep <span class='op'>=</span> <span class='cn'>FALSE</span>, reader <span class='op'>=</span> <span class='va'>read.csv</span>,
+  args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>stringsAsFactors <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -309,23 +309,26 @@ workflow.</p>
 <code>sep=","</code> and <code>ext=".csv"</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mon</span> <span class='kw'>&lt;-</span> <span class='fu'>monitor_csv</span>()
-<span class='no'>mon</span></div><div class='output co'>#&gt; simmer monitor: to disk (delimited files)
-#&gt; { arrivals: /tmp/Rtmpoq6pRH/file1aa6c7f87dd81_arrivals.csv }
-#&gt; { releases: /tmp/Rtmpoq6pRH/file1aa6c7f87dd81_releases.csv }
-#&gt; { attributes: /tmp/Rtmpoq6pRH/file1aa6c7f87dd81_attributes.csv }
-#&gt; { resources: /tmp/Rtmpoq6pRH/file1aa6c7f87dd81_resources.csv }</div><div class='input'>
-<span class='no'>env</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='simmer.html'>simmer</a></span>(<span class='kw'>mon</span><span class='kw'>=</span><span class='no'>mon</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_generator.html'>add_generator</a></span>(<span class='st'>"dummy"</span>, <span class='fu'><a href='trajectory.html'>trajectory</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='timeout.html'>timeout</a></span>(<span class='fl'>1</span>), <span class='kw'>function</span>() <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='run.html'>run</a></span>(<span class='fl'>10</span>)
-<span class='no'>env</span></div><div class='output co'>#&gt; simmer environment: anonymous | now: 10 | next: 10
+    <pre class="examples"><div class='input'><span class='va'>mon</span> <span class='op'>&lt;-</span> <span class='fu'>monitor_csv</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>mon</span>
+</div><div class='output co'>#&gt; simmer monitor: to disk (delimited files)
+#&gt; { arrivals: /tmp/RtmpcAA4Ed/file24241b5a2042_arrivals.csv }
+#&gt; { releases: /tmp/RtmpcAA4Ed/file24241b5a2042_releases.csv }
+#&gt; { attributes: /tmp/RtmpcAA4Ed/file24241b5a2042_attributes.csv }
+#&gt; { resources: /tmp/RtmpcAA4Ed/file24241b5a2042_resources.csv }</div><div class='input'>
+<span class='va'>env</span> <span class='op'>&lt;-</span> <span class='fu'><a href='simmer.html'>simmer</a></span><span class='op'>(</span>mon<span class='op'>=</span><span class='va'>mon</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_generator.html'>add_generator</a></span><span class='op'>(</span><span class='st'>"dummy"</span>, <span class='fu'><a href='trajectory.html'>trajectory</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='timeout.html'>timeout</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='run.html'>run</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>env</span>
+</div><div class='output co'>#&gt; simmer environment: anonymous | now: 10 | next: 10
 #&gt; { Monitor: to disk (delimited files) }
-#&gt;   { arrivals: /tmp/Rtmpoq6pRH/file1aa6c7f87dd81_arrivals.csv }
-#&gt;   { releases: /tmp/Rtmpoq6pRH/file1aa6c7f87dd81_releases.csv }
-#&gt;   { attributes: /tmp/Rtmpoq6pRH/file1aa6c7f87dd81_attributes.csv }
-#&gt;   { resources: /tmp/Rtmpoq6pRH/file1aa6c7f87dd81_resources.csv }
+#&gt;   { arrivals: /tmp/RtmpcAA4Ed/file24241b5a2042_arrivals.csv }
+#&gt;   { releases: /tmp/RtmpcAA4Ed/file24241b5a2042_releases.csv }
+#&gt;   { attributes: /tmp/RtmpcAA4Ed/file24241b5a2042_attributes.csv }
+#&gt;   { resources: /tmp/RtmpcAA4Ed/file24241b5a2042_resources.csv }
 #&gt; { Source: dummy | monitored: 1 | n_generated: 10 }</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span>(<span class='no'>mon</span>$<span class='no'>handlers</span>$<span class='no'>arrivals</span>) <span class='co'># direct access</span></div><div class='output co'>#&gt;     name start_time end_time activity_time finished
+<span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='va'>mon</span><span class='op'>$</span><span class='va'>handlers</span><span class='op'>$</span><span class='va'>arrivals</span><span class='op'>)</span> <span class='co'># direct access</span>
+</div><div class='output co'>#&gt;     name start_time end_time activity_time finished
 #&gt; 1 dummy0          1        2             1        1
 #&gt; 2 dummy1          2        3             1        1
 #&gt; 3 dummy2          3        4             1        1
@@ -333,7 +336,8 @@ workflow.</p>
 #&gt; 5 dummy4          5        6             1        1
 #&gt; 6 dummy5          6        7             1        1
 #&gt; 7 dummy6          7        8             1        1
-#&gt; 8 dummy7          8        9             1        1</div><div class='input'><span class='fu'><a href='get_mon.html'>get_mon_arrivals</a></span>(<span class='no'>env</span>)           <span class='co'># adds the "replication" column</span></div><div class='output co'>#&gt;     name start_time end_time activity_time finished replication
+#&gt; 8 dummy7          8        9             1        1</div><div class='input'><span class='fu'><a href='get_mon.html'>get_mon_arrivals</a></span><span class='op'>(</span><span class='va'>env</span><span class='op'>)</span>           <span class='co'># adds the "replication" column</span>
+</div><div class='output co'>#&gt;     name start_time end_time activity_time finished replication
 #&gt; 1 dummy0          1        2             1        1           1
 #&gt; 2 dummy1          2        3             1        1           1
 #&gt; 3 dummy2          3        4             1        1           1
@@ -358,7 +362,7 @@ workflow.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
