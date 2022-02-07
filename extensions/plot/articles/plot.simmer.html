@@ -26,6 +26,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer.plot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.17</span>
       </span>
     </div>
 
@@ -82,7 +84,7 @@
   </a>
 </li>
 <li>
-  <a href="https://github.com/r-simmer/simmer.plot">
+  <a href="https://github.com/r-simmer/simmer.plot" class="external-link">
     <span class="fa fa-github"></span>
      
     GitHub
@@ -91,7 +93,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://r-simmer.org">
+  <a href="https://r-simmer.org" class="external-link">
     <span class="fa fa-coffee"></span>
      
     simmer
@@ -113,10 +115,10 @@
       <a href="../../bricks">simmer.bricks</a>
     </li>
     <li>
-      <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
+      <a href="https://github.com/r-simmer/simmer.optim" class="external-link">simmer.optim</a>
     </li>
     <li>
-      <a href="https://github.com/r-simmer/simmer.json">simmer.json</a>
+      <a href="https://github.com/r-simmer/simmer.json" class="external-link">simmer.json</a>
     </li>
   </ul>
 </li>
@@ -134,51 +136,52 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Plotting simmer statistics</h1>
-                        <h4 class="author">Bart Smeets, Iñaki Ucar</h4>
+                        <h4 data-toc-skip class="author">Bart Smeets, Iñaki Ucar</h4>
             
-            <h4 class="date">2020-04-25</h4>
+            <h4 data-toc-skip class="date">2022-02-07</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer.plot/blob/master/vignettes/plot.simmer.Rmd"><code>vignettes/plot.simmer.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer.plot/blob/HEAD/vignettes/plot.simmer.Rmd" class="external-link"><code>vignettes/plot.simmer.Rmd</code></a></small>
       <div class="hidden name"><code>plot.simmer.Rmd</code></div>
 
     </div>
 
     
     
-<div id="simulation-example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#simulation-example" class="anchor"></a>Simulation example</h2>
-<p>This is the basic example from <a href="http://r-simmer.org/articles/simmer-01-introduction.html"><em>Introduction to simmer</em></a>. Please, refer to that vignette for further detail.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">parallel</span>)
+<div class="section level2">
+<h2 id="simulation-example">Simulation example<a class="anchor" aria-label="anchor" href="#simulation-example"></a>
+</h2>
+<p>This is the basic example from <a href="https://r-simmer.org/articles/simmer-01-introduction.html" class="external-link"><em>Introduction to simmer</em></a>. Please, refer to that vignette for further detail.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org" class="external-link">simmer</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span>
 
-<span class="no">patient</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://r-simmer.org/reference/trajectory.html">trajectory</a></span>(<span class="st">"patients' path"</span>) <span class="kw">%&gt;%</span>
+<span class="va">patient</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-simmer.org/reference/trajectory.html" class="external-link">trajectory</a></span><span class="op">(</span><span class="st">"patients' path"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="co">## add an intake activity </span>
-  <span class="fu"><a href="https://r-simmer.org/reference/seize.html">seize</a></span>(<span class="st">"nurse"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://r-simmer.org/reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1</span>, <span class="fl">15</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://r-simmer.org/reference/seize.html">release</a></span>(<span class="st">"nurse"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://r-simmer.org/reference/seize.html" class="external-link">seize</a></span><span class="op">(</span><span class="st">"nurse"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://r-simmer.org/reference/timeout.html" class="external-link">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://r-simmer.org/reference/seize.html" class="external-link">release</a></span><span class="op">(</span><span class="st">"nurse"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="co">## add a consultation activity</span>
-  <span class="fu"><a href="https://r-simmer.org/reference/seize.html">seize</a></span>(<span class="st">"doctor"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://r-simmer.org/reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1</span>, <span class="fl">20</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://r-simmer.org/reference/seize.html">release</a></span>(<span class="st">"doctor"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://r-simmer.org/reference/seize.html" class="external-link">seize</a></span><span class="op">(</span><span class="st">"doctor"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://r-simmer.org/reference/timeout.html" class="external-link">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://r-simmer.org/reference/seize.html" class="external-link">release</a></span><span class="op">(</span><span class="st">"doctor"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="co">## add a planning activity</span>
-  <span class="fu"><a href="https://r-simmer.org/reference/seize.html">seize</a></span>(<span class="st">"administration"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://r-simmer.org/reference/timeout.html">timeout</a></span>(<span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1</span>, <span class="fl">5</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://r-simmer.org/reference/seize.html">release</a></span>(<span class="st">"administration"</span>, <span class="fl">1</span>)
+  <span class="fu"><a href="https://r-simmer.org/reference/seize.html" class="external-link">seize</a></span><span class="op">(</span><span class="st">"administration"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://r-simmer.org/reference/timeout.html" class="external-link">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://r-simmer.org/reference/seize.html" class="external-link">release</a></span><span class="op">(</span><span class="st">"administration"</span>, <span class="fl">1</span><span class="op">)</span>
 
-<span class="no">envs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/mclapply.html">mclapply</a></span>(<span class="fl">1</span>:<span class="fl">100</span>, <span class="kw">function</span>(<span class="no">i</span>) {
-  <span class="fu"><a href="https://r-simmer.org/reference/simmer.html">simmer</a></span>(<span class="st">"SuperDuperSim"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://r-simmer.org/reference/add_resource.html">add_resource</a></span>(<span class="st">"nurse"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://r-simmer.org/reference/add_resource.html">add_resource</a></span>(<span class="st">"doctor"</span>, <span class="fl">2</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://r-simmer.org/reference/add_resource.html">add_resource</a></span>(<span class="st">"administration"</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://r-simmer.org/reference/add_generator.html">add_generator</a></span>(<span class="st">"patient"</span>, <span class="no">patient</span>, <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">2</span>)) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://r-simmer.org/reference/run.html">run</a></span>(<span class="fl">80</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="https://r-simmer.org/reference/wrap.html">wrap</a></span>()
-})</pre></body></html></div>
+<span class="va">envs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/mclapply.html" class="external-link">mclapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://r-simmer.org/reference/simmer.html" class="external-link">simmer</a></span><span class="op">(</span><span class="st">"SuperDuperSim"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/add_resource.html" class="external-link">add_resource</a></span><span class="op">(</span><span class="st">"nurse"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/add_resource.html" class="external-link">add_resource</a></span><span class="op">(</span><span class="st">"doctor"</span>, <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/add_resource.html" class="external-link">add_resource</a></span><span class="op">(</span><span class="st">"administration"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/add_generator.html" class="external-link">add_generator</a></span><span class="op">(</span><span class="st">"patient"</span>, <span class="va">patient</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/run.html" class="external-link">run</a></span><span class="op">(</span><span class="fl">80</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/wrap.html" class="external-link">wrap</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="basic-visualisation-tools" class="section level2">
-<h2 class="hasAnchor">
-<a href="#basic-visualisation-tools" class="anchor"></a>Basic visualisation tools</h2>
+<div class="section level2">
+<h2 id="basic-visualisation-tools">Basic visualisation tools<a class="anchor" aria-label="anchor" href="#basic-visualisation-tools"></a>
+</h2>
 <p>This package provides some basic visualisation tools to help you take a glance at your simulations quickly, but of course you probably may want to develop your own data analysis.</p>
 <p>There are three types of plot implemented with different metrics available:</p>
 <ul>
@@ -199,20 +202,24 @@
 </ul>
 <p>All these plots and metrics are accessible through the S3 methods for the <code>plot</code> generic provided by this package (see <code><a href="../reference/plot.mon.html">?plot.mon</a></code> for more details), which uses the <code>ggplot2</code> package as backend.</p>
 <p>For instance, after you’ve left it simmering for a bit (pun intended), we can have a look at the overall resource utilization. The top and bottom of the error bars show respectively the 25th and 75th percentile of the utilization across all the replications. The top of the bar shows the median utilization.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simmer.plot</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org" class="external-link">simmer.plot</a></span><span class="op">)</span>
 
-<span class="no">resources</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span>(<span class="no">envs</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">resources</span>, <span class="kw">metric</span> <span class="kw">=</span> <span class="st">"utilization"</span>)</pre></body></html></div>
+<span class="va">resources</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="va">envs</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">resources</span>, metric <span class="op">=</span> <span class="st">"utilization"</span><span class="op">)</span></code></pre></div>
 <p><img src="plot.simmer_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>It is also possible to have a look at resources’ activity during the simulation.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">resources</span>, <span class="kw">metric</span> <span class="kw">=</span> <span class="st">"usage"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"nurse"</span>, <span class="st">"doctor"</span>), <span class="kw">items</span> <span class="kw">=</span> <span class="st">"server"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">resources</span>, metric <span class="op">=</span> <span class="st">"usage"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"nurse"</span>, <span class="st">"doctor"</span><span class="op">)</span>, items <span class="op">=</span> <span class="st">"server"</span><span class="op">)</span></code></pre></div>
 <p><img src="plot.simmer_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>In the above graph, the individual lines are all separate replications. The smoothing performed is a cumulative average. Let’s take a look now at the instantaneous behaviour for a specific replication and resource. In the example below, the 6th replication is shown.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span>(<span class="no">envs</span><span class="kw">[[</span><span class="fl">6</span>]]), <span class="kw">metric</span> <span class="kw">=</span> <span class="st">"usage"</span>, <span class="st">"doctor"</span>, <span class="kw">items</span> <span class="kw">=</span> <span class="st">"server"</span>, <span class="kw">steps</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="va">envs</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, metric <span class="op">=</span> <span class="st">"usage"</span>, <span class="st">"doctor"</span>, items <span class="op">=</span> <span class="st">"server"</span>, steps <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="plot.simmer_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>Next we can have a look at the evolution of the arrivals’ flow time during the simulation. In the plot below, each individual line represents a replication. A smooth line is drawn over them. All arrivals that didn’t finish their entire trajectory are excluded from the plot.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">arrivals</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span>(<span class="no">envs</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">arrivals</span>, <span class="kw">metric</span> <span class="kw">=</span> <span class="st">"flow_time"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">arrivals</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">envs</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">arrivals</span>, metric <span class="op">=</span> <span class="st">"flow_time"</span><span class="op">)</span></code></pre></div>
 <p><img src="plot.simmer_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>Similarly one can have a look at the evolution of the activity times with <code>metric = "activity_time"</code> and waiting times with <code>metric = "waiting_time"</code>.</p>
 </div>
@@ -229,11 +236,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Iñaki Ucar, Bart Smeets.</p>
+  <p></p>
+<p>Developed by Iñaki Ucar, Bart Smeets.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
 </div>
 
       </footer>
@@ -241,6 +250,8 @@
 
   
 
+
+  
 
   </body>
 </html>
