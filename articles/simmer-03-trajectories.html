@@ -26,6 +26,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
       </span>
     </div>
 
@@ -106,7 +108,7 @@
   </a>
 </li>
 <li>
-  <a href="https://github.com/r-simmer/simmer">
+  <a href="https://github.com/r-simmer/simmer" class="external-link">
     <span class="fa fa-github"></span>
      
     GitHub
@@ -130,13 +132,13 @@
       <a href="../extensions/bricks">simmer.bricks</a>
     </li>
     <li>
-      <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
+      <a href="https://github.com/r-simmer/simmer.optim" class="external-link">simmer.optim</a>
     </li>
     <li>
-      <a href="https://github.com/r-simmer/simmer.json">simmer.json</a>
+      <a href="https://github.com/r-simmer/simmer.json" class="external-link">simmer.json</a>
     </li>
     <li>
-      <a href="https://github.com/r-simmer/simmer.mon">simmer.mon</a>
+      <a href="https://github.com/r-simmer/simmer.mon" class="external-link">simmer.mon</a>
     </li>
   </ul>
 </li>
@@ -150,15 +152,15 @@
 
       
 
-      </header><script src="simmer-03-trajectories_files/header-attrs-2.10/header-attrs.js"></script><script src="simmer-03-trajectories_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Advanced Trajectory Usage</h1>
-                        <h4 class="author">Iñaki Ucar, Bart Smeets</h4>
+                        <h4 data-toc-skip class="author">Iñaki Ucar, Bart Smeets</h4>
             
-            <h4 class="date">2021-08-11</h4>
+            <h4 data-toc-skip class="date">2022-02-07</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-03-trajectories.Rmd"><code>vignettes/simmer-03-trajectories.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/HEAD/vignettes/simmer-03-trajectories.Rmd" class="external-link"><code>vignettes/simmer-03-trajectories.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-03-trajectories.Rmd</code></div>
 
     </div>
@@ -166,20 +168,20 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></code></pre></div>
-<div id="available-set-of-activities" class="section level2">
-<h2 class="hasAnchor">
-<a href="#available-set-of-activities" class="anchor"></a>Available set of activities</h2>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="available-set-of-activities">Available set of activities<a class="anchor" aria-label="anchor" href="#available-set-of-activities"></a>
+</h2>
 <p>When a generator creates an arrival, it couples the arrival to a given trajectory. A trajectory is defined as an interlinkage of activities which together form the arrivals’ lifetime in the system. Once an arrival is coupled to the trajectory, it will (in general) start processing activities in the specified order and, eventually, leave the system. Consider the following:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">traj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span>resource <span class="op">=</span> <span class="st">"doctor"</span>, amount <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span>task <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">traj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span>resource <span class="op">=</span> <span class="st">"doctor"</span>, amount <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span>task <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span>resource <span class="op">=</span> <span class="st">"doctor"</span>, amount <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>Here we create a trajectory where a patient <em>seizes</em> a doctor for 3 minutes and then <em>releases</em> him again. This is a very straightforward example, however, most of the trajectory-related functions allow for more advanced usage.</p>
 <p>Usage examples are provided in the help page for each activity. The complete set of activities can be found and navigated in the <a href="https://r-simmer.org/reference/#section-add-activities-to-trajectories">reference page</a>, or you can list them as follows:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="st">"trajectory"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/methods.html" class="external-link">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="st">"trajectory"</span><span class="op">)</span>
 <span class="co">#&gt;  [1] [                       [[                      [[&lt;-                   </span>
 <span class="co">#&gt;  [4] [&lt;-                     activate                batch                  </span>
 <span class="co">#&gt;  [7] branch                  clone                   deactivate             </span>
@@ -199,46 +201,46 @@
 <span class="co">#&gt; see '?methods' for accessing help and source code</span></code></pre></div>
 <p>Additionally, you may want to try the <code>simmer.bricks</code> package, a plugin for <code>simmer</code> which provides helper methods for trajectories. Each <em>brick</em> wraps a common activity pattern that can be used to build trajectories more conveniently (see the <a href="https://r-simmer.org/extensions/bricks/articles/introduction.html"><em>Introduction to <code>simmer.bricks</code></em></a>).</p>
 </div>
-<div id="dynamic-arguments" class="section level2">
-<h2 class="hasAnchor">
-<a href="#dynamic-arguments" class="anchor"></a>Dynamic arguments</h2>
+<div class="section level2">
+<h2 id="dynamic-arguments">Dynamic arguments<a class="anchor" aria-label="anchor" href="#dynamic-arguments"></a>
+</h2>
 <p>Many activities accept functions as arguments to be evaluated dynamically during the simulation. For example, see <code><a href="../reference/timeout.html">help(timeout)</a></code>:</p>
 <blockquote>
 <p>task: the timeout duration supplied by either passing a numeric or a callable object (a function) which must return a numeric.</p>
 </blockquote>
-<p>Be aware that if you want the <code><a href="../reference/timeout.html">timeout()</a></code>’s <code>task</code> parameter to be evaluated dynamically, you should supply a callable function. For example in <code><a href="../reference/timeout.html">timeout(function() rexp(1, 10))</a></code>, <code><a href="https://rdrr.io/r/stats/Exponential.html">rexp(1, 10)</a></code> will be evaluated every time the timeout activity is executed. However, if you supply it in the form of <code><a href="../reference/timeout.html">timeout(rexp(1, 10))</a></code>, it will only be evaluated once when the trajectory is defined, and will remain static after that.</p>
+<p>Be aware that if you want the <code><a href="../reference/timeout.html">timeout()</a></code>’s <code>task</code> parameter to be evaluated dynamically, you should supply a callable function. For example in <code>timeout(function() rexp(1, 10))</code>, <code>rexp(1, 10)</code> will be evaluated every time the timeout activity is executed. However, if you supply it in the form of <code>timeout(rexp(1, 10))</code>, it will only be evaluated once when the trajectory is defined, and will remain static after that.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>        <span class="co"># fixed</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="co"># dynamic</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html" class="external-link">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>        <span class="co"># fixed</span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html" class="external-link">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="co"># dynamic</span>
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
-<span class="co">#&gt; { Activity: Timeout      | delay: 0.220394 }</span>
+<span class="co">#&gt; { Activity: Timeout      | delay: 0.253262 }</span>
 <span class="co">#&gt; { Activity: Timeout      | delay: function() }</span></code></pre></div>
 <p>Of course, this <code>task</code>, supplied as a function, may be as complex as you need and, for instance, it may check the status of a particular resource, interact with other entities in your simulation model… The same applies to all the activities when they accept a function as a parameter.</p>
 </div>
-<div id="interaction-with-the-environment" class="section level2">
-<h2 class="hasAnchor">
-<a href="#interaction-with-the-environment" class="anchor"></a>Interaction with the environment</h2>
+<div class="section level2">
+<h2 id="interaction-with-the-environment">Interaction with the environment<a class="anchor" aria-label="anchor" href="#interaction-with-the-environment"></a>
+</h2>
 <p>Dynamic arguments may interact with the environment to extract parameters of interest such as the current simulation time (see <code><a href="../reference/now.html">?now</a></code>), status of resources (see <code><a href="../reference/get_capacity.html">?get_capacity</a></code>), status of generators (see <code><a href="../reference/get_n_generated.html">?get_n_generated</a></code>), or directly to gather the history of monitored values (see <code><a href="../reference/get_mon.html">?get_mon</a></code>). The only requirement is that the simulation environment must be in the scope of the trajectory.</p>
 <p>Therefore, this will not work:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">traj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">traj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"dummy"</span>, <span class="va">traj</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"dummy"</span>, <span class="va">traj</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>
 <span class="co">#&gt; 1: dummy0:</span>
 <span class="co">#&gt; Error in now(env): object 'env' not found</span></code></pre></div>
 <p>because the global <code>env</code> is not available at runtime: the simulation runs <em>and then</em> the resulting object is assigned to <code>env</code>. For <code>env</code> to be in the scope of <code>t</code> during this simulation, it is enough to detach the <code><a href="../reference/run.html">run()</a></code> method from the definition pipe:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">traj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">traj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"dummy"</span>, <span class="va">traj</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fl">1</span><span class="op">)</span>
 
-<span class="va">env</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">invisible</span>
+<span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">invisible</span>
 <span class="co">#&gt; 1: dummy0: 1</span>
 <span class="co">#&gt; 2: dummy1: 2</span>
 <span class="co">#&gt; 3: dummy2: 3</span></code></pre></div>
@@ -248,25 +250,25 @@
 <span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># here I'm using it</span>
-<span class="va">traj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">traj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># and finally, run it</span>
-<span class="va">env</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"dummy"</span>, <span class="va">traj</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="va">invisible</span>
+<span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"dummy"</span>, <span class="va">traj</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">invisible</span>
 <span class="co">#&gt; 1: dummy0: 1</span>
 <span class="co">#&gt; 2: dummy1: 2</span>
 <span class="co">#&gt; 3: dummy2: 3</span></code></pre></div>
 </div>
-<div id="trajectory-toolbox-joining-and-subsetting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#trajectory-toolbox-joining-and-subsetting" class="anchor"></a>Trajectory toolbox: joining and subsetting</h2>
-<p>The <code><a href="../reference/join.html">join(...)</a></code> method is very useful to concatenate together any number of trajectories. It may be used as a standalone function as follows:</p>
+<div class="section level2">
+<h2 id="trajectory-toolbox-joining-and-subsetting">Trajectory toolbox: joining and subsetting<a class="anchor" aria-label="anchor" href="#trajectory-toolbox-joining-and-subsetting"></a>
+</h2>
+<p>The <code>join(...)</code> method is very useful to concatenate together any number of trajectories. It may be used as a standalone function as follows:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">t1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"dummy"</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="va">t2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
-<span class="va">t3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"dummy"</span>, <span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">t1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"dummy"</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="va">t2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">t3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"dummy"</span>, <span class="fl">1</span><span class="op">)</span>
 
 <span class="va">t0</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/join.html">join</a></span><span class="op">(</span><span class="va">t1</span>, <span class="va">t2</span>, <span class="va">t3</span><span class="op">)</span>
 <span class="va">t0</span>
@@ -276,9 +278,9 @@
 <span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
 <p>Or it may operate inline, like another activity:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">t0</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/join.html">join</a></span><span class="op">(</span><span class="va">t1</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">t0</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/join.html">join</a></span><span class="op">(</span><span class="va">t1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/join.html">join</a></span><span class="op">(</span><span class="va">t3</span><span class="op">)</span>
 <span class="va">t0</span>
 <span class="co">#&gt; trajectory: anonymous, 3 activities</span>
@@ -287,21 +289,21 @@
 <span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
 <p>You can think about a trajectory object as a list of activities that has a length</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">t0</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">t0</span><span class="op">)</span>
 <span class="co">#&gt; [1] 3</span></code></pre></div>
-<p>and can be subset using the standard operator <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>. For instance, you can select the activities you want with a logical vector:</p>
+<p>and can be subset using the standard operator <code>[</code>. For instance, you can select the activities you want with a logical vector:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">t0</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span>
+<code class="sourceCode R"><span class="va">t0</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
 <span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
 <p>Or a set of indices that respect the order given:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">t0</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span>
+<code class="sourceCode R"><span class="va">t0</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
 <span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span>
-<span class="va">t0</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span>
+<span class="va">t0</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
 <span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span></code></pre></div>
@@ -313,11 +315,11 @@
 <span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
 <p>Or by name, but note that this does <strong>not</strong> respect the order given though, because it performs a match:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">t0</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"seize"</span>, <span class="st">"release"</span><span class="op">)</span><span class="op">]</span>
+<code class="sourceCode R"><span class="va">t0</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"seize"</span>, <span class="st">"release"</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
 <span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span>
-<span class="va">t0</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"release"</span>, <span class="st">"seize"</span><span class="op">)</span><span class="op">]</span>
+<span class="va">t0</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"release"</span>, <span class="st">"seize"</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
 <span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
@@ -328,18 +330,18 @@
 <span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
-<p>In fact, you are <strong>cloning</strong> the trajectory with the latter command. It is equivalent to <code>t0[1:length(t0)]</code> or <code><a href="../reference/join.html">join(t0)</a></code>.</p>
-<p>The generics <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> and <code><a href="https://rdrr.io/r/utils/head.html">tail()</a></code> use the <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> operator under the hood, thus you can use them as well:</p>
+<p>In fact, you are <strong>cloning</strong> the trajectory with the latter command. It is equivalent to <code>t0[1:length(t0)]</code> or <code>join(t0)</code>.</p>
+<p>The generics <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> and <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail()</a></code> use the <code>[</code> operator under the hood, thus you can use them as well:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">t0</span>, <span class="fl">2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">t0</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
 <span class="co">#&gt; { Activity: Seize        | resource: dummy, amount: 1 }</span>
 <span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">t0</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">t0</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; trajectory: anonymous, 2 activities</span>
 <span class="co">#&gt; { Activity: Timeout      | delay: 1 }</span>
 <span class="co">#&gt; { Activity: Release      | resource: dummy, amount: 1 }</span></code></pre></div>
-<p>The <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> operator can also be used to extract <strong>only one</strong> element:</p>
+<p>The <code>[[</code> operator can also be used to extract <strong>only one</strong> element:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">t0</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>
 <span class="co">#&gt; trajectory: anonymous, 1 activities</span>
@@ -367,11 +369,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Iñaki Ucar, Bart Smeets.</p>
+  <p></p>
+<p>Developed by Iñaki Ucar, Bart Smeets.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
 </div>
 
       </footer>
@@ -379,6 +383,8 @@
 
   
 
+
+  
 
   </body>
 </html>

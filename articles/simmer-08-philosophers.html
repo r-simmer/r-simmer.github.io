@@ -26,6 +26,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
       </span>
     </div>
 
@@ -106,7 +108,7 @@
   </a>
 </li>
 <li>
-  <a href="https://github.com/r-simmer/simmer">
+  <a href="https://github.com/r-simmer/simmer" class="external-link">
     <span class="fa fa-github"></span>
      
     GitHub
@@ -130,13 +132,13 @@
       <a href="../extensions/bricks">simmer.bricks</a>
     </li>
     <li>
-      <a href="https://github.com/r-simmer/simmer.optim">simmer.optim</a>
+      <a href="https://github.com/r-simmer/simmer.optim" class="external-link">simmer.optim</a>
     </li>
     <li>
-      <a href="https://github.com/r-simmer/simmer.json">simmer.json</a>
+      <a href="https://github.com/r-simmer/simmer.json" class="external-link">simmer.json</a>
     </li>
     <li>
-      <a href="https://github.com/r-simmer/simmer.mon">simmer.mon</a>
+      <a href="https://github.com/r-simmer/simmer.mon" class="external-link">simmer.mon</a>
     </li>
   </ul>
 </li>
@@ -150,25 +152,25 @@
 
       
 
-      </header><script src="simmer-08-philosophers_files/header-attrs-2.10/header-attrs.js"></script><script src="simmer-08-philosophers_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Dining Philosophers Problem</h1>
-                        <h4 class="author">Iñaki Ucar</h4>
+                        <h4 data-toc-skip class="author">Iñaki Ucar</h4>
             
-            <h4 class="date">2021-08-11</h4>
+            <h4 data-toc-skip class="date">2022-02-07</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/master/vignettes/simmer-08-philosophers.Rmd"><code>vignettes/simmer-08-philosophers.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/HEAD/vignettes/simmer-08-philosophers.Rmd" class="external-link"><code>vignettes/simmer-08-philosophers.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-08-philosophers.Rmd</code></div>
 
     </div>
 
     
     
-<div id="problem-description" class="section level2">
-<h2 class="hasAnchor">
-<a href="#problem-description" class="anchor"></a>Problem description</h2>
-<p>The <a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem">Dining Philosophers problem</a> is a classical example in computer science to illustrate synchronisation issues in concurrent processes. It was originally formulated in 1965 by <a href="https://en.wikipedia.org/wiki/Edsger_W._Dijkstra">E. W. Dijkstra</a> as a student exam exercise, and was later reworked in its current form by <a href="https://en.wikipedia.org/wiki/Tony_Hoare">Tony Hoare</a>:</p>
+<div class="section level2">
+<h2 id="problem-description">Problem description<a class="anchor" aria-label="anchor" href="#problem-description"></a>
+</h2>
+<p>The <a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem" class="external-link">Dining Philosophers problem</a> is a classical example in computer science to illustrate synchronisation issues in concurrent processes. It was originally formulated in 1965 by <a href="https://en.wikipedia.org/wiki/Edsger_W._Dijkstra" class="external-link">E. W. Dijkstra</a> as a student exam exercise, and was later reworked in its current form by <a href="https://en.wikipedia.org/wiki/Tony_Hoare" class="external-link">Tony Hoare</a>:</p>
 <blockquote>
 <p><span class="math inline">\(N\)</span> silent philosophers sit at a round table with bowls of spaghetti. Forks are placed between each pair of adjacent philosophers.</p>
 <p>Each philosopher must alternately think and eat. However, a philosopher can only eat spaghetti when they have both left and right forks. Each fork can be held by only one philosopher and so a philosopher can use the fork only if it is not being used by another philosopher. After an individual philosopher finishes eating, they need to put down both forks so that the forks become available to others. A philosopher can take the fork on their right or the one on their left as they become available, but cannot start eating before getting both forks.</p>
@@ -182,9 +184,9 @@
 <p>The problem is how to design a discipline of behavior (a concurrent algorithm) such that no philosopher will starve; i.e., each can forever continue to alternate between eating and thinking, assuming that no philosopher can know when others may want to eat or think.</p>
 </blockquote>
 </div>
-<div id="simulation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#simulation" class="anchor"></a>Simulation</h2>
+<div class="section level2">
+<h2 id="simulation">Simulation<a class="anchor" aria-label="anchor" href="#simulation"></a>
+</h2>
 <p>Let us define each philosopher as a process executing a thinking + eating loop, and acting concurrently on shared resources (the forks). Each process will follow a similar trajectory in which they</p>
 <ol style="list-style-type: decimal">
 <li>Spend some random time thinking until they become hungry.</li>
@@ -195,33 +197,33 @@
 </ol>
 <p>The following function sets up a simulation of <span class="math inline">\(N\)</span> dining philosophers as established above:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://r-simmer.org">simmer.plot</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://r-simmer.org" class="external-link">simmer.plot</a></span><span class="op">)</span>
 
-<span class="va">simulate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">fork_seq</span>, <span class="va">time</span>, <span class="va">thinking</span><span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
-                     <span class="va">eating</span><span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">lag</span><span class="op">=</span><span class="fl">0.1</span>, <span class="va">seed</span><span class="op">=</span><span class="fl">333</span><span class="op">)</span>
+<span class="va">simulate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">fork_seq</span>, <span class="va">time</span>, <span class="va">thinking</span><span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html" class="external-link">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
+                     <span class="va">eating</span><span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html" class="external-link">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">lag</span><span class="op">=</span><span class="fl">0.1</span>, <span class="va">seed</span><span class="op">=</span><span class="fl">333</span><span class="op">)</span>
 <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="va">seed</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="va">seed</span><span class="op">)</span>
 
   <span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"Dining philosophers"</span><span class="op">)</span>
 
-  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">fork_seq</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">philosopher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">fork_seq</span><span class="op">)</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>
-    <span class="va">forks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"fork_"</span>, <span class="va">fork_seq</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">fork_seq</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">philosopher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">fork_seq</span><span class="op">)</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>
+    <span class="va">forks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"fork_"</span>, <span class="va">fork_seq</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 
-    <span class="va">dining</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="va">thinking</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="va">forks</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="va">lag</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="va">forks</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="va">eating</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="va">forks</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="va">forks</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="va">dining</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="va">thinking</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="va">forks</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="va">lag</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="va">forks</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="va">eating</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="va">forks</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="va">forks</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
       <span class="fu"><a href="../reference/rollback.html">rollback</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span> <span class="co"># back to think</span>
 
-    <span class="va">env</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"fork_"</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">philosopher</span>, <span class="st">"_"</span><span class="op">)</span>, <span class="va">dining</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"fork_"</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">philosopher</span>, <span class="st">"_"</span><span class="op">)</span>, <span class="va">dining</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span>
 
   <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="va">env</span>, <span class="va">time</span><span class="op">)</span>
@@ -229,26 +231,26 @@
 <p>The <code>fork_seq</code> argument consists of a named list of fork sequences. For instance, given the numbering conventions in the image above, if we decide that philosopher 1, Socrates, must take fork 1 first and then fork 2, his fork sequence would be <code>Socrates = c(1, 2)</code>. This function also expects the simulation <code>time</code>, and there are other arguments to play with, such as the <code>thinking</code> and <code>eating</code> random processes, the <code>lag</code> between forks, and the seed.</p>
 <p>The following function would allow us to plot a kind of Gantt chart of the simulation:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">states</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hungry"</span>, <span class="st">"eating"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">states</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hungry"</span>, <span class="st">"eating"</span><span class="op">)</span>
 
-<span class="va">philosophers_gantt</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">env</span>, <span class="va">size</span><span class="op">=</span><span class="fl">15</span><span class="op">)</span> <span class="va">env</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span>per_resource<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span>philosopher <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span><span class="st">"_[0-9]*"</span>, <span class="st">""</span>, <span class="va">name</span><span class="op">)</span>,
-            state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">states</span>, <span class="va">states</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y<span class="op">=</span><span class="va">philosopher</span>, yend<span class="op">=</span><span class="va">philosopher</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">xlab</span><span class="op">(</span><span class="st">"time"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">start_time</span>, xend<span class="op">=</span><span class="va">end_time</span>, color<span class="op">=</span><span class="va">state</span><span class="op">)</span>, size<span class="op">=</span><span class="va">size</span><span class="op">)</span></code></pre></div>
+<span class="va">philosophers_gantt</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">env</span>, <span class="va">size</span><span class="op">=</span><span class="fl">15</span><span class="op">)</span> <span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span>per_resource<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>philosopher <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">"_[0-9]*"</span>, <span class="st">""</span>, <span class="va">name</span><span class="op">)</span>,
+            state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">states</span>, <span class="va">states</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">philosopher</span>, yend<span class="op">=</span><span class="va">philosopher</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"time"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" class="external-link">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">start_time</span>, xend<span class="op">=</span><span class="va">end_time</span>, color<span class="op">=</span><span class="va">state</span><span class="op">)</span>, size<span class="op">=</span><span class="va">size</span><span class="op">)</span></code></pre></div>
 <p>With the simplest algorithm, each philosopher would take, for example, the right fork first and then the left one. But it is easy to see that this policy may result in starvation:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fork_seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-  Socrates   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,
-  Pythagoras <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,
-  Plato      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>,
-  Aristotle  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">fork_seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
+  Socrates   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,
+  Pythagoras <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,
+  Plato      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>,
+  Aristotle  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/stats/simulate.html">simulate</a></span><span class="op">(</span><span class="va">fork_seq</span>, time<span class="op">=</span><span class="fl">50</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">philosophers_gantt</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/simulate.html" class="external-link">simulate</a></span><span class="op">(</span><span class="va">fork_seq</span>, time<span class="op">=</span><span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">philosophers_gantt</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; simmer environment: Dining philosophers | now: 3.89681179066325 | next: </span>
 <span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: fork_1 | monitored: TRUE | server status: 1(1) | queue status: 1(Inf) }</span>
@@ -262,11 +264,11 @@
 <p><img src="simmer-08-philosophers_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>As we can see, the simulation stopped very soon at a point in which every philosopher holds one fork and waits for the other to be available. The solution originally proposed by Dijkstra establishes the convention that all resources must be requested in order. This means that, in our simulation, Aristotle should pick fork 1 first instead:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fork_seq</span><span class="op">$</span><span class="va">Aristotle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">fork_seq</span><span class="op">$</span><span class="va">Aristotle</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">fork_seq</span><span class="op">$</span><span class="va">Aristotle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="va">fork_seq</span><span class="op">$</span><span class="va">Aristotle</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/stats/simulate.html">simulate</a></span><span class="op">(</span><span class="va">fork_seq</span>, time<span class="op">=</span><span class="fl">50</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">philosophers_gantt</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/simulate.html" class="external-link">simulate</a></span><span class="op">(</span><span class="va">fork_seq</span>, time<span class="op">=</span><span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">philosophers_gantt</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; simmer environment: Dining philosophers | now: 50 | next: 50.8360142024587</span>
 <span class="co">#&gt; { Monitor: in memory }</span>
 <span class="co">#&gt; { Resource: fork_1 | monitored: TRUE | server status: 1(1) | queue status: 0(Inf) }</span>
@@ -293,11 +295,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Iñaki Ucar, Bart Smeets.</p>
+  <p></p>
+<p>Developed by Iñaki Ucar, Bart Smeets.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
 </div>
 
       </footer>
@@ -305,6 +309,8 @@
 
   
 
+
+  
 
   </body>
 </html>

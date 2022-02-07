@@ -17,6 +17,7 @@ IMDEA Networks Institute
 \Plainauthor{Iñaki Ucar, Bart Smeets, Arturo Azcorra}
 \Plaintitle{simmer: Discrete-Event Simulation for R}
 
+
 \Abstract{
 The \pkg{simmer} package brings discrete-event simulation to
 \proglang{R}. It is designed as a generic yet powerful process-oriented
@@ -57,9 +58,10 @@ IMDEA Networks Institute\\
   
   }
 
+% Pandoc syntax highlighting
+
 % Pandoc citation processing
 
-% Pandoc header
 
 \usepackage{amsmath} \usepackage{longtable} \usepackage{booktabs} \usepackage{subfig}
 
@@ -67,8 +69,8 @@ IMDEA Networks Institute\\
 
 \setlength{\abovedisplayskip}{0pt}
 
-This manuscript corresponds to \pkg{simmer} version 4.4.3 and was
-typeset on August 11, 2021. For citations, please use the JSS version
+This manuscript corresponds to \pkg{simmer} version 4.4.4 and was
+typeset on February 07, 2022. For citations, please use the JSS version
 (see \code{citation("simmer")}).
 
 \hypertarget{introduction}{%
@@ -582,22 +584,22 @@ consistent execution of simultaneous events.
 \caption{Priority system (in decreasing order) and events
 associated.\label{priorities}}\tabularnewline
 \toprule
-Priority & Event\tabularnewline
+Priority & Event \\
 \midrule
 \endfirsthead
 \toprule
-Priority & Event\tabularnewline
+Priority & Event \\
 \midrule
 \endhead
-\texttt{PRIORITY\_MAX} & Terminate arrivals\tabularnewline
-\texttt{PRIORITY\_RELEASE} & Resource release\tabularnewline
+\texttt{PRIORITY\_MAX} & Terminate arrivals \\
+\texttt{PRIORITY\_RELEASE} & Resource release \\
 \texttt{PRIORITY\_MANAGER} & Manager action (e.g., resource capacity
-change)\tabularnewline
+change) \\
 \texttt{PRIORITY\_RELEASE\_POST} & Resource post-release (i.e., serve
-from the queue)\tabularnewline
-\ldots{} & General activities\tabularnewline
+from the queue) \\
+\ldots{} & General activities \\
 \texttt{PRIORITY\_MIN} & Other tasks (e.g., new arrivals,
-timers\ldots)\tabularnewline
+timers\ldots) \\
 \bottomrule
 \end{longtable}
 
@@ -1795,18 +1797,16 @@ Table \ref{test-simmer-output-table}).
 \caption{Output from the \code{test\_simmer()}
 function.\label{test-simmer-output-table}}\tabularnewline
 \toprule
-Name & Start time & End time & Activity time & Finished &
-Replication\tabularnewline
+Name & Start time & End time & Activity time & Finished & Replication \\
 \midrule
 \endfirsthead
 \toprule
-Name & Start time & End time & Activity time & Finished &
-Replication\tabularnewline
+Name & Start time & End time & Activity time & Finished & Replication \\
 \midrule
 \endhead
-test0 & 1 & 2 & 1 & TRUE & 1\tabularnewline
-test1 & 2 & 3 & 1 & TRUE & 1\tabularnewline
-test2 & 3 & 4 & 1 & TRUE & 1\tabularnewline
+test0 & 1 & 2 & 1 & TRUE & 1 \\
+test1 & 2 & 3 & 1 & TRUE & 1 \\
+test2 & 3 & 4 & 1 & TRUE & 1 \\
 \bottomrule
 \end{longtable}
 
@@ -1879,21 +1879,18 @@ fixed values instead of function calls whenever possible.
 \caption{Execution time
 (milliseconds).\label{performance-table}}\tabularnewline
 \toprule
-Expr & Min & Mean & Median & Max\tabularnewline
+Expr & Min & Mean & Median & Max \\
 \midrule
 \endfirsthead
 \toprule
-Expr & Min & Mean & Median & Max\tabularnewline
+Expr & Min & Mean & Median & Max \\
 \midrule
 \endhead
-test\_simmer(n, 1) & 429.8663 & 492.365 & 480.5408 &
-599.3547\tabularnewline
+test\_simmer(n, 1) & 429.8663 & 492.365 & 480.5408 & 599.3547 \\
 test\_simmer(n, function() 1) & 3067.9957 & 3176.963 & 3165.6859 &
-3434.7979\tabularnewline
-test\_R\_for(n) & 2053.0840 & 2176.164 & 2102.5848 &
-2438.6836\tabularnewline
-test\_R\_lapply(n) & 1525.6682 & 1754.028 & 1757.7566 &
-2002.6634\tabularnewline
+3434.7979 \\
+test\_R\_for(n) & 2053.0840 & 2176.164 & 2102.5848 & 2438.6836 \\
+test\_R\_lapply(n) & 1525.6682 & 1754.028 & 1757.7566 & 2002.6634 \\
 \bottomrule
 \end{longtable}
 
