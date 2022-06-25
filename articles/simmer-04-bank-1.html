@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.5</span>
       </span>
     </div>
 
@@ -60,7 +60,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
@@ -117,7 +117,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
      
     Extensions
@@ -158,7 +158,7 @@
       <h1 data-toc-skip>The Bank Tutorial: Part I</h1>
                         <h4 data-toc-skip class="author">Duncan Garmonsway</h4>
             
-            <h4 data-toc-skip class="date">2022-02-07</h4>
+            <h4 data-toc-skip class="date">2022-06-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/HEAD/vignettes/simmer-04-bank-1.Rmd" class="external-link"><code>vignettes/simmer-04-bank-1.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-04-bank-1.Rmd</code></div>
@@ -740,7 +740,7 @@
 <h3 id="the-bank-with-a-monitor-aka-summary-statistics">The bank with a monitor (aka summary statistics)<a class="anchor" aria-label="anchor" href="#the-bank-with-a-monitor-aka-summary-statistics"></a>
 </h3>
 <p>We now demonstrate how to calculate average waiting times for our customers. In the original SimPy version of this tutorial, this involved using ‘Monitors’. In simmer, data is returned by the <code>get_mon_*</code> family of functions, as has already been demonstrated. Here, we simply summarise the data frame returned by the <code>get_mon_arrivals</code> function, using standard R functions.</p>
-<p>We also increase the number of customers to 50 (find the number ‘49’ in the code.code).</p>
+<p>We also increase the number of customers to 50 (find the number ‘49’ in the code).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
 
@@ -830,7 +830,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer>

@@ -27,7 +27,7 @@ the simulation."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.5</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@ the simulation."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
@@ -99,7 +99,7 @@ the simulation."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
      
     Extensions
@@ -144,29 +144,42 @@ attributes defined with <code>set_global</code> are shared by all the arrivals i
 the simulation.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">set_attribute</span><span class="op">(</span><span class="va">.trj</span>, <span class="va">keys</span>, <span class="va">values</span>, mod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"+"</span>, <span class="st">"*"</span><span class="op">)</span>, init <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">set_attribute</span><span class="op">(</span><span class="va">.trj</span>, <span class="va">keys</span>, <span class="va">values</span>, mod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"+"</span>, <span class="st">"*"</span><span class="op">)</span>, init <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 
-<span class="fu">set_global</span><span class="op">(</span><span class="va">.trj</span>, <span class="va">keys</span>, <span class="va">values</span>, mod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"+"</span>, <span class="st">"*"</span><span class="op">)</span>, init <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div></div>
+<span class="fu">set_global</span><span class="op">(</span><span class="va">.trj</span>, <span class="va">keys</span>, <span class="va">values</span>, mod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"+"</span>, <span class="st">"*"</span><span class="op">)</span>, init <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.trj</dt>
 <dd><p>the trajectory object.</p></dd>
+
+
 <dt>keys</dt>
 <dd><p>the attribute name(s), or a callable object (a function) which
 must return attribute name(s).</p></dd>
+
+
 <dt>values</dt>
 <dd><p>numeric value(s) to set, or a callable object (a function) which
 must return numeric value(s).</p></dd>
+
+
 <dt>mod</dt>
 <dd><p>if set, <code>values</code> modify the attributes rather than substituting them.</p></dd>
+
+
 <dt>init</dt>
 <dd><p>initial value, applied if <code>mod</code> is set and the attribute was
 not previously initialised. Useful for counters or indexes.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns the trajectory object.</p>
+    
+
+<p>Returns the trajectory object.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -232,7 +245,7 @@ unnamed key/value pairs.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

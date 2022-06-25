@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.5</span>
       </span>
     </div>
 
@@ -42,7 +42,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
@@ -95,7 +95,7 @@
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
      
     Extensions
@@ -136,38 +136,52 @@
     <p>This method initialises a simulation environment.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">simmer</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"anonymous"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, mon <span class="op">=</span> <span class="fu"><a href="monitor.html">monitor_mem</a></span><span class="op">(</span><span class="op">)</span>, log_level <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">simmer</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"anonymous"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, mon <span class="op">=</span> <span class="fu"><a href="monitor.html">monitor_mem</a></span><span class="op">(</span><span class="op">)</span>, log_level <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>name</dt>
 <dd><p>the name of the simulator.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>enable showing activity information.</p></dd>
+
+
 <dt>mon</dt>
 <dd><p>monitor (in memory by default); see <code><a href="monitor.html">monitor</a></code> for
 other options.</p></dd>
+
+
 <dt>log_level</dt>
 <dd><p>debugging level (see <code><a href="log_.html">log_</a></code>).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a simulation environment.</p>
+    
+
+<p>Returns a simulation environment.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Available methods by category:</p><ul><li><p>Simulation control: <code><a href="run.html">stepn</a></code>, <code><a href="run.html">run</a></code>,
 <code><a href="now.html">now</a></code>, <code><a href="peek.html">peek</a></code>, <code><a href="reset.html">reset</a></code></p></li>
 <li><p>Resources: <code><a href="add_resource.html">add_resource</a></code>, <code><a href="get_sources.html">get_resources</a></code>,
-<code><a href="get_capacity.html">get_capacity</a></code>, <code><a href="get_capacity.html">get_queue_size</a></code>,
-<code><a href="get_capacity.html">get_server_count</a></code>, <code><a href="get_capacity.html">get_queue_count</a></code>,
-<code><a href="get_capacity.html">get_capacity_selected</a></code>, <code><a href="get_capacity.html">get_queue_size_selected</a></code>,
-<code><a href="get_capacity.html">get_server_count_selected</a></code>, <code><a href="get_capacity.html">get_queue_count_selected</a></code>,
+<code><a href="get_capacity.html">get_capacity</a></code>, <code><a href="get_capacity.html">get_capacity_selected</a></code>,
+<code><a href="get_capacity.html">get_queue_size</a></code>, <code><a href="get_capacity.html">get_queue_size_selected</a></code>,
+<code><a href="get_capacity.html">get_server_count</a></code>, <code><a href="get_capacity.html">get_server_count_selected</a></code>,
+<code><a href="get_capacity.html">get_queue_count</a></code>, <code><a href="get_capacity.html">get_queue_count_selected</a></code>,
 <code><a href="get_capacity.html">get_seized</a></code>, <code><a href="get_capacity.html">get_seized_selected</a></code>,
+<code><a href="get_capacity.html">get_activity_time</a></code>, <code><a href="get_capacity.html">get_activity_time_selected</a></code>,
 <code><a href="get_capacity.html">get_selected</a></code></p></li>
 <li><p>Sources: <code><a href="add_generator.html">add_generator</a></code>, <code><a href="add_dataframe.html">add_dataframe</a></code>,
 <code><a href="get_sources.html">get_sources</a></code>, <code><a href="get_n_generated.html">get_n_generated</a></code>,
 <code><a href="get_n_generated.html">get_trajectory</a></code></p></li>
+<li><p>Arrivals: <code><a href="get_n_generated.html">get_name</a></code>, <code><a href="get_n_generated.html">get_attribute</a></code>,
+<code><a href="get_n_generated.html">get_prioritization</a></code>, <code><a href="get_n_generated.html">get_batch_size</a></code></p></li>
 <li><p>Globals: <code><a href="add_global.html">add_global</a></code>, <code><a href="get_n_generated.html">get_global</a></code></p></li>
 <li><p>Data retrieval: <code><a href="get_mon.html">get_mon_arrivals</a></code>,
 <code><a href="get_mon.html">get_mon_attributes</a></code>, <code><a href="get_mon.html">get_mon_resources</a></code></p></li>
@@ -225,7 +239,7 @@ other options.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

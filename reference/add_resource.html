@@ -28,7 +28,7 @@ the server to be available."><!-- mathjax --><script src="https://cdnjs.cloudfla
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.5</span>
       </span>
     </div>
 
@@ -47,7 +47,7 @@ the server to be available."><!-- mathjax --><script src="https://cdnjs.cloudfla
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
@@ -100,7 +100,7 @@ the server to be available."><!-- mathjax --><script src="https://cdnjs.cloudfla
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
      
     Extensions
@@ -146,45 +146,66 @@ and a priority <em>queue</em> of a certain size, in which arrivals may wait for
 the server to be available.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">add_resource</span><span class="op">(</span><span class="va">.env</span>, <span class="va">name</span>, capacity <span class="op">=</span> <span class="fl">1</span>, queue_size <span class="op">=</span> <span class="cn">Inf</span>, mon <span class="op">=</span> <span class="cn">TRUE</span>,
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">add_resource</span><span class="op">(</span><span class="va">.env</span>, <span class="va">name</span>, capacity <span class="op">=</span> <span class="fl">1</span>, queue_size <span class="op">=</span> <span class="cn">Inf</span>, mon <span class="op">=</span> <span class="cn">TRUE</span>,
   preemptive <span class="op">=</span> <span class="cn">FALSE</span>, preempt_order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fifo"</span>, <span class="st">"lifo"</span><span class="op">)</span>,
-  queue_size_strict <span class="op">=</span> <span class="cn">FALSE</span>, queue_priority <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></code></pre></div></div>
+  queue_size_strict <span class="op">=</span> <span class="cn">FALSE</span>, queue_priority <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.env</dt>
 <dd><p>the simulation environment.</p></dd>
+
+
 <dt>name</dt>
 <dd><p>the name of the resource. If several names are provided, several
 resources will be defined with the same parameters.</p></dd>
+
+
 <dt>capacity</dt>
 <dd><p>the capacity of the server, either an integer or a
 <code><a href="schedule.html">schedule</a></code>, so that the value may change during the simulation.</p></dd>
+
+
 <dt>queue_size</dt>
 <dd><p>the size of the queue, either an integer or a
 <code><a href="schedule.html">schedule</a></code>, so that the value may change during the simulation.</p></dd>
+
+
 <dt>mon</dt>
 <dd><p>whether the simulator must monitor this resource or not.</p></dd>
+
+
 <dt>preemptive</dt>
 <dd><p>whether arrivals in the server can be preempted or not based
 on seize priorities.</p></dd>
+
+
 <dt>preempt_order</dt>
 <dd><p>if <code>preemptive=TRUE</code> and several arrivals are
 preempted, this parameter defines which arrival should be preempted first.
 Either <code>fifo</code> (First In First Out: older preemptible tasks are preempted
 first) or <code>lifo</code> (Last In First Out: newer preemptible tasks are
 preempted first).</p></dd>
+
+
 <dt>queue_size_strict</dt>
 <dd><p>whether the <code>queue_size</code> is a hard limit (see
 details).</p></dd>
+
+
 <dt>queue_priority</dt>
 <dd><p>the priority range required to be able to access the
 queue if there is no room in the server (if a single value is provided, it is
 treated as the minimum priority). By default, all arrivals can be enqueued.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns the simulation environment.</p>
+    
+
+<p>Returns the simulation environment.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -221,7 +242,7 @@ activity.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

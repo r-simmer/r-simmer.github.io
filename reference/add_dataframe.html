@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.5</span>
       </span>
     </div>
 
@@ -42,7 +42,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
@@ -95,7 +95,7 @@
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
      
     Extensions
@@ -136,48 +136,75 @@
     <p>Attach a new source of arrivals to a trajectory from a data frame.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">add_dataframe</span><span class="op">(</span><span class="va">.env</span>, <span class="va">name_prefix</span>, <span class="va">trajectory</span>, <span class="va">data</span>, mon <span class="op">=</span> <span class="fl">1</span>, batch <span class="op">=</span> <span class="fl">50</span>,
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">add_dataframe</span><span class="op">(</span><span class="va">.env</span>, <span class="va">name_prefix</span>, <span class="va">trajectory</span>, <span class="va">data</span>, mon <span class="op">=</span> <span class="fl">1</span>, batch <span class="op">=</span> <span class="fl">50</span>,
   col_time <span class="op">=</span> <span class="st">"time"</span>, time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"interarrival"</span>, <span class="st">"absolute"</span><span class="op">)</span>,
   col_attributes <span class="op">=</span> <span class="cn">NULL</span>, col_priority <span class="op">=</span> <span class="st">"priority"</span>,
-  col_preemptible <span class="op">=</span> <span class="va">col_priority</span>, col_restart <span class="op">=</span> <span class="st">"restart"</span><span class="op">)</span></code></pre></div></div>
+  col_preemptible <span class="op">=</span> <span class="va">col_priority</span>, col_restart <span class="op">=</span> <span class="st">"restart"</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.env</dt>
 <dd><p>the simulation environment.</p></dd>
+
+
 <dt>name_prefix</dt>
 <dd><p>the name prefix of the generated arrivals.</p></dd>
+
+
 <dt>trajectory</dt>
 <dd><p>the trajectory that the generated arrivals will follow (see
 <code><a href="trajectory.html">trajectory</a></code>).</p></dd>
+
+
 <dt>data</dt>
 <dd><p>a data frame with, at least, a column of (inter)arrival times (see details).</p></dd>
+
+
 <dt>mon</dt>
 <dd><p>whether the simulator must monitor the generated arrivals or not
 (0 = no monitoring, 1 = simple arrival monitoring, 2 = level 1 + arrival
 attribute monitoring)</p></dd>
+
+
 <dt>batch</dt>
 <dd><p>number of arrivals generated at a time. Arrivals are read from
 the data frame and attached to the trajectory in batches depending on this
 value. In general, it should not be changed.</p></dd>
+
+
 <dt>col_time</dt>
 <dd><p>name of the time column in the data frame.</p></dd>
+
+
 <dt>time</dt>
 <dd><p>type of time column: <em>interarrival</em>, if the time column
 contains interarrival times, or <em>absolute</em>, if the time column contains
 absolute arrival times.</p></dd>
+
+
 <dt>col_attributes</dt>
 <dd><p>vector of names of the attributes columns (see details).</p></dd>
+
+
 <dt>col_priority</dt>
 <dd><p>name of the priority column.</p></dd>
+
+
 <dt>col_preemptible</dt>
 <dd><p>name of the preemptible column.</p></dd>
+
+
 <dt>col_restart</dt>
 <dd><p>name of the restart column.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns the simulation environment.</p>
+    
+
+<p>Returns the simulation environment.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -216,7 +243,7 @@ good trade-off.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

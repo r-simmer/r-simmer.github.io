@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.5</span>
       </span>
     </div>
 
@@ -42,7 +42,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
@@ -95,7 +95,7 @@
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
      
     Extensions
@@ -136,7 +136,8 @@
     <p>Operators acting on trajectories to extract or replace parts.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre><code># S3 method for trajectory
+    <div id="ref-usage">
+    <div class="sourceCode"><pre><code># S3 method for trajectory
 [(x, i)
 
 # S3 method for trajectory
@@ -146,12 +147,15 @@
 [(x, i) &lt;- value
 
 # S3 method for trajectory
-[[(x, i) &lt;- value</code></pre></div></div>
+[[(x, i) &lt;- value</code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>the trajectory object.</p></dd>
+
+
 <dt>i</dt>
 <dd><p>indices specifying elements to extract. Indices are <code>numeric</code>
 or <code>character</code> or <code>logical</code> vectors or empty (missing) or <code>NULL</code>.</p>
@@ -164,12 +168,17 @@ trajectory as by <code><a href="https://rdrr.io/r/base/match.html" class="extern
 if necessary to match the corresponding extent.</p>
 <p>An empty index will return the whole trajectory.</p>
 <p>An index value of <code>NULL</code> is treated as if it were <code>integer(0)</code>.</p></dd>
+
+
 <dt>value</dt>
 <dd><p>another trajectory object.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a new trajectory object.</p>
+    
+
+<p>Returns a new trajectory object.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -258,7 +267,7 @@ if necessary to match the corresponding extent.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

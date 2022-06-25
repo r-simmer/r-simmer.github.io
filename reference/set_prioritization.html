@@ -25,7 +25,7 @@ add_generator, add_dataframe)."><!-- mathjax --><script src="https://cdnjs.cloud
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.5</span>
       </span>
     </div>
 
@@ -44,7 +44,7 @@ add_generator, add_dataframe)."><!-- mathjax --><script src="https://cdnjs.cloud
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
@@ -97,7 +97,7 @@ add_generator, add_dataframe)."><!-- mathjax --><script src="https://cdnjs.cloud
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
      
     Extensions
@@ -140,23 +140,32 @@ Default prioritization values are defined by the source (see
 <code><a href="add_generator.html">add_generator</a></code>, <code><a href="add_dataframe.html">add_dataframe</a></code>).</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">set_prioritization</span><span class="op">(</span><span class="va">.trj</span>, <span class="va">values</span>, mod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"+"</span>, <span class="st">"*"</span><span class="op">)</span><span class="op">)</span></code></pre></div></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">set_prioritization</span><span class="op">(</span><span class="va">.trj</span>, <span class="va">values</span>, mod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"+"</span>, <span class="st">"*"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.trj</dt>
 <dd><p>the trajectory object.</p></dd>
+
+
 <dt>values</dt>
 <dd><p>expects either a vector/list or a callable object (a function)
 returning a vector/list of three values <code>c(priority, preemptible, restart)</code>.
 A negative value leaves the corresponding parameter unchanged.
 See <code><a href="add_generator.html">add_generator</a></code> for more information about these parameters.</p></dd>
+
+
 <dt>mod</dt>
 <dd><p>if set, <code>values</code> modify the attributes rather than substituting them.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns the trajectory object.</p>
+    
+
+<p>Returns the trajectory object.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -195,7 +204,7 @@ See <code><a href="add_generator.html">add_generator</a></code> for more informa
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

@@ -30,7 +30,7 @@ signals. wait() blocks until a signal is received."><!-- mathjax --><script src=
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.5</span>
       </span>
     </div>
 
@@ -49,7 +49,7 @@ signals. wait() blocks until a signal is received."><!-- mathjax --><script src=
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
@@ -102,7 +102,7 @@ signals. wait() blocks until a signal is received."><!-- mathjax --><script src=
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
      
     Extensions
@@ -150,33 +150,46 @@ point of the interruption. <code>untrap()</code> can be used to unsubscribe from
 signals. <code>wait()</code> blocks until a signal is received.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">send</span><span class="op">(</span><span class="va">.trj</span>, <span class="va">signals</span>, delay <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">send</span><span class="op">(</span><span class="va">.trj</span>, <span class="va">signals</span>, delay <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 
 <span class="fu">trap</span><span class="op">(</span><span class="va">.trj</span>, <span class="va">signals</span>, handler <span class="op">=</span> <span class="cn">NULL</span>, interruptible <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="fu">untrap</span><span class="op">(</span><span class="va">.trj</span>, <span class="va">signals</span><span class="op">)</span>
 
-<span class="fu">wait</span><span class="op">(</span><span class="va">.trj</span><span class="op">)</span></code></pre></div></div>
+<span class="fu">wait</span><span class="op">(</span><span class="va">.trj</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.trj</dt>
 <dd><p>the trajectory object.</p></dd>
+
+
 <dt>signals</dt>
 <dd><p>signal or list of signals, accepts either a string, a list of
 strings or a callable object (a function) which must return a string or a
 list of strings.</p></dd>
+
+
 <dt>delay</dt>
 <dd><p>optional timeout to trigger the signals, accepts either a
 numeric or a callable object (a function) which must return a numeric.</p></dd>
+
+
 <dt>handler</dt>
 <dd><p>optional trajectory object to handle a signal received.</p></dd>
+
+
 <dt>interruptible</dt>
 <dd><p>whether the handler can be interrupted by signals.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns the trajectory object.</p>
+    
+
+<p>Returns the trajectory object.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -246,7 +259,7 @@ numeric or a callable object (a function) which must return a numeric.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

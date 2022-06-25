@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.5</span>
       </span>
     </div>
 
@@ -42,7 +42,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
@@ -95,7 +95,7 @@
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
      
     Extensions
@@ -136,46 +136,65 @@
     <p>Attach a new source of arrivals to a trajectory from a generator function.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">add_generator</span><span class="op">(</span><span class="va">.env</span>, <span class="va">name_prefix</span>, <span class="va">trajectory</span>, <span class="va">distribution</span>, mon <span class="op">=</span> <span class="fl">1</span>,
-  priority <span class="op">=</span> <span class="fl">0</span>, preemptible <span class="op">=</span> <span class="va">priority</span>, restart <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">add_generator</span><span class="op">(</span><span class="va">.env</span>, <span class="va">name_prefix</span>, <span class="va">trajectory</span>, <span class="va">distribution</span>, mon <span class="op">=</span> <span class="fl">1</span>,
+  priority <span class="op">=</span> <span class="fl">0</span>, preemptible <span class="op">=</span> <span class="va">priority</span>, restart <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.env</dt>
 <dd><p>the simulation environment.</p></dd>
+
+
 <dt>name_prefix</dt>
 <dd><p>the name prefix of the generated arrivals. If several
 names are provided, several generators will be defined with the same parameters.</p></dd>
+
+
 <dt>trajectory</dt>
 <dd><p>the trajectory that the generated arrivals will follow (see
 <code><a href="trajectory.html">trajectory</a></code>).</p></dd>
+
+
 <dt>distribution</dt>
 <dd><p>a function modelling the interarrival times (returning a
 negative value or a missing value stops the generator).</p></dd>
+
+
 <dt>mon</dt>
 <dd><p>whether the simulator must monitor the generated arrivals or not
 (0 = no monitoring, 1 = simple arrival monitoring, 2 = level 1 + arrival
 attribute monitoring)</p></dd>
+
+
 <dt>priority</dt>
 <dd><p>the priority of each arrival (a higher integer equals higher
 priority; defaults to the minimum priority, which is 0).</p></dd>
+
+
 <dt>preemptible</dt>
 <dd><p>if a seize occurs in a preemptive resource, this parameter
 establishes the minimum incoming priority that can preempt these arrivals (an
 arrival with a priority greater than <code>preemptible</code> gains the resource). In
 any case, <code>preemptible</code> must be equal or greater than <code>priority</code>, and
 thus only higher priority arrivals can trigger preemption.</p></dd>
+
+
 <dt>restart</dt>
 <dd><p>whether the activity must be restarted after being preempted.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns the simulation environment.</p>
+    
+
+<p>Returns the simulation environment.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Convenience functions: <code><a href="generators.html">at</a></code>, <code><a href="generators.html">from</a></code>,
-<code><a href="generators.html">to</a></code>, <code><a href="generators.html">from_to</a></code>.</p>
+<code><a href="generators.html">to</a></code>, <code><a href="generators.html">from_to</a></code>, <code><a href="generators.html">when_activated</a></code>.</p>
 <p>Other sources: <code><a href="add_dataframe.html">add_dataframe</a></code>.</p></div>
     </div>
 
@@ -191,7 +210,7 @@ thus only higher priority arrivals can trigger preemption.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

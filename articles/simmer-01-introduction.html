@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.5</span>
       </span>
     </div>
 
@@ -60,7 +60,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
@@ -117,7 +117,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
      
     Extensions
@@ -158,7 +158,7 @@
       <h1 data-toc-skip>Introduction to simmer</h1>
                         <h4 data-toc-skip class="author">Bart Smeets, Iñaki Ucar</h4>
             
-            <h4 data-toc-skip class="date">2022-02-07</h4>
+            <h4 data-toc-skip class="date">2022-06-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/HEAD/vignettes/simmer-01-introduction.Rmd" class="external-link"><code>vignettes/simmer-01-introduction.Rmd</code></a></small>
       <div class="hidden name"><code>simmer-01-introduction.Rmd</code></div>
@@ -291,23 +291,23 @@
 <span class="va">envs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt;   resource      time server queue capacity queue_size system limit replication</span>
-<span class="co">#&gt; 1    nurse  9.569374      1     0        1        Inf      1   Inf           1</span>
-<span class="co">#&gt; 2    nurse 19.489399      1     1        1        Inf      2   Inf           1</span>
-<span class="co">#&gt; 3    nurse 27.020953      1     0        1        Inf      1   Inf           1</span>
-<span class="co">#&gt; 4   doctor 27.020953      1     0        2        Inf      1   Inf           1</span>
-<span class="co">#&gt; 5    nurse 27.193104      1     1        1        Inf      2   Inf           1</span>
-<span class="co">#&gt; 6    nurse 37.322030      1     2        1        Inf      3   Inf           1</span>
+<span class="co">#&gt;   resource     time server queue capacity queue_size system limit replication</span>
+<span class="co">#&gt; 1    nurse 11.56214      1     0        1        Inf      1   Inf           1</span>
+<span class="co">#&gt; 2    nurse 19.78508      1     1        1        Inf      2   Inf           1</span>
+<span class="co">#&gt; 3    nurse 26.09057      1     0        1        Inf      1   Inf           1</span>
+<span class="co">#&gt; 4   doctor 26.09057      1     0        2        Inf      1   Inf           1</span>
+<span class="co">#&gt; 5    nurse 32.28922      1     1        1        Inf      2   Inf           1</span>
+<span class="co">#&gt; 6    nurse 40.33311      1     2        1        Inf      3   Inf           1</span>
 <span class="va">envs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;       name start_time end_time activity_time finished replication</span>
-<span class="co">#&gt; 1 patient0   9.569374 50.40631      40.83694     TRUE           1</span>
-<span class="co">#&gt; 2 patient1  19.489399 69.21271      42.19176     TRUE           1</span>
-<span class="co">#&gt; 3 patient0  11.010974 50.70789      39.69691     TRUE           2</span>
-<span class="co">#&gt; 4 patient1  23.763479 70.96863      43.65818     TRUE           2</span>
-<span class="co">#&gt; 5 patient0  11.068777 49.75820      38.68942     TRUE           3</span>
-<span class="co">#&gt; 6 patient1  20.087926 65.97124      38.21914     TRUE           3</span></code></pre></div>
+<span class="co">#&gt; 1 patient0  11.562139 49.33203      37.76989     TRUE           1</span>
+<span class="co">#&gt; 2 patient1  19.785081 67.41176      41.32119     TRUE           1</span>
+<span class="co">#&gt; 3 patient2  32.289224 77.86854      37.23876     TRUE           1</span>
+<span class="co">#&gt; 4 patient0   9.475731 46.85842      37.38269     TRUE           2</span>
+<span class="co">#&gt; 5 patient1  20.475888 63.74796      42.00167     TRUE           2</span>
+<span class="co">#&gt; 6 patient2  28.453557 79.07843      41.81745     TRUE           2</span></code></pre></div>
 <p>Unfortunately, as the C++ simulation cores are destroyed, the downside of this kind of parallelization is that one cannot resume execution of the replicas.</p>
 </div>
 <div class="section level2">
@@ -339,7 +339,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer>

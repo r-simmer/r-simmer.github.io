@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.5</span>
       </span>
     </div>
 
@@ -42,7 +42,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
@@ -95,7 +95,7 @@
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
      
     Extensions
@@ -136,28 +136,41 @@
     <p>Execute steps until a given criterion.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">run</span><span class="op">(</span><span class="va">.env</span>, until <span class="op">=</span> <span class="cn">Inf</span>, progress <span class="op">=</span> <span class="cn">NULL</span>, steps <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">run</span><span class="op">(</span><span class="va">.env</span>, until <span class="op">=</span> <span class="cn">Inf</span>, progress <span class="op">=</span> <span class="cn">NULL</span>, steps <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
-<span class="fu">stepn</span><span class="op">(</span><span class="va">.env</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div></div>
+<span class="fu">stepn</span><span class="op">(</span><span class="va">.env</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.env</dt>
 <dd><p>the simulation environment.</p></dd>
+
+
 <dt>until</dt>
 <dd><p>stop time.</p></dd>
+
+
 <dt>progress</dt>
 <dd><p>optional callback to show the progress of the simulation. The
 completed ratio is periodically passed as argument to the callback.</p></dd>
+
+
 <dt>steps</dt>
 <dd><p>number of steps to show as progress (it takes effect only if
 <code>progress</code> is provided).</p></dd>
+
+
 <dt>n</dt>
 <dd><p>number of events to simulate.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns the simulation environment.</p>
+    
+
+<p>Returns the simulation environment.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -205,7 +218,7 @@ completed ratio is periodically passed as argument to the callback.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

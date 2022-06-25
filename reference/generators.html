@@ -24,7 +24,7 @@ for some common cases."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simmer | DES for R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.4.5</span>
       </span>
     </div>
 
@@ -43,7 +43,7 @@ for some common cases."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
@@ -96,7 +96,7 @@ for some common cases."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-puzzle-piece"></span>
      
     Extensions
@@ -138,7 +138,8 @@ for some common cases."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
 for some common cases.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">at</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">at</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
 
 <span class="fu">from</span><span class="op">(</span><span class="va">start_time</span>, <span class="va">dist</span>, arrive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
@@ -146,36 +147,52 @@ for some common cases.</p>
 
 <span class="fu">from_to</span><span class="op">(</span><span class="va">start_time</span>, <span class="va">stop_time</span>, <span class="va">dist</span>, arrive <span class="op">=</span> <span class="cn">TRUE</span>, every <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 
-<span class="fu">when_activated</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div></div>
+<span class="fu">when_activated</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>...</dt>
 <dd><p>a vector or multiple parameters of times at which to initiate an arrival.</p></dd>
+
+
 <dt>start_time</dt>
 <dd><p>the time at which to launch the initial arrival
 (numeric or function).</p></dd>
+
+
 <dt>dist</dt>
 <dd><p>a function modelling the interarrival times. It is supposed to be
 an infinite source of values <code>&gt;= 0</code> (e.g., <code>rexp</code> and the like). If
 the function provided returns any negative value, the behaviour is undefined.</p></dd>
+
+
 <dt>arrive</dt>
 <dd><p>if set to <code>TRUE</code> (default) the first arrival will be
 generated at <code>start_time</code> and will follow <code>dist</code> from then on.
 If set to <code>FALSE</code>, will initiate <code>dist</code> at <code>start_time</code>
 (and the first arrival will most likely start at a time later than
 <code>start_time</code>).</p></dd>
+
+
 <dt>stop_time</dt>
 <dd><p>the time at which to stop the generator (numeric or function).</p></dd>
+
+
 <dt>every</dt>
 <dd><p>repeat with this time cycle (numeric or function).</p></dd>
+
+
 <dt>n</dt>
 <dd><p>an integer or a callable object (a function) which must return
 a number of arrivals to generate when activated.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a generator function (a closure).</p>
+    
+
+<p>Returns a generator function (a closure).</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -224,9 +241,9 @@ trajectory using the activity <code><a href="activate.html">activate</a></code>.
 <span class="r-in">  <span class="fu"><a href="get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     name start_time end_time activity_time finished replication</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 dummy0   5.000000 5.000000             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 dummy1   6.562911 6.562911             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 dummy2   8.393081 8.393081             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 dummy3   9.563937 9.563937             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 dummy1   6.336782 6.336782             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 dummy2   8.306363 8.306363             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 dummy3   9.400749 9.400749             0     TRUE           1</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># apply distribution until 5 (starting at 0)</span></span>
 <span class="r-in"><span class="fu"><a href="simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -234,9 +251,9 @@ trajectory using the activity <code><a href="activate.html">activate</a></code>.
 <span class="r-in">  <span class="fu"><a href="run.html">run</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu"><a href="get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     name start_time end_time activity_time finished replication</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 dummy0   1.987399 1.987399             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 dummy1   3.632096 3.632096             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 dummy2   4.929057 4.929057             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 dummy0   1.824173 1.824173             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 dummy1   3.237710 3.237710             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 dummy2   4.953393 4.953393             0     TRUE           1</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># apply distribution from 8 to 16 h every 24 h:</span></span>
 <span class="r-in"><span class="fu"><a href="simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -245,17 +262,17 @@ trajectory using the activity <code><a href="activate.html">activate</a></code>.
 <span class="r-in">  <span class="fu"><a href="get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       name start_time  end_time activity_time finished replication</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   dummy0   8.000000  8.000000             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   dummy1   9.614984  9.614984             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   dummy2  10.995721 10.995721             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   dummy3  12.294296 12.294296             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   dummy4  13.399422 13.399422             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   dummy5  15.395337 15.395337             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   dummy1   9.731849  9.731849             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   dummy2  11.222185 11.222185             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   dummy3  12.787766 12.787766             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   dummy4  14.196379 14.196379             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   dummy5  15.702096 15.702096             0     TRUE           1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7   dummy6  32.000000 32.000000             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   dummy7  33.606093 33.606093             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   dummy8  34.668558 34.668558             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  dummy9  35.994091 35.994091             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 dummy10  37.916104 37.916104             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 dummy11  39.621426 39.621426             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   dummy7  33.647385 33.647385             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   dummy8  34.966072 34.966072             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  dummy9  36.442788 36.442788             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 dummy10  37.817360 37.817360             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 dummy11  39.581458 39.581458             0     TRUE           1</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># triggering arrivals on demand from a trajectory</span></span>
 <span class="r-in"><span class="va">t1</span> <span class="op">&lt;-</span> <span class="fu"><a href="trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -284,7 +301,7 @@ trajectory using the activity <code><a href="activate.html">activate</a></code>.
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
