@@ -45,24 +45,3 @@
 .footnote {
   bottom: 1em;
 }
-
-hr, .title-slide h2::after, .mline h1::after {
-  content: '';
-  display: block;
-  border: none;
-  background-color: #EB811B;
-  color: #EB811B;
-  height: 1px;
-}
-
-hr, .mline h1::after {
-  margin: 1em 15px 0 15px;
-}
-
-.title-slide h2::after {
-  margin: 10px 15px 35px 0;
-}
-
-.mline h1::after {
-  margin: 10px 15px 0 15px;
-}

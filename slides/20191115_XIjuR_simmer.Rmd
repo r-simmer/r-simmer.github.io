@@ -1,12 +1,14 @@
 ---
 title: "simmer"
 subtitle: "Discrete-Event Simulation for R"
-author: "**Iñaki Úcar**, postdoctoral fellow @ UC3M-Santander Big Data Institute (IBiDat) <br>Bart Smeets, data scientist @ dataroots.io"
+author:
+  - "**Iñaki Úcar**, postdoctoral fellow @ UC3M-Santander Big Data Institute (IBiDat)"
+  - "Bart Smeets, founder & data scientist @ dataroots.io"
 date: "<br>November 15-16, 2019"
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: [default, metropolis-fonts, libs/metropolis.css, libs/my-theme.css]
+    css: [default, metropolis-fonts, metropolis, libs/my-theme.css]
     nature:
       beforeInit: libs/macros.js
       ratio: '16:9'
@@ -788,7 +790,7 @@ class: center, middle, inverse, mline
 <div class="hexagon" style="bottom:0;left:551px"></div>
 
 <div class="hexagon" style="bottom:118px;left:75px"></div>
-<div style="position:absolute;bottom:118px;left:211px;filter:drop-shadow(2px 4px 6px black)">![:scale 100%](https://r-simmer.org/images/simmer-hex-02.svg)</div>
+<div style="position:absolute;bottom:118px;left:211px;filter:drop-shadow(2px 4px 6px black);width:129px">![:scale 100%](https://r-simmer.org/images/simmer-hex-02.svg)</div>
 <div class="hexagon" style="bottom:118px;left:347px"></div>
 
 <div class="hexagon" style="bottom:236px;left:143px"></div>
