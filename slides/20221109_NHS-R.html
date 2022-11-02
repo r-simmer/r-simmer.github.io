@@ -119,11 +119,11 @@ class: center, middle, inverse, title-slide
 ## DES
 ## `simmer`
 .sticker[]
-### Publications
+## Publications
 ]
 
 .right-column[
-#### Main reference
+### Main reference
 - **Ucar I**, Smeets B, Azcorra A (2019). “simmer: Discrete-Event Simulation for R.” _Journal of Statistical Software_, 90(2), 1-30. doi: [10.18637/jss.v090.i02](https://doi.org/10.18637/jss.v090.i02).
 
 &lt;br&gt;
@@ -133,14 +133,12 @@ class: center, middle, inverse, title-slide
 
 .right-column[
 .pull-left[
-#### Citing documents
+### Citing documents
 - 67 citations in Google Scholar
 - 19 healthcare applications
 - See [zotero.org/groups/r-simmer](https://www.zotero.org/groups/r-simmer)
 
-&lt;br&gt;
-
-#### Packages
+### Packages
 - [`babsim.hospital`](https://cran.r-project.org/package=babsim.hospital):&lt;br&gt;
   Hospital capacity planning
 ]
@@ -158,14 +156,14 @@ class: center, middle, inverse, title-slide
 ## DES
 ## `simmer`
 .sticker[]
-### Publications
-### Tutorials
+## Publications
+## Tutorials
 ]
 
 .right-column[
 &lt;br&gt;
 
-#### About healthcare applications
+### About healthcare applications
 - Lawton, Tom. **ICU Patient flow modelling using r-simmer**. NHS-R Conference 2019. 
   [[GitHub](https://github.com/ImprovementAcademy/ICU-Model)]
 
@@ -583,10 +581,10 @@ head(subset(get_mon_arrivals(job.envs), name == "job0"), 3)
 ```
 
 ```
-##       name start_time end_time activity_time finished replication
-## 7     job0 0.21417878 3.536332      3.322153     TRUE           1
-## 5999  job0 0.21559972 1.306597      1.090997     TRUE           2
-## 12030 job0 0.05281753 1.684405      1.631587     TRUE           3
+##       name start_time  end_time activity_time finished replication
+## 4     job0 0.01583773 0.9999808     0.9841431     TRUE           1
+## 5942  job0 0.26689271 2.0683266     1.8014339     TRUE           2
+## 11915 job0 0.05115561 1.9492936     1.8981379     TRUE           3
 ```
 
 ---
@@ -700,8 +698,8 @@ library(simmer.plot)
 ]
 
 .pull-right[
-<div id="htmlwidget-22113026c5fb20b22aa6" style="width:504px;height:504px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-22113026c5fb20b22aa6">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"sans-serif\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"1.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Seize\", shape = \"box\", style = \"filled\", color = \"#7FC97F\", tooltip = \"resource: machine, amount: 1\", fontcolor = \"black\", fillcolor = \"#7FC97F\"] \n  \"2\" [label = \"Timeout\", shape = \"box\", style = \"solid\", color = \"black\", tooltip = \"delay: function()\", fontcolor = \"black\", fillcolor = \"#000000\"] \n  \"3\" [label = \"Branch\", shape = \"diamond\", style = \"filled\", color = \"lightgrey\", tooltip = \"option: function()\", fontcolor = \"black\", fillcolor = \"#D3D3D3\"] \n  \"4\" [label = \"Seize\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: operative, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"5\" [label = \"Timeout\", shape = \"box\", style = \"solid\", color = \"black\", tooltip = \"delay: function()\", fontcolor = \"black\", fillcolor = \"#000000\"] \n  \"6\" [label = \"Release\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: operative, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"7\" [label = \"Seize\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: operative, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"8\" [label = \"Timeout\", shape = \"box\", style = \"solid\", color = \"black\", tooltip = \"delay: function()\", fontcolor = \"black\", fillcolor = \"#000000\"] \n  \"9\" [label = \"Release\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: operative, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"10\" [label = \"Release\", shape = \"box\", style = \"filled\", color = \"#7FC97F\", tooltip = \"resource: machine, amount: 1\", fontcolor = \"black\", fillcolor = \"#7FC97F\"] \n\"1\"->\"2\" [color = \"black\", style = \"solid\"] \n\"2\"->\"3\" [color = \"black\", style = \"solid\"] \n\"3\"->\"7\" [color = \"black\", style = \"solid\"] \n\"4\"->\"5\" [color = \"black\", style = \"solid\"] \n\"5\"->\"6\" [color = \"black\", style = \"solid\"] \n\"6\"->\"7\" [color = \"black\", style = \"solid\"] \n\"7\"->\"8\" [color = \"black\", style = \"solid\"] \n\"8\"->\"9\" [color = \"black\", style = \"solid\"] \n\"9\"->\"10\" [color = \"black\", style = \"solid\"] \n\"3\"->\"4\" [color = \"grey\", style = \"dashed\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-dc30ff66946cfee4b88e" style="width:504px;height:504px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dc30ff66946cfee4b88e">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"sans-serif\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"1.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Seize\", shape = \"box\", style = \"filled\", color = \"#7FC97F\", tooltip = \"resource: machine, amount: 1\", fontcolor = \"black\", fillcolor = \"#7FC97F\"] \n  \"2\" [label = \"Timeout\", shape = \"box\", style = \"solid\", color = \"black\", tooltip = \"delay: function()\", fontcolor = \"black\", fillcolor = \"#000000\"] \n  \"3\" [label = \"Branch\", shape = \"diamond\", style = \"filled\", color = \"lightgrey\", tooltip = \"option: function()\", fontcolor = \"black\", fillcolor = \"#D3D3D3\"] \n  \"4\" [label = \"Seize\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: operative, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"5\" [label = \"Timeout\", shape = \"box\", style = \"solid\", color = \"black\", tooltip = \"delay: function()\", fontcolor = \"black\", fillcolor = \"#000000\"] \n  \"6\" [label = \"Release\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: operative, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"7\" [label = \"Seize\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: operative, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"8\" [label = \"Timeout\", shape = \"box\", style = \"solid\", color = \"black\", tooltip = \"delay: function()\", fontcolor = \"black\", fillcolor = \"#000000\"] \n  \"9\" [label = \"Release\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: operative, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"10\" [label = \"Release\", shape = \"box\", style = \"filled\", color = \"#7FC97F\", tooltip = \"resource: machine, amount: 1\", fontcolor = \"black\", fillcolor = \"#7FC97F\"] \n\"1\"->\"2\" [color = \"black\", style = \"solid\"] \n\"2\"->\"3\" [color = \"black\", style = \"solid\"] \n\"3\"->\"7\" [color = \"black\", style = \"solid\"] \n\"4\"->\"5\" [color = \"black\", style = \"solid\"] \n\"5\"->\"6\" [color = \"black\", style = \"solid\"] \n\"6\"->\"7\" [color = \"black\", style = \"solid\"] \n\"7\"->\"8\" [color = \"black\", style = \"solid\"] \n\"8\"->\"9\" [color = \"black\", style = \"solid\"] \n\"9\"->\"10\" [color = \"black\", style = \"solid\"] \n\"3\"->\"4\" [color = \"grey\", style = \"dashed\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 ---

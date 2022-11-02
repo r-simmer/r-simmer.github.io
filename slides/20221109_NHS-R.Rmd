@@ -101,11 +101,11 @@ library(simmer)
 ## DES
 ## `simmer`
 .sticker[]
-### Publications
+## Publications
 ]
 
 .right-column[
-#### Main reference
+### Main reference
 - **Ucar I**, Smeets B, Azcorra A (2019). “simmer: Discrete-Event Simulation for R.” _Journal of Statistical Software_, 90(2), 1-30. doi: [10.18637/jss.v090.i02](https://doi.org/10.18637/jss.v090.i02).
 
 <br>
@@ -115,14 +115,12 @@ library(simmer)
 
 .right-column[
 .pull-left[
-#### Citing documents
+### Citing documents
 - 67 citations in Google Scholar
 - 19 healthcare applications
 - See [zotero.org/groups/r-simmer](https://www.zotero.org/groups/r-simmer)
 
-<br>
-
-#### Packages
+### Packages
 - [`babsim.hospital`](https://cran.r-project.org/package=babsim.hospital):<br>
   Hospital capacity planning
 ]
@@ -157,14 +155,14 @@ ggplot(cites) +
 ## DES
 ## `simmer`
 .sticker[]
-### Publications
-### Tutorials
+## Publications
+## Tutorials
 ]
 
 .right-column[
 <br>
 
-#### About healthcare applications
+### About healthcare applications
 - Lawton, Tom. **ICU Patient flow modelling using r-simmer**. NHS-R Conference 2019. 
   [[GitHub](https://github.com/ImprovementAcademy/ICU-Model)]
 
@@ -487,7 +485,7 @@ aggregate(cbind(server, queue) ~ resource, get_mon_resources(job.env), mean)
 
 Easy replication with standard R functions:
 
-```{r, eval=FALSE}
+```{r}
 job.envs <- lapply(1:10, function(i) {
   simmer("Job Shop") %>%
     add_generator("job", job, NEW_JOB) %>%
@@ -506,7 +504,7 @@ job.envs <- lapply(1:10, function(i) {
 
 Even easier parallelization of replicas:
 
-```{r}
+```{r, eval=FALSE}
 job.envs <- parallel::mclapply(1:10, function(i) {
   simmer("Job Shop") %>%
     add_generator("job", job, NEW_JOB) %>%
