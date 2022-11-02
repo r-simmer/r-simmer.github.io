@@ -17,6 +17,14 @@
   filter: invert(100%);
 }
 
+.sticker {
+  background-image: url("https://r-simmer.org/images/simmer-hex-02.svg");
+  position: absolute;
+  bottom: 40px;
+  width: 226px;
+  height: 260px;
+}
+
 .hexagon {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124.71 144"><path style="fill:%23EB811B;fill-opacity:1" d="M 62.359375 0 L 0 36 L 0 108 L 62.349609 144 L 124.71094 108 L 124.71094 36 L 62.359375 0 z M 62.359375 2.3105469 C 82.476562 13.92513 102.59375 25.539714 122.71094 37.154297 L 122.71094 106.8457 C 102.59049 118.46029 82.470052 130.07487 62.349609 141.68945 C 42.233073 130.07487 22.116536 118.46029 2 106.8457 L 2 37.154297 L 62.359375 2.3105469 z " /></svg>');
   background-repeat: no-repeat;
@@ -26,7 +34,11 @@
 }
 
 .left-column h2:first-child, .right-column h2:first-child,
-.pull-left h2:first-child, .pull-right h2:first-child {
+.left-column h3:first-child, .right-column h3:first-child,
+.left-column h4:first-child, .right-column h4:first-child,
+.pull-left h2:first-child, .pull-right h2:first-child,
+.pull-left h3:first-child, .pull-right h3:first-child,
+.pull-left h4:first-child, .pull-right h4:first-child {
   margin-top: 0;
 }
 

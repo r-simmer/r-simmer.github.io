@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>simmer</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Iñaki Úcar, Assistant Professor of Statistics @ Universidad Carlos III de Madrid" />
+    <meta name="author" content="Bart Smeets, Founder &amp; Data Scientist @ dataroots.io" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/viz/viz.js"></script>
+    <link href="libs/DiagrammeR-styles/styles.css" rel="stylesheet" />
+    <script src="libs/grViz-binding/grViz.js"></script>
+    <link rel="stylesheet" href="libs/my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# simmer
+]
+.subtitle[
+## Discrete-Event Simulation for R
+]
+.author[
+### <strong>Iñaki Úcar</strong>, Assistant Professor of Statistics @ Universidad Carlos III de Madrid
+]
+.author[
+### Bart Smeets, Founder &amp; Data Scientist @ dataroots.io
+]
+.date[
+### <br>NHS-R Online Speaker Conference 2022, November 8-10
+]
+
+---
+
+
+
+
+# Introduction
+
+.left-column[
+## DES
+]
+
+.right-column[
+### Examples
+
+- customers arriving at a bank,
+- products being manipulated in a supply chain,
+- packets traversing a telecommunications network,
+- ...
+]
+
+--
+
+.right-column[
+- **patients** traversing a **resource-constrained** healthcare system:
+  - Patient view: waiting times, serving times, recovery times...
+  - Resource view: allocation, scheduling, utilization...
+]
+
+--
+
+.right-column[
+### Possibilities
+
+- **Optimization** (possibly with budget constraints)
+- Compare **what-if** scenarios -&gt; data generation
+- Input of real or simulated data
+]
+
+---
+
+# Introduction
+
+.left-column[
+## DES
+## `simmer`
+.sticker[]
+]
+
+.right-column[
+### Characteristics
+
+- General versatile framework for fast prototyping
+- Rich and user-friendly R API over a fast C++ simulation core
+- Process-oriented **trajectory-based** modelling, with rich **resource control**
+- Automatic monitoring capabilities
+- Integration with R: reproducibility, analysis, visualization
+]
+
+--
+
+.right-column[
+### Documentation
+- Function reference: [r-simmer.org/reference](https://r-simmer.org/reference)
+- Vignettes (10): [r-simmer.org/articles](https://r-simmer.org/articles)
+- News: [r-simmer.org/news](https://r-simmer.org/news)
+]
+
+--
+
+.right-column[
+### Help
+- Mailing list: [groups.google.com/g/simmer-devel](https://groups.google.com/g/simmer-devel)
+- Discussions: [github.com/r-simmer/simmer/discussions](https://github.com/r-simmer/simmer/discussions)
+- Bug reports: [github.com/r-simmer/simmer/issues](https://github.com/r-simmer/simmer/issues)
+]
+
+---
+
+# Introduction
+
+.left-column[
+## DES
+## `simmer`
+.sticker[]
+### Publications
+]
+
+.right-column[
+#### Main reference
+- **Ucar I**, Smeets B, Azcorra A (2019). “simmer: Discrete-Event Simulation for R.” _Journal of Statistical Software_, 90(2), 1-30. doi: [10.18637/jss.v090.i02](https://doi.org/10.18637/jss.v090.i02).
+
+&lt;br&gt;
+]
+
+--
+
+.right-column[
+.pull-left[
+#### Citing documents
+- 67 citations in Google Scholar
+- 19 healthcare applications
+- See [zotero.org/groups/r-simmer](https://www.zotero.org/groups/r-simmer)
+
+&lt;br&gt;
+
+#### Packages
+- [`babsim.hospital`](https://cran.r-project.org/package=babsim.hospital):&lt;br&gt;
+  Hospital capacity planning
+]
+.pull-right[
+
+&lt;img src="../images/figure-html/202211_cites-1.png" width="504" /&gt;
+]
+]
+
+---
+
+# Introduction
+
+.left-column[
+## DES
+## `simmer`
+.sticker[]
+### Publications
+### Tutorials
+]
+
+.right-column[
+&lt;br&gt;
+
+#### About healthcare applications
+- Lawton, Tom. **ICU Patient flow modelling using r-simmer**. NHS-R Conference 2019. 
+  [[GitHub](https://github.com/ImprovementAcademy/ICU-Model)]
+
+- Degeling, Koen. **Discrete Event Simulation Using `simmer` for Models Featuring Resource Constraints**.
+  R for HTA Workshop 2021. [[Slides](https://r-hta.org/events/workshop/2021/degeling.pdf)]
+  [[Video](https://www.youtube.com/watch?v=tAr2RpGhOTw)]
+
+- Koffijberg, H., Van de Ven, M., Degeling, K.
+  **Discrete Event Simulation in R to support healthcare decision making**,
+  for the Society for Medical Decision Making.
+  [[GitHub](https://github.com/koendegeling/SMDM_DESinR)]
+
+- Koffijberg, H. and Degeling, K. **Learning and Applying Discrete Event Simulation**,
+  for the Professional Society for Health Economics and Outcomes Research (ISPOR).
+  [[GitHub](https://github.com/koendegeling/ISPOR_DESinR)]
+]
+
+---
+
+# Example: Job Shop
+
+.pull-left[
+From M. Pidd (1988), Section 5.3.1:
+
+- Jobs are allocated to the first available machine.
+- Machines need to be retooled (sometimes) and reset by an operative.
+- Operatives may be away attending other tasks.
+
+![](../images/jss-job-shop.png)
+]
+
+--
+
+.pull-right[
+
+```r
+job &lt;- trajectory() %&gt;%
+  seize("machine") %&gt;%
+  timeout(RUNNING) %&gt;%
+  branch(
+    CHECK_WORN, continue = TRUE,
+    trajectory() %&gt;%
+      seize("operative") %&gt;%
+      timeout(RETOOL) %&gt;%
+      release("operative")
+  ) %&gt;%
+  seize("operative") %&gt;%
+  timeout(RESET) %&gt;%
+  release("operative") %&gt;%
+  release("machine")
+```
+]
+
+--
+
+.pull-right[
+
+```r
+task &lt;- trajectory() %&gt;%
+  seize("operative") %&gt;%
+  timeout(AWAY) %&gt;%
+  release("operative")
+```
+]
+
+---
+
+# The simmer API
+
+.left-column[
+## Trajectories
+]
+
+.right-column[
+Similar to `dplyr` for data manipulation. In the words of H. Wickham,
+
+&gt; by constraining your options, it simplifies how you can think about [something]
+
+- Trajectories are recipes, **lists of activities** defining the life time of arrivals
+- Activities are common functional DES blocks, identified by **verbs**
+]
+
+--
+
+.right-column[
+Fixed vs. dynamic parameters:
+
+```r
+traj_fixed &lt;- trajectory() %&gt;%
+  set_attribute("arrival_time", now(env)) %&gt;%
+  timeout(rexp(1, 1)) %&gt;%
+  log_("Leaving the trajectory")
+```
+
+```r
+traj_dynamic &lt;- trajectory() %&gt;%
+  set_attribute("arrival_time", function() now(env)) %&gt;%
+  timeout(function() rexp(1, 1)) %&gt;%
+  log_(function() paste("Leaving the trajectory at",
+                        get_attribute(env, "arrival_time") - now(env)))
+```
+]
+
+---
+
+# Example: Job Shop
+
+.pull-left[
+
+```r
+library(simmer); set.seed(1234)
+
+RUNNING &lt;- function() rexp(1, 1)
+CHECK_WORN &lt;- function() runif(1) &lt; 0.2
+RETOOL &lt;- function() rexp(1, 2)
+RESET &lt;- function() rexp(1, 3)
+AWAY &lt;- function() rexp(1, 1)
+```
+&lt;div style="height:200px"&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+```r
+job &lt;- trajectory() %&gt;%
+  seize("machine") %&gt;%
+* timeout(RUNNING) %&gt;%
+  branch(
+*   CHECK_WORN, continue = TRUE,
+    trajectory() %&gt;%
+      seize("operative") %&gt;%
+*     timeout(RETOOL) %&gt;%
+      release("operative")
+  ) %&gt;%
+  seize("operative") %&gt;%
+* timeout(RESET) %&gt;%
+  release("operative") %&gt;%
+  release("machine")
+```
+]
+
+.pull-right[
+
+```r
+task &lt;- trajectory() %&gt;%
+  seize("operative") %&gt;%
+* timeout(AWAY) %&gt;%
+  release("operative")
+```
+]
+
+---
+
+# The simmer API
+
+.left-column[
+## Trajectories
+### Activities
+]
+
+.right-column[
+.pull-left[
+- Spend time in the system
+  - `timeout`, `timeout_from_attribute`, `timeout_from_global`
+- Modify arrival properties
+  - `set_attribute`, `set_global`
+  - `set_prioritization`
+- Interaction with resources
+  - `seize`, `release`
+  - `set_capacity`, `set_queue_size`
+  - `select`, `seize_selected`...
+- Interaction with sources
+  - `activate`, `deactivate`
+  - `set_trajectory`, `set_source`
+- Loops
+  - `rollback`
+]
+.pull-right[
+- Branching
+  - `branch`
+  - `clone`, `synchronize`
+- Batching
+  - `batch`, `separate`
+- Inter-arrival communication
+  - `send`, `trap`, `untrap`, `wait`
+- Reneging
+  - `leave`
+  - `renege_in`, `renege_if`, `renege_abort`
+  - `handle_unfinished`
+- Debugging
+  - `log_`
+  - `stop_if`
+]
+]
+
+--
+
+.right-column[
+(Plus many getters to retrieve parameters at run time)
+]
+
+---
+
+# The simmer API
+
+.left-column[
+## Trajectories
+### Activities
+## Simulation environment
+]
+
+.right-column[
+- Create a simulator and attach a monitor
+  - `simmer`
+  - `monitor_mem` (default), `monitor_csv`... (extensible, see `simmer.mon` on GitHub)
+]
+
+--
+
+.right-column[
+- Add sources of arrivals
+  - `add_generator`: based on a distribution function
+  - `add_dataframe`: based on a data frame (additional columns as attributes)
+]
+
+--
+
+.right-column[
+- Add resources
+  - `add_resource`: priority resource, with capacity and queue size; optional preemption
+]
+
+--
+
+.right-column[
+- Add global variables
+  - `add_global`
+]
+
+--
+
+.right-column[
+- Run the simulation
+  - `run`, `stepn`
+]
+
+---
+
+# The simmer API
+
+.left-column[
+## Trajectories
+### Activities
+## Simulation environment
+## Monitoring
+]
+
+.right-column[
+`simmer` automatically records every change in the state of the system. All these statistics can be retrieved after the simulation:
+
+.code70[
+
+```r
+names( get_mon_arrivals(simmer(), per_resource=FALSE) )
+```
+
+```
+## [1] "name"          "start_time"    "end_time"      "activity_time"
+## [5] "finished"
+```
+
+```r
+names( get_mon_arrivals(simmer(), per_resource=TRUE) )
+```
+
+```
+## [1] "name"          "start_time"    "end_time"      "activity_time"
+## [5] "resource"
+```
+
+```r
+names( get_mon_attributes(simmer()) )
+```
+
+```
+## [1] "time"  "name"  "key"   "value"
+```
+
+```r
+names( get_mon_resources(simmer()) )
+```
+
+```
+## [1] "resource"   "time"       "server"     "queue"      "capacity"  
+## [6] "queue_size" "system"     "limit"
+```
+]
+]
+
+---
+
+# Example: Job Shop
+
+.pull-left[
+
+```r
+library(simmer); set.seed(1234)
+
+RUNNING &lt;- function() rexp(1, 1)
+CHECK_WORN &lt;- function() runif(1) &lt; 0.2
+RETOOL &lt;- function() rexp(1, 2)
+RESET &lt;- function() rexp(1, 3)
+AWAY &lt;- function() rexp(1, 1)
+
+job &lt;- trajectory() %&gt;%
+  ...
+task &lt;- trajectory() %&gt;%
+  ...
+
+*NEW_JOB &lt;- function() rexp(1, 5)
+*NEW_TASK &lt;- function() rexp(1, 1)
+```
+
+]
+
+--
+
+.pull-right[
+
+```r
+job.env &lt;- simmer("Job Shop") %&gt;%
+* add_generator("job", job, NEW_JOB) %&gt;%
+* add_generator("task", task, NEW_TASK) %&gt;%
+  add_resource("machine", 10) %&gt;%
+  add_resource("operative", 5) %&gt;%
+  run(until=1000)
+job.env
+```
+
+```
+## simmer environment: Job Shop | now: 1000 | next: 1000.09508921831
+## { Monitor: in memory }
+## { Resource: machine | monitored: TRUE | server status: 3(10) | queue status: 0(Inf) }
+## { Resource: operative | monitored: TRUE | server status: 2(5) | queue status: 0(Inf) }
+## { Source: job | monitored: 1 | n_generated: 5177 }
+## { Source: task | monitored: 1 | n_generated: 995 }
+```
+]
+
+--
+
+&lt;div style="clear:both"&gt;&lt;/div&gt;
+
+
+```r
+aggregate(cbind(server, queue) ~ resource, get_mon_resources(job.env), mean)
+```
+
+```
+##    resource   server     queue
+## 1   machine 7.987438 1.0355590
+## 2 operative 3.505732 0.4441298
+```
+
+---
+
+# Modelling
+
+.pull-left[
+## Replication
+
+Easy replication with standard R functions:
+
+
+```r
+job.envs &lt;- lapply(1:10, function(i) {
+  simmer("Job Shop") %&gt;%
+    add_generator("job", job, NEW_JOB) %&gt;%
+    add_generator("task", task, NEW_TASK) %&gt;%
+    add_resource("machine", 10) %&gt;%
+    add_resource("operative", 5) %&gt;%
+    run(until=1000)
+})
+```
+]
+
+--
+
+.pull-right[
+## Parallelization
+
+Even easier parallelization of replicas:
+
+
+```r
+job.envs &lt;- parallel::mclapply(1:10, function(i) {
+  simmer("Job Shop") %&gt;%
+    add_generator("job", job, NEW_JOB) %&gt;%
+    add_generator("task", task, NEW_TASK) %&gt;%
+    add_resource("machine", 10) %&gt;%
+    add_resource("operative", 5) %&gt;%
+    run(until=1000) %&gt;%
+*   wrap()
+}, mc.cores=4)
+```
+]
+
+--
+
+&lt;div style="clear:both"&gt;&lt;/div&gt;
+
+
+```r
+head(subset(get_mon_arrivals(job.envs), name == "job0"), 3)
+```
+
+```
+##       name start_time end_time activity_time finished replication
+## 7     job0 0.21417878 3.536332      3.322153     TRUE           1
+## 5999  job0 0.21559972 1.306597      1.090997     TRUE           2
+## 12030 job0 0.05281753 1.684405      1.631587     TRUE           3
+```
+
+---
+
+# Modelling
+
+## Best practices
+
+There are usually multiple valid ways of mapping the&lt;br&gt;
+identified resources and processes into the `simmer` API
+
+--
+
+.pull-left[
+### Design pattern 1
+
+
+```r
+beep &lt;- trajectory() %&gt;%
+  log_("beeeep!")
+```
+
+
+```r
+env &lt;- simmer() %&gt;%
+  add_generator("beep", beep, function() 1) %&gt;%
+  run(2.5)
+```
+
+```
+## 1: beep0: beeeep!
+## 2: beep1: beeeep!
+```
+]
+
+--
+
+.pull-right[
+### Design pattern 2
+
+
+```r
+alarm &lt;- trajectory() %&gt;%
+  timeout(1) %&gt;%
+  log_("beeeep!") %&gt;%
+  rollback(2)
+```
+
+
+```r
+env &lt;- simmer() %&gt;%
+  add_generator("alarm", alarm, at(0)) %&gt;%
+  run(2.5)
+```
+
+```
+## 1: alarm0: beeeep!
+## 2: alarm0: beeeep!
+```
+]
+
+--
+
+&lt;div style="clear:both;position:relative;top:-500px"&gt;
+.pull-right[
+### Encapsulation
+
+
+```r
+# global constants and functions
+...
+
+# parametrized simulation function
+simulate &lt;- function(param, t=Inf) {
+  traj_1 &lt;- trajectory() %&gt;% ...
+  ...
+  
+  env &lt;- simmer() %&gt;%
+    add_generator(...) %&gt;%
+    ...
+  
+  run(env, until=t) %&gt;%
+    wrap()
+}
+
+# set of scenarios
+cases &lt;- expand.grid(var1=..., var2=..., ...)
+
+# simulation
+envs &lt;- lapply(split(cases, 1:nrow(cases)), simulate)
+```
+]
+&lt;/div&gt;
+
+---
+
+# Extensions: .remark-code[simmer.plot] [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/simmer.plot)](https://cran.r-project.org/package=simmer.plot)
+
+.pull-left[
+
+```r
+library(simmer.plot)
+*plot(get_mon_resources(job.env))
+```
+
+&lt;img src="../images/figure-html/jobshop-plot-1.png" width="504" /&gt;
+
+```r
+*plot(job)
+```
+]
+
+.pull-right[
+<div id="htmlwidget-22113026c5fb20b22aa6" style="width:504px;height:504px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-22113026c5fb20b22aa6">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"sans-serif\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"1.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Seize\", shape = \"box\", style = \"filled\", color = \"#7FC97F\", tooltip = \"resource: machine, amount: 1\", fontcolor = \"black\", fillcolor = \"#7FC97F\"] \n  \"2\" [label = \"Timeout\", shape = \"box\", style = \"solid\", color = \"black\", tooltip = \"delay: function()\", fontcolor = \"black\", fillcolor = \"#000000\"] \n  \"3\" [label = \"Branch\", shape = \"diamond\", style = \"filled\", color = \"lightgrey\", tooltip = \"option: function()\", fontcolor = \"black\", fillcolor = \"#D3D3D3\"] \n  \"4\" [label = \"Seize\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: operative, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"5\" [label = \"Timeout\", shape = \"box\", style = \"solid\", color = \"black\", tooltip = \"delay: function()\", fontcolor = \"black\", fillcolor = \"#000000\"] \n  \"6\" [label = \"Release\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: operative, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"7\" [label = \"Seize\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: operative, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"8\" [label = \"Timeout\", shape = \"box\", style = \"solid\", color = \"black\", tooltip = \"delay: function()\", fontcolor = \"black\", fillcolor = \"#000000\"] \n  \"9\" [label = \"Release\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: operative, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"10\" [label = \"Release\", shape = \"box\", style = \"filled\", color = \"#7FC97F\", tooltip = \"resource: machine, amount: 1\", fontcolor = \"black\", fillcolor = \"#7FC97F\"] \n\"1\"->\"2\" [color = \"black\", style = \"solid\"] \n\"2\"->\"3\" [color = \"black\", style = \"solid\"] \n\"3\"->\"7\" [color = \"black\", style = \"solid\"] \n\"4\"->\"5\" [color = \"black\", style = \"solid\"] \n\"5\"->\"6\" [color = \"black\", style = \"solid\"] \n\"6\"->\"7\" [color = \"black\", style = \"solid\"] \n\"7\"->\"8\" [color = \"black\", style = \"solid\"] \n\"8\"->\"9\" [color = \"black\", style = \"solid\"] \n\"9\"->\"10\" [color = \"black\", style = \"solid\"] \n\"3\"->\"4\" [color = \"grey\", style = \"dashed\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+]
+
+---
+
+# Extensions: .remark-code[simmer.bricks] [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/simmer.bricks)](https://cran.r-project.org/package=simmer.bricks)
+
+.pull-left[
+
+```r
+library(simmer.bricks)
+
+trajectory() %&gt;%
+* visit("res", function() rexp(1, 1), 1)
+```
+
+```
+## trajectory: anonymous, 3 activities
+## { Activity: Seize        | resource: res, amount: 1 }
+## { Activity: Timeout      | delay: function() }
+## { Activity: Release      | resource: res, amount: 1 }
+```
+
+```r
+trajectory() %&gt;%
+* delayed_release("res", function() rexp(1, 1), 1)
+```
+
+```
+## trajectory: anonymous, 6 activities
+## { Activity: Clone        | n: 2 }
+##   Fork 1, continue,  trajectory: anonymous, 2 activities
+##   { Activity: SetCapacity  | resource: res, value: -1, mod: + }
+##   { Activity: Release      | resource: res, amount: 1 }
+##   Fork 2, continue,  trajectory: anonymous, 2 activities
+##   { Activity: Timeout      | delay: function() }
+##   { Activity: SetCapacity  | resource: res, value: 1, mod: + }
+## { Activity: Synchronize  | wait: 0 }
+```
+]
+
+.pull-right[
+
+```r
+env &lt;- simmer()
+
+trajectory() %&gt;%
+* do_parallel(
+    trajectory("task 1") %&gt;%
+      timeout(function() rexp(1)),
+    trajectory("task 2") %&gt;%
+      timeout(function() rexp(1)),
+    .env = env, wait = TRUE
+  )
+```
+
+```
+## trajectory: anonymous, 10 activities
+## { Activity: Clone        | n: 3 }
+##   Fork 1, continue,  trajectory: original, 4 activities
+##   { Activity: Trap         | signals: function() }
+##   { Activity: Wait         |  }
+##   { Activity: Wait         |  }
+##   { Activity: UnTrap       | signals: function() }
+##   Fork 2, continue,  trajectory: task 1, 2 activities
+##   { Activity: Timeout      | delay: function() }
+##   { Activity: Send         | signals: function(), delay: 0 }
+##   Fork 3, continue,  trajectory: task 2, 2 activities
+##   { Activity: Timeout      | delay: function() }
+##   { Activity: Send         | signals: function(), delay: 0 }
+## { Activity: Synchronize  | wait: 1 }
+```
+]
+
+---
+
+# Extensions: others
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+Package          | Description                                     | Status
+---------------- | ----------------------------------------------- | ------------------
+[**simmer.optim**](https://github.com/r-simmer/simmer.optim) | Parameter Optimization Functions for `simmer` | [![Status\_Badge](https://img.shields.io/badge/lifecycle-dormant-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[**simmer.json**](https://github.com/r-simmer/simmer.json)  | Read / Load `simmer` Definitions in JSON Format | [![Status\_Badge](https://img.shields.io/badge/lifecycle-dormant-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[**simmer.mon**](https://github.com/r-simmer/simmer.mon)  | Monitoring Backends for `simmer` | [![Status\_Badge](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+
+&lt;!--
+# Performance
+
+.pull-left[
+Comparison with similar frameworks (out-of-date!):
+
+- SimPy 3.0.9, Python 2.7
+- SimJulia 0.3.14, Julia 0.5.1
+
+&lt;br&gt;Heavy M/M/1, `\(\rho \approx 0.9\)`:
+
+
+```r
+test_mm1_simmer &lt;- function(n, m, mon=FALSE) {
+  mm1 &lt;- trajectory() %&gt;%
+    seize("server", 1) %&gt;%
+    timeout(function() rexp(1, 1.1)) %&gt;%
+    release("server", 1)
+  
+  env &lt;- simmer() %&gt;%
+    add_resource("server", 1, mon=mon) %&gt;%
+    add_generator("customer", mm1,
+                  function() rexp(m, 1), mon=mon) %&gt;%
+    run(until=n)
+}
+```
+]
+
+.pull-right[
+.center[![:scale 80%](../images/jss-benchmark-boxplot.png)]
+.center[![:scale 80%](../images/jss-benchmark-batched.png)]
+]--&gt;
+
+&lt;!--
+# Performance
+
+## The cost of calling R from C++ revisited
+
+.pull-left[
+Very simple deterministic test to study the impact:
+
+
+```r
+test_simmer &lt;- function(n, delay) {
+  test &lt;- trajectory() %&gt;%
+    timeout(delay)
+  simmer() %&gt;%
+    add_generator("test", test, at(1:n)) %&gt;%
+    run() %&gt;%
+    get_mon_arrivals()
+}
+
+test_simmer(5, 1)[,1:5]
+```
+
+```
+##    name start_time end_time activity_time finished
+## 1 test0          1        2             1     TRUE
+## 2 test1          2        3             1     TRUE
+## 3 test2          3        4             1     TRUE
+## 4 test3          4        5             1     TRUE
+## 5 test4          5        6             1     TRUE
+```
+]
+
+.pull-right[
+Original benchmark in the JSS paper (R 3.3.3):
+
+.font80[
+|Expr                         |       Min|     Mean|    Median|       Max|
+|:----------------------------|---------:|--------:|---------:|---------:|
+|test_simmer(n, 1)            |  429.8663|  492.365|  480.5408|  599.3547|
+|test_simmer(n, function() 1) | 3067.9957| 3176.963| 3165.6859| 3434.7979|
+|test_R_for(n)                | 2053.0840| 2176.164| 2102.5848| 2438.6836|
+]
+]
+
+.pull-right[
+&lt;br&gt;Today, R 4.1.3 + `-DRCPP_USE_UNWIND_PROTECT`:
+
+.font80[
+|Expr                         |       Min|     Mean|    Median|       Max|
+|:----------------------------|---------:|--------:|---------:|---------:|
+|test_simmer(n, 1)            |  398.8606|  427.928|  411.8718|  550.8392|
+|test_simmer(n, function() 1) |  425.3039|  480.963|  483.6672|  620.8084|
+|test_R_for(n)                |  386.3202|  453.576|  444.6313|  591.2085|
+]
+]--&gt;
+
+---
+
+# Summary
+
+&lt;div style="height:1px"&gt;&lt;/div&gt;
+
+.font130[
+- Generic yet powerful process-oriented Discrete-Event Simulation framework for R [1, 2]
+
+- Combines a robust and **fast** C++ simulation core with a **rich and flexible** R API
+]
+
+.footnote[
+[1] **Ucar I**, Smeets B, Azcorra A (2019). “simmer: Discrete-Event Simulation for R.” _Journal of Statistical Software_, 90(2), 1-30. doi: [10.18637/jss.v090.i02](https://doi.org/10.18637/jss.v090.i02).&lt;br&gt;
+[2] **Ucar I**, Hernández JA, Serrano P, Azcorra A (2018). “Design and Analysis of 5G Scenarios with simmer: An R Package for Fast DES Prototyping.” _IEEE Communications Magazine_, 56(11), 145-151. doi: [10.1109/MCOM.2018.1700960](https://doi.org/10.1109/MCOM.2018.1700960).
+]
+
+--
+
+.font130[
+- Broad set of **activities**, the basic building block; extensible via custom routines
+
+- Activities are chained into a **trajectory**, a common path for processes of the same type
+]
+
+--
+
+.font130[
+- **Automatic monitoring**: focus on modelling
+]
+
+--
+
+.font130[
+- **Integration**: easy replication, parallelization, analysis...
+]
+
+---
+class: center, middle, inverse, mline
+
+# Thanks, and happy  &lt;span style="filter: invert(100%);vertical-align:-10px"&gt;![:scale 16%](https://raw.githubusercontent.com/r-simmer/r-simmer.github.io/master/images/simmer-logo.png)&lt;/span&gt;ing!
+
+**https://r-simmer.org**
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;div class="hexagon" style="bottom:0;left:7px"&gt;&lt;/div&gt;
+&lt;div class="hexagon" style="bottom:0;left:143px"&gt;&lt;/div&gt;
+&lt;div class="hexagon" style="bottom:0;left:279px"&gt;&lt;/div&gt;
+&lt;div class="hexagon" style="bottom:0;left:415px"&gt;&lt;/div&gt;
+&lt;div class="hexagon" style="bottom:0;left:551px"&gt;&lt;/div&gt;
+
+&lt;div class="hexagon" style="bottom:118px;left:75px"&gt;&lt;/div&gt;
+&lt;div style="position:absolute;bottom:118px;left:211px;filter:drop-shadow(2px 4px 6px black);width:129px"&gt;![:scale 100%](https://r-simmer.org/images/simmer-hex-02.svg)&lt;/div&gt;
+&lt;div class="hexagon" style="bottom:118px;left:347px"&gt;&lt;/div&gt;
+
+&lt;div class="hexagon" style="bottom:236px;left:143px"&gt;&lt;/div&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="libs/macros.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
