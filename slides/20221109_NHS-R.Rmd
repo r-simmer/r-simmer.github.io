@@ -160,13 +160,17 @@ ggplot(cites) +
 ]
 
 .right-column[
-<br>
-
 ### About healthcare applications
 - Lawton, Tom. **ICU Patient flow modelling using r-simmer**. NHS-R Conference 2019. 
   [[GitHub](https://github.com/ImprovementAcademy/ICU-Model)]
 
-- Degeling, Koen. **Discrete Event Simulation Using `simmer` for Models Featuring Resource Constraints**.
+- Croft, S., Zharinova, A., Jemmett, T.
+  **Workshop for `simmer` in R training**. The Strategy Unit.
+  [[GitHub](https://github.com/The-Strategy-Unit/des_simmer_workshop)]
+  [[Web](https://the-strategy-unit.github.io/des_simmer_workshop/)]
+
+- Degeling, Koen.
+  **Discrete Event Simulation Using `simmer` for Models Featuring Resource Constraints**.
   R for HTA Workshop 2021. [[Slides](https://r-hta.org/events/workshop/2021/degeling.pdf)]
   [[Video](https://www.youtube.com/watch?v=tAr2RpGhOTw)]
 
