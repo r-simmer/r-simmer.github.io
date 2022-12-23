@@ -40,6 +40,9 @@
     <loc>https://r-simmer.org/authors.html</loc>
   </url>
   <url>
+    <loc>https://r-simmer.org/extensions/bricks/404.html</loc>
+  </url>
+  <url>
     <loc>https://r-simmer.org/extensions/bricks/LICENSE-text.html</loc>
   </url>
   <url>
@@ -278,5 +281,8 @@
   </url>
   <url>
     <loc>https://r-simmer.org/slides/20191115_XIjuR_simmer.html</loc>
+  </url>
+  <url>
+    <loc>https://r-simmer.org/slides/20221109_NHS-R.html</loc>
   </url>
 </urlset>
