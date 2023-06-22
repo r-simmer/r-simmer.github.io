@@ -5,7 +5,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="simmer">
+<meta name="description" content="Learn to translate several SimPy examples to simmer.
+">
 <title>Other SimPy Examples • simmer | DES for R</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
@@ -13,7 +14,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Other SimPy Examples">
-<meta property="og:description" content="simmer">
+<meta property="og:description" content="Learn to translate several SimPy examples to simmer.
+">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -33,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">simmer | DES for R</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.5.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.5.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,24 +51,12 @@
     Reference
   </a>
 </li>
-<li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--articles">
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/index.html">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
   </a>
-  <div class="dropdown-menu" aria-labelledby="dropdown--articles">
-    <a class="dropdown-item" href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
-    <a class="dropdown-item" href="../articles/simmer-02-jss.pdf">JSS paper (PDF)</a>
-    <a class="dropdown-item" href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
-    <a class="dropdown-item" href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
-    <a class="dropdown-item" href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
-    <a class="dropdown-item" href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
-    <a class="dropdown-item" href="../articles/simmer-06-queueing.html">Queueing Systems</a>
-    <a class="dropdown-item" href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
-    <a class="dropdown-item" href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
-    <a class="dropdown-item" href="../articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
-  </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">
@@ -115,7 +105,7 @@
       <img src="" class="logo" alt=""><h1>Other SimPy Examples</h1>
                         <h4 data-toc-skip class="author">Iñaki Ucar</h4>
             
-            <h4 data-toc-skip class="date">2022-12-23</h4>
+            <h4 data-toc-skip class="date">2023-06-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/HEAD/vignettes/simmer-05-simpy.Rmd" class="external-link"><code>vignettes/simmer-05-simpy.Rmd</code></a></small>
       <div class="d-none name"><code>simmer-05-simpy.Rmd</code></div>
@@ -126,7 +116,11 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>These examples are adapted from the Python package ‘SimPy’, <a href="https://simpy.readthedocs.io/en/latest/examples" class="external-link">here</a>. Users familiar with SimPy may find these examples helpful for transitioning to <code>simmer</code>. Some very basic material is not covered. Beginners should first read <em><a href="simmer-04-bank-1.html">The Bank Tutorial: Part I</a> &amp; <a href="simmer-04-bank-2.html">Part II</a></em>.</p>
+<p>These examples are adapted from the Python package ‘SimPy’, <a href="https://simpy.readthedocs.io/en/latest/examples" class="external-link">here</a>. Users
+familiar with SimPy may find these examples helpful for transitioning to
+<code>simmer</code>. Some very basic material is not covered. Beginners
+should first read <em><a href="simmer-04-bank-1.html">The Bank Tutorial:
+Part I</a> &amp; <a href="simmer-04-bank-2.html">Part II</a></em>.</p>
 </div>
 <div class="section level2">
 <h2 id="carwash">Carwash<a class="anchor" aria-label="anchor" href="#carwash"></a>
@@ -139,7 +133,11 @@
 </ul>
 <p>From <a href="https://simpy.readthedocs.io/en/latest/examples/carwash.html" class="external-link">here</a>:</p>
 <blockquote>
-<p>A carwash has a limited number of washing machines and defines a washing process that takes some time. Cars arrive at the carwash at a random time. If one washing machine is available, they start the washing process and wait for it to finish. If not, they wait until they an use one.</p>
+<p>A carwash has a limited number of washing machines and defines a
+washing process that takes some time. Cars arrive at the carwash at a
+random time. If one washing machine is available, they start the washing
+process and wait for it to finish. If not, they wait until they an use
+one.</p>
 </blockquote>
 <p>Parameters and setup:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -153,7 +151,12 @@
 <span><span class="co"># setup</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
 <span><span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>The implementation with <code>simmer</code> is as simple as defining the trajectory each arriving <code>car</code> will share and follow. This trajectory comprises seizing a wash machine, spending some time and releasing it. The process takes <code>WASHTIME</code> and removes some random percentage of dirt between 50 and 90%. The <code><a href="../reference/log_.html">log_()</a></code> messages are merely illustrative.</p>
+<p>The implementation with <code>simmer</code> is as simple as defining
+the trajectory each arriving <code>car</code> will share and follow.
+This trajectory comprises seizing a wash machine, spending some time and
+releasing it. The process takes <code>WASHTIME</code> and removes some
+random percentage of dirt between 50 and 90%. The <code><a href="../reference/log_.html">log_()</a></code>
+messages are merely illustrative.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">car</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"arrives at the carwash"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -165,7 +168,8 @@
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"dirt_removed"</span><span class="op">)</span>, <span class="st">"% of dirt was removed"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"wash"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"leaves the carwash"</span><span class="op">)</span></span></code></pre></div>
-<p>Finally, we setup the resources and feed the trajectory with a couple of generators. The result is shown below:</p>
+<p>Finally, we setup the resources and feed the trajectory with a couple
+of generators. The result is shown below:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"wash"</span>, <span class="va">NUM_MACHINES</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -219,7 +223,13 @@
 </ul>
 <p>From <a href="https://simpy.readthedocs.io/en/latest/examples/machine_shop.html" class="external-link">here</a>:</p>
 <blockquote>
-<p>This example comprises a workshop with <code>n</code> identical machines. A stream of jobs (enough to keep the machines busy) arrives. Each machine breaks down periodically. Repairs are carried out by one repairman. The repairman has other, less important tasks to perform, too. Broken machines preempt theses tasks. The repairman continues them when he is done with the machine repair. The workshop works continuously.</p>
+<p>This example comprises a workshop with <code>n</code> identical
+machines. A stream of jobs (enough to keep the machines busy) arrives.
+Each machine breaks down periodically. Repairs are carried out by one
+repairman. The repairman has other, less important tasks to perform,
+too. Broken machines preempt theses tasks. The repairman continues them
+when he is done with the machine repair. The workshop works
+continuously.</p>
 </blockquote>
 <p>First of all, we load the libraries and prepare the environment.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -238,7 +248,10 @@
 <span><span class="co"># setup</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
 <span><span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>The <code>make_parts</code> trajectory defines a machine’s operating loop. A worker seizes the machine and starts manufacturing and counting parts in an infinite loop. Provided we want more than one machine, we parametrise the trajectory as a function of the machine:</p>
+<p>The <code>make_parts</code> trajectory defines a machine’s operating
+loop. A worker seizes the machine and starts manufacturing and counting
+parts in an infinite loop. Provided we want more than one machine, we
+parametrise the trajectory as a function of the machine:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">make_parts</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">machine</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -246,13 +259,18 @@
 <span>    <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">PT_MEAN</span>, <span class="va">PT_SIGMA</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"parts"</span>, <span class="fl">1</span>, mod<span class="op">=</span><span class="st">"+"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/rollback.html">rollback</a></span><span class="op">(</span><span class="fl">2</span>, <span class="cn">Inf</span><span class="op">)</span> <span class="co"># go to 'timeout' over and over</span></span></code></pre></div>
-<p>Repairman’s <em>unimportant</em> jobs may be modelled in the same way (without the accounting part):</p>
+<p>Repairman’s <em>unimportant</em> jobs may be modelled in the same way
+(without the accounting part):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">other_jobs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"repairman"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="va">JOB_DURATION</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/rollback.html">rollback</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">Inf</span><span class="op">)</span></span></code></pre></div>
-<p>Failures are high-priority arrivals, both for the machines and for the repairman. Each random generated failure will randomly select and seize (break) a machine, and will seize (call) the repairman. After the machine is repaired, both resources are released and the corresponding workers begin where they left.</p>
+<p>Failures are high-priority arrivals, both for the machines and for
+the repairman. Each random generated failure will randomly select and
+seize (break) a machine, and will seize (call) the repairman. After the
+machine is repaired, both resources are released and the corresponding
+workers begin where they left.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">machines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"machine"</span>, <span class="fl">1</span><span class="op">:</span><span class="va">NUM_MACHINES</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
@@ -263,25 +281,31 @@
 <span>  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="va">REPAIR_TIME</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"repairman"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/seize.html">release_selected</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p>The machines and their workers are appended to the simulation environment. Note that each machine, which is defined as preemptive, has space for one worker (or a failure) and no space in queue.</p>
+<p>The machines and their workers are appended to the simulation
+environment. Note that each machine, which is defined as preemptive, has
+space for one worker (or a failure) and no space in queue.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">machines</span><span class="op">)</span> <span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="va">i</span>, <span class="fl">1</span>, <span class="fl">0</span>, preemptive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">i</span>, <span class="st">"_worker"</span><span class="op">)</span>, <span class="fu">make_parts</span><span class="op">(</span><span class="va">i</span><span class="op">)</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>, mon <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p>The same for the repairman, but this time the queue is infinite, since there could be any number of machines at any time waiting for repairments.</p>
+<p>The same for the repairman, but this time the queue is infinite,
+since there could be any number of machines at any time waiting for
+repairments.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"repairman"</span>, <span class="fl">1</span>, <span class="cn">Inf</span>, preemptive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"repairman_worker"</span>, <span class="va">other_jobs</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="va">invisible</span></span></code></pre></div>
-<p>Finally, the failure generator is defined with <code>priority=1</code> (default: 0), and the simulation begins:</p>
+<p>Finally, the failure generator is defined with
+<code>priority=1</code> (default: 0), and the simulation begins:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"failure"</span>, <span class="va">failure</span>, </span>
 <span>                <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html" class="external-link">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">BREAK_MEAN</span> <span class="op">*</span> <span class="va">NUM_MACHINES</span><span class="op">)</span>, </span>
 <span>                priority <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/run.html">run</a></span><span class="op">(</span><span class="va">SIM_TIME</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">invisible</span></span></code></pre></div>
-<p>The last value per worker from the attributes table reports the number of parts made:</p>
+<p>The last value per worker from the attributes table reports the
+number of parts made:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">value</span> <span class="op">~</span> <span class="va">name</span>, <span class="fu"><a href="../reference/get_mon.html">get_mon_attributes</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span>, <span class="va">max</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                name value</span></span>
@@ -308,7 +332,11 @@
 </ul>
 <p>From <a href="https://simpy.readthedocs.io/en/latest/examples/movie_renege.html" class="external-link">here</a>:</p>
 <blockquote>
-<p>This example models a movie theater with one ticket counter selling tickets for three movies (next show only). People arrive at random times and try to buy a random number (1-6) of tickets for a random movie. When a movie is sold out, all people waiting to buy a ticket for that movie renege (leave the queue).</p>
+<p>This example models a movie theater with one ticket counter selling
+tickets for three movies (next show only). People arrive at random times
+and try to buy a random number (1-6) of tickets for a random movie. When
+a movie is sold out, all people waiting to buy a ticket for that movie
+renege (leave the queue).</p>
 </blockquote>
 <p>First of all, we load the libraries and prepare the environment.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -321,35 +349,47 @@
 <span><span class="co"># setup</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
 <span><span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>The main actor of this simulation is the <em>moviegoer</em>, a process that will try to buy a number of tickets for a certain movie. The logic is as follows:</p>
+<p>The main actor of this simulation is the <em>moviegoer</em>, a
+process that will try to buy a number of tickets for a certain movie.
+The logic is as follows:</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Select</strong> a movie and go to the theater.</li>
-<li>At any moment, the <em>moviegoer</em> <strong>reneges if</strong> the movie becomes sold out (the “sold out” event is received).</li>
-<li>In particular, <strong>leave</strong> immediately if the movie already became sold out.</li>
-<li>Reach the ticket counter and stay in the queue. When the turn comes (counter is <strong>seized</strong>),
+<li>At any moment, the <em>moviegoer</em> <strong>reneges if</strong>
+the movie becomes sold out (the “sold out” event is received).</li>
+<li>In particular, <strong>leave</strong> immediately if the movie
+already became sold out.</li>
+<li>Reach the ticket counter and stay in the queue. When the turn comes
+(counter is <strong>seized</strong>),
 <ol style="list-style-type: decimal">
-<li>Try to buy (<strong>seize</strong> the resource) tickets (randomly chosen between 1 and 6).
+<li>Try to buy (<strong>seize</strong> the resource) tickets (randomly
+chosen between 1 and 6).
 <ul>
-<li>If there are not enough tickets, the <em>moviegoer</em> is <strong>rejected</strong> after some discussion.</li>
+<li>If there are not enough tickets, the <em>moviegoer</em> is
+<strong>rejected</strong> after some discussion.</li>
 </ul>
 </li>
-<li>Provided the <em>moviegoer</em> has tickets, the reneging condition is <strong>aborted</strong>.</li>
+<li>Provided the <em>moviegoer</em> has tickets, the reneging condition
+is <strong>aborted</strong>.</li>
 <li>Check the tickets available and, if at most one ticket is left…
 <ul>
 <li>
-<strong>Set</strong> instant rejection for future customers (at point 3.).</li>
+<strong>Set</strong> instant rejection for future customers (at
+point 3.).</li>
 <li>
-<strong>Send</strong> the “sold out” event (subscribed at point 2.) for current customers (waiting at point 4.).</li>
+<strong>Send</strong> the “sold out” event (subscribed at point 2.)
+for current customers (waiting at point 4.).</li>
 </ul>
 </li>
 </ol>
 </li>
 <li>
-<strong>Release</strong> the ticket counter after the duration of the purchase.</li>
+<strong>Release</strong> the ticket counter after the duration of
+the purchase.</li>
 <li>Enjoy the movie!</li>
 </ol>
-<p>This recipe is directly translated into a <code>simmer</code> trajectory as follows:</p>
+<p>This recipe is directly translated into a <code>simmer</code>
+trajectory as follows:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_movie</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="va">movies</span><span class="op">[</span><span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"movie"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">soldout_signal</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu">get_movie</span><span class="op">(</span><span class="op">)</span>, <span class="st">" sold out"</span><span class="op">)</span></span>
@@ -387,7 +427,10 @@
 <span>  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"counter"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="co"># watch the movie</span></span>
 <span>  <span class="fu"><a href="../reference/send.html">wait</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>which actually constitutes a quite interesting subset of <code>simmer</code>’s capabilities. The next step is to add the required resources to the environment <code>env</code>: the three movies and the ticket counter.</p>
+<p>which actually constitutes a quite interesting subset of
+<code>simmer</code>’s capabilities. The next step is to add the required
+resources to the environment <code>env</code>: the three movies and the
+ticket counter.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># add movies as resources with capacity TICKETS and no queue</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">movies</span><span class="op">)</span> <span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -401,7 +444,8 @@
 <span><span class="co">#&gt; { Resource: Kill Process | monitored: TRUE | server status: 0(50) | queue status: 0(0) }</span></span>
 <span><span class="co">#&gt; { Resource: Pulp Implementation | monitored: TRUE | server status: 0(50) | queue status: 0(0) }</span></span>
 <span><span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span></span></code></pre></div>
-<p>And finally, we attach an exponential <em>moviegoer</em> generator to the <code>moviegoer</code> trajectory and the simulation starts:</p>
+<p>And finally, we attach an exponential <em>moviegoer</em> generator to
+the <code>moviegoer</code> trajectory and the simulation starts:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># add a moviegoer generator and start simulation</span></span>
 <span><span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -455,9 +499,15 @@
 </ul>
 <p>From <a href="https://simpy.readthedocs.io/en/latest/examples/gas_station_refuel.html" class="external-link">here</a>:</p>
 <blockquote>
-<p>This example models a gas station and cars that arrive for refuelling. The gas station has a limited number of fuel pumps and a fuel tank that is shared between the fuel pumps.</p>
-<p>Vehicles arriving at the gas station first request a fuel pump from the station. Once they acquire one, they try to take the desired amount of fuel from the fuel pump. They leave when they are done.</p>
-<p>The fuel level is reqularly monitored by a controller. When the level drops below a certain threshold, a tank truck is called for refilling the tank.</p>
+<p>This example models a gas station and cars that arrive for
+refuelling. The gas station has a limited number of fuel pumps and a
+fuel tank that is shared between the fuel pumps.</p>
+<p>Vehicles arriving at the gas station first request a fuel pump from
+the station. Once they acquire one, they try to take the desired amount
+of fuel from the fuel pump. They leave when they are done.</p>
+<p>The fuel level is reqularly monitored by a controller. When the level
+drops below a certain threshold, a tank truck is called for refilling
+the tank.</p>
 </blockquote>
 <p>Parameters and setup:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -475,8 +525,15 @@
 <span><span class="co"># setup</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
 <span><span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>SimPy solves this problem using a special kind of resource called <em>container</em>, which is not present in <code>simmer</code> so far. However, a container is nothing more than an embellished counter. Therefore, we can implement this in <code>simmer</code> with a global counter (<code>GAS_STATION_LEVEL</code> here), some signaling and some care checking the counter bounds.</p>
-<p>Let us consider just the refuelling process in the first place. A car needs to check whether there is enough fuel available to fill its tank. If not, it needs to block until the gas station is refilled.</p>
+<p>SimPy solves this problem using a special kind of resource called
+<em>container</em>, which is not present in <code>simmer</code> so far.
+However, a container is nothing more than an embellished counter.
+Therefore, we can implement this in <code>simmer</code> with a global
+counter (<code>GAS_STATION_LEVEL</code> here), some signaling and some
+care checking the counter bounds.</p>
+<p>Let us consider just the refuelling process in the first place. A car
+needs to check whether there is enough fuel available to fill its tank.
+If not, it needs to block until the gas station is refilled.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">GAS_STATION_LEVEL</span> <span class="op">&lt;-</span> <span class="va">GAS_STATION_SIZE</span></span>
 <span><span class="va">signal</span> <span class="op">&lt;-</span> <span class="st">"gas station refilled"</span></span>
@@ -497,7 +554,9 @@
 <span>    <span class="va">GAS_STATION_LEVEL</span> <span class="op">&lt;&lt;-</span> <span class="va">GAS_STATION_LEVEL</span> <span class="op">-</span> <span class="va">liters_required</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">liters_required</span> <span class="op">/</span> <span class="va">REFUELING_SPEED</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<p>Now a car’s trajectory is straightforward. First, the starting time is saved as well as the tank level. Then, the car seizes a pump, refuels and leaves.</p>
+<p>Now a car’s trajectory is straightforward. First, the starting time
+is saved as well as the tank level. Then, the car seizes a pump, refuels
+and leaves.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">car</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"start"</span>, <span class="st">"level"</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> </span>
@@ -509,7 +568,9 @@
 <span>  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"pump"</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"finished refuelling in "</span>, <span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"start"</span><span class="op">)</span>, <span class="st">" seconds"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>The tank truck takes some time to arrive. Then, the gas station is completely refilled and the signal “gas station refilled” is sent to the blocked cars.</p>
+<p>The tank truck takes some time to arrive. Then, the gas station is
+completely refilled and the signal “gas station refilled” is sent to the
+blocked cars.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tank_truck</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="va">TANK_TRUCK_TIME</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -520,7 +581,8 @@
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"tank truck refilling "</span>, <span class="va">refill</span>, <span class="st">" liters"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/send.html">send</a></span><span class="op">(</span><span class="va">signal</span><span class="op">)</span></span></code></pre></div>
-<p>The controller periodically checks the <code>GAS_STATION_LEVEL</code> and calls the tank truck when needed.</p>
+<p>The controller periodically checks the <code>GAS_STATION_LEVEL</code>
+and calls the tank truck when needed.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">controller</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/branch.html">branch</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="va">GAS_STATION_LEVEL</span> <span class="op">/</span> <span class="va">GAS_STATION_SIZE</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">&lt;</span> <span class="va">THRESHOLD</span>, </span>
@@ -531,7 +593,8 @@
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/rollback.html">rollback</a></span><span class="op">(</span><span class="fl">2</span>, <span class="cn">Inf</span><span class="op">)</span></span></code></pre></div>
-<p>Finally, we need to add a couple of pumps, a controller worker and a car generator.</p>
+<p>Finally, we need to add a couple of pumps, a controller worker and a
+car generator.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"pump"</span>, <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -564,7 +627,12 @@
 <span><span class="co">#&gt; { Resource: pump | monitored: TRUE | server status: 2(2) | queue status: 9(Inf) }</span></span>
 <span><span class="co">#&gt; { Source: controller | monitored: 1 | n_generated: 1 }</span></span>
 <span><span class="co">#&gt; { Source: car | monitored: 1 | n_generated: 17 }</span></span></code></pre></div>
-<p>Note though that this model has an important flaw, both in the original and in this adaptation, as discussed in <a href="https://github.com/r-simmer/simmer/issues/239" class="external-link">#239</a>: when two cars require more fuel than available, but the level is still above the threshold, these cars completely block the queue, and the refilling truck is never called. It could be solved by detecting this situation in the controller.</p>
+<p>Note though that this model has an important flaw, both in the
+original and in this adaptation, as discussed in <a href="https://github.com/r-simmer/simmer/issues/239" class="external-link">#239</a>: when two
+cars require more fuel than available, but the level is still above the
+threshold, these cars completely block the queue, and the refilling
+truck is never called. It could be solved by detecting this situation in
+the controller.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

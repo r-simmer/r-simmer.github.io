@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">simmer | DES for R</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.5.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.5.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,24 +31,12 @@
     Reference
   </a>
 </li>
-<li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--articles">
+<li class="nav-item">
+  <a class="nav-link" href="../articles/index.html">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
   </a>
-  <div class="dropdown-menu" aria-labelledby="dropdown--articles">
-    <a class="dropdown-item" href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
-    <a class="dropdown-item" href="../articles/simmer-02-jss.pdf">JSS paper (PDF)</a>
-    <a class="dropdown-item" href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
-    <a class="dropdown-item" href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
-    <a class="dropdown-item" href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
-    <a class="dropdown-item" href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
-    <a class="dropdown-item" href="../articles/simmer-06-queueing.html">Queueing Systems</a>
-    <a class="dropdown-item" href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
-    <a class="dropdown-item" href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
-    <a class="dropdown-item" href="../articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
-  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../news/index.html">
@@ -91,15 +79,18 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="4.4.5.2" id="simmer-4452">simmer 4.4.5.2<a class="anchor" aria-label="anchor" href="#simmer-4452"></a></h2>
+<h2 class="pkg-version" data-toc-text="4.4.5.3" id="simmer-4453">simmer 4.4.5.3<a class="anchor" aria-label="anchor" href="#simmer-4453"></a></h2>
 <div class="section level3">
-<h3 id="new-features-4-4-5-2">New features<a class="anchor" aria-label="anchor" href="#new-features-4-4-5-2"></a></h3>
+<h3 id="new-features-4-4-5-3">New features<a class="anchor" aria-label="anchor" href="#new-features-4-4-5-3"></a></h3>
 <ul><li>Add support for activity tags via <code>tag</code> argument (as part of <a href="https://github.com/r-simmer/simmer/issues/287" class="external-link">#287</a>).</li>
 <li>Add support for named rollbacks via tags. The <code>amount</code> argument is deprecated in favor of the more generic name <code>target</code>. The former will still work, but raises a warning (<a href="https://github.com/r-simmer/simmer/issues/287" class="external-link">#287</a> addressing <a href="https://github.com/r-simmer/simmer/issues/197" class="external-link">#197</a>).</li>
+<li>Switch to C++17, drop Boost usage (<a href="https://github.com/r-simmer/simmer/issues/297" class="external-link">#297</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="minor-changes-and-fixes-4-4-5-2">Minor changes and fixes<a class="anchor" aria-label="anchor" href="#minor-changes-and-fixes-4-4-5-2"></a></h3>
-<ul><li>Fix call identification on error (<a href="https://github.com/r-simmer/simmer/issues/286" class="external-link">#286</a>).</li></ul></div>
+<h3 id="minor-changes-and-fixes-4-4-5-3">Minor changes and fixes<a class="anchor" aria-label="anchor" href="#minor-changes-and-fixes-4-4-5-3"></a></h3>
+<ul><li>Fix call identification on error (<a href="https://github.com/r-simmer/simmer/issues/286" class="external-link">#286</a>).</li>
+<li>Make tests less verbose by default.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="4.4.5" id="simmer-445">simmer 4.4.5<a class="anchor" aria-label="anchor" href="#simmer-445"></a></h2><p class="text-muted">CRAN release: 2022-06-25</p>
@@ -210,7 +201,8 @@
 <h2 class="pkg-version" data-toc-text="4.2.1" id="simmer-421">simmer 4.2.1<a class="anchor" aria-label="anchor" href="#simmer-421"></a></h2><p class="text-muted">CRAN release: 2019-01-09</p>
 <div class="section level3">
 <h3 id="minor-changes-and-fixes-4-2-1">Minor changes and fixes:<a class="anchor" aria-label="anchor" href="#minor-changes-and-fixes-4-2-1"></a></h3>
-<ul><li>Fix memtest notes on CRAN (e741686).</li></ul></div>
+<ul><li>Fix memtest notes on CRAN (e741686).</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="4.2.0" id="simmer-420">simmer 4.2.0<a class="anchor" aria-label="anchor" href="#simmer-420"></a></h2><p class="text-muted">CRAN release: 2019-01-09</p>
@@ -255,7 +247,8 @@
 <h2 class="pkg-version" data-toc-text="4.0.1" id="simmer-401">simmer 4.0.1<a class="anchor" aria-label="anchor" href="#simmer-401"></a></h2><p class="text-muted">CRAN release: 2018-09-10</p>
 <div class="section level3">
 <h3 id="new-features-4-0-1">New features:<a class="anchor" aria-label="anchor" href="#new-features-4-0-1"></a></h3>
-<ul><li>New getters (<a href="https://github.com/r-simmer/simmer/issues/159" class="external-link">#159</a>):<ul><li>
+<ul><li>New getters (<a href="https://github.com/r-simmer/simmer/issues/159" class="external-link">#159</a>):
+<ul><li>
 <code><a href="../reference/get_sources.html">get_sources()</a></code> and <code><a href="../reference/get_sources.html">get_resources()</a></code> retrieve a character vector of source/resource names defined in a simulation environment.</li>
 <li>
 <code><a href="../reference/get_n_generated.html">get_trajectory()</a></code> retrieves a trajectory to which a given source is attached.</li>
@@ -275,7 +268,8 @@
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="4.0.0" id="simmer-400">simmer 4.0.0<a class="anchor" aria-label="anchor" href="#simmer-400"></a></h2><p class="text-muted">CRAN release: 2018-07-20</p>
-<ul><li>The <code>simmer</code> license has been changed to GPL &gt;= 2.</li></ul><div class="section level3">
+<ul><li>The <code>simmer</code> license has been changed to GPL &gt;= 2.</li>
+</ul><div class="section level3">
 <h3 id="new-features-4-0-0">New features:<a class="anchor" aria-label="anchor" href="#new-features-4-0-0"></a></h3>
 <ul><li>The C++ core has been refactorised into a header-only library under <code>inst/include</code> (<a href="https://github.com/r-simmer/simmer/issues/147" class="external-link">#147</a> closing <a href="https://github.com/r-simmer/simmer/issues/145" class="external-link">#145</a>). Therefore, from now on it is possible to extend the C++ API from another package by listing <code>simmer</code> under the <code>LinkingTo</code> field in the DESCRIPTION file.</li>
 <li>New generic <code>monitor</code> constructor enables the development of new monitoring backends in other packages (179f656, as part of <a href="https://github.com/r-simmer/simmer/issues/147" class="external-link">#147</a>).</li>
@@ -364,7 +358,8 @@
 <h3 id="new-features-3-6-3">New features:<a class="anchor" aria-label="anchor" href="#new-features-3-6-3"></a></h3>
 <ul><li>Show simulation progress via an optional <code>progress</code> callback in <code><a href="../reference/run.html">run()</a></code> (<a href="https://github.com/r-simmer/simmer/issues/103" class="external-link">#103</a>).</li>
 <li>New “The Bank Tutorial: Part II” vignette, by Duncan Garmonsway <a href="https://github.com/nacnudus" class="external-link">@nacnudus</a> (<a href="https://github.com/r-simmer/simmer/issues/106" class="external-link">#106</a>).</li>
-<li>New getters for running arrivals (<a href="https://github.com/r-simmer/simmer/issues/109" class="external-link">#109</a>), meant to be used inside trajectories:<ul><li>
+<li>New getters for running arrivals (<a href="https://github.com/r-simmer/simmer/issues/109" class="external-link">#109</a>), meant to be used inside trajectories:
+<ul><li>
 <code><a href="../reference/get_n_generated.html">get_name()</a></code> retrieves the arrival name.</li>
 <li>
 <code><a href="../reference/get_n_generated.html">get_attribute()</a></code> retrieves an attribute by name. The old method of retrieving them by providing a function with one argument is deprecated in favour of <code><a href="../reference/get_n_generated.html">get_attribute()</a></code>, and will be removed in version 3.7.x.</li>
@@ -468,7 +463,8 @@
 <h2 class="pkg-version" data-toc-text="3.4.4" id="simmer-344">simmer 3.4.4<a class="anchor" aria-label="anchor" href="#simmer-344"></a></h2><p class="text-muted">CRAN release: 2016-10-06</p>
 <div class="section level3">
 <h3 id="minor-changes-and-fixes-3-4-4">Minor changes and fixes:<a class="anchor" aria-label="anchor" href="#minor-changes-and-fixes-3-4-4"></a></h3>
-<ul><li>Fix non-defined behaviour caused by a race condition in object destruction under some platforms.</li></ul></div>
+<ul><li>Fix non-defined behaviour caused by a race condition in object destruction under some platforms.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="3.4.3" id="simmer-343">simmer 3.4.3<a class="anchor" aria-label="anchor" href="#simmer-343"></a></h2><p class="text-muted">CRAN release: 2016-10-02</p>
@@ -485,7 +481,8 @@
 <h2 class="pkg-version" data-toc-text="3.4.2" id="simmer-342">simmer 3.4.2<a class="anchor" aria-label="anchor" href="#simmer-342"></a></h2><p class="text-muted">CRAN release: 2016-09-03</p>
 <div class="section level3">
 <h3 id="new-features-3-4-2">New features:<a class="anchor" aria-label="anchor" href="#new-features-3-4-2"></a></h3>
-<ul><li>Ongoing (unfinished) arrivals are reported with <code>get_mon_arrivals(ongoing = TRUE)</code> (<a href="https://github.com/r-simmer/simmer/issues/73" class="external-link">#73</a>).</li></ul></div>
+<ul><li>Ongoing (unfinished) arrivals are reported with <code>get_mon_arrivals(ongoing = TRUE)</code> (<a href="https://github.com/r-simmer/simmer/issues/73" class="external-link">#73</a>).</li>
+</ul></div>
 <div class="section level3">
 <h3 id="minor-changes-and-fixes-3-4-2">Minor changes and fixes:<a class="anchor" aria-label="anchor" href="#minor-changes-and-fixes-3-4-2"></a></h3>
 <ul><li>Simplify Rcpp glue: remove unnecessary <code>as&lt;&gt;()</code> calls (ec4e51a).</li>
@@ -535,7 +532,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="major-fixes-3-3-0">Major fixes:<a class="anchor" aria-label="anchor" href="#major-fixes-3-3-0"></a></h3>
-<ul><li>Fix per-resource activity time monitoring (<a href="https://github.com/r-simmer/simmer/issues/67" class="external-link">#67</a>). The problem emerged when an arrival revisited a resource and it was enqueued. An uninitialised variable could lead to an activity time greater than <code>end_time - start_time</code>. All versions 3.2.x are affected by this bug.</li></ul></div>
+<ul><li>Fix per-resource activity time monitoring (<a href="https://github.com/r-simmer/simmer/issues/67" class="external-link">#67</a>). The problem emerged when an arrival revisited a resource and it was enqueued. An uninitialised variable could lead to an activity time greater than <code>end_time - start_time</code>. All versions 3.2.x are affected by this bug.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="minor-changes-and-fixes-3-3-0">Minor changes and fixes:<a class="anchor" aria-label="anchor" href="#minor-changes-and-fixes-3-3-0"></a></h3>
 <ul><li>Fix the description of <code>preemptible</code> in the documentation of <code><a href="../reference/seize.html">seize()</a></code> and force <code>preemptible</code> to be equal or greater than <code>priority</code> (<a href="https://github.com/r-simmer/simmer/issues/53" class="external-link">#53</a>).</li>
@@ -574,16 +572,19 @@
 <h2 class="pkg-version" data-toc-text="3.2.0" id="simmer-320">simmer 3.2.0<a class="anchor" aria-label="anchor" href="#simmer-320"></a></h2><p class="text-muted">CRAN release: 2016-04-04</p>
 <div class="section level3">
 <h3 id="major-fix-3-2-0">Major fix:<a class="anchor" aria-label="anchor" href="#major-fix-3-2-0"></a></h3>
-<ul><li>In previous versions, resources were monitored <strong>before</strong> performing the corresponding seize/release activity, before changing the status of the system. Thus, <code>t=3, queue=2</code> meant that, until <code>t=3</code>, the queue had 2 customers, and at <code>t=3</code> the system changed (because of a new arrival or a new departure). The idea was to keep the values and time vectors aligned (see <a href="https://github.com/r-simmer/simmer/issues/28" class="external-link">#28</a>). But from this moment on, the resources are monitored <strong>after</strong> changing the status of the system. This is more consistent with what a user would expect, and more consistent with the behaviour of other related R functions (e.g., see <code><a href="https://rdrr.io/r/stats/stepfun.html" class="external-link">stepfun()</a></code>, from the <code>stats</code> package). Wrapping up and from now on, <code>t=3, queue=2</code> means that some event happened at <code>t=3</code> whose immediate and subsequent result was a queue with 2 customers.</li></ul></div>
+<ul><li>In previous versions, resources were monitored <strong>before</strong> performing the corresponding seize/release activity, before changing the status of the system. Thus, <code>t=3, queue=2</code> meant that, until <code>t=3</code>, the queue had 2 customers, and at <code>t=3</code> the system changed (because of a new arrival or a new departure). The idea was to keep the values and time vectors aligned (see <a href="https://github.com/r-simmer/simmer/issues/28" class="external-link">#28</a>). But from this moment on, the resources are monitored <strong>after</strong> changing the status of the system. This is more consistent with what a user would expect, and more consistent with the behaviour of other related R functions (e.g., see <code><a href="https://rdrr.io/r/stats/stepfun.html" class="external-link">stepfun()</a></code>, from the <code>stats</code> package). Wrapping up and from now on, <code>t=3, queue=2</code> means that some event happened at <code>t=3</code> whose immediate and subsequent result was a queue with 2 customers.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="new-features-3-2-0">New features:<a class="anchor" aria-label="anchor" href="#new-features-3-2-0"></a></h3>
-<ul><li>Add preemption functionality (<a href="https://github.com/r-simmer/simmer/issues/34" class="external-link">#34</a>). Preemption comes into play when a resource is specified as <code>preemptive=TRUE</code>. Arrivals in the server can be preempted on a <code>preempt_order="fifo"</code> or <code>preempt_order="lifo"</code> basis. Each <code><a href="../reference/seize.html">seize()</a></code> has three basic properties:<ul><li>
+<ul><li>Add preemption functionality (<a href="https://github.com/r-simmer/simmer/issues/34" class="external-link">#34</a>). Preemption comes into play when a resource is specified as <code>preemptive=TRUE</code>. Arrivals in the server can be preempted on a <code>preempt_order="fifo"</code> or <code>preempt_order="lifo"</code> basis. Each <code><a href="../reference/seize.html">seize()</a></code> has three basic properties:
+<ul><li>
 <code>priority</code>: already present in previous versions.</li>
 <li>
 <code>preemptible</code>: another <code><a href="../reference/seize.html">seize()</a></code> with a <code>priority</code> value greater than this may preempt the present <code><a href="../reference/seize.html">seize()</a></code>.</li>
 <li>
 <code>restart</code>: whether the current task (a <code><a href="../reference/timeout.html">timeout()</a></code> activity, for instance) should be restarted if the arrival is preempted.</li>
-</ul></li></ul></div>
+</ul></li>
+</ul></div>
 <div class="section level3">
 <h3 id="minor-changes-and-fixes-3-2-0">Minor changes and fixes:<a class="anchor" aria-label="anchor" href="#minor-changes-and-fixes-3-2-0"></a></h3>
 <ul><li>Remove deprecated functions <code>show_activity()</code> and <code>show_trajectory()</code>.</li>
@@ -598,7 +599,8 @@
 <h2 class="pkg-version" data-toc-text="3.1.2" id="simmer-312">simmer 3.1.2<a class="anchor" aria-label="anchor" href="#simmer-312"></a></h2><p class="text-muted">CRAN release: 2016-01-04</p>
 <div class="section level3">
 <h3 id="new-features-3-1-2">New features:<a class="anchor" aria-label="anchor" href="#new-features-3-1-2"></a></h3>
-<ul><li>Monitor arrivals’ start/activity/end times on a per-resource basis (<a href="https://github.com/r-simmer/simmer/issues/38" class="external-link">#38</a>). So far, the function <code><a href="../reference/get_mon.html">get_mon_arrivals()</a></code> returned the start/activity/end times per arrival for the whole trajectory. This behaviour remains, but additionally, <code>get_mon_arrivals(per_resource = TRUE)</code> returns these times per resource, so that it is possible to retrieve queueing/system times per resource.</li></ul></div>
+<ul><li>Monitor arrivals’ start/activity/end times on a per-resource basis (<a href="https://github.com/r-simmer/simmer/issues/38" class="external-link">#38</a>). So far, the function <code><a href="../reference/get_mon.html">get_mon_arrivals()</a></code> returned the start/activity/end times per arrival for the whole trajectory. This behaviour remains, but additionally, <code>get_mon_arrivals(per_resource = TRUE)</code> returns these times per resource, so that it is possible to retrieve queueing/system times per resource.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="minor-changes-and-fixes-3-1-2">Minor changes and fixes:<a class="anchor" aria-label="anchor" href="#minor-changes-and-fixes-3-1-2"></a></h3>
 <ul><li>Fix testing ERRORs reported on platforms using clang and Sparc Solaris.</li>

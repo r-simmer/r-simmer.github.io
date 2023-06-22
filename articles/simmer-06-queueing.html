@@ -5,7 +5,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="simmer">
+<meta name="description" content="Learn how to implement classical queueing models with simmer.
+">
 <title>Queueing Systems • simmer | DES for R</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
@@ -13,7 +14,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Queueing Systems">
-<meta property="og:description" content="simmer">
+<meta property="og:description" content="Learn how to implement classical queueing models with simmer.
+">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -33,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">simmer | DES for R</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.5.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.5.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,24 +51,12 @@
     Reference
   </a>
 </li>
-<li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--articles">
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/index.html">
     <span class="fa fa-graduation-cap"></span>
      
     Articles
   </a>
-  <div class="dropdown-menu" aria-labelledby="dropdown--articles">
-    <a class="dropdown-item" href="../articles/simmer-01-introduction.html">Introduction to simmer</a>
-    <a class="dropdown-item" href="../articles/simmer-02-jss.pdf">JSS paper (PDF)</a>
-    <a class="dropdown-item" href="../articles/simmer-03-trajectories.html">Advanced Trajectory Usage</a>
-    <a class="dropdown-item" href="../articles/simmer-04-bank-1.html">The Bank Tutorial: Part I</a>
-    <a class="dropdown-item" href="../articles/simmer-04-bank-2.html">The Bank Tutorial: Part II</a>
-    <a class="dropdown-item" href="../articles/simmer-05-simpy.html">Other SimPy Examples</a>
-    <a class="dropdown-item" href="../articles/simmer-06-queueing.html">Queueing Systems</a>
-    <a class="dropdown-item" href="../articles/simmer-07-ctmc.html">Continuous-Time Markov Chains</a>
-    <a class="dropdown-item" href="../articles/simmer-08-philosophers.html">Dining Philosophers Problem</a>
-    <a class="dropdown-item" href="../articles/simmer-aa-5G.html">Design and Analysis of 5G Scenarios</a>
-  </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">
@@ -115,7 +105,7 @@
       <img src="" class="logo" alt=""><h1>Queueing Systems</h1>
                         <h4 data-toc-skip class="author">Iñaki Ucar</h4>
             
-            <h4 data-toc-skip class="date">2022-12-23</h4>
+            <h4 data-toc-skip class="date">2023-06-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/HEAD/vignettes/simmer-06-queueing.Rmd" class="external-link"><code>vignettes/simmer-06-queueing.Rmd</code></a></small>
       <div class="d-none name"><code>simmer-06-queueing.Rmd</code></div>
@@ -130,8 +120,16 @@
 <div class="section level2">
 <h2 id="mmck-systems">M/M/c/k systems<a class="anchor" aria-label="anchor" href="#mmck-systems"></a>
 </h2>
-<p>In Kendall’s notation, an M/M/c/k system has exponential arrivals (<strong>M</strong>/M/c/k), a <span class="math inline">\(c\)</span> servers (M/M/<strong>c</strong>/k) with exponential service time (M/<strong>M</strong>/c/k) and an <span class="math inline">\(k-c\)</span> positions in queue (M/M/c/<strong>k</strong>). For instance, a router may have several processors to handle packets, and the in/out queues are necessarily finite.</p>
-<p>This is the simulation of an M/M/2/3 system (2 server, 1 position in queue). Note that the trajectory is identical to an M/M/1 system (one server, infinite queue).</p>
+<p>In Kendall’s notation, an M/M/c/k system has exponential arrivals
+(<strong>M</strong>/M/c/k), a <span class="math inline">\(c\)</span>
+servers (M/M/<strong>c</strong>/k) with exponential service time
+(M/<strong>M</strong>/c/k) and an <span class="math inline">\(k-c\)</span> positions in queue
+(M/M/c/<strong>k</strong>). For instance, a router may have several
+processors to handle packets, and the in/out queues are necessarily
+finite.</p>
+<p>This is the simulation of an M/M/2/3 system (2 server, 1 position in
+queue). Note that the trajectory is identical to an M/M/1 system (one
+server, infinite queue).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
@@ -150,14 +148,20 @@
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">mm23.env</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="va">finished</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">finished</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.04253894</span></span></code></pre></div>
-<p>By solving the balance equations for this system, we obtain the following:</p>
+<p>By solving the balance equations for this system, we obtain the
+following:</p>
 <p><span class="math display">\[
 \begin{aligned}
-p_0 &amp;= \left[ \sum_{n=0}^{c-1}\frac{r^n}{n!} + \sum_{n=c}^{k}\frac{r^n}{c!c^{n-c}} \right]^{-1}\\
-N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \sum_{n=c}^{k}\frac{nr^n}{c!c^{n-c}}\right)
+p_0 &amp;= \left[ \sum_{n=0}^{c-1}\frac{r^n}{n!} +
+\sum_{n=c}^{k}\frac{r^n}{c!c^{n-c}} \right]^{-1}\\
+N &amp;= \sum_{n=0}^{\infty}nP_n =
+p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} +
+\sum_{n=c}^{k}\frac{nr^n}{c!c^{n-c}}\right)
 \end{aligned}
 \]</span></p>
-<p>where <span class="math inline">\(r=\lambda/\mu\)</span>. Finally, we can see how the simulation quickly converges to the theoretical average number of customers in the system <span class="math inline">\(N\)</span>:</p>
+<p>where <span class="math inline">\(r=\lambda/\mu\)</span>. Finally, we
+can see how the simulation quickly converges to the theoretical average
+number of customers in the system <span class="math inline">\(N\)</span>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Theoretical value</span></span>
 <span><span class="va">rho</span> <span class="op">&lt;-</span> <span class="va">lambda</span><span class="op">/</span><span class="va">mu</span></span>
@@ -172,8 +176,19 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <div class="section level2">
 <h2 id="custom-service-policies">Custom service policies<a class="anchor" aria-label="anchor" href="#custom-service-policies"></a>
 </h2>
-<p>Resources implement a FIFO (or FCFS) priority queue, which means that arrivals with a higher priority are processed first, and among those with the same priority, the first-in-first-out policy applies. These priorities can be statically assigned to all arrivals coming from a particular source (using the <code>priority</code> argument in <code><a href="../reference/add_generator.html">add_generator()</a></code> or a dedicated column in the data frame passed to <code><a href="../reference/add_dataframe.html">add_dataframe()</a></code>).</p>
-<p>However, there is a useful activity to change priorities dynamically (as well as the other two prioritization values, <code>preemtible</code> and <code>restart</code>), and that is <code><a href="../reference/set_prioritization.html">set_prioritization()</a></code>. Such an activity allows us, for example, to implement a LIFO queue just by assigning an increasing priority to incoming arrivals:</p>
+<p>Resources implement a FIFO (or FCFS) priority queue, which means that
+arrivals with a higher priority are processed first, and among those
+with the same priority, the first-in-first-out policy applies. These
+priorities can be statically assigned to all arrivals coming from a
+particular source (using the <code>priority</code> argument in
+<code><a href="../reference/add_generator.html">add_generator()</a></code> or a dedicated column in the data frame
+passed to <code><a href="../reference/add_dataframe.html">add_dataframe()</a></code>).</p>
+<p>However, there is a useful activity to change priorities dynamically
+(as well as the other two prioritization values, <code>preemtible</code>
+and <code>restart</code>), and that is
+<code><a href="../reference/set_prioritization.html">set_prioritization()</a></code>. Such an activity allows us, for
+example, to implement a LIFO queue just by assigning an increasing
+priority to incoming arrivals:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -194,7 +209,11 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <span><span class="co">#&gt; 10: dummy3: processing</span></span>
 <span><span class="co">#&gt; 15: dummy2: processing</span></span>
 <span><span class="co">#&gt; 20: dummy1: processing</span></span></code></pre></div>
-<p>This mechanism, together with signaling, serves as the basis to implement any custom servicing policy. The main idea is to signal whenever an arrival is going to release the resource so that all the arrivals in the queue can leave the queue momentarily to recompute their priorities:</p>
+<p>This mechanism, together with signaling, serves as the basis to
+implement any custom servicing policy. The main idea is to signal
+whenever an arrival is going to release the resource so that all the
+arrivals in the queue can leave the queue momentarily to recompute their
+priorities:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -229,22 +248,38 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <span><span class="co">#&gt; 10: dummy4: processing</span></span>
 <span><span class="co">#&gt; 15: dummy1: processing</span></span>
 <span><span class="co">#&gt; 20: dummy2: processing</span></span></code></pre></div>
-<p>Note that a null timeout was added so that the resource is released in the last place. In this way, all arrivals recompute their priorities and enter the queue again before the resource is released.</p>
+<p>Note that a null timeout was added so that the resource is released
+in the last place. In this way, all arrivals recompute their priorities
+and enter the queue again before the resource is released.</p>
 </div>
 <div class="section level2">
 <h2 id="state-dependent-service-rates">State-dependent service rates<a class="anchor" aria-label="anchor" href="#state-dependent-service-rates"></a>
 </h2>
-<p>In many practical queueing scenarios, the speed of the server depends on the state of the system. Here we consider a multi-server resource that is able to distribute the processing capacity evenly among the arrivals. This means that if, for example, <code>capacity=2</code> and there is a single arrival in the server, it would be served twice as fast.</p>
-<p>In terms of a simulation model, a state-dependent service rate implies that the time spent in the server must be asynchronously updated each time an arrival seizes or releases the resource. In consequence, first we need to define a trajectory that updates a running service delay and restarts the new time left to release the resource. The following trajectory assumes that three attributes are available:</p>
+<p>In many practical queueing scenarios, the speed of the server depends
+on the state of the system. Here we consider a multi-server resource
+that is able to distribute the processing capacity evenly among the
+arrivals. This means that if, for example, <code>capacity=2</code> and
+there is a single arrival in the server, it would be served twice as
+fast.</p>
+<p>In terms of a simulation model, a state-dependent service rate
+implies that the time spent in the server must be asynchronously updated
+each time an arrival seizes or releases the resource. In consequence,
+first we need to define a trajectory that updates a running service
+delay and restarts the new time left to release the resource. The
+following trajectory assumes that three attributes are available:</p>
 <ul>
 <li>
-<code>start</code>: simulation time at which the arrival started the last <code>timeout</code> activity.</li>
+<code>start</code>: simulation time at which the arrival started the
+last <code>timeout</code> activity.</li>
 <li>
-<code>multiplier</code>: distribution of the processing capacity.</li>
+<code>multiplier</code>: distribution of the processing
+capacity.</li>
 <li>
-<code>delay</code>: service delay applied to the last <code>timeout</code> activity.</li>
+<code>delay</code>: service delay applied to the last
+<code>timeout</code> activity.</li>
 </ul>
-<p>The new delay is the time left scaled by the last and new multipliers.</p>
+<p>The new delay is the time left scaled by the last and new
+multipliers.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">update.delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"start"</span>, <span class="st">"multiplier"</span>, <span class="st">"delay"</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
@@ -257,7 +292,17 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/now.html">now</a></span><span class="op">(</span><span class="va">env</span><span class="op">)</span>, <span class="va">new_multiplier</span>, <span class="va">left</span> <span class="op">*</span> <span class="va">multiplier</span> <span class="op">/</span> <span class="va">new_multiplier</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/timeout.html">timeout_from_attribute</a></span><span class="op">(</span><span class="st">"delay"</span><span class="op">)</span></span></code></pre></div>
-<p>The main trajectory below first seizes the server and initialises the three attributes. Then, the arrivals need to follow the <code>update.delay</code> trajectory and must be interrupted at any given time to re-run it, thus re-computing the service time left. In <code>simmer</code>, this can be done with some signaling (see <code><a href="../reference/send.html">help(trap)</a></code>): a signal is subscribed and <code>update.delay</code> is registered as a handler. The first <code>send</code> signals the arriving entity, causing all the arrivals to execute the handler. Eventually, the handler finishes and the execution path returns to unregister the handler, release the server and signal the departing entity.</p>
+<p>The main trajectory below first seizes the server and initialises the
+three attributes. Then, the arrivals need to follow the
+<code>update.delay</code> trajectory and must be interrupted at any
+given time to re-run it, thus re-computing the service time left. In
+<code>simmer</code>, this can be done with some signaling (see
+<code><a href="../reference/send.html">help(trap)</a></code>): a signal is subscribed and
+<code>update.delay</code> is registered as a handler. The first
+<code>send</code> signals the arriving entity, causing all the arrivals
+to execute the handler. Eventually, the handler finishes and the
+execution path returns to unregister the handler, release the server and
+signal the departing entity.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sd.queue</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"sd.server"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -276,7 +321,9 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <span>  <span class="fu"><a href="../reference/send.html">untrap</a></span><span class="op">(</span><span class="st">"update delay"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="st">"sd.server"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/send.html">send</a></span><span class="op">(</span><span class="st">"update delay"</span><span class="op">)</span></span></code></pre></div>
-<p>In the following, we compare an M/M/2 with this state-dependent system. Both systems are fed with the same interarrival times and, as expected, the average resource usage is significantly reduced.</p>
+<p>In the following, we compare an M/M/2 with this state-dependent
+system. Both systems are fed with the same interarrival times and, as
+expected, the average resource usage is significantly reduced.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
 <span><span class="va">capacity</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
@@ -299,12 +346,22 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <div class="section level2">
 <h2 id="queueing-networks">Queueing Networks<a class="anchor" aria-label="anchor" href="#queueing-networks"></a>
 </h2>
-<p>Let us consider the following network of queues (example taken from <a href="https://www.grotto-networking.com/DiscreteEventPython.html#NetQueues" class="external-link">Grotto Networking</a>):</p>
+<p>Let us consider the following network of queues (example taken from
+<a href="https://www.grotto-networking.com/DiscreteEventPython.html#NetQueues" class="external-link">Grotto
+Networking</a>):</p>
 <div class="figure">
 <img src="includes/queueing-network.svg" alt=""><p class="caption">A network of queues.</p>
 </div>
-<p>There are three exponential generators (<span class="math inline">\(\lambda_1\)</span>, <span class="math inline">\(\lambda_2\)</span>, <span class="math inline">\(\lambda_4\)</span>) that inject messages with exponential size of mean 100 bytes. There are four M/D/1 queues with a deterministic rate equal to 220 bytes/s. There is a 25% probability that messages from <span class="math inline">\(\lambda_1\)</span> are dropped before the second queue, and a fork 35/65% for the output of the second queue to reach queues 3 and 4. We are interested, for instance, in the accumulated waiting time for messages entering queue 1 and exiting queue 3 or 4.</p>
-<p>We’ll start by setting up the main constants and a couple of functions to set the message size and seize an M/D/1 queue:</p>
+<p>There are three exponential generators (<span class="math inline">\(\lambda_1\)</span>, <span class="math inline">\(\lambda_2\)</span>, <span class="math inline">\(\lambda_4\)</span>) that inject messages with
+exponential size of mean 100 bytes. There are four M/D/1 queues with a
+deterministic rate equal to 220 bytes/s. There is a 25% probability that
+messages from <span class="math inline">\(\lambda_1\)</span> are dropped
+before the second queue, and a fork 35/65% for the output of the second
+queue to reach queues 3 and 4. We are interested, for instance, in the
+accumulated waiting time for messages entering queue 1 and exiting queue
+3 or 4.</p>
+<p>We’ll start by setting up the main constants and a couple of
+functions to set the message size and seize an M/D/1 queue:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mean_pkt_size</span> <span class="op">&lt;-</span> <span class="fl">100</span>        <span class="co"># bytes</span></span>
 <span><span class="va">lambda1</span> <span class="op">&lt;-</span> <span class="fl">2</span>                <span class="co"># pkts/s</span></span>
@@ -321,7 +378,8 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <span>  <span class="fu"><a href="../reference/seize.html">seize</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"md1_"</span>, <span class="va">id</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="../reference/get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"size"</span><span class="op">)</span> <span class="op">/</span> <span class="va">rate</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/seize.html">release</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"md1_"</span>, <span class="va">id</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p>The next step is to set up the three points of attachment for our generators:</p>
+<p>The next step is to set up the three points of attachment for our
+generators:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">to_queue_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">set_msg_size</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -341,7 +399,8 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <span><span class="va">to_queue_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">set_msg_size</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">md1</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<p>Finally, we prepare and run the simulation environment with the resources and generators required:</p>
+<p>Finally, we prepare and run the simulation environment with the
+resources and generators required:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span> <span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -360,7 +419,9 @@ N &amp;= \sum_{n=0}^{\infty}nP_n = p_0\left(\sum_{n=0}^{c-n}\frac{nr^n}{n!} + \s
 <span><span class="co">#&gt; { Source: arrival1_ | monitored: 2 | n_generated: 8079 }</span></span>
 <span><span class="co">#&gt; { Source: arrival3_ | monitored: 2 | n_generated: 2044 }</span></span>
 <span><span class="co">#&gt; { Source: arrival4_ | monitored: 2 | n_generated: 2402 }</span></span></code></pre></div>
-<p>In the analysis, we filter arrivals from generator 1 that reach queues 3 and 4, and we examine the average waiting time and the total number of messages:</p>
+<p>In the analysis, we filter arrivals from generator 1 that reach
+queues 3 and 4, and we examine the average waiting time and the total
+number of messages:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">env</span>, per_resource <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">resource</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"md1_3"</span>, <span class="st">"md1_4"</span><span class="op">)</span>, select<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"resource"</span><span class="op">)</span><span class="op">)</span></span>
