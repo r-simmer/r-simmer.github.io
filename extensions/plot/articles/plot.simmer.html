@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">simmer.plot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.17</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.18</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,9 +111,10 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Plotting simmer statistics</h1>
-                        <h4 data-toc-skip class="author">Bart Smeets, Iñaki Ucar</h4>
+                        <h4 data-toc-skip class="author">Bart Smeets,
+Iñaki Ucar</h4>
             
-            <h4 data-toc-skip class="date">2022-12-23</h4>
+            <h4 data-toc-skip class="date">2023-07-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer.plot/blob/HEAD/vignettes/plot.simmer.Rmd" class="external-link"><code>vignettes/plot.simmer.Rmd</code></a></small>
       <div class="d-none name"><code>plot.simmer.Rmd</code></div>
@@ -124,7 +125,9 @@
 <div class="section level2">
 <h2 id="simulation-example">Simulation example<a class="anchor" aria-label="anchor" href="#simulation-example"></a>
 </h2>
-<p>This is the basic example from <a href="https://r-simmer.org/articles/simmer-01-introduction.html" class="external-link"><em>Introduction to simmer</em></a>. Please, refer to that vignette for further detail.</p>
+<p>This is the basic example from <a href="https://r-simmer.org/articles/simmer-01-introduction.html" class="external-link"><em>Introduction
+to simmer</em></a>. Please, refer to that vignette for further
+detail.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org" class="external-link">simmer</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span></span>
@@ -156,8 +159,11 @@
 <div class="section level2">
 <h2 id="basic-visualisation-tools">Basic visualisation tools<a class="anchor" aria-label="anchor" href="#basic-visualisation-tools"></a>
 </h2>
-<p>This package provides some basic visualisation tools to help you take a glance at your simulations quickly, but of course you probably may want to develop your own data analysis.</p>
-<p>There are three types of plot implemented with different metrics available:</p>
+<p>This package provides some basic visualisation tools to help you take
+a glance at your simulations quickly, but of course you probably may
+want to develop your own data analysis.</p>
+<p>There are three types of plot implemented with different metrics
+available:</p>
 <ul>
 <li>Plot of resources. Two metrics available:
 <ul>
@@ -174,28 +180,46 @@
 </li>
 <li>Plot of attributes.</li>
 </ul>
-<p>All these plots and metrics are accessible through the S3 methods for the <code>plot</code> generic provided by this package (see <code><a href="../reference/plot.mon.html">?plot.mon</a></code> for more details), which uses the <code>ggplot2</code> package as backend.</p>
-<p>For instance, after you’ve left it simmering for a bit (pun intended), we can have a look at the overall resource utilization. The top and bottom of the error bars show respectively the 25th and 75th percentile of the utilization across all the replications. The top of the bar shows the median utilization.</p>
+<p>All these plots and metrics are accessible through the S3 methods for
+the <code>plot</code> generic provided by this package (see
+<code><a href="../reference/plot.mon.html">?plot.mon</a></code> for more details), which uses the
+<code>ggplot2</code> package as backend.</p>
+<p>For instance, after you’ve left it simmering for a bit (pun
+intended), we can have a look at the overall resource utilization. The
+top and bottom of the error bars show respectively the 25th and 75th
+percentile of the utilization across all the replications. The top of
+the bar shows the median utilization.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org" class="external-link">simmer.plot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">resources</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="va">envs</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">resources</span>, metric <span class="op">=</span> <span class="st">"utilization"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot.simmer_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;"></p>
-<p>It is also possible to have a look at resources’ activity during the simulation.</p>
+<p>It is also possible to have a look at resources’ activity during the
+simulation.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">resources</span>, metric <span class="op">=</span> <span class="st">"usage"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"nurse"</span>, <span class="st">"doctor"</span><span class="op">)</span>, items <span class="op">=</span> <span class="st">"server"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot.simmer_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;"></p>
-<p>In the above graph, the individual lines are all separate replications. The smoothing performed is a cumulative average. Let’s take a look now at the instantaneous behaviour for a specific replication and resource. In the example below, the 6th replication is shown.</p>
+<p>In the above graph, the individual lines are all separate
+replications. The smoothing performed is a cumulative average. Let’s
+take a look now at the instantaneous behaviour for a specific
+replication and resource. In the example below, the 6th replication is
+shown.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="va">envs</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, metric <span class="op">=</span> <span class="st">"usage"</span>, <span class="st">"doctor"</span>, items <span class="op">=</span> <span class="st">"server"</span>, steps <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot.simmer_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;"></p>
-<p>Next we can have a look at the evolution of the arrivals’ flow time during the simulation. In the plot below, each individual line represents a replication. A smooth line is drawn over them. All arrivals that didn’t finish their entire trajectory are excluded from the plot.</p>
+<p>Next we can have a look at the evolution of the arrivals’ flow time
+during the simulation. In the plot below, each individual line
+represents a replication. A smooth line is drawn over them. All arrivals
+that didn’t finish their entire trajectory are excluded from the
+plot.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">arrivals</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">envs</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">arrivals</span>, metric <span class="op">=</span> <span class="st">"flow_time"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plot.simmer_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;"></p>
-<p>Similarly one can have a look at the evolution of the activity times with <code>metric = "activity_time"</code> and waiting times with <code>metric = "waiting_time"</code>.</p>
+<p>Similarly one can have a look at the evolution of the activity times
+with <code>metric = "activity_time"</code> and waiting times with
+<code>metric = "waiting_time"</code>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

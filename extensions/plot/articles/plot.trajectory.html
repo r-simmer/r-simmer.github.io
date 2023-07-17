@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">simmer.plot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.17</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.18</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,9 +111,10 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Plotting simmer trajectories</h1>
-                        <h4 data-toc-skip class="author">Iñaki Ucar, Bart Smeets</h4>
+                        <h4 data-toc-skip class="author">Iñaki Ucar,
+Bart Smeets</h4>
             
-            <h4 data-toc-skip class="date">2022-12-23</h4>
+            <h4 data-toc-skip class="date">2023-07-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer.plot/blob/HEAD/vignettes/plot.trajectory.Rmd" class="external-link"><code>vignettes/plot.trajectory.Rmd</code></a></small>
       <div class="d-none name"><code>plot.trajectory.Rmd</code></div>
@@ -121,7 +122,10 @@
 
     
     
-<p>Simulation trajectories may grow considerably, and they are not always easy to inspect to ensure their compliance with the model that we are trying to build. For instance, let us consider this pretty complex one:</p>
+<p>Simulation trajectories may grow considerably, and they are not
+always easy to inspect to ensure their compliance with the model that we
+are trying to build. For instance, let us consider this pretty complex
+one:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org" class="external-link">simmer</a></span><span class="op">)</span></span>
 <span></span>
@@ -156,8 +160,15 @@
 <li>Rollbacks point back to the activity we expect.</li>
 <li>…</li>
 </ul>
-<p>For this task, the <strong>simmer.plot</strong> package provides an S3 method for the <code>plot</code> generic to visualise diagrams of trajectory objects (see <code><a href="../reference/plot.trajectory.html">?plot.trajectory</a></code> for more details) using the <code>DiagrammeR</code> package as the backend, which facilitates trajectory checking and debugging.</p>
-<p>Note that colors are assigned to seizes and releases as a function of the resource that these are applied to. By default, resources are mapped to a qualitative Color Brewer palette, but you can override this using the optional parameter <code>fill</code>.</p>
+<p>For this task, the <strong>simmer.plot</strong> package provides an
+S3 method for the <code>plot</code> generic to visualise diagrams of
+trajectory objects (see <code><a href="../reference/plot.trajectory.html">?plot.trajectory</a></code> for more details)
+using the <code>DiagrammeR</code> package as the backend, which
+facilitates trajectory checking and debugging.</p>
+<p>Note that colors are assigned to seizes and releases as a function of
+the resource that these are applied to. By default, resources are mapped
+to a qualitative Color Brewer palette, but you can override this using
+the optional parameter <code>fill</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org" class="external-link">simmer.plot</a></span><span class="op">)</span></span>
 <span></span>
