@@ -18,7 +18,7 @@ implement loops."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
     
     <a class="navbar-brand me-2" href="../index.html">simmer | DES for R</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.5.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.6.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -145,15 +145,29 @@ function to check whether the rollback must be done or not.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: hello_sayer0: hello!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3: hello_sayer0: hello!</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## same but with a tag as target</span></span></span>
+<span class="r-in"><span><span class="va">traj</span> <span class="op">&lt;-</span> <span class="fu"><a href="trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="log_.html">log_</a></span><span class="op">(</span><span class="st">"hello!"</span>, tag<span class="op">=</span><span class="st">"msg"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="timeout.html">timeout</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">rollback</span><span class="op">(</span><span class="st">"msg"</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"hello_sayer"</span>, <span class="va">traj</span>, <span class="fu"><a href="generators.html">at</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="run.html">run</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">invisible</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0: hello_sayer0: hello!</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: hello_sayer0: hello!</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: hello_sayer0: hello!</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: hello_sayer0: hello!</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## custom check</span></span></span>
 <span class="r-in"><span><span class="va">env</span> <span class="op">&lt;-</span> <span class="fu"><a href="simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">traj</span> <span class="op">&lt;-</span> <span class="fu"><a href="trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"var"</span>, <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="log_.html">log_</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="log_.html">log_</a></span><span class="op">(</span>tag<span class="op">=</span><span class="st">"msg"</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"attribute level is at:"</span>, <span class="fu"><a href="get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"var"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="set_attribute.html">set_attribute</a></span><span class="op">(</span><span class="st">"var"</span>, <span class="fl">25</span>, mod<span class="op">=</span><span class="st">"+"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">rollback</span><span class="op">(</span><span class="fl">2</span>, check<span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"var"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">rollback</span><span class="op">(</span><span class="st">"msg"</span>, check<span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="get_n_generated.html">get_attribute</a></span><span class="op">(</span><span class="va">env</span>, <span class="st">"var"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="log_.html">log_</a></span><span class="op">(</span><span class="st">"done"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>

@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">simmer | DES for R</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.5.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.6.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,7 +106,7 @@
                         <h4 data-toc-skip class="author">Duncan
 Garmonsway</h4>
             
-            <h4 data-toc-skip class="date">2023-06-22</h4>
+            <h4 data-toc-skip class="date">2023-07-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/HEAD/vignettes/simmer-04-bank-2.Rmd" class="external-link"><code>vignettes/simmer-04-bank-2.Rmd</code></a></small>
       <div class="d-none name"><code>simmer-04-bank-2.Rmd</code></div>
@@ -1036,15 +1036,11 @@ to plot.</p>
 <span><span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span></span>
 <span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 20 }</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bank</span>,</span>
-<span>     what <span class="op">=</span> <span class="st">"resources"</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="va">bank</span><span class="op">)</span>,</span>
 <span>     metric <span class="op">=</span> <span class="st">"usage"</span>,</span>
 <span>     names <span class="op">=</span> <span class="st">"counter"</span>,</span>
 <span>     items <span class="op">=</span> <span class="st">"system"</span>,</span>
-<span>     steps <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: 'plot.simmer' is deprecated.</span></span>
-<span><span class="co">#&gt; Use 'plot(get_mon_resources(x))' instead.</span></span>
-<span><span class="co">#&gt; See help("Deprecated")</span></span></code></pre></div>
+<span>     steps <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="simmer-04-bank-2_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>

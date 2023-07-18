@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">simmer | DES for R</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.5.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.6.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,7 +106,7 @@
                         <h4 data-toc-skip class="author">Bart Smeets,
 Iñaki Ucar</h4>
             
-            <h4 data-toc-skip class="date">2023-06-22</h4>
+            <h4 data-toc-skip class="date">2023-07-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/HEAD/vignettes/simmer-01-introduction.Rmd" class="external-link"><code>vignettes/simmer-01-introduction.Rmd</code></a></small>
       <div class="d-none name"><code>simmer-01-introduction.Rmd</code></div>
@@ -265,7 +265,7 @@ it accessible through the same methods that would ordinarily be used for
 a <code>simmer</code> environment.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">envs</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_n_generated.html">get_n_generated</a></span><span class="op">(</span><span class="st">"patient"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 10</span></span>
+<span><span class="co">#&gt; [1] 9</span></span>
 <span><span class="va">envs</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_capacity.html">get_queue_count</a></span><span class="op">(</span><span class="st">"doctor"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span>
 <span><span class="va">envs</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_capacity.html">get_queue_size</a></span><span class="op">(</span><span class="st">"doctor"</span><span class="op">)</span></span>
@@ -273,23 +273,23 @@ a <code>simmer</code> environment.</p>
 <span><span class="va">envs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   resource      time server queue capacity queue_size system limit replication</span></span>
-<span><span class="co">#&gt; 1    nurse  9.618485      1     0        1        Inf      1   Inf           1</span></span>
-<span><span class="co">#&gt; 2    nurse 17.613666      1     1        1        Inf      2   Inf           1</span></span>
-<span><span class="co">#&gt; 3    nurse 24.714794      1     0        1        Inf      1   Inf           1</span></span>
-<span><span class="co">#&gt; 4   doctor 24.714794      1     0        2        Inf      1   Inf           1</span></span>
-<span><span class="co">#&gt; 5    nurse 26.674996      1     1        1        Inf      2   Inf           1</span></span>
-<span><span class="co">#&gt; 6    nurse 36.547959      1     2        1        Inf      3   Inf           1</span></span>
+<span><span class="co">#&gt;   resource     time server queue capacity queue_size system limit replication</span></span>
+<span><span class="co">#&gt; 1    nurse 11.85132      1     0        1        Inf      1   Inf           1</span></span>
+<span><span class="co">#&gt; 2    nurse 21.93084      1     1        1        Inf      2   Inf           1</span></span>
+<span><span class="co">#&gt; 3    nurse 26.55408      1     0        1        Inf      1   Inf           1</span></span>
+<span><span class="co">#&gt; 4   doctor 26.55408      1     0        2        Inf      1   Inf           1</span></span>
+<span><span class="co">#&gt; 5    nurse 27.52574      1     1        1        Inf      2   Inf           1</span></span>
+<span><span class="co">#&gt; 6    nurse 37.51856      1     2        1        Inf      3   Inf           1</span></span>
 <span><span class="va">envs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       name start_time end_time activity_time finished replication</span></span>
-<span><span class="co">#&gt; 1 patient0   9.618485 50.18907      40.57059     TRUE           1</span></span>
-<span><span class="co">#&gt; 2 patient1  17.613666 64.43180      39.71701     TRUE           1</span></span>
-<span><span class="co">#&gt; 3 patient0  12.900136 51.35679      38.45666     TRUE           2</span></span>
-<span><span class="co">#&gt; 4 patient1  24.595582 68.31150      40.41129     TRUE           2</span></span>
-<span><span class="co">#&gt; 5 patient0  10.380211 52.16355      41.78333     TRUE           3</span></span>
-<span><span class="co">#&gt; 6 patient1  15.963994 65.83749      40.37560     TRUE           3</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 patient0   11.85132 53.51800      41.66668     TRUE           1</span></span>
+<span><span class="co">#&gt; 2 patient1   21.93084 65.34338      38.78930     TRUE           1</span></span>
+<span><span class="co">#&gt; 3 patient2   27.52574 78.80441      38.15713     TRUE           1</span></span>
+<span><span class="co">#&gt; 4 patient0   14.34039 52.66201      38.32162     TRUE           2</span></span>
+<span><span class="co">#&gt; 5 patient1   21.78522 70.19597      41.88066     TRUE           2</span></span>
+<span><span class="co">#&gt; 6 patient0   11.20147 52.12906      40.92759     TRUE           3</span></span></code></pre></div>
 <p>Unfortunately, as the C++ simulation cores are destroyed, the
 downside of this kind of parallelization is that one cannot resume
 execution of the replicas.</p>
