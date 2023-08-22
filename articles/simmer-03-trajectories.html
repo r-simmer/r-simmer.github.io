@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">simmer | DES for R</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.6.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.6.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,7 +106,7 @@
                         <h4 data-toc-skip class="author">Iñaki Ucar,
 Bart Smeets</h4>
             
-            <h4 data-toc-skip class="date">2023-07-18</h4>
+            <h4 data-toc-skip class="date">2023-08-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/HEAD/vignettes/simmer-03-trajectories.Rmd" class="external-link"><code>vignettes/simmer-03-trajectories.Rmd</code></a></small>
       <div class="d-none name"><code>simmer-03-trajectories.Rmd</code></div>
@@ -185,7 +185,7 @@ remain static after that.</p>
 <span>  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html" class="external-link">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>        <span class="co"># fixed</span></span>
 <span>  <span class="fu"><a href="../reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html" class="external-link">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="co"># dynamic</span></span>
 <span><span class="co">#&gt; trajectory: anonymous, 2 activities</span></span>
-<span><span class="co">#&gt; { Activity: Timeout      | delay: 0.042816 }</span></span>
+<span><span class="co">#&gt; { Activity: Timeout      | delay: 0.0960537 }</span></span>
 <span><span class="co">#&gt; { Activity: Timeout      | delay: function() }</span></span></code></pre></div>
 <p>Of course, this <code>task</code>, supplied as a function, may be as
 complex as you need and, for instance, it may check the status of a

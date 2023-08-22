@@ -18,7 +18,7 @@ for some common cases."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
     
     <a class="navbar-brand me-2" href="../index.html">simmer | DES for R</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.6.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.6.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -190,9 +190,9 @@ trajectory using the activity <code><a href="activate.html">activate</a></code>.
 <span class="r-in"><span>  <span class="fu"><a href="get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     name start_time end_time activity_time finished replication</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 dummy0   5.000000 5.000000             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 dummy1   6.061138 6.061138             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 dummy2   7.950519 7.950519             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 dummy3   9.563896 9.563896             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 dummy1   6.054850 6.054850             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 dummy2   7.625511 7.625511             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 dummy3   9.555658 9.555658             0     TRUE           1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># apply distribution until 5 (starting at 0)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -200,9 +200,9 @@ trajectory using the activity <code><a href="activate.html">activate</a></code>.
 <span class="r-in"><span>  <span class="fu"><a href="run.html">run</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     name start_time end_time activity_time finished replication</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 dummy0   1.221750 1.221750             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 dummy1   2.540808 2.540808             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 dummy2   4.336913 4.336913             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 dummy0   1.543105 1.543105             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 dummy1   3.008031 3.008031             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 dummy2   4.293720 4.293720             0     TRUE           1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># apply distribution from 8 to 16 h every 24 h:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -211,17 +211,17 @@ trajectory using the activity <code><a href="activate.html">activate</a></code>.
 <span class="r-in"><span>  <span class="fu"><a href="get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       name start_time  end_time activity_time finished replication</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   dummy0   8.000000  8.000000             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   dummy1   9.061816  9.061816             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   dummy2  11.008172 11.008172             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   dummy3  12.130567 12.130567             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   dummy4  13.862444 13.862444             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   dummy5  15.464530 15.464530             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   dummy1   9.349974  9.349974             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   dummy2  10.927960 10.927960             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   dummy3  12.649415 12.649415             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   dummy4  14.024923 14.024923             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   dummy5  15.775842 15.775842             0     TRUE           1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7   dummy6  32.000000 32.000000             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   dummy7  33.119655 33.119655             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   dummy8  34.298582 34.298582             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  dummy9  35.818672 35.818672             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 dummy10  37.422194 37.422194             0     TRUE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 dummy11  38.633862 38.633862             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   dummy7  33.043767 33.043767             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   dummy8  34.364540 34.364540             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  dummy9  35.684818 35.684818             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 dummy10  37.669201 37.669201             0     TRUE           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 dummy11  39.175569 39.175569             0     TRUE           1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># triggering arrivals on demand from a trajectory</span></span></span>
 <span class="r-in"><span><span class="va">t1</span> <span class="op">&lt;-</span> <span class="fu"><a href="trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
