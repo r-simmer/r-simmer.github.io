@@ -86,7 +86,7 @@ IMDEA Networks Institute\\
 \setlength{\abovedisplayskip}{0pt}
 
 This manuscript corresponds to \pkg{simmer} version 4.4.6.2 and was
-typeset on August 22, 2023. For citations, please use the JSS version
+typeset on November 28, 2023. For citations, please use the JSS version
 (see \code{citation("simmer")}).
 
 \hypertarget{introduction}{%
@@ -599,14 +599,16 @@ consistent execution of simultaneous events.
 \begin{longtable}[]{@{}ll@{}}
 \caption{Priority system (in decreasing order) and events
 associated.\label{priorities}}\tabularnewline
-\toprule()
+\toprule\noalign{}
 Priority & Event \\
-\midrule()
+\midrule\noalign{}
 \endfirsthead
-\toprule()
+\toprule\noalign{}
 Priority & Event \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \texttt{PRIORITY\_MAX} & Terminate arrivals \\
 \texttt{PRIORITY\_RELEASE} & Resource release \\
 \texttt{PRIORITY\_MANAGER} & Manager action (e.g., resource capacity
@@ -616,7 +618,6 @@ from the queue) \\
 \ldots{} & General activities \\
 \texttt{PRIORITY\_MIN} & Other tasks (e.g., new arrivals,
 timers\ldots) \\
-\bottomrule()
 \end{longtable}
 
 \section[The simmer API]{The \pkg{simmer} API}
@@ -1812,18 +1813,19 @@ Table \ref{test-simmer-output-table}).
 \begin{longtable}[]{@{}lrrrlr@{}}
 \caption{Output from the \code{test\_simmer()}
 function.\label{test-simmer-output-table}}\tabularnewline
-\toprule()
+\toprule\noalign{}
 Name & Start time & End time & Activity time & Finished & Replication \\
-\midrule()
+\midrule\noalign{}
 \endfirsthead
-\toprule()
+\toprule\noalign{}
 Name & Start time & End time & Activity time & Finished & Replication \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 test0 & 1 & 2 & 1 & TRUE & 1 \\
 test1 & 2 & 3 & 1 & TRUE & 1 \\
 test2 & 3 & 4 & 1 & TRUE & 1 \\
-\bottomrule()
 \end{longtable}
 
 As a matter of comparison, the following \code{test_R_for()} function
@@ -1899,7 +1901,7 @@ fixed values instead of function calls whenever possible.
   >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1471}}@{}}
 \caption{Execution time
 (milliseconds).\label{performance-table}}\tabularnewline
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Expr
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
@@ -1911,9 +1913,9 @@ Median
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
 Max
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endfirsthead
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Expr
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
@@ -1925,14 +1927,15 @@ Median
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
 Max
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 test\_simmer(n, 1) & 429.8663 & 492.365 & 480.5408 & 599.3547 \\
 test\_simmer(n, function() 1) & 3067.9957 & 3176.963 & 3165.6859 &
 3434.7979 \\
 test\_R\_for(n) & 2053.0840 & 2176.164 & 2102.5848 & 2438.6836 \\
 test\_R\_lapply(n) & 1525.6682 & 1754.028 & 1757.7566 & 2002.6634 \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{summary}{%
