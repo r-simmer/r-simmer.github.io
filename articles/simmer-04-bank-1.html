@@ -12,7 +12,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="The Bank Tutorial: Part I">
 <meta property="og:description" content="Learn a classical DES model with simmer.
 ">
@@ -31,11 +31,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark"><div class="container">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark" data-bs-theme="dark"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">simmer | DES for R</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.6.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.6.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,7 +106,7 @@
                         <h4 data-toc-skip class="author">Duncan
 Garmonsway</h4>
             
-            <h4 data-toc-skip class="date">2023-11-28</h4>
+            <h4 data-toc-skip class="date">2024-07-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-simmer/simmer/blob/HEAD/vignettes/simmer-04-bank-1.Rmd" class="external-link"><code>vignettes/simmer-04-bank-1.Rmd</code></a></small>
       <div class="d-none name"><code>simmer-04-bank-1.Rmd</code></div>
@@ -161,8 +161,9 @@ customers that are generated complete their trajectories.</p>
 <span><span class="co">#&gt; 15: Customer0: I must leave</span></span>
 <span><span class="co">#&gt; simmer environment: bank | now: 15 | next: </span></span>
 <span><span class="co">#&gt; { Monitor: in memory }</span></span>
-<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 1 }</span></span>
-<span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 1 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        name start_time end_time activity_time finished replication</span></span>
 <span><span class="co">#&gt; 1 Customer0          5       15            10     TRUE           1</span></span></code></pre></div>
 <p>The short trace printed out by the <code>get_mon_arrivals</code>
@@ -183,7 +184,7 @@ distribution with the given parameter, which in this case is
 <code>1/5</code>. See <code><a href="https://rdrr.io/r/stats/Exponential.html" class="external-link">?rexp</a></code> for more details. We also seed
 the random number generator with 10211 so that the same sequence of
 random numbers will be drawn every time the script is run.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">10212</span><span class="op">)</span></span>
@@ -203,8 +204,9 @@ random numbers will be drawn every time the script is run.</p>
 <span><span class="co">#&gt; 17.8393: Customer0: I must leave</span></span>
 <span><span class="co">#&gt; simmer environment: bank | now: 17.8393046225526 | next: </span></span>
 <span><span class="co">#&gt; { Monitor: in memory }</span></span>
-<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 1 }</span></span>
-<span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 1 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        name start_time end_time activity_time finished replication</span></span>
 <span><span class="co">#&gt; 1 Customer0   7.839305  17.8393            10     TRUE           1</span></span></code></pre></div>
 <p>The trace shows that the customer now arrives at time 7.839305.
@@ -235,7 +237,7 @@ called. We define a function called <code>loop</code> to do this. The
 store that function under the name <code>x</code>. When called, the
 function <code>x</code> returns one of (in the example) 7, 10, and 20,
 in sequence, wrapping around when it is called a fourth time.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Function to specify a series of waiting times, that loop around</span></span>
 <span><span class="va">loop</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">time_diffs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -271,7 +273,7 @@ generated, and their first step is the timeout step, they are assigned
 customers are defined. Here, the first customer to be defined is the one
 who arrives at 2 and waits for 7. That is because the arguments to
 <code><a href="../reference/generators.html">at()</a></code> must be in ascending order.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Function to specify a series of waiting times in a loop</span></span>
@@ -308,8 +310,9 @@ who arrives at 2 and waits for 7. That is because the arguments to
 <span><span class="co">#&gt; 32: Customer2: I must leave</span></span>
 <span><span class="co">#&gt; simmer environment: bank | now: 32 | next: </span></span>
 <span><span class="co">#&gt; { Monitor: in memory }</span></span>
-<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 3 }</span></span>
-<span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 3 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        name start_time end_time activity_time finished replication</span></span>
 <span><span class="co">#&gt; 1 Customer0          2        9             7     TRUE           1</span></span>
 <span><span class="co">#&gt; 2 Customer1          5       15            10     TRUE           1</span></span>
@@ -319,7 +322,7 @@ for the three waiting times. This is best done by creating an initial
 template, and then modifying the waiting time for each copy.</p>
 <p>Note that the order in which the customers are defined does not
 matter this time, and we can also name each customer.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create a template trajectory</span></span>
@@ -344,18 +347,21 @@ matter this time, and we can also name each customer.</p>
 <span><span class="co">#&gt; trajectory: Customer's path, 3 activities</span></span>
 <span><span class="co">#&gt; { Activity: Log          | message: Here I am, level: 0 }</span></span>
 <span><span class="co">#&gt; { Activity: Timeout      | delay: 10 }</span></span>
-<span><span class="co">#&gt; { Activity: Log          | message: I must lea..., level: 0 }</span></span>
-<span><span class="va">Tony</span></span>
+<span><span class="co">#&gt; { Activity: Log          | message: I must lea..., level: 0 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Tony</span></span>
 <span><span class="co">#&gt; trajectory: Customer's path, 3 activities</span></span>
 <span><span class="co">#&gt; { Activity: Log          | message: Here I am, level: 0 }</span></span>
 <span><span class="co">#&gt; { Activity: Timeout      | delay: 7 }</span></span>
-<span><span class="co">#&gt; { Activity: Log          | message: I must lea..., level: 0 }</span></span>
-<span><span class="va">Evelyn</span></span>
+<span><span class="co">#&gt; { Activity: Log          | message: I must lea..., level: 0 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Evelyn</span></span>
 <span><span class="co">#&gt; trajectory: Customer's path, 3 activities</span></span>
 <span><span class="co">#&gt; { Activity: Log          | message: Here I am, level: 0 }</span></span>
 <span><span class="co">#&gt; { Activity: Timeout      | delay: 20 }</span></span>
-<span><span class="co">#&gt; { Activity: Log          | message: I must lea..., level: 0 }</span></span>
-<span></span>
+<span><span class="co">#&gt; { Activity: Log          | message: I must lea..., level: 0 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="va">bank</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/simmer.html">simmer</a></span><span class="op">(</span><span class="st">"bank"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"Klaus"</span>, <span class="va">Klaus</span>, <span class="fu"><a href="../reference/generators.html">at</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -373,8 +379,9 @@ matter this time, and we can also name each customer.</p>
 <span><span class="co">#&gt; { Monitor: in memory }</span></span>
 <span><span class="co">#&gt; { Source: Klaus | monitored: 1 | n_generated: 1 }</span></span>
 <span><span class="co">#&gt; { Source: Tony | monitored: 1 | n_generated: 1 }</span></span>
-<span><span class="co">#&gt; { Source: Evelyn | monitored: 1 | n_generated: 1 }</span></span>
-<span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; { Source: Evelyn | monitored: 1 | n_generated: 1 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      name start_time end_time activity_time finished replication</span></span>
 <span><span class="co">#&gt; 1   Tony0          2        9             7     TRUE           1</span></span>
 <span><span class="co">#&gt; 2  Klaus0          5       15            10     TRUE           1</span></span>
@@ -395,7 +402,7 @@ no arrival is created on the <code>to</code> time, so we give it as 41,
 one unit after the last arrival to be generated. Another is that the
 interarrival time must be specified as a function, hence we define a
 constant function <code>function() {10}</code></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">customer</span> <span class="op">&lt;-</span></span>
@@ -421,8 +428,9 @@ constant function <code>function() {10}</code></p>
 <span><span class="co">#&gt; 52: Customer4: I must leave</span></span>
 <span><span class="co">#&gt; simmer environment: bank | now: 52 | next: </span></span>
 <span><span class="co">#&gt; { Monitor: in memory }</span></span>
-<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></span>
-<span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        name start_time end_time activity_time finished replication</span></span>
 <span><span class="co">#&gt; 1 Customer0          0       12            12     TRUE           1</span></span>
 <span><span class="co">#&gt; 2 Customer1         10       22            12     TRUE           1</span></span>
@@ -450,7 +458,7 @@ drawn, and a final -1 stops the generator.</p>
 <p>The reason why we cannot use the <code>from_to</code> function here
 is that we want to control the number of arrivals that are generated,
 rather than the end-time of arrival generation.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1289</span><span class="op">)</span></span>
@@ -478,8 +486,9 @@ rather than the end-time of arrival generation.</p>
 <span><span class="co">#&gt; 50.2706: Customer4: I must leave</span></span>
 <span><span class="co">#&gt; simmer environment: bank | now: 50.2705868901582 | next: </span></span>
 <span><span class="co">#&gt; { Monitor: in memory }</span></span>
-<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></span>
-<span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        name start_time end_time activity_time finished replication</span></span>
 <span><span class="co">#&gt; 1 Customer0    0.00000 12.00000            12     TRUE           1</span></span>
 <span><span class="co">#&gt; 2 Customer1   14.31136 26.31136            12     TRUE           1</span></span>
@@ -520,7 +529,7 @@ customers in the queue.</p>
 <p>Since the activity trace does not produce the waiting time by
 default, this is calculated and appended using the
 <code>transform</code> function.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
@@ -561,8 +570,9 @@ default, this is calculated and appended using the
 <span><span class="co">#&gt; simmer environment: bank | now: 73.0175860496223 | next: </span></span>
 <span><span class="co">#&gt; { Monitor: in memory }</span></span>
 <span><span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span></span>
-<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></span>
-<span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>waiting_time <span class="op">=</span> <span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span> <span class="op">-</span> <span class="va">activity_time</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        name start_time end_time activity_time finished replication waiting_time</span></span>
@@ -584,7 +594,7 @@ is traditional in the study of simple queues we first assume an
 exponential service time.</p>
 <p>Note that the argument to <code>timeout</code> must be a function,
 otherwise it would apply a constant timeout to every customer.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1269</span><span class="op">)</span></span>
@@ -626,8 +636,9 @@ otherwise it would apply a constant timeout to every customer.</p>
 <span><span class="co">#&gt; simmer environment: bank | now: 93.7285504163997 | next: </span></span>
 <span><span class="co">#&gt; { Monitor: in memory }</span></span>
 <span><span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span></span>
-<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></span>
-<span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>waiting_time <span class="op">=</span> <span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span> <span class="op">-</span> <span class="va">activity_time</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        name start_time  end_time activity_time finished replication</span></span>
@@ -668,7 +679,7 @@ queue.</p>
 <p>The only difference between this model and the single-server model is
 in the <code>add_resource</code> function, where we have increased the
 capacity to two so that it can serve two customers at once.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1269</span><span class="op">)</span></span>
@@ -707,8 +718,9 @@ capacity to two so that it can serve two customers at once.</p>
 <span><span class="co">#&gt; simmer environment: bank | now: 49.1715828181142 | next: </span></span>
 <span><span class="co">#&gt; { Monitor: in memory }</span></span>
 <span><span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(2) | queue status: 0(Inf) }</span></span>
-<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></span>
-<span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>waiting_time <span class="op">=</span> <span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span> <span class="op">-</span> <span class="va">activity_time</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        name start_time  end_time activity_time finished replication</span></span>
@@ -739,7 +751,7 @@ this behaviour by first selecting the shortest queue, using the
 <code>select</code> function. Then we use <code>seize_selected</code> to
 enter the chosen queue, and later <code>release_selected</code>.</p>
 <p>The rest of the program is the same as before.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1014</span><span class="op">)</span></span>
@@ -781,8 +793,9 @@ enter the chosen queue, and later <code>release_selected</code>.</p>
 <span><span class="co">#&gt; { Monitor: in memory }</span></span>
 <span><span class="co">#&gt; { Resource: counter1 | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span></span>
 <span><span class="co">#&gt; { Resource: counter2 | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }</span></span>
-<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></span>
-<span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 5 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>service_start_time <span class="op">=</span> <span class="va">end_time</span> <span class="op">-</span> <span class="va">activity_time</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="va">.</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">start_time</span><span class="op">)</span>,<span class="op">]</span></span>
@@ -797,8 +810,9 @@ enter the chosen queue, and later <code>release_selected</code>.</p>
 <span><span class="co">#&gt; 1           23.71444</span></span>
 <span><span class="co">#&gt; 5           62.10372</span></span>
 <span><span class="co">#&gt; 2           33.94103</span></span>
-<span><span class="co">#&gt; 3           48.85593</span></span>
-<span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="co">#&gt; 3           48.85593</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="va">.</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">time</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt;    resource     time server queue capacity queue_size system limit replication</span></span>
@@ -830,7 +844,7 @@ demonstrated. Here, we simply summarise the data frame returned by the
 <code>get_mon_arrivals</code> function, using standard R functions.</p>
 <p>We also increase the number of customers to 50 (find the number ‘49’
 in the code).</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100005</span><span class="op">)</span></span>
@@ -850,8 +864,9 @@ in the code).</p>
 <span><span class="co">#&gt; simmer environment: bank | now: 650.615510598544 | next: </span></span>
 <span><span class="co">#&gt; { Monitor: in memory }</span></span>
 <span><span class="co">#&gt; { Resource: counter | monitored: TRUE | server status: 0(2) | queue status: 0(Inf) }</span></span>
-<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 50 }</span></span>
-<span></span>
+<span><span class="co">#&gt; { Source: Customer | monitored: 1 | n_generated: 50 }</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">bank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -861,7 +876,7 @@ more reliable (i.e., less subject to random simulation effects) than the
 times we measured before but it is still not sufficiently reliable for
 real-world decisions. We should also replicate the runs using different
 random number seeds. The result of this run is:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Average wait for "</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">finished</span><span class="op">)</span>, <span class="st">" completions was "</span>,</span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">waiting_time</span><span class="op">)</span>, <span class="st">"minutes."</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Average wait for  50  completions was  3.05085138406832 minutes."</span></span></code></pre></div>
@@ -880,7 +895,7 @@ the ‘parallel’ package. This function runs each simulation in parallel,
 using the available cores in the computer’s processor. Because we use
 seeds for reproducability, we pass these to the function that runs the
 simulation (<code>function(the_seed)</code>).</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span></span>
 <span></span>
@@ -922,13 +937,11 @@ steady-state.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Iñaki Ucar, Bart Smeets.</p>
+  <p>Developed by Iñaki Ucar, Bart Smeets.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
     </footer>

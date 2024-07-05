@@ -77,7 +77,7 @@ IMDEA Networks Institute\\
 
 
 
-\usepackage{amsmath} \usepackage{longtable} \usepackage{booktabs} \usepackage{subfig}
+\usepackage{amsmath} \usepackage{longtable} \usepackage{booktabs} \usepackage{subfig} \providecommand{\pandocbounded}[1]{#1}
 
 \begin{document}
 
@@ -85,12 +85,11 @@ IMDEA Networks Institute\\
 
 \setlength{\abovedisplayskip}{0pt}
 
-This manuscript corresponds to \pkg{simmer} version 4.4.6.2 and was
-typeset on November 28, 2023. For citations, please use the JSS version
-(see \code{citation("simmer")}).
+This manuscript corresponds to \pkg{simmer} version 4.4.6.3 and was
+typeset on July 05, 2024. For citations, please use the JSS version (see
+\code{citation("simmer")}).
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\section{Introduction}\label{introduction}
 
 The complexity of many real-world systems involves unaffordable
 analytical models, and consequently, such systems are commonly studied
@@ -344,8 +343,7 @@ Going beyond the \proglang{R} language, the direct competitors to
 \citep{GitHub:SimJulia}, built for respectively the \proglang{Python}
 and \proglang{Julia} languages.
 
-\hypertarget{the-simulation-core-design}{%
-\section{The simulation core design}\label{the-simulation-core-design}}
+\section{The simulation core design}\label{the-simulation-core-design}
 
 The core of any modern discrete-event simulator comprises two main
 components: an event list, ordered by time of occurrence, and an event
@@ -377,8 +375,7 @@ of the paper. Then, the architectural choices made are discussed, as
 well as the event queue and the \emph{simultaneity problem}, an
 important topic that every DES framework has to deal with.
 
-\hypertarget{terminology}{%
-\subsection{Terminology}\label{terminology}}
+\subsection{Terminology}\label{terminology}
 
 This document uses some DES-specific terminology, e.g., \emph{event},
 \emph{state}, \emph{entity}, \emph{process} or \emph{attribute}. Such
@@ -424,8 +421,7 @@ time in the system, move back and forth through the trajectory
 dynamically, and much more.
 \end{description}
 
-\hypertarget{architecture}{%
-\subsection{Architecture}\label{architecture}}
+\subsection{Architecture}\label{architecture}
 
 Extending an \proglang{R} package (or any other piece of software
 written in any interpreted language) with compiled code poses an
@@ -441,7 +437,7 @@ the \proglang{C++} classes (depicted in white).
 
 \begin{figure}
 \centering
-\includegraphics{includes/jss-simmer-design.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{includes/jss-simmer-design.pdf}}
 \caption{UML diagram of the simulation core architecture. Blue classes
 represent how \proglang{R} encapsulates the \proglang{C++} core. Blue
 circles represent how \proglang{C++} interfaces with
@@ -538,8 +534,7 @@ provides enough flexibility to the user for modelling the interarrival
 times from \proglang{R} and execute any custom user-defined code through
 the activities.
 
-\hypertarget{the-event-queue}{%
-\subsection{The event queue}\label{the-event-queue}}
+\subsection{The event queue}\label{the-event-queue}
 
 The event queue is the most fundamental part of any DES software. It is
 responsible for maintaining a list of events to be executed by the event
@@ -560,9 +555,7 @@ in the event queue ordered by 1) time of occurrence and 2) priority.
 This secondary order criterion is devoted to solve a common issue for
 DES software called \emph{the simultaneity problem}.
 
-\hypertarget{the-simultaneity-problem}{%
-\subsubsection{The simultaneity
-problem}\label{the-simultaneity-problem}}
+\subsubsection{The simultaneity problem}\label{the-simultaneity-problem}
 
 As noted by \citet{Ronngren:1999:EOP:301429.301456},
 \citet{Jha:2000:SEL:361026.361032}, there are many circumstances from
@@ -632,8 +625,7 @@ the API is composed of verbs and actions that can be chained together.
 For easy-of-use, these have been made fully compatible with the pipe
 operator (\code{\%>\%}) from the \pkg{magrittr} package.
 
-\hypertarget{the-trajectory-object}{%
-\subsection{The trajectory object}\label{the-trajectory-object}}
+\subsection{The trajectory object}\label{the-trajectory-object}
 
 A \emph{trajectory} can be defined as a recipe and consists of an
 ordered set of \emph{activities}. The idea behind this concept is very
@@ -696,8 +688,7 @@ trajectory: anonymous, 3 activities
 There are many activities available. We will briefly review them by
 categorizing them into different topics.
 
-\hypertarget{arrival-properties}{%
-\subsubsection{Arrival properties}\label{arrival-properties}}
+\subsubsection{Arrival properties}\label{arrival-properties}
 
 Arrivals are able to store attributes and modify these using
 \code{set\_attribute()}. Attributes consist of pairs \code{(key, value)}
@@ -750,9 +741,8 @@ particular source, but they can also be dynamically changed on a
 per-arrival basis using the \code{set\_prioritization()} and
 \code{get\_prioritization()} activities, in the same way as attributes.
 
-\hypertarget{interaction-with-resources}{%
 \subsubsection{Interaction with
-resources}\label{interaction-with-resources}}
+resources}\label{interaction-with-resources}
 
 The two main activities for interacting with resources are
 \code{seize()} and \code{release()}. In their most basic usage, they
@@ -838,9 +828,7 @@ selected, there are special versions of the aforementioned activities
 for interacting with resources without specifying its name, such as
 \code{seize\_selected()}, \code{set\_capacity\_selected()} and so on.
 
-\hypertarget{interaction-with-sources}{%
-\subsubsection{Interaction with
-sources}\label{interaction-with-sources}}
+\subsubsection{Interaction with sources}\label{interaction-with-sources}
 
 There are four activities specifically intended to modify arrival
 sources. An arrival may \code{activate()} or \code{deactivate()} a
@@ -875,8 +863,7 @@ R> simmer() %>%
 \end{CodeOutput}
 \end{CodeChunk}
 
-\hypertarget{branching}{%
-\subsubsection{Branching}\label{branching}}
+\subsubsection{Branching}\label{branching}
 
 A branch is a point in a trajectory in which one or more
 sub-trajectories may be followed. Two types of branching are supported
@@ -932,8 +919,7 @@ parameter. By default, all the clones continue in the main trajectory
 after this activity. To remove all of them except for one, the
 \code{synchronize()} activity may be used.
 
-\hypertarget{loops}{%
-\subsubsection{Loops}\label{loops}}
+\subsubsection{Loops}\label{loops}
 
 There is a mechanism, \code{rollback()}, for going back in a trajectory
 and thus executing loops over a number of activities. This activity
@@ -965,8 +951,7 @@ R> simmer() %>%
 \end{CodeOutput}
 \end{CodeChunk}
 
-\hypertarget{batching}{%
-\subsubsection{Batching}\label{batching}}
+\subsubsection{Batching}\label{batching}
 
 Batching consists of collecting a number of arrivals before they can
 continue their path in the trajectory as a unit\footnote{A concrete
@@ -998,9 +983,7 @@ shared only by arrivals directly attached to the same trajectory.
 Whenever a globally shared batch is needed, a common \code{name} must be
 specified.
 
-\hypertarget{asynchronous-programming}{%
-\subsubsection{Asynchronous
-programming}\label{asynchronous-programming}}
+\subsubsection{Asynchronous programming}\label{asynchronous-programming}
 
 There are a number of methods enabling asynchronous events. The
 \code{send()} activity broadcasts one or more \code{signals} to all the
@@ -1063,8 +1046,7 @@ enough signals being broadcasted. If an uninterruptible \code{handler}
 is needed, this can be achieved by setting the flag \code{interruptible}
 to \code{FALSE} in \code{trap()}.
 
-\hypertarget{reneging}{%
-\subsubsection{Reneging}\label{reneging}}
+\subsubsection{Reneging}\label{reneging}
 
 Besides being rejected while trying to seize a resource, arrivals are
 also able to leave the trajectory at any moment, synchronously or
@@ -1110,9 +1092,8 @@ R> simmer() %>%
 \end{CodeOutput}
 \end{CodeChunk}
 
-\hypertarget{the-simulation-environment}{%
 \subsection{The simulation
-environment}\label{the-simulation-environment}}
+environment}\label{the-simulation-environment}
 
 The simulation environment manages resources and sources, and controls
 the simulation execution. The \code{simmer()} method instantiates the
@@ -1166,8 +1147,7 @@ information from the \proglang{C++} object encapsulated into a
 the \emph{getters} work also when applied to wrapped environments, but
 such an object cannot be reset or re-run anymore.
 
-\hypertarget{resources}{%
-\subsubsection{Resources}\label{resources}}
+\subsubsection{Resources}\label{resources}
 
 A \pkg{simmer} resource, as stated in Section \ref{terminology},
 comprises two internal self-managed parts: a server and a priority
@@ -1186,8 +1166,7 @@ controls whether this dedicated queue must be taken into account for the
 queue size limit, if any. If this parameter enforces the limit, then
 rejection may occur in the main queue.
 
-\hypertarget{sources}{%
-\subsubsection{Sources}\label{sources}}
+\subsubsection{Sources}\label{sources}
 
 Three main parameters define a source: a \code{name_prefix} for each
 generated arrival, a trajectory to attach them to and a source of
@@ -1214,9 +1193,8 @@ provided in batches. Both generators and data sources re-schedule
 themselves with a delay equal to the sum of the values obtained to
 produce the next batch.
 
-\hypertarget{monitoring-and-data-retrieval}{%
 \subsection{Monitoring and data
-retrieval}\label{monitoring-and-data-retrieval}}
+retrieval}\label{monitoring-and-data-retrieval}
 
 There are three methods for obtaining monitored data (if any) about
 arrivals, resources and attributes. They can be applied to a single
@@ -1257,8 +1235,7 @@ package vignettes, which cover the use of attributes, loops, batching,
 branching, shared events, reneging and advanced uses of resources among
 others.
 
-\hypertarget{queuing-systems}{%
-\subsection{Queuing systems}\label{queuing-systems}}
+\subsection{Queuing systems}\label{queuing-systems}
 
 The concept of \emph{trajectory} developed in \pkg{simmer} emerges as a
 natural way to simulate a wide range of problems related to
@@ -1347,9 +1324,8 @@ converges to the theoretical value given by Equation \ref{eq:N}.
 \end{figure}
 \end{CodeChunk}
 
-\hypertarget{replication-and-parallelization}{%
 \subsection{Replication and
-parallelization}\label{replication-and-parallelization}}
+parallelization}\label{replication-and-parallelization}
 
 Typically, running a certain simulation only once is useless. In
 general, we will be interested in replicating the model execution many
@@ -1412,8 +1388,7 @@ mean of x
 \end{CodeOutput}
 \end{CodeChunk}
 
-\hypertarget{best-practices}{%
-\subsection{Best practices}\label{best-practices}}
+\subsection{Best practices}\label{best-practices}
 
 DES modelling can be done in an event-by-event basis, but this approach
 is fairly tedious and mostly unpractical. Instead, modern
@@ -1558,8 +1533,7 @@ R> env <- env %>%
 \end{CodeOutput}
 \end{CodeChunk}
 
-\hypertarget{performance-evaluation}{%
-\section{Performance evaluation}\label{performance-evaluation}}
+\section{Performance evaluation}\label{performance-evaluation}
 
 This section investigates the performance of \pkg{simmer} with the aim
 of assessing its usability as a general-purpose DES framework. A first
@@ -1579,9 +1553,8 @@ configuration, and thus they should not be taken as representative for
 any other system. Instead, the relative performance should be
 approximately constant across different systems.
 
-\hypertarget{comparison-with-similar-frameworks}{%
 \subsection{Comparison with similar
-frameworks}\label{comparison-with-similar-frameworks}}
+frameworks}\label{comparison-with-similar-frameworks}
 
 A significant effort has been put into the design of \pkg{simmer} in
 order to make it performant enough to run general and relatively large
@@ -1716,8 +1689,8 @@ R> ref <- data.frame(
 \end{CodeChunk}
 
 As a matter of fact, we also tested a small DES skeleton in pure
-\proglang{R} provided in \citep[\emph{7.8.3 Extended Example:
-Discrete-Event Simulation in \proglang{R}}]{Matloff:2011:ARP:2090080}.
+\proglang{R} provided in
+\citep[7.8.3 Extended Example: Discrete-Event Simulation in ]{Matloff:2011:ARP:2090080}.
 This code was formalized into an \proglang{R} package called \pkg{DES},
 available on GitHub\footnote{\url{https://github.com/matloff/des}} since
 2014. The original code implemented the event queue as an ordered vector
@@ -1894,11 +1867,11 @@ these results highlight the overheads involved and encourage the use of
 fixed values instead of function calls whenever possible.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.4265}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1471}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1324}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1471}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1471}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.4265}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1471}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1324}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1471}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1471}}@{}}
 \caption{Execution time
 (milliseconds).\label{performance-table}}\tabularnewline
 \toprule\noalign{}
@@ -1938,8 +1911,7 @@ test\_R\_for(n) & 2053.0840 & 2176.164 & 2102.5848 & 2438.6836 \\
 test\_R\_lapply(n) & 1525.6682 & 1754.028 & 1757.7566 & 2002.6634 \\
 \end{longtable}
 
-\hypertarget{summary}{%
-\section{Summary}\label{summary}}
+\section{Summary}\label{summary}
 
 The \pkg{simmer} package presented in this paper brings a generic yet
 powerful process-oriented Discrete-Event Simulation framework to
