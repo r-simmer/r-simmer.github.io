@@ -1,5 +1,5 @@
 pandoc: 3.2.1
-pkgdown: 2.0.9
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   simmer-01-introduction: simmer-01-introduction.html
@@ -12,8 +12,7 @@ articles:
   simmer-07-ctmc: simmer-07-ctmc.html
   simmer-08-philosophers: simmer-08-philosophers.html
   simmer-aa-5G: simmer-aa-5G.html
-last_built: 2024-07-05T08:46Z
+last_built: 2024-09-28T20:40Z
 urls:
   reference: https://r-simmer.org/reference
   article: https://r-simmer.org/articles
-

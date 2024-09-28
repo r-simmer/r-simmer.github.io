@@ -1,291 +1,98 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://r-simmer.org/404.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/articles/simmer-01-introduction.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/articles/simmer-03-trajectories.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/articles/simmer-04-bank-1.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/articles/simmer-04-bank-2.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/articles/simmer-05-simpy.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/articles/simmer-06-queueing.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/articles/simmer-07-ctmc.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/articles/simmer-08-philosophers.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/articles/simmer-aa-5G.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/404.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/README.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/articles/introduction.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/cran-comments.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/reference/delayed_release.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/reference/do_parallel.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/reference/interleave.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/reference/simmer.bricks-package.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/reference/visit.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/bricks/reference/wait_n.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/404.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/NEWS.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/README.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/articles/plot.simmer.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/articles/plot.trajectory.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/cran-comments.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/reference/get_mon.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/reference/plot.mon.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/reference/plot.simmer.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/reference/plot.trajectory.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/reference/simmer.plot-package.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/extensions/plot/reference/simmer.plot.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/Extract.trajectory.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/activate.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/add_dataframe.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/add_generator.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/add_global.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/add_resource.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/at.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/batch.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/branch.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/clone.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/generators.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/get_capacity.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/get_mon.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/get_n_generated.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/get_sources.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/handle_unfinished.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/join.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/length.trajectory.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/log_.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/monitor.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/now.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/peek.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/renege.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/reset.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/rollback.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/run.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/schedule.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/seize.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/select.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/send.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/set_attribute.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/set_capacity.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/set_prioritization.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/set_trajectory.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/simmer-package.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/simmer.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/timeout.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/trajectory.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/reference/wrap.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/slides/20160512_R-Meetup-Madrid.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/slides/20191115_XIjuR_simmer.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/slides/20221109_NHS-R.html</loc>
-  </url>
-  <url>
-    <loc>https://r-simmer.org/slides/20230701_workshop.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://r-simmer.org/404.html</loc></url>
+<url><loc>https://r-simmer.org/LICENSE-text.html</loc></url>
+<url><loc>https://r-simmer.org/articles/index.html</loc></url>
+<url><loc>https://r-simmer.org/articles/simmer-01-introduction.html</loc></url>
+<url><loc>https://r-simmer.org/articles/simmer-03-trajectories.html</loc></url>
+<url><loc>https://r-simmer.org/articles/simmer-04-bank-1.html</loc></url>
+<url><loc>https://r-simmer.org/articles/simmer-04-bank-2.html</loc></url>
+<url><loc>https://r-simmer.org/articles/simmer-05-simpy.html</loc></url>
+<url><loc>https://r-simmer.org/articles/simmer-06-queueing.html</loc></url>
+<url><loc>https://r-simmer.org/articles/simmer-07-ctmc.html</loc></url>
+<url><loc>https://r-simmer.org/articles/simmer-08-philosophers.html</loc></url>
+<url><loc>https://r-simmer.org/articles/simmer-aa-5G.html</loc></url>
+<url><loc>https://r-simmer.org/authors.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/404.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/LICENSE-text.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/LICENSE.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/README.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/articles/index.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/articles/introduction.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/authors.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/cran-comments.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/index.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/news/index.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/reference/delayed_release.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/reference/do_parallel.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/reference/index.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/reference/interleave.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/reference/simmer.bricks-package.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/reference/visit.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/bricks/reference/wait_n.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/404.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/LICENSE-text.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/LICENSE.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/NEWS.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/README.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/articles/index.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/articles/plot.simmer.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/articles/plot.trajectory.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/authors.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/cran-comments.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/index.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/news/index.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/reference/get_mon.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/reference/index.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/reference/plot.mon.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/reference/plot.simmer.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/reference/plot.trajectory.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/reference/simmer.plot-package.html</loc></url>
+<url><loc>https://r-simmer.org/extensions/plot/reference/simmer.plot.html</loc></url>
+<url><loc>https://r-simmer.org/index.html</loc></url>
+<url><loc>https://r-simmer.org/news/index.html</loc></url>
+<url><loc>https://r-simmer.org/reference/Extract.trajectory.html</loc></url>
+<url><loc>https://r-simmer.org/reference/activate.html</loc></url>
+<url><loc>https://r-simmer.org/reference/add_dataframe.html</loc></url>
+<url><loc>https://r-simmer.org/reference/add_generator.html</loc></url>
+<url><loc>https://r-simmer.org/reference/add_global.html</loc></url>
+<url><loc>https://r-simmer.org/reference/add_resource.html</loc></url>
+<url><loc>https://r-simmer.org/reference/batch.html</loc></url>
+<url><loc>https://r-simmer.org/reference/branch.html</loc></url>
+<url><loc>https://r-simmer.org/reference/clone.html</loc></url>
+<url><loc>https://r-simmer.org/reference/generators.html</loc></url>
+<url><loc>https://r-simmer.org/reference/get_capacity.html</loc></url>
+<url><loc>https://r-simmer.org/reference/get_mon.html</loc></url>
+<url><loc>https://r-simmer.org/reference/get_n_generated.html</loc></url>
+<url><loc>https://r-simmer.org/reference/get_sources.html</loc></url>
+<url><loc>https://r-simmer.org/reference/handle_unfinished.html</loc></url>
+<url><loc>https://r-simmer.org/reference/index.html</loc></url>
+<url><loc>https://r-simmer.org/reference/join.html</loc></url>
+<url><loc>https://r-simmer.org/reference/length.trajectory.html</loc></url>
+<url><loc>https://r-simmer.org/reference/log_.html</loc></url>
+<url><loc>https://r-simmer.org/reference/monitor.html</loc></url>
+<url><loc>https://r-simmer.org/reference/now.html</loc></url>
+<url><loc>https://r-simmer.org/reference/peek.html</loc></url>
+<url><loc>https://r-simmer.org/reference/reexports.html</loc></url>
+<url><loc>https://r-simmer.org/reference/renege.html</loc></url>
+<url><loc>https://r-simmer.org/reference/reset.html</loc></url>
+<url><loc>https://r-simmer.org/reference/rollback.html</loc></url>
+<url><loc>https://r-simmer.org/reference/run.html</loc></url>
+<url><loc>https://r-simmer.org/reference/schedule.html</loc></url>
+<url><loc>https://r-simmer.org/reference/seize.html</loc></url>
+<url><loc>https://r-simmer.org/reference/select.html</loc></url>
+<url><loc>https://r-simmer.org/reference/send.html</loc></url>
+<url><loc>https://r-simmer.org/reference/set_attribute.html</loc></url>
+<url><loc>https://r-simmer.org/reference/set_capacity.html</loc></url>
+<url><loc>https://r-simmer.org/reference/set_prioritization.html</loc></url>
+<url><loc>https://r-simmer.org/reference/set_trajectory.html</loc></url>
+<url><loc>https://r-simmer.org/reference/simmer-package.html</loc></url>
+<url><loc>https://r-simmer.org/reference/simmer.html</loc></url>
+<url><loc>https://r-simmer.org/reference/timeout.html</loc></url>
+<url><loc>https://r-simmer.org/reference/trajectory.html</loc></url>
+<url><loc>https://r-simmer.org/reference/wrap.html</loc></url>
+<url><loc>https://r-simmer.org/slides/20160512_R-Meetup-Madrid.html</loc></url>
+<url><loc>https://r-simmer.org/slides/20191115_XIjuR_simmer.html</loc></url>
+<url><loc>https://r-simmer.org/slides/20221109_NHS-R.html</loc></url>
+<url><loc>https://r-simmer.org/slides/20230701_workshop.html</loc></url>
 </urlset>
+
